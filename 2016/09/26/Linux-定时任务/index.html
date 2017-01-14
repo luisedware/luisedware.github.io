@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Linux 定时任务 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Linux 定时任务
+at 一次性定时任务
+crontab 循环定时任务
+crontab 设置
+anacron 配置
+
+at 一次性定时任务12345# at 服务是否安装chkconfig --list | grep atd# at 服务的启动service atd restart
+at 的访问控制
+
+如果系统中有 /etc/at.allow 文件，那么只有写入 /etc/at.allow （白">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 定时任务">
+<meta property="og:url" content="http://yoursite.com/2016/09/26/Linux-定时任务/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Linux 定时任务
+at 一次性定时任务
+crontab 循环定时任务
+crontab 设置
+anacron 配置
+
+at 一次性定时任务12345# at 服务是否安装chkconfig --list | grep atd# at 服务的启动service atd restart
+at 的访问控制
+
+如果系统中有 /etc/at.allow 文件，那么只有写入 /etc/at.allow （白">
+<meta property="og:updated_time" content="2016-10-04T02:47:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux 定时任务">
+<meta name="twitter:description" content="Linux 定时任务
+at 一次性定时任务
+crontab 循环定时任务
+crontab 设置
+anacron 配置
+
+at 一次性定时任务12345# at 服务是否安装chkconfig --list | grep atd# at 服务的启动service atd restart
+at 的访问控制
+
+如果系统中有 /etc/at.allow 文件，那么只有写入 /etc/at.allow （白">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Linux-定时任务" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/26/Linux-定时任务/" class="article-date">
+  <time datetime="2016-09-26T09:25:18.000Z" itemprop="datePublished">2016-09-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Linux 定时任务
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Linux-定时任务"><a href="#Linux-定时任务" class="headerlink" title="Linux 定时任务"></a>Linux 定时任务</h2><ul>
+<li>at 一次性定时任务</li>
+<li>crontab 循环定时任务</li>
+<li>crontab 设置</li>
+<li>anacron 配置</li>
+</ul>
+<h2 id="at-一次性定时任务"><a href="#at-一次性定时任务" class="headerlink" title="at 一次性定时任务"></a>at 一次性定时任务</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># at 服务是否安装</div><div class="line">chkconfig --list | grep atd</div><div class="line"></div><div class="line"># at 服务的启动</div><div class="line">service atd restart</div></pre></td></tr></table></figure>
+<p>at 的访问控制</p>
+<ul>
+<li>如果系统中有 /etc/at.allow 文件，那么只有写入 /etc/at.allow （白名单）文件中的用户可以使用 at 命令（/etc/at.deny 文件会被忽略）</li>
+<li>如果系统中没有 /etc/at.allow 文件，只有 /etc/at.deny 文件，那么写入 /etc/at.deny （黑名单）文件中的用户不能使用 at 命令。对 root 不起作用</li>
+<li>如果系统中这两个文件都不存在，那么只有 root 用户可以使用 at 命令</li>
+</ul>
+<p>at 命令</p>
+<ul>
+<li>at<ul>
+<li><code>at [选项] 时间</code><ul>
+<li>选项：<ul>
+<li>-m 当 at 工作完成后，无论命令是否有输出，都用 email 通知执行 at 命令的用户</li>
+<li>-c 工作号：显示该 at 工作的实际内容</li>
+</ul>
+</li>
+<li>时间：<ul>
+<li>HH:MM 02:30</li>
+<li>HH:MM YYYY-MM-DD 02:30 2013-07-25</li>
+<li>HH:MM[am|pm] [month] [date] 02:30 July 25</li>
+<li>HH:MM[am|pm] + [minutes|hours|days|weeks] now + 5 minutes</li>
+</ul>
+</li>
+<li>例子：<ul>
+<li><code>at now + 2 minutes</code> &amp;&amp; <code>/root/hello.sh &gt;&gt; /root/hello.log</code></li>
+<li><code>at 02:00 2013-07-26</code> &amp;&amp; <code>/bin/sync</code> &amp;&amp; <code>/sbin/shutdown -r now</code></li>
+</ul>
+</li>
+<li>其他：<ul>
+<li><code>atq</code> 查询当前服务器上的 at 工作</li>
+<li><code>atrm [工作号]</code> 删除指定的 at 任务</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="anncron"><a href="#anncron" class="headerlink" title="anncron"></a>anncron</h2><p>anacron 是用来保证在系统关机的时候错过的定时任务，可以在系统开机之后再执行</p>
+<p>anacron 检测周期</p>
+<ul>
+<li>anacron 会使用一天，七天，一个月作为检测周期</li>
+<li>在系统的 /var/spool/anacron/ 目录中存在 cron.{daily，weekly，monthly} 文件，用于记录上次执行的 cron 的时间</li>
+<li>和当前时间做比较，如果两个时间的差值超过了 anacron 的指定时间差值，证明有 cron 任务被漏执行</li>
+</ul>
+<p>anacron 配置文件</p>
+<ul>
+<li>vim /etc/anacrontab<ul>
+<li><code>RANDOM_DELAY=45</code> 最大随机延迟</li>
+<li><code>START_HOURS_RANGE=3-22</code> anacron 的执行时间范围是 3:00 - 22:00</li>
+<li><code>1    5    cron.daily         nice run-parts /etc/cron.daily</code> 天数 强制延迟（分钟） 工作名称 实际执行的命令</li>
+</ul>
+</li>
+</ul>
+<p>anacron 执行过程（以 cron.daily 为例）</p>
+<ul>
+<li>首先读取 /var/spool/anacron/cron.daily 中的上一次 anacron 执行的时间</li>
+<li>和当前时间比较，如果两个时间的差值超过 1 天，就执行 cron.daily 工作</li>
+<li>执行这个工作只能在 03:00-22:00 之间</li>
+<li>执行工作时强制延迟时间为 5 分钟，再随机延迟 0-45 分钟时间</li>
+<li>使用 nice 命令指定默认优先级，使用 run-parts 脚本执行 /etc/cron.daily 目录中的所有可执行文件</li>
+</ul>
+<h2 id="Crontab-简介"><a href="#Crontab-简介" class="headerlink" title="Crontab 简介"></a>Crontab 简介</h2><p>业务场景</p>
+<ul>
+<li>每分钟需要执行一个程序检查系统运行状态</li>
+<li>每天凌晨需要对过去一天的业务数据进行统计</li>
+<li>每个星期需要把日志文件备份</li>
+<li>每个月需要把数据库进行备份</li>
+</ul>
+<p>概念理解</p>
+<p><strong>Crontab 是一个用于设置周期性被执行的任务的工具。</strong></p>
+<h2 id="Crontab-实践"><a href="#Crontab-实践" class="headerlink" title="Crontab 实践"></a>Crontab 实践</h2><ul>
+<li>相关工具<ul>
+<li>Mac OS 自带 SSH</li>
+</ul>
+</li>
+<li>安装并检查 Crontab 服务<ul>
+<li>检查 cron 服务<ul>
+<li>检查 Crontab 工具是否安装：<code>crontab -l</code></li>
+<li>检查 Crontab 可执行的命令：<code>service crond</code></li>
+<li>检查 Crontab 服务是否启动：<code>service crond status</code></li>
+<li>删除当前用户所有的定时任务： <code>crontab -r</code></li>
+<li>打开定时任务列表，进行编辑：<code>crontab -e</code><ul>
+<li>实际上在修改目录 <code>/var/spool/cron/root</code> 下用户对应的文件</li>
+<li><code>crontab 文件名</code> 会把（crontab -e）文件里的内容都覆盖，使用时需要注意</li>
+</ul>
+</li>
+<li>启动 Crontab 服务：<code>service crond start</code></li>
+</ul>
+</li>
+<li>安装 Crontab 服务（依次执行）<ul>
+<li><code>yum install vixie-cron</code></li>
+<li><code>yum install crontabs</code></li>
+</ul>
+</li>
+<li><code>tail</code> 命令<ul>
+<li>作用：按照要求将指定的文件的最后部分输出到标准设备，如果文件有更新，tail 会主动刷新，确保你看到最新的文件内容</li>
+<li>选项<ul>
+<li>-f 循环读取</li>
+<li>-q 不显示处理信息</li>
+<li>-v 显示详细的处理信息</li>
+<li>-c [数目] 显示的字节数</li>
+<li>-n [行数] 显示行数</li>
+<li>-s 与-f合用,表示在每次反复的间隔休眠 s 秒</li>
+<li>-q 从不输出给出文件名的首部</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Crontab 的基本组成<ul>
+<li>配置文件</li>
+<li>系统服务 Crond</li>
+<li>配置工具 Crontab</li>
+</ul>
+</li>
+<li>Crontab 的配置文件格式<ul>
+<li><code>* * * * * Command</code><ul>
+<li>第一个星号：分钟 0~59</li>
+<li>第二个星号：小时 0~23</li>
+<li>第三个星号：日期 1~31</li>
+<li>第四个星号：月份 1~12</li>
+<li>第五个星号：星期 0~7（0、7 都是星期天）</li>
+</ul>
+</li>
+<li>用法：<ul>
+<li>每晚的 21:30 重启 apache<ul>
+<li><strong><code>30 21 * * * service httpd restart</code></strong></li>
+</ul>
+</li>
+<li>每月 1 到 10 日的 4:45 重启 apache<ul>
+<li><strong><code>45 4 1-10 * * service httpd restart</code></strong></li>
+</ul>
+</li>
+<li>每月 1、10、22 日的 4:45 重启 apache<ul>
+<li><strong><code>45 4 1,10,22 * * service httpd restart</code></strong></li>
+</ul>
+</li>
+<li>每隔两分钟重启 apache 服务器<ul>
+<li><strong><code>*/2 * * * * service httpd restart</code></strong></li>
+</ul>
+</li>
+<li>晚上 11 点到早上 7 点之间，每隔一小时重启 apache<ul>
+<li><strong><code>0 23-7/1 * * * service httpd restart</code></strong></li>
+</ul>
+</li>
+<li>每天 18:00 至 23:00 之间每隔 30 分钟重启 apache<ul>
+<li><strong><code>0,30 18-23 * * * service httpd restart</code></strong></li>
+<li><strong><code>0-59/30 18-23 * * * service httpd restart</code></strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>总结：<ul>
+<li>* 表示任何时候都匹配</li>
+<li>可以用 “A,B,C” 表示 A 或者 B 或者 C 时执行命令</li>
+<li>可以用 “A-B” 表示 A 到 B 之间时执行命令</li>
+<li>可以用 “*/A” 表示每 A 时间执行一次命令</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Crontab 配置文件<ul>
+<li>全局配置文件<ul>
+<li><code>/etc/crontab</code> 查看系统级别的 Crontab</li>
+</ul>
+</li>
+<li>用户配置文件<ul>
+<li><code>/var/spool/cron/用户名称</code> 查看用户级别的 Crontab</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Crontab 的日志<ul>
+<li>监听 Crontab 执行日志：<code>tail -f /var/log/cron</code>，可以看到用户级别和系统级别的 Crontab</li>
+<li>查看每天的 Crontab 日志：<code>ls /var/log/cron*</code></li>
+</ul>
+</li>
+<li>Crontab 常见错误<ul>
+<li>环境变量：涉及到文件路径时写全局路径。注意声明 <code>#!/bin/bash</code> 确保脚本中环境变量能够被识别</li>
+<li>第三和第五个域之间执行的是 “或” 操作<ul>
+<li>四月的第一个星期日早晨 1 时 59 分运行 a.sh：<code>59 1 1-7 4 * test &#39;date + \%w -eq 0 &amp;&amp; /root/a.sh&#39;</code></li>
+</ul>
+</li>
+<li>两个小时运行一次<ul>
+<li>错误例子：<code>* 0,2,4,6,8,10,12,14,16,18,20,22 * * * date</code></li>
+<li>正确例子：<code>0 */2 * * * date</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Crontab 补充<ul>
+<li>半分钟执行命令<ul>
+<li><code>date &amp;&amp; sleep 0.5s &amp;&amp; date</code></li>
+</ul>
+</li>
+<li>Crontab 最小时间是 1 分钟，控制 1 分钟执行多次，本应该是同时执行，但第二条被推迟了30s执行，效果就是1分钟执行了2次<ul>
+<li><code>*/1 * * * * date &gt;&gt; /root/test/half.log</code></li>
+<li><code>*/1 * * * * sleep 30s; date &gt;&gt; /root/test/half.log</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/26/Linux-定时任务/" data-id="cixwy9h7d000i6l4bxpt7fm9n" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/09/27/Linux-软件安装/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Linux 软件安装
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/09/24/Linux-系统管理/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Linux 系统管理</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 18px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 14px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 12px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Yii/" style="font-size: 16px;">Yii</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/12/08/学习-UML（一）/">学习 UML（一）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/02/Yii2-Working-with-Databases/">Yii2 Working with Databases</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/22/关于-PHP-函数-array-walk-的一些想法/">关于 PHP 函数 array_walk 的一些想法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/21/关于-PHP-函数-array-filter-的一些想法/">关于 PHP 函数 array_filter 的一些想法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/21/关于-PHP-函数-array-map-的一些想法/">关于 PHP 函数 array_map 的一些想法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

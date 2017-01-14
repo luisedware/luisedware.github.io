@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>打造扛得住的 MySQL 数据库架构 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="第1章 实例和故事1-1 什么决定了电商双11大促的成败电商公司的服务器能够承受住双十一期间高并发的访问量，为用户提供稳定高速的购物体验。
+1-2 在双11大促中的数据库服务器数据库架构：
+
+1 台 MySQL 主服务器
+15 台 MySQL 从服务器
+
+当时没有部署主从复制组件，一旦主服务器出现故障，很难自动进行故障切换，必须由 DBA 进行手动操作。过多的从服务器，对主服务器的网卡容量也是一个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="打造扛得住的 MySQL 数据库架构">
+<meta property="og:url" content="http://yoursite.com/2016/10/20/打造扛得住的-MySQL-数据库架构/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="第1章 实例和故事1-1 什么决定了电商双11大促的成败电商公司的服务器能够承受住双十一期间高并发的访问量，为用户提供稳定高速的购物体验。
+1-2 在双11大促中的数据库服务器数据库架构：
+
+1 台 MySQL 主服务器
+15 台 MySQL 从服务器
+
+当时没有部署主从复制组件，一旦主服务器出现故障，很难自动进行故障切换，必须由 DBA 进行手动操作。过多的从服务器，对主服务器的网卡容量也是一个">
+<meta property="og:updated_time" content="2016-10-23T07:23:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="打造扛得住的 MySQL 数据库架构">
+<meta name="twitter:description" content="第1章 实例和故事1-1 什么决定了电商双11大促的成败电商公司的服务器能够承受住双十一期间高并发的访问量，为用户提供稳定高速的购物体验。
+1-2 在双11大促中的数据库服务器数据库架构：
+
+1 台 MySQL 主服务器
+15 台 MySQL 从服务器
+
+当时没有部署主从复制组件，一旦主服务器出现故障，很难自动进行故障切换，必须由 DBA 进行手动操作。过多的从服务器，对主服务器的网卡容量也是一个">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-打造扛得住的-MySQL-数据库架构" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/20/打造扛得住的-MySQL-数据库架构/" class="article-date">
+  <time datetime="2016-10-20T12:57:11.000Z" itemprop="datePublished">2016-10-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      打造扛得住的 MySQL 数据库架构
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="第1章-实例和故事"><a href="#第1章-实例和故事" class="headerlink" title="第1章 实例和故事"></a>第1章 实例和故事</h2><h3 id="1-1-什么决定了电商双11大促的成败"><a href="#1-1-什么决定了电商双11大促的成败" class="headerlink" title="1-1 什么决定了电商双11大促的成败"></a>1-1 什么决定了电商双11大促的成败</h3><p>电商公司的服务器能够承受住双十一期间高并发的访问量，为用户提供稳定高速的购物体验。</p>
+<h3 id="1-2-在双11大促中的数据库服务器"><a href="#1-2-在双11大促中的数据库服务器" class="headerlink" title="1-2 在双11大促中的数据库服务器"></a>1-2 在双11大促中的数据库服务器</h3><p>数据库架构：</p>
+<ul>
+<li>1 台 MySQL 主服务器</li>
+<li>15 台 MySQL 从服务器</li>
+</ul>
+<p>当时没有部署主从复制组件，一旦主服务器出现故障，很难自动进行故障切换，必须由 DBA 进行手动操作。过多的从服务器，对主服务器的网卡容量也是一个不小的挑战。</p>
+<p>数据库性能依据参数：</p>
+<ul>
+<li>QPS</li>
+<li>TPS</li>
+<li>并发量</li>
+<li>CPU 使用率</li>
+<li>磁盘 IO</li>
+</ul>
+<h3 id="1-3-在大促中什么影响了数据库性能"><a href="#1-3-在大促中什么影响了数据库性能" class="headerlink" title="1-3 在大促中什么影响了数据库性能"></a>1-3 在大促中什么影响了数据库性能</h3><p>影响数据库性能的因素</p>
+<ul>
+<li>SQL 查询速度</li>
+<li>服务器硬件</li>
+<li>网卡流量</li>
+<li>磁盘 IO</li>
+</ul>
+<p>数据库性能常见的风险：</p>
+<ul>
+<li>效率低下的 SQL<ul>
+<li>QPS：每秒钟处理的查询量<ul>
+<li>10ms 处理 1个 SQL，1s 处理 100个 SQL，QPS &lt;= 100</li>
+<li>100ms 处理 1个 SQL，1s 处理 10个 SQL，QPS &lt;= 10</li>
+</ul>
+</li>
+<li>TPS：每秒钟处理的事务数</li>
+</ul>
+</li>
+<li>大量的并发和超高的 CPU 使用率<ul>
+<li>大量的并发会导致数据库连接数被占满</li>
+<li>超高的 CPU 使用率会导致服务器因 CPU 资源耗尽而出现宕机</li>
+</ul>
+</li>
+<li>磁盘 IO<ul>
+<li>磁盘 IO 性能突然下降（使用更快的磁盘设备）</li>
+<li>其它大量消耗磁盘性能的计划任务（调整计划任务，做好磁盘维护）</li>
+</ul>
+</li>
+<li>网卡 IO<ul>
+<li>当网卡 IO 被占满时，（千兆网卡 1000 Mb/8=100 MB）会出现无法连接数据库的情况。</li>
+<li>如何避免无法连接数据库的情况<ul>
+<li>减少从服务器的数量</li>
+<li>进行分级缓存</li>
+<li>避免使用 <code>select *</code> 进行查询</li>
+<li>分离业务网络和服务器网络</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>大表<ul>
+<li>什么样的表可以称之为大表<ul>
+<li>记录行数巨大，单表超过千万行</li>
+<li>表数据文件巨大，表数据文件超过 10 G</li>
+</ul>
+</li>
+<li>大表对查询的影响<ul>
+<li>慢查询：很难在一定的时间内过滤出所需要的数据<ul>
+<li>区分度低的数据在查询的时候会产生大量的磁盘 IO，会降低磁盘的效率，导致查询效率低下,出现大量的慢查询。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>大表对 DDL 操作的影响<ul>
+<li>建立索引需要很长的时间<ul>
+<li>MySQL 版本 &lt; 5.5，建立索引会锁表</li>
+<li>MySQL 版本 &gt;= 5.5，虽然不会锁表但会引起主从延迟</li>
+</ul>
+</li>
+<li>修改表结构需要长时间锁表<ul>
+<li>会造成长时间的主从延迟</li>
+<li>影响正常的数据操作</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>解决方案<ul>
+<li>分库分表，把一张大表分成多个小表<ul>
+<li>难点<ul>
+<li>分表主键的选择</li>
+<li>分表后跨分区数据的查询和统计</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>大表的历史数据归档（减少对前后端业务的影响）<ul>
+<li>难点<ul>
+<li>归档时间点的选择</li>
+<li>如何进行归档操作</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>大事务<ul>
+<li>事务的概念<ul>
+<li>事务是数据库系统区别于其它一切文件系统的重要特性之一</li>
+<li>事务是一组具有原子性的 SQL 语句，或是一个独立的工作单元</li>
+</ul>
+</li>
+<li>事务的特性<ul>
+<li>原子性<ul>
+<li>一个事务必须被视为一个不可分割的最小工作单元，整个事务中的所有操作要么全部提交成功，要么全部失败，对于一个事务来说，不可能只执行其中的一部分操作。</li>
+</ul>
+</li>
+<li>一致性<ul>
+<li>一致性是指事务将数据库从一种一致性状态转换到另外一种一致性状态。在事务开始之前和事务结束后，数据库中的数据完整性没有被破坏。</li>
+</ul>
+</li>
+<li>隔离性<ul>
+<li>隔离性要求一个事务对数据库中数据的修改，在未提交完成前对于其它事务是不可见的。</li>
+<li>隔离性的类型<ul>
+<li>未提交读（Read Uncommited）</li>
+<li>已提交读（Read Commited）</li>
+<li>可重复读（Repeatable Read）</li>
+<li>可串行化（Serialization）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>持久性<ul>
+<li>一旦事务提交，则其所做的修改就会永久保存到数据库中。此时即使系统崩溃，已经提交的修改数据也不会丢失</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>什么是大事务<ul>
+<li>定义：运行时间比较长，操作的数据比较多的事务</li>
+<li>风险：<ul>
+<li>锁定太多的数据，造成大量的阻塞和锁超时</li>
+<li>回滚时所需时间比较长</li>
+<li>执行时间长，容易造成主从延迟</li>
+</ul>
+</li>
+<li>处理：<ul>
+<li>避免一次处理太多的数据</li>
+<li>移出不必要在事务中的 SELECT 操作</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="第2章-什么影响了MySQL性能"><a href="#第2章-什么影响了MySQL性能" class="headerlink" title="第2章 什么影响了MySQL性能"></a>第2章 什么影响了MySQL性能</h2><h2 id="第3章-MySQL基准测试"><a href="#第3章-MySQL基准测试" class="headerlink" title="第3章 MySQL基准测试"></a>第3章 MySQL基准测试</h2><h2 id="第4章-MySQL数据库结构优化"><a href="#第4章-MySQL数据库结构优化" class="headerlink" title="第4章 MySQL数据库结构优化"></a>第4章 MySQL数据库结构优化</h2><h2 id="第5章-MySQL高可用架构设计"><a href="#第5章-MySQL高可用架构设计" class="headerlink" title="第5章 MySQL高可用架构设计"></a>第5章 MySQL高可用架构设计</h2><h2 id="第6章-数据库索引优化"><a href="#第6章-数据库索引优化" class="headerlink" title="第6章 数据库索引优化"></a>第6章 数据库索引优化</h2><h2 id="第7章-SQL查询优化"><a href="#第7章-SQL查询优化" class="headerlink" title="第7章 SQL查询优化"></a>第7章 SQL查询优化</h2><h2 id="第8章-数据库的分库分表"><a href="#第8章-数据库的分库分表" class="headerlink" title="第8章 数据库的分库分表"></a>第8章 数据库的分库分表</h2><h2 id="第9章-数据库监控"><a href="#第9章-数据库监控" class="headerlink" title="第9章 数据库监控"></a>第9章 数据库监控</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/10/20/打造扛得住的-MySQL-数据库架构/" data-id="cixwy9hco00496l4bmxq9me6v" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/10/25/Yii-框架之高效篇/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Yii 框架之高效篇
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/10/13/MySQL-性能优化/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">MySQL 性能优化</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 18px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 14px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 12px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Yii/" style="font-size: 16px;">Yii</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/12/08/学习-UML（一）/">学习 UML（一）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/02/Yii2-Working-with-Databases/">Yii2 Working with Databases</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/22/关于-PHP-函数-array-walk-的一些想法/">关于 PHP 函数 array_walk 的一些想法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/21/关于-PHP-函数-array-filter-的一些想法/">关于 PHP 函数 array_filter 的一些想法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/21/关于-PHP-函数-array-map-的一些想法/">关于 PHP 函数 array_map 的一些想法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

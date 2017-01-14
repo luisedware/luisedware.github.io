@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>使用 Laravel 编写自定义命令 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本文讲述了如何使用 Laravel 开发命令行
+环境
+PHP 7
+Laravel 5.1
+OS X El Capitan 10.11.4
+
+简介Artisan 是 Laravel 的命令行接口的名称，它提供了许多实用的命令来帮助你开发 Laravel 应用，它由强大的 Symfony Console 组件所驱动。
+文档 Artisan
+目的本文目的旨在实现三个简单的命令，分别是优化项目、清除缓存和">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 Laravel 编写自定义命令">
+<meta property="og:url" content="http://yoursite.com/2016/08/25/使用-Laravel-编写自定义命令/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="本文讲述了如何使用 Laravel 开发命令行
+环境
+PHP 7
+Laravel 5.1
+OS X El Capitan 10.11.4
+
+简介Artisan 是 Laravel 的命令行接口的名称，它提供了许多实用的命令来帮助你开发 Laravel 应用，它由强大的 Symfony Console 组件所驱动。
+文档 Artisan
+目的本文目的旨在实现三个简单的命令，分别是优化项目、清除缓存和">
+<meta property="og:image" content="http://o93kt6djh.bkt.clouddn.com/laravel-optimize.png">
+<meta property="og:image" content="http://o93kt6djh.bkt.clouddn.com/laravel-clean.png">
+<meta property="og:image" content="http://o93kt6djh.bkt.clouddn.com/email-send.png">
+<meta property="og:updated_time" content="2016-09-20T07:18:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用 Laravel 编写自定义命令">
+<meta name="twitter:description" content="本文讲述了如何使用 Laravel 开发命令行
+环境
+PHP 7
+Laravel 5.1
+OS X El Capitan 10.11.4
+
+简介Artisan 是 Laravel 的命令行接口的名称，它提供了许多实用的命令来帮助你开发 Laravel 应用，它由强大的 Symfony Console 组件所驱动。
+文档 Artisan
+目的本文目的旨在实现三个简单的命令，分别是优化项目、清除缓存和">
+<meta name="twitter:image" content="http://o93kt6djh.bkt.clouddn.com/laravel-optimize.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-使用-Laravel-编写自定义命令" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/25/使用-Laravel-编写自定义命令/" class="article-date">
+  <time datetime="2016-08-25T13:48:36.000Z" itemprop="datePublished">2016-08-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      使用 Laravel 编写自定义命令
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文讲述了如何使用 Laravel 开发命令行</p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
+<li>PHP 7</li>
+<li>Laravel 5.1</li>
+<li>OS X El Capitan 10.11.4</li>
+</ul>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Artisan 是 Laravel 的命令行接口的名称，它提供了许多实用的命令来帮助你开发 Laravel 应用，它由强大的 Symfony Console 组件所驱动。</p>
+<h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p> <a href="http://laravel-china.org/docs/5.1/artisan" target="_blank" rel="external">Artisan</a></p>
+<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>本文目的旨在实现三个简单的命令，分别是优化项目、清除缓存和发送邮件</p>
+<h2 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h2><h3 id="新建命令"><a href="#新建命令" class="headerlink" title="新建命令"></a>新建命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">php artisan make:console LaravelOptimize --command=laravel:optimize</div><div class="line">php artisan make:console LaravelClean --command=laravel:clean</div><div class="line">php artisan make:console SendEmails --command=emails:send</div></pre></td></tr></table></figure>
+<h3 id="注册命令"><a href="#注册命令" class="headerlink" title="注册命令"></a>注册命令</h3><p>打开文件 <code>app/Console/Kernel.php</code>，修改代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">protected $commands = [</div><div class="line">    \App\Console\Commands\Inspire::class,</div><div class="line">    \App\Console\Commands\SendEmails::class,</div><div class="line">    \App\Console\Commands\LaravelClean::class,</div><div class="line">    \App\Console\Commands\LaravelOptimize::class,</div><div class="line">];</div></pre></td></tr></table></figure></p>
+<h3 id="编写命令执行代码"><a href="#编写命令执行代码" class="headerlink" title="编写命令执行代码"></a>编写命令执行代码</h3><p>文件 <code>SendEmails.php</code> 代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"></div><div class="line">namespace App\Console\Commands;</div><div class="line"></div><div class="line">use App\Facades\UserRepository;</div><div class="line">use Illuminate\Console\Command;</div><div class="line">use Mail;</div><div class="line"></div><div class="line">class SendEmails extends Command</div><div class="line">&#123;</div><div class="line">    /**</div><div class="line">     * The name and signature of the console command.</div><div class="line">     *</div><div class="line">     * @var string</div><div class="line">     */</div><div class="line">    protected $signature = &apos;emails:send&apos;;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * The console command description.</div><div class="line">     *</div><div class="line">     * @var string</div><div class="line">     */</div><div class="line">    protected $description = &apos;use SendCloud to send emails&apos;;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Create a new command instance.</div><div class="line">     *</div><div class="line">     * @return void</div><div class="line">     */</div><div class="line">    public function __construct()</div><div class="line">    &#123;</div><div class="line">        parent::__construct();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Execute the console command.</div><div class="line">     *</div><div class="line">     * @return mixed</div><div class="line">     */</div><div class="line">    public function handle()</div><div class="line">    &#123;</div><div class="line">        $this-&gt;line(&quot;即将执行邮件发送命令&quot;);</div><div class="line"></div><div class="line">        if($this-&gt;confirm(&apos;确定执行?&apos;))&#123;</div><div class="line">            $users = UserRepository::all();</div><div class="line"></div><div class="line">            $bar = $this-&gt;output-&gt;createProgressBar(count($users));</div><div class="line"></div><div class="line">            foreach ($users as $user) &#123;</div><div class="line">                $icon = &quot;http://o93kt6djh.bkt.clouddn.com/Laravel-SendEmaillaravel-200x50.png&quot;;</div><div class="line">                $image = &quot;http://o93kt6djh.bkt.clouddn.com/Laravel-SendEmaillaravel-600x300.jpg&quot;;</div><div class="line"></div><div class="line">                Mail::send(&apos;emails.test-image&apos;,</div><div class="line">                    [</div><div class="line">                        &apos;name&apos;  =&gt; $user-&gt;name,</div><div class="line">                        &apos;icon&apos;  =&gt; $icon,</div><div class="line">                        &apos;image&apos; =&gt; $image,</div><div class="line">                    ],</div><div class="line">                    function ($email) use ($user) &#123;</div><div class="line">                        $email-&gt;to($user-&gt;email)-&gt;subject(&apos;图文邮件标题&apos;);</div><div class="line">                    &#125;);</div><div class="line"></div><div class="line">                $bar-&gt;advance();</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            $bar-&gt;finish();</div><div class="line"></div><div class="line">            $this-&gt;info(&quot;发送邮件完毕&quot;);</div><div class="line">        &#125; else &#123;</div><div class="line">            $this-&gt;info(&quot;取消执行邮件发送命令&quot;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>文件 <code>LaravelOptimize.php</code> 代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"></div><div class="line">namespace App\Console\Commands;</div><div class="line"></div><div class="line">use Illuminate\Console\Command;</div><div class="line">use Illuminate\Support\Facades\Artisan;</div><div class="line"></div><div class="line">class LaravelOptimize extends Command</div><div class="line">&#123;</div><div class="line">    /**</div><div class="line">     * The name and signature of the console command.</div><div class="line">     *</div><div class="line">     * @var string</div><div class="line">     */</div><div class="line">    protected $signature = &apos;laravel:optimize&apos;;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * The console command description.</div><div class="line">     *</div><div class="line">     * @var string</div><div class="line">     */</div><div class="line">    protected $description = &apos;optimize laravel project&apos;;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Create a new command instance.</div><div class="line">     *</div><div class="line">     * @return void</div><div class="line">     */</div><div class="line">    public function __construct()</div><div class="line">    &#123;</div><div class="line">        parent::__construct();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Execute the console command.</div><div class="line">     *</div><div class="line">     * @return mixed</div><div class="line">     */</div><div class="line">    public function handle()</div><div class="line">    &#123;</div><div class="line">        $this-&gt;line(&quot;即将执行优化缓存命令&quot;);</div><div class="line">        if($this-&gt;confirm(&apos;确定执行?&apos;))&#123;</div><div class="line">            $this-&gt;line(&quot;开始执行缓存命令&quot;);</div><div class="line"></div><div class="line">            Artisan::call(&quot;config:cache&quot;);</div><div class="line">            $this-&gt;info(&apos;Configuration cache cleared!&apos;);</div><div class="line">            $this-&gt;info(&apos;Configuration cached successfully!&apos;);</div><div class="line"></div><div class="line">            Artisan::call(&quot;route:cache&quot;);</div><div class="line">            $this-&gt;info(&apos;Route cache cleared!&apos;);</div><div class="line">            $this-&gt;info(&apos;Routes cached successfully!&apos;);</div><div class="line"></div><div class="line">            Artisan::call(&quot;optimize&quot;);</div><div class="line">            $this-&gt;info(&apos;Generating optimized class loader&apos;);</div><div class="line"></div><div class="line">            if(function_exists(&apos;exec&apos;))&#123;</div><div class="line">                exec(&quot;composer dump-autoload&quot;);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            Artisan::call(&quot;ide-helper:generate&quot;);</div><div class="line">            $this-&gt;info(&apos;A new helper file was written to _ide_helper.php&apos;);</div><div class="line"></div><div class="line">            $this-&gt;info(&quot;优化缓存成功&quot;);</div><div class="line">        &#125; else &#123;</div><div class="line">            $this-&gt;info(&quot;取消执行优化缓存命令&quot;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>文件 <code>LaravelClean.php</code> 代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"></div><div class="line">namespace App\Console\Commands;</div><div class="line"></div><div class="line">use Illuminate\Console\Command;</div><div class="line">use Illuminate\Support\Facades\Artisan;</div><div class="line"></div><div class="line">class LaravelClean extends Command</div><div class="line">&#123;</div><div class="line">    /**</div><div class="line">     * The name and signature of the console command.</div><div class="line">     *</div><div class="line">     * @var string</div><div class="line">     */</div><div class="line">    protected $signature = &apos;laravel:clean&apos;;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * The console command description.</div><div class="line">     *</div><div class="line">     * @var string</div><div class="line">     */</div><div class="line">    protected $description = &apos;clean project all cache&apos;;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Create a new command instance.</div><div class="line">     *</div><div class="line">     * @return void</div><div class="line">     */</div><div class="line">    public function __construct()</div><div class="line">    &#123;</div><div class="line">        parent::__construct();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Execute the console command.</div><div class="line">     *</div><div class="line">     * @return mixed</div><div class="line">     */</div><div class="line">    public function handle()</div><div class="line">    &#123;</div><div class="line">        $this-&gt;line(&quot;即将执行清除缓存命令&quot;);</div><div class="line">        if($this-&gt;confirm(&apos;确定执行?&apos;))&#123;</div><div class="line">            $this-&gt;line(&quot;开始执行缓存命令&quot;);</div><div class="line"></div><div class="line">            Artisan::call(&quot;clear-compiled&quot;);</div><div class="line"></div><div class="line">            Artisan::call(&quot;auth:clear-resets&quot;);</div><div class="line">            $this-&gt;info(&apos;Expired reset tokens cleared!&apos;);</div><div class="line"></div><div class="line">            Artisan::call(&quot;cache:clear&quot;);</div><div class="line">            $this-&gt;info(&apos;Application cache cleared!&apos;);</div><div class="line"></div><div class="line">            Artisan::call(&quot;config:clear&quot;);</div><div class="line">            $this-&gt;info(&apos;Configuration cache cleared!&apos;);</div><div class="line"></div><div class="line">            Artisan::call(&quot;debugbar:clear&quot;);</div><div class="line">            $this-&gt;info(&apos;Debugbar Storage cleared!&apos;);</div><div class="line"></div><div class="line">            Artisan::call(&quot;route:clear&quot;);</div><div class="line">            $this-&gt;info(&apos;Route cache cleared!&apos;);</div><div class="line"></div><div class="line">            Artisan::call(&quot;view:clear&quot;);</div><div class="line">            $this-&gt;info(&apos;Compiled views cleared!&apos;);</div><div class="line"></div><div class="line">            $this-&gt;info(&quot;清除缓存成功&quot;);</div><div class="line">        &#125; else &#123;</div><div class="line">            $this-&gt;info(&quot;取消执行清除缓存命令&quot;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="执行效果"><a href="#执行效果" class="headerlink" title="执行效果"></a>执行效果</h2><p>在终端分别执行以下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">php artisan laravel:optimize</div><div class="line">php artisan laravel:clean</div><div class="line">php artisan emails:send</div></pre></td></tr></table></figure></p>
+<p>执行效果分别如下显示：</p>
+<h4 id="php-artisan-laravel-optimize"><a href="#php-artisan-laravel-optimize" class="headerlink" title="php artisan laravel:optimize"></a>php artisan laravel:optimize</h4><p><img src="http://o93kt6djh.bkt.clouddn.com/laravel-optimize.png" alt="执行缓存清楚"></p>
+<h4 id="php-artisan-laravel-clean"><a href="#php-artisan-laravel-clean" class="headerlink" title="php artisan laravel:clean"></a>php artisan laravel:clean</h4><p><img src="http://o93kt6djh.bkt.clouddn.com/laravel-clean.png" alt="执行缓存清楚"></p>
+<h4 id="php-artisan-emails-send"><a href="#php-artisan-emails-send" class="headerlink" title="php artisan emails:send"></a>php artisan emails:send</h4><p><img src="http://o93kt6djh.bkt.clouddn.com/email-send.png" alt="执行邮件发送"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/08/25/使用-Laravel-编写自定义命令/" data-id="cixwy9h9t00206l4byg5gwvqr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/31/使用阿里云从零开始部署-Laravel/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          使用阿里云从零开始部署 Laravel
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/08/使用-Laravel-基于-SMTP-驱动实现发送邮件/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">使用 Laravel 基于 SMTP 驱动实现发送邮件</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 18px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 14px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 12px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Yii/" style="font-size: 16px;">Yii</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/12/08/学习-UML（一）/">学习 UML（一）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/02/Yii2-Working-with-Databases/">Yii2 Working with Databases</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/22/关于-PHP-函数-array-walk-的一些想法/">关于 PHP 函数 array_walk 的一些想法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/21/关于-PHP-函数-array-filter-的一些想法/">关于 PHP 函数 array_filter 的一些想法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/21/关于-PHP-函数-array-map-的一些想法/">关于 PHP 函数 array_map 的一些想法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

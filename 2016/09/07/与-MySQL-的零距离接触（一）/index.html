@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>与 MySQL 的零距离接触（一） | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="第 1 章 初涉 MySQL
+1-1 MySQL概述
+MySQL 是由瑞典 MySQL AB 公司开发的，目前被 Oracle 公司收购了
+MySQL 是一款开源的关系型数据库管理系统
+MySQL 分为社区版和企业版
+
+
+1-2 MySQL的安装与配置
+Mac OS 使用 HomeBrew 安装：brew install mysql
+MySQL 目录结构：
+bin - 存储可执行文件
+lib -">
+<meta property="og:type" content="article">
+<meta property="og:title" content="与 MySQL 的零距离接触（一）">
+<meta property="og:url" content="http://yoursite.com/2016/09/07/与-MySQL-的零距离接触（一）/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="第 1 章 初涉 MySQL
+1-1 MySQL概述
+MySQL 是由瑞典 MySQL AB 公司开发的，目前被 Oracle 公司收购了
+MySQL 是一款开源的关系型数据库管理系统
+MySQL 分为社区版和企业版
+
+
+1-2 MySQL的安装与配置
+Mac OS 使用 HomeBrew 安装：brew install mysql
+MySQL 目录结构：
+bin - 存储可执行文件
+lib -">
+<meta property="og:updated_time" content="2016-09-20T07:18:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="与 MySQL 的零距离接触（一）">
+<meta name="twitter:description" content="第 1 章 初涉 MySQL
+1-1 MySQL概述
+MySQL 是由瑞典 MySQL AB 公司开发的，目前被 Oracle 公司收购了
+MySQL 是一款开源的关系型数据库管理系统
+MySQL 分为社区版和企业版
+
+
+1-2 MySQL的安装与配置
+Mac OS 使用 HomeBrew 安装：brew install mysql
+MySQL 目录结构：
+bin - 存储可执行文件
+lib -">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-与-MySQL-的零距离接触（一）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/07/与-MySQL-的零距离接触（一）/" class="article-date">
+  <time datetime="2016-09-07T12:48:20.000Z" itemprop="datePublished">2016-09-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      与 MySQL 的零距离接触（一）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="第-1-章-初涉-MySQL"><a href="#第-1-章-初涉-MySQL" class="headerlink" title="第 1 章 初涉 MySQL"></a>第 1 章 初涉 MySQL</h2><ul>
+<li><h3 id="1-1-MySQL概述"><a href="#1-1-MySQL概述" class="headerlink" title="1-1 MySQL概述"></a>1-1 MySQL概述</h3><ul>
+<li>MySQL 是由瑞典 MySQL AB 公司开发的，目前被 Oracle 公司收购了</li>
+<li>MySQL 是一款开源的关系型数据库管理系统</li>
+<li>MySQL 分为社区版和企业版</li>
+</ul>
+</li>
+<li><h3 id="1-2-MySQL的安装与配置"><a href="#1-2-MySQL的安装与配置" class="headerlink" title="1-2 MySQL的安装与配置"></a>1-2 MySQL的安装与配置</h3><ul>
+<li>Mac OS 使用 HomeBrew 安装：<code>brew install mysql</code></li>
+<li>MySQL 目录结构：<ul>
+<li>bin - 存储可执行文件</li>
+<li>lib - 存储库文件</li>
+<li>share - 存储错误消息和字符集文件</li>
+<li>scripts - 存储脚本文件</li>
+<li>include - 存储包含的头文件</li>
+<li>mysql-test</li>
+<li>support-files</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="1-3-启动与停止MySQL服务"><a href="#1-3-启动与停止MySQL服务" class="headerlink" title="1-3 启动与停止MySQL服务"></a>1-3 启动与停止MySQL服务</h3><ul>
+<li>启动 MySQL 服务：<code>launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist&quot;</code></li>
+<li>停止 MySQL 服务：<code>launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist&quot;</code></li>
+</ul>
+</li>
+<li><h3 id="1-4-登录与退出"><a href="#1-4-登录与退出" class="headerlink" title="1-4 登录与退出"></a>1-4 登录与退出</h3><ul>
+<li>登录<ul>
+<li><code>mysql</code> 命令<ul>
+<li>-D, –database=[name] : 指定数据库</li>
+<li>-P, –port=[number] ： 指定端口号</li>
+<li>-u, –user=[name] ： 指定登录用户</li>
+<li>-h, –host=[name] ： 指定服务器</li>
+<li>-p, –password ： 密码</li>
+<li>-V, –version ：查看版本</li>
+<li>–delimiter=[name] ： 指定分隔符</li>
+<li>–prompt=[name] ： 设置提示符</li>
+</ul>
+</li>
+<li><code>mysql</code> 命令例子<ul>
+<li><code>mysql -uroot -p</code></li>
+<li><code>mysql --version</code></li>
+<li><code>mysql -uroot -P6606 -p</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>退出<ul>
+<li><code>mysql</code> CLI 环境中输入<ul>
+<li>exit;</li>
+<li>quit:</li>
+<li>\q;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="1-5-修改MySQL提示符"><a href="#1-5-修改MySQL提示符" class="headerlink" title="1-5 修改MySQL提示符"></a>1-5 修改MySQL提示符</h3><ul>
+<li>连接客户端时通过参数指定：<code>shell&gt;mysql -uroot -proot --prompt 提示符</code></li>
+<li>连接上客户端后，通过设置 prompt 提示符指定：<code>prompt 提示符</code></li>
+<li><code>prompt</code> 提示符参数：<ul>
+<li>\D 完整的日期</li>
+<li>\d 当前数据库</li>
+<li>\h 服务器名称</li>
+<li>\u 当前用户</li>
+</ul>
+</li>
+<li><code>prompt</code> 提示符参数用法：<code>prompt \h-\u-\p-\D</code></li>
+</ul>
+</li>
+<li><h3 id="1-6-MySQL-常用命令以及语法规范"><a href="#1-6-MySQL-常用命令以及语法规范" class="headerlink" title="1-6 MySQL 常用命令以及语法规范"></a>1-6 MySQL 常用命令以及语法规范</h3><ul>
+<li>常用命令：<ul>
+<li>查看数据库版本 - <code>SELECT VERSION();</code></li>
+<li>查看数据库当前时间 - <code>SELECT NEW();</code></li>
+<li>查看数据库当前用户 - <code>SELECT USER();</code></li>
+<li>查看数据库列表 - <code>SHOW DATABASES;</code></li>
+<li>查看警告日志 - <code>SHOW WARINGS;</code></li>
+</ul>
+</li>
+<li>语法规范：<ul>
+<li>关键字与函数名称全部大写</li>
+<li>数据库名称、表名称、字段名称全部小写</li>
+<li>SQL 语句必须以分号结尾</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="1-7-操作数据库"><a href="#1-7-操作数据库" class="headerlink" title="1-7 操作数据库"></a>1-7 操作数据库</h3><ul>
+<li><p>创建数据库 - <code>CREATE {DATABASE | SCHEMA} [IF NOT EXISTS] db_name [DEFAULT] CHARACTER SET [=] charset_name;</code></p>
+</li>
+<li><p>修改数据库 - <code>ALTER {DATABASE | SCHEMA} [db_name] [DEFAULT] CHARACTER SET [=] charset_name;</code></p>
+</li>
+<li><p>删除数据库 - <code>DROP {DATABASE | SCHEMA} [IF EXISTS] db_name</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="第-2-章-数据类型与操作数据表"><a href="#第-2-章-数据类型与操作数据表" class="headerlink" title="第 2 章 数据类型与操作数据表"></a>第 2 章 数据类型与操作数据表</h2><ul>
+<li><h3 id="2-1-内容回顾"><a href="#2-1-内容回顾" class="headerlink" title="2-1 内容回顾"></a>2-1 内容回顾</h3><ul>
+<li>略</li>
+</ul>
+</li>
+<li><h3 id="2-2-数据类型之整型"><a href="#2-2-数据类型之整型" class="headerlink" title="2-2 数据类型之整型"></a>2-2 数据类型之整型</h3><ul>
+<li>数据类型的概念：数据类型是指列、存储过程参数、表达式和局部变量的数据特征，它决定了数据的存储格式，代表了不同的信息类型。</li>
+<li>整型类型：<ul>
+<li><code>TINYINT</code><ul>
+<li>有符号值：-128 ~ 127 （- 2）</li>
+<li>无符号值：0 ~ 255</li>
+<li>字节：1</li>
+</ul>
+</li>
+<li><code>SMALLINT</code><ul>
+<li>有符号值：-32768 ~ 32767</li>
+<li>无符号值：0 ~ 65535</li>
+<li>字节：2</li>
+</ul>
+</li>
+<li><code>MEDIUMINT</code><ul>
+<li>有符号值：-8388608 ~ 8388607</li>
+<li>无符号值：0 ~ 16777215</li>
+<li>字节：3</li>
+</ul>
+</li>
+<li><code>INT</code><ul>
+<li>有符号值：-2147483648 ~ 2147483647</li>
+<li>无符号值：0 ~ 4294967295</li>
+<li>字节：4</li>
+</ul>
+</li>
+<li><code>BIGINT</code><ul>
+<li>有符号值：-9223372036854775808 ~ 9223372036854775807</li>
+<li>无符号值：0 ~ 18446744073709551615</li>
+<li>字节：8</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="2-3-数据类型之浮点型"><a href="#2-3-数据类型之浮点型" class="headerlink" title="2-3 数据类型之浮点型"></a>2-3 数据类型之浮点型</h3><ul>
+<li><code>FLOAT</code> [(M,D)]：M 是数字总位数，D 是小数点后面的位数。如果 M 和 D 被省略，根据硬件允许的限制来保存值。单精度浮点数精确到大约 7 位小数位。</li>
+<li><code>DOUBLE</code> [(M,D)]</li>
+</ul>
+</li>
+<li><h3 id="2-4-数据类型之日期时间型"><a href="#2-4-数据类型之日期时间型" class="headerlink" title="2-4 数据类型之日期时间型"></a>2-4 数据类型之日期时间型</h3><ul>
+<li><code>YEAR</code></li>
+<li><code>TIME</code></li>
+<li><code>DATE</code></li>
+<li><code>DATETIME</code></li>
+<li><code>TIMESTAMP</code></li>
+</ul>
+</li>
+<li><h3 id="2-5-数据类型之字符型"><a href="#2-5-数据类型之字符型" class="headerlink" title="2-5 数据类型之字符型"></a>2-5 数据类型之字符型</h3><ul>
+<li><code>CHAR</code>：M 个字节，0 &lt;= M &lt;= 255</li>
+<li><code>VARCHAR</code>：L + 1 个字节，其中 L &lt;= M 且 0 &lt;= M &lt;= 65535</li>
+<li><code>TINYTEXT</code>：L + 1 个字节，其中 L &lt; 2^8</li>
+<li><code>TEXT</code>：L + 2 个字节，其中 L &lt; 2^16</li>
+<li><code>MEDIUMTEXT</code>：L + 3 个字节，其中 L &lt; 2^24</li>
+<li><code>LONGTEXT</code>：L + 4 个字节，其中 L &lt; 2^32</li>
+<li><code>ENUM</code>(‘value1’,’value2’,…)：1 或 2 个字节，取决于枚举值的个数（最多 65535 个值）</li>
+<li><code>SET</code>(‘value1’,’value2’,…)：1、2、3、4 或者 8 个字节，取决于 set 成员的数目（最多64个）</li>
+</ul>
+</li>
+<li><h3 id="2-6-创建数据表"><a href="#2-6-创建数据表" class="headerlink" title="2-6 创建数据表"></a>2-6 创建数据表</h3><ul>
+<li>数据表概念：数据表是数据库最重要的组成部分一直，是其他对象的基础。</li>
+<li>选择数据库 - <code>use {database}</code></li>
+<li>创建数据表 - <code>CREATE TABLE [IF NOT EXISTS] table_name(column_name data_type,....)</code></li>
+</ul>
+</li>
+<li><h3 id="2-7-查看数据表："><a href="#2-7-查看数据表：" class="headerlink" title="2-7 查看数据表："></a>2-7 查看数据表：</h3><ul>
+<li><code>SHOW TABLES [FROM db_name] [LIKE &#39;pattern&#39;|WHERE expr]</code></li>
+</ul>
+</li>
+<li><h3 id="2-8-查看数据表结构："><a href="#2-8-查看数据表结构：" class="headerlink" title="2-8 查看数据表结构："></a>2-8 查看数据表结构：</h3><ul>
+<li><code>SHOW COLUMNS FROM tbl_name</code></li>
+</ul>
+</li>
+<li><h3 id="2-9-记录的插入与查找："><a href="#2-9-记录的插入与查找：" class="headerlink" title="2-9 记录的插入与查找："></a>2-9 记录的插入与查找：</h3><ul>
+<li>插入：<code>INSERT [INTO] tal_name[(col_name)VALUES(val,..)]</code></li>
+<li>插入省略字段需要为所有字段都要赋值，否则数据库报错</li>
+<li>查找：<code>SELECT expr,... FROM tbl_name</code></li>
+</ul>
+</li>
+<li><h3 id="2-10-空值与非空"><a href="#2-10-空值与非空" class="headerlink" title="2-10 空值与非空"></a>2-10 空值与非空</h3><ul>
+<li><code>NULL</code>，字段值可以为空</li>
+<li><code>NOT NULL</code>，字段值禁止为空</li>
+</ul>
+</li>
+<li><h3 id="2-11-自动编号"><a href="#2-11-自动编号" class="headerlink" title="2-11 自动编号"></a>2-11 自动编号</h3><ul>
+<li><code>AUTO_INCREMENT</code>，自动编号，且必须与主键组合使用</li>
+<li>默认情况下，起始值为 1，每次的增量为 1</li>
+</ul>
+</li>
+<li><h3 id="2-12-初涉主键约束"><a href="#2-12-初涉主键约束" class="headerlink" title="2-12 初涉主键约束"></a>2-12 初涉主键约束</h3><ul>
+<li><code>PRIMARY KEY</code><ul>
+<li>主键约束</li>
+<li>主键自动为 NOT NULL</li>
+<li>主键保证记录的唯一性</li>
+<li>每张数据表只能存在一个主键</li>
+<li><code>AUTO_INCREMENT</code> 必须和 <code>PRIMARY KEY</code> 一起使用，<code>PRIMARY KEY</code>  不必须和 <code>AUTO_INCREMENT</code> 一起使用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="2-13-初涉唯一约束"><a href="#2-13-初涉唯一约束" class="headerlink" title="2-13 初涉唯一约束"></a>2-13 初涉唯一约束</h3><ul>
+<li><code>UNIQUE KEY</code><ul>
+<li>唯一约束</li>
+<li>唯约束可以保证记录的唯一性</li>
+<li>唯一约束的字段可以为空值（NULL）</li>
+<li>每张数据表可以存在多个唯一索引</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="2-14-初涉默认约束"><a href="#2-14-初涉默认约束" class="headerlink" title="2-14 初涉默认约束"></a>2-14 初涉默认约束</h3><ul>
+<li><code>DEFAULT</code><ul>
+<li>默认值</li>
+<li>当插入记录时，如果没有明确为字段赋值，则自动赋予默认值</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="第-3-章-约束以及修改数据表"><a href="#第-3-章-约束以及修改数据表" class="headerlink" title="第 3 章 约束以及修改数据表"></a>第 3 章 约束以及修改数据表</h2><ul>
+<li><h3 id="3-1-回顾和概述"><a href="#3-1-回顾和概述" class="headerlink" title="3-1 回顾和概述"></a>3-1 回顾和概述</h3><ul>
+<li>略</li>
+</ul>
+</li>
+<li><h3 id="3-2-外键约束的要求解析"><a href="#3-2-外键约束的要求解析" class="headerlink" title="3-2 外键约束的要求解析"></a>3-2 外键约束的要求解析</h3><ul>
+<li>约束<ul>
+<li>约束保证数据的完整性和一致性</li>
+<li>约束分为表级约束和列级约束</li>
+<li>约束类型：<ul>
+<li><code>DEFAULT</code>（默认约束）</li>
+<li><code>NOT NULL</code>（非空约束）</li>
+<li><code>UNIQUE KEY</code>（唯一约束）</li>
+<li><code>PRIMARY KEY</code>（主键约束）</li>
+<li><code>FOREIGN KEY</code>（外键约束）</li>
+</ul>
+</li>
+<li>FOREIGN KEY - 外键约束<ul>
+<li>保持数据一致性，完整性</li>
+<li>实现一对一或一对多关系</li>
+</ul>
+</li>
+<li>使用外键约束的要求<ul>
+<li>父表和子表必须使用相同的存储引擎，而且禁止使用临时表</li>
+<li>数据表的存储引擎只能为 InnoDB</li>
+<li>外键列和参照列必须具有相似的数据类型。其中数字的长度或是是否有符号位必须相同；而字符的长度则可以不同</li>
+<li>外键列和参照列必须创建索引，如果参照列不存在索引的话，MySQL 将自动创建索引</li>
+</ul>
+</li>
+<li>编辑数据表的默认存储引擎：<code>default-storage-engine=INNODB</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="3-3-外键约束的参照操作"><a href="#3-3-外键约束的参照操作" class="headerlink" title="3-3 外键约束的参照操作"></a>3-3 外键约束的参照操作</h3><ul>
+<li><code>CASCADE</code>：从父表删除或更新且自动删除或更新子表中匹配的行</li>
+<li><code>SET NULL</code>：从父表删除或更新行，并设置子表中的外键列为 NULL。如果使用该选项，必须保证子表列没有指定 NOT NULL</li>
+<li><code>RESTRICT</code>：拒绝对父表的删除或更新操作</li>
+<li><code>NO ACTION</code>：标准 SQL 的关键字，在 MySQL 中与 RESTRICE 相同</li>
+</ul>
+</li>
+<li><h3 id="3-4-表级约束与列级约束"><a href="#3-4-表级约束与列级约束" class="headerlink" title="3-4 表级约束与列级约束"></a>3-4 表级约束与列级约束</h3><ul>
+<li>对一个数据列建立的约束，称为列级约束</li>
+<li>对多个数据列建立的约束，称为表级约束</li>
+<li>列级约束既可以在列定义时声明，也可以在列定义后声明</li>
+<li>表级约束只能在列定义后声明</li>
+</ul>
+</li>
+<li><h3 id="3-5-修改数据表-添加-删除列"><a href="#3-5-修改数据表-添加-删除列" class="headerlink" title="3-5 修改数据表-添加/删除列"></a>3-5 修改数据表-添加/删除列</h3><ul>
+<li>添加单列：<code>ALTER TABLE tbl_name ADD [COLUMN] col_name column_definition [FIRST | AFTER col_name]</code></li>
+<li>添加多列：<code>ALTER TABLE tbl_name ADD [COLUMN] (col_name column_definition,...)</code></li>
+<li>删除单列：<code>ALTER TABLE tbl_name DROP [COLUMN] col_name</code></li>
+</ul>
+</li>
+<li><h3 id="3-6-修改数据表–添加约束"><a href="#3-6-修改数据表–添加约束" class="headerlink" title="3-6 修改数据表–添加约束"></a>3-6 修改数据表–添加约束</h3><ul>
+<li>添加主键约束：<code>ALTER TABLE tbl_name ADD [CONSTRAINT [symbol]] PRIMARY KEY [index_type](index_col_name,...)</code></li>
+<li>添加唯一约束：<code>ALTER TABLE tbl_name ADD [CONSTRAINT [symbol]] UNIQUE [INDEX|KEY][index_name][index_type](index_col_name,...)</code></li>
+<li>添加外键约束：<code>ALTER TABLE tbl_name ADD [CONSTRAINT [symbol]] FOREIGN KEY [index_name](index_col_name,...) reference_definition</code></li>
+<li>添加/删除默认约束：<code>ALTER TABLE tbl_name ALTER [COLUMN] col_name {SET DEFAULT literal | DROP DEFAULT}</code></li>
+</ul>
+</li>
+<li><h3 id="3-7-修改数据表–删除约束"><a href="#3-7-修改数据表–删除约束" class="headerlink" title="3-7 修改数据表–删除约束"></a>3-7 修改数据表–删除约束</h3><ul>
+<li>删除主键约束：<code>ALTER TABLE tbl_name DROP PRIMARY KEY</code></li>
+<li>删除唯一约束：<code>ALTER TABLE tbl_name DROP {INDEX | KEY} index_name</code></li>
+<li>删除外键约束：<code>ALTER TABLE tbl_name DROP FOREIGN KEY fk_symbol</code></li>
+</ul>
+</li>
+<li><h3 id="3-8-修改数据表–修改列定义和更名数据表"><a href="#3-8-修改数据表–修改列定义和更名数据表" class="headerlink" title="3-8 修改数据表–修改列定义和更名数据表"></a>3-8 修改数据表–修改列定义和更名数据表</h3><ul>
+<li>修改表名称<ul>
+<li><code>ALTER TABLE tbl_name RENAME [TO|AS] new_tbl_name</code></li>
+<li><code>RENAME TABLE tbl_name TO new_tbl_name [,tbl_name2 To ewn_tbl_name2,...]</code></li>
+</ul>
+</li>
+<li>修改列定义：<code>ALTER TABLE tbl_name MODIFY [COLUMN] col_name column_definition [FIRST | AFTER col_name]</code></li>
+<li>修改列名称：<code>ALTER TABLE tbl_name CHANGE [COLUMN] old_col_name new_col_name column_definition [FIRST|AFTER col_name]</code></li>
+</ul>
+</li>
+<li><h3 id="3-9-小结"><a href="#3-9-小结" class="headerlink" title="3-9 小结"></a>3-9 小结</h3><ul>
+<li>约束<ul>
+<li>功能<ul>
+<li><code>NOT NULL</code>（非空约束）</li>
+<li><code>PRIMARY KEY</code>（主键约束）</li>
+<li><code>UNIQUE KEY</code>（唯一约束）</li>
+<li><code>DEFAULT</code>（默认约束）</li>
+<li><code>FOREIGN KEY</code>（外键约束）</li>
+</ul>
+</li>
+<li>数据列的数目<ul>
+<li>表级约束</li>
+<li>列级约束</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>修改数据表<ul>
+<li>针对字段的操作：添加 / 删除字段、修改列定义，修改列名称等</li>
+<li>针对约束的操作：添加 / 删除各种约束</li>
+<li>针对数据表的操作：数据表更名（两种方式）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="第-4-章-操作数据表中的记录"><a href="#第-4-章-操作数据表中的记录" class="headerlink" title="第 4 章 操作数据表中的记录"></a>第 4 章 操作数据表中的记录</h2><ul>
+<li><h3 id="4-1-回顾和概述"><a href="#4-1-回顾和概述" class="headerlink" title="4-1 回顾和概述"></a>4-1 回顾和概述</h3><ul>
+<li>略</li>
+</ul>
+</li>
+<li><h3 id="4-2-插入记录-INSERT"><a href="#4-2-插入记录-INSERT" class="headerlink" title="4-2 插入记录 INSERT"></a>4-2 插入记录 <code>INSERT</code></h3><ul>
+<li>INSERT<ul>
+<li><code>INSERT [INFO] tbl_name [(col_name,...)] {VALUES | VALUE}({expr|DEFAULT},...),(...)</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="4-3-插入记录-INSERT-SET-SELECT"><a href="#4-3-插入记录-INSERT-SET-SELECT" class="headerlink" title="4-3 插入记录 INSERT SET-SELECT"></a>4-3 插入记录 <code>INSERT SET-SELECT</code></h3><ul>
+<li>INSERT SET 与 INSERT 的区别在于，此方法可以使用子查询（SubQuery）<ul>
+<li><code>INSERT [INTO] tbl_name SET col_name={expr | DEFAULT},...</code></li>
+</ul>
+</li>
+<li>INSERT SELECT 与 INSERT 的区别在于，此方法可以将查询结果插入到指定数据表<ul>
+<li><code>INSERT [INTO] tbl_name [(col_name,...)] SELECT ...</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="4-4-单表更新记录-UPDATE"><a href="#4-4-单表更新记录-UPDATE" class="headerlink" title="4-4 单表更新记录 UPDATE"></a>4-4 单表更新记录 UPDATE</h3><ul>
+<li><code>UPDATE</code><ul>
+<li><code>UPDATE [LOW_PRIORITY] [IGNORE] table_reference SET col_name1={expr | DEFAULT}[,col_name2={expr2|DEFAULT}]...[WHERE where_condition]</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="4-5-单表删除记录-DELETE"><a href="#4-5-单表删除记录-DELETE" class="headerlink" title="4-5 单表删除记录 DELETE"></a>4-5 单表删除记录 DELETE</h3><ul>
+<li><code>DELETE</code><ul>
+<li><code>DELETE FROM tbl_name [WHERE where_condition]</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="4-6-查询表达式解析"><a href="#4-6-查询表达式解析" class="headerlink" title="4-6 查询表达式解析"></a>4-6 查询表达式解析</h3><ul>
+<li><code>SELECT</code><ul>
+<li><code>SELECT select_expr[,select_expr ...]</code></li>
+<li><code>[</code><ul>
+<li><code>FROM table_references</code></li>
+<li><code>[WHERE where_condition]</code></li>
+<li><code>[GROUP BY {col_name | position} [ASC | DESC], ...]</code></li>
+<li><code>[HAVING where_condition]</code></li>
+<li><code>[ORDER BY {col_name | expr | position} [ASC | DESC],...]</code></li>
+<li><code>[LIMIT {[offset,] row_count | row_count OFFSET offset}]</code></li>
+</ul>
+</li>
+<li><code>]</code></li>
+</ul>
+</li>
+<li>select_expr - 查询表达式<ul>
+<li>每一个表达式表示想要的一列，必须有至少一个。</li>
+<li>多个列之间以英文逗号分隔</li>
+<li>星号（<em>）表示所有列。tbl_name.</em> 可以表示命名表的所有列</li>
+<li>查询表达式可以使用 <code>[ AS ]</code> alias_name 为其赋予别名</li>
+<li>别名可用于 <code>GROUP BY</code>，<code>ORDER BY</code> 或 <code>HAVING</code> 子句</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="4-7-WHERE-语句进行条件查询"><a href="#4-7-WHERE-语句进行条件查询" class="headerlink" title="4-7 WHERE 语句进行条件查询"></a>4-7 <code>WHERE</code> 语句进行条件查询</h3><ul>
+<li><code>WHERE</code> - 条件表达式<ul>
+<li>对记录进行过滤，如果没有指定 <code>WHERE</code> 子句，则显示所有记录</li>
+<li>在 <code>WHERE</code> 表达式中，可以使用 MySQL 支持的函数或者运算符</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="4-8-GROUP-BY-语句对查询结果分组"><a href="#4-8-GROUP-BY-语句对查询结果分组" class="headerlink" title="4-8 GROUP BY 语句对查询结果分组"></a>4-8 <code>GROUP BY</code> 语句对查询结果分组</h3><ul>
+<li><code>[GROUP BY {col_name | position} [ASC | DESC], ...]</code></li>
+</ul>
+</li>
+<li><h3 id="4-9-HAVING-语句设置分组条件"><a href="#4-9-HAVING-语句设置分组条件" class="headerlink" title="4-9 HAVING 语句设置分组条件"></a>4-9 <code>HAVING</code> 语句设置分组条件</h3><ul>
+<li><code>[HAVING where_condition]</code></li>
+<li>请使用聚合函数或 select_column，否则报错</li>
+</ul>
+</li>
+<li><h3 id="4-10-ORDER-BY-语句对查询结果排序"><a href="#4-10-ORDER-BY-语句对查询结果排序" class="headerlink" title="4-10 ORDER BY 语句对查询结果排序"></a>4-10 <code>ORDER BY</code> 语句对查询结果排序</h3><ul>
+<li><code>[ORDER BY {col_name | expr | position} [ASC | DESC],...]</code></li>
+</ul>
+</li>
+<li><h3 id="4-11-LIMIT-语句限制查询数量"><a href="#4-11-LIMIT-语句限制查询数量" class="headerlink" title="4-11 LIMIT 语句限制查询数量"></a>4-11 <code>LIMIT</code> 语句限制查询数量</h3><ul>
+<li><code>[LIMIT {[offset,] row_count | row_count OFFSET offset}]</code></li>
+<li>想要获取第三、第四条记录，写法是 <code>LIMIT 2 OFFSET 2</code></li>
+</ul>
+</li>
+<li><h3 id="4-12-小结"><a href="#4-12-小结" class="headerlink" title="4-12 小结"></a>4-12 小结</h3><ul>
+<li>略</li>
+</ul>
+</li>
+</ul>
+<h2 id="第-5-章-子查询与连接"><a href="#第-5-章-子查询与连接" class="headerlink" title="第 5 章 子查询与连接"></a>第 5 章 子查询与连接</h2><ul>
+<li><h3 id="5-1-数据准备"><a href="#5-1-数据准备" class="headerlink" title="5-1 数据准备"></a>5-1 数据准备</h3><ul>
+<li>数据可以在「资料下载」栏目中获取</li>
+</ul>
+</li>
+<li><h3 id="5-2-子查询简介"><a href="#5-2-子查询简介" class="headerlink" title="5-2 子查询简介"></a>5-2 子查询简介</h3><ul>
+<li>简介<ul>
+<li>子查询（Subquery）是指出现在其他 SQL 语句内的 SELECT 子句</li>
+<li>子查询指嵌套在查询内部，且必须始终出现在圆括号内</li>
+<li>子查询可以包含多个关键字或条件，如 DISTINCT、GROUP BY、ORDER BY、LIMIT、函数等</li>
+<li>子查询的外层查询可以：SELECT、INSERT、UPDATE、SET、DO 等</li>
+<li>子查询可以返回标量、一行、一列或子查询</li>
+</ul>
+</li>
+<li>例子<ul>
+<li><code>SELECT * FROM t1 WHERE col1 = (SELECT col2 FROM t2)</code>;<ul>
+<li>其中 <code>SELECT * FROM t1</code>，称为 Outer Query / Outer Statement</li>
+<li><code>SELECT col2 FROM t2</code>，称为 SubQuery</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="5-3-由比较运算符引发的子查询"><a href="#5-3-由比较运算符引发的子查询" class="headerlink" title="5-3 由比较运算符引发的子查询"></a>5-3 由比较运算符引发的子查询</h3><ul>
+<li>使用比较运算符的子查询：=，&gt;，&lt;，&gt;=，&lt;=，&lt;&gt;，!=，&lt;=&gt;</li>
+<li>语法结构：operand comparison_operator subquery</li>
+<li>比较运算符<ul>
+<li>operand comparison_operator ANY(subquery)<ul>
+<li>>、&gt;= 最小值</li>
+<li>&lt;、&lt;= 最大值</li>
+<li>=     任意值</li>
+<li>&lt;&gt;、!=</li>
+</ul>
+</li>
+<li>operand comparison_operator ALL(subquery)<ul>
+<li>>、&gt;= 最大值</li>
+<li>&lt;、&lt;= 最小值</li>
+<li>=</li>
+<li>&lt;&gt;、!=    任意值</li>
+</ul>
+</li>
+<li>operand comparison_operator SOME(subquery)<ul>
+<li>>、&gt;= 最小值</li>
+<li>&lt;、&lt;= 最大值</li>
+<li>=     任意值</li>
+<li>&lt;&gt;、!=</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="5-4-由-NOT-IN-EXISTS引发的子查询"><a href="#5-4-由-NOT-IN-EXISTS引发的子查询" class="headerlink" title="5-4 由[NOT] IN/EXISTS引发的子查询"></a>5-4 由[NOT] IN/EXISTS引发的子查询</h3><ul>
+<li>语法结构：operand comparison_operator [NOT] IN (subquery)<ul>
+<li>=ANY 运算符与 IN 等效</li>
+<li>!=ALL 或 &lt;&gt;ALL 运算符与 NOT IN 等效</li>
+</ul>
+</li>
+<li>语法结构：operand comparison_operator [NOT] EXISTS<ul>
+<li>如果子查询返回任何行，EXISTE 将返回 TRUE，否则为 FALSE</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="5-5-使用INSERT…SELECT插入记录"><a href="#5-5-使用INSERT…SELECT插入记录" class="headerlink" title="5-5 使用INSERT…SELECT插入记录"></a>5-5 使用INSERT…SELECT插入记录</h3><ul>
+<li>INSERT..SELECT<ul>
+<li>将查询结果写入数据表：<code>INSERT [INTO] tbl_name [(col_name)] SELECT...</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="5-6-多表更新"><a href="#5-6-多表更新" class="headerlink" title="5-6 多表更新"></a>5-6 多表更新</h3><ul>
+<li><code>UPDATE table_references</code></li>
+<li><code>SET col_name1={expr1|DEFAULT}</code></li>
+<li><code>[,col_name2={expr2|DEFAULT}]</code></li>
+<li><code>[WHERE where_condition]</code></li>
+</ul>
+</li>
+<li><h3 id="5-7-多表更新之一步到位"><a href="#5-7-多表更新之一步到位" class="headerlink" title="5-7 多表更新之一步到位"></a>5-7 多表更新之一步到位</h3><ul>
+<li>CREATE…SELECT<ul>
+<li>创建数据表同时将查询结果写入到数据表：<code>CREATE TABLE [IF NOT EXISTS] tbl_name [(create_definition,...)] select_statement</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="5-8-连接的语法结构"><a href="#5-8-连接的语法结构" class="headerlink" title="5-8 连接的语法结构"></a>5-8 连接的语法结构</h3><ul>
+<li>连接<ul>
+<li>MySQL 在 SELECT 语句、多表更新、多表删除语句中支持 JOIN 操作</li>
+<li>语法结构<ul>
+<li><code>table_reference</code> - 数据表参照<ul>
+<li><code>tbl_name [[AS] alias] | table_subquery [AS] alias</code><ul>
+<li>数据表可以使用 tbl_name As alias_name 或 tbl_name alias_name 赋予别名</li>
+<li>table_subquery 可以作为子查询使用在 FROM 子句中，这样的子查询必须为其赋予别名</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>{[INNER | CROSS] JOIN | {LEFT | RIGHT} [OUTER] JOIN}</code></li>
+<li><code>table_reference</code></li>
+<li><code>ON conditional_expr</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="5-9-内连接-INNER-JOIN"><a href="#5-9-内连接-INNER-JOIN" class="headerlink" title="5-9 内连接 INNER JOIN"></a>5-9 内连接 INNER JOIN</h3></li>
+<li><h3 id="5-10-外连接-OUTER-JOIN"><a href="#5-10-外连接-OUTER-JOIN" class="headerlink" title="5-10 外连接 OUTER JOIN"></a>5-10 外连接 OUTER JOIN</h3><ul>
+<li>LEFT JOIN</li>
+<li>RIGHT JOIN</li>
+</ul>
+</li>
+<li><h3 id="5-11-多表连接"><a href="#5-11-多表连接" class="headerlink" title="5-11 多表连接"></a>5-11 多表连接</h3><ul>
+<li>略</li>
+</ul>
+</li>
+<li><h3 id="5-12-关于连接的几点说明"><a href="#5-12-关于连接的几点说明" class="headerlink" title="5-12 关于连接的几点说明"></a>5-12 关于连接的几点说明</h3><ul>
+<li>外连接<ul>
+<li>A LEFT JOIN B join_condtion<ul>
+<li>数据表 B 的结果集依赖数据表 A</li>
+<li>数据表 A 的结果集根据左连接条件依赖所有数据表</li>
+<li>左外连接条件决定如何检索数据表 B</li>
+<li>如果数据表 A 的某条记录符合 WHERE 条件，但是在数据表 B 不存在，符合连接条件的记录，将生成一个所有列为空的额外的行</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="5-13-无限级分类表设计"><a href="#5-13-无限级分类表设计" class="headerlink" title="5-13 无限级分类表设计"></a>5-13 无限级分类表设计</h3><ul>
+<li>略</li>
+</ul>
+</li>
+<li><h3 id="5-14-多表删除"><a href="#5-14-多表删除" class="headerlink" title="5-14 多表删除"></a>5-14 多表删除</h3><ul>
+<li><code>DELETE tbl_name[.*] [,tbl_name[.*]] ... FROM table_references [WHERE where_condition]</code></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/07/与-MySQL-的零距离接触（一）/" data-id="cixwy9h9e001s6l4bq236ugfp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/09/09/与-MySQL-的零距离接触（二）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          与 MySQL 的零距离接触（二）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/09/04/复习使用-MySQL（三）/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">复习使用 MySQL（三）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 18px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 14px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 12px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Yii/" style="font-size: 16px;">Yii</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/12/08/学习-UML（一）/">学习 UML（一）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/02/Yii2-Working-with-Databases/">Yii2 Working with Databases</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/22/关于-PHP-函数-array-walk-的一些想法/">关于 PHP 函数 array_walk 的一些想法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/21/关于-PHP-函数-array-filter-的一些想法/">关于 PHP 函数 array_filter 的一些想法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/21/关于-PHP-函数-array-map-的一些想法/">关于 PHP 函数 array_map 的一些想法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>复习使用 MySQL（二） | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="环境
+MySQL 5.7.13
+
+MySQL 主要存储引擎
+
+
+特性/引擎
+MyISAM
+Aria
+InnoDB
+XtraDB
+Memory
+Archive
+
+
+
+
+数据存储
+传统顺序数据储存
+传统顺序数据储存
+表空间存储方式
+表空间存储方式
+
+
+
+
+
+事务支持
+不支持
+支持
+支持
+支持
+不支持
+不支持
+
+
+
+外键
+不支持
+不支持
+支持
+支持
+不支持
+不支持
+
+
+
+全文检索
+支持
+支持
+5.6 之">
+<meta property="og:type" content="article">
+<meta property="og:title" content="复习使用 MySQL（二）">
+<meta property="og:url" content="http://yoursite.com/2016/09/04/复习使用-MySQL（二）/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="环境
+MySQL 5.7.13
+
+MySQL 主要存储引擎
+
+
+特性/引擎
+MyISAM
+Aria
+InnoDB
+XtraDB
+Memory
+Archive
+
+
+
+
+数据存储
+传统顺序数据储存
+传统顺序数据储存
+表空间存储方式
+表空间存储方式
+
+
+
+
+
+事务支持
+不支持
+支持
+支持
+支持
+不支持
+不支持
+
+
+
+外键
+不支持
+不支持
+支持
+支持
+不支持
+不支持
+
+
+
+全文检索
+支持
+支持
+5.6 之">
+<meta property="og:updated_time" content="2016-09-20T07:19:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="复习使用 MySQL（二）">
+<meta name="twitter:description" content="环境
+MySQL 5.7.13
+
+MySQL 主要存储引擎
+
+
+特性/引擎
+MyISAM
+Aria
+InnoDB
+XtraDB
+Memory
+Archive
+
+
+
+
+数据存储
+传统顺序数据储存
+传统顺序数据储存
+表空间存储方式
+表空间存储方式
+
+
+
+
+
+事务支持
+不支持
+支持
+支持
+支持
+不支持
+不支持
+
+
+
+外键
+不支持
+不支持
+支持
+支持
+不支持
+不支持
+
+
+
+全文检索
+支持
+支持
+5.6 之">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-复习使用-MySQL（二）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/04/复习使用-MySQL（二）/" class="article-date">
+  <time datetime="2016-09-04T12:41:22.000Z" itemprop="datePublished">2016-09-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      复习使用 MySQL（二）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
+<li>MySQL 5.7.13</li>
+</ul>
+<h2 id="MySQL-主要存储引擎"><a href="#MySQL-主要存储引擎" class="headerlink" title="MySQL 主要存储引擎"></a>MySQL 主要存储引擎</h2><table>
+<thead>
+<tr>
+<th>特性/引擎</th>
+<th>MyISAM</th>
+<th>Aria</th>
+<th>InnoDB</th>
+<th>XtraDB</th>
+<th>Memory</th>
+<th>Archive</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据存储</td>
+<td>传统顺序数据储存</td>
+<td>传统顺序数据储存</td>
+<td>表空间存储方式</td>
+<td>表空间存储方式</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>事务支持</td>
+<td>不支持</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+<td>不支持</td>
+<td>不支持</td>
+<td></td>
+</tr>
+<tr>
+<td>外键</td>
+<td>不支持</td>
+<td>不支持</td>
+<td>支持</td>
+<td>支持</td>
+<td>不支持</td>
+<td>不支持</td>
+<td></td>
+</tr>
+<tr>
+<td>全文检索</td>
+<td>支持</td>
+<td>支持</td>
+<td>5.6 之后支持</td>
+<td>5.6 之后支持</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>锁级别</td>
+<td>表级锁</td>
+<td>表级锁</td>
+<td>行级锁</td>
+<td>行级锁</td>
+<td>表级锁</td>
+<td>行级锁</td>
+<td></td>
+</tr>
+<tr>
+<td>Count 速度</td>
+<td>快</td>
+<td>快</td>
+<td>慢</td>
+<td>慢</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>适合业务</td>
+<td>读多写少、单表数据量小于 1 KW</td>
+<td>读多写少、单表数据量小于 1 KW</td>
+<td>读写均衡、数据量不限</td>
+<td>读写均衡、数据量不限</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>可用版本</td>
+<td>MySQL、MariaDB、Percona</td>
+<td>MariaDB</td>
+<td>MySQL、MariaDB、Percona</td>
+<td>MariaDB、Percona</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>其他说明</td>
+<td>传统顺序索引数据库，适合读多写少小数据量业务</td>
+<td>MyISAM 增强版，性能更好</td>
+<td>适合高压力高性能的业务模型</td>
+<td>InnoDB 增强版</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="MySQL-索引定义"><a href="#MySQL-索引定义" class="headerlink" title="MySQL 索引定义"></a>MySQL 索引定义</h2><p>MySQL 的索引（Index）是帮助 MySQL 高效获取数据的数据结构</p>
+<h2 id="MySQL-索引类型"><a href="#MySQL-索引类型" class="headerlink" title="MySQL 索引类型"></a>MySQL 索引类型</h2><ul>
+<li>Normal<ul>
+<li>普通索引，对存储的数值没有任何限制</li>
+</ul>
+</li>
+<li>Unique<ul>
+<li>唯一索引，不允许数值重复，但允许空值</li>
+</ul>
+</li>
+<li>Primary<ul>
+<li>主键索引，是一种特殊的唯一索引，不允许存在数值重复或空值</li>
+</ul>
+</li>
+<li>Spatial（R-Tree）<ul>
+<li>GIS 相关空间查询使用索引数据结构。</li>
+</ul>
+</li>
+<li>Fulltext<ul>
+<li>主要用于全文检索，目前只有 MyISAM 和 MySQL 5.6 + 的 InnoDB 支持；目前只支持英文。</li>
+</ul>
+</li>
+</ul>
+<h2 id="MySQL-索引方法"><a href="#MySQL-索引方法" class="headerlink" title="MySQL 索引方法"></a>MySQL 索引方法</h2><ul>
+<li>B+Tree<ul>
+<li>可用于排序的索引数据结构，可应用于 =，&gt;，&lt; 等各个范围查询，并且可以排序</li>
+<li>时间复杂度：O(log2N)</li>
+</ul>
+</li>
+<li>Hash<ul>
+<li>只能用于 =，IN 等操作，无法进行范围操作，Key 冲突严重情况下可能性能比 B-Tree 低下</li>
+<li>时间复杂度：O(1)</li>
+</ul>
+</li>
+</ul>
+<h2 id="MyISAM-索引结构：B-Tree"><a href="#MyISAM-索引结构：B-Tree" class="headerlink" title="MyISAM 索引结构：B+ Tree"></a>MyISAM 索引结构：B+ Tree</h2><ul>
+<li>MyISAM 主索引和辅助索引<ul>
+<li>区别在于：主索引 Key 是唯一；辅助索引 Key 可以重复</li>
+</ul>
+</li>
+<li>MyISAM 为非聚簇索引</li>
+</ul>
+<h2 id="InnoDB-索引结构：B-Tree"><a href="#InnoDB-索引结构：B-Tree" class="headerlink" title="InnoDB 索引结构：B+ Tree"></a>InnoDB 索引结构：B+ Tree</h2><ul>
+<li>InnoDB 主索引和辅助索引<ul>
+<li>InnoDB 的主索引是聚簇索引，数据和 Key 本身都会存储在 B+Tree 的叶子节点</li>
+<li>InnoDB 的辅助索引本身主要是记录主索引的 Key,最终查找数据还是从辅助索引再去主索引查找</li>
+</ul>
+</li>
+<li>InnoDB 为聚簇索引</li>
+</ul>
+<h2 id="存储引擎及版本选择"><a href="#存储引擎及版本选择" class="headerlink" title="存储引擎及版本选择"></a>存储引擎及版本选择</h2><p>结论：</p>
+<ul>
+<li>使用 InnoDB 于生产环境</li>
+<li>使用 MySQL 5.5+ 于生产环境</li>
+</ul>
+<p>原因：</p>
+<ul>
+<li>更稳定可靠的数据存储和索引结构；整个存储引擎设计思想更可靠先进，接近于Oracle、SQL Server级别的数据库（有兴趣可以去阅读源码了解细节）</li>
+<li>更多可靠特性支持，比如事务、外键等支持（支付等关键领域事务非常重要）</li>
+<li>运行更稳定，不论读写数据的量级，都能够保证比较稳定的性能响应</li>
+<li>更好地崩溃恢复机制，特别利用一些Percona的一些工具，更有效运维InnoDB</li>
+<li>MySQL 5.5+ 对比 MySQL 5.1.x 总体功能和性能提升太多，改进太多</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/04/复习使用-MySQL（二）/" data-id="cixwy9hcf00406l4btmh4wy5t" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/09/04/复习使用-MySQL（三）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          复习使用 MySQL（三）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/09/02/复习使用-MySQL（一）/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">复习使用 MySQL（一）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 18px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 14px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 12px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Yii/" style="font-size: 16px;">Yii</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/12/08/学习-UML（一）/">学习 UML（一）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/02/Yii2-Working-with-Databases/">Yii2 Working with Databases</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/22/关于-PHP-函数-array-walk-的一些想法/">关于 PHP 函数 array_walk 的一些想法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/21/关于-PHP-函数-array-filter-的一些想法/">关于 PHP 函数 array_filter 的一些想法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/21/关于-PHP-函数-array-map-的一些想法/">关于 PHP 函数 array_map 的一些想法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

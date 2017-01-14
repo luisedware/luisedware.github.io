@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Linux Shell 基础之运算符 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Shell 运算符
+declare 声明变量
+declare [+/-][选项] 变量名
+- 给变量设定类型属性
+-a 将变量声明为数组型
+-i 将变量声明为整数型
+-x 将变量声明为环境变量
+-r 将变量声明为只读变量
+-p 显示指定变量的被声明的类型
+
+
++ 取消变量的类型属性
+
+
+declare -x test=123 声明环境变量
+
+
+declare -p 查询变量的属性
+declare">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux Shell 基础之运算符">
+<meta property="og:url" content="http://yoursite.com/2016/10/04/Linux-Shell-基础之运算符/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Shell 运算符
+declare 声明变量
+declare [+/-][选项] 变量名
+- 给变量设定类型属性
+-a 将变量声明为数组型
+-i 将变量声明为整数型
+-x 将变量声明为环境变量
+-r 将变量声明为只读变量
+-p 显示指定变量的被声明的类型
+
+
++ 取消变量的类型属性
+
+
+declare -x test=123 声明环境变量
+
+
+declare -p 查询变量的属性
+declare">
+<meta property="og:updated_time" content="2016-10-04T02:54:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux Shell 基础之运算符">
+<meta name="twitter:description" content="Shell 运算符
+declare 声明变量
+declare [+/-][选项] 变量名
+- 给变量设定类型属性
+-a 将变量声明为数组型
+-i 将变量声明为整数型
+-x 将变量声明为环境变量
+-r 将变量声明为只读变量
+-p 显示指定变量的被声明的类型
+
+
++ 取消变量的类型属性
+
+
+declare -x test=123 声明环境变量
+
+
+declare -p 查询变量的属性
+declare">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Linux-Shell-基础之运算符" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/04/Linux-Shell-基础之运算符/" class="article-date">
+  <time datetime="2016-10-04T02:53:55.000Z" itemprop="datePublished">2016-10-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Linux Shell 基础之运算符
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Shell-运算符"><a href="#Shell-运算符" class="headerlink" title="Shell 运算符"></a>Shell 运算符</h2><ul>
+<li>declare 声明变量<ul>
+<li><code>declare [+/-][选项] 变量名</code><ul>
+<li>- 给变量设定类型属性<ul>
+<li>-a 将变量声明为数组型</li>
+<li>-i 将变量声明为整数型</li>
+<li>-x 将变量声明为环境变量</li>
+<li>-r 将变量声明为只读变量</li>
+<li>-p 显示指定变量的被声明的类型</li>
+</ul>
+</li>
+<li>+ 取消变量的类型属性</li>
+</ul>
+</li>
+<li><code>declare -x test=123</code> 声明环境变量</li>
+</ul>
+</li>
+<li>declare -p 查询变量的属性<ul>
+<li><code>declare -p</code> 查询所有变量的属性</li>
+<li><code>declare -p 变量名</code> 查询指定变量的属性</li>
+</ul>
+</li>
+<li>expr 或 let 数值运算工具</li>
+</ul>
+<h2 id="Shell-运算符-例子"><a href="#Shell-运算符-例子" class="headerlink" title="Shell 运算符 例子"></a>Shell 运算符 例子</h2><h3 id="Shell-declare-例子"><a href="#Shell-declare-例子" class="headerlink" title="Shell declare 例子"></a>Shell declare 例子</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># 给变量 aa 和 bb 赋值</div><div class="line">aa=11</div><div class="line">bb=22</div><div class="line"></div><div class="line"># 声明变量 cc 的类型是整数型，它的值是 aa 和 bb 的和</div><div class="line">declare -i cc=$aa+$bb</div></pre></td></tr></table></figure>
+<h3 id="声明数组变量例子"><a href="#声明数组变量例子" class="headerlink" title="声明数组变量例子"></a>声明数组变量例子</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"># 定义数组</div><div class="line">movie[0]=zp</div><div class="line">movie[1]=tp</div><div class="line">declare -a movie[2]=live</div><div class="line"></div><div class="line"># 查看数组</div><div class="line">echo $&#123;movie&#125;</div><div class="line">echo $&#123;movie[2]&#125;</div><div class="line">echo $&#123;movie[*]&#125;</div></pre></td></tr></table></figure>
+<h2 id="Shell-环境变量配置文件"><a href="#Shell-环境变量配置文件" class="headerlink" title="Shell 环境变量配置文件"></a>Shell 环境变量配置文件</h2><p>环境变量配置文件中主要是定义对系统操作环境生效的系统默认环境变量，如 PATH 等</p>
+<ul>
+<li>source 命令<ul>
+<li><code>source 配置文件</code></li>
+<li><code>. 配置文件</code></li>
+</ul>
+</li>
+<li>常用的环境变量配置文件<ul>
+<li>/etc/profile<ul>
+<li>USER 变量</li>
+<li>LOGNAME 变量</li>
+<li>MAIL 变量</li>
+<li>PATH 变量</li>
+<li>HOSTNAME 变量</li>
+<li>HISTSIZE 变量</li>
+<li>umask 查看系统默认权限<ul>
+<li>文件最高权限为 666</li>
+<li>目录最高权限为 777</li>
+<li>权限不能使用数字进行换算，而必须使用字母</li>
+<li>umask 定义的权限，是系统默认权限中准备丢弃的权限</li>
+</ul>
+</li>
+<li>调用 /etc/profile.d/*sh 文件</li>
+</ul>
+</li>
+<li>/etc/profile.d/*sh</li>
+<li>~/.bash_profile</li>
+<li>~/.bashrc</li>
+<li>/etc/bashrc</li>
+</ul>
+</li>
+<li>其他配置文件<ul>
+<li><code>~/.bash_logout</code> 注销时生效的环境变量配置文件</li>
+</ul>
+</li>
+<li>Shell 登录信息<ul>
+<li><code>cat /etc/issue</code> 本地终端欢迎信息</li>
+<li><code>cat /etc/issue.net</code> 远程终端欢迎信息<ul>
+<li>转义符在 <code>/etc/issue.net</code> 文件中不能使用</li>
+<li>是否显示此欢迎信息，由 SSH 的配置文件 <code>/etc/ssh/sshd_config</code> 决定，加入 “Banner /etc/issue.net” 行才能显示（需要重启 SSH 服务）</li>
+</ul>
+</li>
+<li><code>/etc/motd</code> 登陆后欢迎信息，不管是本地登录，还是远程登录，都可以显示此欢迎信息</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/10/04/Linux-Shell-基础之运算符/" data-id="cixwy9h5g00046l4b6ynbvqzj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/10/04/Linux-Shell-基础之条件判断语句/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Linux Shell 基础之条件判断语句
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/10/04/Linux-Shell-基础之变量/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Linux Shell 基础之变量</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 18px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 14px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 12px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Yii/" style="font-size: 16px;">Yii</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/12/08/学习-UML（一）/">学习 UML（一）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/02/Yii2-Working-with-Databases/">Yii2 Working with Databases</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/22/关于-PHP-函数-array-walk-的一些想法/">关于 PHP 函数 array_walk 的一些想法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/21/关于-PHP-函数-array-filter-的一些想法/">关于 PHP 函数 array_filter 的一些想法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/21/关于-PHP-函数-array-map-的一些想法/">关于 PHP 函数 array_map 的一些想法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

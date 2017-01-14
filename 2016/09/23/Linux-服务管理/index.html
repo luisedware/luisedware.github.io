@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Linux 服务管理 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Linux 服务管理简介与分类
+系统的运行级别
+查看运行级别命令：runlevel
+修改运行级别命令：init 运行级别
+系统开机进入级别：vim /etc/inittab ~ id:3initdefault:
+
+
+
+
+
+
+运行级别
+含义
+
+
+
+
+0
+关机
+
+
+1
+单用户模式，主要用于系统修复
+
+
+2
+不完全的命令行模式，不含 NFS 服务
+
+
+3
+完全的命令行模式，就是标准字符界面
+
+
+4
+系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 服务管理">
+<meta property="og:url" content="http://yoursite.com/2016/09/23/Linux-服务管理/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Linux 服务管理简介与分类
+系统的运行级别
+查看运行级别命令：runlevel
+修改运行级别命令：init 运行级别
+系统开机进入级别：vim /etc/inittab ~ id:3initdefault:
+
+
+
+
+
+
+运行级别
+含义
+
+
+
+
+0
+关机
+
+
+1
+单用户模式，主要用于系统修复
+
+
+2
+不完全的命令行模式，不含 NFS 服务
+
+
+3
+完全的命令行模式，就是标准字符界面
+
+
+4
+系统">
+<meta property="og:updated_time" content="2016-09-23T13:53:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux 服务管理">
+<meta name="twitter:description" content="Linux 服务管理简介与分类
+系统的运行级别
+查看运行级别命令：runlevel
+修改运行级别命令：init 运行级别
+系统开机进入级别：vim /etc/inittab ~ id:3initdefault:
+
+
+
+
+
+
+运行级别
+含义
+
+
+
+
+0
+关机
+
+
+1
+单用户模式，主要用于系统修复
+
+
+2
+不完全的命令行模式，不含 NFS 服务
+
+
+3
+完全的命令行模式，就是标准字符界面
+
+
+4
+系统">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Linux-服务管理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/23/Linux-服务管理/" class="article-date">
+  <time datetime="2016-09-23T12:26:20.000Z" itemprop="datePublished">2016-09-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Linux 服务管理
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Linux-服务管理"><a href="#Linux-服务管理" class="headerlink" title="Linux 服务管理"></a>Linux 服务管理</h2><h3 id="简介与分类"><a href="#简介与分类" class="headerlink" title="简介与分类"></a>简介与分类</h3><ul>
+<li><h4 id="系统的运行级别"><a href="#系统的运行级别" class="headerlink" title="系统的运行级别"></a>系统的运行级别</h4><ul>
+<li>查看运行级别命令：<code>runlevel</code></li>
+<li>修改运行级别命令：<code>init 运行级别</code></li>
+<li>系统开机进入级别：<code>vim /etc/inittab</code> ~ <code>id:3initdefault:</code></li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>运行级别</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>关机</td>
+</tr>
+<tr>
+<td>1</td>
+<td>单用户模式，主要用于系统修复</td>
+</tr>
+<tr>
+<td>2</td>
+<td>不完全的命令行模式，不含 NFS 服务</td>
+</tr>
+<tr>
+<td>3</td>
+<td>完全的命令行模式，就是标准字符界面</td>
+</tr>
+<tr>
+<td>4</td>
+<td>系统保留</td>
+</tr>
+<tr>
+<td>5</td>
+<td>图形模式</td>
+</tr>
+<tr>
+<td>6</td>
+<td>重启动</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><h4 id="服务的分类"><a href="#服务的分类" class="headerlink" title="服务的分类"></a>服务的分类</h4><ul>
+<li>Linux 服务<ul>
+<li>PRM 包默认安装的服务<ul>
+<li>独立的服务<ul>
+<li>默认配置文件位置<ul>
+<li>/etc/init.d/ 启动脚本位置</li>
+<li>/etc/sysconfig/ 初始化环境配置文件位置</li>
+<li>/etc/ 配置文件位置</li>
+<li>/etc/xinetd.conf xinetd 配置文件</li>
+<li>/etc/xinetd.d/ 基于 xineted 服务的启动脚本</li>
+<li>/var/lib/ 服务产生的数据放在这里</li>
+<li>/var/log/ 日志</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>基于 xinetd 服务</li>
+</ul>
+</li>
+<li>源码包安装的服务<ul>
+<li>源码包安装位置，一般是 <code>/usr/local</code> 下</li>
+</ul>
+</li>
+<li>PRM 包安装和源码包安装的区别：两者服务安装的位置不同</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h4 id="服务与端口"><a href="#服务与端口" class="headerlink" title="服务与端口"></a>服务与端口</h4><ul>
+<li>概念：如果把 IP 地址比作一间房子，端口就是出入这间房子的门。真正的房子只有几个门，但是一个 IP 地址的端口可以有 65536 个</li>
+<li>服务与端口的对应：<code>cat /etc/services</code></li>
+<li>查询系统中开启的服务：<code>netstat [选项]</code><ul>
+<li>-t 列出 TCP 数据</li>
+<li>-u 列出 UDP 数据</li>
+<li>-l 列出正在监听的网络服务（不包含已经连接的网络服务）</li>
+<li>-n 用端口号来显示服务，而不是用服务名</li>
+<li>-p 列出该服务的进程 ID</li>
+</ul>
+</li>
+<li>chkconfig 和 netstat 的区别<ul>
+<li><code>chkconfig</code> 查看自启动命令</li>
+<li><code>netstat</code> 查看启动命令</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h4 id="服务启动与自启动"><a href="#服务启动与自启动" class="headerlink" title="服务启动与自启动"></a>服务启动与自启动</h4><ul>
+<li>独立服务的自启动<ul>
+<li><code>ntsysv</code> 命令图形界面管理自启动</li>
+<li><code>/etc/rc.d/rc.local</code> 文件修改管理自启动</li>
+<li><code>chkconfig --list</code> 查看服务自启动状态，可以看到所有 RPM 包安装的服务</li>
+<li><code>chkconfig [--level 运行级别] [独立服务名] [on|off]</code> 修改服务自启动状态</li>
+</ul>
+</li>
+<li>独立服务的启动<ul>
+<li><code>/etc/init.d/独立服务名 start、stop、status、restart</code></li>
+<li><code>service 独立服务名 start、stop、status、restart</code></li>
+</ul>
+</li>
+<li>源码包安装服务的启动<ul>
+<li>使用绝对路径，调用启动脚本来启动。不同的源码包的启动脚本不同。可以查看源码包的安装说明，查看启动脚本的方法。</li>
+<li>用法：<code>/usr/local/apache2/bin/apachectl start</code></li>
+</ul>
+</li>
+<li>源码包服务的自启动<ul>
+<li><code>vi /etc/rc.d/rc.local</code> 加入 <code>/usr/local/apache2/bin/apachectl start</code></li>
+</ul>
+</li>
+<li>源码包的 Apache 服务能被 Service 命令管理启动<ul>
+<li><code>ln -s /usr/local/apache2/bin/apachectl /etc/init.d/apache</code></li>
+</ul>
+</li>
+<li>源码包的 Apache 服务能被 chkconfig 与 ntsysv 命令管理自启动<ul>
+<li><code>vi /etc/init.d/apache</code> 加入 <code># chkconfig:35 86 76</code> 和 <code>description:source package apache</code></li>
+<li><code>chkconfig --add apache</code> 把源码包 apache 加入 chkconfig 命令</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/23/Linux-服务管理/" data-id="cixwy9h6w000d6l4bt7qqvz06" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/09/24/Linux-系统管理/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Linux 系统管理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/09/22/Linux-Shell-基础之正则表达式/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Linux-Shell-基础之正则表达式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 18px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 14px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 12px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Yii/" style="font-size: 16px;">Yii</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/12/08/学习-UML（一）/">学习 UML（一）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/02/Yii2-Working-with-Databases/">Yii2 Working with Databases</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/22/关于-PHP-函数-array-walk-的一些想法/">关于 PHP 函数 array_walk 的一些想法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/21/关于-PHP-函数-array-filter-的一些想法/">关于 PHP 函数 array_filter 的一些想法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/21/关于-PHP-函数-array-map-的一些想法/">关于 PHP 函数 array_map 的一些想法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

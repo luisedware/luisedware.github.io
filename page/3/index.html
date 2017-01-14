@@ -1,0 +1,3613 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/page/3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-Linux-系统管理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/24/Linux-系统管理/" class="article-date">
+  <time datetime="2016-09-24T01:01:11.000Z" itemprop="datePublished">2016-09-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/24/Linux-系统管理/">Linux 系统管理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="进程简介"><a href="#进程简介" class="headerlink" title="进程简介"></a>进程简介</h2><p>进程是正在执行的一个程序或命令，每一个进程都是一个运行的实体，都有自己的地址空间，并占用一定的系统资源</p>
+<h2 id="进程管理的作用"><a href="#进程管理的作用" class="headerlink" title="进程管理的作用"></a>进程管理的作用</h2><ul>
+<li>判断服务器健康状态</li>
+<li>查看系统中所有进程</li>
+<li>杀死进程</li>
+</ul>
+<h2 id="进程的查看"><a href="#进程的查看" class="headerlink" title="进程的查看"></a>进程的查看</h2><ul>
+<li><h4 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h4><ul>
+<li><code>ps aux</code> 查看系统中所有进程，使用 BSD 操作系统格式</li>
+<li><code>ps -le</code> 查看系统中所有进程，使用 Linux 标准命令模式</li>
+<li>选项：<ul>
+<li>a 显示一个终端的所有进程，除了会话引线</li>
+<li>u 显示进程的归属用户及内存的使用情况</li>
+<li>x 显示没有控制终端的进程</li>
+<li>-l 长格式显示。显示更加详细的信息</li>
+<li>-e 显示所有进程，和 -A 作用一致</li>
+</ul>
+</li>
+<li>ps 命令输出<ul>
+<li>USER 该进程是由哪个用户产生的</li>
+<li>PID 该进程的 ID 号</li>
+<li>%CPU 该进程占用 CPU 资源的百分比，占用越高，进程越耗费资源</li>
+<li>%MEN 该进程占用物理内存的百分比，占用越高，进程越耗费资源</li>
+<li>VSZ 该进程占用虚拟内存大小，单位 KB</li>
+<li>RSS 该进程占用实际物理内存的大小，单位 KB</li>
+<li>TTY 该进程是在哪个终端中运行的。其中 tty1-tty7 代表本地控制台终端，tty1-tty6 是本地的字符界面终端，tty7 是图形终端。pts/0-255 代表虚拟终端，？ 代表内核运行</li>
+<li>STAT 进程状态<ul>
+<li>R 运行</li>
+<li>S 睡眠</li>
+<li>T 停止状态</li>
+<li><ul>
+<li>位于后台</li>
+</ul>
+</li>
+<li>s 包含子进程</li>
+</ul>
+</li>
+<li>START 该进程的启动时间</li>
+<li>TIME 该进程占用 CPU 的运算时间，注意不是系统时间</li>
+<li>COMMAND 产生此进程的命令名</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h4 id="pstree"><a href="#pstree" class="headerlink" title="pstree"></a>pstree</h4><ul>
+<li><code>pstree [选项]</code><ul>
+<li>-p 显示进程的 PID</li>
+<li>-u 显示进程的所属用户</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h4 id="top"><a href="#top" class="headerlink" title="top"></a>top</h4><ul>
+<li><code>top [选项]</code></li>
+<li><code>top -b -n 1 &gt; top.log</code> 把每秒的 top 信息写进 <code>top.log</code> 文件中</li>
+<li>选项：<ul>
+<li>-d 秒数 指定 top 命令每隔几秒更新。默认是 3 秒</li>
+<li>-b 使用批处理模式输出。一般和 “-n” 选项合用</li>
+<li>-n 次数 指定 top 命令执行的次数。一般和 “-b” 选项合用</li>
+</ul>
+</li>
+<li>top 命令交互模式可以执行命令<ul>
+<li>? 或 h 显示帮助</li>
+<li>M 以内存使用率排序</li>
+<li>P 以 CPU 使用率排序，默认此项</li>
+<li>N 以 PID 排序</li>
+<li>q 退出 top</li>
+</ul>
+</li>
+<li>top 参数意义<ul>
+<li>第一行系统信息：<ul>
+<li><code>12:26:46</code> 系统当前时间</li>
+<li><code>up 1 day,13:32</code> 系统运行时间，本机已运行了 1 天 13 小时 32 分钟</li>
+<li><code>2 users</code>  当前系统登录了用户</li>
+<li><code>load average: 0.00,0.00,0.00</code> 系统在之前 1 分钟，5 分钟，15 分钟的平均负载。一般认为小于1时，负载较小。如果大于 1，系统已经超出负荷</li>
+</ul>
+</li>
+<li>第二行进程信息：<ul>
+<li><code>Tasks: 95 total</code> 系统中的进程总数</li>
+<li><code>1 running</code> 正在运行的进程数</li>
+<li><code>94 sleeping</code> 睡眠的进程</li>
+<li><code>0 stopped</code> 正在停止的进程</li>
+<li><code>0 zombie</code> 僵尸进程。如果不是 0，需要手工检查僵尸进程</li>
+</ul>
+</li>
+<li>第三行 CPU 信息：<ul>
+<li><code>Cpu(s) 0.1%us</code> 用户模式占用的 CPU 百分比</li>
+<li><code>0.1%sy</code> 系统模式占用的 CPU 百分比</li>
+<li><code>0.0%ni</code> 改变过优先级的用户进程占用的 CPU 百分比</li>
+<li><code>99.7%id</code> 空闲 CPU 的 CPU 百分比</li>
+<li><code>0.1%wa</code> 等待输入 / 输出的进程的占用 CPU 百分比</li>
+<li><code>0.0%hi</code> 硬中断请求服务占用的 CPU 百分比</li>
+<li><code>0.1%si</code> 软中断请求服务占用的 CPU 百分比</li>
+<li><code>0,0%st</code> 虚拟时间百分比</li>
+</ul>
+</li>
+<li>第四行内存信息：<ul>
+<li><code>Mem: 635344k total</code> 物理内存的总量，单位 KB</li>
+<li><code>571504k used</code> 已经使用的物理内存数量</li>
+<li><code>53840k free</code> 空闲的物理内存数量</li>
+<li><code>65800k buffers</code> 作为缓冲的内存数量</li>
+</ul>
+</li>
+<li>第五行交换分区信息：<ul>
+<li><code>Swap: 524280k total</code> 交换分区（虚拟内存）的总大小</li>
+<li><code>Ok used</code> 已经使用的交互分区的大小</li>
+<li><code>524280k free</code> 空闲交换分区的大小</li>
+<li><code>409280k cached</code> 作为缓存的交互分区的大小</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="杀死进程"><a href="#杀死进程" class="headerlink" title="杀死进程"></a>杀死进程</h2><ul>
+<li>kill<ul>
+<li><code>kill -l</code> 查看可用的进程信号</li>
+<li><code>kill -1 进程 ID</code> 重启进程</li>
+<li><code>kill -9 进程 ID</code> 强制杀死进程</li>
+</ul>
+</li>
+<li>killall<ul>
+<li><code>killall [选项] [信号] 进程名</code><ul>
+<li>选项：<ul>
+<li>-i 交互式，询问是否要杀死某个进程</li>
+<li>-I 忽略进程名的大小写</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>pkill<ul>
+<li><code>pkill [选项] [信号] 进程名</code><ul>
+<li>选项：<ul>
+<li>-t 终端号：按照终端号踢出用户</li>
+</ul>
+</li>
+<li>用法：<ul>
+<li><code>pkill -9 -t tty1</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="修改进程优先级"><a href="#修改进程优先级" class="headerlink" title="修改进程优先级"></a>修改进程优先级</h2><p>Linux 操作系统是一个多用户、多任务的操作系统，Linux 系统中通知运行着非常多的进程。但是 CPU 在同一个时钟周期内只能运算一个指令。进程优先级决定了每个进程处理的先后顺序呢。</p>
+<p>执行命令 <code>ps -le</code> 返回的结果中，PRI 代表 Priority，NI 代表 Nice。这两个值都是优先级，数字越少代表改进程优先级越高。</p>
+<p>用户可以修改 NI 值，注意事项如下：</p>
+<ul>
+<li>NI 值的范围是 -20 到 19</li>
+<li>普通用户调整 NI 值的范围是 0 到 19，而且只能调整自己的进程</li>
+<li>普通用户只能调高 NI 值，而不能降低，如原本 NI 值为0，则只能调整为大于 0</li>
+<li>root 用户才能设定进程 NI 值为负值，而且可以调整任何用户的进程</li>
+<li>PRI（最终值）= PRI（原始值）+ NI</li>
+<li>用户只能修改 NI 的值，不能直接修改 PRI</li>
+</ul>
+<p>修改进程优先级的命令如下：</p>
+<ul>
+<li>nice<ul>
+<li><code>nice [选项] 命令</code> nice 的命令可以给新执行的命令直接赋予 NI 值，但是不能修改已经存在进程的 NI 值<ul>
+<li>选项：<ul>
+<li>-n NI 值：给命令赋予 NI 值</li>
+</ul>
+</li>
+<li>用法：<ul>
+<li><code>nice -n -5 service httpd start</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>renice<ul>
+<li><code>renice [优先级] 进程 ID</code> renice 命令是修改已经存在进程的 NI 值的命令<ul>
+<li>用法：<ul>
+<li><code>renice -10 2125</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="工作管理"><a href="#工作管理" class="headerlink" title="工作管理"></a>工作管理</h2><p>工作管理指的是在单个登录终端中（也就是登录的 Shell 界面中）同时管理多个工作的行为</p>
+<p>工作管理注意事项如下：</p>
+<ul>
+<li>当前的登录终端，只能管理当前终端的工作，而不能管理其他登录终端的工作</li>
+<li>放入后台的命令必须可以持续运行一段时间，这样我们才能扑捉和操作这个工作</li>
+<li>放入后台执行的命令不能和前台用户有交互或需要前台输入，否则放入后台只能暂停，而不能执行</li>
+</ul>
+<h2 id="工作管理方法"><a href="#工作管理方法" class="headerlink" title="工作管理方法"></a>工作管理方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># 把命令放入后台，并在后台执行</div><div class="line">top &amp;</div><div class="line"></div><div class="line"># 按下 ctrl + z 快捷键，放在后台暂停</div><div class="line">top</div></pre></td></tr></table></figure>
+<ul>
+<li>jobs<ul>
+<li><code>josb [选项]</code><ul>
+<li>选项：<ul>
+<li>-l 显示工作的 PID</li>
+</ul>
+</li>
+<li>+ 号代表最近一个放入后台的工作，也是工作恢复时，默认恢复的工作；- 号代表倒数第二个放入后台的工作</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>fg<ul>
+<li><code>fg %工作号</code> 将后台暂停的工作恢复到前台执行，注意 % 号可以省略，但是注意工作号和 PID 的区别</li>
+</ul>
+</li>
+<li>bg<ul>
+<li><code>bg %工作号</code> 后台恢复执行的命令，是不能和前台有交互的，否则不能恢复到后台执行</li>
+</ul>
+</li>
+</ul>
+<h2 id="后台命令脱离登录终端执行的方法"><a href="#后台命令脱离登录终端执行的方法" class="headerlink" title="后台命令脱离登录终端执行的方法"></a>后台命令脱离登录终端执行的方法</h2><ul>
+<li>第一种方法是把需要后台执行的命令加入 /etc/rc.local 文件</li>
+<li>第二种方法是使用系统定时任务，让系统在指定的时间执行某个后台命令</li>
+<li>第三种方法是使用 nohup 命令</li>
+</ul>
+<h2 id="系统资源查看"><a href="#系统资源查看" class="headerlink" title="系统资源查看"></a>系统资源查看</h2><ul>
+<li>vmstat<ul>
+<li><code>vmstat [刷新延时 刷新次数]</code></li>
+<li>用法：<ul>
+<li><code>vmstat 1 3</code></li>
+</ul>
+</li>
+<li>参数：<ul>
+<li>procs：进程信息字段<ul>
+<li>r 等待运行的进程数，数量越大，系统越繁忙</li>
+<li>b 不可被唤醒的进程数量，数量越大，系统越繁忙</li>
+</ul>
+</li>
+<li>memory：内存信息字段<ul>
+<li>free 空闲的内存容量，单位 KB</li>
+<li>buff 缓冲的内存容量，单位 KB</li>
+<li>cache 缓存的内存容量，单位 KB</li>
+<li>swpd 虚拟内存的使用情况，单位 KB</li>
+<li>缓冲和缓存的区别：缓存是用来加速数据读取的，缓冲是用来加速数据写入的</li>
+</ul>
+</li>
+<li>swap：交换分区的信息字段<ul>
+<li>si 从磁盘中交换到内存中数据的数量，单位 KB</li>
+<li>so 从内存中交换到磁盘中数据的数量，单位 KB。此两个数越大，证明数据需要经常在磁盘和内存之间交换，系统性能越差。</li>
+</ul>
+</li>
+<li>io：磁盘读写信息字段<ul>
+<li>bi 从块设备读入数据的总量，单位是块</li>
+<li>bo 写到块设备的数据的总量，单位是块。此两个数越大，代表系统的 I/O 越繁忙</li>
+</ul>
+</li>
+<li>system：系统信息字段<ul>
+<li>in 每秒被中断的进程次数</li>
+<li>cs 每秒进行的事件切换次数。此两个数越大，代表系统与接口设备的通信非常繁忙</li>
+</ul>
+</li>
+<li>CPU：CPU 信息字段<ul>
+<li>us 非内核进程消耗 CPU 运算时间的百分比</li>
+<li>sy 内核进程消耗 CPU 运算时间的百分比</li>
+<li>id 空闲 CPu 的百分比</li>
+<li>wa 等待 I/O 所消耗的 CPU 百分比</li>
+<li>st 被虚拟机消耗的 CPU 百分比</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>dmesg<ul>
+<li><code>dmesg</code> 显示系统内核信息</li>
+</ul>
+</li>
+<li>free<ul>
+<li><code>free [选项]</code> 查看内存使用状态<ul>
+<li>选项：<ul>
+<li>-\b 以字节为单位显示</li>
+<li>-\k 以 KB 为单位显示，默认就是以 KB 为单位显示</li>
+<li>-\m 以 MB 为单位显示</li>
+<li>-\g 以 GB 为单位显示</li>
+</ul>
+</li>
+<li>参数：<ul>
+<li>第一行：total 是总内存数，used 是已经使用的内存数，free 是空闲的内存数，shared 是多个进程共享的内存总数，buffers 是缓冲内存数，cached 是缓存内存数。默认单位是 KB</li>
+<li>第二行：-/buffers/cache 的内存数，相当于第一行的 used-buffers-cached。+/buffers/cache 的内存数，相当于第一行的 free + buffers + cached</li>
+<li>第三行：total 是 swap 的总数；used 是已经使用的 swap 数，free 是空闲的 swap 数。默认单位是 KB</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>cat /proc/cpuinfo<ul>
+<li>查看 CPU 信息</li>
+</ul>
+</li>
+<li>uptime<ul>
+<li>显示系统的启动时间和平均负载，也就是 top 命令的第一行。</li>
+</ul>
+</li>
+<li>uname<ul>
+<li><code>uname [选项]</code><ul>
+<li>选项：<ul>
+<li>-a 查看系统所有相关信息</li>
+<li>-r 查看内核版本</li>
+<li>-s 查看内核名称</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>file /bin/ls<ul>
+<li>查看系统操作位数</li>
+</ul>
+</li>
+<li>lsb_release -a<ul>
+<li>查询当前 Linxu 系统的发行版本</li>
+</ul>
+</li>
+<li>lsof<ul>
+<li><code>lsof    [选项]</code><ul>
+<li>选项：<ul>
+<li>-c 字符串：只列出以字符串开头的进程打开的文件</li>
+<li>-u 用户名：只列出某个用户的进程打开的文件</li>
+<li>-p PID：列出某个 PID 进程打开的文件</li>
+</ul>
+</li>
+<li>例子：<ul>
+<li><code>lsof | more</code></li>
+<li><code>lsof /sbin/init</code></li>
+<li><code>lsof -c httpd</code></li>
+<li><code>lsof -u root</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/24/Linux-系统管理/" data-id="cixwy9h7p000u6l4be0i3lca4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Linux-服务管理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/23/Linux-服务管理/" class="article-date">
+  <time datetime="2016-09-23T12:26:20.000Z" itemprop="datePublished">2016-09-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/23/Linux-服务管理/">Linux 服务管理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Linux-服务管理"><a href="#Linux-服务管理" class="headerlink" title="Linux 服务管理"></a>Linux 服务管理</h2><h3 id="简介与分类"><a href="#简介与分类" class="headerlink" title="简介与分类"></a>简介与分类</h3><ul>
+<li><h4 id="系统的运行级别"><a href="#系统的运行级别" class="headerlink" title="系统的运行级别"></a>系统的运行级别</h4><ul>
+<li>查看运行级别命令：<code>runlevel</code></li>
+<li>修改运行级别命令：<code>init 运行级别</code></li>
+<li>系统开机进入级别：<code>vim /etc/inittab</code> ~ <code>id:3initdefault:</code></li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>运行级别</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>关机</td>
+</tr>
+<tr>
+<td>1</td>
+<td>单用户模式，主要用于系统修复</td>
+</tr>
+<tr>
+<td>2</td>
+<td>不完全的命令行模式，不含 NFS 服务</td>
+</tr>
+<tr>
+<td>3</td>
+<td>完全的命令行模式，就是标准字符界面</td>
+</tr>
+<tr>
+<td>4</td>
+<td>系统保留</td>
+</tr>
+<tr>
+<td>5</td>
+<td>图形模式</td>
+</tr>
+<tr>
+<td>6</td>
+<td>重启动</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><h4 id="服务的分类"><a href="#服务的分类" class="headerlink" title="服务的分类"></a>服务的分类</h4><ul>
+<li>Linux 服务<ul>
+<li>PRM 包默认安装的服务<ul>
+<li>独立的服务<ul>
+<li>默认配置文件位置<ul>
+<li>/etc/init.d/ 启动脚本位置</li>
+<li>/etc/sysconfig/ 初始化环境配置文件位置</li>
+<li>/etc/ 配置文件位置</li>
+<li>/etc/xinetd.conf xinetd 配置文件</li>
+<li>/etc/xinetd.d/ 基于 xineted 服务的启动脚本</li>
+<li>/var/lib/ 服务产生的数据放在这里</li>
+<li>/var/log/ 日志</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>基于 xinetd 服务</li>
+</ul>
+</li>
+<li>源码包安装的服务<ul>
+<li>源码包安装位置，一般是 <code>/usr/local</code> 下</li>
+</ul>
+</li>
+<li>PRM 包安装和源码包安装的区别：两者服务安装的位置不同</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h4 id="服务与端口"><a href="#服务与端口" class="headerlink" title="服务与端口"></a>服务与端口</h4><ul>
+<li>概念：如果把 IP 地址比作一间房子，端口就是出入这间房子的门。真正的房子只有几个门，但是一个 IP 地址的端口可以有 65536 个</li>
+<li>服务与端口的对应：<code>cat /etc/services</code></li>
+<li>查询系统中开启的服务：<code>netstat [选项]</code><ul>
+<li>-t 列出 TCP 数据</li>
+<li>-u 列出 UDP 数据</li>
+<li>-l 列出正在监听的网络服务（不包含已经连接的网络服务）</li>
+<li>-n 用端口号来显示服务，而不是用服务名</li>
+<li>-p 列出该服务的进程 ID</li>
+</ul>
+</li>
+<li>chkconfig 和 netstat 的区别<ul>
+<li><code>chkconfig</code> 查看自启动命令</li>
+<li><code>netstat</code> 查看启动命令</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h4 id="服务启动与自启动"><a href="#服务启动与自启动" class="headerlink" title="服务启动与自启动"></a>服务启动与自启动</h4><ul>
+<li>独立服务的自启动<ul>
+<li><code>ntsysv</code> 命令图形界面管理自启动</li>
+<li><code>/etc/rc.d/rc.local</code> 文件修改管理自启动</li>
+<li><code>chkconfig --list</code> 查看服务自启动状态，可以看到所有 RPM 包安装的服务</li>
+<li><code>chkconfig [--level 运行级别] [独立服务名] [on|off]</code> 修改服务自启动状态</li>
+</ul>
+</li>
+<li>独立服务的启动<ul>
+<li><code>/etc/init.d/独立服务名 start、stop、status、restart</code></li>
+<li><code>service 独立服务名 start、stop、status、restart</code></li>
+</ul>
+</li>
+<li>源码包安装服务的启动<ul>
+<li>使用绝对路径，调用启动脚本来启动。不同的源码包的启动脚本不同。可以查看源码包的安装说明，查看启动脚本的方法。</li>
+<li>用法：<code>/usr/local/apache2/bin/apachectl start</code></li>
+</ul>
+</li>
+<li>源码包服务的自启动<ul>
+<li><code>vi /etc/rc.d/rc.local</code> 加入 <code>/usr/local/apache2/bin/apachectl start</code></li>
+</ul>
+</li>
+<li>源码包的 Apache 服务能被 Service 命令管理启动<ul>
+<li><code>ln -s /usr/local/apache2/bin/apachectl /etc/init.d/apache</code></li>
+</ul>
+</li>
+<li>源码包的 Apache 服务能被 chkconfig 与 ntsysv 命令管理自启动<ul>
+<li><code>vi /etc/init.d/apache</code> 加入 <code># chkconfig:35 86 76</code> 和 <code>description:source package apache</code></li>
+<li><code>chkconfig --add apache</code> 把源码包 apache 加入 chkconfig 命令</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/23/Linux-服务管理/" data-id="cixwy9h6w000d6l4bt7qqvz06" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Linux-Shell-基础之正则表达式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/22/Linux-Shell-基础之正则表达式/" class="article-date">
+  <time datetime="2016-09-22T12:56:54.000Z" itemprop="datePublished">2016-09-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/22/Linux-Shell-基础之正则表达式/">Linux-Shell-基础之正则表达式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="第1章-正则表达式"><a href="#第1章-正则表达式" class="headerlink" title="第1章 正则表达式"></a>第1章 正则表达式</h2><h3 id="1-1-什么是正则表达式"><a href="#1-1-什么是正则表达式" class="headerlink" title="1-1 什么是正则表达式"></a>1-1 什么是正则表达式</h3><p>正则表达式是用于描述字符排列和匹配模式的一种语法规则。它主要用于字符串的模式分割、匹配、查找及替换操作。</p>
+<h3 id="1-2-正则表达式与通配符"><a href="#1-2-正则表达式与通配符" class="headerlink" title="1-2 正则表达式与通配符"></a>1-2 正则表达式与通配符</h3><ul>
+<li>正则表达式用来在文件中匹配符合条件的字符串，正则是包含匹配。grep、awk、sed 等命令可以支持正则表达式（字符串）</li>
+<li>通配符用来匹配符合条件的文件名，通配符是完全匹配。ls、find、cp 这些命令不支持正则表达式，所以只能使用 Shell 自己的通配符来进行匹配了。（文件）<ul>
+<li>* 匹配任意内容</li>
+<li>? 匹配任意一个内容</li>
+<li>[] 匹配括号中的一个字符</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-3-基础正则表达式"><a href="#1-3-基础正则表达式" class="headerlink" title="1-3 基础正则表达式"></a>1-3 基础正则表达式</h3><table>
+<thead>
+<tr>
+<th>元字符</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*</td>
+<td>前一个字符匹配 0 次或任意多次</td>
+</tr>
+<tr>
+<td>.</td>
+<td>匹配除了换行符外任意一个字符</td>
+</tr>
+<tr>
+<td>^</td>
+<td>匹配行首，例如：^hello 会匹配以 hello 开头的行</td>
+</tr>
+<tr>
+<td>$</td>
+<td>匹配行尾，例如：hello&amp; 会匹配以 hello 结尾的行</td>
+</tr>
+<tr>
+<td>[]</td>
+<td>匹配中括号中指定的任意一个字符，只匹配一个字符。</td>
+</tr>
+<tr>
+<td>[^]</td>
+<td>匹配除中括号的字符以外的任意一个字符</td>
+</tr>
+<tr>
+<td>\</td>
+<td>转义符，用于取消讲特殊符号的含义取消</td>
+</tr>
+<tr>
+<td>\{n\}</td>
+<td>表示其前面的字符恰好出现 n 次</td>
+</tr>
+<tr>
+<td>\{n,\}</td>
+<td>表示其前面的字符出现不小于 n 次</td>
+</tr>
+<tr>
+<td>\{n,m\}</td>
+<td>表示其前面的字符至少出现 n 次，最多出现 m 次</td>
+</tr>
+</tbody>
+</table>
+<h2 id="第2章-字符截取命令"><a href="#第2章-字符截取命令" class="headerlink" title="第2章 字符截取命令"></a>第2章 字符截取命令</h2><ul>
+<li>cut 列提取字符串<ul>
+<li><code>cut [选项] 文件名</code><ul>
+<li>-f 列号：提取第几列<ul>
+<li><code>cut -f 2 student.txt</code> 截取第二列</li>
+<li><code>cut -f 2,4 student.txt</code> 截取第二、第四列</li>
+</ul>
+</li>
+<li>-d 分隔符：按照指定分隔符分割列<ul>
+<li><code>grep &quot;/bin/bash&quot; /etc/passwd |grep -v &quot;root&quot; | cut -f 1 -d &quot;:&quot;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>printf 格式化输出命令<ul>
+<li><code>printf &#39;输出类型输出格式&#39; 输出内容</code><ul>
+<li>输出类型<ul>
+<li>%ns 输出字符串。n 是数字指代输出几个字符</li>
+<li>%ni 输出整数。n 是数字指代输出几个数字</li>
+<li>%m.nf 输出浮点数。m 和 n 是数字，指代输出的整数位数和小数位数。如 %8.2f 代表共输出 8 位数，其中 2 位是小数，6 位是整数。</li>
+</ul>
+</li>
+<li>输出格式<ul>
+<li>\a 输出警告声音</li>
+<li>\b 输出退格键</li>
+<li>\f 清除屏幕</li>
+<li>\n 换行</li>
+<li>\r 回车</li>
+<li>\t 水平输出 Tab 键</li>
+<li>\v 垂直输出 Tab 键</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>在 <code>awk</code> 命令的输出中支持 <code>print</code> 和 <code>printf</code> 命令</li>
+</ul>
+</li>
+<li>awk 字符截取命令<ul>
+<li><code>awk &#39;条件1{动作1}条件2{动作2}...&#39; 文件名</code></li>
+<li>条件<ul>
+<li>一般使用关系表达式作为条件</li>
+<li>x&gt;10 判断变量 x 是否大于 10</li>
+<li>x&gt;=10 大于等于</li>
+<li>x&lt;=10 小于等于</li>
+</ul>
+</li>
+<li>动作<ul>
+<li>格式化输出</li>
+<li>流程控制语句</li>
+</ul>
+</li>
+<li>例子<ul>
+<li><code>awk &#39;{printf $2 &quot;\t&quot; $4 &quot;\n&quot;}&#39; student.txt</code></li>
+<li><code>awk &#39;{print $2 &quot;\t&quot; $4 }&#39; student.txt</code></li>
+<li><code>df -h | awk &#39;{print $1 &quot;\t&quot; $3}&#39;</code><ul>
+<li><code>akw &#39;BEGIN{printf &quot;This is a transcript \n&quot;}{printf $2 &quot;\t&quot; $4 &quot;\n&quot;}&#39; student.txt</code></li>
+<li><code>cat /etc/passwd |grep &quot;/bin/bash&quot; | awk &#39;BEGIN{FS=&quot;:&quot;}{printf $1 &quot;\t&quot; $3 &quot;\n&quot;}&#39;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>sed 字符替换命令<ul>
+<li>sed 是一个几乎包括在所有 UNIX 平台（包括 Linux）的轻量级编辑器。sed 主要是用来将数据进行选取、替换、删除、新增的命令</li>
+<li><code>sed [选项] &#39;[动作]&#39; 文件名</code><ul>
+<li>选项<ul>
+<li>-n 一般 sed 命令会把所有数据都输出到屏幕，如果加入此选择则只会把经过 sed 命令处理的行输出到屏幕</li>
+<li>-e 允许对输入数据应用多条 sed 命令编辑</li>
+<li>-i 用 sed 的修改结果直接修改读取数据的文件，而不是由屏幕输出</li>
+</ul>
+</li>
+<li>动作<ul>
+<li>a 追加，在当前行后添加一行或多行</li>
+<li>c 行替换，用 c 后面的字符串替换原数据行</li>
+<li>i 插入，在当期行前插入一行或多行</li>
+<li>d 删除，删除指定行</li>
+<li>p 打印，输出指定的行</li>
+<li>s 字符串替换，用一个字符串替换另外一个字符串，格式为 “行范围s/旧字符串g”</li>
+</ul>
+</li>
+<li>例子<ul>
+<li><code>sed &#39;2p&#39; student.txt</code> 查看文件的第二行</li>
+<li><code>sed &#39;2,4d&#39; student.txt</code> 表示删除【第2-4行】，但是不改变文件本身</li>
+<li><code>sed &#39;2a piaoliangdecxiaoguniang&#39; student.txt</code> 在第2行之后添加字符串，但是不改变字符串本身</li>
+<li><code>sed &#39;4c xxwmpg&#39; student.txt</code> 将第二行的整行替换为xxwmpg</li>
+<li><code>sed &#39;6s/70/100/g&#39; student.txt</code> 将第7行的所有70全部替换为100，如果不指定行的话会替换所有的指定字符串</li>
+<li><code>sed -e &#39;s/fengj//g&#39;;s/cang//g&#39; student.txt</code> 同时把fengj和cang替换为空</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="第3章-字符处理命令"><a href="#第3章-字符处理命令" class="headerlink" title="第3章 字符处理命令"></a>第3章 字符处理命令</h2><ul>
+<li>sort 排序命令<ul>
+<li><code>sort [选项] 文件名</code><ul>
+<li>选项<ul>
+<li>-f 忽略大小写</li>
+<li>-n 以数值型进行排序，默认使用字符串型排序</li>
+<li>-r 反向排序</li>
+<li>-t 指定分隔符，默认的分隔符是制表符</li>
+<li>-k n[,m] 按照指定的字段范围排序。从第 n 字段开始，m 字段结束（默认到行尾）</li>
+</ul>
+</li>
+<li>用法<ul>
+<li><code>sort /etc/passwd</code> 用户信息正向排序</li>
+<li><code>sort -r /etc/passwd</code> 用户信息反向排序</li>
+<li><code>sort -t &quot;:&quot; -k 3,3 /etc/passwd</code> 指定分隔符是 “:”，用第三字段开头，第三字段结尾排序，就是只用第三字段排序</li>
+<li><code>sort -n -t &quot;:&quot; -k 3,3 /etc/passwd</code> 作用同上，但把指定字符串排序改为数字排序</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>wc 统计命令<ul>
+<li><code>wc [选项] 文件名</code><ul>
+<li>选项：<ul>
+<li>-l 只统计行数</li>
+<li>-w 只统计单词数</li>
+<li>-m 只统计字符数</li>
+</ul>
+</li>
+<li>用法：<ul>
+<li><code>wc /etc/passwd</code></li>
+<li><code>wc -l /etc/passwd</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/22/Linux-Shell-基础之正则表达式/" data-id="cixwy9h6200066l4b5xumzcxr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Linux-网络基础" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/20/Linux-网络基础/" class="article-date">
+  <time datetime="2016-09-20T12:33:54.000Z" itemprop="datePublished">2016-09-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/20/Linux-网络基础/">Linux 网络基础</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="网络基础"><a href="#网络基础" class="headerlink" title="网络基础"></a>网络基础</h2><h3 id="ISO-OSI-七层模型简介"><a href="#ISO-OSI-七层模型简介" class="headerlink" title="ISO / OSI 七层模型简介"></a>ISO / OSI 七层模型简介</h3><ul>
+<li>ISO：国际标准化组织</li>
+<li>OSI：开放系统互联模型<ul>
+<li>OSI 的七层模型<ul>
+<li>应用层 - APDU<ul>
+<li>APDU 是应用协议数据单元</li>
+</ul>
+</li>
+<li>表示层 - PPDU<ul>
+<li>PPDU 是表示层协议数据单元</li>
+</ul>
+</li>
+<li>会话层 - SPDU<ul>
+<li>SPDU 是会话协议数据单元</li>
+</ul>
+</li>
+<li>传输层 - TPDU<ul>
+<li>TPDU 是传输协议数据单元</li>
+</ul>
+</li>
+<li>网络层 - 报文<ul>
+<li>IP 地址负责外网通信</li>
+</ul>
+</li>
+<li>数据链路层 - 帧<ul>
+<li>MAC 地址负责局域网通信</li>
+</ul>
+</li>
+<li>物理层 - 比特</li>
+</ul>
+</li>
+<li>数据发送时候，从上层向下层传递；数据接收时候，从下层向上层传递。</li>
+</ul>
+</li>
+</ul>
+<h3 id="ISO-OSI-七层模型详解"><a href="#ISO-OSI-七层模型详解" class="headerlink" title="ISO / OSI 七层模型详解"></a>ISO / OSI 七层模型详解</h3><ul>
+<li>应用层 - APDU<ul>
+<li>用户接口</li>
+</ul>
+</li>
+<li>表示层 - PPDU<ul>
+<li>数据的表现形式、特定功能的实现如-加密</li>
+</ul>
+</li>
+<li>会话层 - SPDU<ul>
+<li>对应用会话的管理、同步</li>
+</ul>
+</li>
+<li>传输层 - TPDU<ul>
+<li>可靠与不可靠的传输、传输前的错误检测、流控</li>
+</ul>
+</li>
+<li>网络层 - 报文<ul>
+<li>提供逻辑地址、选路</li>
+</ul>
+</li>
+<li>数据链路层 - 帧<ul>
+<li>城帧、用 MAC 地址访问媒介、错误检测与修正</li>
+</ul>
+</li>
+<li>物理层 - 比特<ul>
+<li>设备之间的比特流的传输、物理接口、电器特征等</li>
+</ul>
+</li>
+</ul>
+<h3 id="TCP-IP-四层模型"><a href="#TCP-IP-四层模型" class="headerlink" title="TCP / IP 四层模型"></a>TCP / IP 四层模型</h3><ul>
+<li>TCP / IP 四层模型<ul>
+<li>应用层 （对应 OSI 模型的应用层、表示层、会话层）<ul>
+<li>应用层对应于 OSI 参考模型的应用层、表示层、会话层，为用户提供所需要的各种服务，例如：FTP、Telnet、DNS、SMTP 等</li>
+</ul>
+</li>
+<li>传输层 （对应 OSI 模型的传输层）<ul>
+<li>传输层对应于 OSI 模型的传输层，为应用层实体提供端到端的通信功能，保证了数据包的顺序传送及数据的完整性。该层定义了两个主要的协议：传输控制协议（TCP）和用户数据协议（UDP）</li>
+</ul>
+</li>
+<li>网际互联层（对应 OSI 模型的网络层）<ul>
+<li>网际互联对应于 OSI 模型的网络层，主要解决主机到主机的通信问题。它所包含的协议涉及数据包在整个网络上的逻辑传输。该层有三个主要协议：网际协议（IP）、互联网组管理协议（IGMP）和互联网控制报文协议（ICMP）。</li>
+</ul>
+</li>
+<li>网络接口层（对应 OSI 模型的数据链路层、物理层）<ul>
+<li>网络接口层与 OSI 模型中的物理层和数据链路层相对应。它负责监视数据在主机和网络之间的交换。事实上，TCP /IP 本身并未定义该层的协议，而由参与互连的各网络使用自己的物理层和数据链路层协议，然后与 TCP / IP 的网络接口层进行连接。地址解析协议（ARP）工作在此层，即 OSI 参考模型的数据链路层。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>TCP / IP 三次握手（两军问题）</p>
+<p>数据封装过程</p>
+<table>
+<thead>
+<tr>
+<th>应用数据</th>
+<th>字节流（数据）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>应用层</td>
+<td>FTP + 数据</td>
+</tr>
+<tr>
+<td>传输层</td>
+<td>TCP 头 + FTP + 数据</td>
+</tr>
+<tr>
+<td>网络层</td>
+<td>IP 头 + TCP 头 + FTP + 数据</td>
+</tr>
+<tr>
+<td>数据链路层</td>
+<td>以太帧头 + (IP 头 + TCP 头 + FTP + 数据) = IP 数据报</td>
+</tr>
+<tr>
+<td>最后</td>
+<td>以太帧头 + 目的地址 + 源地址 + 包类型 + 包数据（IP 数据报） + CRC</td>
+</tr>
+</tbody>
+</table>
+<h3 id="IP地址详解"><a href="#IP地址详解" class="headerlink" title="IP地址详解"></a>IP地址详解</h3><ul>
+<li>IP 包头<ul>
+<li>第一行<ul>
+<li>版本（4）</li>
+<li>头部长度（4）</li>
+<li>优先级和服务类型（8）</li>
+<li>总长度（16）</li>
+</ul>
+</li>
+<li>第二行<ul>
+<li>标识（16）</li>
+<li>标志（3）</li>
+<li>片偏移（13）</li>
+</ul>
+</li>
+<li>第三行<ul>
+<li>生存时间（8）</li>
+<li>协议（8）</li>
+<li>头部校验和（16）</li>
+</ul>
+</li>
+<li>第四行<ul>
+<li>源 IP 地址（32）</li>
+</ul>
+</li>
+<li>第五行<ul>
+<li>目的 IP 地址（32）</li>
+</ul>
+</li>
+<li>第六行<ul>
+<li>选项</li>
+</ul>
+</li>
+<li>第七行<ul>
+<li>数据</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>IP 地址分类</p>
+<table>
+<thead>
+<tr>
+<th>网络类别</th>
+<th>最大网络数</th>
+<th>IP 地址范围</th>
+<th>最大主机数</th>
+<th>私有 IP 地址范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>126</td>
+<td>1.0.0.0 – 126.255.255.255</td>
+<td>2^24-2</td>
+<td>10.0.0.0 – 10.255.255.255</td>
+</tr>
+<tr>
+<td>B</td>
+<td>16384</td>
+<td>128.0.0.0 – 191.255.255.255</td>
+<td>2^16-2</td>
+<td>172.16.0.0 – 172.31.255.255</td>
+</tr>
+<tr>
+<td>C</td>
+<td>2098152</td>
+<td>192.0.0.0 – 223.255.255.255</td>
+<td>2^8-2</td>
+<td>192.168.0.0 – 192.168.255.255</td>
+</tr>
+</tbody>
+</table>
+<h3 id="子网掩码"><a href="#子网掩码" class="headerlink" title="子网掩码"></a>子网掩码</h3><h3 id="网关作用"><a href="#网关作用" class="headerlink" title="网关作用"></a>网关作用</h3><ul>
+<li>网关（Gateway）又称为网间连接器、协议转换器</li>
+<li>网关在网络层以上实现网络互连，是最复杂的网络互连设备，仅用于两个高层协议不同的网络互连</li>
+<li>网关既可以用于广域网互连，也可以用于局域网互连</li>
+<li>网关是一种充当转换重任的服务器或路由器</li>
+</ul>
+<h3 id="端口作用"><a href="#端口作用" class="headerlink" title="端口作用"></a>端口作用</h3><ul>
+<li>TCP 协议包头<ul>
+<li>第一行<ul>
+<li>源端口（16）</li>
+<li>目的端口（16）</li>
+</ul>
+</li>
+<li>第二行<ul>
+<li>序列号（32）</li>
+</ul>
+</li>
+<li>第三行<ul>
+<li>确认号（32）</li>
+</ul>
+</li>
+<li>第四行<ul>
+<li>数据偏移（4）</li>
+<li>保留（6）</li>
+<li>标志（6）</li>
+<li>窗口（16）</li>
+</ul>
+</li>
+<li>第五行<ul>
+<li>校验和（16）</li>
+<li>紧急指针（16）</li>
+</ul>
+</li>
+<li>第六行<ul>
+<li>选项</li>
+</ul>
+</li>
+<li>第七行<ul>
+<li>数据</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>UDP 协议包头<ul>
+<li>第一行<ul>
+<li>源端口（16）</li>
+<li>目的端口（16）</li>
+</ul>
+</li>
+<li>第二行<ul>
+<li>长度（16）</li>
+<li>校验和（16）</li>
+</ul>
+</li>
+<li>第三行<ul>
+<li>数据</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>常见端口号</p>
+<ul>
+<li>FTP（文件传输协议）：20 21</li>
+<li>SSH（安全 Shell 协议）：22</li>
+<li>TELNET（远程登录协议）：23</li>
+<li>DNS（域名系统）：53</li>
+<li>HTTP（超文本传输协议）：80</li>
+<li>SMTP（简单邮件传输协议）：25</li>
+<li>POP3（邮局协议 3 代）：110</li>
+</ul>
+<p>查看本机启用的端口</p>
+<ul>
+<li>netstat -an<ul>
+<li>-a 查看所有连接和监听端口</li>
+<li>-n 显示 IP 地址和端口号，而不显示域名和服务名</li>
+</ul>
+</li>
+</ul>
+<h3 id="DNS-作用"><a href="#DNS-作用" class="headerlink" title="DNS 作用"></a>DNS 作用</h3><ul>
+<li>DNS 的作用：将域名解析为 IP 地址<ul>
+<li>客户机向 DNS 服务器发送域名查询请求</li>
+<li>DNS 服务器告知客户机 Web 服务器的 IP 地址</li>
+<li>客户机与 Web 服务器通信</li>
+</ul>
+</li>
+<li>DNS 的查询类型<ul>
+<li>从查询方式上分<ul>
+<li>递归查询<ul>
+<li>要么做出查询成功响应，要么做出查询失败的响应，一般客户机和服务器之间属于递归查询，即当客户机向 DNS 服务器发出请求后，若 DNS 服务器本身不能解析，则会向另外的 DNS 服务器发出查询请求，得到结果后转交给客户机。</li>
+</ul>
+</li>
+<li>迭代查询<ul>
+<li>服务器收到一次迭代查询回复一次结果，这个结果不一定是目标 IP 与域名的映射关系，也可以是其他 DNS 服务器的地址</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>从查询内容上分<ul>
+<li>正向查询由域名查找 IP 地址</li>
+<li>反向查询由 IP 地址查找域名</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Linux-网络配置"><a href="#Linux-网络配置" class="headerlink" title="Linux 网络配置"></a>Linux 网络配置</h2><h3 id="IP-地址配置"><a href="#IP-地址配置" class="headerlink" title="IP 地址配置"></a>IP 地址配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># 查看与配置网络状态命令</div><div class="line">ifconfig</div><div class="line"></div><div class="line"># 临时设置 eth0 网卡的 IP 地址与子网掩码</div><div class="line">ifconfig eth0 192.168.0.200 netmask 255.255.255.0</div><div class="line"></div><div class="line"># setup 图形界面（红帽专用）</div><div class="line">setup</div></pre></td></tr></table></figure>
+<h3 id="使用文件配置-IP-地址"><a href="#使用文件配置-IP-地址" class="headerlink" title="使用文件配置 IP 地址"></a>使用文件配置 IP 地址</h3><p>网卡信息文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/sysconfig/network-scripts/ifcfg-eth0</div></pre></td></tr></table></figure></p>
+<p>主机名文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/sysconfig/network</div></pre></td></tr></table></figure></p>
+<h2 id="Linux-网络命令"><a href="#Linux-网络命令" class="headerlink" title="Linux 网络命令"></a>Linux 网络命令</h2><h3 id="网络环境查看命令"><a href="#网络环境查看命令" class="headerlink" title="网络环境查看命令"></a>网络环境查看命令</h3><ul>
+<li><code>ifconfig</code> 查看与配置网络状态命令<ul>
+<li>只能看到 IP 和子网掩码，看不到网关和 DNS</li>
+</ul>
+</li>
+<li><code>ifdown 网卡设备名称</code> 禁用指定网卡设备</li>
+<li><code>ifup 网卡设置名称</code> 启用指定网卡设备</li>
+<li><code>netstat 选项</code><ul>
+<li>-t 列出 TCP 协议端口</li>
+<li>-u 列出 UDP 协议端口</li>
+<li>-n 不使用域名与服务名，而是用 IP 地址和端口号</li>
+<li>-l 仅列出在监听状态网络服务</li>
+<li>-a 列出所有的网络连接</li>
+</ul>
+</li>
+<li><code>route -n</code> 查看路由列表</li>
+<li><code>route add default gw 192.168.1.1</code> 临时设定网关</li>
+<li><code>nslookup [主机名或 IP]</code> 进行域名与 IP 地址解析</li>
+<li><code>nslookup &gt;server</code> 查看本机 DNS 服务器</li>
+</ul>
+<h3 id="网络测试命令"><a href="#网络测试命令" class="headerlink" title="网络测试命令"></a>网络测试命令</h3><ul>
+<li><code>ping [选项] [IP 或域名]</code> 探测指定 IP 或域名的网络状况<ul>
+<li>-c 次数 指定 ping 包的次数</li>
+</ul>
+</li>
+<li><code>telnet [域名或 IP] [端口]</code> 远程管理与端口探测命令</li>
+<li><code>wget URL</code> 下载命令</li>
+<li><code>tcpdump -i eth0 -nnX port 21</code><ul>
+<li>-i 指定网卡接口</li>
+<li>-X 以十六进制和 ASCII 码显示数据包内容</li>
+<li>-nn 将数据包中的域名与服务转为 IP 和端口</li>
+<li>port 指定监听的端口</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/20/Linux-网络基础/" data-id="cixwy9h7k000r6l4bj6v2avgj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Linux-命令基础" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/19/Linux-命令基础/" class="article-date">
+  <time datetime="2016-09-19T12:34:56.000Z" itemprop="datePublished">2016-09-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/19/Linux-命令基础/">Linux 命令基础</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="命令基本格式及文件处理命令"><a href="#命令基本格式及文件处理命令" class="headerlink" title="命令基本格式及文件处理命令"></a>命令基本格式及文件处理命令</h2><h3 id="命令提示符"><a href="#命令提示符" class="headerlink" title="命令提示符"></a>命令提示符</h3><p>命令提示符例子：<code>[root@localhost ~]#</code>，参数意义如下：</p>
+<ul>
+<li>root：当前登录用户名称</li>
+<li>@：分隔用户名称和主机名称</li>
+<li>localhost：主机名称</li>
+<li>~：当前所在目录</li>
+<li>#：超级用户提示符，普通用户提示符是 $</li>
+</ul>
+<h3 id="命令格式"><a href="#命令格式" class="headerlink" title="命令格式"></a>命令格式</h3><blockquote>
+<p>命令 [选项] [参数]</p>
+</blockquote>
+<ul>
+<li>个别命令使用不遵循此格式</li>
+<li>当有多个选项时，可以写在一起</li>
+<li>简化选项与完整选项：-a 等于 –all</li>
+</ul>
+<h3 id="查询目录中内容：ls"><a href="#查询目录中内容：ls" class="headerlink" title="查询目录中内容：ls"></a>查询目录中内容：ls</h3><blockquote>
+<p>ls [选项] [文件或目录]</p>
+</blockquote>
+<p>选项：</p>
+<ul>
+<li>-a：显示所有文件，包括隐藏文件</li>
+<li>-l：显示详细信息</li>
+<li>-d：查看目录属性</li>
+<li>-h：人性化显示文件大小</li>
+<li>-i：显示 inode</li>
+</ul>
+<p>命令 <code>ls -l</code> 等于命令 <code>ll</code></p>
+<h3 id="目录处理命令"><a href="#目录处理命令" class="headerlink" title="目录处理命令"></a>目录处理命令</h3><ul>
+<li>新建目录：mkdir<ul>
+<li><code>mkdir -p [目录名称]</code></li>
+<li>-p 递归创建</li>
+<li>命令英文原意：make directories</li>
+</ul>
+</li>
+<li>切换所在目录：cd<ul>
+<li><code>cd [目录名称]</code><ul>
+<li>cd ~ ：进入当前用户的家目录</li>
+<li>cd - ：进入上次目录</li>
+<li>cd . ：进入当前目录</li>
+<li>cd .. ：进入上一级目录</li>
+</ul>
+</li>
+<li>命令英文原意：change directory</li>
+<li>相对路径：参照当前所在目录，进行查找</li>
+<li>绝对路径：从根目录开始制定，一级一级递归查找。在任何目录下，都能进入指定目录</li>
+</ul>
+</li>
+<li>查询所在目录位置：pwd<ul>
+<li><code>pwd</code></li>
+<li>命令英文原意：print working directory</li>
+</ul>
+</li>
+<li>删除空目录：rmdir<ul>
+<li><code>rmdir [目录名称]</code></li>
+<li>命令英文原意：remove empty directories</li>
+</ul>
+</li>
+<li>删除文件或目录：rm<ul>
+<li><code>rm -rf [文件或目录]</code><ul>
+<li>-r ：删除目录</li>
+<li>-f ：强制</li>
+</ul>
+</li>
+<li>命令英文原意：remove</li>
+</ul>
+</li>
+<li>复制命令：cp<ul>
+<li><code>cp [选项] [原文件或目录] [目标目录]</code><ul>
+<li>-r ：复制目录</li>
+<li>-p ：连带文件属性复制</li>
+<li>-d ：若源文件是链接文件，则复制链接属性</li>
+<li>-a ：相当于 -pdr</li>
+</ul>
+</li>
+<li>命令英文原意：copy</li>
+</ul>
+</li>
+<li>剪切或重命名命令：mv<ul>
+<li><code>mv [原文件或目录] [目标目录]</code></li>
+<li>命令英文原意：move</li>
+</ul>
+</li>
+</ul>
+<h3 id="常见目录作用"><a href="#常见目录作用" class="headerlink" title="常见目录作用"></a>常见目录作用</h3><ul>
+<li>/ ：根目录</li>
+<li>/bin ：命令保存目录</li>
+<li>/dev ：设备文件保存目录</li>
+<li>/etc ：配置文件保存目录</li>
+<li>/lib ：系统保存目录</li>
+<li>/mnt ：系统挂载目录</li>
+<li>/tmp ：临时目录</li>
+<li>/sys ：</li>
+<li>/var ：系统相关文档内容</li>
+<li>/usr ：系统软件资源目录<ul>
+<li>/usr/bin ：系统命令（普通用户）</li>
+<li>/usr/sbin ：系统命令（超级用户）</li>
+</ul>
+</li>
+<li>/boot ：启动目录，启动相关文件</li>
+<li>/home ：普通用户的家目录</li>
+<li>/root ：超级用户的家目录</li>
+<li>/sbin ：命令保存目录</li>
+<li>/proc ：直接写入内存的</li>
+<li>/media ： 挂载目录</li>
+</ul>
+<h3 id="链接命令"><a href="#链接命令" class="headerlink" title="链接命令"></a>链接命令</h3><ul>
+<li>链接命令：ln<ul>
+<li><code>ln [参数] [原文件] [目标文件]</code><ul>
+<li>-s ：创建软链接</li>
+<li>默认创建硬链接</li>
+</ul>
+</li>
+<li>命令英文原意：link</li>
+<li>功能描述：生成链接文件</li>
+</ul>
+</li>
+<li>硬链接特征：<ul>
+<li>拥有相同的 I 节点和存储 Block 块，可以看做是同一个文件</li>
+<li>可通过 I 节点识别</li>
+<li>不能跨分区</li>
+<li>不能针对目录使用</li>
+</ul>
+</li>
+<li>软连接特征：<ul>
+<li>类似 Windows 快捷方式</li>
+<li>软链接拥有自己的 I 节点和 Block 块，但是数据块中只保存原文件的文件名和 I 节点号，并没有实际的文件数据</li>
+<li>软连接文件权限都为：rwxrwxrwx</li>
+<li>修改任意文件，另一个都改变</li>
+<li>删除原文件，软链接不能使用</li>
+</ul>
+</li>
+</ul>
+<h2 id="文件搜索命令"><a href="#文件搜索命令" class="headerlink" title="文件搜索命令"></a>文件搜索命令</h2><h3 id="文件搜索命令-locate"><a href="#文件搜索命令-locate" class="headerlink" title="文件搜索命令 locate"></a>文件搜索命令 locate</h3><ul>
+<li><code>locate 文件名</code>（只能搜索文件名）<ul>
+<li>在后台数据库中按文件名搜索，搜索速度更快</li>
+</ul>
+</li>
+<li><code>/var/lib/mlocate</code><ul>
+<li>locate 命令所搜索的后台数据库</li>
+</ul>
+</li>
+<li><code>updatedb</code><ul>
+<li>更新数据库</li>
+</ul>
+</li>
+<li><code>/etc/updatedb.conf</code> 配置文件<ul>
+<li>PRUNE_BIND_MOUNTS = “yes” (开启搜索限制)</li>
+<li>PRUNEFS = （搜索时，不搜索的文件系统）</li>
+<li>PRUNENAMES = （搜索时，不搜索的文件类型）</li>
+<li>PRUNEPATHS = （搜索时，不搜索的路径）</li>
+</ul>
+</li>
+</ul>
+<h3 id="命令搜索命令-whereis-与-which"><a href="#命令搜索命令-whereis-与-which" class="headerlink" title="命令搜索命令 whereis 与 which"></a>命令搜索命令 whereis 与 which</h3><ul>
+<li>whereis<ul>
+<li>搜索命令所在路径及帮助文档所在位置</li>
+<li>选项<ul>
+<li>-b    只查找可执行文件</li>
+<li>-m    只查找帮助文件</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>which （能看到命令的别名，只能看到命令的所在位置）</li>
+</ul>
+<h3 id="文件搜索命令-find"><a href="#文件搜索命令-find" class="headerlink" title="文件搜索命令 find"></a>文件搜索命令 find</h3><ul>
+<li><code>find [搜索范围] [搜索条件]</code><ul>
+<li>搜索文件</li>
+</ul>
+</li>
+<li><code>find / -name install.log</code><ul>
+<li>避免大范围搜索，会非常耗费系统资源</li>
+<li>find 是在系统当中搜索符合条件的文件名。如果需要匹配，使用通配符匹配，通配符是完全匹配</li>
+<li>Linux 中的通配符<ul>
+<li><ul>
+<li>匹配任意内容</li>
+</ul>
+</li>
+<li>?  匹配任意一个字符</li>
+<li>[] 匹配任意一个中括号内的字符</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>find /root -iname install.log</code> 不区分大小写</li>
+<li><code>find /root -user root</code> 按照所有者搜索</li>
+<li><code>find /root -nouser</code> 查找没有所有者的文件</li>
+<li><code>find /var/log/ -mtime +10</code> 查找 10 天前修改的文件<ul>
+<li>10 10 天当天修改的文件</li>
+<li>-10 10 天内修改文件</li>
+<li>+10 10 天前修改的文件</li>
+<li>atime 文件访问时间</li>
+<li>ctime 改变文件属性</li>
+<li>mtime 修改文件内容</li>
+</ul>
+</li>
+<li><code>find . -size 25k</code> 查找文件大小是 25 KB 的文件<ul>
+<li>25K 等于 25 KB的文件</li>
+<li>-25K 小于 25 KB的文件</li>
+<li>+25K 大于 25KB 的文件</li>
+</ul>
+</li>
+<li><code>find . -inum 262422</code> 查找 i 节点是 262422 的文件</li>
+<li><code>find /etc -size +20k -a -size -50k</code> 查找 /etc/ 目录下，大于 20 KB 并且小于 50 KB 的文件<ul>
+<li>-a and 逻辑与，两个条件都满足</li>
+<li>-o or 逻辑或，两个条件满足一个即可</li>
+</ul>
+</li>
+<li><code>find /etc -size +20k -a -size -50k -exec ls -lh {} \;</code> 查找 /etc/，大于 20 KB 并且小于 50 KB 的文件，并显示详细信息，-exec/ -ok 命令 {}\; 对搜索结果执行操作</li>
+</ul>
+<h3 id="字符串搜索命令-grep"><a href="#字符串搜索命令-grep" class="headerlink" title="字符串搜索命令 grep"></a>字符串搜索命令 grep</h3><ul>
+<li><code>grep [选项] 字符串 文件名</code> 在文件当中匹配符合条件的字符串<ul>
+<li>-i 忽略大小写</li>
+<li>-v 排除指定字符串</li>
+</ul>
+</li>
+</ul>
+<h3 id="find-命令与-grep-命令的区别"><a href="#find-命令与-grep-命令的区别" class="headerlink" title="find 命令与 grep 命令的区别"></a>find 命令与 grep 命令的区别</h3><p>find 命令：在系统当中搜索符合条件的文件名，如果需要匹配，使用通配符匹配，通配符是完全匹配。</p>
+<p>grep 命令：在文件当中搜索符合条件的字符串，如果需要匹配，使用正则表达式进行匹配，正则表达式时包含匹配。</p>
+<h2 id="帮助命令"><a href="#帮助命令" class="headerlink" title="帮助命令"></a>帮助命令</h2><h3 id="帮助命令-man"><a href="#帮助命令-man" class="headerlink" title="帮助命令 man"></a>帮助命令 man</h3><ul>
+<li><code>man 命令</code>  获取指定命令的帮助</li>
+<li><code>man -f 命令</code> 相当于 <code>whatis 命令</code> 查看命令的帮助级别</li>
+<li><code>man -k 命令</code> 相当于 <code>apropos 命令</code> 查看和命令相关的所有帮助</li>
+<li>man 的级别<ul>
+<li>1 ： 查看命令的帮助</li>
+<li>2 ： 查看可被内核调用的函数的帮助</li>
+<li>3 ： 查看函数和函数库的帮助</li>
+<li>4 ： 查看特殊文件的帮助（主要是 /dev 目录下的文件）</li>
+<li>5 ： 查看配置文件的帮助</li>
+<li>6 ： 查看游戏的帮助</li>
+<li>7 ： 查看其他杂项的帮助</li>
+<li>8 ： 查看系统管理员可用命令的帮助</li>
+<li>9 ： 查看和内核相关文件的帮助</li>
+</ul>
+</li>
+</ul>
+<h3 id="其他帮助命令"><a href="#其他帮助命令" class="headerlink" title="其他帮助命令"></a>其他帮助命令</h3><ul>
+<li><code>命令 --help</code> 获取命令选项的帮助<ul>
+<li><code>ls --help</code></li>
+</ul>
+</li>
+<li><code>help shell 内部命令</code> 获取 shell 内部命令的帮助<ul>
+<li><code>whereis cd</code> 确定是否是 shell 内部命令</li>
+<li><code>help cd</code> 获取内部命令帮助</li>
+</ul>
+</li>
+<li><code>info 命令</code><ul>
+<li>回车 ： 进入子帮助页面</li>
+<li>u ： 进入上层页面</li>
+<li>n ： 进入下一个帮助小节</li>
+<li>p ： 进入上一个帮助小节</li>
+<li>q ： 退出</li>
+</ul>
+</li>
+</ul>
+<h2 id="压缩命令"><a href="#压缩命令" class="headerlink" title="压缩命令"></a>压缩命令</h2><ul>
+<li>常用的压缩格式：<ul>
+<li>.zip</li>
+<li>.gz</li>
+<li>.bz2</li>
+<li>.tar.gz</li>
+<li>.tar.bz2</li>
+</ul>
+</li>
+<li>.zip 格式<ul>
+<li><code>zip 压缩文件名 源文件</code> 压缩文件</li>
+<li><code>zip -r 压缩文件名 源目录</code> 压缩目录</li>
+<li><code>unzip 压缩文件</code> 解压 <code>.zip</code> 文件</li>
+</ul>
+</li>
+<li>.gz 格式<ul>
+<li><code>gzip 源文件</code> 压缩为 <code>.gz</code> 格式的压缩文件，源文件消失</li>
+<li><code>gzip -c 源文件 &gt; 压缩文件</code> 压缩为 <code>.gz</code> 格式的压缩文件，源文件保留</li>
+<li><code>gzip -r 目录</code> 压缩目录下所有的子文件，但是不能压缩目录</li>
+<li><code>gzip -d 压缩文件</code> 解压文件</li>
+<li><code>gunzip 压缩文件</code> 解压文件</li>
+</ul>
+</li>
+<li>.bz2<ul>
+<li><code>bzip2 源文件</code> 压缩为 <code>.bz2</code> 格式的压缩文件，不保留源文件</li>
+<li><code>bzip2 -k 源文件</code> 压缩为 <code>.bz2</code> 格式的压缩文件，保留源文件</li>
+<li><code>bzip2</code> 命令不能压缩目录</li>
+</ul>
+</li>
+<li>tar.gz<ul>
+<li><code>tar -cvf 打包文件名 源文件</code><ul>
+<li>选项<ul>
+<li>-c ： 打包</li>
+<li>-v ： 显示过程</li>
+<li>-f    ： 指定打包后的文件名</li>
+</ul>
+</li>
+<li>举例：<code>tar -cvf longzls.tar longzls</code></li>
+</ul>
+</li>
+<li><code>tar -xvf 打包文件名</code><ul>
+<li>选项<ul>
+<li>-x ： 解打包</li>
+</ul>
+</li>
+<li>举例：<code>tar -xvf longzls.tar</code></li>
+</ul>
+</li>
+<li><code>tar -zcvf 压缩包名.tar.gz 源文件</code> 压缩为 <code>.tar.gz</code> 格式的压缩文件</li>
+<li><code>tar -zxvf 压缩包名.tar.gz</code> 解压 <code>.tar.gz</code> 格式的文件</li>
+<li><code>tar -jcvf 压缩包名.tar.bz2 源文件</code> 压缩为 <code>.tar.bz2</code> 格式的压缩文件</li>
+<li><code>tar -jxvf 压缩包名.tar.bz2</code> 解压 <code>.tar.bz2</code> 格式的文件</li>
+</ul>
+</li>
+</ul>
+<h2 id="关机重启命令"><a href="#关机重启命令" class="headerlink" title="关机重启命令"></a>关机重启命令</h2><ul>
+<li>shutdown 命令<ul>
+<li><code>shutdown [选项] 时间</code></li>
+<li>选项<ul>
+<li>-c ：取消前一个关机命令</li>
+<li>-h ：关机（尽可能少用）</li>
+<li>-r ：重启</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>其他关机命令<ul>
+<li>halt</li>
+<li>poweroff</li>
+<li>init 0</li>
+</ul>
+</li>
+<li>其他重启命令<ul>
+<li>reboot</li>
+<li>init 6</li>
+</ul>
+</li>
+<li>系统运行级别<ul>
+<li>0 关机</li>
+<li>1 单用户</li>
+<li>2 不完全多用户，不含 NFS 服务</li>
+<li>3 完全多用户</li>
+<li>4 未分配</li>
+<li>5 图形界面</li>
+<li>6 重启</li>
+</ul>
+</li>
+<li><code>cat /etc/inittab</code> 可以修复系统默认运行级别</li>
+<li><code>runlevel</code> 查询系统运行级别</li>
+<li><code>logout</code> 退出登录命令</li>
+</ul>
+<h2 id="挂载命令"><a href="#挂载命令" class="headerlink" title="挂载命令"></a>挂载命令</h2><ul>
+<li>查询与自动挂载<ul>
+<li><code>mount [-t 文件系统] [-o 特殊选项] 设备 文件名 挂载点</code><ul>
+<li>-t 文件系统：加入文件系统类型来指定挂载的类型，可以 ext3、ext4、iso 9660 等文件系统</li>
+<li>-o 特殊选项：可以指定挂载的额外选项</li>
+</ul>
+</li>
+<li><code>mount</code> 查询系统中已经挂载的设备</li>
+<li><code>mount -a</code> 依据配置文件 /etc/fstab 的内容，自动挂载</li>
+</ul>
+</li>
+<li>光盘的挂载<ul>
+<li>挂载光盘<ul>
+<li><code>mkdir /mnt/cdrom/</code> 建立挂载点</li>
+<li><code>mount -t iso9660 /dev/cdrom /mnt/cdrom/</code> 挂载光盘</li>
+<li><code>mount /dev/sr0 /mnt/cdrom/</code></li>
+</ul>
+</li>
+<li>卸载命令<ul>
+<li><code>umount 设备文件名或挂载点</code></li>
+<li><code>umount /mnt/cdrom</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>U 盘的挂载<ul>
+<li><code>fdisk -l</code> 查看存储设备文件名</li>
+<li><code>mount -t vfat /dev/sdb1 /mnt/usb/</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="用户登录查看命令"><a href="#用户登录查看命令" class="headerlink" title="用户登录查看命令"></a>用户登录查看命令</h2><ul>
+<li>w<ul>
+<li>USER ：登录的用户名</li>
+<li>TTY ：登录终端</li>
+<li>FROM ：从哪个 IP 地址登录</li>
+<li>LOGIN@ ：登录时间</li>
+<li>IDLE ：用户闲置时间</li>
+<li>JCPU ：指的是和该终端连接的所有进程占用的时间。这个时间里并不包括过去的后台作业时间，但却包括当前正在运行的后台作业所占用的时间；</li>
+<li>PCPU ：是指当前进程所占用的时间；</li>
+<li>WHAT ：当前正在运行的命令</li>
+</ul>
+</li>
+<li>who<ul>
+<li>用户名</li>
+<li>登录终端</li>
+<li>登录时间（登录来源 IP 地址）</li>
+</ul>
+</li>
+<li>last（查询当前登录和过去登录的用户信息）<ul>
+<li>last 命令默认是读取 /var/log/wtmp 文件数据</li>
+<li>命令输出<ul>
+<li>用户名</li>
+<li>登录终端</li>
+<li>登录 IP</li>
+<li>登录时间</li>
+<li>退出时间（在线时间）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>lastlog（查看所有用户的最后一次登录时间）<ul>
+<li>lastlog 命令默认是读取 /var/log/lastlog 文件内容</li>
+<li>命令输出<ul>
+<li>用户名</li>
+<li>登录终端</li>
+<li>登录 IP</li>
+<li>最后一次登录时间</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Shell-基础"><a href="#Shell-基础" class="headerlink" title="Shell 基础"></a>Shell 基础</h2><h3 id="Shell-概述"><a href="#Shell-概述" class="headerlink" title="Shell 概述"></a>Shell 概述</h3><p>Shell 是一个命令行解释器，它为用户提供了一个向 Linux 内核发送请求以便运行程序的界面系统级程序，<br>用户可以用 Shell 来启动、挂起、停止甚至是编写一些程序。</p>
+<p>Shell 还是一个功能相当强大的编程语言，易编写，易调试，灵活性比较强。<br>Shell 是解释执行的脚本语言，在 Shell 中可以直接调用 Linux 的系统命令</p>
+<p>Shell 的分类</p>
+<ul>
+<li>Bourne Shell<ul>
+<li>sh、ksh、Bash、psh、zsh</li>
+</ul>
+</li>
+<li>C Shell<ul>
+<li>csh、tcsh</li>
+</ul>
+</li>
+</ul>
+<h3 id="脚本执行方式"><a href="#脚本执行方式" class="headerlink" title="脚本执行方式"></a>脚本执行方式</h3><ul>
+<li>echo 输出命令<ul>
+<li><code>echo [选项] [输出内容]</code></li>
+<li>选项<ul>
+<li>-e ：支持反斜线控制的字符转换</li>
+</ul>
+</li>
+<li>字符转换<ul>
+<li>\a 输出警告音</li>
+<li>\b 退格键，也就是向左删除键</li>
+<li>\n 换行符</li>
+<li>\r 回车键</li>
+<li>\t 制表符</li>
+<li>\v 垂直制表符</li>
+<li>\0nnn 按照八进制 ASCII 码表输出字符。其中 0 为数字零，nnn 是三位八进制数</li>
+<li>\xhh 按照十六进制 ASCII 码表输出字符。其中 hh 是两位十六进制数</li>
+</ul>
+</li>
+<li>使用颜色<ul>
+<li>30m=黑色</li>
+<li>31m=红色</li>
+<li>32m=绿色</li>
+<li>33m=黄色</li>
+<li>34m=蓝色</li>
+<li>35m=洋红</li>
+<li>36m=青色</li>
+<li>37m=白色</li>
+<li>\e[1;31m \e[0m</li>
+</ul>
+</li>
+<li>例子<ul>
+<li><code>echo -e &quot;hell\bo&quot;;</code></li>
+<li><code>echo -e &quot;\x68\t\x65\t\x6c\n\x6c\t\x6f\t&quot;;</code></li>
+<li><code>echo -e &quot;\e[1;31mHello World \e[0m&quot;;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="命令别名与快捷键"><a href="#命令别名与快捷键" class="headerlink" title="命令别名与快捷键"></a>命令别名与快捷键</h3><ul>
+<li><code>alias</code> 查看系统中所有的命令别名</li>
+<li><code>alias 别名=&#39;原命令&#39;</code> 设定命令别名<ul>
+<li>例子：<code>alias vi=&#39;vim&#39;</code></li>
+</ul>
+</li>
+<li><code>vi ~/.bashrc</code> 写入环境变量配置文件</li>
+<li><code>unalias 别名</code> 删除别名</li>
+<li>命令生效顺序<ul>
+<li>第一顺位执行用绝对路径或相对路径执行的命令</li>
+<li>第二顺位执行别名</li>
+<li>第三顺位执行 Bash 的内部命令</li>
+<li>第四顺位执行按照 $PATH 环境变量定义的目录查找顺序找到的第一个命令</li>
+</ul>
+</li>
+<li>常用快捷键<ul>
+<li><code>Ctrl + c</code> 强制终止当前命令</li>
+<li><code>Ctrl + l</code> 清屏</li>
+<li><code>Ctrl + a</code> 光标移动到命令行首</li>
+<li><code>Ctrl + e</code> 光标移动到命令行尾</li>
+<li><code>Ctrl + u</code> 从光标所在位置删除到行首</li>
+<li><code>Ctrl + z</code> 把命令放入后台</li>
+<li><code>Ctrl + r</code> 在历史命令中搜索</li>
+</ul>
+</li>
+</ul>
+<h3 id="历史命令"><a href="#历史命令" class="headerlink" title="历史命令"></a>历史命令</h3><ul>
+<li><code>history [选项] [历史命令保存文件]</code><ul>
+<li>选项<ul>
+<li>-c ：清空历史缓存</li>
+<li>-w ：把缓存中的历史命令写入历史命令保存文件 <code>~/.bash_history</code></li>
+</ul>
+</li>
+<li>历史命令默认会保存 1000 条，可以在环境变量配置文件 <code>/etc/profile</code> 中的 <code>HISTSIZE</code> 进行修改</li>
+<li>历史命令的调用<ul>
+<li>使用上、下箭头调用以前的历史命令</li>
+<li>使用 <code>!n</code> 重复执行第 n 条历史命令</li>
+<li>使用 <code>!!</code> 重复执行上一条命令</li>
+<li>使用 <code>!字符</code> 重复执行最后一条以该字符串开头的命令</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="输出重定向"><a href="#输出重定向" class="headerlink" title="输出重定向"></a>输出重定向</h3><p>1.标准输入输出</p>
+<table>
+<thead>
+<tr>
+<th>设备</th>
+<th>设备文件名</th>
+<th>文件描述符</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>键盘</td>
+<td>/dev/stdin</td>
+<td>0</td>
+<td>标准输入</td>
+</tr>
+<tr>
+<td>显示器</td>
+<td>/dev/sdtout</td>
+<td>1</td>
+<td>标准输入</td>
+</tr>
+<tr>
+<td>显示器</td>
+<td>/dev/sdterr</td>
+<td>2</td>
+<td>标准错误输出</td>
+</tr>
+</tbody>
+</table>
+<p>2.输出重定向</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>符号</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>标准输出重定向</td>
+<td>命令 &gt; 文件</td>
+<td>以覆盖的方式，把命令的正确输出，输出到指定的文件或设备中</td>
+</tr>
+<tr>
+<td>标准输出重定向</td>
+<td>命令 &gt;&gt; 文件</td>
+<td>以追加的方式，把命令的正确输出，输出到指定的文件或设备中</td>
+</tr>
+<tr>
+<td>标准错误输出重定向</td>
+<td>错误命令2&gt;文件</td>
+<td>以覆盖的方式，把命令的错误输出，输出到指定的文件或设备中</td>
+</tr>
+<tr>
+<td>标准错误输出重定向</td>
+<td>错误命令2&gt;&gt;文件</td>
+<td>以追加的方式，把命令的错误输出，输出到指定的文件或设备中</td>
+</tr>
+<tr>
+<td>正确输出和错误输出同时保存</td>
+<td>命令 &gt; 文件 2&gt;&amp;1</td>
+<td>以覆盖的方式，把正确输出和错误输出都保存到同一个文件当中</td>
+</tr>
+<tr>
+<td>正确输出和错误输出同时保存</td>
+<td>命令 &gt;&gt; 文件 2&gt;&amp;1</td>
+<td>以追加的方式，把正确输出和错误输出都保存到同一个文件当中</td>
+</tr>
+<tr>
+<td>正确输出和错误输出同时保存</td>
+<td>命令 &amp;&gt;文件</td>
+<td>以覆盖的方式，把正确输出和错误输出都保存都同一个文件当中</td>
+</tr>
+<tr>
+<td>正确输出和错误输出同时保存</td>
+<td>命令 &amp;&gt;&gt;文件</td>
+<td>以追加的方式，把正确输出和错误输出都保存到同一个文件当中</td>
+</tr>
+<tr>
+<td>正确输出和错误输出同时保存</td>
+<td>命令&gt;&gt;文件1 2&gt;&gt;文件2</td>
+<td>把正确的输出追加到文件 1 中，把错误的输出追加到文件 2 中</td>
+</tr>
+</tbody>
+</table>
+<p>3.输入重定向</p>
+<ul>
+<li><code>wc [选项] [文件名]</code> 输入重定向<ul>
+<li>选项<ul>
+<li>-c ：统计字节数</li>
+<li>-w ：统计单词数</li>
+<li>-i ：统计行数<h3 id="管道符"><a href="#管道符" class="headerlink" title="管道符"></a>管道符</h3></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>1.多命令顺序执行</p>
+<table>
+<thead>
+<tr>
+<th>多命令执行符</th>
+<th>格式</th>
+<th>作用</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>;</td>
+<td>命令1;命令2</td>
+<td>多个命令顺序执行，命令之间没有任何逻辑联系，即使报错也会往下执行</td>
+<td>date ; ls ; cd ~; history;</td>
+</tr>
+<tr>
+<td>&amp;&amp;</td>
+<td>命令1&amp;&amp;命令2</td>
+<td>逻辑与，当命令 1 正确执行，则命令 2 才会执行，当命令 1 执行不正确，则命令 2 不会执行</td>
+<td>ls &amp;&amp; echo yes</td>
+</tr>
+<tr>
+<td>II</td>
+<td>命令1 II 命令2</td>
+<td>逻辑或，当命令 1 执行不正确，则命令 2 才会执行，当命令 1 正确执行，则命令 2 不会执行</td>
+<td>lsls II echo no</td>
+</tr>
+</tbody>
+</table>
+<p>2.管道符</p>
+<ul>
+<li>格式：命令 1 | 命令 2</li>
+<li>作用：命令 1 的正确输出作为命令 2 的操作对象</li>
+</ul>
+<h3 id="通配符"><a href="#通配符" class="headerlink" title="通配符"></a>通配符</h3><p>1.通配符</p>
+<table>
+<thead>
+<tr>
+<th>通配符</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>?</td>
+<td>匹配一个任意字符</td>
+</tr>
+<tr>
+<td>*</td>
+<td>匹配 0 个或任意多个任意字符，也就是可以匹配任何内容</td>
+</tr>
+<tr>
+<td>[]</td>
+<td>匹配中括号中任意一个字符，例如：[abc] 代表一定匹配一个字符，或是 a,或是 b,或是 c</td>
+</tr>
+<tr>
+<td>[-]</td>
+<td>匹配中括号中任意一个字符，- 代表一个范围，例如：[a-z] 代表匹配一个小写字母</td>
+</tr>
+<tr>
+<td>[^]</td>
+<td>逻辑非，表示匹配不是中括号内的一个字符，例如：[^0-9] 代表匹配一个不是数字的字符</td>
+</tr>
+</tbody>
+</table>
+<p>通配符执行例子</p>
+<ul>
+<li>存在文件夹<code>dzp</code>,<code>dzp2</code>,<code>dzp3</code>,<code>dzp34</code>,<code>dzpa</code>，<code>dzpbols</code>,<code>dzpcang</code></li>
+<li>执行命令 <code>ls dzp</code>，显示文件夹 <code>dzp</code></li>
+<li>执行命令 <code>ls dzp?</code>，显示文件夹 <code>dzp2</code>，<code>dzp3</code></li>
+<li>执行命令 <code>ls dzp[0-9]</code>，显示文件夹 <code>dzp2</code>，<code>dzp3</code></li>
+<li>执行命令 <code>ls dzp[0-9][0-9]</code>，显示文件夹 <code>dzp34</code></li>
+<li>执行命令 <code>ls dzp[^0-9]</code>，显示文件夹 <code>dzpa</code></li>
+<li>执行命令 <code>ls dzp[^0-9]*</code>，显示文件夹 <code>dzpa</code>，<code>dzpbols</code>，<code>dzpcang</code></li>
+</ul>
+<p>2.Bash 中其他特殊符号</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>‘’</td>
+<td>单引号。在单引号中所有特殊符号，如 $ 和 ` 都没有特殊含义。</td>
+</tr>
+<tr>
+<td>“”</td>
+<td>双引号。在双引号中特殊符号都没有特殊含义，但是 $ 、`、\ 是例外，拥有<em>调用变量值</em>，<em>引用命令</em>，<em>转义符</em>的特殊含义</td>
+</tr>
+<tr>
+<td>``</td>
+<td>反引号。反引号包括起来的内容是系统命令，在 Bash 中会先执行它。和 $() 作用一样，不过推荐使用 $()，因为反引号非常容易看错。</td>
+</tr>
+<tr>
+<td>$()</td>
+<td>和反引号作用一样，用来引用系统命令</td>
+</tr>
+<tr>
+<td>#</td>
+<td>在 Shell 脚本中，# 开头的行代表注释</td>
+</tr>
+<tr>
+<td>$</td>
+<td>用于调用变量的值，如需要调用变量 name 的值时，需要用 $name 的方式得到变量的值</td>
+</tr>
+<tr>
+<td>\</td>
+<td>转义符，跟在 \ 之后的</td>
+</tr>
+</tbody>
+</table>
+<h2 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h2><h3 id="用户和用户组的概念"><a href="#用户和用户组的概念" class="headerlink" title="用户和用户组的概念"></a>用户和用户组的概念</h3><ul>
+<li>用户：使用操作系统的人</li>
+<li>用户组：具有相同系统权限的一组用户</li>
+<li><code>/etc/group</code> 存储当前系统中所有用户组信息<ul>
+<li>Group:x:499:root,luis,daemon</li>
+<li>组名称：组密码占位符：组编号：组中用户名列表</li>
+</ul>
+</li>
+<li><code>/etc/gshadow</code> 存储当前系统中用户组的密码信息<ul>
+<li>Group:*:    :root,luis</li>
+<li>组名称：组密码：组管理者：组中用户名列表</li>
+</ul>
+</li>
+<li><code>/etc/passwd</code> 存储当前系统中所有用户的账号信息<ul>
+<li>root:x:0:0:root:/root:/bin/bash</li>
+<li>用户名：密码占位符：用户编号：用户组编号：用户注释信息：用户主目录：Shell 类型</li>
+</ul>
+</li>
+<li><code>/etc/shadow</code> 存储当前系统中所有用户的密码信息<ul>
+<li>root:$6$tBDREHKV$JfcEQ/hTxaOWI8QKoRPARviOq3etqaE.szqFoqW8/Uxh6nAkCvlQzp8nRhg4kRM4ySRjpsfyS7kxXfa5cOlLa.:17044:0:99999:7:::</li>
+<li>用户名:密码:::</li>
+</ul>
+</li>
+</ul>
+<h3 id="用户和用户组的基本命令"><a href="#用户和用户组的基本命令" class="headerlink" title="用户和用户组的基本命令"></a>用户和用户组的基本命令</h3><ul>
+<li>用户组基本命令<ul>
+<li>新增用户组：<code>groupadd 用户组名称</code></li>
+<li>新增用户组并指定编号：<code>groupadd -g 数字编号 用户组名称</code></li>
+<li>修改用户组名称：<code>groupmod -n 新名称 旧名称</code></li>
+<li>修改用户组编号：<code>groupmod -g 数字编号 用户组名称</code></li>
+<li>删除用户组：<code>groupdel 用户组名称</code></li>
+</ul>
+</li>
+<li>用户基本命令<ul>
+<li>删除用户：<code>userdel 用户名称</code></li>
+<li>删除用户并删除个人文件夹：<code>userdel -r 用户名称</code></li>
+<li>新增用户并指定用户组：<code>useradd -g 用户组名称 用户名称</code></li>
+<li>新增用户并指定用户个人文件夹：<code>useradd -d 目录路径 用户名称</code></li>
+<li>修改用户名称：<code>usermod -l 新名称 旧名称</code></li>
+<li>修改用户备注信息：<code>usermod -c 备注信息 用户名称</code></li>
+<li>修改用户的用户组信息：<code>usermod -g 用户组名称 用户名称</code></li>
+<li>指定用户新的个人文件夹：<code>usermod -d 目录路径 用户名称</code></li>
+</ul>
+</li>
+<li>其他命令<ul>
+<li>切换用户：<code>su</code></li>
+<li>锁定用户：<code>passwd -l 用户名称</code></li>
+<li>解锁用户：<code>passwd -u 用户名称</code></li>
+<li>无密码登录：<code>passwd -d 用户名称</code></li>
+<li>设置组密码：<code>gpasswd 用户组名称</code></li>
+<li>显示用户详情:<ul>
+<li>显示当前登录用户名：<code>whoami</code></li>
+<li>显示用户信息和组信息：<code>id 用户名称</code></li>
+<li>显示用户所在的所有组：<code>groups 用户名称</code></li>
+</ul>
+</li>
+<li>设置用户资料：<code>chfn 用户名称</code></li>
+<li>新增用户附属组：<code>gpasswd -a 用户名称 用户组名称</code>（在 Linux 当中，一个用户可以属于多个用户组，但只能有一个主要组，其余都是附属组）</li>
+<li>删除用户附属组：<code>gpasswd -d 用户名称</code></li>
+<li>切换用户附属组：<code>newgrp 用户组名称</code></li>
+<li>新增用户指定主要组和附属组：<code>useradd -g 主要组名称 -G 附属组名称</code></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/19/Linux-命令基础/" data-id="cixwy9h7f000l6l4bfsymio18" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-MySQL-5-7-版本新特性" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/12/MySQL-5-7-版本新特性/" class="article-date">
+  <time datetime="2016-09-12T13:12:40.000Z" itemprop="datePublished">2016-09-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/12/MySQL-5-7-版本新特性/">MySQL 5.7 版本新特性</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="第-1-章-MySQL-服务功能增强"><a href="#第-1-章-MySQL-服务功能增强" class="headerlink" title="第 1 章 MySQL 服务功能增强"></a>第 1 章 MySQL 服务功能增强</h2><h3 id="1-1-初始化方式变更"><a href="#1-1-初始化方式变更" class="headerlink" title="1-1 初始化方式变更"></a>1-1 初始化方式变更</h3><p>MySQL 5.7 之前<br><code>scripts/mysql_install_db \
+    --datadir=/data/sql_data \
+    --user=mysql --basedir=/home/mysql</code></p>
+<p>MySQL 5.7 之后<br><code>bin/mysql --initialize --user = mysql \
+    --basedir=/home/mysql \
+    --datadir=/home/mysql/data</code></p>
+<h3 id="1-3-旧版本支持为表增加计算列演练"><a href="#1-3-旧版本支持为表增加计算列演练" class="headerlink" title="1-3 旧版本支持为表增加计算列演练"></a>1-3 旧版本支持为表增加计算列演练</h3><p>MySQL 5.7 之前，需要增加一个插入触发器和更新触发器来实现计算列的功能，或者是一个视图来实现计算列的功能</p>
+<p>MySQL 5.7 之后，在 <code>CREATE TABLE</code> 及 <code>ALTER TABLE</code> 语句中支持增加计算列的方式<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">col_name data_type [GENERATED ALWAYS] AS (expression)</div><div class="line">[VIRTUAL | STORED] [UNIQUE [KEY]] [<span class="keyword">COMMENT</span> <span class="keyword">comment</span>]</div><div class="line">[[<span class="keyword">NOT</span>] <span class="literal">NULL</span>] [[PRIMARY] <span class="keyword">KEY</span>]</div></pre></td></tr></table></figure></p>
+<h3 id="1-4-MySQL5-7支持为表增加计算列实际演练"><a href="#1-4-MySQL5-7支持为表增加计算列实际演练" class="headerlink" title="1-4 MySQL5.7支持为表增加计算列实际演练"></a>1-4 MySQL5.7支持为表增加计算列实际演练</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> t(<span class="keyword">id</span> <span class="built_in">int</span> AUTO_INCREMENT <span class="keyword">not</span> <span class="literal">null</span>,c1 <span class="built_in">int</span>,c2 <span class="built_in">int</span>,c3 <span class="built_in">int</span> <span class="keyword">as</span> (c1+c2),PRIMARY <span class="keyword">KEY</span> (<span class="keyword">id</span>));</div><div class="line"></div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> t(c1,c2) <span class="keyword">VALUES</span>(<span class="number">1</span>,<span class="number">2</span>);</div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> t;</div><div class="line"></div><div class="line"><span class="keyword">UPDATE</span> t <span class="keyword">set</span> c1 = <span class="number">5</span> <span class="keyword">WHERE</span> <span class="keyword">id</span> = <span class="number">1</span>;</div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> t;</div></pre></td></tr></table></figure>
+<h3 id="1-5-引入JSON列类型及相关函数"><a href="#1-5-引入JSON列类型及相关函数" class="headerlink" title="1-5 引入JSON列类型及相关函数"></a>1-5 引入JSON列类型及相关函数</h3><p>MySQL 5.7 之前</p>
+<p>只能在 varchar 或是 text 等字符类型的列中存储 JSON 类型的字符串，并通过程序解析使用 JSON 字符串。</p>
+<p>MySQL 5.7 之后</p>
+<p>增加了 JSON 列类型及以 JSON 开头的相关处理函数，如 JSON_TYPE(),JSON_OBJECT()，JSON_MERGE() 等。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SELECT JSON_ARRAY(1,2,3,now());</div><div class="line">SELECT JSON_OBJECT(&apos;keyA&apos;,1,&apos;keyB&apos;,2);</div></pre></td></tr></table></figure></p>
+<h2 id="第-2-章-Replication-相关增强"><a href="#第-2-章-Replication-相关增强" class="headerlink" title="第 2 章 Replication 相关增强"></a>第 2 章 Replication 相关增强</h2><h3 id="2-1-支持多源复制"><a href="#2-1-支持多源复制" class="headerlink" title="2-1 支持多源复制"></a>2-1 支持多源复制</h3><p>略</p>
+<h3 id="2-2-基于库或是逻辑锁的多线程复制"><a href="#2-2-基于库或是逻辑锁的多线程复制" class="headerlink" title="2-2 基于库或是逻辑锁的多线程复制"></a>2-2 基于库或是逻辑锁的多线程复制</h3><p>MySQL 5.7 之前</p>
+<p>从 MySQL 5.6 开始支持多线程复制，只不过是对于每一个库一个复制线程。</p>
+<p>MySQL 5.7 之后</p>
+<p>MySQL 5.7 后对多线程复制功能进行了加强，增加了 <code>slave_paraller_type</code> 参数可以控制并发同步是基于 <code>database</code> 还是 <code>logical_clock</code></p>
+<h3 id="2-3-在线变更复制方式"><a href="#2-3-在线变更复制方式" class="headerlink" title="2-3 在线变更复制方式"></a>2-3 在线变更复制方式</h3><p>MySQL 5.7 之前</p>
+<p>要把基于日志点的复制方式变为基于 gtid 的复制方式或是把基于 gtid 的复制方式变成基于日志点的复制方式必须要重启 master 的服务器</p>
+<p>MySQL 5.7 之后</p>
+<p>允许在线变列复制的方式，而不用重启 master 服务器</p>
+<h2 id="第-3-章-InnoDB-引擎增强"><a href="#第-3-章-InnoDB-引擎增强" class="headerlink" title="第 3 章 InnoDB 引擎增强"></a>第 3 章 InnoDB 引擎增强</h2><h3 id="3-1-支持缓冲池大小在线变更"><a href="#3-1-支持缓冲池大小在线变更" class="headerlink" title="3-1 支持缓冲池大小在线变更"></a>3-1 支持缓冲池大小在线变更</h3><p>MySQL 5.7 之前</p>
+<p>要变更 <code>innodb_buffer_pool</code> 大小必须更改 <code>my.cnf</code> 文件后重启数据库服务器</p>
+<p>MySQL 5.7 之后</p>
+<p><code>innodb_buffer_pool_size</code> 参数变为动态参数，可以在线调整 <code>innodb</code> 缓存池的大小</p>
+<h3 id="3-2-增加-innodb-buffer-pool-导入导出功能"><a href="#3-2-增加-innodb-buffer-pool-导入导出功能" class="headerlink" title="3-2 增加 innodb_buffer_pool 导入导出功能"></a>3-2 增加 <code>innodb_buffer_pool</code> 导入导出功能</h3><p>MySQL 5.7 之后，新增以下参数控制 <code>innodb_buffer_pool</code> 的导入导出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">innodb_buffer_pool_dump_pct</div><div class="line">innodb_buffer_pool_dump_now</div><div class="line">innodb_buffer_pool_dump_at_shutdown</div><div class="line">innodb_buffer_pool_load_at_startup</div><div class="line">innodb_buffer_pool_load_now</div></pre></td></tr></table></figure></p>
+<h3 id="3-3-支持为-innodb-表建立表空间"><a href="#3-3-支持为-innodb-表建立表空间" class="headerlink" title="3-3 支持为 innodb 表建立表空间"></a>3-3 支持为 <code>innodb</code> 表建立表空间</h3><p>MySQL 5.7 之前</p>
+<p>具有系统表空间及可以为每个表建立一个独立的表空间</p>
+<p>MySQL 5.7 之后</p>
+<p>支持 <code>CREATE TABLESPACE</code> 语法为一个表或多个表建立共用的表空间</p>
+<h2 id="第-4-章-安全及管理方面增强"><a href="#第-4-章-安全及管理方面增强" class="headerlink" title="第 4 章 安全及管理方面增强"></a>第 4 章 安全及管理方面增强</h2><h3 id="4-1-不再支持old-password认证"><a href="#4-1-不再支持old-password认证" class="headerlink" title="4-1 不再支持old_password认证"></a>4-1 不再支持old_password认证</h3><h3 id="4-2-增加账号默认过期时间"><a href="#4-2-增加账号默认过期时间" class="headerlink" title="4-2 增加账号默认过期时间"></a>4-2 增加账号默认过期时间</h3><p><code>show variables like &#39;default_password_lifetime&#39;;</code></p>
+<h3 id="4-3-加强了对账号的管理功能"><a href="#4-3-加强了对账号的管理功能" class="headerlink" title="4-3 加强了对账号的管理功能"></a>4-3 加强了对账号的管理功能</h3><h3 id="4-4-增加了-sys-管理数据库"><a href="#4-4-增加了-sys-管理数据库" class="headerlink" title="4-4 增加了 sys 管理数据库"></a>4-4 增加了 sys 管理数据库</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/12/MySQL-5-7-版本新特性/" data-id="cixwy9h7u000x6l4bm3a5t5fm" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-与-MySQL-的零距离接触（二）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/09/与-MySQL-的零距离接触（二）/" class="article-date">
+  <time datetime="2016-09-09T12:14:34.000Z" itemprop="datePublished">2016-09-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/09/与-MySQL-的零距离接触（二）/">与 MySQL 的零距离接触（二）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="第-6-章-运算符和函数"><a href="#第-6-章-运算符和函数" class="headerlink" title="第 6 章 运算符和函数"></a>第 6 章 运算符和函数</h2><ul>
+<li><h3 id="6-1-回顾和概述"><a href="#6-1-回顾和概述" class="headerlink" title="6-1 回顾和概述"></a>6-1 回顾和概述</h3><ul>
+<li>运算符</li>
+<li>函数<ul>
+<li>字符函数</li>
+<li>数值运算符和函数</li>
+<li>比较运算符和函数</li>
+<li>日期时间函数</li>
+<li>信息函数</li>
+<li>聚合函数</li>
+<li>加密函数</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="6-2-字符函数"><a href="#6-2-字符函数" class="headerlink" title="6-2 字符函数"></a>6-2 字符函数</h3><ul>
+<li>CONCAT() - 字符连接</li>
+<li>CONCAT_WS() - 使用指定的分隔符进行字符连接</li>
+<li>FORMAT() - 数字格式化</li>
+<li>LOWER() - 转换成小写字母</li>
+<li>UPPER() - 转换成大写字母</li>
+<li>LEFT() - 获取左侧字符</li>
+<li>RIGHT() - 获取右侧字符</li>
+<li>LENGTH() - 获取字符串长度</li>
+<li>LTRIM() - 删除前导空格</li>
+<li>RTRIM() - 删除后续空壳</li>
+<li>TRIM() - 删除前导和后续空格</li>
+<li>SUBSTRING() - 字符串截取</li>
+<li>[NOT] LIKE - 模式匹配<ul>
+<li>%（百分号）：代表任意个字符</li>
+<li>_（下划线）：代表任意一个字符</li>
+</ul>
+</li>
+<li>REPLACE() - 字符串替换</li>
+</ul>
+</li>
+<li><h3 id="6-3-数值运算符和函数"><a href="#6-3-数值运算符和函数" class="headerlink" title="6-3 数值运算符和函数"></a>6-3 数值运算符和函数</h3><ul>
+<li>CEIL() - 进一取整</li>
+<li>DIV - 整数除法</li>
+<li>FLOOR() - 舍一取整</li>
+<li>MOD - 取余数</li>
+<li>POWER() - 幂运算</li>
+<li>ROUND() - 四舍五入</li>
+<li>TRUNCATE() - 数字截取</li>
+</ul>
+</li>
+<li><h3 id="6-4-比较运算符和函数"><a href="#6-4-比较运算符和函数" class="headerlink" title="6-4 比较运算符和函数"></a>6-4 比较运算符和函数</h3><ul>
+<li>[NOT] BETWEEN…AND… - [不]在范围之内</li>
+<li>[NOT] IN() - [不]在列出值范围内</li>
+<li>IS [NOT] NULL - [不]为空</li>
+</ul>
+</li>
+<li><h3 id="6-5-日期时间函数"><a href="#6-5-日期时间函数" class="headerlink" title="6-5 日期时间函数"></a>6-5 日期时间函数</h3><ul>
+<li>NOW() - 当前日期和时间</li>
+<li>CURDATE() - 当前日期</li>
+<li>CURTIME() - 当前时间</li>
+<li>DATE_ADD() - 日期变化</li>
+<li>DATEDIFF() - 日期差值</li>
+<li>DATE_FORMAT() - 日期格式化</li>
+</ul>
+</li>
+<li><h3 id="6-6-信息函数"><a href="#6-6-信息函数" class="headerlink" title="6-6 信息函数"></a>6-6 信息函数</h3><ul>
+<li>CONNECTION_ID() - 连接 ID</li>
+<li>DATEBASE() - 当前数据库</li>
+<li>LAST_INSERT_ID() - 最后插入记录的 ID</li>
+<li>VERSION() - 最后插入记录的 ID 号</li>
+<li>USER() - 当前用户</li>
+</ul>
+</li>
+<li><h3 id="6-7-聚合函数"><a href="#6-7-聚合函数" class="headerlink" title="6-7 聚合函数"></a>6-7 聚合函数</h3><ul>
+<li>AVG() - 平均值</li>
+<li>COUNT() - 计数</li>
+<li>MAX() - 最大值</li>
+<li>MIN() - 最小值</li>
+<li>SUM() - 求和</li>
+</ul>
+</li>
+<li><h3 id="6-8-加密函数"><a href="#6-8-加密函数" class="headerlink" title="6-8 加密函数"></a>6-8 加密函数</h3><ul>
+<li>MD5() - 信息摘要算法</li>
+<li>PASSWORD() - 密码</li>
+</ul>
+</li>
+</ul>
+<h2 id="第-7-章-自定义函数"><a href="#第-7-章-自定义函数" class="headerlink" title="第 7 章 自定义函数"></a>第 7 章 自定义函数</h2><ul>
+<li><h3 id="7-1-回顾和概述"><a href="#7-1-回顾和概述" class="headerlink" title="7-1 回顾和概述"></a>7-1 回顾和概述</h3><ul>
+<li>略</li>
+</ul>
+</li>
+<li><h3 id="7-2-自定义函数简介"><a href="#7-2-自定义函数简介" class="headerlink" title="7-2 自定义函数简介"></a>7-2 自定义函数简介</h3><ul>
+<li>自定义函数：用户自定义函数（user-defined function,UDF）是一种对 MySQL 扩展的途径，其用法与内置函数相同。</li>
+<li>自定义函数的两个必要条件：<ul>
+<li>参数</li>
+<li>返回值</li>
+<li>函数可以接受任意类型的参数，也可以返回任意类型的值</li>
+<li>函数的参数与返回值没有任何必然、内在的联系</li>
+</ul>
+</li>
+<li>创建自定义函数<ul>
+<li><code>CREATE FUNCTION function_name RETURNS {STRING|INTEGER|REAL|DECIMAL} routine_body</code></li>
+<li>routine_body - 函数体<ul>
+<li>函数体由合法的 SQL 语句构成</li>
+<li>函数体可以是简单的 SELECT 或 INSERT 语句</li>
+<li>函数体如果为复合结构则使用 BEGIN…END 语句</li>
+<li>复合结构可以包含声明，循环，控制结构</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="7-3-创建不带参数的自定义函数"><a href="#7-3-创建不带参数的自定义函数" class="headerlink" title="7-3 创建不带参数的自定义函数"></a>7-3 创建不带参数的自定义函数</h3><ul>
+<li><code>create function f1() returns varchar(30) return date_format(now(),&#39;%Y年%m月%d %H:%i:%s&#39;);</code></li>
+<li>执行 <code>SELECT f1();</code>，输出 <code>2016年09月09 17:30:08</code></li>
+</ul>
+</li>
+<li><h3 id="7-4-创建带有参数的自定义函数"><a href="#7-4-创建带有参数的自定义函数" class="headerlink" title="7-4 创建带有参数的自定义函数"></a>7-4 创建带有参数的自定义函数</h3><ul>
+<li><code>create function f2(num1 smallint unsigned,num2 smallint unsigned) returns float(10,2) unsigned return (num1+num2)/2;</code></li>
+<li>执行 <code>SELECT f2(10,30);</code>，输出 <code>20.00</code></li>
+</ul>
+</li>
+<li><h3 id="7-5-创建具有复合结构函数体的自定义函数"><a href="#7-5-创建具有复合结构函数体的自定义函数" class="headerlink" title="7-5 创建具有复合结构函数体的自定义函数"></a>7-5 创建具有复合结构函数体的自定义函数</h3><ul>
+<li>重定义 SQL 语句结束分隔符 - <code>DELIMITER string</code></li>
+<li><code>create function adduser(username varchar(20)) returns int unsigned begin insert test(username) values(username); return last_insert_id(); end //</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="第-8-章-MySQL-存储过程"><a href="#第-8-章-MySQL-存储过程" class="headerlink" title="第 8 章 MySQL 存储过程"></a>第 8 章 MySQL 存储过程</h2><ul>
+<li>8-1 课程回顾<ul>
+<li>略</li>
+</ul>
+</li>
+<li>8-2 存储过程简介<ul>
+<li>SQL 命令执行过程<ul>
+<li>SQL 命令 &gt; MySQL 引擎 &gt; 分析语法 &gt; 可识别命令 &gt; 执行 &gt; 返回执行结果<ul>
+<li>存储过程的简介</li>
+</ul>
+</li>
+<li>存储过程是 SQL 语句和控制语句的预编译集合，以一个名称存储并作为一个单元处理<ul>
+<li>存储过程的有点</li>
+</ul>
+</li>
+<li>增强 SQL 语句的功能和灵活性</li>
+<li>实现较快的执行速度</li>
+<li>减少网络流量</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>8-3 存储过程语法结构解析<ul>
+<li>创建存储过程的语法结构<ul>
+<li><code>CREATE</code></li>
+<li><code>[DEFINER = {user | CURRENT_USER}]</code></li>
+<li><code>PROCEDURE sp_name([proc_parameter[,...]])</code></li>
+<li><code>[characteristic ...] routine_body</code></li>
+<li><code>proc_parameter:</code></li>
+<li><code>[IN | OUT | INOUT] param_name type</code></li>
+</ul>
+</li>
+<li>创建存储过程的参数含义<ul>
+<li>IN，表示该参数的值必须在调用存储过程时指定</li>
+<li>OUT，表示该参数的值可以被存储过程改变，并且可以返回</li>
+<li>INOUT，表示该参数在调用时指定，并且可以被改变和返回</li>
+</ul>
+</li>
+<li>创建存储过程的过程体<ul>
+<li>过程体由合法的 SQL 语句构成</li>
+<li>过程体可以是任意 SQL 语句</li>
+<li>过程体如果为复合结构则使用 BEGIN…END 语句</li>
+<li>复合结构可以包含声明，循环，控制结构</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>8-4 创建不带参数的存储过程<ul>
+<li>SQL 语句 - <code>CREATE PROCEDURE sp1() SELECT VERSION();</code></li>
+<li>调用 - <code>CALL sp1();</code> 或 <code>CALL sp1</code></li>
+</ul>
+</li>
+<li>8-5 创建带有IN类型参数的存储过程<ul>
+<li>SQL 语句 - <code>CREATE PROCEDURE removeUserById(IN user_id INT UNSIGNED) BEGIN DELETE FROM users WHERE id = user_id; END //</code></li>
+<li>调用 - <code>CALL removeUserById(22);</code></li>
+</ul>
+</li>
+<li>8-6 创建带有IN和OUT类型参数的存储过程<ul>
+<li>SQL 语句 - <code>CREATE PROCEDURE removeUserAndReturnUserNums(IN user_id INT UNSIGNED,OUT user_nums INT UNSIGNED) BEGIN DELETE FROM users WHERE id = user_id; SELECT cout(id) FROM users INTO user_nums; END //</code></li>
+<li>调用 - <code>CALL removeUserAndReturnUserNums(27,@user_nums); SELECT @user_nums</code></li>
+<li><code>@name</code> 声明用户变量，只能是当前用户使用</li>
+</ul>
+</li>
+<li>8-7 创建带有多个OUT类型参数的存储过程<ul>
+<li>SQL 语句 - <code>CREATE PROCEDURE removeUserByAgeAndReturnInfos(IN user_age SMALLINT UNSIGNED,OUT deleteUsers SMALLINT UNSIGNED,OUT user_counts SMALLINT UNSIGNED) BEGIN DELETE FROM users WHERE age = user_age; SELECT ROW_COUNT() INTO deleteUsers; SELECT COUNT(id) FROM users INTO user_counts; END //</code></li>
+<li>调用 - <code>CALL removeUserByAgeAndReturnInfos(20,@a,@b)</code></li>
+</ul>
+</li>
+<li>8-8 存储过程与自定义函数的区别<ul>
+<li>存储过程实现的功能要复杂一些；而函数的针对性更强</li>
+<li>存储过程可以返回多个值；函数只能有一个返回值</li>
+<li>存储过程一般都是独立执行；而函数可以作为其他 SQL 语句的组成部分来出现。</li>
+</ul>
+</li>
+</ul>
+<h2 id="第-9-章-MySQL-存储引擎"><a href="#第-9-章-MySQL-存储引擎" class="headerlink" title="第 9 章 MySQL 存储引擎"></a>第 9 章 MySQL 存储引擎</h2><ul>
+<li>9-1 课程回顾<ul>
+<li>略</li>
+</ul>
+</li>
+<li>9-2 存储引擎简介<ul>
+<li>简介：MySQL 可以将数据以不同的技术存储在文件（内存）中，这种技术就成为存储引擎。每一种存储引擎使用不同的存储机制、索引技巧、锁定水平，最终提供广泛且不同的功能。</li>
+<li>类型：<ul>
+<li>MyISAM</li>
+<li>InnoDB</li>
+<li>Memory</li>
+<li>CSV</li>
+<li>Archive</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>9-3 相关知识点之并发处理<ul>
+<li>并发控制：当多个连接对记录进行修改时保证数据的一致性和完整性</li>
+<li>锁<ul>
+<li>共享锁（读锁）：在同一时间段内，多个用户可以读取同一个资源，读取过程中数据不会发生任何变化。</li>
+<li>排它锁（写锁）：在任何时候只能有一个用户写入资源，当进行写锁时会阻塞其他的读锁或者写锁操作。</li>
+</ul>
+</li>
+<li>锁颗粒<ul>
+<li>表锁，是一种开销最小的锁策略</li>
+<li>行锁，是一种开销最大的锁策略</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>9-4 相关知识点之事务处理<ul>
+<li>事务<ul>
+<li>事务用于保证数据库的完整性</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>9-5 相关知识点之外键和索引<ul>
+<li>外键<ul>
+<li>外键是保证数据一致性的策略</li>
+</ul>
+</li>
+<li>索引<ul>
+<li>是对数据表中一列或多列的值进行排序的一种结构。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>9-6 各个存储引擎特点</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>特性/引擎</th>
+<th>MyISAM</th>
+<th>Aria</th>
+<th>InnoDB</th>
+<th>XtraDB</th>
+<th>Memory</th>
+<th>Archive</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据存储</td>
+<td>传统顺序数据储存</td>
+<td>传统顺序数据储存</td>
+<td>表空间存储方式</td>
+<td>表空间存储方式</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>事务支持</td>
+<td>不支持</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+<td>不支持</td>
+<td>不支持</td>
+<td></td>
+</tr>
+<tr>
+<td>外键</td>
+<td>不支持</td>
+<td>不支持</td>
+<td>支持</td>
+<td>支持</td>
+<td>不支持</td>
+<td>不支持</td>
+<td></td>
+</tr>
+<tr>
+<td>全文检索</td>
+<td>支持</td>
+<td>支持</td>
+<td>5.6 之后支持</td>
+<td>5.6 之后支持</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>锁级别</td>
+<td>表级锁</td>
+<td>表级锁</td>
+<td>行级锁</td>
+<td>行级锁</td>
+<td>表级锁</td>
+<td>行级锁</td>
+<td></td>
+</tr>
+<tr>
+<td>Count 速度</td>
+<td>快</td>
+<td>快</td>
+<td>慢</td>
+<td>慢</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>适合业务</td>
+<td>读多写少、单表数据量小于 1 KW</td>
+<td>读多写少、单表数据量小于 1 KW</td>
+<td>读写均衡、数据量不限</td>
+<td>读写均衡、数据量不限</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>可用版本</td>
+<td>MySQL、MariaDB、Percona</td>
+<td>MariaDB</td>
+<td>MySQL、MariaDB、Percona</td>
+<td>MariaDB、Percona</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>其他说明</td>
+<td>传统顺序索引数据库，适合读多写少小数据量业务</td>
+<td>MyISAM 增强版，性能更好</td>
+<td>适合高压力高性能的业务模型</td>
+<td>InnoDB 增强版</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>9-7 设置存储引擎<ul>
+<li>修改搜索引擎的方法，主要有两种：<ul>
+<li>通过修改 MySQL 配置文件实现：<code>default-storage-engine = engine</code></li>
+<li>通过创建数据表命令实现<ul>
+<li><code>CREATE TABLE table_name(...,...) ENGINE = engine;</code></li>
+</ul>
+</li>
+<li>通过修改数据表命令实现<ul>
+<li><code>ALTER TABLE table_name ENGINE [=] engine_name;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="第-10-章-MySQL-图形化管理工具"><a href="#第-10-章-MySQL-图形化管理工具" class="headerlink" title="第 10 章 MySQL 图形化管理工具"></a>第 10 章 MySQL 图形化管理工具</h2><ul>
+<li>10-1 课程介绍<ul>
+<li>PHPMyAdmin</li>
+<li>Navicat</li>
+<li>MySQL Workbench</li>
+</ul>
+</li>
+<li>10-2 管理工具之 phpMyAdmin</li>
+<li>10-3 管理工具之 Navicat for MySQL</li>
+<li>10-4 管理工具之 MySQL Workbench</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/09/与-MySQL-的零距离接触（二）/" data-id="cixwy9h9n001v6l4bid3v9kbg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-与-MySQL-的零距离接触（一）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/07/与-MySQL-的零距离接触（一）/" class="article-date">
+  <time datetime="2016-09-07T12:48:20.000Z" itemprop="datePublished">2016-09-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/07/与-MySQL-的零距离接触（一）/">与 MySQL 的零距离接触（一）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="第-1-章-初涉-MySQL"><a href="#第-1-章-初涉-MySQL" class="headerlink" title="第 1 章 初涉 MySQL"></a>第 1 章 初涉 MySQL</h2><ul>
+<li><h3 id="1-1-MySQL概述"><a href="#1-1-MySQL概述" class="headerlink" title="1-1 MySQL概述"></a>1-1 MySQL概述</h3><ul>
+<li>MySQL 是由瑞典 MySQL AB 公司开发的，目前被 Oracle 公司收购了</li>
+<li>MySQL 是一款开源的关系型数据库管理系统</li>
+<li>MySQL 分为社区版和企业版</li>
+</ul>
+</li>
+<li><h3 id="1-2-MySQL的安装与配置"><a href="#1-2-MySQL的安装与配置" class="headerlink" title="1-2 MySQL的安装与配置"></a>1-2 MySQL的安装与配置</h3><ul>
+<li>Mac OS 使用 HomeBrew 安装：<code>brew install mysql</code></li>
+<li>MySQL 目录结构：<ul>
+<li>bin - 存储可执行文件</li>
+<li>lib - 存储库文件</li>
+<li>share - 存储错误消息和字符集文件</li>
+<li>scripts - 存储脚本文件</li>
+<li>include - 存储包含的头文件</li>
+<li>mysql-test</li>
+<li>support-files</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="1-3-启动与停止MySQL服务"><a href="#1-3-启动与停止MySQL服务" class="headerlink" title="1-3 启动与停止MySQL服务"></a>1-3 启动与停止MySQL服务</h3><ul>
+<li>启动 MySQL 服务：<code>launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist&quot;</code></li>
+<li>停止 MySQL 服务：<code>launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist&quot;</code></li>
+</ul>
+</li>
+<li><h3 id="1-4-登录与退出"><a href="#1-4-登录与退出" class="headerlink" title="1-4 登录与退出"></a>1-4 登录与退出</h3><ul>
+<li>登录<ul>
+<li><code>mysql</code> 命令<ul>
+<li>-D, –database=[name] : 指定数据库</li>
+<li>-P, –port=[number] ： 指定端口号</li>
+<li>-u, –user=[name] ： 指定登录用户</li>
+<li>-h, –host=[name] ： 指定服务器</li>
+<li>-p, –password ： 密码</li>
+<li>-V, –version ：查看版本</li>
+<li>–delimiter=[name] ： 指定分隔符</li>
+<li>–prompt=[name] ： 设置提示符</li>
+</ul>
+</li>
+<li><code>mysql</code> 命令例子<ul>
+<li><code>mysql -uroot -p</code></li>
+<li><code>mysql --version</code></li>
+<li><code>mysql -uroot -P6606 -p</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>退出<ul>
+<li><code>mysql</code> CLI 环境中输入<ul>
+<li>exit;</li>
+<li>quit:</li>
+<li>\q;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="1-5-修改MySQL提示符"><a href="#1-5-修改MySQL提示符" class="headerlink" title="1-5 修改MySQL提示符"></a>1-5 修改MySQL提示符</h3><ul>
+<li>连接客户端时通过参数指定：<code>shell&gt;mysql -uroot -proot --prompt 提示符</code></li>
+<li>连接上客户端后，通过设置 prompt 提示符指定：<code>prompt 提示符</code></li>
+<li><code>prompt</code> 提示符参数：<ul>
+<li>\D 完整的日期</li>
+<li>\d 当前数据库</li>
+<li>\h 服务器名称</li>
+<li>\u 当前用户</li>
+</ul>
+</li>
+<li><code>prompt</code> 提示符参数用法：<code>prompt \h-\u-\p-\D</code></li>
+</ul>
+</li>
+<li><h3 id="1-6-MySQL-常用命令以及语法规范"><a href="#1-6-MySQL-常用命令以及语法规范" class="headerlink" title="1-6 MySQL 常用命令以及语法规范"></a>1-6 MySQL 常用命令以及语法规范</h3><ul>
+<li>常用命令：<ul>
+<li>查看数据库版本 - <code>SELECT VERSION();</code></li>
+<li>查看数据库当前时间 - <code>SELECT NEW();</code></li>
+<li>查看数据库当前用户 - <code>SELECT USER();</code></li>
+<li>查看数据库列表 - <code>SHOW DATABASES;</code></li>
+<li>查看警告日志 - <code>SHOW WARINGS;</code></li>
+</ul>
+</li>
+<li>语法规范：<ul>
+<li>关键字与函数名称全部大写</li>
+<li>数据库名称、表名称、字段名称全部小写</li>
+<li>SQL 语句必须以分号结尾</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="1-7-操作数据库"><a href="#1-7-操作数据库" class="headerlink" title="1-7 操作数据库"></a>1-7 操作数据库</h3><ul>
+<li><p>创建数据库 - <code>CREATE {DATABASE | SCHEMA} [IF NOT EXISTS] db_name [DEFAULT] CHARACTER SET [=] charset_name;</code></p>
+</li>
+<li><p>修改数据库 - <code>ALTER {DATABASE | SCHEMA} [db_name] [DEFAULT] CHARACTER SET [=] charset_name;</code></p>
+</li>
+<li><p>删除数据库 - <code>DROP {DATABASE | SCHEMA} [IF EXISTS] db_name</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="第-2-章-数据类型与操作数据表"><a href="#第-2-章-数据类型与操作数据表" class="headerlink" title="第 2 章 数据类型与操作数据表"></a>第 2 章 数据类型与操作数据表</h2><ul>
+<li><h3 id="2-1-内容回顾"><a href="#2-1-内容回顾" class="headerlink" title="2-1 内容回顾"></a>2-1 内容回顾</h3><ul>
+<li>略</li>
+</ul>
+</li>
+<li><h3 id="2-2-数据类型之整型"><a href="#2-2-数据类型之整型" class="headerlink" title="2-2 数据类型之整型"></a>2-2 数据类型之整型</h3><ul>
+<li>数据类型的概念：数据类型是指列、存储过程参数、表达式和局部变量的数据特征，它决定了数据的存储格式，代表了不同的信息类型。</li>
+<li>整型类型：<ul>
+<li><code>TINYINT</code><ul>
+<li>有符号值：-128 ~ 127 （- 2）</li>
+<li>无符号值：0 ~ 255</li>
+<li>字节：1</li>
+</ul>
+</li>
+<li><code>SMALLINT</code><ul>
+<li>有符号值：-32768 ~ 32767</li>
+<li>无符号值：0 ~ 65535</li>
+<li>字节：2</li>
+</ul>
+</li>
+<li><code>MEDIUMINT</code><ul>
+<li>有符号值：-8388608 ~ 8388607</li>
+<li>无符号值：0 ~ 16777215</li>
+<li>字节：3</li>
+</ul>
+</li>
+<li><code>INT</code><ul>
+<li>有符号值：-2147483648 ~ 2147483647</li>
+<li>无符号值：0 ~ 4294967295</li>
+<li>字节：4</li>
+</ul>
+</li>
+<li><code>BIGINT</code><ul>
+<li>有符号值：-9223372036854775808 ~ 9223372036854775807</li>
+<li>无符号值：0 ~ 18446744073709551615</li>
+<li>字节：8</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="2-3-数据类型之浮点型"><a href="#2-3-数据类型之浮点型" class="headerlink" title="2-3 数据类型之浮点型"></a>2-3 数据类型之浮点型</h3><ul>
+<li><code>FLOAT</code> [(M,D)]：M 是数字总位数，D 是小数点后面的位数。如果 M 和 D 被省略，根据硬件允许的限制来保存值。单精度浮点数精确到大约 7 位小数位。</li>
+<li><code>DOUBLE</code> [(M,D)]</li>
+</ul>
+</li>
+<li><h3 id="2-4-数据类型之日期时间型"><a href="#2-4-数据类型之日期时间型" class="headerlink" title="2-4 数据类型之日期时间型"></a>2-4 数据类型之日期时间型</h3><ul>
+<li><code>YEAR</code></li>
+<li><code>TIME</code></li>
+<li><code>DATE</code></li>
+<li><code>DATETIME</code></li>
+<li><code>TIMESTAMP</code></li>
+</ul>
+</li>
+<li><h3 id="2-5-数据类型之字符型"><a href="#2-5-数据类型之字符型" class="headerlink" title="2-5 数据类型之字符型"></a>2-5 数据类型之字符型</h3><ul>
+<li><code>CHAR</code>：M 个字节，0 &lt;= M &lt;= 255</li>
+<li><code>VARCHAR</code>：L + 1 个字节，其中 L &lt;= M 且 0 &lt;= M &lt;= 65535</li>
+<li><code>TINYTEXT</code>：L + 1 个字节，其中 L &lt; 2^8</li>
+<li><code>TEXT</code>：L + 2 个字节，其中 L &lt; 2^16</li>
+<li><code>MEDIUMTEXT</code>：L + 3 个字节，其中 L &lt; 2^24</li>
+<li><code>LONGTEXT</code>：L + 4 个字节，其中 L &lt; 2^32</li>
+<li><code>ENUM</code>(‘value1’,’value2’,…)：1 或 2 个字节，取决于枚举值的个数（最多 65535 个值）</li>
+<li><code>SET</code>(‘value1’,’value2’,…)：1、2、3、4 或者 8 个字节，取决于 set 成员的数目（最多64个）</li>
+</ul>
+</li>
+<li><h3 id="2-6-创建数据表"><a href="#2-6-创建数据表" class="headerlink" title="2-6 创建数据表"></a>2-6 创建数据表</h3><ul>
+<li>数据表概念：数据表是数据库最重要的组成部分一直，是其他对象的基础。</li>
+<li>选择数据库 - <code>use {database}</code></li>
+<li>创建数据表 - <code>CREATE TABLE [IF NOT EXISTS] table_name(column_name data_type,....)</code></li>
+</ul>
+</li>
+<li><h3 id="2-7-查看数据表："><a href="#2-7-查看数据表：" class="headerlink" title="2-7 查看数据表："></a>2-7 查看数据表：</h3><ul>
+<li><code>SHOW TABLES [FROM db_name] [LIKE &#39;pattern&#39;|WHERE expr]</code></li>
+</ul>
+</li>
+<li><h3 id="2-8-查看数据表结构："><a href="#2-8-查看数据表结构：" class="headerlink" title="2-8 查看数据表结构："></a>2-8 查看数据表结构：</h3><ul>
+<li><code>SHOW COLUMNS FROM tbl_name</code></li>
+</ul>
+</li>
+<li><h3 id="2-9-记录的插入与查找："><a href="#2-9-记录的插入与查找：" class="headerlink" title="2-9 记录的插入与查找："></a>2-9 记录的插入与查找：</h3><ul>
+<li>插入：<code>INSERT [INTO] tal_name[(col_name)VALUES(val,..)]</code></li>
+<li>插入省略字段需要为所有字段都要赋值，否则数据库报错</li>
+<li>查找：<code>SELECT expr,... FROM tbl_name</code></li>
+</ul>
+</li>
+<li><h3 id="2-10-空值与非空"><a href="#2-10-空值与非空" class="headerlink" title="2-10 空值与非空"></a>2-10 空值与非空</h3><ul>
+<li><code>NULL</code>，字段值可以为空</li>
+<li><code>NOT NULL</code>，字段值禁止为空</li>
+</ul>
+</li>
+<li><h3 id="2-11-自动编号"><a href="#2-11-自动编号" class="headerlink" title="2-11 自动编号"></a>2-11 自动编号</h3><ul>
+<li><code>AUTO_INCREMENT</code>，自动编号，且必须与主键组合使用</li>
+<li>默认情况下，起始值为 1，每次的增量为 1</li>
+</ul>
+</li>
+<li><h3 id="2-12-初涉主键约束"><a href="#2-12-初涉主键约束" class="headerlink" title="2-12 初涉主键约束"></a>2-12 初涉主键约束</h3><ul>
+<li><code>PRIMARY KEY</code><ul>
+<li>主键约束</li>
+<li>主键自动为 NOT NULL</li>
+<li>主键保证记录的唯一性</li>
+<li>每张数据表只能存在一个主键</li>
+<li><code>AUTO_INCREMENT</code> 必须和 <code>PRIMARY KEY</code> 一起使用，<code>PRIMARY KEY</code>  不必须和 <code>AUTO_INCREMENT</code> 一起使用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="2-13-初涉唯一约束"><a href="#2-13-初涉唯一约束" class="headerlink" title="2-13 初涉唯一约束"></a>2-13 初涉唯一约束</h3><ul>
+<li><code>UNIQUE KEY</code><ul>
+<li>唯一约束</li>
+<li>唯约束可以保证记录的唯一性</li>
+<li>唯一约束的字段可以为空值（NULL）</li>
+<li>每张数据表可以存在多个唯一索引</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="2-14-初涉默认约束"><a href="#2-14-初涉默认约束" class="headerlink" title="2-14 初涉默认约束"></a>2-14 初涉默认约束</h3><ul>
+<li><code>DEFAULT</code><ul>
+<li>默认值</li>
+<li>当插入记录时，如果没有明确为字段赋值，则自动赋予默认值</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="第-3-章-约束以及修改数据表"><a href="#第-3-章-约束以及修改数据表" class="headerlink" title="第 3 章 约束以及修改数据表"></a>第 3 章 约束以及修改数据表</h2><ul>
+<li><h3 id="3-1-回顾和概述"><a href="#3-1-回顾和概述" class="headerlink" title="3-1 回顾和概述"></a>3-1 回顾和概述</h3><ul>
+<li>略</li>
+</ul>
+</li>
+<li><h3 id="3-2-外键约束的要求解析"><a href="#3-2-外键约束的要求解析" class="headerlink" title="3-2 外键约束的要求解析"></a>3-2 外键约束的要求解析</h3><ul>
+<li>约束<ul>
+<li>约束保证数据的完整性和一致性</li>
+<li>约束分为表级约束和列级约束</li>
+<li>约束类型：<ul>
+<li><code>DEFAULT</code>（默认约束）</li>
+<li><code>NOT NULL</code>（非空约束）</li>
+<li><code>UNIQUE KEY</code>（唯一约束）</li>
+<li><code>PRIMARY KEY</code>（主键约束）</li>
+<li><code>FOREIGN KEY</code>（外键约束）</li>
+</ul>
+</li>
+<li>FOREIGN KEY - 外键约束<ul>
+<li>保持数据一致性，完整性</li>
+<li>实现一对一或一对多关系</li>
+</ul>
+</li>
+<li>使用外键约束的要求<ul>
+<li>父表和子表必须使用相同的存储引擎，而且禁止使用临时表</li>
+<li>数据表的存储引擎只能为 InnoDB</li>
+<li>外键列和参照列必须具有相似的数据类型。其中数字的长度或是是否有符号位必须相同；而字符的长度则可以不同</li>
+<li>外键列和参照列必须创建索引，如果参照列不存在索引的话，MySQL 将自动创建索引</li>
+</ul>
+</li>
+<li>编辑数据表的默认存储引擎：<code>default-storage-engine=INNODB</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="3-3-外键约束的参照操作"><a href="#3-3-外键约束的参照操作" class="headerlink" title="3-3 外键约束的参照操作"></a>3-3 外键约束的参照操作</h3><ul>
+<li><code>CASCADE</code>：从父表删除或更新且自动删除或更新子表中匹配的行</li>
+<li><code>SET NULL</code>：从父表删除或更新行，并设置子表中的外键列为 NULL。如果使用该选项，必须保证子表列没有指定 NOT NULL</li>
+<li><code>RESTRICT</code>：拒绝对父表的删除或更新操作</li>
+<li><code>NO ACTION</code>：标准 SQL 的关键字，在 MySQL 中与 RESTRICE 相同</li>
+</ul>
+</li>
+<li><h3 id="3-4-表级约束与列级约束"><a href="#3-4-表级约束与列级约束" class="headerlink" title="3-4 表级约束与列级约束"></a>3-4 表级约束与列级约束</h3><ul>
+<li>对一个数据列建立的约束，称为列级约束</li>
+<li>对多个数据列建立的约束，称为表级约束</li>
+<li>列级约束既可以在列定义时声明，也可以在列定义后声明</li>
+<li>表级约束只能在列定义后声明</li>
+</ul>
+</li>
+<li><h3 id="3-5-修改数据表-添加-删除列"><a href="#3-5-修改数据表-添加-删除列" class="headerlink" title="3-5 修改数据表-添加/删除列"></a>3-5 修改数据表-添加/删除列</h3><ul>
+<li>添加单列：<code>ALTER TABLE tbl_name ADD [COLUMN] col_name column_definition [FIRST | AFTER col_name]</code></li>
+<li>添加多列：<code>ALTER TABLE tbl_name ADD [COLUMN] (col_name column_definition,...)</code></li>
+<li>删除单列：<code>ALTER TABLE tbl_name DROP [COLUMN] col_name</code></li>
+</ul>
+</li>
+<li><h3 id="3-6-修改数据表–添加约束"><a href="#3-6-修改数据表–添加约束" class="headerlink" title="3-6 修改数据表–添加约束"></a>3-6 修改数据表–添加约束</h3><ul>
+<li>添加主键约束：<code>ALTER TABLE tbl_name ADD [CONSTRAINT [symbol]] PRIMARY KEY [index_type](index_col_name,...)</code></li>
+<li>添加唯一约束：<code>ALTER TABLE tbl_name ADD [CONSTRAINT [symbol]] UNIQUE [INDEX|KEY][index_name][index_type](index_col_name,...)</code></li>
+<li>添加外键约束：<code>ALTER TABLE tbl_name ADD [CONSTRAINT [symbol]] FOREIGN KEY [index_name](index_col_name,...) reference_definition</code></li>
+<li>添加/删除默认约束：<code>ALTER TABLE tbl_name ALTER [COLUMN] col_name {SET DEFAULT literal | DROP DEFAULT}</code></li>
+</ul>
+</li>
+<li><h3 id="3-7-修改数据表–删除约束"><a href="#3-7-修改数据表–删除约束" class="headerlink" title="3-7 修改数据表–删除约束"></a>3-7 修改数据表–删除约束</h3><ul>
+<li>删除主键约束：<code>ALTER TABLE tbl_name DROP PRIMARY KEY</code></li>
+<li>删除唯一约束：<code>ALTER TABLE tbl_name DROP {INDEX | KEY} index_name</code></li>
+<li>删除外键约束：<code>ALTER TABLE tbl_name DROP FOREIGN KEY fk_symbol</code></li>
+</ul>
+</li>
+<li><h3 id="3-8-修改数据表–修改列定义和更名数据表"><a href="#3-8-修改数据表–修改列定义和更名数据表" class="headerlink" title="3-8 修改数据表–修改列定义和更名数据表"></a>3-8 修改数据表–修改列定义和更名数据表</h3><ul>
+<li>修改表名称<ul>
+<li><code>ALTER TABLE tbl_name RENAME [TO|AS] new_tbl_name</code></li>
+<li><code>RENAME TABLE tbl_name TO new_tbl_name [,tbl_name2 To ewn_tbl_name2,...]</code></li>
+</ul>
+</li>
+<li>修改列定义：<code>ALTER TABLE tbl_name MODIFY [COLUMN] col_name column_definition [FIRST | AFTER col_name]</code></li>
+<li>修改列名称：<code>ALTER TABLE tbl_name CHANGE [COLUMN] old_col_name new_col_name column_definition [FIRST|AFTER col_name]</code></li>
+</ul>
+</li>
+<li><h3 id="3-9-小结"><a href="#3-9-小结" class="headerlink" title="3-9 小结"></a>3-9 小结</h3><ul>
+<li>约束<ul>
+<li>功能<ul>
+<li><code>NOT NULL</code>（非空约束）</li>
+<li><code>PRIMARY KEY</code>（主键约束）</li>
+<li><code>UNIQUE KEY</code>（唯一约束）</li>
+<li><code>DEFAULT</code>（默认约束）</li>
+<li><code>FOREIGN KEY</code>（外键约束）</li>
+</ul>
+</li>
+<li>数据列的数目<ul>
+<li>表级约束</li>
+<li>列级约束</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>修改数据表<ul>
+<li>针对字段的操作：添加 / 删除字段、修改列定义，修改列名称等</li>
+<li>针对约束的操作：添加 / 删除各种约束</li>
+<li>针对数据表的操作：数据表更名（两种方式）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="第-4-章-操作数据表中的记录"><a href="#第-4-章-操作数据表中的记录" class="headerlink" title="第 4 章 操作数据表中的记录"></a>第 4 章 操作数据表中的记录</h2><ul>
+<li><h3 id="4-1-回顾和概述"><a href="#4-1-回顾和概述" class="headerlink" title="4-1 回顾和概述"></a>4-1 回顾和概述</h3><ul>
+<li>略</li>
+</ul>
+</li>
+<li><h3 id="4-2-插入记录-INSERT"><a href="#4-2-插入记录-INSERT" class="headerlink" title="4-2 插入记录 INSERT"></a>4-2 插入记录 <code>INSERT</code></h3><ul>
+<li>INSERT<ul>
+<li><code>INSERT [INFO] tbl_name [(col_name,...)] {VALUES | VALUE}({expr|DEFAULT},...),(...)</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="4-3-插入记录-INSERT-SET-SELECT"><a href="#4-3-插入记录-INSERT-SET-SELECT" class="headerlink" title="4-3 插入记录 INSERT SET-SELECT"></a>4-3 插入记录 <code>INSERT SET-SELECT</code></h3><ul>
+<li>INSERT SET 与 INSERT 的区别在于，此方法可以使用子查询（SubQuery）<ul>
+<li><code>INSERT [INTO] tbl_name SET col_name={expr | DEFAULT},...</code></li>
+</ul>
+</li>
+<li>INSERT SELECT 与 INSERT 的区别在于，此方法可以将查询结果插入到指定数据表<ul>
+<li><code>INSERT [INTO] tbl_name [(col_name,...)] SELECT ...</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="4-4-单表更新记录-UPDATE"><a href="#4-4-单表更新记录-UPDATE" class="headerlink" title="4-4 单表更新记录 UPDATE"></a>4-4 单表更新记录 UPDATE</h3><ul>
+<li><code>UPDATE</code><ul>
+<li><code>UPDATE [LOW_PRIORITY] [IGNORE] table_reference SET col_name1={expr | DEFAULT}[,col_name2={expr2|DEFAULT}]...[WHERE where_condition]</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="4-5-单表删除记录-DELETE"><a href="#4-5-单表删除记录-DELETE" class="headerlink" title="4-5 单表删除记录 DELETE"></a>4-5 单表删除记录 DELETE</h3><ul>
+<li><code>DELETE</code><ul>
+<li><code>DELETE FROM tbl_name [WHERE where_condition]</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="4-6-查询表达式解析"><a href="#4-6-查询表达式解析" class="headerlink" title="4-6 查询表达式解析"></a>4-6 查询表达式解析</h3><ul>
+<li><code>SELECT</code><ul>
+<li><code>SELECT select_expr[,select_expr ...]</code></li>
+<li><code>[</code><ul>
+<li><code>FROM table_references</code></li>
+<li><code>[WHERE where_condition]</code></li>
+<li><code>[GROUP BY {col_name | position} [ASC | DESC], ...]</code></li>
+<li><code>[HAVING where_condition]</code></li>
+<li><code>[ORDER BY {col_name | expr | position} [ASC | DESC],...]</code></li>
+<li><code>[LIMIT {[offset,] row_count | row_count OFFSET offset}]</code></li>
+</ul>
+</li>
+<li><code>]</code></li>
+</ul>
+</li>
+<li>select_expr - 查询表达式<ul>
+<li>每一个表达式表示想要的一列，必须有至少一个。</li>
+<li>多个列之间以英文逗号分隔</li>
+<li>星号（<em>）表示所有列。tbl_name.</em> 可以表示命名表的所有列</li>
+<li>查询表达式可以使用 <code>[ AS ]</code> alias_name 为其赋予别名</li>
+<li>别名可用于 <code>GROUP BY</code>，<code>ORDER BY</code> 或 <code>HAVING</code> 子句</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="4-7-WHERE-语句进行条件查询"><a href="#4-7-WHERE-语句进行条件查询" class="headerlink" title="4-7 WHERE 语句进行条件查询"></a>4-7 <code>WHERE</code> 语句进行条件查询</h3><ul>
+<li><code>WHERE</code> - 条件表达式<ul>
+<li>对记录进行过滤，如果没有指定 <code>WHERE</code> 子句，则显示所有记录</li>
+<li>在 <code>WHERE</code> 表达式中，可以使用 MySQL 支持的函数或者运算符</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="4-8-GROUP-BY-语句对查询结果分组"><a href="#4-8-GROUP-BY-语句对查询结果分组" class="headerlink" title="4-8 GROUP BY 语句对查询结果分组"></a>4-8 <code>GROUP BY</code> 语句对查询结果分组</h3><ul>
+<li><code>[GROUP BY {col_name | position} [ASC | DESC], ...]</code></li>
+</ul>
+</li>
+<li><h3 id="4-9-HAVING-语句设置分组条件"><a href="#4-9-HAVING-语句设置分组条件" class="headerlink" title="4-9 HAVING 语句设置分组条件"></a>4-9 <code>HAVING</code> 语句设置分组条件</h3><ul>
+<li><code>[HAVING where_condition]</code></li>
+<li>请使用聚合函数或 select_column，否则报错</li>
+</ul>
+</li>
+<li><h3 id="4-10-ORDER-BY-语句对查询结果排序"><a href="#4-10-ORDER-BY-语句对查询结果排序" class="headerlink" title="4-10 ORDER BY 语句对查询结果排序"></a>4-10 <code>ORDER BY</code> 语句对查询结果排序</h3><ul>
+<li><code>[ORDER BY {col_name | expr | position} [ASC | DESC],...]</code></li>
+</ul>
+</li>
+<li><h3 id="4-11-LIMIT-语句限制查询数量"><a href="#4-11-LIMIT-语句限制查询数量" class="headerlink" title="4-11 LIMIT 语句限制查询数量"></a>4-11 <code>LIMIT</code> 语句限制查询数量</h3><ul>
+<li><code>[LIMIT {[offset,] row_count | row_count OFFSET offset}]</code></li>
+<li>想要获取第三、第四条记录，写法是 <code>LIMIT 2 OFFSET 2</code></li>
+</ul>
+</li>
+<li><h3 id="4-12-小结"><a href="#4-12-小结" class="headerlink" title="4-12 小结"></a>4-12 小结</h3><ul>
+<li>略</li>
+</ul>
+</li>
+</ul>
+<h2 id="第-5-章-子查询与连接"><a href="#第-5-章-子查询与连接" class="headerlink" title="第 5 章 子查询与连接"></a>第 5 章 子查询与连接</h2><ul>
+<li><h3 id="5-1-数据准备"><a href="#5-1-数据准备" class="headerlink" title="5-1 数据准备"></a>5-1 数据准备</h3><ul>
+<li>数据可以在「资料下载」栏目中获取</li>
+</ul>
+</li>
+<li><h3 id="5-2-子查询简介"><a href="#5-2-子查询简介" class="headerlink" title="5-2 子查询简介"></a>5-2 子查询简介</h3><ul>
+<li>简介<ul>
+<li>子查询（Subquery）是指出现在其他 SQL 语句内的 SELECT 子句</li>
+<li>子查询指嵌套在查询内部，且必须始终出现在圆括号内</li>
+<li>子查询可以包含多个关键字或条件，如 DISTINCT、GROUP BY、ORDER BY、LIMIT、函数等</li>
+<li>子查询的外层查询可以：SELECT、INSERT、UPDATE、SET、DO 等</li>
+<li>子查询可以返回标量、一行、一列或子查询</li>
+</ul>
+</li>
+<li>例子<ul>
+<li><code>SELECT * FROM t1 WHERE col1 = (SELECT col2 FROM t2)</code>;<ul>
+<li>其中 <code>SELECT * FROM t1</code>，称为 Outer Query / Outer Statement</li>
+<li><code>SELECT col2 FROM t2</code>，称为 SubQuery</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="5-3-由比较运算符引发的子查询"><a href="#5-3-由比较运算符引发的子查询" class="headerlink" title="5-3 由比较运算符引发的子查询"></a>5-3 由比较运算符引发的子查询</h3><ul>
+<li>使用比较运算符的子查询：=，&gt;，&lt;，&gt;=，&lt;=，&lt;&gt;，!=，&lt;=&gt;</li>
+<li>语法结构：operand comparison_operator subquery</li>
+<li>比较运算符<ul>
+<li>operand comparison_operator ANY(subquery)<ul>
+<li>>、&gt;= 最小值</li>
+<li>&lt;、&lt;= 最大值</li>
+<li>=     任意值</li>
+<li>&lt;&gt;、!=</li>
+</ul>
+</li>
+<li>operand comparison_operator ALL(subquery)<ul>
+<li>>、&gt;= 最大值</li>
+<li>&lt;、&lt;= 最小值</li>
+<li>=</li>
+<li>&lt;&gt;、!=    任意值</li>
+</ul>
+</li>
+<li>operand comparison_operator SOME(subquery)<ul>
+<li>>、&gt;= 最小值</li>
+<li>&lt;、&lt;= 最大值</li>
+<li>=     任意值</li>
+<li>&lt;&gt;、!=</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="5-4-由-NOT-IN-EXISTS引发的子查询"><a href="#5-4-由-NOT-IN-EXISTS引发的子查询" class="headerlink" title="5-4 由[NOT] IN/EXISTS引发的子查询"></a>5-4 由[NOT] IN/EXISTS引发的子查询</h3><ul>
+<li>语法结构：operand comparison_operator [NOT] IN (subquery)<ul>
+<li>=ANY 运算符与 IN 等效</li>
+<li>!=ALL 或 &lt;&gt;ALL 运算符与 NOT IN 等效</li>
+</ul>
+</li>
+<li>语法结构：operand comparison_operator [NOT] EXISTS<ul>
+<li>如果子查询返回任何行，EXISTE 将返回 TRUE，否则为 FALSE</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="5-5-使用INSERT…SELECT插入记录"><a href="#5-5-使用INSERT…SELECT插入记录" class="headerlink" title="5-5 使用INSERT…SELECT插入记录"></a>5-5 使用INSERT…SELECT插入记录</h3><ul>
+<li>INSERT..SELECT<ul>
+<li>将查询结果写入数据表：<code>INSERT [INTO] tbl_name [(col_name)] SELECT...</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="5-6-多表更新"><a href="#5-6-多表更新" class="headerlink" title="5-6 多表更新"></a>5-6 多表更新</h3><ul>
+<li><code>UPDATE table_references</code></li>
+<li><code>SET col_name1={expr1|DEFAULT}</code></li>
+<li><code>[,col_name2={expr2|DEFAULT}]</code></li>
+<li><code>[WHERE where_condition]</code></li>
+</ul>
+</li>
+<li><h3 id="5-7-多表更新之一步到位"><a href="#5-7-多表更新之一步到位" class="headerlink" title="5-7 多表更新之一步到位"></a>5-7 多表更新之一步到位</h3><ul>
+<li>CREATE…SELECT<ul>
+<li>创建数据表同时将查询结果写入到数据表：<code>CREATE TABLE [IF NOT EXISTS] tbl_name [(create_definition,...)] select_statement</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="5-8-连接的语法结构"><a href="#5-8-连接的语法结构" class="headerlink" title="5-8 连接的语法结构"></a>5-8 连接的语法结构</h3><ul>
+<li>连接<ul>
+<li>MySQL 在 SELECT 语句、多表更新、多表删除语句中支持 JOIN 操作</li>
+<li>语法结构<ul>
+<li><code>table_reference</code> - 数据表参照<ul>
+<li><code>tbl_name [[AS] alias] | table_subquery [AS] alias</code><ul>
+<li>数据表可以使用 tbl_name As alias_name 或 tbl_name alias_name 赋予别名</li>
+<li>table_subquery 可以作为子查询使用在 FROM 子句中，这样的子查询必须为其赋予别名</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>{[INNER | CROSS] JOIN | {LEFT | RIGHT} [OUTER] JOIN}</code></li>
+<li><code>table_reference</code></li>
+<li><code>ON conditional_expr</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="5-9-内连接-INNER-JOIN"><a href="#5-9-内连接-INNER-JOIN" class="headerlink" title="5-9 内连接 INNER JOIN"></a>5-9 内连接 INNER JOIN</h3></li>
+<li><h3 id="5-10-外连接-OUTER-JOIN"><a href="#5-10-外连接-OUTER-JOIN" class="headerlink" title="5-10 外连接 OUTER JOIN"></a>5-10 外连接 OUTER JOIN</h3><ul>
+<li>LEFT JOIN</li>
+<li>RIGHT JOIN</li>
+</ul>
+</li>
+<li><h3 id="5-11-多表连接"><a href="#5-11-多表连接" class="headerlink" title="5-11 多表连接"></a>5-11 多表连接</h3><ul>
+<li>略</li>
+</ul>
+</li>
+<li><h3 id="5-12-关于连接的几点说明"><a href="#5-12-关于连接的几点说明" class="headerlink" title="5-12 关于连接的几点说明"></a>5-12 关于连接的几点说明</h3><ul>
+<li>外连接<ul>
+<li>A LEFT JOIN B join_condtion<ul>
+<li>数据表 B 的结果集依赖数据表 A</li>
+<li>数据表 A 的结果集根据左连接条件依赖所有数据表</li>
+<li>左外连接条件决定如何检索数据表 B</li>
+<li>如果数据表 A 的某条记录符合 WHERE 条件，但是在数据表 B 不存在，符合连接条件的记录，将生成一个所有列为空的额外的行</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="5-13-无限级分类表设计"><a href="#5-13-无限级分类表设计" class="headerlink" title="5-13 无限级分类表设计"></a>5-13 无限级分类表设计</h3><ul>
+<li>略</li>
+</ul>
+</li>
+<li><h3 id="5-14-多表删除"><a href="#5-14-多表删除" class="headerlink" title="5-14 多表删除"></a>5-14 多表删除</h3><ul>
+<li><code>DELETE tbl_name[.*] [,tbl_name[.*]] ... FROM table_references [WHERE where_condition]</code></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/07/与-MySQL-的零距离接触（一）/" data-id="cixwy9h9e001s6l4bq236ugfp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-复习使用-MySQL（三）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/04/复习使用-MySQL（三）/" class="article-date">
+  <time datetime="2016-09-04T13:08:24.000Z" itemprop="datePublished">2016-09-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/04/复习使用-MySQL（三）/">复习使用 MySQL（三）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
+<li>MySQL 5.7.13</li>
+</ul>
+<h2 id="MySQL-优化：硬件"><a href="#MySQL-优化：硬件" class="headerlink" title="MySQL 优化：硬件"></a>MySQL 优化：硬件</h2><ul>
+<li>CPU：使用多核 CPU，能够充分发挥新版 MySQL 多核下的效果，建议 4 核以上</li>
+<li>内存：如果数据量比较大，建议使用不要低于 20 G 内存的服务器</li>
+<li>硬盘：SSD 硬盘，提高 TPS，选择适合的 RAID 方案</li>
+<li>网卡：保证足够的吞吐量，建议千兆网卡</li>
+</ul>
+<h2 id="MySQL-优化：软件"><a href="#MySQL-优化：软件" class="headerlink" title="MySQL 优化：软件"></a>MySQL 优化：软件</h2><ul>
+<li>OS 类型<ul>
+<li>Linux</li>
+<li>FreeBSD</li>
+</ul>
+</li>
+<li>Linux 关键配置<ul>
+<li>文件打开描述符：/etc/security/limits.conf 中 nofile、/proc/sys/fs/nr_open</li>
+<li>可分配文件句柄数：/etc/sysctl.conf 中 fs.file-max、/proc/sys/fs/file-max</li>
+<li>进程数：/etc/security/limits.conf 中的 nproc</li>
+<li>线程数：/proc/sys/kernel/thread-max</li>
+<li>其他 TCP 和网络相关选项：/etc/sysctl.conf</li>
+<li>这些都可以通过ulimit 或 直接调整 /proc 中变量进行临时修改</li>
+<li>建议关闭 SWAP 分区（内存要足够大才行）；如果数据太大，为了防止夯死主机，可以设置 2G 左右的 SWAP 分区</li>
+</ul>
+</li>
+</ul>
+<h2 id="MySQL-优化：基础配置"><a href="#MySQL-优化：基础配置" class="headerlink" title="MySQL 优化：基础配置"></a>MySQL 优化：基础配置</h2><p>基础配置 &amp; MyISAM 配置<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">max_connections=<span class="number">3000</span></div><div class="line">max_user_connections=<span class="number">2800</span></div><div class="line">max_connect_errors=<span class="number">10</span></div><div class="line">max_allowed_packet=<span class="number">64</span>M</div><div class="line">max_heap_table_size=<span class="number">512</span>M</div><div class="line">tmp_table_size=<span class="number">512</span>M</div><div class="line">max_length_for_sort_data=<span class="number">16</span>k</div><div class="line">wait_timeout=<span class="number">172800</span></div><div class="line">interactive_timeout=<span class="number">172800</span></div><div class="line"></div><div class="line">net_buffer_length=<span class="number">8</span>K</div><div class="line">read_buffer_size=<span class="number">4</span>M</div><div class="line">read_rnd_buffer_size=<span class="number">1</span>M</div><div class="line">sort_buffer_size=<span class="number">256</span>K</div><div class="line">join_buffer_size=<span class="number">2</span>M</div><div class="line">table_open_cache=<span class="number">512</span></div><div class="line">thread_cache_size=<span class="number">512</span></div><div class="line">query_cache_type=<span class="number">1</span></div><div class="line">query_cache_size=<span class="number">256</span>M</div></pre></td></tr></table></figure></p>
+<p>InnoDB 配置<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">innodb_file_per_table=<span class="number">1</span></div><div class="line">innodb_open_files=<span class="number">7168</span></div><div class="line">innodb_use_sys_malloc=<span class="number">1</span></div><div class="line">innodb_additional_mem_pool_size=<span class="number">64</span>M</div><div class="line">innodb_buffer_pool_instances=<span class="number">4</span></div><div class="line">innodb_buffer_pool_size=<span class="number">20</span>G</div><div class="line">innodb_data_home_dir=/home/work/data</div><div class="line">innodb_data_file_path=ibdata1:<span class="number">1024</span>M:autoextend</div><div class="line">innodb_autoextend_increment=<span class="number">128</span></div><div class="line">innodb_thread_concurrency=<span class="number">0</span></div><div class="line">innodb_flush_log_at_trx_commit=<span class="number">1</span></div><div class="line">innodb_fast_shutdown=<span class="number">1</span></div><div class="line">innodb_force_recovery=<span class="number">0</span></div><div class="line"></div><div class="line">innodb_log_buffer_size=<span class="number">16</span>M</div><div class="line">innodb_log_file_size=<span class="number">128</span>M</div><div class="line">innodb_log_files_in_group=<span class="number">4</span></div><div class="line">innodb_log_group_home_dir=/home/work/data</div><div class="line">innodb_max_dirty_pages_pct=<span class="number">60</span></div><div class="line">innodb_purge_threads=<span class="number">0</span></div><div class="line">innodb_lock_wait_timeout=<span class="number">50</span></div><div class="line">innodb_rollback_on_timeout=<span class="number">1</span></div><div class="line">innodb_commit_concurrency=<span class="number">0</span></div><div class="line">innodb_concurrency_tickets=<span class="number">1024</span></div><div class="line">innodb_autoinc_lock_mode=<span class="number">2</span></div><div class="line">innodb_change_buffering=all</div></pre></td></tr></table></figure></p>
+<h2 id="MySQL-优化：表设计原则"><a href="#MySQL-优化：表设计原则" class="headerlink" title="MySQL 优化：表设计原则"></a>MySQL 优化：表设计原则</h2><ul>
+<li>互联网业务的特点：数据量大、读写操作多、业务模式相对简单</li>
+<li>单表字段不宜过多，尽量不按照第三范式去设计表结构，</li>
+<li>尽量减少表关联，适当的冗余保证不联表查询</li>
+<li>表名和字段尽量采用小写字母+下划线的命名规则，尽量使用英文，例如：user_score</li>
+<li>每个表一定要有主键，一般建议自增ID；单表索引不宜过多，一般5~6个索引</li>
+<li>字段尽量使用高效类型，比如数字或时间，IP地址、手机号等都可以使用数字类型存储，非不得已采用字符</li>
+</ul>
+<h2 id="MySQL-优化：查询语句"><a href="#MySQL-优化：查询语句" class="headerlink" title="MySQL 优化：查询语句"></a>MySQL 优化：查询语句</h2><ul>
+<li>不要写太复杂的SQL语句，尽量简单，能够让业务去做的，就不要让数据库区操作</li>
+<li>尽量避免：子查询、group by、distinct 等操作（子查询可以用left join替代）</li>
+<li>where、order by 等关键字段一定要建立索引，where里多个条件经常使用的可以建立联合索引（注意建立索引的数据必须是尽量分布多并且具备单调性，重复率低）</li>
+<li>把数据当做神一样来供着，能够缓存的尽量缓存（redis、memcached等），能够多次查询的就不要关联查询</li>
+<li>所有的变更操作（update、delete）必须有where条件！</li>
+<li>不适合使用MySQL服务的数据功能操作，尽量采用别的第三方服务支持，比如全文检索功能</li>
+</ul>
+<h2 id="MySQL-优化：SQL-优化实例"><a href="#MySQL-优化：SQL-优化实例" class="headerlink" title="MySQL 优化：SQL 优化实例"></a>MySQL 优化：SQL 优化实例</h2><ul>
+<li>Like 优化</li>
+<li>Limit 优化</li>
+<li>InnoDB 中 count 优化</li>
+<li>定期使用 Explain 查看执行计划</li>
+</ul>
+<h2 id="PHP-与-MySQL-交互"><a href="#PHP-与-MySQL-交互" class="headerlink" title="PHP 与 MySQL 交互"></a>PHP 与 MySQL 交互</h2><ul>
+<li>扩展层</li>
+<li><p>代码层</p>
+<ul>
+<li>为防止mysql太慢夯住PHP，建议设置SQL超时，或者设置execute_time等超时设置</li>
+<li>$mysqli-&gt;options(MYSQL_OPT_READ_TIMEOUT, 3);</li>
+<li>$mysqli-&gt;options(MYSQL_OPT_WRITE_TIMEOUT, 1);</li>
+<li>务必在代码里记录相关SQL语句执行性能和时间等信息，方便后续优化</li>
+</ul>
+</li>
+<li><p>超时设置</p>
+<ul>
+<li>PHP代码连接后端的超时设置</li>
+<li>php.ini中execute_time设置</li>
+<li>php-fpm中request_terminate_timeout，request_slowlog_timeout</li>
+<li>nginx upstream相关超时设置</li>
+</ul>
+</li>
+</ul>
+<h2 id="PHP-与-MySQL-安全"><a href="#PHP-与-MySQL-安全" class="headerlink" title="PHP 与 MySQL 安全"></a>PHP 与 MySQL 安全</h2><ul>
+<li>SQL 注入</li>
+<li>MySQL 服务端</li>
+<li>备份机制</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/04/复习使用-MySQL（三）/" data-id="cixwy9hci00436l4brreux9bn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-复习使用-MySQL（二）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/04/复习使用-MySQL（二）/" class="article-date">
+  <time datetime="2016-09-04T12:41:22.000Z" itemprop="datePublished">2016-09-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/04/复习使用-MySQL（二）/">复习使用 MySQL（二）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
+<li>MySQL 5.7.13</li>
+</ul>
+<h2 id="MySQL-主要存储引擎"><a href="#MySQL-主要存储引擎" class="headerlink" title="MySQL 主要存储引擎"></a>MySQL 主要存储引擎</h2><table>
+<thead>
+<tr>
+<th>特性/引擎</th>
+<th>MyISAM</th>
+<th>Aria</th>
+<th>InnoDB</th>
+<th>XtraDB</th>
+<th>Memory</th>
+<th>Archive</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据存储</td>
+<td>传统顺序数据储存</td>
+<td>传统顺序数据储存</td>
+<td>表空间存储方式</td>
+<td>表空间存储方式</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>事务支持</td>
+<td>不支持</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+<td>不支持</td>
+<td>不支持</td>
+<td></td>
+</tr>
+<tr>
+<td>外键</td>
+<td>不支持</td>
+<td>不支持</td>
+<td>支持</td>
+<td>支持</td>
+<td>不支持</td>
+<td>不支持</td>
+<td></td>
+</tr>
+<tr>
+<td>全文检索</td>
+<td>支持</td>
+<td>支持</td>
+<td>5.6 之后支持</td>
+<td>5.6 之后支持</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>锁级别</td>
+<td>表级锁</td>
+<td>表级锁</td>
+<td>行级锁</td>
+<td>行级锁</td>
+<td>表级锁</td>
+<td>行级锁</td>
+<td></td>
+</tr>
+<tr>
+<td>Count 速度</td>
+<td>快</td>
+<td>快</td>
+<td>慢</td>
+<td>慢</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>适合业务</td>
+<td>读多写少、单表数据量小于 1 KW</td>
+<td>读多写少、单表数据量小于 1 KW</td>
+<td>读写均衡、数据量不限</td>
+<td>读写均衡、数据量不限</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>可用版本</td>
+<td>MySQL、MariaDB、Percona</td>
+<td>MariaDB</td>
+<td>MySQL、MariaDB、Percona</td>
+<td>MariaDB、Percona</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>其他说明</td>
+<td>传统顺序索引数据库，适合读多写少小数据量业务</td>
+<td>MyISAM 增强版，性能更好</td>
+<td>适合高压力高性能的业务模型</td>
+<td>InnoDB 增强版</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="MySQL-索引定义"><a href="#MySQL-索引定义" class="headerlink" title="MySQL 索引定义"></a>MySQL 索引定义</h2><p>MySQL 的索引（Index）是帮助 MySQL 高效获取数据的数据结构</p>
+<h2 id="MySQL-索引类型"><a href="#MySQL-索引类型" class="headerlink" title="MySQL 索引类型"></a>MySQL 索引类型</h2><ul>
+<li>Normal<ul>
+<li>普通索引，对存储的数值没有任何限制</li>
+</ul>
+</li>
+<li>Unique<ul>
+<li>唯一索引，不允许数值重复，但允许空值</li>
+</ul>
+</li>
+<li>Primary<ul>
+<li>主键索引，是一种特殊的唯一索引，不允许存在数值重复或空值</li>
+</ul>
+</li>
+<li>Spatial（R-Tree）<ul>
+<li>GIS 相关空间查询使用索引数据结构。</li>
+</ul>
+</li>
+<li>Fulltext<ul>
+<li>主要用于全文检索，目前只有 MyISAM 和 MySQL 5.6 + 的 InnoDB 支持；目前只支持英文。</li>
+</ul>
+</li>
+</ul>
+<h2 id="MySQL-索引方法"><a href="#MySQL-索引方法" class="headerlink" title="MySQL 索引方法"></a>MySQL 索引方法</h2><ul>
+<li>B+Tree<ul>
+<li>可用于排序的索引数据结构，可应用于 =，&gt;，&lt; 等各个范围查询，并且可以排序</li>
+<li>时间复杂度：O(log2N)</li>
+</ul>
+</li>
+<li>Hash<ul>
+<li>只能用于 =，IN 等操作，无法进行范围操作，Key 冲突严重情况下可能性能比 B-Tree 低下</li>
+<li>时间复杂度：O(1)</li>
+</ul>
+</li>
+</ul>
+<h2 id="MyISAM-索引结构：B-Tree"><a href="#MyISAM-索引结构：B-Tree" class="headerlink" title="MyISAM 索引结构：B+ Tree"></a>MyISAM 索引结构：B+ Tree</h2><ul>
+<li>MyISAM 主索引和辅助索引<ul>
+<li>区别在于：主索引 Key 是唯一；辅助索引 Key 可以重复</li>
+</ul>
+</li>
+<li>MyISAM 为非聚簇索引</li>
+</ul>
+<h2 id="InnoDB-索引结构：B-Tree"><a href="#InnoDB-索引结构：B-Tree" class="headerlink" title="InnoDB 索引结构：B+ Tree"></a>InnoDB 索引结构：B+ Tree</h2><ul>
+<li>InnoDB 主索引和辅助索引<ul>
+<li>InnoDB 的主索引是聚簇索引，数据和 Key 本身都会存储在 B+Tree 的叶子节点</li>
+<li>InnoDB 的辅助索引本身主要是记录主索引的 Key,最终查找数据还是从辅助索引再去主索引查找</li>
+</ul>
+</li>
+<li>InnoDB 为聚簇索引</li>
+</ul>
+<h2 id="存储引擎及版本选择"><a href="#存储引擎及版本选择" class="headerlink" title="存储引擎及版本选择"></a>存储引擎及版本选择</h2><p>结论：</p>
+<ul>
+<li>使用 InnoDB 于生产环境</li>
+<li>使用 MySQL 5.5+ 于生产环境</li>
+</ul>
+<p>原因：</p>
+<ul>
+<li>更稳定可靠的数据存储和索引结构；整个存储引擎设计思想更可靠先进，接近于Oracle、SQL Server级别的数据库（有兴趣可以去阅读源码了解细节）</li>
+<li>更多可靠特性支持，比如事务、外键等支持（支付等关键领域事务非常重要）</li>
+<li>运行更稳定，不论读写数据的量级，都能够保证比较稳定的性能响应</li>
+<li>更好地崩溃恢复机制，特别利用一些Percona的一些工具，更有效运维InnoDB</li>
+<li>MySQL 5.5+ 对比 MySQL 5.1.x 总体功能和性能提升太多，改进太多</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/04/复习使用-MySQL（二）/" data-id="cixwy9hcf00406l4btmh4wy5t" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">__('next') &raquo;</a>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 18px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 14px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 12px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Yii/" style="font-size: 16px;">Yii</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/12/08/学习-UML（一）/">学习 UML（一）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/02/Yii2-Working-with-Databases/">Yii2 Working with Databases</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/22/关于-PHP-函数-array-walk-的一些想法/">关于 PHP 函数 array_walk 的一些想法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/21/关于-PHP-函数-array-filter-的一些想法/">关于 PHP 函数 array_filter 的一些想法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/21/关于-PHP-函数-array-map-的一些想法/">关于 PHP 函数 array_map 的一些想法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

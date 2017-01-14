@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Linux Shell 基础之条件判断语句 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Shell 条件判断式语句按文件类型判断
+
+
+测试选项
+作用
+
+
+
+
+-b 文件
+判断该文件是否存在，并且是否为块设备文件
+
+
+-c 文件
+判断该文件是否存在，并且是否为字符设备文件
+
+
+-d 文件
+判断该文件是否存在，并且是否为目录文件
+
+
+-e 文件
+判断该文件是否存在（存在为真）
+
+
+-f 文件
+判断该文件是否存在，并且是否为普通文件
+
+
+-L 文件
+判断该文件是否存在，并且是否为符号链接文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux Shell 基础之条件判断语句">
+<meta property="og:url" content="http://yoursite.com/2016/10/04/Linux-Shell-基础之条件判断语句/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Shell 条件判断式语句按文件类型判断
+
+
+测试选项
+作用
+
+
+
+
+-b 文件
+判断该文件是否存在，并且是否为块设备文件
+
+
+-c 文件
+判断该文件是否存在，并且是否为字符设备文件
+
+
+-d 文件
+判断该文件是否存在，并且是否为目录文件
+
+
+-e 文件
+判断该文件是否存在（存在为真）
+
+
+-f 文件
+判断该文件是否存在，并且是否为普通文件
+
+
+-L 文件
+判断该文件是否存在，并且是否为符号链接文">
+<meta property="og:updated_time" content="2016-10-04T03:17:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux Shell 基础之条件判断语句">
+<meta name="twitter:description" content="Shell 条件判断式语句按文件类型判断
+
+
+测试选项
+作用
+
+
+
+
+-b 文件
+判断该文件是否存在，并且是否为块设备文件
+
+
+-c 文件
+判断该文件是否存在，并且是否为字符设备文件
+
+
+-d 文件
+判断该文件是否存在，并且是否为目录文件
+
+
+-e 文件
+判断该文件是否存在（存在为真）
+
+
+-f 文件
+判断该文件是否存在，并且是否为普通文件
+
+
+-L 文件
+判断该文件是否存在，并且是否为符号链接文">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Linux-Shell-基础之条件判断语句" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/04/Linux-Shell-基础之条件判断语句/" class="article-date">
+  <time datetime="2016-10-04T02:56:05.000Z" itemprop="datePublished">2016-10-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Linux Shell 基础之条件判断语句
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Shell-条件判断式语句"><a href="#Shell-条件判断式语句" class="headerlink" title="Shell 条件判断式语句"></a>Shell 条件判断式语句</h2><h3 id="按文件类型判断"><a href="#按文件类型判断" class="headerlink" title="按文件类型判断"></a>按文件类型判断</h3><table>
+<thead>
+<tr>
+<th>测试选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-b 文件</td>
+<td>判断该文件是否存在，并且是否为块设备文件</td>
+</tr>
+<tr>
+<td>-c 文件</td>
+<td>判断该文件是否存在，并且是否为字符设备文件</td>
+</tr>
+<tr>
+<td>-d 文件</td>
+<td>判断该文件是否存在，并且是否为目录文件</td>
+</tr>
+<tr>
+<td>-e 文件</td>
+<td>判断该文件是否存在（存在为真）</td>
+</tr>
+<tr>
+<td>-f 文件</td>
+<td>判断该文件是否存在，并且是否为普通文件</td>
+</tr>
+<tr>
+<td>-L 文件</td>
+<td>判断该文件是否存在，并且是否为符号链接文件</td>
+</tr>
+<tr>
+<td>-p 文件</td>
+<td>判断该文件是否存在，并且是否为管道文件</td>
+</tr>
+<tr>
+<td>-s 文件</td>
+<td>判断该文件是否存在，并且是否为非空</td>
+</tr>
+<tr>
+<td>-S 文件</td>
+<td>判断该文件是否存在，并且是否为套接字文件</td>
+</tr>
+</tbody>
+</table>
+<p>两种判断格式</p>
+<ul>
+<li><code>test -e /root/install.log</code></li>
+<li><code>[ -e /root/install.log ]</code></li>
+<li><code>[ -e /root/install.log ] &amp;&amp; echo yes || echo no</code></li>
+</ul>
+<h3 id="按文件权限判断"><a href="#按文件权限判断" class="headerlink" title="按文件权限判断"></a>按文件权限判断</h3><table>
+<thead>
+<tr>
+<th>测试选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-r 文件</td>
+<td>判断该文件是否存在，并且是否该文件拥有读权限</td>
+</tr>
+<tr>
+<td>-w 文件</td>
+<td>判断该文件是否存在，并且是否该文件拥有写权限</td>
+</tr>
+<tr>
+<td>-x 文件</td>
+<td>判断该文件是否存在，并且是否该文件拥有执行权限</td>
+</tr>
+<tr>
+<td>-u 文件</td>
+<td>判断该文件是否存在，并且是否该文件拥有 SUID 权限</td>
+</tr>
+<tr>
+<td>-g 文件</td>
+<td>判断该文件是否存在，并且是否该文件拥有 SGID 权限</td>
+</tr>
+<tr>
+<td>-k 文件</td>
+<td>判断该文件是否存在，并且是否该文件拥有 SBit 权限</td>
+</tr>
+</tbody>
+</table>
+<h3 id="两个文件之间的比较"><a href="#两个文件之间的比较" class="headerlink" title="两个文件之间的比较"></a>两个文件之间的比较</h3><table>
+<thead>
+<tr>
+<th>测试选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>文件1 -nt 文件2</td>
+<td>判断文件 1 的修改时间是否比文件 2 的新</td>
+</tr>
+<tr>
+<td>文件1 -ot 文件2</td>
+<td>判断文件 1 的修改时间是否比文件 2 的旧</td>
+</tr>
+<tr>
+<td>文件1 -ef 文件2</td>
+<td>判断文件 1 是否和文件 2 的 Inode 号一致，可以理解为两个文件是否为同一个文件，这个判断用于硬链接判断是很好的方法</td>
+</tr>
+</tbody>
+</table>
+<p>例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># 创建一个硬链接</div><div class="line">ln /root/student.txt/tmp/stu.txt</div><div class="line"></div><div class="line"># 测试</div><div class="line">[/root/student.txt -ef /tmp/stu.txt] &amp;&amp; echo &quot;yes&quot; || echo &quot;no&quot;</div></pre></td></tr></table></figure></p>
+<h3 id="两个整数之间的比较"><a href="#两个整数之间的比较" class="headerlink" title="两个整数之间的比较"></a>两个整数之间的比较</h3><table>
+<thead>
+<tr>
+<th>测试选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>整数1 -eq 整数2</td>
+<td>判断整数 1 是否和整数 2 相等</td>
+</tr>
+<tr>
+<td>整数1 -ne 整数2</td>
+<td>判断整数 1 是否和整数 2 不相等</td>
+</tr>
+<tr>
+<td>整数1 -gt 整数2</td>
+<td>判断整数 1 是否大于整数 2</td>
+</tr>
+<tr>
+<td>整数1 -lt 整数2</td>
+<td>判断整数 1 是否小于整数 2</td>
+</tr>
+<tr>
+<td>整数1 -ge 整数2</td>
+<td>判断整数 1 是否大于等于整数 2</td>
+</tr>
+<tr>
+<td>整数1 -le 整数2</td>
+<td>判断整数 1 是否小于等于整数 2</td>
+</tr>
+</tbody>
+</table>
+<p>例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[ 23 -ge 22 ] &amp;&amp; echo &quot;yes&quot; || echo &quot;no&quot;</div><div class="line">[ 23 -le 22 ] &amp;&amp; echo &quot;yes&quot; || echo &quot;no&quot;</div></pre></td></tr></table></figure>
+<h3 id="字符串的判断"><a href="#字符串的判断" class="headerlink" title="字符串的判断"></a>字符串的判断</h3><table>
+<thead>
+<tr>
+<th>测试选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-z</td>
+<td>判断字符串是否为空</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>判断字符串是否为非空</td>
+</tr>
+<tr>
+<td>字符串1==字符串2</td>
+<td>判断字符串 1 是否和字符串 2 相等</td>
+</tr>
+<tr>
+<td>字符串1!=字符串2</td>
+<td>判断字符串 1 是否和字符串 2 不相等</td>
+</tr>
+</tbody>
+</table>
+<p>例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"># 给 name 变量赋值</div><div class="line">name=fengj</div><div class="line"></div><div class="line"># 判断 name 变量是否为空</div><div class="line">[ -z &quot;$name&quot; ] &amp;&amp; echo &quot;yes&quot; || echo &quot;no&quot;</div><div class="line"></div><div class="line"># 给变量 aa 和变量 bb 赋值</div><div class="line">aa=11</div><div class="line">bb=22</div><div class="line"></div><div class="line"># 判断两个变量的值是否相等</div><div class="line">[ &quot;$aa&quot; == &quot;$bb&quot; ] &amp;&amp; echo yes || echo no</div></pre></td></tr></table></figure></p>
+<h3 id="多重条件判断"><a href="#多重条件判断" class="headerlink" title="多重条件判断"></a>多重条件判断</h3><table>
+<thead>
+<tr>
+<th>测试选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>判断1 -a 判断2</td>
+<td>逻辑与，判断 1 和判断 2 都成立，最终的结果才为真</td>
+</tr>
+<tr>
+<td>判断1 -o 判断2</td>
+<td>逻辑或，判断 1 和判断 2 有一个成立，最终的结果就为真</td>
+</tr>
+<tr>
+<td>! 判断</td>
+<td>逻辑非，使原始的判断式取反</td>
+</tr>
+</tbody>
+</table>
+<p>例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># 给变量 aa 赋值</div><div class="line">aa=11</div><div class="line"></div><div class="line"># 判断变量 aa 是否有值，同时判断变量 aa 是否大于 23</div><div class="line">[ -n &quot;$aa&quot; -a &quot;$aa&quot; -gt 23 ] &amp;&amp; echo &quot;yes&quot; || echo &quot;no&quot;</div></pre></td></tr></table></figure></p>
+<h2 id="Shell-单分支if语句"><a href="#Shell-单分支if语句" class="headerlink" title="Shell 单分支if语句"></a>Shell 单分支if语句</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>如何 “背” 程序</p>
+<ol>
+<li>抄写目标程序并能正确运行</li>
+<li>为目标程序补全注释</li>
+<li>删掉注释，为代码重新加注释</li>
+<li>删除代码，看注释写代码</li>
+<li>删除注释和代码，从头开始写</li>
+</ol>
+<h3 id="单分支-if-语句"><a href="#单分支-if-语句" class="headerlink" title="单分支 if 语句"></a>单分支 if 语句</h3><p>语法支持<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">if [ 条件判断式 ];then</div><div class="line">	程序</div><div class="line">fi</div><div class="line"></div><div class="line">if [ 条件判断式 ]</div><div class="line">	then</div><div class="line">	程序</div><div class="line">fi</div></pre></td></tr></table></figure></p>
+<p>例子1：判断登录的用户是否为 root<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">test=$(env|grep &quot;USER&quot; |cut -d &quot;=&quot; -f2)</div><div class="line"></div><div class="line">if [ &quot;$test&quot; == root ]</div><div class="line">	then</div><div class="line">	echo &quot;Current user is root.&quot;</div><div class="line">fi</div></pre></td></tr></table></figure></p>
+<h3 id="单分支-if-语句例子：判断分区使用率"><a href="#单分支-if-语句例子：判断分区使用率" class="headerlink" title="单分支 if 语句例子：判断分区使用率"></a>单分支 if 语句例子：判断分区使用率</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line"># 统计根分区使用率，把根分区使用率作为变量值赋予变量 rate</div><div class="line">rate=$(df -h | grep &quot;/dev/disk1&quot; | awk &apos;&#123;print $5&#125;&apos; | cut -d &quot;%&quot; -f 1)</div><div class="line"></div><div class="line">if [ $rate -ge 70 ]</div><div class="line">then</div><div class="line">	echo &quot;Warning! /dev/disk1 is full!!&quot;</div><div class="line">fi</div></pre></td></tr></table></figure>
+<h2 id="Shell-双分支if语句"><a href="#Shell-双分支if语句" class="headerlink" title="Shell 双分支if语句"></a>Shell 双分支if语句</h2><p>语法支持<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">if [ 条件判断式 ]</div><div class="line">	then</div><div class="line">		条件成立时，执行的程序</div><div class="line">	else</div><div class="line">		条件不成立时，执行的另一个程序</div><div class="line">fi</div></pre></td></tr></table></figure></p>
+<h3 id="双分支-if-语句例子：判断输入的是否是一个目录"><a href="#双分支-if-语句例子：判断输入的是否是一个目录" class="headerlink" title="双分支 if 语句例子：判断输入的是否是一个目录"></a>双分支 if 语句例子：判断输入的是否是一个目录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">read -t 30 -p &quot;Please input a dir:&quot; dir</div><div class="line"></div><div class="line">if [ -d &quot;$dir&quot; ]</div><div class="line">then</div><div class="line">    echo &quot;is a Dir&quot;</div><div class="line">else</div><div class="line">    echo &quot;is not a Dir&quot;</div><div class="line">fi</div></pre></td></tr></table></figure>
+<h3 id="双分支-if-语句例子：判断Apache服务是否启动"><a href="#双分支-if-语句例子：判断Apache服务是否启动" class="headerlink" title="双分支 if 语句例子：判断Apache服务是否启动"></a>双分支 if 语句例子：判断Apache服务是否启动</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line"># 列出所有进程，选取 httpd 进程，反选 grep</div><div class="line">test=$(ps aux | grep httpd | grep -v grep)</div><div class="line"></div><div class="line">if [ -n &quot;$test&quot; ]</div><div class="line">	then</div><div class="line">		echo &quot;$(date) httpd is ok!&quot; &gt;&gt; /tmp/autostart-acc.log</div><div class="line">	else</div><div class="line">		sudo apachectl restart  &amp;&gt; /dev/null</div><div class="line">		echo &quot;$(date) restart httpd !!&quot; &gt;&gt; /tmp/autostart-err.log</div><div class="line">fi</div></pre></td></tr></table></figure>
+<h2 id="Shell-多分支-if-语句"><a href="#Shell-多分支-if-语句" class="headerlink" title="Shell 多分支 if 语句"></a>Shell 多分支 if 语句</h2><p>语言支持：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">if [ 条件判断式 1 ]</div><div class="line">	then</div><div class="line">		条件成立 1 时，执行的程序</div><div class="line">elif [ 条件判断式 2 ]</div><div class="line">	then</div><div class="line">		条件成立 2 时，执行的程序</div><div class="line">else</div><div class="line">		条件不成立时，执行的另一个程序</div><div class="line">fi</div></pre></td></tr></table></figure></p>
+<h3 id="多分支-if-语句例子：判断用户输入的是什么文件"><a href="#多分支-if-语句例子：判断用户输入的是什么文件" class="headerlink" title="多分支 if 语句例子：判断用户输入的是什么文件"></a>多分支 if 语句例子：判断用户输入的是什么文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"># 判断用户输出的是什么文件</div><div class="line"></div><div class="line"># 接受键盘的输入，并赋予变量file</div><div class="line">read -p &quot;Please input a filename:&quot; file</div><div class="line"></div><div class="line"># 判断变量是否为空</div><div class="line">if [ -z &quot;$file&quot; ]</div><div class="line">then</div><div class="line">	echo &quot;Error,Please input a filename&quot;</div><div class="line">	exit 1</div><div class="line"># 判断 file 的值是否存在</div><div class="line">elif [ ! -e &quot;$file&quot; ]</div><div class="line">then</div><div class="line">	echo &quot;Your input is not a file!&quot;</div><div class="line">	exit 2</div><div class="line"># 判断 file 的值是否为普通文件</div><div class="line">elif [ -f &quot;$file&quot; ]</div><div class="line">then</div><div class="line">	echo &quot;$file is a regulare file!&quot;</div><div class="line"># 判断 file 的值是否为目录文件</div><div class="line">then</div><div class="line">	echo &quot;$file is a directory!&quot;</div><div class="line">else</div><div class="line">	echo &quot;$file is an other file!&quot;</div></pre></td></tr></table></figure>
+<h2 id="Shell-多分支case语句"><a href="#Shell-多分支case语句" class="headerlink" title="Shell 多分支case语句"></a>Shell 多分支case语句</h2><p>语法支持<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">case $变量名 in</div><div class="line">	&quot;值1&quot;)</div><div class="line">		如果变量的值等于值 1，则执行程序1</div><div class="line">	;;</div><div class="line">	&quot;值2&quot;)</div><div class="line">		如果变量的值等于值 2，则执行程序2</div><div class="line">	;;</div><div class="line">	*)</div><div class="line">		如果变量的值都不是以上的值，则执行此程序</div><div class="line">	;;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/10/04/Linux-Shell-基础之条件判断语句/" data-id="cixwy9h4w00016l4b2kdsavdy" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/10/13/MySQL-性能优化/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          MySQL 性能优化
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/10/04/Linux-Shell-基础之运算符/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Linux Shell 基础之运算符</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 18px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 14px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 12px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Yii/" style="font-size: 16px;">Yii</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/12/08/学习-UML（一）/">学习 UML（一）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/02/Yii2-Working-with-Databases/">Yii2 Working with Databases</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/22/关于-PHP-函数-array-walk-的一些想法/">关于 PHP 函数 array_walk 的一些想法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/21/关于-PHP-函数-array-filter-的一些想法/">关于 PHP 函数 array_filter 的一些想法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/21/关于-PHP-函数-array-map-的一些想法/">关于 PHP 函数 array_map 的一些想法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

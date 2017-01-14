@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>MySQL 5.7 版本新特性 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="第 1 章 MySQL 服务功能增强1-1 初始化方式变更MySQL 5.7 之前scripts/mysql_install_db \
+    --datadir=/data/sql_data \
+    --user=mysql --basedir=/home/mysql
+MySQL 5.7 之后bin/mysql --initialize --user = mysql \
+    --base">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL 5.7 版本新特性">
+<meta property="og:url" content="http://yoursite.com/2016/09/12/MySQL-5-7-版本新特性/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="第 1 章 MySQL 服务功能增强1-1 初始化方式变更MySQL 5.7 之前scripts/mysql_install_db \
+    --datadir=/data/sql_data \
+    --user=mysql --basedir=/home/mysql
+MySQL 5.7 之后bin/mysql --initialize --user = mysql \
+    --base">
+<meta property="og:updated_time" content="2016-10-08T03:24:49.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL 5.7 版本新特性">
+<meta name="twitter:description" content="第 1 章 MySQL 服务功能增强1-1 初始化方式变更MySQL 5.7 之前scripts/mysql_install_db \
+    --datadir=/data/sql_data \
+    --user=mysql --basedir=/home/mysql
+MySQL 5.7 之后bin/mysql --initialize --user = mysql \
+    --base">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-MySQL-5-7-版本新特性" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/12/MySQL-5-7-版本新特性/" class="article-date">
+  <time datetime="2016-09-12T13:12:40.000Z" itemprop="datePublished">2016-09-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      MySQL 5.7 版本新特性
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="第-1-章-MySQL-服务功能增强"><a href="#第-1-章-MySQL-服务功能增强" class="headerlink" title="第 1 章 MySQL 服务功能增强"></a>第 1 章 MySQL 服务功能增强</h2><h3 id="1-1-初始化方式变更"><a href="#1-1-初始化方式变更" class="headerlink" title="1-1 初始化方式变更"></a>1-1 初始化方式变更</h3><p>MySQL 5.7 之前<br><code>scripts/mysql_install_db \
+    --datadir=/data/sql_data \
+    --user=mysql --basedir=/home/mysql</code></p>
+<p>MySQL 5.7 之后<br><code>bin/mysql --initialize --user = mysql \
+    --basedir=/home/mysql \
+    --datadir=/home/mysql/data</code></p>
+<h3 id="1-3-旧版本支持为表增加计算列演练"><a href="#1-3-旧版本支持为表增加计算列演练" class="headerlink" title="1-3 旧版本支持为表增加计算列演练"></a>1-3 旧版本支持为表增加计算列演练</h3><p>MySQL 5.7 之前，需要增加一个插入触发器和更新触发器来实现计算列的功能，或者是一个视图来实现计算列的功能</p>
+<p>MySQL 5.7 之后，在 <code>CREATE TABLE</code> 及 <code>ALTER TABLE</code> 语句中支持增加计算列的方式<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">col_name data_type [GENERATED ALWAYS] AS (expression)</div><div class="line">[VIRTUAL | STORED] [UNIQUE [KEY]] [<span class="keyword">COMMENT</span> <span class="keyword">comment</span>]</div><div class="line">[[<span class="keyword">NOT</span>] <span class="literal">NULL</span>] [[PRIMARY] <span class="keyword">KEY</span>]</div></pre></td></tr></table></figure></p>
+<h3 id="1-4-MySQL5-7支持为表增加计算列实际演练"><a href="#1-4-MySQL5-7支持为表增加计算列实际演练" class="headerlink" title="1-4 MySQL5.7支持为表增加计算列实际演练"></a>1-4 MySQL5.7支持为表增加计算列实际演练</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> t(<span class="keyword">id</span> <span class="built_in">int</span> AUTO_INCREMENT <span class="keyword">not</span> <span class="literal">null</span>,c1 <span class="built_in">int</span>,c2 <span class="built_in">int</span>,c3 <span class="built_in">int</span> <span class="keyword">as</span> (c1+c2),PRIMARY <span class="keyword">KEY</span> (<span class="keyword">id</span>));</div><div class="line"></div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> t(c1,c2) <span class="keyword">VALUES</span>(<span class="number">1</span>,<span class="number">2</span>);</div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> t;</div><div class="line"></div><div class="line"><span class="keyword">UPDATE</span> t <span class="keyword">set</span> c1 = <span class="number">5</span> <span class="keyword">WHERE</span> <span class="keyword">id</span> = <span class="number">1</span>;</div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> t;</div></pre></td></tr></table></figure>
+<h3 id="1-5-引入JSON列类型及相关函数"><a href="#1-5-引入JSON列类型及相关函数" class="headerlink" title="1-5 引入JSON列类型及相关函数"></a>1-5 引入JSON列类型及相关函数</h3><p>MySQL 5.7 之前</p>
+<p>只能在 varchar 或是 text 等字符类型的列中存储 JSON 类型的字符串，并通过程序解析使用 JSON 字符串。</p>
+<p>MySQL 5.7 之后</p>
+<p>增加了 JSON 列类型及以 JSON 开头的相关处理函数，如 JSON_TYPE(),JSON_OBJECT()，JSON_MERGE() 等。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SELECT JSON_ARRAY(1,2,3,now());</div><div class="line">SELECT JSON_OBJECT(&apos;keyA&apos;,1,&apos;keyB&apos;,2);</div></pre></td></tr></table></figure></p>
+<h2 id="第-2-章-Replication-相关增强"><a href="#第-2-章-Replication-相关增强" class="headerlink" title="第 2 章 Replication 相关增强"></a>第 2 章 Replication 相关增强</h2><h3 id="2-1-支持多源复制"><a href="#2-1-支持多源复制" class="headerlink" title="2-1 支持多源复制"></a>2-1 支持多源复制</h3><p>略</p>
+<h3 id="2-2-基于库或是逻辑锁的多线程复制"><a href="#2-2-基于库或是逻辑锁的多线程复制" class="headerlink" title="2-2 基于库或是逻辑锁的多线程复制"></a>2-2 基于库或是逻辑锁的多线程复制</h3><p>MySQL 5.7 之前</p>
+<p>从 MySQL 5.6 开始支持多线程复制，只不过是对于每一个库一个复制线程。</p>
+<p>MySQL 5.7 之后</p>
+<p>MySQL 5.7 后对多线程复制功能进行了加强，增加了 <code>slave_paraller_type</code> 参数可以控制并发同步是基于 <code>database</code> 还是 <code>logical_clock</code></p>
+<h3 id="2-3-在线变更复制方式"><a href="#2-3-在线变更复制方式" class="headerlink" title="2-3 在线变更复制方式"></a>2-3 在线变更复制方式</h3><p>MySQL 5.7 之前</p>
+<p>要把基于日志点的复制方式变为基于 gtid 的复制方式或是把基于 gtid 的复制方式变成基于日志点的复制方式必须要重启 master 的服务器</p>
+<p>MySQL 5.7 之后</p>
+<p>允许在线变列复制的方式，而不用重启 master 服务器</p>
+<h2 id="第-3-章-InnoDB-引擎增强"><a href="#第-3-章-InnoDB-引擎增强" class="headerlink" title="第 3 章 InnoDB 引擎增强"></a>第 3 章 InnoDB 引擎增强</h2><h3 id="3-1-支持缓冲池大小在线变更"><a href="#3-1-支持缓冲池大小在线变更" class="headerlink" title="3-1 支持缓冲池大小在线变更"></a>3-1 支持缓冲池大小在线变更</h3><p>MySQL 5.7 之前</p>
+<p>要变更 <code>innodb_buffer_pool</code> 大小必须更改 <code>my.cnf</code> 文件后重启数据库服务器</p>
+<p>MySQL 5.7 之后</p>
+<p><code>innodb_buffer_pool_size</code> 参数变为动态参数，可以在线调整 <code>innodb</code> 缓存池的大小</p>
+<h3 id="3-2-增加-innodb-buffer-pool-导入导出功能"><a href="#3-2-增加-innodb-buffer-pool-导入导出功能" class="headerlink" title="3-2 增加 innodb_buffer_pool 导入导出功能"></a>3-2 增加 <code>innodb_buffer_pool</code> 导入导出功能</h3><p>MySQL 5.7 之后，新增以下参数控制 <code>innodb_buffer_pool</code> 的导入导出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">innodb_buffer_pool_dump_pct</div><div class="line">innodb_buffer_pool_dump_now</div><div class="line">innodb_buffer_pool_dump_at_shutdown</div><div class="line">innodb_buffer_pool_load_at_startup</div><div class="line">innodb_buffer_pool_load_now</div></pre></td></tr></table></figure></p>
+<h3 id="3-3-支持为-innodb-表建立表空间"><a href="#3-3-支持为-innodb-表建立表空间" class="headerlink" title="3-3 支持为 innodb 表建立表空间"></a>3-3 支持为 <code>innodb</code> 表建立表空间</h3><p>MySQL 5.7 之前</p>
+<p>具有系统表空间及可以为每个表建立一个独立的表空间</p>
+<p>MySQL 5.7 之后</p>
+<p>支持 <code>CREATE TABLESPACE</code> 语法为一个表或多个表建立共用的表空间</p>
+<h2 id="第-4-章-安全及管理方面增强"><a href="#第-4-章-安全及管理方面增强" class="headerlink" title="第 4 章 安全及管理方面增强"></a>第 4 章 安全及管理方面增强</h2><h3 id="4-1-不再支持old-password认证"><a href="#4-1-不再支持old-password认证" class="headerlink" title="4-1 不再支持old_password认证"></a>4-1 不再支持old_password认证</h3><h3 id="4-2-增加账号默认过期时间"><a href="#4-2-增加账号默认过期时间" class="headerlink" title="4-2 增加账号默认过期时间"></a>4-2 增加账号默认过期时间</h3><p><code>show variables like &#39;default_password_lifetime&#39;;</code></p>
+<h3 id="4-3-加强了对账号的管理功能"><a href="#4-3-加强了对账号的管理功能" class="headerlink" title="4-3 加强了对账号的管理功能"></a>4-3 加强了对账号的管理功能</h3><h3 id="4-4-增加了-sys-管理数据库"><a href="#4-4-增加了-sys-管理数据库" class="headerlink" title="4-4 增加了 sys 管理数据库"></a>4-4 增加了 sys 管理数据库</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/12/MySQL-5-7-版本新特性/" data-id="cixwy9h7u000x6l4bm3a5t5fm" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/09/19/Linux-命令基础/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Linux 命令基础
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/09/09/与-MySQL-的零距离接触（二）/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">与 MySQL 的零距离接触（二）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 18px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 14px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 12px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Yii/" style="font-size: 16px;">Yii</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/12/08/学习-UML（一）/">学习 UML（一）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/02/Yii2-Working-with-Databases/">Yii2 Working with Databases</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/22/关于-PHP-函数-array-walk-的一些想法/">关于 PHP 函数 array_walk 的一些想法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/21/关于-PHP-函数-array-filter-的一些想法/">关于 PHP 函数 array_filter 的一些想法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/21/关于-PHP-函数-array-map-的一些想法/">关于 PHP 函数 array_map 的一些想法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

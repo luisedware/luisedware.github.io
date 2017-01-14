@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Linux Shell 基础之变量 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Shell 变量概述Shell 与其他语言的对比
+
+PHP 和 JAVA 主要实现功能
+Shell 简化管理操作
+
+什么是变量
+
+变量是计算机内存的单元，其中存放的值可以改变
+变量让你能够把程序中准备使用的每一段数据都赋给一个简短、易于记忆的名字，因此它们十分有用
+
+变量命名规则
+
+变量名必须以字母或下划线开头，名字中间只能由字母、数字和下划线组成
+变量名的长度不得超过 255 个字符
+变量名在有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux Shell 基础之变量">
+<meta property="og:url" content="http://yoursite.com/2016/10/04/Linux-Shell-基础之变量/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Shell 变量概述Shell 与其他语言的对比
+
+PHP 和 JAVA 主要实现功能
+Shell 简化管理操作
+
+什么是变量
+
+变量是计算机内存的单元，其中存放的值可以改变
+变量让你能够把程序中准备使用的每一段数据都赋给一个简短、易于记忆的名字，因此它们十分有用
+
+变量命名规则
+
+变量名必须以字母或下划线开头，名字中间只能由字母、数字和下划线组成
+变量名的长度不得超过 255 个字符
+变量名在有">
+<meta property="og:updated_time" content="2016-10-04T02:53:21.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux Shell 基础之变量">
+<meta name="twitter:description" content="Shell 变量概述Shell 与其他语言的对比
+
+PHP 和 JAVA 主要实现功能
+Shell 简化管理操作
+
+什么是变量
+
+变量是计算机内存的单元，其中存放的值可以改变
+变量让你能够把程序中准备使用的每一段数据都赋给一个简短、易于记忆的名字，因此它们十分有用
+
+变量命名规则
+
+变量名必须以字母或下划线开头，名字中间只能由字母、数字和下划线组成
+变量名的长度不得超过 255 个字符
+变量名在有">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Linux-Shell-基础之变量" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/04/Linux-Shell-基础之变量/" class="article-date">
+  <time datetime="2016-10-04T02:50:53.000Z" itemprop="datePublished">2016-10-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Linux Shell 基础之变量
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Shell-变量概述"><a href="#Shell-变量概述" class="headerlink" title="Shell 变量概述"></a>Shell 变量概述</h2><p>Shell 与其他语言的对比</p>
+<ul>
+<li>PHP 和 JAVA 主要实现功能</li>
+<li>Shell 简化管理操作</li>
+</ul>
+<p>什么是变量</p>
+<ul>
+<li>变量是计算机内存的单元，其中存放的值可以改变</li>
+<li>变量让你能够把程序中准备使用的每一段数据都赋给一个简短、易于记忆的名字，因此它们十分有用</li>
+</ul>
+<p>变量命名规则</p>
+<ul>
+<li>变量名必须以字母或下划线开头，名字中间只能由字母、数字和下划线组成</li>
+<li>变量名的长度不得超过 255 个字符</li>
+<li>变量名在有效的范围内必须是唯一的</li>
+<li>在 Bash 中，变量的默认类型都是字符串型</li>
+</ul>
+<p>变量存储类型</p>
+<ul>
+<li>整型</li>
+<li>浮点型</li>
+<li>日期型</li>
+<li>字符串型</li>
+</ul>
+<p>变量定义分类</p>
+<ul>
+<li>用户自定义变量：用户自定义的变量</li>
+<li>环境变量：这种变量中主要保存的是和系统操作环境相关的数据。变量可以自定义，但是对系统生效的环境变量名和变量作用是固定的。</li>
+<li>位置参数变量：这种变量主要是用来向脚本当中传递参数或数据的。变量名不能自定义，变量作用固定。</li>
+<li>预定义变量：是 Bash 中已经定义好的变量，变量名不能自定义，变量作用也是固定的。</li>
+</ul>
+<h2 id="Shell-变量与变量分类"><a href="#Shell-变量与变量分类" class="headerlink" title="Shell 变量与变量分类"></a>Shell 变量与变量分类</h2><ul>
+<li>用户自定义变量<ul>
+<li>变量定义<ul>
+<li><code>变量名=变量值</code><ul>
+<li><code>x=5</code></li>
+<li><code>name=&quot;Luis&quot;</code></li>
+</ul>
+</li>
+<li>变量赋值时候，变量名与变量值之间不能有空格</li>
+</ul>
+</li>
+<li>变量调用<ul>
+<li><code>echo $x</code></li>
+<li><code>echo $name</code></li>
+</ul>
+</li>
+<li>变量叠加<ul>
+<li>x=123</li>
+<li>x=”$x”456</li>
+<li>x=${x}789</li>
+</ul>
+</li>
+<li>变量查看<ul>
+<li>set<ul>
+<li>-u 如果设定此选项，调用未声明变量时会报错（默认无任何显示）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>变量删除<ul>
+<li><code>unset 变量名</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>环境变量<ul>
+<li>用户自定义环境变量<ul>
+<li>设置环境变量<ul>
+<li><code>export 变量名=变量值</code></li>
+<li><code>变量名=变量值;export 变量名</code></li>
+</ul>
+</li>
+<li>查看环境变量<ul>
+<li><code>set</code> 查看所有变量</li>
+<li><code>env</code> 查看环境变量</li>
+</ul>
+</li>
+<li>删除环境变量<ul>
+<li><code>unset 变量名</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>系统常用的环境变量<ul>
+<li>HOSTNAME 主机名</li>
+<li>SHELL 当前的 Shell</li>
+<li>TERM 终端环境</li>
+<li>HISTSIZE 历史命令条数</li>
+<li>SSH_CLIENT 当前操作环境是用 ssh 连接的，这里记录客户端 IP</li>
+<li>SSH_TTY ssh 连接的终端时 pts/1</li>
+<li>USER 当前登录的用户</li>
+<li>PATH 系统查找命令的路径<ul>
+<li><code>echo $PATH</code> 查看 PATH 环境变量</li>
+<li><code>PATH=&quot;$PATH&quot;:/root/sh</code> 增加 PATH 变量的值</li>
+</ul>
+</li>
+<li>PS1 变量 命令提示符设置<ul>
+<li>\d 显示日期，格式为”星期 月 日”</li>
+<li>\H 显示完整的主机名，如默认主机名 “localhost.localdomain”</li>
+<li>\t 显示 24 小时制时间，格式为 “HH:MM:SS”</li>
+<li>\A 显示 24 小时制时间，格式为 “HH:MM”</li>
+<li>\u 显示当前用户名</li>
+<li>\w 显示当前所在目录的完整名称</li>
+<li>\W 显示当前所在目录的最后一个目录</li>
+<li>\$ 提示符。如果是 root 用户会显示提示符为 “#”，如果是普通用户会显示提示符为 “$”</li>
+<li>例子 <code>PS1=&#39;[\u@\A \w]\$ &#39;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>语系变量<ul>
+<li><code>locale</code> 查询当前系统语系（<code>echo $LANG</code>）<ul>
+<li>LANG 定义系统主语系的变量</li>
+<li>LC_ALL 定义整体语系的变量</li>
+</ul>
+</li>
+<li><code>locale -a | more</code> 查看 Linux 支持的所有语系</li>
+<li><code>cat /etc/sysconfig/i18n</code> 查询系统默认语系（下次开机语系变量）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>位置参数变量</p>
+<p>  位置参数变量|作用<br>  —|—<br>  $n|n 为数字，$0 代表命令本身，$1-$9 代表第一到第九个参数，十以上的参数需要用大括号包含，如 ${10}<br>  $*|这个变量代表命令行中所有的参数，$* 把所有的参数看成一个整体<br>  $@|这个变量代表命令行中所有的参数，不过 $@ 把每个参数区分对待<br>  $#|这个变量代表命令行中所有参数的个数</p>
+</li>
+<li><p>预定义变量</p>
+<p>  预定义变量|作用<br>  —|—<br>  $? | 最后一次执行的命令的返回状态。如果这个变量的值为 0，证明上一个命令正确执行；如果这个变量的值为非 0(具体是哪个数，由命令自己决定，则证明上一个命令执行不正确)<br>  $$ | 当前进程的进程号<br>  $! | 后台运行的最后一个进程的进程号</p>
+</li>
+<li><p>接收键盘输入</p>
+<ul>
+<li><code>read [选项] [变量名]</code><ul>
+<li>-p 提示信息：在等待 read 输入时，输出提示信息</li>
+<li>-t 秒数：read 命令会一直等待用户输入，使用此选项可以指定等待时间</li>
+<li>-n 字符数：read 命令只接受指定的字符数，就会执行</li>
+<li>-s 隐藏输入的数据，适用于机密信息的输入</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Shell-变量例子"><a href="#Shell-变量例子" class="headerlink" title="Shell 变量例子"></a>Shell 变量例子</h2><p>位置参数例子 1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">num1=$1</div><div class="line">num2=$2</div><div class="line"></div><div class="line"># 变量 sum 的和是 num1 加 num2</div><div class="line">sum=$(($num1+$num2))</div><div class="line"></div><div class="line"># 打印变量 sum 的值</div><div class="line">echo $sum</div></pre></td></tr></table></figure>
+<p>位置参数例子 2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line"># 使用 $# 代表所有参数的个数</div><div class="line">echo &quot;A total of $# parameters&quot;</div><div class="line"></div><div class="line"># 使用 $* 代表所有的参数</div><div class="line">echo &quot;The parameters is:$*&quot;</div><div class="line"></div><div class="line"># 使用 $@ 也代表所有参数</div><div class="line">echo &quot;The parameters is:$@&quot;</div></pre></td></tr></table></figure></p>
+<p>位置参数例子 3（$* 与 $@ 的区别）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">for i in &quot;$*&quot;</div><div class="line"># $* 中的所有参数看成是一个整体，所以这个 for 循环只会循环一次</div><div class="line">do</div><div class="line">	echo &quot;The parameters is: $i&quot;</div><div class="line">done</div><div class="line"></div><div class="line">for y in &quot;$@&quot;</div><div class="line"># $@ 中的每个参数都看成是独立的，所以 &quot;$@&quot; 中有几个参数，就会循环几次</div><div class="line">do</div><div class="line">	echo &quot;Parameter:$y&quot;</div><div class="line">done</div></pre></td></tr></table></figure></p>
+<p>接收键盘输入例子 1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">read -p &quot;Please input your name: &quot; -t 30 name</div><div class="line">echo $name</div><div class="line"></div><div class="line">read -p &quot;Please input your passwd: &quot; -s passed</div><div class="line">echo -e &quot;\n&quot;</div><div class="line">echo $passwd</div><div class="line"></div><div class="line">read -p &quot;Please input your sex [M/F]: &quot; -n 1 sex</div><div class="line">echo -e &quot;\n&quot;</div><div class="line">echo $sex</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/10/04/Linux-Shell-基础之变量/" data-id="cixwy9h4q00006l4bzh5zusgw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/10/04/Linux-Shell-基础之运算符/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Linux Shell 基础之运算符
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/10/03/Linux-Shell-实战/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Linux Shell 实战</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 18px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 14px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 12px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Yii/" style="font-size: 16px;">Yii</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/12/08/学习-UML（一）/">学习 UML（一）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/02/Yii2-Working-with-Databases/">Yii2 Working with Databases</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/22/关于-PHP-函数-array-walk-的一些想法/">关于 PHP 函数 array_walk 的一些想法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/21/关于-PHP-函数-array-filter-的一些想法/">关于 PHP 函数 array_filter 的一些想法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/21/关于-PHP-函数-array-map-的一些想法/">关于 PHP 函数 array_map 的一些想法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

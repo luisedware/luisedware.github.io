@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Linux-Shell-基础之正则表达式 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="第1章 正则表达式1-1 什么是正则表达式正则表达式是用于描述字符排列和匹配模式的一种语法规则。它主要用于字符串的模式分割、匹配、查找及替换操作。
+1-2 正则表达式与通配符
+正则表达式用来在文件中匹配符合条件的字符串，正则是包含匹配。grep、awk、sed 等命令可以支持正则表达式（字符串）
+通配符用来匹配符合条件的文件名，通配符是完全匹配。ls、find、cp 这些命令不支持正则表达式，所以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux-Shell-基础之正则表达式">
+<meta property="og:url" content="http://yoursite.com/2016/09/22/Linux-Shell-基础之正则表达式/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="第1章 正则表达式1-1 什么是正则表达式正则表达式是用于描述字符排列和匹配模式的一种语法规则。它主要用于字符串的模式分割、匹配、查找及替换操作。
+1-2 正则表达式与通配符
+正则表达式用来在文件中匹配符合条件的字符串，正则是包含匹配。grep、awk、sed 等命令可以支持正则表达式（字符串）
+通配符用来匹配符合条件的文件名，通配符是完全匹配。ls、find、cp 这些命令不支持正则表达式，所以">
+<meta property="og:updated_time" content="2016-10-04T04:45:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux-Shell-基础之正则表达式">
+<meta name="twitter:description" content="第1章 正则表达式1-1 什么是正则表达式正则表达式是用于描述字符排列和匹配模式的一种语法规则。它主要用于字符串的模式分割、匹配、查找及替换操作。
+1-2 正则表达式与通配符
+正则表达式用来在文件中匹配符合条件的字符串，正则是包含匹配。grep、awk、sed 等命令可以支持正则表达式（字符串）
+通配符用来匹配符合条件的文件名，通配符是完全匹配。ls、find、cp 这些命令不支持正则表达式，所以">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Linux-Shell-基础之正则表达式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/22/Linux-Shell-基础之正则表达式/" class="article-date">
+  <time datetime="2016-09-22T12:56:54.000Z" itemprop="datePublished">2016-09-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Linux-Shell-基础之正则表达式
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="第1章-正则表达式"><a href="#第1章-正则表达式" class="headerlink" title="第1章 正则表达式"></a>第1章 正则表达式</h2><h3 id="1-1-什么是正则表达式"><a href="#1-1-什么是正则表达式" class="headerlink" title="1-1 什么是正则表达式"></a>1-1 什么是正则表达式</h3><p>正则表达式是用于描述字符排列和匹配模式的一种语法规则。它主要用于字符串的模式分割、匹配、查找及替换操作。</p>
+<h3 id="1-2-正则表达式与通配符"><a href="#1-2-正则表达式与通配符" class="headerlink" title="1-2 正则表达式与通配符"></a>1-2 正则表达式与通配符</h3><ul>
+<li>正则表达式用来在文件中匹配符合条件的字符串，正则是包含匹配。grep、awk、sed 等命令可以支持正则表达式（字符串）</li>
+<li>通配符用来匹配符合条件的文件名，通配符是完全匹配。ls、find、cp 这些命令不支持正则表达式，所以只能使用 Shell 自己的通配符来进行匹配了。（文件）<ul>
+<li>* 匹配任意内容</li>
+<li>? 匹配任意一个内容</li>
+<li>[] 匹配括号中的一个字符</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-3-基础正则表达式"><a href="#1-3-基础正则表达式" class="headerlink" title="1-3 基础正则表达式"></a>1-3 基础正则表达式</h3><table>
+<thead>
+<tr>
+<th>元字符</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*</td>
+<td>前一个字符匹配 0 次或任意多次</td>
+</tr>
+<tr>
+<td>.</td>
+<td>匹配除了换行符外任意一个字符</td>
+</tr>
+<tr>
+<td>^</td>
+<td>匹配行首，例如：^hello 会匹配以 hello 开头的行</td>
+</tr>
+<tr>
+<td>$</td>
+<td>匹配行尾，例如：hello&amp; 会匹配以 hello 结尾的行</td>
+</tr>
+<tr>
+<td>[]</td>
+<td>匹配中括号中指定的任意一个字符，只匹配一个字符。</td>
+</tr>
+<tr>
+<td>[^]</td>
+<td>匹配除中括号的字符以外的任意一个字符</td>
+</tr>
+<tr>
+<td>\</td>
+<td>转义符，用于取消讲特殊符号的含义取消</td>
+</tr>
+<tr>
+<td>\{n\}</td>
+<td>表示其前面的字符恰好出现 n 次</td>
+</tr>
+<tr>
+<td>\{n,\}</td>
+<td>表示其前面的字符出现不小于 n 次</td>
+</tr>
+<tr>
+<td>\{n,m\}</td>
+<td>表示其前面的字符至少出现 n 次，最多出现 m 次</td>
+</tr>
+</tbody>
+</table>
+<h2 id="第2章-字符截取命令"><a href="#第2章-字符截取命令" class="headerlink" title="第2章 字符截取命令"></a>第2章 字符截取命令</h2><ul>
+<li>cut 列提取字符串<ul>
+<li><code>cut [选项] 文件名</code><ul>
+<li>-f 列号：提取第几列<ul>
+<li><code>cut -f 2 student.txt</code> 截取第二列</li>
+<li><code>cut -f 2,4 student.txt</code> 截取第二、第四列</li>
+</ul>
+</li>
+<li>-d 分隔符：按照指定分隔符分割列<ul>
+<li><code>grep &quot;/bin/bash&quot; /etc/passwd |grep -v &quot;root&quot; | cut -f 1 -d &quot;:&quot;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>printf 格式化输出命令<ul>
+<li><code>printf &#39;输出类型输出格式&#39; 输出内容</code><ul>
+<li>输出类型<ul>
+<li>%ns 输出字符串。n 是数字指代输出几个字符</li>
+<li>%ni 输出整数。n 是数字指代输出几个数字</li>
+<li>%m.nf 输出浮点数。m 和 n 是数字，指代输出的整数位数和小数位数。如 %8.2f 代表共输出 8 位数，其中 2 位是小数，6 位是整数。</li>
+</ul>
+</li>
+<li>输出格式<ul>
+<li>\a 输出警告声音</li>
+<li>\b 输出退格键</li>
+<li>\f 清除屏幕</li>
+<li>\n 换行</li>
+<li>\r 回车</li>
+<li>\t 水平输出 Tab 键</li>
+<li>\v 垂直输出 Tab 键</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>在 <code>awk</code> 命令的输出中支持 <code>print</code> 和 <code>printf</code> 命令</li>
+</ul>
+</li>
+<li>awk 字符截取命令<ul>
+<li><code>awk &#39;条件1{动作1}条件2{动作2}...&#39; 文件名</code></li>
+<li>条件<ul>
+<li>一般使用关系表达式作为条件</li>
+<li>x&gt;10 判断变量 x 是否大于 10</li>
+<li>x&gt;=10 大于等于</li>
+<li>x&lt;=10 小于等于</li>
+</ul>
+</li>
+<li>动作<ul>
+<li>格式化输出</li>
+<li>流程控制语句</li>
+</ul>
+</li>
+<li>例子<ul>
+<li><code>awk &#39;{printf $2 &quot;\t&quot; $4 &quot;\n&quot;}&#39; student.txt</code></li>
+<li><code>awk &#39;{print $2 &quot;\t&quot; $4 }&#39; student.txt</code></li>
+<li><code>df -h | awk &#39;{print $1 &quot;\t&quot; $3}&#39;</code><ul>
+<li><code>akw &#39;BEGIN{printf &quot;This is a transcript \n&quot;}{printf $2 &quot;\t&quot; $4 &quot;\n&quot;}&#39; student.txt</code></li>
+<li><code>cat /etc/passwd |grep &quot;/bin/bash&quot; | awk &#39;BEGIN{FS=&quot;:&quot;}{printf $1 &quot;\t&quot; $3 &quot;\n&quot;}&#39;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>sed 字符替换命令<ul>
+<li>sed 是一个几乎包括在所有 UNIX 平台（包括 Linux）的轻量级编辑器。sed 主要是用来将数据进行选取、替换、删除、新增的命令</li>
+<li><code>sed [选项] &#39;[动作]&#39; 文件名</code><ul>
+<li>选项<ul>
+<li>-n 一般 sed 命令会把所有数据都输出到屏幕，如果加入此选择则只会把经过 sed 命令处理的行输出到屏幕</li>
+<li>-e 允许对输入数据应用多条 sed 命令编辑</li>
+<li>-i 用 sed 的修改结果直接修改读取数据的文件，而不是由屏幕输出</li>
+</ul>
+</li>
+<li>动作<ul>
+<li>a 追加，在当前行后添加一行或多行</li>
+<li>c 行替换，用 c 后面的字符串替换原数据行</li>
+<li>i 插入，在当期行前插入一行或多行</li>
+<li>d 删除，删除指定行</li>
+<li>p 打印，输出指定的行</li>
+<li>s 字符串替换，用一个字符串替换另外一个字符串，格式为 “行范围s/旧字符串g”</li>
+</ul>
+</li>
+<li>例子<ul>
+<li><code>sed &#39;2p&#39; student.txt</code> 查看文件的第二行</li>
+<li><code>sed &#39;2,4d&#39; student.txt</code> 表示删除【第2-4行】，但是不改变文件本身</li>
+<li><code>sed &#39;2a piaoliangdecxiaoguniang&#39; student.txt</code> 在第2行之后添加字符串，但是不改变字符串本身</li>
+<li><code>sed &#39;4c xxwmpg&#39; student.txt</code> 将第二行的整行替换为xxwmpg</li>
+<li><code>sed &#39;6s/70/100/g&#39; student.txt</code> 将第7行的所有70全部替换为100，如果不指定行的话会替换所有的指定字符串</li>
+<li><code>sed -e &#39;s/fengj//g&#39;;s/cang//g&#39; student.txt</code> 同时把fengj和cang替换为空</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="第3章-字符处理命令"><a href="#第3章-字符处理命令" class="headerlink" title="第3章 字符处理命令"></a>第3章 字符处理命令</h2><ul>
+<li>sort 排序命令<ul>
+<li><code>sort [选项] 文件名</code><ul>
+<li>选项<ul>
+<li>-f 忽略大小写</li>
+<li>-n 以数值型进行排序，默认使用字符串型排序</li>
+<li>-r 反向排序</li>
+<li>-t 指定分隔符，默认的分隔符是制表符</li>
+<li>-k n[,m] 按照指定的字段范围排序。从第 n 字段开始，m 字段结束（默认到行尾）</li>
+</ul>
+</li>
+<li>用法<ul>
+<li><code>sort /etc/passwd</code> 用户信息正向排序</li>
+<li><code>sort -r /etc/passwd</code> 用户信息反向排序</li>
+<li><code>sort -t &quot;:&quot; -k 3,3 /etc/passwd</code> 指定分隔符是 “:”，用第三字段开头，第三字段结尾排序，就是只用第三字段排序</li>
+<li><code>sort -n -t &quot;:&quot; -k 3,3 /etc/passwd</code> 作用同上，但把指定字符串排序改为数字排序</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>wc 统计命令<ul>
+<li><code>wc [选项] 文件名</code><ul>
+<li>选项：<ul>
+<li>-l 只统计行数</li>
+<li>-w 只统计单词数</li>
+<li>-m 只统计字符数</li>
+</ul>
+</li>
+<li>用法：<ul>
+<li><code>wc /etc/passwd</code></li>
+<li><code>wc -l /etc/passwd</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/22/Linux-Shell-基础之正则表达式/" data-id="cixwy9h6200066l4b5xumzcxr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/09/23/Linux-服务管理/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Linux 服务管理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/09/20/Linux-网络基础/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Linux 网络基础</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 18px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 14px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 12px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Yii/" style="font-size: 16px;">Yii</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/12/08/学习-UML（一）/">学习 UML（一）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/02/Yii2-Working-with-Databases/">Yii2 Working with Databases</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/22/关于-PHP-函数-array-walk-的一些想法/">关于 PHP 函数 array_walk 的一些想法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/21/关于-PHP-函数-array-filter-的一些想法/">关于 PHP 函数 array_filter 的一些想法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/21/关于-PHP-函数-array-map-的一些想法/">关于 PHP 函数 array_map 的一些想法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

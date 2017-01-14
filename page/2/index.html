@@ -1,0 +1,1917 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-Yii-框架之高效篇" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/25/Yii-框架之高效篇/" class="article-date">
+  <time datetime="2016-10-25T12:42:56.000Z" itemprop="datePublished">2016-10-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/25/Yii-框架之高效篇/">Yii 框架之高效篇</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Yii-的延迟加载"><a href="#Yii-的延迟加载" class="headerlink" title="Yii 的延迟加载"></a>Yii 的延迟加载</h2><h3 id="类的延迟加载"><a href="#类的延迟加载" class="headerlink" title="类的延迟加载"></a>类的延迟加载</h3><p>sql_autoload_register</p>
+<p>Yii 如何使用 sql_autoload_register</p>
+<p>自动加载文件路径：vendor/yiisoft/yii2/Yii.php<br>入口文件路径：web/index.php</p>
+<h3 id="类的映射表机制"><a href="#类的映射表机制" class="headerlink" title="类的映射表机制"></a>类的映射表机制</h3><p>yii2快速的机制：使用类的映射表，把常用的类放入映射表中，加快加载速度</p>
+<p>映射表文件：vendor/yiisoft/yii2/classes.php<br>类的映射变量：Yii::$classMap<br>vendor/yiisoft/yii2/BaseYii.php</p>
+<p>可以通过使用Yii::$classMap，对延迟加载机制进行优化，是典型的空间换时间的做法，所以不建议往classMap中放入太多不常用的内容，避免内存占用过多</p>
+<p>只建议将常用的高频率class放进‘类的映射表’，不常用的就不要放，否则映射表大了，不但降低查询效率，还将占用不必要的内存。</p>
+<h3 id="组件的延迟加载"><a href="#组件的延迟加载" class="headerlink" title="组件的延迟加载"></a>组件的延迟加载</h3><ul>
+<li>index.php<ul>
+<li>app<ul>
+<li>application class</li>
+<li>components<ul>
+<li>vendor/yiisoft/yii2/web/Application.php</li>
+<li>vendor/yiisoft/yii2/base/Application.php</li>
+</ul>
+</li>
+<li>controller</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据缓存的使用"><a href="#数据缓存的使用" class="headerlink" title="数据缓存的使用"></a>数据缓存的使用</h2><h3 id="数据缓存的基础使用"><a href="#数据缓存的基础使用" class="headerlink" title="数据缓存的基础使用"></a>数据缓存的基础使用</h3><p>如何配置缓存服务器</p>
+<p>如何将数据写入缓存</p>
+<p>如何将缓存数据读出</p>
+<p>如何修改缓存的数据</p>
+<p>如何删除缓存的数据</p>
+<p>如何清空缓存中数据</p>
+<p>如何设置缓存有效期</p>
+<h3 id="数据缓存的依赖关系详解"><a href="#数据缓存的依赖关系详解" class="headerlink" title="数据缓存的依赖关系详解"></a>数据缓存的依赖关系详解</h3><p>可以用来解决缓存实时更新的问题</p>
+<p>文件依赖<br>yii框架缓存的DB依赖,跟其他缓存依赖一样,如果依赖中的sql取出的数据发生了改变,相关联的缓存就会消失</p>
+<p>表达式依赖</p>
+<p>1、文件依赖(FileDependency)：一旦文件改变，缓存将失效<br>$dependency=new \yii\caching\FileDependency([‘filename’=&gt;’hw.txt’]);<br>$cache-&gt;add(‘file_key’,’hello word!’,3000,$dependency);<br>2、表达式依赖(ExpressionDependency)：一旦表达式改变，缓存将失效，即参数发生了变化<br>$dependency=new \yii\caching\ExpressionDependency([‘expression’=&gt;’\YII::$app-&gt;request-&gt;get[“name”]’]);<br>3、DB依赖(DbDependency)：一旦数据改变，缓存将失效<br>$dependency=new \yii\caching\ExpressionDependency(<br>[‘sql’=&gt;’select count(*) from user’]);</p>
+<p>4.链式依赖<br>5.组依赖</p>
+<p>Yii 框架是如何监听文件改变、表达式改变和数据改变？</p>
+<h2 id="片段缓存的使用"><a href="#片段缓存的使用" class="headerlink" title="片段缓存的使用"></a>片段缓存的使用</h2><p>//片段缓存介绍(主要负责把前端界面的一些区域[不会经常变动的区域：如京东商品分类]缓存起来[缓存到内存或文件中]，下次访问时直接从缓存里把数据拿出来，而不用再从数据库抓取信息，提高了程序的执行效率)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 使用视图组件($this)里的beginCache(&apos;缓存数据的名字&apos;)方法把cache_div给缓存起来;这个方法开启会检查当前有没有缓存，如果没有返回false --&gt;</div><div class="line">&lt;!-- 如何证明cache_div的代码片段被缓存了呢？ 在两个div里都添加上相同的内容。如果cache_div被缓存起来将会使用缓存里的内容，而不会使用修改后的内容。提高了程序的运行效率。 --&gt;</div><div class="line">&lt;?php if($this-&gt;beginCache(&apos;cache_div&apos;))&#123;?&gt;</div><div class="line">&lt;div id=&apos;cache_div&apos;&gt;</div><div class="line">	&lt;div&gt;这里待会会被缓存(这里是缓存过后添加的)&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;?php</div><div class="line">	$this-&gt;endCache();//结束缓存</div><div class="line">&#125;</div><div class="line">?&gt;</div><div class="line"></div><div class="line">&lt;div id=&apos;no_cache_div&apos;&gt;</div><div class="line">	&lt;div&gt;这里不会被缓存(这里是缓存过后添加的)&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<p>片段缓存的设置</p>
+<p>片段缓存的时间<br>$this-&gt;beginCache(‘cache_div’,[‘duration’=&gt;$duration]);<br>$this-&gt;endCache();</p>
+<p>片段缓存的依赖<br>$this-&gt;beginCache(‘cache_div’,[‘dependency’=&gt;$dependency]);<br>$this-&gt;endCache();</p>
+<p>片段缓存的开关<br>$this-&gt;beginCache(‘cache_div’,[‘enabled’=&gt;$enabled’]);<br>$this-&gt;endCache();</p>
+<p>片段缓存的嵌套使用</p>
+<p>谨慎使用：外层的失效时间应该短于内层，外层的依赖条件应该低于内层，以确保最小的片段，返回的是最新的数据。</p>
+<p>片段嵌套缓存  外面的缓存时间大于里面的  那么里面的数据即使超过了缓存时间后有修改也不会被执行</p>
+<h2 id="页面缓存的使用"><a href="#页面缓存的使用" class="headerlink" title="页面缓存的使用"></a>页面缓存的使用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">public function actionIndex()</div><div class="line">&#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">//页面访问index()方法之前会先访问behavior()方法行为。</div><div class="line">public function behavior()</div><div class="line">&#123;</div><div class="line">    return [</div><div class="line">        [</div><div class="line">            &apos;class&apos;      =&gt; &apos;yii\filters\PageCache&apos;,//页面缓存类</div><div class="line">            &apos;duration&apos;   =&gt; 1000,//缓存时间</div><div class="line">            &apos;only&apos;       =&gt; [&apos;index&apos;, &apos;test&apos;],//仅仅缓存index和test方法的数据]</div><div class="line">            &apos;dependency&apos; =&gt; [&apos;class&apos; =&gt; &apos;yii\caching\FileDependency&apos;, &apos;fileName&apos; =&gt; &apos;hw.txt&apos;]//文件缓存依赖</div><div class="line">        ],</div><div class="line">    ];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="HTTP-缓存的使用"><a href="#HTTP-缓存的使用" class="headerlink" title="HTTP 缓存的使用"></a>HTTP 缓存的使用</h2><p>如何校验服务器与浏览器的数据一致</p>
+<p>用矩形L代表浏览器，矩形F代表服务器。<br>1.当用户到F浏览网站或一个页面时，就会用L给F发送一个请求，然后F就会处理这个请求，处理完之后会把处理的结果作为一个响应返回给L，然后L从这个响应里拿数据，再显示出来，这样用户就可以看到他想看到的页面了。<br>2.但这时会遇到一个小问题，如果用户从F拿过来的数据不是他想要的数据(比如12306订票页面想订的票没有了)，这时用户猛刷新L，那么L就会给F发送很多的请求，实际上F的数据是没有发生变化的，F收到这么多请求后都会照常的处理，但处理的结果没有发生变化，所以处理的结果跟第一次返回出去的数据是一样的。所以这样对F来说，很浪费资源、时间。<br>3.F想了一个办法，当F第一次把数据(小圆表示)发送给L时，它让L把数据缓存到L里面，也就是把它缓存起来，缓存起来以后如果下一次L发送了请求到了F这边之后，F会对比F这边的数据和L那边的数据是不是一样的(F是如何校验的呢？)，如果是一样的那就没必要再把这个数据发送回给L了，就让L使用缓存里的数据就行了。<br>4.F如何校验F和L的数据是一样的，F就想了一个办法。当F第一次发送数据给L时，会在数据中塞入一个last-modified字段(记录了F这边数据的修改时间)，那么L也有了这个字段。那么当L下一次发送请求时，会把这个修改时间也带上，也就是把lm(last-modified字段)发送回给F，F会校验lm和F里的那个数据的修改时间是否是一样的，如果是一样的那么这个数据肯定没有被修改过，那就没必要再发送回给L了，直接告诉L去使用缓存里的数据就行了。<br>5.另一种校验方式是基于last-modified的小缺陷设计出来的(开发人员把F的数据@改为#，然后又改回@，那么数据@虽然没变化，但它的修改时间改变了。那么L发送过来的lm和数据@的修改时间是对不上的，然后F又把@发送给L，但实际上@没有发生变化，这样也会造成一些问题)。所以F想了一个办法，F第一次发送@数据包时，会根据@里的内容生成一个标志etag，通过etag可以大概了解数据包@里的内容。F会把etag和last-modified一起发送给L，那么L下一次访问F时，会传lm和etag。那么F先验证lm(两边数据修改时间是否一样)，一样则使用L的缓存；如果不一样，F则验证etag是否一样，如果一样证明@没有被修改，则让L使用缓存</p>
+<p>服务器响应304，not modifired</p>
+<p>服务器怎么告诉浏览器缓存起来？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public function behaviors()&#123;</div><div class="line">	return [</div><div class="line">		[</div><div class="line">			&apos;class&apos;=&gt;&apos;yii\filters\HttpCache&apos;,</div><div class="line">			&apos;lastModified&apos;=&gt;function()&#123;</div><div class="line">				return 1432817564;</div><div class="line">			&#125;,</div><div class="line">			&apos;etagSeed&apos;=&gt;function()&#123;</div><div class="line">				return &apos;etagseed2f;&apos;</div><div class="line">			&#125;</div><div class="line">		]</div><div class="line">	];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>//使用 HttpCache 之后再请求头部header会多了一个Cache-Control:last-modified 来作为标志</p>
+<p>在服务器修改数据之后如何让浏览器更新缓存</p>
+<p>httpCache的依赖:<br>lastModified: 时间标识<br>etagSeed：内容标识<br>当二者同时存时，需要两个均发生变化才会发送200并返回新数据</p>
+<h2 id="gii-工具简介"><a href="#gii-工具简介" class="headerlink" title="gii 工具简介"></a>gii 工具简介</h2><ul>
+<li>Model Generator（数据模型的代码生成器）</li>
+<li>Form Generator（表单的代码生成器）</li>
+<li>Module Generator（模块的代码生成器）</li>
+<li>CRUD Generator（增删改查的代码生成器）</li>
+<li>Controller Generator（控制器的代码生成器）</li>
+<li>Extension Generator（扩展的代码生成器）</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/10/25/Yii-框架之高效篇/" data-id="cixwy9h8t001i6l4b2ne81hqy" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-打造扛得住的-MySQL-数据库架构" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/20/打造扛得住的-MySQL-数据库架构/" class="article-date">
+  <time datetime="2016-10-20T12:57:11.000Z" itemprop="datePublished">2016-10-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/20/打造扛得住的-MySQL-数据库架构/">打造扛得住的 MySQL 数据库架构</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="第1章-实例和故事"><a href="#第1章-实例和故事" class="headerlink" title="第1章 实例和故事"></a>第1章 实例和故事</h2><h3 id="1-1-什么决定了电商双11大促的成败"><a href="#1-1-什么决定了电商双11大促的成败" class="headerlink" title="1-1 什么决定了电商双11大促的成败"></a>1-1 什么决定了电商双11大促的成败</h3><p>电商公司的服务器能够承受住双十一期间高并发的访问量，为用户提供稳定高速的购物体验。</p>
+<h3 id="1-2-在双11大促中的数据库服务器"><a href="#1-2-在双11大促中的数据库服务器" class="headerlink" title="1-2 在双11大促中的数据库服务器"></a>1-2 在双11大促中的数据库服务器</h3><p>数据库架构：</p>
+<ul>
+<li>1 台 MySQL 主服务器</li>
+<li>15 台 MySQL 从服务器</li>
+</ul>
+<p>当时没有部署主从复制组件，一旦主服务器出现故障，很难自动进行故障切换，必须由 DBA 进行手动操作。过多的从服务器，对主服务器的网卡容量也是一个不小的挑战。</p>
+<p>数据库性能依据参数：</p>
+<ul>
+<li>QPS</li>
+<li>TPS</li>
+<li>并发量</li>
+<li>CPU 使用率</li>
+<li>磁盘 IO</li>
+</ul>
+<h3 id="1-3-在大促中什么影响了数据库性能"><a href="#1-3-在大促中什么影响了数据库性能" class="headerlink" title="1-3 在大促中什么影响了数据库性能"></a>1-3 在大促中什么影响了数据库性能</h3><p>影响数据库性能的因素</p>
+<ul>
+<li>SQL 查询速度</li>
+<li>服务器硬件</li>
+<li>网卡流量</li>
+<li>磁盘 IO</li>
+</ul>
+<p>数据库性能常见的风险：</p>
+<ul>
+<li>效率低下的 SQL<ul>
+<li>QPS：每秒钟处理的查询量<ul>
+<li>10ms 处理 1个 SQL，1s 处理 100个 SQL，QPS &lt;= 100</li>
+<li>100ms 处理 1个 SQL，1s 处理 10个 SQL，QPS &lt;= 10</li>
+</ul>
+</li>
+<li>TPS：每秒钟处理的事务数</li>
+</ul>
+</li>
+<li>大量的并发和超高的 CPU 使用率<ul>
+<li>大量的并发会导致数据库连接数被占满</li>
+<li>超高的 CPU 使用率会导致服务器因 CPU 资源耗尽而出现宕机</li>
+</ul>
+</li>
+<li>磁盘 IO<ul>
+<li>磁盘 IO 性能突然下降（使用更快的磁盘设备）</li>
+<li>其它大量消耗磁盘性能的计划任务（调整计划任务，做好磁盘维护）</li>
+</ul>
+</li>
+<li>网卡 IO<ul>
+<li>当网卡 IO 被占满时，（千兆网卡 1000 Mb/8=100 MB）会出现无法连接数据库的情况。</li>
+<li>如何避免无法连接数据库的情况<ul>
+<li>减少从服务器的数量</li>
+<li>进行分级缓存</li>
+<li>避免使用 <code>select *</code> 进行查询</li>
+<li>分离业务网络和服务器网络</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>大表<ul>
+<li>什么样的表可以称之为大表<ul>
+<li>记录行数巨大，单表超过千万行</li>
+<li>表数据文件巨大，表数据文件超过 10 G</li>
+</ul>
+</li>
+<li>大表对查询的影响<ul>
+<li>慢查询：很难在一定的时间内过滤出所需要的数据<ul>
+<li>区分度低的数据在查询的时候会产生大量的磁盘 IO，会降低磁盘的效率，导致查询效率低下,出现大量的慢查询。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>大表对 DDL 操作的影响<ul>
+<li>建立索引需要很长的时间<ul>
+<li>MySQL 版本 &lt; 5.5，建立索引会锁表</li>
+<li>MySQL 版本 &gt;= 5.5，虽然不会锁表但会引起主从延迟</li>
+</ul>
+</li>
+<li>修改表结构需要长时间锁表<ul>
+<li>会造成长时间的主从延迟</li>
+<li>影响正常的数据操作</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>解决方案<ul>
+<li>分库分表，把一张大表分成多个小表<ul>
+<li>难点<ul>
+<li>分表主键的选择</li>
+<li>分表后跨分区数据的查询和统计</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>大表的历史数据归档（减少对前后端业务的影响）<ul>
+<li>难点<ul>
+<li>归档时间点的选择</li>
+<li>如何进行归档操作</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>大事务<ul>
+<li>事务的概念<ul>
+<li>事务是数据库系统区别于其它一切文件系统的重要特性之一</li>
+<li>事务是一组具有原子性的 SQL 语句，或是一个独立的工作单元</li>
+</ul>
+</li>
+<li>事务的特性<ul>
+<li>原子性<ul>
+<li>一个事务必须被视为一个不可分割的最小工作单元，整个事务中的所有操作要么全部提交成功，要么全部失败，对于一个事务来说，不可能只执行其中的一部分操作。</li>
+</ul>
+</li>
+<li>一致性<ul>
+<li>一致性是指事务将数据库从一种一致性状态转换到另外一种一致性状态。在事务开始之前和事务结束后，数据库中的数据完整性没有被破坏。</li>
+</ul>
+</li>
+<li>隔离性<ul>
+<li>隔离性要求一个事务对数据库中数据的修改，在未提交完成前对于其它事务是不可见的。</li>
+<li>隔离性的类型<ul>
+<li>未提交读（Read Uncommited）</li>
+<li>已提交读（Read Commited）</li>
+<li>可重复读（Repeatable Read）</li>
+<li>可串行化（Serialization）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>持久性<ul>
+<li>一旦事务提交，则其所做的修改就会永久保存到数据库中。此时即使系统崩溃，已经提交的修改数据也不会丢失</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>什么是大事务<ul>
+<li>定义：运行时间比较长，操作的数据比较多的事务</li>
+<li>风险：<ul>
+<li>锁定太多的数据，造成大量的阻塞和锁超时</li>
+<li>回滚时所需时间比较长</li>
+<li>执行时间长，容易造成主从延迟</li>
+</ul>
+</li>
+<li>处理：<ul>
+<li>避免一次处理太多的数据</li>
+<li>移出不必要在事务中的 SELECT 操作</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="第2章-什么影响了MySQL性能"><a href="#第2章-什么影响了MySQL性能" class="headerlink" title="第2章 什么影响了MySQL性能"></a>第2章 什么影响了MySQL性能</h2><h2 id="第3章-MySQL基准测试"><a href="#第3章-MySQL基准测试" class="headerlink" title="第3章 MySQL基准测试"></a>第3章 MySQL基准测试</h2><h2 id="第4章-MySQL数据库结构优化"><a href="#第4章-MySQL数据库结构优化" class="headerlink" title="第4章 MySQL数据库结构优化"></a>第4章 MySQL数据库结构优化</h2><h2 id="第5章-MySQL高可用架构设计"><a href="#第5章-MySQL高可用架构设计" class="headerlink" title="第5章 MySQL高可用架构设计"></a>第5章 MySQL高可用架构设计</h2><h2 id="第6章-数据库索引优化"><a href="#第6章-数据库索引优化" class="headerlink" title="第6章 数据库索引优化"></a>第6章 数据库索引优化</h2><h2 id="第7章-SQL查询优化"><a href="#第7章-SQL查询优化" class="headerlink" title="第7章 SQL查询优化"></a>第7章 SQL查询优化</h2><h2 id="第8章-数据库的分库分表"><a href="#第8章-数据库的分库分表" class="headerlink" title="第8章 数据库的分库分表"></a>第8章 数据库的分库分表</h2><h2 id="第9章-数据库监控"><a href="#第9章-数据库监控" class="headerlink" title="第9章 数据库监控"></a>第9章 数据库监控</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/10/20/打造扛得住的-MySQL-数据库架构/" data-id="cixwy9hco00496l4bmxq9me6v" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-MySQL-性能优化" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/13/MySQL-性能优化/" class="article-date">
+  <time datetime="2016-10-13T12:32:23.000Z" itemprop="datePublished">2016-10-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/13/MySQL-性能优化/">MySQL 性能优化</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="可以进行优化的层面"><a href="#可以进行优化的层面" class="headerlink" title="可以进行优化的层面"></a>可以进行优化的层面</h2><ul>
+<li>硬件</li>
+<li>系统配置</li>
+<li>数据库表结构</li>
+<li>SQL 语句和索引</li>
+</ul>
+<h2 id="进行优化前的数据准备"><a href="#进行优化前的数据准备" class="headerlink" title="进行优化前的数据准备"></a>进行优化前的数据准备</h2><p>打开以下链接下载数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://downloads.mysql.com/docs/sakila-db.zip</div></pre></td></tr></table></figure></p>
+<p>打开终端，执行以下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"># 登录 MySQL Cli 模式</div><div class="line">mysql -uroot -p</div><div class="line"></div><div class="line"># 创建数据库</div><div class="line">SOURCE /Users/LuisEdware/Downloads/sakila-db/sakila-schema.sql.sql</div><div class="line"></div><div class="line"># 填充数据到数据库</div><div class="line">SOURCE /Users/LuisEdware/Downloads/sakila-db/sakila-data.sql</div><div class="line"></div><div class="line"># 使用 sakila 数据库</div><div class="line">USE sakila;</div></pre></td></tr></table></figure></p>
+<h2 id="SQL-语句和索引"><a href="#SQL-语句和索引" class="headerlink" title="SQL 语句和索引"></a>SQL 语句和索引</h2><h3 id="MySQL-慢查询日志"><a href="#MySQL-慢查询日志" class="headerlink" title="MySQL 慢查询日志"></a>MySQL 慢查询日志</h3><p>如何发现有问题的 SQL？答案是使用 MySQL 慢查询日志对有效率问题的 SQL 进行监控，执行命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"># 查看是否开启慢查询日志</div><div class="line">show variables like &quot;slow_query_log&quot;;</div><div class="line"></div><div class="line"># 查看是否设置了把没有索引的记录到慢查询日志</div><div class="line">show variables like &quot;log_queries_not_using_indexes&quot;;</div><div class="line"></div><div class="line"># 查看是否设置慢查询的 SQL 执行时间</div><div class="line">show variables like &quot;long_query_time&quot;;</div><div class="line"></div><div class="line"># 查看慢查询日志记录位置</div><div class="line">show variables like &quot;slow_query_log_file&quot;;</div><div class="line"></div><div class="line"># 开启慢查询日志</div><div class="line">set global slow_query_log=on</div><div class="line"></div><div class="line"># 设置没有索引的记录到慢查询日志</div><div class="line">set global log_queries_not_using_indexes=on</div><div class="line"></div><div class="line"># 设置到慢查询日志的 SQL 执行时间</div><div class="line">set global long_query_time=0</div><div class="line"></div><div class="line"># 查看慢查询日志（在 Linux 终端下执行）</div><div class="line">tail -50 /usr/local/var/mysql/luyiyuandeMacBook-Pro-slow.log;</div></pre></td></tr></table></figure></p>
+<p>慢查询日志所包含的内容</p>
+<ul>
+<li>SQL 的执行时间：<strong># Time: 2016-10-13T10:01:45.914267Z</strong></li>
+<li>SQL 的执行主机：<strong># User@Host: root[root] @ localhost []  Id:   949</strong></li>
+<li>SQL 的执行信息：<strong># Query_time: 0.000227  Lock_time: 0.000099 Rows_sent: 2  Rows_examined: 2</strong></li>
+<li>SQL 的执行时间：<strong>SET timestamp=1476352905;</strong></li>
+<li>SQL 的执行内容：<strong>select * from store;</strong></li>
+</ul>
+<p>慢查询日志分析工具</p>
+<ul>
+<li>mysqldumpslow<ul>
+<li>安装：MySQL 数据库自带</li>
+<li>使用：<code>mysqldumpslow /usr/local/var/mysql/luyiyuandeMacBook-Pro-slow.log;</code></li>
+<li>选项</li>
+<li>参数</li>
+</ul>
+</li>
+<li>pt-query-digest<ul>
+<li>安装：<code>brew install brew install percona-toolkit</code></li>
+<li>使用：<code>pt-query-digest /usr/local/var/mysql/luyiyuandeMacBook-Pro-slow.log | more;</code></li>
+<li>选项</li>
+<li>参数</li>
+</ul>
+</li>
+</ul>
+<p>如何通过慢查询日志发现有问题的 SQL？</p>
+<ul>
+<li>查询次数多且每次查询占用时间长的 SQL</li>
+<li>IO 大的 SQL</li>
+<li>未命中索引的 SQL</li>
+</ul>
+<h3 id="EXPLAIN-分析-SQL-的执行计划"><a href="#EXPLAIN-分析-SQL-的执行计划" class="headerlink" title="EXPLAIN 分析 SQL 的执行计划"></a>EXPLAIN 分析 SQL 的执行计划</h3><p>使用 EXPLAIN 分析 SQL 的执行计划的例子如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">EXPLAIN</span> <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> staff;</div></pre></td></tr></table></figure></p>
+<p>使用 EXPLAIN 分析 SQL 的各列参数含义如下：</p>
+<ul>
+<li>id：SQL 语句执行顺序编号</li>
+<li>select_type：SQL 语句执行的类型，主要区别普通查询、联合查询和子查询之类的复杂查询</li>
+<li>table：SQL 语句执行所引用的数据表</li>
+<li>type：显示连接使用的类型</li>
+<li>possible_keys：指出 MySQL 能在该数据表中使用哪些索引有助于查询</li>
+<li>key：SQL 语句执行时所使用的索引</li>
+<li>key_len：SQL 语句执行时所使用的索引的长度。在不损失精确性的情况下，长度越短越好</li>
+<li>ref：显示索引的哪一列被使用了</li>
+<li>rows：MySQL 认为必须检查的用来返回请求数据的行数</li>
+<li>Extra：提供 MySQL 优化器一系列额外信息</li>
+</ul>
+<h3 id="MAX-和-COUNT-的优化"><a href="#MAX-和-COUNT-的优化" class="headerlink" title="MAX() 和 COUNT() 的优化"></a>MAX() 和 COUNT() 的优化</h3><h4 id="MAX"><a href="#MAX" class="headerlink" title="MAX()"></a>MAX()</h4><p>分析 SQL 语句：使用 MAX() 方法查询最后一笔交易的时间<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">EXPLAIN SELECT MAX(payment_date) FROM payment_date</div></pre></td></tr></table></figure></p>
+<p>执行结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">*************************** 1. row ***************************</div><div class="line">           id: 1</div><div class="line">  select_type: SIMPLE</div><div class="line">        table: payment</div><div class="line">   partitions: NULL</div><div class="line">         type: ALL</div><div class="line">possible_keys: NULL</div><div class="line">          key: NULL</div><div class="line">      key_len: NULL</div><div class="line">          ref: NULL</div><div class="line">         rows: 16086</div><div class="line">     filtered: 100.00</div><div class="line">        Extra: NULL</div><div class="line">1 row in set, 1 warning (0.00 sec)</div></pre></td></tr></table></figure></p>
+<p>如果数据表的数据非常大，查询频率又非常高，那么服务器的 IO 消耗也会非常高，所以这条 SQL 语句需要优化。可以通过建立索引进行优化。执行代码如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> idx_paydate <span class="keyword">ON</span> payment(payment_date);</div></pre></td></tr></table></figure>
+<p>然后再分析 SQL 语句，执行结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">*************************** 1. row ***************************</div><div class="line">           id: 1</div><div class="line">  select_type: SIMPLE</div><div class="line">        table: NULL</div><div class="line">   partitions: NULL</div><div class="line">         type: NULL</div><div class="line">possible_keys: NULL</div><div class="line">          key: NULL</div><div class="line">      key_len: NULL</div><div class="line">          ref: NULL</div><div class="line">         rows: NULL</div><div class="line">     filtered: NULL</div><div class="line">        Extra: Select tables optimized away</div><div class="line">1 row in set, 1 warning (0.01 sec)</div></pre></td></tr></table></figure></p>
+<p>经过优化之后，由于索引是按顺序排列的，MySQL 不需要查询表中的数据，而是通过查询索引最后的一个数据，就可以得知执行结果了。而且这个时候，不管表的数据量多大，查询 MAX() 所需要的时间都是基本固定的，这样就尽可能地减少了 IO 操作。</p>
+<h4 id="COUNT"><a href="#COUNT" class="headerlink" title="COUNT()"></a>COUNT()</h4><p>分析 SQL 语句：使用 COUNT() 函数在一条 SQL 中同时查出 2006 年和 2007 年电影的数量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">SELECT</div><div class="line">	count(release_year = &apos;2006&apos; OR NULL) AS &apos;2006 年电影数量&apos; ,</div><div class="line">	count(release_year = &apos;2007&apos; OR NULL) AS &apos;2007 年电影数量&apos;</div><div class="line">FROM</div><div class="line">	film;</div></pre></td></tr></table></figure></p>
+<p>count(*) 包含空值，count(id) 不包含空值。上述语句就是优化 Count() 函数取值</p>
+<h3 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h3><p>分析 SQL 语句：查询 sandra 出演的所有影片<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span></div><div class="line">	title ,</div><div class="line">	release_year ,</div><div class="line">	<span class="keyword">LENGTH</span></div><div class="line"><span class="keyword">FROM</span></div><div class="line">	film</div><div class="line"><span class="keyword">WHERE</span></div><div class="line">	film_id <span class="keyword">IN</span>(</div><div class="line">		<span class="keyword">SELECT</span></div><div class="line">			film_id</div><div class="line">		<span class="keyword">FROM</span></div><div class="line">			film_actor</div><div class="line">		<span class="keyword">WHERE</span></div><div class="line">			actor_id <span class="keyword">IN</span>(</div><div class="line">				<span class="keyword">SELECT</span></div><div class="line">					actor_id</div><div class="line">				<span class="keyword">FROM</span></div><div class="line">					actor</div><div class="line">				<span class="keyword">WHERE</span></div><div class="line">					first_name = <span class="string">'sandra'</span></div><div class="line">			)</div><div class="line">	)</div></pre></td></tr></table></figure></p>
+<p>通常情况下，需要把子查询优化为 join 查询，但在优化时要注意关联键是否有一对多的关系，要注意重复数据。</p>
+<h3 id="GROUP-BY"><a href="#GROUP-BY" class="headerlink" title="GROUP BY"></a>GROUP BY</h3><p>group by 可能会出现临时表、文件排序等，影响效率。可以通过关联的子查询，来避免产生临时表和文件排序，可以节省 IO。</p>
+<p>group by 查询优化前：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">EXPLAIN</span> <span class="keyword">SELECT</span></div><div class="line">	actor.first_name ,</div><div class="line">	actor.last_name ,</div><div class="line">	<span class="keyword">Count</span>(*)</div><div class="line"><span class="keyword">FROM</span></div><div class="line">	sakila.film_actor</div><div class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> sakila.actor <span class="keyword">USING</span>(actor_id)</div><div class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span></div><div class="line">	film_actor.actor_id;</div></pre></td></tr></table></figure></p>
+<p>执行结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">*************************** 1. row ***************************</div><div class="line">           id: 1</div><div class="line">  select_type: SIMPLE</div><div class="line">        table: actor</div><div class="line">   partitions: NULL</div><div class="line">         type: ALL</div><div class="line">possible_keys: PRIMARY</div><div class="line">          key: NULL</div><div class="line">      key_len: NULL</div><div class="line">          ref: NULL</div><div class="line">         rows: 200</div><div class="line">     filtered: 100.00</div><div class="line">        Extra: Using temporary; Using filesort</div><div class="line">*************************** 2. row ***************************</div><div class="line">           id: 1</div><div class="line">  select_type: SIMPLE</div><div class="line">        table: film_actor</div><div class="line">   partitions: NULL</div><div class="line">         type: ref</div><div class="line">possible_keys: PRIMARY,idx_fk_film_id</div><div class="line">          key: PRIMARY</div><div class="line">      key_len: 2</div><div class="line">          ref: sakila.actor.actor_id</div><div class="line">         rows: 27</div><div class="line">     filtered: 100.00</div><div class="line">        Extra: Using index</div><div class="line">2 rows in set, 1 warning (0.01 sec)</div></pre></td></tr></table></figure></p>
+<p>group by 查询优化后：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">EXPLAIN SELECT</div><div class="line">	actor.first_name ,</div><div class="line">	actor.last_name ,</div><div class="line">	c.cnt</div><div class="line">FROM</div><div class="line">	sakila.actor</div><div class="line">INNER JOIN(</div><div class="line">	SELECT</div><div class="line">		actor_id ,</div><div class="line">		count(*) AS cnt</div><div class="line">	FROM</div><div class="line">		sakila.film_actor</div><div class="line">	GROUP BY</div><div class="line">		actor_id</div><div class="line">) AS c USING(actor_id);</div></pre></td></tr></table></figure></p>
+<p>执行结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">*************************** 1. row ***************************</div><div class="line">           id: 1</div><div class="line">  select_type: PRIMARY</div><div class="line">        table: actor</div><div class="line">   partitions: NULL</div><div class="line">         type: ALL</div><div class="line">possible_keys: PRIMARY</div><div class="line">          key: NULL</div><div class="line">      key_len: NULL</div><div class="line">          ref: NULL</div><div class="line">         rows: 200</div><div class="line">     filtered: 100.00</div><div class="line">        Extra: NULL</div><div class="line">*************************** 2. row ***************************</div><div class="line">           id: 1</div><div class="line">  select_type: PRIMARY</div><div class="line">        table: &lt;derived2&gt;</div><div class="line">   partitions: NULL</div><div class="line">         type: ref</div><div class="line">possible_keys: &lt;auto_key0&gt;</div><div class="line">          key: &lt;auto_key0&gt;</div><div class="line">      key_len: 2</div><div class="line">          ref: sakila.actor.actor_id</div><div class="line">         rows: 27</div><div class="line">     filtered: 100.00</div><div class="line">        Extra: NULL</div><div class="line">*************************** 3. row ***************************</div><div class="line">           id: 2</div><div class="line">  select_type: DERIVED</div><div class="line">        table: film_actor</div><div class="line">   partitions: NULL</div><div class="line">         type: index</div><div class="line">possible_keys: PRIMARY,idx_fk_film_id</div><div class="line">          key: PRIMARY</div><div class="line">      key_len: 4</div><div class="line">          ref: NULL</div><div class="line">         rows: 5462</div><div class="line">     filtered: 100.00</div><div class="line">        Extra: Using index</div><div class="line">3 rows in set, 1 warning (0.00 sec)</div></pre></td></tr></table></figure></p>
+<h3 id="LIMIT"><a href="#LIMIT" class="headerlink" title="LIMIT"></a>LIMIT</h3><p>LIMIT 常用于分页处理，时常会伴随 ORDER BY 从句使用，因此大多时候会使用 Filesorts ，这样会造成大量的 IO 问题</p>
+<p>优化步骤1：使用有索引的列或主键进行 Order By 操作<br>优化步骤2：记录上次返回的主键，在下次查询时使用主键过滤（保证主键是自增且有索引）</p>
+<h3 id="索引优化"><a href="#索引优化" class="headerlink" title="索引优化"></a>索引优化</h3><h4 id="1-为合适的列建立索引"><a href="#1-为合适的列建立索引" class="headerlink" title="1.为合适的列建立索引"></a>1.为合适的列建立索引</h4><ul>
+<li>在 where 从句，group by 从句，order by 从句，on 从句中出现的列</li>
+<li>索引字段越小越好</li>
+<li>离散度的列放到联合索引的前面</li>
+</ul>
+<p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SELECT * FROM payment WHERE staff_id = 2 AND customer_id = 584;</div></pre></td></tr></table></figure></p>
+<p>上述 SQL 语句，是 <code>index(staff_id,customer_id)</code> 合理，还是 <code>index(customer_id,staff_id)</code> 合理。执行语句如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">SELECT count(DISTINCT customer_id) , count(DISTINCT staff_id) FROM payment;</div><div class="line"></div><div class="line">-- 结果是 599	2</div></pre></td></tr></table></figure></p>
+<p>由于 customer_id 的离散度更大，所以应该使用 <code>index(customer_id,staff_id)</code></p>
+<h4 id="2-找到重复和冗余的索引"><a href="#2-找到重复和冗余的索引" class="headerlink" title="2.找到重复和冗余的索引"></a>2.找到重复和冗余的索引</h4><p>之所以要找到重复和冗余的索引，是因为过多的索引不但影响写入，而且影响查询，索引越多，分析越慢。那么为何重复索引、冗余索引？概念如下：</p>
+<p>重复索引是指相同的列以相同的顺序建立的同类型的索引，如下表中 primary key 和 ID 列上的索引就是重复索引，例子如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">test</span>(</div><div class="line">	<span class="keyword">id</span> <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> PRIMARY <span class="keyword">KEY</span> ,</div><div class="line">	<span class="keyword">NAME</span> <span class="built_in">VARCHAR</span>(<span class="number">10</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> ,</div><div class="line">	title <span class="built_in">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> ,</div><div class="line">	<span class="keyword">UNIQUE</span>(<span class="keyword">id</span>)</div><div class="line">) <span class="keyword">ENGINE</span> = <span class="keyword">INNODB</span>;</div></pre></td></tr></table></figure></p>
+<p><code>UNIQUE(ID)</code> 和 <code>PRIMARY KEY</code> 重复了。</p>
+<p>冗余索引是指多个索引的前缀列相同，或是在联合索引中包含了主键的索引，例子如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">test</span>(</div><div class="line">	<span class="keyword">id</span> <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> PRIMARY <span class="keyword">KEY</span> ,</div><div class="line">	<span class="keyword">NAME</span> <span class="built_in">VARCHAR</span>(<span class="number">10</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> ,</div><div class="line">	title <span class="built_in">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> ,</div><div class="line">	<span class="keyword">KEY</span>(<span class="keyword">NAME</span> , <span class="keyword">id</span>)</div><div class="line">) <span class="keyword">ENGINE</span> = <span class="keyword">INNODB</span>;</div></pre></td></tr></table></figure></p>
+<p>查找重复及冗余索引的 SQL 语句如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">USE information_schema;</div><div class="line"></div><div class="line">SELECT</div><div class="line">	a.TABLE_SCHEMA AS &apos;数据名&apos; ,</div><div class="line">	a.table_name AS &apos;表名&apos; ,</div><div class="line">	a.index_name AS &apos;索引1&apos; ,</div><div class="line">	b.INDEX_NAME AS &apos;索引2&apos; ,</div><div class="line">	a.COLUMN_NAME AS &apos;重复列名&apos;</div><div class="line">FROM</div><div class="line">	STATISTICS a</div><div class="line">JOIN STATISTICS b ON a.TABLE_SCHEMA = b.TABLE_SCHEMA</div><div class="line">AND a.TABLE_NAME = b.table_name</div><div class="line">AND a.SEQ_IN_INDEX = b.SEQ_IN_INDEX</div><div class="line">AND a.COLUMN_NAME = b.COLUMN_NAME</div><div class="line">WHERE</div><div class="line">	a.SEQ_IN_INDEX = 1</div><div class="line">AND a.INDEX_NAME &lt;&gt; b.INDEX_NAME</div></pre></td></tr></table></figure></p>
+<p>也可以使用工具 <code>pt-duplicate-key-checker</code> 检查重复索引和冗余索引,使用例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pt-duplicate-key-checker -uroot -p &apos;123456&apos; -h 127.0.0.1 -d sakila</div></pre></td></tr></table></figure></p>
+<p>执行结果如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># ########################################################################</div><div class="line"># Summary of indexes</div><div class="line"># ########################################################################</div><div class="line"></div><div class="line"># Size Duplicate Indexes   118425374</div><div class="line"># Total Duplicate Indexes  24</div><div class="line"># Total Indexes            1439</div></pre></td></tr></table></figure></p>
+<h4 id="3-删除不用的索引"><a href="#3-删除不用的索引" class="headerlink" title="3.删除不用的索引"></a>3.删除不用的索引</h4><p>目前 MySQL 中还没有记录索引的使用情况，但是在 PerconMySQL 和 MariaDB 中可以通过 INDEX_STATISTICS 表来查看哪些索引未使用，但在 MySQL 中目前只能通过慢查询日志配合共组 <code>pt-index-usage</code> 来进行索引使用情况的分析。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pt-index-usage -uroot -p &apos;123456&apos; /usr/local/var/mysql/luyiyuandeMacBook-Pro-slow.log;</div></pre></td></tr></table></figure>
+<h2 id="数据库结构优化"><a href="#数据库结构优化" class="headerlink" title="数据库结构优化"></a>数据库结构优化</h2><h3 id="选择合适的数据类型"><a href="#选择合适的数据类型" class="headerlink" title="选择合适的数据类型"></a>选择合适的数据类型</h3><ul>
+<li>使用可以存下你的数据的最小的数据类型</li>
+<li>使用简单的数据类型。Integer 要比 varchar 类型在 MySQL 中处理更高效</li>
+<li>尽可能使用 not null 定义字段</li>
+<li>尽量少用 text 类型，非用不可时最好考虑分表</li>
+</ul>
+<h3 id="数据库表的范式化优化与反范式化优化"><a href="#数据库表的范式化优化与反范式化优化" class="headerlink" title="数据库表的范式化优化与反范式化优化"></a>数据库表的范式化优化与反范式化优化</h3><p>略</p>
+<h3 id="数据库表的垂直拆分"><a href="#数据库表的垂直拆分" class="headerlink" title="数据库表的垂直拆分"></a>数据库表的垂直拆分</h3><p>垂直拆分，就是把原来一个有很多列的表拆分成多个表，这解决了表的宽度问题。通常垂直拆分就可以按以下原则进行：</p>
+<ul>
+<li>把不太常用的字段单独存放到一个表中</li>
+<li>把大字段独立存放到一个表中</li>
+<li>把经常一起使用的字段放到一起</li>
+</ul>
+<h3 id="数据库表的水平拆分"><a href="#数据库表的水平拆分" class="headerlink" title="数据库表的水平拆分"></a>数据库表的水平拆分</h3><p>当单表的数据量过大，导致增删查改等操作过慢，这时候需要对表进行水平拆分。水平拆分的表，每一张表的结构都是完全一致的。</p>
+<p>常用的水平拆分方法为：</p>
+<ol>
+<li>对 customer_id 进行 hash 运算，如果要拆分成 5 个表则使用 mod(customer_id,5) 取出 0-4 个值</li>
+<li>针对不同的 hashID 把数据存到不同的表中</li>
+</ol>
+<p>挑战：</p>
+<ul>
+<li>跨分区表进行数据查询</li>
+<li>统计及后台报表操作</li>
+</ul>
+<h2 id="系统配置优化"><a href="#系统配置优化" class="headerlink" title="系统配置优化"></a>系统配置优化</h2><h3 id="数据库系统配置优化"><a href="#数据库系统配置优化" class="headerlink" title="数据库系统配置优化"></a>数据库系统配置优化</h3><p>数据库是基于操作系统的，目前大多数 MySQL 都是安装在Linux 系统之上，所以对于操作系统的一些参数配置也会影响到 MySQL 的性能，下面列举一些常用到的系统配置。</p>
+<p>网络方面的配置，要修改文件 <code>/etc/sysctl.conf</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># 增加 tcp 支持的队列数</div><div class="line">net.ipv4.tcp_max_syn_backlog = 65535</div><div class="line"></div><div class="line"># 减少断开连接时，资源回收</div><div class="line">net.ipv4.tcp_max_tw_buckets = 8000</div><div class="line">net.ipv4.tcp_tw_reuse = 1</div><div class="line">net.ipv4.tcp_tw_recycle = 1</div><div class="line">net.ipv4.tcp_fin_timeout = 10</div></pre></td></tr></table></figure></p>
+<p>打开文件数的限制，可以使用 ulimit -a 查看目录的各项限制，可以修改文件 <code>/etc/security/limits.conf</code> ，增加以下内容以修改打开文件数量的限制<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">soft nofile 65535</div><div class="line">hard nofile 65535</div></pre></td></tr></table></figure></p>
+<p>除此之外最好在 MySQL 服务器上关闭 iptables，selinux 等防火墙软件。</p>
+<h3 id="MySQL-配置文件"><a href="#MySQL-配置文件" class="headerlink" title="MySQL 配置文件"></a>MySQL 配置文件</h3><p>MySQL 可以通过启动时指定配置参数和使用配置文件两种方法进行配置，在一般情况下，配置文件位于 <code>/etc/my.cnf</code> 或是 <code>/etc/mysql/my.cnf</code>，MySQL 查询配置文件的顺序是可以通过以下方法过的</p>
+<p>常用参数说明</p>
+<ul>
+<li><p>innodb_buffer_pool_size：用于配置 Innodb 的缓冲池</p>
+<ul>
+<li>如果数据库中只有 Innodb 表，则推荐配置量为总内存的 75%</li>
+<li>Innodb_buffer_pool_size &gt;= Total MB<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span></div><div class="line"><span class="keyword">ENGINE</span> ,</div><div class="line"><span class="keyword">round</span>(</div><div class="line">  <span class="keyword">sum</span>(data_length + index_length) / <span class="number">1024</span> / <span class="number">1024</span> ,</div><div class="line">  <span class="number">1</span></div><div class="line">) <span class="keyword">AS</span> <span class="string">'Total MB'</span></div><div class="line"><span class="keyword">FROM</span></div><div class="line">information_schema. <span class="keyword">TABLES</span></div><div class="line"><span class="keyword">WHERE</span></div><div class="line">table_schema <span class="keyword">NOT</span> <span class="keyword">IN</span>(</div><div class="line">  <span class="string">"information_schema"</span> ,</div><div class="line">  <span class="string">"performance_schema"</span></div><div class="line">)</div><div class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span></div><div class="line"><span class="keyword">ENGINE</span>;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>innodb_buffer_pool_instances</strong>：MySQL 5.5 中新增参数，可以控制缓冲池的个数，默认情况下只有一个缓冲池。</p>
+</li>
+<li><strong>innodb_log_buffer_size</strong>：Innodb 日志缓冲的大小，由于日志最长，每秒钟就会刷新，所以一般不用太大。</li>
+<li><strong>innodb_flush_log_at_trx_commit</strong>：对 Innodb 的 IO 效率影响很大。</li>
+<li><strong>innodb_file_per_table</strong>：控制 Innodb 每一个表都使用独立的表空间，默认为 OFF，也就是所有表都会建立在共享表空间中。</li>
+<li><strong>innodb_stats_on_metadata</strong>：决定 MySQL 在什么情况下会刷新 innodb 表的统计信息。</li>
+</ul>
+<h3 id="第三方配置工具使用"><a href="#第三方配置工具使用" class="headerlink" title="第三方配置工具使用"></a>第三方配置工具使用</h3><p><strong><code>percona：https://tools.percona.com/</code></strong></p>
+<h2 id="服务器硬件优化"><a href="#服务器硬件优化" class="headerlink" title="服务器硬件优化"></a>服务器硬件优化</h2><ul>
+<li>如何选择 CPU<ul>
+<li>MySQL 有一些工作只能使用到单核 CPU，选择高频</li>
+<li>MySQL 对 CPU 核数的支持并不是越多越快，MySQL 5.5 版本不要超过 32 个核</li>
+</ul>
+</li>
+<li>硬盘 IO 优化<ul>
+<li>RAID 级别简介<ul>
+<li>RAID 0：也称为条带，就是把多个磁盘链接成一个硬盘使用，这个级别 IO 最好</li>
+<li>RAID 1：也成为镜像，要求至少两个磁盘，每组磁盘存储的数据相同</li>
+<li>RAID 1 + 0：就是 RAID 1 和 RAID 0的结合。同时具备两个级别的优缺点。一般建议数据库使用这个级别。</li>
+<li>RAID 5：把多个（最少 3 个）硬盘合并成 1 个逻辑盘使用，数据读写时会建立奇偶校验信息，并且奇偶校验信息和相对应的数据分别存储在不同的磁盘上。当 RAID 5 的一个磁盘数据发生损坏后，利用剩下的数据和相应的奇偶校验信息去恢复被损坏的数据。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/10/13/MySQL-性能优化/" data-id="cixwy9h8900106l4boa12bb9t" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Linux-Shell-基础之条件判断语句" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/04/Linux-Shell-基础之条件判断语句/" class="article-date">
+  <time datetime="2016-10-04T02:56:05.000Z" itemprop="datePublished">2016-10-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/04/Linux-Shell-基础之条件判断语句/">Linux Shell 基础之条件判断语句</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Shell-条件判断式语句"><a href="#Shell-条件判断式语句" class="headerlink" title="Shell 条件判断式语句"></a>Shell 条件判断式语句</h2><h3 id="按文件类型判断"><a href="#按文件类型判断" class="headerlink" title="按文件类型判断"></a>按文件类型判断</h3><table>
+<thead>
+<tr>
+<th>测试选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-b 文件</td>
+<td>判断该文件是否存在，并且是否为块设备文件</td>
+</tr>
+<tr>
+<td>-c 文件</td>
+<td>判断该文件是否存在，并且是否为字符设备文件</td>
+</tr>
+<tr>
+<td>-d 文件</td>
+<td>判断该文件是否存在，并且是否为目录文件</td>
+</tr>
+<tr>
+<td>-e 文件</td>
+<td>判断该文件是否存在（存在为真）</td>
+</tr>
+<tr>
+<td>-f 文件</td>
+<td>判断该文件是否存在，并且是否为普通文件</td>
+</tr>
+<tr>
+<td>-L 文件</td>
+<td>判断该文件是否存在，并且是否为符号链接文件</td>
+</tr>
+<tr>
+<td>-p 文件</td>
+<td>判断该文件是否存在，并且是否为管道文件</td>
+</tr>
+<tr>
+<td>-s 文件</td>
+<td>判断该文件是否存在，并且是否为非空</td>
+</tr>
+<tr>
+<td>-S 文件</td>
+<td>判断该文件是否存在，并且是否为套接字文件</td>
+</tr>
+</tbody>
+</table>
+<p>两种判断格式</p>
+<ul>
+<li><code>test -e /root/install.log</code></li>
+<li><code>[ -e /root/install.log ]</code></li>
+<li><code>[ -e /root/install.log ] &amp;&amp; echo yes || echo no</code></li>
+</ul>
+<h3 id="按文件权限判断"><a href="#按文件权限判断" class="headerlink" title="按文件权限判断"></a>按文件权限判断</h3><table>
+<thead>
+<tr>
+<th>测试选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-r 文件</td>
+<td>判断该文件是否存在，并且是否该文件拥有读权限</td>
+</tr>
+<tr>
+<td>-w 文件</td>
+<td>判断该文件是否存在，并且是否该文件拥有写权限</td>
+</tr>
+<tr>
+<td>-x 文件</td>
+<td>判断该文件是否存在，并且是否该文件拥有执行权限</td>
+</tr>
+<tr>
+<td>-u 文件</td>
+<td>判断该文件是否存在，并且是否该文件拥有 SUID 权限</td>
+</tr>
+<tr>
+<td>-g 文件</td>
+<td>判断该文件是否存在，并且是否该文件拥有 SGID 权限</td>
+</tr>
+<tr>
+<td>-k 文件</td>
+<td>判断该文件是否存在，并且是否该文件拥有 SBit 权限</td>
+</tr>
+</tbody>
+</table>
+<h3 id="两个文件之间的比较"><a href="#两个文件之间的比较" class="headerlink" title="两个文件之间的比较"></a>两个文件之间的比较</h3><table>
+<thead>
+<tr>
+<th>测试选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>文件1 -nt 文件2</td>
+<td>判断文件 1 的修改时间是否比文件 2 的新</td>
+</tr>
+<tr>
+<td>文件1 -ot 文件2</td>
+<td>判断文件 1 的修改时间是否比文件 2 的旧</td>
+</tr>
+<tr>
+<td>文件1 -ef 文件2</td>
+<td>判断文件 1 是否和文件 2 的 Inode 号一致，可以理解为两个文件是否为同一个文件，这个判断用于硬链接判断是很好的方法</td>
+</tr>
+</tbody>
+</table>
+<p>例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># 创建一个硬链接</div><div class="line">ln /root/student.txt/tmp/stu.txt</div><div class="line"></div><div class="line"># 测试</div><div class="line">[/root/student.txt -ef /tmp/stu.txt] &amp;&amp; echo &quot;yes&quot; || echo &quot;no&quot;</div></pre></td></tr></table></figure></p>
+<h3 id="两个整数之间的比较"><a href="#两个整数之间的比较" class="headerlink" title="两个整数之间的比较"></a>两个整数之间的比较</h3><table>
+<thead>
+<tr>
+<th>测试选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>整数1 -eq 整数2</td>
+<td>判断整数 1 是否和整数 2 相等</td>
+</tr>
+<tr>
+<td>整数1 -ne 整数2</td>
+<td>判断整数 1 是否和整数 2 不相等</td>
+</tr>
+<tr>
+<td>整数1 -gt 整数2</td>
+<td>判断整数 1 是否大于整数 2</td>
+</tr>
+<tr>
+<td>整数1 -lt 整数2</td>
+<td>判断整数 1 是否小于整数 2</td>
+</tr>
+<tr>
+<td>整数1 -ge 整数2</td>
+<td>判断整数 1 是否大于等于整数 2</td>
+</tr>
+<tr>
+<td>整数1 -le 整数2</td>
+<td>判断整数 1 是否小于等于整数 2</td>
+</tr>
+</tbody>
+</table>
+<p>例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[ 23 -ge 22 ] &amp;&amp; echo &quot;yes&quot; || echo &quot;no&quot;</div><div class="line">[ 23 -le 22 ] &amp;&amp; echo &quot;yes&quot; || echo &quot;no&quot;</div></pre></td></tr></table></figure>
+<h3 id="字符串的判断"><a href="#字符串的判断" class="headerlink" title="字符串的判断"></a>字符串的判断</h3><table>
+<thead>
+<tr>
+<th>测试选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-z</td>
+<td>判断字符串是否为空</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>判断字符串是否为非空</td>
+</tr>
+<tr>
+<td>字符串1==字符串2</td>
+<td>判断字符串 1 是否和字符串 2 相等</td>
+</tr>
+<tr>
+<td>字符串1!=字符串2</td>
+<td>判断字符串 1 是否和字符串 2 不相等</td>
+</tr>
+</tbody>
+</table>
+<p>例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"># 给 name 变量赋值</div><div class="line">name=fengj</div><div class="line"></div><div class="line"># 判断 name 变量是否为空</div><div class="line">[ -z &quot;$name&quot; ] &amp;&amp; echo &quot;yes&quot; || echo &quot;no&quot;</div><div class="line"></div><div class="line"># 给变量 aa 和变量 bb 赋值</div><div class="line">aa=11</div><div class="line">bb=22</div><div class="line"></div><div class="line"># 判断两个变量的值是否相等</div><div class="line">[ &quot;$aa&quot; == &quot;$bb&quot; ] &amp;&amp; echo yes || echo no</div></pre></td></tr></table></figure></p>
+<h3 id="多重条件判断"><a href="#多重条件判断" class="headerlink" title="多重条件判断"></a>多重条件判断</h3><table>
+<thead>
+<tr>
+<th>测试选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>判断1 -a 判断2</td>
+<td>逻辑与，判断 1 和判断 2 都成立，最终的结果才为真</td>
+</tr>
+<tr>
+<td>判断1 -o 判断2</td>
+<td>逻辑或，判断 1 和判断 2 有一个成立，最终的结果就为真</td>
+</tr>
+<tr>
+<td>! 判断</td>
+<td>逻辑非，使原始的判断式取反</td>
+</tr>
+</tbody>
+</table>
+<p>例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># 给变量 aa 赋值</div><div class="line">aa=11</div><div class="line"></div><div class="line"># 判断变量 aa 是否有值，同时判断变量 aa 是否大于 23</div><div class="line">[ -n &quot;$aa&quot; -a &quot;$aa&quot; -gt 23 ] &amp;&amp; echo &quot;yes&quot; || echo &quot;no&quot;</div></pre></td></tr></table></figure></p>
+<h2 id="Shell-单分支if语句"><a href="#Shell-单分支if语句" class="headerlink" title="Shell 单分支if语句"></a>Shell 单分支if语句</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>如何 “背” 程序</p>
+<ol>
+<li>抄写目标程序并能正确运行</li>
+<li>为目标程序补全注释</li>
+<li>删掉注释，为代码重新加注释</li>
+<li>删除代码，看注释写代码</li>
+<li>删除注释和代码，从头开始写</li>
+</ol>
+<h3 id="单分支-if-语句"><a href="#单分支-if-语句" class="headerlink" title="单分支 if 语句"></a>单分支 if 语句</h3><p>语法支持<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">if [ 条件判断式 ];then</div><div class="line">	程序</div><div class="line">fi</div><div class="line"></div><div class="line">if [ 条件判断式 ]</div><div class="line">	then</div><div class="line">	程序</div><div class="line">fi</div></pre></td></tr></table></figure></p>
+<p>例子1：判断登录的用户是否为 root<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">test=$(env|grep &quot;USER&quot; |cut -d &quot;=&quot; -f2)</div><div class="line"></div><div class="line">if [ &quot;$test&quot; == root ]</div><div class="line">	then</div><div class="line">	echo &quot;Current user is root.&quot;</div><div class="line">fi</div></pre></td></tr></table></figure></p>
+<h3 id="单分支-if-语句例子：判断分区使用率"><a href="#单分支-if-语句例子：判断分区使用率" class="headerlink" title="单分支 if 语句例子：判断分区使用率"></a>单分支 if 语句例子：判断分区使用率</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line"># 统计根分区使用率，把根分区使用率作为变量值赋予变量 rate</div><div class="line">rate=$(df -h | grep &quot;/dev/disk1&quot; | awk &apos;&#123;print $5&#125;&apos; | cut -d &quot;%&quot; -f 1)</div><div class="line"></div><div class="line">if [ $rate -ge 70 ]</div><div class="line">then</div><div class="line">	echo &quot;Warning! /dev/disk1 is full!!&quot;</div><div class="line">fi</div></pre></td></tr></table></figure>
+<h2 id="Shell-双分支if语句"><a href="#Shell-双分支if语句" class="headerlink" title="Shell 双分支if语句"></a>Shell 双分支if语句</h2><p>语法支持<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">if [ 条件判断式 ]</div><div class="line">	then</div><div class="line">		条件成立时，执行的程序</div><div class="line">	else</div><div class="line">		条件不成立时，执行的另一个程序</div><div class="line">fi</div></pre></td></tr></table></figure></p>
+<h3 id="双分支-if-语句例子：判断输入的是否是一个目录"><a href="#双分支-if-语句例子：判断输入的是否是一个目录" class="headerlink" title="双分支 if 语句例子：判断输入的是否是一个目录"></a>双分支 if 语句例子：判断输入的是否是一个目录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">read -t 30 -p &quot;Please input a dir:&quot; dir</div><div class="line"></div><div class="line">if [ -d &quot;$dir&quot; ]</div><div class="line">then</div><div class="line">    echo &quot;is a Dir&quot;</div><div class="line">else</div><div class="line">    echo &quot;is not a Dir&quot;</div><div class="line">fi</div></pre></td></tr></table></figure>
+<h3 id="双分支-if-语句例子：判断Apache服务是否启动"><a href="#双分支-if-语句例子：判断Apache服务是否启动" class="headerlink" title="双分支 if 语句例子：判断Apache服务是否启动"></a>双分支 if 语句例子：判断Apache服务是否启动</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line"># 列出所有进程，选取 httpd 进程，反选 grep</div><div class="line">test=$(ps aux | grep httpd | grep -v grep)</div><div class="line"></div><div class="line">if [ -n &quot;$test&quot; ]</div><div class="line">	then</div><div class="line">		echo &quot;$(date) httpd is ok!&quot; &gt;&gt; /tmp/autostart-acc.log</div><div class="line">	else</div><div class="line">		sudo apachectl restart  &amp;&gt; /dev/null</div><div class="line">		echo &quot;$(date) restart httpd !!&quot; &gt;&gt; /tmp/autostart-err.log</div><div class="line">fi</div></pre></td></tr></table></figure>
+<h2 id="Shell-多分支-if-语句"><a href="#Shell-多分支-if-语句" class="headerlink" title="Shell 多分支 if 语句"></a>Shell 多分支 if 语句</h2><p>语言支持：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">if [ 条件判断式 1 ]</div><div class="line">	then</div><div class="line">		条件成立 1 时，执行的程序</div><div class="line">elif [ 条件判断式 2 ]</div><div class="line">	then</div><div class="line">		条件成立 2 时，执行的程序</div><div class="line">else</div><div class="line">		条件不成立时，执行的另一个程序</div><div class="line">fi</div></pre></td></tr></table></figure></p>
+<h3 id="多分支-if-语句例子：判断用户输入的是什么文件"><a href="#多分支-if-语句例子：判断用户输入的是什么文件" class="headerlink" title="多分支 if 语句例子：判断用户输入的是什么文件"></a>多分支 if 语句例子：判断用户输入的是什么文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"># 判断用户输出的是什么文件</div><div class="line"></div><div class="line"># 接受键盘的输入，并赋予变量file</div><div class="line">read -p &quot;Please input a filename:&quot; file</div><div class="line"></div><div class="line"># 判断变量是否为空</div><div class="line">if [ -z &quot;$file&quot; ]</div><div class="line">then</div><div class="line">	echo &quot;Error,Please input a filename&quot;</div><div class="line">	exit 1</div><div class="line"># 判断 file 的值是否存在</div><div class="line">elif [ ! -e &quot;$file&quot; ]</div><div class="line">then</div><div class="line">	echo &quot;Your input is not a file!&quot;</div><div class="line">	exit 2</div><div class="line"># 判断 file 的值是否为普通文件</div><div class="line">elif [ -f &quot;$file&quot; ]</div><div class="line">then</div><div class="line">	echo &quot;$file is a regulare file!&quot;</div><div class="line"># 判断 file 的值是否为目录文件</div><div class="line">then</div><div class="line">	echo &quot;$file is a directory!&quot;</div><div class="line">else</div><div class="line">	echo &quot;$file is an other file!&quot;</div></pre></td></tr></table></figure>
+<h2 id="Shell-多分支case语句"><a href="#Shell-多分支case语句" class="headerlink" title="Shell 多分支case语句"></a>Shell 多分支case语句</h2><p>语法支持<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">case $变量名 in</div><div class="line">	&quot;值1&quot;)</div><div class="line">		如果变量的值等于值 1，则执行程序1</div><div class="line">	;;</div><div class="line">	&quot;值2&quot;)</div><div class="line">		如果变量的值等于值 2，则执行程序2</div><div class="line">	;;</div><div class="line">	*)</div><div class="line">		如果变量的值都不是以上的值，则执行此程序</div><div class="line">	;;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/10/04/Linux-Shell-基础之条件判断语句/" data-id="cixwy9h4w00016l4b2kdsavdy" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Linux-Shell-基础之运算符" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/04/Linux-Shell-基础之运算符/" class="article-date">
+  <time datetime="2016-10-04T02:53:55.000Z" itemprop="datePublished">2016-10-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/04/Linux-Shell-基础之运算符/">Linux Shell 基础之运算符</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Shell-运算符"><a href="#Shell-运算符" class="headerlink" title="Shell 运算符"></a>Shell 运算符</h2><ul>
+<li>declare 声明变量<ul>
+<li><code>declare [+/-][选项] 变量名</code><ul>
+<li>- 给变量设定类型属性<ul>
+<li>-a 将变量声明为数组型</li>
+<li>-i 将变量声明为整数型</li>
+<li>-x 将变量声明为环境变量</li>
+<li>-r 将变量声明为只读变量</li>
+<li>-p 显示指定变量的被声明的类型</li>
+</ul>
+</li>
+<li>+ 取消变量的类型属性</li>
+</ul>
+</li>
+<li><code>declare -x test=123</code> 声明环境变量</li>
+</ul>
+</li>
+<li>declare -p 查询变量的属性<ul>
+<li><code>declare -p</code> 查询所有变量的属性</li>
+<li><code>declare -p 变量名</code> 查询指定变量的属性</li>
+</ul>
+</li>
+<li>expr 或 let 数值运算工具</li>
+</ul>
+<h2 id="Shell-运算符-例子"><a href="#Shell-运算符-例子" class="headerlink" title="Shell 运算符 例子"></a>Shell 运算符 例子</h2><h3 id="Shell-declare-例子"><a href="#Shell-declare-例子" class="headerlink" title="Shell declare 例子"></a>Shell declare 例子</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># 给变量 aa 和 bb 赋值</div><div class="line">aa=11</div><div class="line">bb=22</div><div class="line"></div><div class="line"># 声明变量 cc 的类型是整数型，它的值是 aa 和 bb 的和</div><div class="line">declare -i cc=$aa+$bb</div></pre></td></tr></table></figure>
+<h3 id="声明数组变量例子"><a href="#声明数组变量例子" class="headerlink" title="声明数组变量例子"></a>声明数组变量例子</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"># 定义数组</div><div class="line">movie[0]=zp</div><div class="line">movie[1]=tp</div><div class="line">declare -a movie[2]=live</div><div class="line"></div><div class="line"># 查看数组</div><div class="line">echo $&#123;movie&#125;</div><div class="line">echo $&#123;movie[2]&#125;</div><div class="line">echo $&#123;movie[*]&#125;</div></pre></td></tr></table></figure>
+<h2 id="Shell-环境变量配置文件"><a href="#Shell-环境变量配置文件" class="headerlink" title="Shell 环境变量配置文件"></a>Shell 环境变量配置文件</h2><p>环境变量配置文件中主要是定义对系统操作环境生效的系统默认环境变量，如 PATH 等</p>
+<ul>
+<li>source 命令<ul>
+<li><code>source 配置文件</code></li>
+<li><code>. 配置文件</code></li>
+</ul>
+</li>
+<li>常用的环境变量配置文件<ul>
+<li>/etc/profile<ul>
+<li>USER 变量</li>
+<li>LOGNAME 变量</li>
+<li>MAIL 变量</li>
+<li>PATH 变量</li>
+<li>HOSTNAME 变量</li>
+<li>HISTSIZE 变量</li>
+<li>umask 查看系统默认权限<ul>
+<li>文件最高权限为 666</li>
+<li>目录最高权限为 777</li>
+<li>权限不能使用数字进行换算，而必须使用字母</li>
+<li>umask 定义的权限，是系统默认权限中准备丢弃的权限</li>
+</ul>
+</li>
+<li>调用 /etc/profile.d/*sh 文件</li>
+</ul>
+</li>
+<li>/etc/profile.d/*sh</li>
+<li>~/.bash_profile</li>
+<li>~/.bashrc</li>
+<li>/etc/bashrc</li>
+</ul>
+</li>
+<li>其他配置文件<ul>
+<li><code>~/.bash_logout</code> 注销时生效的环境变量配置文件</li>
+</ul>
+</li>
+<li>Shell 登录信息<ul>
+<li><code>cat /etc/issue</code> 本地终端欢迎信息</li>
+<li><code>cat /etc/issue.net</code> 远程终端欢迎信息<ul>
+<li>转义符在 <code>/etc/issue.net</code> 文件中不能使用</li>
+<li>是否显示此欢迎信息，由 SSH 的配置文件 <code>/etc/ssh/sshd_config</code> 决定，加入 “Banner /etc/issue.net” 行才能显示（需要重启 SSH 服务）</li>
+</ul>
+</li>
+<li><code>/etc/motd</code> 登陆后欢迎信息，不管是本地登录，还是远程登录，都可以显示此欢迎信息</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/10/04/Linux-Shell-基础之运算符/" data-id="cixwy9h5g00046l4b6ynbvqzj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Linux-Shell-基础之变量" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/04/Linux-Shell-基础之变量/" class="article-date">
+  <time datetime="2016-10-04T02:50:53.000Z" itemprop="datePublished">2016-10-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/04/Linux-Shell-基础之变量/">Linux Shell 基础之变量</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Shell-变量概述"><a href="#Shell-变量概述" class="headerlink" title="Shell 变量概述"></a>Shell 变量概述</h2><p>Shell 与其他语言的对比</p>
+<ul>
+<li>PHP 和 JAVA 主要实现功能</li>
+<li>Shell 简化管理操作</li>
+</ul>
+<p>什么是变量</p>
+<ul>
+<li>变量是计算机内存的单元，其中存放的值可以改变</li>
+<li>变量让你能够把程序中准备使用的每一段数据都赋给一个简短、易于记忆的名字，因此它们十分有用</li>
+</ul>
+<p>变量命名规则</p>
+<ul>
+<li>变量名必须以字母或下划线开头，名字中间只能由字母、数字和下划线组成</li>
+<li>变量名的长度不得超过 255 个字符</li>
+<li>变量名在有效的范围内必须是唯一的</li>
+<li>在 Bash 中，变量的默认类型都是字符串型</li>
+</ul>
+<p>变量存储类型</p>
+<ul>
+<li>整型</li>
+<li>浮点型</li>
+<li>日期型</li>
+<li>字符串型</li>
+</ul>
+<p>变量定义分类</p>
+<ul>
+<li>用户自定义变量：用户自定义的变量</li>
+<li>环境变量：这种变量中主要保存的是和系统操作环境相关的数据。变量可以自定义，但是对系统生效的环境变量名和变量作用是固定的。</li>
+<li>位置参数变量：这种变量主要是用来向脚本当中传递参数或数据的。变量名不能自定义，变量作用固定。</li>
+<li>预定义变量：是 Bash 中已经定义好的变量，变量名不能自定义，变量作用也是固定的。</li>
+</ul>
+<h2 id="Shell-变量与变量分类"><a href="#Shell-变量与变量分类" class="headerlink" title="Shell 变量与变量分类"></a>Shell 变量与变量分类</h2><ul>
+<li>用户自定义变量<ul>
+<li>变量定义<ul>
+<li><code>变量名=变量值</code><ul>
+<li><code>x=5</code></li>
+<li><code>name=&quot;Luis&quot;</code></li>
+</ul>
+</li>
+<li>变量赋值时候，变量名与变量值之间不能有空格</li>
+</ul>
+</li>
+<li>变量调用<ul>
+<li><code>echo $x</code></li>
+<li><code>echo $name</code></li>
+</ul>
+</li>
+<li>变量叠加<ul>
+<li>x=123</li>
+<li>x=”$x”456</li>
+<li>x=${x}789</li>
+</ul>
+</li>
+<li>变量查看<ul>
+<li>set<ul>
+<li>-u 如果设定此选项，调用未声明变量时会报错（默认无任何显示）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>变量删除<ul>
+<li><code>unset 变量名</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>环境变量<ul>
+<li>用户自定义环境变量<ul>
+<li>设置环境变量<ul>
+<li><code>export 变量名=变量值</code></li>
+<li><code>变量名=变量值;export 变量名</code></li>
+</ul>
+</li>
+<li>查看环境变量<ul>
+<li><code>set</code> 查看所有变量</li>
+<li><code>env</code> 查看环境变量</li>
+</ul>
+</li>
+<li>删除环境变量<ul>
+<li><code>unset 变量名</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>系统常用的环境变量<ul>
+<li>HOSTNAME 主机名</li>
+<li>SHELL 当前的 Shell</li>
+<li>TERM 终端环境</li>
+<li>HISTSIZE 历史命令条数</li>
+<li>SSH_CLIENT 当前操作环境是用 ssh 连接的，这里记录客户端 IP</li>
+<li>SSH_TTY ssh 连接的终端时 pts/1</li>
+<li>USER 当前登录的用户</li>
+<li>PATH 系统查找命令的路径<ul>
+<li><code>echo $PATH</code> 查看 PATH 环境变量</li>
+<li><code>PATH=&quot;$PATH&quot;:/root/sh</code> 增加 PATH 变量的值</li>
+</ul>
+</li>
+<li>PS1 变量 命令提示符设置<ul>
+<li>\d 显示日期，格式为”星期 月 日”</li>
+<li>\H 显示完整的主机名，如默认主机名 “localhost.localdomain”</li>
+<li>\t 显示 24 小时制时间，格式为 “HH:MM:SS”</li>
+<li>\A 显示 24 小时制时间，格式为 “HH:MM”</li>
+<li>\u 显示当前用户名</li>
+<li>\w 显示当前所在目录的完整名称</li>
+<li>\W 显示当前所在目录的最后一个目录</li>
+<li>\$ 提示符。如果是 root 用户会显示提示符为 “#”，如果是普通用户会显示提示符为 “$”</li>
+<li>例子 <code>PS1=&#39;[\u@\A \w]\$ &#39;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>语系变量<ul>
+<li><code>locale</code> 查询当前系统语系（<code>echo $LANG</code>）<ul>
+<li>LANG 定义系统主语系的变量</li>
+<li>LC_ALL 定义整体语系的变量</li>
+</ul>
+</li>
+<li><code>locale -a | more</code> 查看 Linux 支持的所有语系</li>
+<li><code>cat /etc/sysconfig/i18n</code> 查询系统默认语系（下次开机语系变量）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>位置参数变量</p>
+<p>  位置参数变量|作用<br>  —|—<br>  $n|n 为数字，$0 代表命令本身，$1-$9 代表第一到第九个参数，十以上的参数需要用大括号包含，如 ${10}<br>  $*|这个变量代表命令行中所有的参数，$* 把所有的参数看成一个整体<br>  $@|这个变量代表命令行中所有的参数，不过 $@ 把每个参数区分对待<br>  $#|这个变量代表命令行中所有参数的个数</p>
+</li>
+<li><p>预定义变量</p>
+<p>  预定义变量|作用<br>  —|—<br>  $? | 最后一次执行的命令的返回状态。如果这个变量的值为 0，证明上一个命令正确执行；如果这个变量的值为非 0(具体是哪个数，由命令自己决定，则证明上一个命令执行不正确)<br>  $$ | 当前进程的进程号<br>  $! | 后台运行的最后一个进程的进程号</p>
+</li>
+<li><p>接收键盘输入</p>
+<ul>
+<li><code>read [选项] [变量名]</code><ul>
+<li>-p 提示信息：在等待 read 输入时，输出提示信息</li>
+<li>-t 秒数：read 命令会一直等待用户输入，使用此选项可以指定等待时间</li>
+<li>-n 字符数：read 命令只接受指定的字符数，就会执行</li>
+<li>-s 隐藏输入的数据，适用于机密信息的输入</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Shell-变量例子"><a href="#Shell-变量例子" class="headerlink" title="Shell 变量例子"></a>Shell 变量例子</h2><p>位置参数例子 1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">num1=$1</div><div class="line">num2=$2</div><div class="line"></div><div class="line"># 变量 sum 的和是 num1 加 num2</div><div class="line">sum=$(($num1+$num2))</div><div class="line"></div><div class="line"># 打印变量 sum 的值</div><div class="line">echo $sum</div></pre></td></tr></table></figure>
+<p>位置参数例子 2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line"># 使用 $# 代表所有参数的个数</div><div class="line">echo &quot;A total of $# parameters&quot;</div><div class="line"></div><div class="line"># 使用 $* 代表所有的参数</div><div class="line">echo &quot;The parameters is:$*&quot;</div><div class="line"></div><div class="line"># 使用 $@ 也代表所有参数</div><div class="line">echo &quot;The parameters is:$@&quot;</div></pre></td></tr></table></figure></p>
+<p>位置参数例子 3（$* 与 $@ 的区别）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">for i in &quot;$*&quot;</div><div class="line"># $* 中的所有参数看成是一个整体，所以这个 for 循环只会循环一次</div><div class="line">do</div><div class="line">	echo &quot;The parameters is: $i&quot;</div><div class="line">done</div><div class="line"></div><div class="line">for y in &quot;$@&quot;</div><div class="line"># $@ 中的每个参数都看成是独立的，所以 &quot;$@&quot; 中有几个参数，就会循环几次</div><div class="line">do</div><div class="line">	echo &quot;Parameter:$y&quot;</div><div class="line">done</div></pre></td></tr></table></figure></p>
+<p>接收键盘输入例子 1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">read -p &quot;Please input your name: &quot; -t 30 name</div><div class="line">echo $name</div><div class="line"></div><div class="line">read -p &quot;Please input your passwd: &quot; -s passed</div><div class="line">echo -e &quot;\n&quot;</div><div class="line">echo $passwd</div><div class="line"></div><div class="line">read -p &quot;Please input your sex [M/F]: &quot; -n 1 sex</div><div class="line">echo -e &quot;\n&quot;</div><div class="line">echo $sex</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/10/04/Linux-Shell-基础之变量/" data-id="cixwy9h4q00006l4bzh5zusgw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Linux-Shell-实战" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/03/Linux-Shell-实战/" class="article-date">
+  <time datetime="2016-10-03T08:11:54.000Z" itemprop="datePublished">2016-10-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/03/Linux-Shell-实战/">Linux Shell 实战</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="monitor-man-sh"><a href="#monitor-man-sh" class="headerlink" title="monitor_man.sh"></a>monitor_man.sh</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">resettem=$(tput sgr0)</div><div class="line">declare -A ssharray</div><div class="line">i=0</div><div class="line">numbers=&quot;&quot;</div><div class="line"></div><div class="line">for script_file in `ls -I &quot;monitor_man.sh&quot; ./`</div><div class="line">do</div><div class="line">  echo -e &quot;\e[1;35m&quot; &quot;The Script:&quot; $&#123;i&#125; &apos;==&gt;&apos; $&#123;resettem&#125; $&#123;script_file&#125;</div><div class="line">  ssharray[$i]=$&#123;script_file&#125;</div><div class="line">  numbers=&quot;$&#123;numbers&#125; | $&#123;i&#125;&quot;</div><div class="line"></div><div class="line">  i=$((i+1))</div><div class="line">done</div><div class="line"></div><div class="line">while true</div><div class="line">do</div><div class="line">  read -p &quot;Please input a number [ $&#123;numbers&#125; ]:&quot; execshell</div><div class="line">  if [[ ! $&#123;execshell&#125; =~ ^[0-9]+ ]];then</div><div class="line">        exit 0</div><div class="line">  fi</div><div class="line">done</div></pre></td></tr></table></figure>
+<h2 id="system-monitor-sh"><a href="#system-monitor-sh" class="headerlink" title="system_monitor.sh"></a>system_monitor.sh</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">clear</div><div class="line"></div><div class="line">if [[ $# -eq 0 ]]</div><div class="line">then</div><div class="line"></div><div class="line"># Define Variable reset_terminal</div><div class="line">reset_terminal=$(tput sgr0)</div><div class="line"></div><div class="line"># Check OS Type</div><div class="line">os=$(uname -o)</div><div class="line">echo -e &apos;\E[32m&apos; &quot;Check OS Type&quot; $reset_terminal $os</div><div class="line"></div><div class="line"># Check OS Release Version and Name</div><div class="line">os_name=$(cat /etc/issue|grep -e &quot;Server&quot;)</div><div class="line">echo -e &apos;\E[32m&apos; &quot;Check OS Release Version and Name&quot; $reset_terminal $os_name</div><div class="line"></div><div class="line"># Check Architecture</div><div class="line">architecture=$(uname -m)</div><div class="line">echo -e &apos;\E[32m&apos; &quot;Check Architecture&quot; $reset_terminal $architecture</div><div class="line"></div><div class="line"># Check Kernel Release</div><div class="line">kernel_release=$(uname -r)</div><div class="line">echo -e &apos;\E[32m&apos; &quot;Check Kernel Release&quot; $reset_terminal $kernel_release</div><div class="line"></div><div class="line"># Check Hostname $HOSTNAME</div><div class="line">host_name=$(uname -n)</div><div class="line">echo -e &apos;\E[32m&apos; &quot;Check Hostname&quot; $reset_terminal $host_name</div><div class="line"></div><div class="line"># Check Internal IP</div><div class="line">internal_ip=$(hostname -I)</div><div class="line">echo -e &apos;\E[32m&apos; &quot;Check Internal IP&quot; $reset_terminal $internal_ip</div><div class="line"></div><div class="line"># Check External IP</div><div class="line">external_ip=$(curl -s http://ipecho.net/plain)</div><div class="line">echo -e &apos;\E[32m&apos; &quot;Check External IP&quot; $reset_terminal $external_ip</div><div class="line"></div><div class="line"># Check DNS</div><div class="line">name_servers=$(cat /etc/resolv.conf | grep -E &quot;\&lt;nameserver[ ]+&quot; | awk &apos;&#123;print $NF&#125;&apos;)</div><div class="line">echo -e &apos;\E[32m&apos; &quot;Check DNS&quot; $reset_terminal $name_servers</div><div class="line"></div><div class="line"># Check if connected to Internet or not</div><div class="line">ping -c 2 baidu.com &amp;&gt; /dev/null &amp;&amp; echo &quot;Internet:Connected&quot; || echo &quot;Internet:Disconnected&quot;</div><div class="line">echo -e &apos;\E[32m&apos; &quot;Check if connected to Internet or not&quot; $reset_terminal $ping</div><div class="line"></div><div class="line"># Check Logged In Users</div><div class="line">who&gt;/tmp/who</div><div class="line">echo -e &apos;\E[32m&apos; &quot;Logged In Users&quot; &amp;&amp; cat /tmp/who</div><div class="line">rm -f /tmp/who</div><div class="line"></div><div class="line"># Check System Memory Usages</div><div class="line">system_men_usages=$(awk &apos;/MemTotal/&#123;total=$2&#125;/MemFree/&#123;free=$2&#125;END&#123;print (total-free)/1024&#125;&apos; /proc/meminfo)</div><div class="line">apps_mem_usages=$(awk &apos;/MemTotal/&#123;total=$2&#125;/MemFree/&#123;free=$2&#125;/^Cached/&#123;cached=$2&#125;/Buffers/&#123;buffers=$2&#125;END&#123;print (total-free-cached-buffers)/1024&#125;&apos; /proc/meminfo)</div><div class="line"></div><div class="line">echo -e &apos;\E[32m&apos; &quot;System Memuserages&quot; $reset_terminal $system_men_usages</div><div class="line">echo -e &apos;\E[32m&apos; &quot;Apps Memuserages&quot; $reset_terminal $apps_mem_usages</div><div class="line"></div><div class="line">load_average=$(top -n 1 -b | grep &quot;load average:&quot; | awk &apos;&#123;print $12 $13 $14&#125;&apos;)</div><div class="line">echo -e &apos;\E[32m&apos; &quot;load averages&quot; $reset_terminal $load_average</div><div class="line"></div><div class="line">disk_average=$(df -hP | grep -vE &apos;Filesystem|tmpfs&apos; | awk &apos;&#123;print $1 &quot; &quot; $5&#125;&apos;)</div><div class="line">echo -e &apos;\E[32m&apos; &quot;disk averages&quot; $reset_terminal $disk_average</div><div class="line"></div><div class="line">fi</div></pre></td></tr></table></figure>
+<h2 id="check-server-sh"><a href="#check-server-sh" class="headerlink" title="check_server_sh"></a>check_server_sh</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">resettem=$(tput sgr0)</div><div class="line"></div><div class="line">nginx_server=&apos;http://10.170.22.217&apos;</div><div class="line"></div><div class="line">check_nginx_server()</div><div class="line">&#123;</div><div class="line">	status_code=curl -m 5 -s -w %&#123;http_code&#125; $&#123;nginx_server&#125; -o /dev/null</div><div class="line"></div><div class="line">	if [ $status_code -eq 000 -o $status_code -ge 500 ];then</div><div class="line">		echo -e &apos;\E[32m&apos; &quot;Check http server error! Response status code is &quot; $resettem $status_code</div><div class="line">	else</div><div class="line">		http_content=$(curl -s $&#123;nginx_server&#125;)</div><div class="line">		echo -e &apos;\E[32m&apos; &quot;Check http server ok! \n&quot; $resettem $http_content</div><div class="line">	fi</div><div class="line">&#125;</div><div class="line"></div><div class="line">check_nginx_server</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/10/03/Linux-Shell-实战/" data-id="cixwy9h5k00056l4b7ertk1x1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Linux-权限管理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/30/Linux-权限管理/" class="article-date">
+  <time datetime="2016-09-30T06:24:23.000Z" itemprop="datePublished">2016-09-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/30/Linux-权限管理/">Linux 权限管理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="基本权限"><a href="#基本权限" class="headerlink" title="基本权限"></a>基本权限</h2><ul>
+<li><code>drwxrw-r--</code><ul>
+<li>d 文件类型</li>
+<li>r 读</li>
+<li>w 写</li>
+<li>x 执行</li>
+<li>rwx 代表所有者权限</li>
+<li>rw- 代表所属组权限</li>
+<li>r– 代表其他人权限</li>
+</ul>
+</li>
+<li>权限作用<ul>
+<li>权限对文件的作用：<ul>
+<li>r 读取文件内容</li>
+<li>w 编辑、新增、修改文件内容，但是不能删除文件</li>
+<li>x 可执行</li>
+</ul>
+</li>
+<li>权限对目录的作用：<ul>
+<li>r 可以查询目录下文件名（ls）</li>
+<li>w 具有修改目录结构的权限。如新建文件和目录，删除此目录下文件和目录，重命名此目录下文件和目录，剪切（touch rm mv cp）</li>
+<li>x 可以进入目录（cd）</li>
+</ul>
+</li>
+<li>区别：<ul>
+<li>对文件来讲，最高权限是 x</li>
+<li>对目录来讲，最高权限是 w</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>权限命令<ul>
+<li>chmod</li>
+<li><code>chmod [选项] 模式 文件名</code><ul>
+<li>选项：<ul>
+<li>-R 递归</li>
+</ul>
+</li>
+<li>模式：<ul>
+<li><code>[ugoa] [+.=] [rwx]</code></li>
+<li><code>[mode=421]</code></li>
+</ul>
+</li>
+<li>例子：<ul>
+<li><code>chmod u+x cangls.av</code></li>
+<li><code>chmod a=rwx fengjie.av</code></li>
+<li><code>chmod g+w,o+w furong.av</code></li>
+</ul>
+</li>
+<li>权限的数字表示<ul>
+<li>r 4</li>
+<li>w 2</li>
+<li>x 1</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>chgrp<ul>
+<li><code>chgrp 组名 文件名</code> 修改文件的所属组</li>
+</ul>
+</li>
+<li>chown<ul>
+<li><code>chown 用户名 文件名</code> 修改文件的所有者</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="默认权限"><a href="#默认权限" class="headerlink" title="默认权限"></a>默认权限</h2><ul>
+<li>umask 查看默认权限<ul>
+<li>0022<ul>
+<li>第一位 0：文件特殊权限</li>
+<li>022：文件默认权限</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>修改 umask 值<ul>
+<li>临时修改<ul>
+<li>umask 0002</li>
+</ul>
+</li>
+<li>永久修改<ul>
+<li>vim /etc/profile</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>文件的默认权限特点</p>
+<ul>
+<li>文件默认不能建立为执行文件，必须手工赋予执行权限</li>
+<li>文件默认权限最大为 666</li>
+<li>默认权限需要换算成字母再相减</li>
+<li>建立文件之后的默认权限，为 666 减去 umask 值<ul>
+<li>例子：<ul>
+<li>文件默认最大权限 666，umask 值 022</li>
+<li><code>-rw-rw-rw- 减去 -----w--w- 等于 -rw-r--r--</code>，结果为 644</li>
+<li><code>-rw-rw-rw- 键入 -----wx-wx 等于 -rw-r--r--</code>，结果为 644</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>目录的默认权限特点</p>
+<ul>
+<li>目录默认权限最大为 777</li>
+<li>默认权限需要换算成字母再相减</li>
+<li>建立文件之后的默认权限，为 777 减去 umask 值<ul>
+<li>例子：<ul>
+<li>目录默认最大权限为 777，umask 值 022</li>
+<li><code>-rwxrwxrwx 减去 -----w--w- 等于 -rwxr-xr-x</code>，结果为 755</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/30/Linux-权限管理/" data-id="cixwy9h6a000a6l4btar5m9mg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Linux-软件安装" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/27/Linux-软件安装/" class="article-date">
+  <time datetime="2016-09-27T14:29:56.000Z" itemprop="datePublished">2016-09-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/27/Linux-软件安装/">Linux 软件安装</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="软件包管理简介"><a href="#软件包管理简介" class="headerlink" title="软件包管理简介"></a>软件包管理简介</h2><ul>
+<li>软件包分类<ul>
+<li>源码包<ul>
+<li>优点：<ul>
+<li>开源，如果有足够的能力，可以修改代码</li>
+<li>可以自由选择所需的功能</li>
+<li>软件是编译安装，所以更加适合自己的系统，更加稳定也效率更高</li>
+<li>卸载方便</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>安装步骤较多，尤其安装较大的软件集合时，容易出现拼写错误</li>
+<li>编译过程时间较长，安装比二进制安装时间长</li>
+<li>编译安装一旦报错，新手很难解决安装错误</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>二进制包（RPM 包、系统默认包）<ul>
+<li>优点：<ul>
+<li>包管理系统简单，只通过几个命令就可以实现包的安装、升级、查询和卸载</li>
+<li>安装速度比源码包安装快得多</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>经过编译，不再可以看到源代码</li>
+<li>功能选择不如源码包灵活</li>
+<li>依赖性</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>脚本安装包（本质是源码包和二进制包）<ul>
+<li>优点：安装简单、快捷</li>
+<li>缺点：完全丧失了自定义性</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="RPM-命令管理"><a href="#RPM-命令管理" class="headerlink" title="RPM 命令管理"></a>RPM 命令管理</h2><h3 id="RPM-包命令规则"><a href="#RPM-包命令规则" class="headerlink" title="RPM 包命令规则"></a>RPM 包命令规则</h3><ul>
+<li><code>httpd-2.2.15-15.el6.centos.1.i686.rpm</code><ul>
+<li>httpd：软件包名</li>
+<li>2.2.15：软件版本</li>
+<li>15：软件发布的次数</li>
+<li>el6.centos：适合的 Linux 平台</li>
+<li>i686：适合的硬件平台</li>
+<li>rpm：rpm 包扩展名</li>
+</ul>
+</li>
+</ul>
+<p>RPM 包依赖性</p>
+<ul>
+<li>树形依赖：a-&gt;b-&gt;c</li>
+<li>环形依赖：a-&gt;b-&gt;c-&gt;a</li>
+<li>模块依赖：查询网站：www.rpmfind.net</li>
+</ul>
+<h3 id="RPM-安装命令"><a href="#RPM-安装命令" class="headerlink" title="RPM 安装命令"></a>RPM 安装命令</h3><p>包全名与包名</p>
+<ul>
+<li>包全名：操作的包是没有安装的软件包时，使用包全名。而且要注意路径。</li>
+<li>包名：操作已经安装的软件包时，使用包名，是搜索 /var/lib/rpm/ 中的数据库</li>
+</ul>
+<p>RPM 包安装</p>
+<ul>
+<li>安装<ul>
+<li><code>rpm [选项] 包全名</code><ul>
+<li>选项：<ul>
+<li>-i（install）安装</li>
+<li>-v（verbose）显示详细信息</li>
+<li>-h（hash）显示进度</li>
+<li>--nodeps 不检测依赖性</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>升级<ul>
+<li><code>rpm -Uvh  包全名</code><ul>
+<li>选项：<ul>
+<li>-U 升级</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>卸载<ul>
+<li><code>rpm -e 包名</code><ul>
+<li>选项：<ul>
+<li>-e 卸载</li>
+<li>–nodeps 不检查依赖性</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>查询<ul>
+<li><code>rpm -qa</code> 查询所有已经安装的 RPM 包</li>
+<li><code>rpm -q 包名</code> 查询包是否安装</li>
+<li><code>rpm -qi 包名</code> 查询软件包详细信息</li>
+<li><code>rpm -ql 包名</code> 查询包中文件安装位置<ul>
+<li>RPM 包默认安装路径<ul>
+<li>/etc 配置文件安装目录</li>
+<li>/usr/bin 可执行命令安装目录</li>
+<li>/usr/lib 程序所使用的函数库保存位置</li>
+<li>/usr/share/doc 基本的软件使用手册保存位置</li>
+<li>/usr/share/man/ 帮助文件保存位置</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>rpm -qf 系统文件名</code><ul>
+<li>选项：<ul>
+<li>-f 查询系统文件属于哪个软件包（file）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>rpm -qR 包名</code><ul>
+<li>选项：<ul>
+<li>-R 查询软件包的依赖性</li>
+<li>-p 查询未安装包信息</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Yum-命令管理"><a href="#Yum-命令管理" class="headerlink" title="Yum 命令管理"></a>Yum 命令管理</h2><ul>
+<li>查询<ul>
+<li><code>yum list</code> 查询所有可用软件包列表</li>
+<li><code>yum search 关键字</code> 搜索服务器上所有和关键字相关的包</li>
+</ul>
+</li>
+<li>安装<ul>
+<li><code>yum -y install 包名</code><ul>
+<li>选项：<ul>
+<li>install 安装</li>
+<li>-y 自动回答 yes</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>升级<ul>
+<li><code>yum -y update 包名</code><ul>
+<li>选项：<ul>
+<li>update 升级</li>
+<li>-y 自动回答 yes</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>卸载<ul>
+<li><code>yum -y remove 包名</code><ul>
+<li>选项：<ul>
+<li>remove 卸载</li>
+<li>-y 自动回答 yes</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>组管理<ul>
+<li><code>yum grouplist</code> 列出所有可用的软件组列表</li>
+<li><code>yum groupinstall 软件组名</code> 安装指定软件组，组名可以由 grouplist 查询出来</li>
+<li><code>yum groupremove 软件组名</code> 卸载指定软件组</li>
+</ul>
+</li>
+</ul>
+<h2 id="源码包安装"><a href="#源码包安装" class="headerlink" title="源码包安装"></a>源码包安装</h2><p>源码包安装位置需要手动指定，一般安装在 <code>/usr/local/软件名</code></p>
+<p>安装源码包之前需要安装 C 语言编译器</p>
+<p>源码包安装过程</p>
+<ul>
+<li>下载源码包</li>
+<li>解压缩下载的源码包</li>
+<li>进入解压缩目录</li>
+<li><code>./configure 软件配置与检查</code><ul>
+<li>定义需要的功能选项</li>
+<li>检测系统环境是否符合安装要求</li>
+<li>把定义好的功能选项和检测系统环境的信息都写入 Makefile 文件，用于后续的编辑</li>
+</ul>
+</li>
+<li><code>make</code> 编译<ul>
+<li><code>make clean</code> 如果编译错误，尝试执行 <code>make clean</code></li>
+</ul>
+</li>
+<li><code>make install</code> 编译安装</li>
+</ul>
+<p>源码包不需要卸载命令，直接删除安装目录即可。不会遗留垃圾文件</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/27/Linux-软件安装/" data-id="cixwy9h7i000o6l4bgavxpov1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Linux-定时任务" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/26/Linux-定时任务/" class="article-date">
+  <time datetime="2016-09-26T09:25:18.000Z" itemprop="datePublished">2016-09-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/26/Linux-定时任务/">Linux 定时任务</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Linux-定时任务"><a href="#Linux-定时任务" class="headerlink" title="Linux 定时任务"></a>Linux 定时任务</h2><ul>
+<li>at 一次性定时任务</li>
+<li>crontab 循环定时任务</li>
+<li>crontab 设置</li>
+<li>anacron 配置</li>
+</ul>
+<h2 id="at-一次性定时任务"><a href="#at-一次性定时任务" class="headerlink" title="at 一次性定时任务"></a>at 一次性定时任务</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># at 服务是否安装</div><div class="line">chkconfig --list | grep atd</div><div class="line"></div><div class="line"># at 服务的启动</div><div class="line">service atd restart</div></pre></td></tr></table></figure>
+<p>at 的访问控制</p>
+<ul>
+<li>如果系统中有 /etc/at.allow 文件，那么只有写入 /etc/at.allow （白名单）文件中的用户可以使用 at 命令（/etc/at.deny 文件会被忽略）</li>
+<li>如果系统中没有 /etc/at.allow 文件，只有 /etc/at.deny 文件，那么写入 /etc/at.deny （黑名单）文件中的用户不能使用 at 命令。对 root 不起作用</li>
+<li>如果系统中这两个文件都不存在，那么只有 root 用户可以使用 at 命令</li>
+</ul>
+<p>at 命令</p>
+<ul>
+<li>at<ul>
+<li><code>at [选项] 时间</code><ul>
+<li>选项：<ul>
+<li>-m 当 at 工作完成后，无论命令是否有输出，都用 email 通知执行 at 命令的用户</li>
+<li>-c 工作号：显示该 at 工作的实际内容</li>
+</ul>
+</li>
+<li>时间：<ul>
+<li>HH:MM 02:30</li>
+<li>HH:MM YYYY-MM-DD 02:30 2013-07-25</li>
+<li>HH:MM[am|pm] [month] [date] 02:30 July 25</li>
+<li>HH:MM[am|pm] + [minutes|hours|days|weeks] now + 5 minutes</li>
+</ul>
+</li>
+<li>例子：<ul>
+<li><code>at now + 2 minutes</code> &amp;&amp; <code>/root/hello.sh &gt;&gt; /root/hello.log</code></li>
+<li><code>at 02:00 2013-07-26</code> &amp;&amp; <code>/bin/sync</code> &amp;&amp; <code>/sbin/shutdown -r now</code></li>
+</ul>
+</li>
+<li>其他：<ul>
+<li><code>atq</code> 查询当前服务器上的 at 工作</li>
+<li><code>atrm [工作号]</code> 删除指定的 at 任务</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="anncron"><a href="#anncron" class="headerlink" title="anncron"></a>anncron</h2><p>anacron 是用来保证在系统关机的时候错过的定时任务，可以在系统开机之后再执行</p>
+<p>anacron 检测周期</p>
+<ul>
+<li>anacron 会使用一天，七天，一个月作为检测周期</li>
+<li>在系统的 /var/spool/anacron/ 目录中存在 cron.{daily，weekly，monthly} 文件，用于记录上次执行的 cron 的时间</li>
+<li>和当前时间做比较，如果两个时间的差值超过了 anacron 的指定时间差值，证明有 cron 任务被漏执行</li>
+</ul>
+<p>anacron 配置文件</p>
+<ul>
+<li>vim /etc/anacrontab<ul>
+<li><code>RANDOM_DELAY=45</code> 最大随机延迟</li>
+<li><code>START_HOURS_RANGE=3-22</code> anacron 的执行时间范围是 3:00 - 22:00</li>
+<li><code>1    5    cron.daily         nice run-parts /etc/cron.daily</code> 天数 强制延迟（分钟） 工作名称 实际执行的命令</li>
+</ul>
+</li>
+</ul>
+<p>anacron 执行过程（以 cron.daily 为例）</p>
+<ul>
+<li>首先读取 /var/spool/anacron/cron.daily 中的上一次 anacron 执行的时间</li>
+<li>和当前时间比较，如果两个时间的差值超过 1 天，就执行 cron.daily 工作</li>
+<li>执行这个工作只能在 03:00-22:00 之间</li>
+<li>执行工作时强制延迟时间为 5 分钟，再随机延迟 0-45 分钟时间</li>
+<li>使用 nice 命令指定默认优先级，使用 run-parts 脚本执行 /etc/cron.daily 目录中的所有可执行文件</li>
+</ul>
+<h2 id="Crontab-简介"><a href="#Crontab-简介" class="headerlink" title="Crontab 简介"></a>Crontab 简介</h2><p>业务场景</p>
+<ul>
+<li>每分钟需要执行一个程序检查系统运行状态</li>
+<li>每天凌晨需要对过去一天的业务数据进行统计</li>
+<li>每个星期需要把日志文件备份</li>
+<li>每个月需要把数据库进行备份</li>
+</ul>
+<p>概念理解</p>
+<p><strong>Crontab 是一个用于设置周期性被执行的任务的工具。</strong></p>
+<h2 id="Crontab-实践"><a href="#Crontab-实践" class="headerlink" title="Crontab 实践"></a>Crontab 实践</h2><ul>
+<li>相关工具<ul>
+<li>Mac OS 自带 SSH</li>
+</ul>
+</li>
+<li>安装并检查 Crontab 服务<ul>
+<li>检查 cron 服务<ul>
+<li>检查 Crontab 工具是否安装：<code>crontab -l</code></li>
+<li>检查 Crontab 可执行的命令：<code>service crond</code></li>
+<li>检查 Crontab 服务是否启动：<code>service crond status</code></li>
+<li>删除当前用户所有的定时任务： <code>crontab -r</code></li>
+<li>打开定时任务列表，进行编辑：<code>crontab -e</code><ul>
+<li>实际上在修改目录 <code>/var/spool/cron/root</code> 下用户对应的文件</li>
+<li><code>crontab 文件名</code> 会把（crontab -e）文件里的内容都覆盖，使用时需要注意</li>
+</ul>
+</li>
+<li>启动 Crontab 服务：<code>service crond start</code></li>
+</ul>
+</li>
+<li>安装 Crontab 服务（依次执行）<ul>
+<li><code>yum install vixie-cron</code></li>
+<li><code>yum install crontabs</code></li>
+</ul>
+</li>
+<li><code>tail</code> 命令<ul>
+<li>作用：按照要求将指定的文件的最后部分输出到标准设备，如果文件有更新，tail 会主动刷新，确保你看到最新的文件内容</li>
+<li>选项<ul>
+<li>-f 循环读取</li>
+<li>-q 不显示处理信息</li>
+<li>-v 显示详细的处理信息</li>
+<li>-c [数目] 显示的字节数</li>
+<li>-n [行数] 显示行数</li>
+<li>-s 与-f合用,表示在每次反复的间隔休眠 s 秒</li>
+<li>-q 从不输出给出文件名的首部</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Crontab 的基本组成<ul>
+<li>配置文件</li>
+<li>系统服务 Crond</li>
+<li>配置工具 Crontab</li>
+</ul>
+</li>
+<li>Crontab 的配置文件格式<ul>
+<li><code>* * * * * Command</code><ul>
+<li>第一个星号：分钟 0~59</li>
+<li>第二个星号：小时 0~23</li>
+<li>第三个星号：日期 1~31</li>
+<li>第四个星号：月份 1~12</li>
+<li>第五个星号：星期 0~7（0、7 都是星期天）</li>
+</ul>
+</li>
+<li>用法：<ul>
+<li>每晚的 21:30 重启 apache<ul>
+<li><strong><code>30 21 * * * service httpd restart</code></strong></li>
+</ul>
+</li>
+<li>每月 1 到 10 日的 4:45 重启 apache<ul>
+<li><strong><code>45 4 1-10 * * service httpd restart</code></strong></li>
+</ul>
+</li>
+<li>每月 1、10、22 日的 4:45 重启 apache<ul>
+<li><strong><code>45 4 1,10,22 * * service httpd restart</code></strong></li>
+</ul>
+</li>
+<li>每隔两分钟重启 apache 服务器<ul>
+<li><strong><code>*/2 * * * * service httpd restart</code></strong></li>
+</ul>
+</li>
+<li>晚上 11 点到早上 7 点之间，每隔一小时重启 apache<ul>
+<li><strong><code>0 23-7/1 * * * service httpd restart</code></strong></li>
+</ul>
+</li>
+<li>每天 18:00 至 23:00 之间每隔 30 分钟重启 apache<ul>
+<li><strong><code>0,30 18-23 * * * service httpd restart</code></strong></li>
+<li><strong><code>0-59/30 18-23 * * * service httpd restart</code></strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>总结：<ul>
+<li>* 表示任何时候都匹配</li>
+<li>可以用 “A,B,C” 表示 A 或者 B 或者 C 时执行命令</li>
+<li>可以用 “A-B” 表示 A 到 B 之间时执行命令</li>
+<li>可以用 “*/A” 表示每 A 时间执行一次命令</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Crontab 配置文件<ul>
+<li>全局配置文件<ul>
+<li><code>/etc/crontab</code> 查看系统级别的 Crontab</li>
+</ul>
+</li>
+<li>用户配置文件<ul>
+<li><code>/var/spool/cron/用户名称</code> 查看用户级别的 Crontab</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Crontab 的日志<ul>
+<li>监听 Crontab 执行日志：<code>tail -f /var/log/cron</code>，可以看到用户级别和系统级别的 Crontab</li>
+<li>查看每天的 Crontab 日志：<code>ls /var/log/cron*</code></li>
+</ul>
+</li>
+<li>Crontab 常见错误<ul>
+<li>环境变量：涉及到文件路径时写全局路径。注意声明 <code>#!/bin/bash</code> 确保脚本中环境变量能够被识别</li>
+<li>第三和第五个域之间执行的是 “或” 操作<ul>
+<li>四月的第一个星期日早晨 1 时 59 分运行 a.sh：<code>59 1 1-7 4 * test &#39;date + \%w -eq 0 &amp;&amp; /root/a.sh&#39;</code></li>
+</ul>
+</li>
+<li>两个小时运行一次<ul>
+<li>错误例子：<code>* 0,2,4,6,8,10,12,14,16,18,20,22 * * * date</code></li>
+<li>正确例子：<code>0 */2 * * * date</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Crontab 补充<ul>
+<li>半分钟执行命令<ul>
+<li><code>date &amp;&amp; sleep 0.5s &amp;&amp; date</code></li>
+</ul>
+</li>
+<li>Crontab 最小时间是 1 分钟，控制 1 分钟执行多次，本应该是同时执行，但第二条被推迟了30s执行，效果就是1分钟执行了2次<ul>
+<li><code>*/1 * * * * date &gt;&gt; /root/test/half.log</code></li>
+<li><code>*/1 * * * * sleep 30s; date &gt;&gt; /root/test/half.log</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/26/Linux-定时任务/" data-id="cixwy9h7d000i6l4bxpt7fm9n" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">__('next') &raquo;</a>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 18px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 14px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 12px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Yii/" style="font-size: 16px;">Yii</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/12/08/学习-UML（一）/">学习 UML（一）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/02/Yii2-Working-with-Databases/">Yii2 Working with Databases</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/22/关于-PHP-函数-array-walk-的一些想法/">关于 PHP 函数 array_walk 的一些想法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/21/关于-PHP-函数-array-filter-的一些想法/">关于 PHP 函数 array_filter 的一些想法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/21/关于-PHP-函数-array-map-的一些想法/">关于 PHP 函数 array_map 的一些想法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
