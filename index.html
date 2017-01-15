@@ -65,6 +65,85 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-使用-Laravel-Vue-js-进行微信开发（一）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/15/使用-Laravel-Vue-js-进行微信开发（一）/" class="article-date">
+  <time datetime="2017-01-15T01:11:57.000Z" itemprop="datePublished">2017-01-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/15/使用-Laravel-Vue-js-进行微信开发（一）/">使用 Laravel + Vue.js 进行微信开发（一）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="安装-EasyWechat"><a href="#安装-EasyWechat" class="headerlink" title="安装 EasyWechat"></a>安装 EasyWechat</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">composer require &quot;overtrue/laravel-wechat:~3.0&quot;</div></pre></td></tr></table></figure>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ul>
+<li>注册 ServiceProvider:<ul>
+<li>Overtrue\LaravelWechat\ServiceProvider::class,</li>
+</ul>
+</li>
+<li>创建配置文件<ul>
+<li>php artisan vendor:publish</li>
+</ul>
+</li>
+<li>修改 config/wechat.php<ul>
+<li>app_id</li>
+<li>secret</li>
+<li>token</li>
+<li>aes_key</li>
+</ul>
+</li>
+</ul>
+<h2 id="创建微信分组路由"><a href="#创建微信分组路由" class="headerlink" title="创建微信分组路由"></a>创建微信分组路由</h2><p>修改文件 app/Http/routes.php，代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Route::group([</div><div class="line">    <span class="string">'prefix'</span> =&gt; <span class="string">'wechat'</span>,</div><div class="line">    <span class="string">'namespace'</span> =&gt; <span class="string">'WeChat'</span>,</div><div class="line">], <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">require_once</span> <span class="keyword">__DIR__</span> . <span class="string">'/Routes/wechat.php'</span>;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>新增文件 app/Http/Routes/wechat.php，代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Route::any(<span class="string">'/wechat'</span>, [</div><div class="line">    <span class="string">'as'</span> =&gt; <span class="string">''</span>,</div><div class="line">    <span class="string">'uses'</span> =&gt; <span class="string">'WechatController@serve'</span>,</div><div class="line">]);</div></pre></td></tr></table></figure></p>
+<h2 id="关闭路由-CSRF"><a href="#关闭路由-CSRF" class="headerlink" title="关闭路由 CSRF"></a>关闭路由 CSRF</h2><p>修改文件 app/Http/Middleware/VerifyCSsrfToken.php，代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">protected</span> $except = [</div><div class="line">	<span class="string">'/wechat'</span></div><div class="line">];</div></pre></td></tr></table></figure></p>
+<h2 id="创建控制器"><a href="#创建控制器" class="headerlink" title="创建控制器"></a>创建控制器</h2><p>新增文件 app/Http/Controllers/WeChat/WeChatController.php，代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>\<span class="title">WeChat</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>\<span class="title">Controller</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">EasyWeChat</span>\<span class="title">Foundation</span>\<span class="title">Application</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">Log</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">WeChatController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 处理微信的请求消息</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span> string</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">serve</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        Log::info(<span class="string">'WeChat Server HTTP Request Arrived!'</span>);</div><div class="line"></div><div class="line">        $wechat = app(<span class="string">'wechat'</span>);</div><div class="line">        $wechat-&gt;server-&gt;setMessageHandler(<span class="function"><span class="keyword">function</span><span class="params">($message)</span></span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">"欢迎关注 &#123;$message&#125;!"</span>;</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        Log::info(<span class="string">'Return HTTP Response.'</span>);</div><div class="line"></div><div class="line">        <span class="keyword">return</span> $wechat-&gt;server-&gt;serve();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><ul>
+<li>配置微信公众平台测试号<ul>
+<li>接口配置信息<ul>
+<li>URL：域名/wechat</li>
+<li>Token</li>
+</ul>
+</li>
+<li>JS 接口安全域名<ul>
+<li>填写域名</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>URL 和 Token 通过验证之后，关注微信公众平台测试号，并发送测试消息，成功的话，如下图：<br><img src="http://o93kt6djh.bkt.clouddn.com/yanzhengwechatmessage.jpeg" alt=""></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2017/01/15/使用-Laravel-Vue-js-进行微信开发（一）/" data-id="cixy8sfs000206u4baq5543z1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-学习-UML（一）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/12/08/学习-UML（一）/" class="article-date">
@@ -162,7 +241,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/12/08/学习-UML（一）/" data-id="cixwyy2ci003x0f4bep8tx9ry" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/12/08/学习-UML（一）/" data-id="cixy8sftf00436u4bwpr3unh1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UML/">UML</a></li></ul>
@@ -217,7 +296,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/12/02/Yii2-Working-with-Databases/" data-id="cixwyy2am001i0f4bnhrqbqge" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/12/02/Yii2-Working-with-Databases/" data-id="cixy8sfry001u6u4bhbdtjy8p" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -287,7 +366,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/11/22/关于-PHP-函数-array-walk-的一些想法/" data-id="cixwyy2cd003q0f4bqc9n50q6" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/11/22/关于-PHP-函数-array-walk-的一些想法/" data-id="cixy8sft6003r6u4b4eheutz6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -353,7 +432,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/11/21/关于-PHP-函数-array-filter-的一些想法/" data-id="cixwyy2c000360f4b3i8f46yc" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/11/21/关于-PHP-函数-array-filter-的一些想法/" data-id="cixy8sfsz003h6u4bzzo4bp90" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -414,7 +493,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/11/21/关于-PHP-函数-array-map-的一些想法/" data-id="cixwyy2c300390f4b1cfqywh0" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/11/21/关于-PHP-函数-array-map-的一些想法/" data-id="cixy8sft4003n6u4b9lec7qkb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -463,7 +542,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/11/19/使用-PHPStorm-的-Live-Templates-封装常用代码/" data-id="cixwyy2b7002a0f4b8tlfi2vk" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/11/19/使用-PHPStorm-的-Live-Templates-封装常用代码/" data-id="cixy8sfsc002i6u4b4a2sixhi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -503,7 +582,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/11/03/Yii-框架之工具篇/" data-id="cixwyy2ac00180f4bulfcvv96" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/11/03/Yii-框架之工具篇/" data-id="cixy8sfro001g6u4bt3mnqpyj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -573,7 +652,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/29/Yii-框架之安全篇/" data-id="cixwyy2aj001g0f4byvwc567u" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/29/Yii-框架之安全篇/" data-id="cixy8sfrm001d6u4bk42nax5d" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -631,279 +710,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/29/Yii-框架之扩展篇/" data-id="cixwyy2aq001o0f4br62r3h7c" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Yii-框架之基础篇" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/10/25/Yii-框架之基础篇/" class="article-date">
-  <time datetime="2016-10-25T13:59:58.000Z" itemprop="datePublished">2016-10-25</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/25/Yii-框架之基础篇/">Yii 框架之基础篇</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>检查当前 PHP 环境是否满足 Yii 最基本需求：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php requirements.php</div></pre></td></tr></table></figure></p>
-<p>通过 Composer 进行安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 安装基础应用模板</div><div class="line">sudo composer create-project --prefer-dist yiisoft/yii2-app-basic yii</div><div class="line"></div><div class="line">// 安装高级应用模板</div><div class="line">sudo composer create-project --prefer-dist yiisoft/yii2-app-advanced advanced</div></pre></td></tr></table></figure></p>
-<p>如果安装的过程中提示需要 Github Token，则进入以下网址生成 Token<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://github.com/settings/tokens</div></pre></td></tr></table></figure></p>
-<h2 id="Packages"><a href="#Packages" class="headerlink" title="Packages"></a>Packages</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// AdminLte 后台响应模板</div><div class="line">composer require dmstr/yii2-adminlte-asset &quot;2.*&quot;</div><div class="line"></div><div class="line">// Yii2 RBAC 的一套管理工具，实现了漂亮的界面和完整的权限管理功能</div><div class="line">composer require mdmsoft/yii2-admin &quot;2.x-dev&quot;</div></pre></td></tr></table></figure>
-<h2 id="控制器"><a href="#控制器" class="headerlink" title="控制器"></a>控制器</h2><h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><p>控制器由操作组成，它是执行终端用户请求的最基础的单元，一个控制器可有一个或多个操作。</p>
-<p>操作分为独立操作和内联操作</p>
-<p>内联操作容易创建，在无需重用的情况下优先使用； 独立操作相反，主要用于多个控制器重用， 或重构为扩展</p>
-<h3 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h3><p>终端用户通过所谓的路由寻找到操作，路由是包含以下部分的字符串：</p>
-<ul>
-<li>模块 ID</li>
-<li>控制器 ID</li>
-<li>操作 ID</li>
-</ul>
-<p>路由两种主要的格式<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 默认目录下的路由</span></div><div class="line">ControllerID/ActionID</div><div class="line"></div><div class="line"><span class="comment"># 模块目录下的路由</span></div><div class="line">ModuleID/ControllerID/ActionID</div></pre></td></tr></table></figure></p>
-<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>在应用配置文件 <code>web.php</code> 配置默认控制器，当请求没有指定路由，该属性值作为路由使用:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">[</div><div class="line">	<span class="string">'defaultRoute'</span> =&gt; <span class="string">'main'</span>,</div><div class="line">]</div></pre></td></tr></table></figure></p>
-<p>在应用配置文件 <code>web.php</code> 强制控制器 ID 和类名对应，通常用在使用第三方不能掌控类名的控制器上<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">[</div><div class="line">    <span class="string">'controllerMap'</span> =&gt; [</div><div class="line">        <span class="comment">// 用类名申明 "account" 控制器</span></div><div class="line">        <span class="string">'account'</span> =&gt; <span class="string">'app\controllers\UserController'</span>,</div><div class="line"></div><div class="line">        <span class="comment">// 用配置数组申明 "article" 控制器</span></div><div class="line">        <span class="string">'article'</span> =&gt; [</div><div class="line">            <span class="string">'class'</span> =&gt; <span class="string">'app\controllers\PostController'</span>,</div><div class="line">            <span class="string">'enableCsrfValidation'</span> =&gt; <span class="keyword">false</span>,</div><div class="line">        ],</div><div class="line">    ],</div><div class="line">]</div></pre></td></tr></table></figure></p>
-<h3 id="操作结果"><a href="#操作结果" class="headerlink" title="操作结果"></a>操作结果</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 返回响应对象，进行页面跳转</div><div class="line">$this-&gt;redirect(&apos;http://example.com&apos;);</div></pre></td></tr></table></figure>
-<h3 id="操作参数"><a href="#操作参数" class="headerlink" title="操作参数"></a>操作参数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">namespace app\controllers;</div><div class="line"></div><div class="line">use yii\web\Controller;</div><div class="line"></div><div class="line">class PostController extends Controller</div><div class="line">&#123;</div><div class="line">    public function actionView(int $id, $version = null)</div><div class="line">    &#123;</div><div class="line">        // ...</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>操作参数会被不同的参数填入，如下所示：</p>
-<ul>
-<li><a href="http://hostname/index.php?r=post/view&amp;id=123" target="_blank" rel="external">http://hostname/index.php?r=post/view&amp;id=123</a>: $id 会填入’123’， $version 仍为 null 空因为没有version请求参数;</li>
-<li><a href="http://hostname/index.php?r=post/view&amp;id=123&amp;version=2" target="_blank" rel="external">http://hostname/index.php?r=post/view&amp;id=123&amp;version=2</a>: $id 和 $version 分别填入 ‘123’ 和 ‘2’`；</li>
-<li><a href="http://hostname/index.php?r=post/view" target="_blank" rel="external">http://hostname/index.php?r=post/view</a>: 会抛出yii\web\BadRequestHttpException 异常 因为请求没有提供参数给必须赋值参数$id；</li>
-<li><a href="http://hostname/index.php?r=post/view&amp;id[]=123" target="_blank" rel="external">http://hostname/index.php?r=post/view&amp;id[]=123</a>: 会抛出yii\web\BadRequestHttpException 异常 因为$id 参数收到数字值 [‘123’]而不是字符串.</li>
-</ul>
-<h3 id="默认操作"><a href="#默认操作" class="headerlink" title="默认操作"></a>默认操作</h3><p>每个控制器都有一个由 yii\base\Controller::defaultAction 属性指定的默认操作，当路由只包含控制器ID， 会使用所请求的控制器的默认操作。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">namespace</span> <span class="title">app</span>\<span class="title">controllers</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">yii</span>\<span class="title">web</span>\<span class="title">Controller</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SiteController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> $defaultAction = <span class="string">'home'</span>;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">actionHome</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;render(<span class="string">'home'</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><p>模型通过属性来代表业务数据，每个属性像是模型的公有可访问属性，yii\base\Model::attributes() 指定模型所拥有的属性。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$model = <span class="keyword">new</span> \app\models\ContactForm;</div><div class="line"></div><div class="line"><span class="comment">// "name" 是ContactForm模型的属性</span></div><div class="line">$model-&gt;name = <span class="string">'example'</span>;</div><div class="line"><span class="keyword">echo</span> $model-&gt;name;</div></pre></td></tr></table></figure></p>
-<p>模型实现了 ArrayAccess 和 ArrayIterator 接口，可以像数组单元项一样访问属性<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$model = <span class="keyword">new</span> \app\models\ContactForm;</div><div class="line"></div><div class="line"><span class="comment">// 像访问数组单元项一样访问属性</span></div><div class="line">$model[<span class="string">'name'</span>] = <span class="string">'example'</span>;</div><div class="line"><span class="keyword">echo</span> $model[<span class="string">'name'</span>];</div><div class="line"></div><div class="line"><span class="comment">// 迭代器遍历模型</span></div><div class="line"><span class="keyword">foreach</span> ($model <span class="keyword">as</span> $name =&gt; $value) &#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">"$name: $value\n"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="属性标签"><a href="#属性标签" class="headerlink" title="属性标签"></a>属性标签</h3><p>如果你不想用自动生成的标签， 可以覆盖 yii\base\Model::attributeLabels() 方法明确指定属性标签，例如：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">namespace</span> <span class="title">app</span>\<span class="title">models</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">yii</span>\<span class="title">base</span>\<span class="title">Model</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ContactForm</span> <span class="keyword">extends</span> <span class="title">Model</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> $name;</div><div class="line">    <span class="keyword">public</span> $email;</div><div class="line">    <span class="keyword">public</span> $subject;</div><div class="line">    <span class="keyword">public</span> $body;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">attributeLabels</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> [</div><div class="line">            <span class="string">'name'</span> =&gt; <span class="string">'Your name'</span>,</div><div class="line">            <span class="string">'email'</span> =&gt; <span class="string">'Your email address'</span>,</div><div class="line">            <span class="string">'subject'</span> =&gt; <span class="string">'Subject'</span>,</div><div class="line">            <span class="string">'body'</span> =&gt; <span class="string">'Content'</span>,</div><div class="line">        ];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><p>模型可能在多个场景下使用，例如 User 模块可能会在收集用户登录输入，也可能会在用户注册时使用。在不同的场景下，模型可能会使用不同的业务规则和逻辑，例如 email 属性在注册时强制要求有，但在登陆时不需要。模型设置场景如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="comment">// 场景作为属性来设置</span></div><div class="line">$model = <span class="keyword">new</span> User;</div><div class="line">$model-&gt;scenario = <span class="string">'login'</span>;</div><div class="line"></div><div class="line"><span class="comment">// 场景通过构造初始化配置来设置</span></div><div class="line">$model = <span class="keyword">new</span> User([<span class="string">'scenario'</span> =&gt; <span class="string">'login'</span>]);</div></pre></td></tr></table></figure></p>
-<p>场景设置活动属性和验证规则<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">namespace</span> <span class="title">app</span>\<span class="title">models</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">yii</span>\<span class="title">db</span>\<span class="title">ActiveRecord</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">extends</span> <span class="title">ActiveRecord</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">const</span> SCENARIO_LOGIN = <span class="string">'login'</span>;</div><div class="line">    <span class="keyword">const</span> SCENARIO_REGISTER = <span class="string">'register'</span>;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">scenarios</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        $scenarios = <span class="keyword">parent</span>::scenarios();</div><div class="line">        $scenarios[<span class="keyword">self</span>::SCENARIO_LOGIN] = [<span class="string">'username'</span>, <span class="string">'password'</span>];</div><div class="line">        $scenarios[<span class="keyword">self</span>::SCENARIO_REGISTER] = [<span class="string">'username'</span>, <span class="string">'email'</span>, <span class="string">'password'</span>];</div><div class="line">        <span class="keyword">return</span> $scenarios;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">rules</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">	    <span class="keyword">return</span> [</div><div class="line">	        <span class="comment">// 在"register" 场景下 username, email 和 password 必须有值</span></div><div class="line">	        [[<span class="string">'username'</span>, <span class="string">'email'</span>, <span class="string">'password'</span>], <span class="string">'required'</span>, <span class="string">'on'</span> =&gt; <span class="string">'register'</span>],</div><div class="line"></div><div class="line">	        <span class="comment">// 在 "login" 场景下 username 和 password 必须有值</span></div><div class="line">	        [[<span class="string">'username'</span>, <span class="string">'password'</span>], <span class="string">'required'</span>, <span class="string">'on'</span> =&gt; <span class="string">'login'</span>],</div><div class="line">	    ];</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="块赋值"><a href="#块赋值" class="headerlink" title="块赋值"></a>块赋值</h3><p>块赋值只用一行代码将用户所有输入填充到一个模型，非常方便，它直接将输入数据对应填充到 yii\base\Model::attributes 属性。以下两段代码效果是相同的，都是将终端用户输入的表单数据赋值到 ContactForm 模型的属性，明显地前一段块赋值的代码比后一段代码简洁且不易出错。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="comment"># 块赋值</span></div><div class="line">$model = <span class="keyword">new</span> \app\models\ContactForm;</div><div class="line">$model-&gt;attributes = \Yii::$app-&gt;request-&gt;post(<span class="string">'ContactForm'</span>);</div><div class="line"></div><div class="line"><span class="comment"># 普通赋值</span></div><div class="line"></div><div class="line">$model = <span class="keyword">new</span> \app\models\ContactForm;</div><div class="line">$data = \Yii::$app-&gt;request-&gt;post(<span class="string">'ContactForm'</span>, []);</div><div class="line">$model-&gt;name = <span class="keyword">isset</span>($data[<span class="string">'name'</span>]) ? $data[<span class="string">'name'</span>] : <span class="keyword">null</span>;</div><div class="line">$model-&gt;email = <span class="keyword">isset</span>($data[<span class="string">'email'</span>]) ? $data[<span class="string">'email'</span>] : <span class="keyword">null</span>;</div><div class="line">$model-&gt;subject = <span class="keyword">isset</span>($data[<span class="string">'subject'</span>]) ? $data[<span class="string">'subject'</span>] : <span class="keyword">null</span>;</div><div class="line">$model-&gt;body = <span class="keyword">isset</span>($data[<span class="string">'body'</span>]) ? $data[<span class="string">'body'</span>] : <span class="keyword">null</span>;</div></pre></td></tr></table></figure></p>
-<h3 id="对象转换数组"><a href="#对象转换数组" class="headerlink" title="对象转换数组"></a>对象转换数组</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$post = \app\models\Post::findOne(<span class="number">100</span>);</div><div class="line">$array = $post-&gt;attributes;</div></pre></td></tr></table></figure>
-<h3 id="字段"><a href="#字段" class="headerlink" title="字段"></a>字段</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$array = $model-&gt;toArray([], [<span class="string">'prettyName'</span>, <span class="string">'fullAddress'</span>]);</div><div class="line"></div><div class="line"><span class="comment">// 明确列出每个字段，特别用于你想确保数据表或模型</span></div><div class="line"><span class="comment">// 属性改变不会导致你的字段改变(保证后端的API兼容)。</span></div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">fields</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> [</div><div class="line">        <span class="comment">// 字段名和属性名相同</span></div><div class="line">        <span class="string">'id'</span>,</div><div class="line"></div><div class="line">        <span class="comment">// 字段名为 "email"，对应属性名为 "email_address"</span></div><div class="line">        <span class="string">'email'</span> =&gt; <span class="string">'email_address'</span>,</div><div class="line"></div><div class="line">        <span class="comment">// 字段名为 "name", 值通过PHP代码返回</span></div><div class="line">        <span class="string">'name'</span> =&gt; <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;first_name . <span class="string">' '</span> . <span class="keyword">$this</span>-&gt;last_name;</div><div class="line">        &#125;,</div><div class="line">    ];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 过滤掉一些字段，特别用于你想</span></div><div class="line"><span class="comment">// 继承父类实现并不想用一些敏感字段</span></div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">fields</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    $fields = <span class="keyword">parent</span>::fields();</div><div class="line"></div><div class="line">    <span class="comment">// 去掉一些包含敏感信息的字段</span></div><div class="line">    <span class="keyword">unset</span>($fields[<span class="string">'auth_key'</span>], $fields[<span class="string">'password_hash'</span>], $fields[<span class="string">'password_reset_token'</span>]);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> $fields;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h2><h3 id="控制器渲染视图的方法"><a href="#控制器渲染视图的方法" class="headerlink" title="控制器渲染视图的方法"></a>控制器渲染视图的方法</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="comment">// 渲染一个视图名并使用一个布局返回到渲染结果</span></div><div class="line">yii\base\Controller::render();</div><div class="line"></div><div class="line"><span class="comment">// 渲染一个视图名并且不使用布局</span></div><div class="line">yii\base\Controller::renderPartial();</div><div class="line"></div><div class="line"><span class="comment">// 渲染一个视图名并且不使用布局，并注入所有注册的JS/CSS脚本和文件，通常使用在响应AJAX网页请求的情况下。</span></div><div class="line">yii\base\Controller::renderAjax();</div><div class="line"></div><div class="line"><span class="comment">// 渲染一个视图文件目录或别名下的视图文件。</span></div><div class="line">yii\base\Controller::renderFile();</div><div class="line"></div><div class="line">yii\base\Controller::renderContent();</div></pre></td></tr></table></figure>
-<h3 id="小部件渲染视图的方法"><a href="#小部件渲染视图的方法" class="headerlink" title="小部件渲染视图的方法"></a>小部件渲染视图的方法</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="comment">// 渲染一个视图名</span></div><div class="line">yii\base\Widget::render()</div><div class="line"></div><div class="line"><span class="comment">// 渲染一个视图文件目录或别名下的视图文件</span></div><div class="line">yii\base\Widget::renderFile()</div></pre></td></tr></table></figure>
-<h3 id="视图中访问数据"><a href="#视图中访问数据" class="headerlink" title="视图中访问数据"></a>视图中访问数据</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$<span class="keyword">this</span>-&gt;render(<span class="string">'视图名'</span>,[<span class="string">'key'</span>=&gt;$value]);</div><div class="line"></div><div class="line">echo $<span class="keyword">this</span>-&gt;key;</div></pre></td></tr></table></figure>
-<h3 id="视图间共享数据"><a href="#视图间共享数据" class="headerlink" title="视图间共享数据"></a>视图间共享数据</h3><p>yii\base\View 视图组件提供yii\base\View::params参数 属性来让不同视图共享数据。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$<span class="keyword">this</span>-&gt;params[<span class="string">'breadcrumbs'</span>][] = <span class="string">'About Us'</span>;</div></pre></td></tr></table></figure></p>
-<h3 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h3><p>布局的渲染过程<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// 该方法应在布局的开始处调用， 它触发表明页面开始的 yii\base\View::EVENT_BEGIN_PAGE 事件。</span></div><div class="line">yii\base\View::beginPage();</div><div class="line"></div><div class="line"><span class="comment">// 该方法应在布局的结尾处调用， 它触发表明页面结尾的 yii\base\View::EVENT_END_PAGE 时间。</span></div><div class="line">yii\base\View::endPage();</div><div class="line"></div><div class="line"><span class="comment">// 该方法应在HTML页面的&lt;head&gt;标签中调用， 它生成一个占位符，在页面渲染结束时会被注册的头部HTML代码 （如，link标签, meta标签）替换。</span></div><div class="line">yii\web\View::head();</div><div class="line"></div><div class="line"><span class="comment">// 该方法应在&lt;body&gt;标签的开始处调用， 它触发 yii\web\View::EVENT_BEGIN_BODY 事件并生成一个占位符， 会被注册的HTML代码（如JavaScript）在页面主体开始处替换。</span></div><div class="line">yii\web\View::beginBody();</div><div class="line"></div><div class="line"><span class="comment">// 方法应在&lt;body&gt;标签的结尾处调用， 它触发 yii\web\View::EVENT_END_BODY 事件并生成一个占位符， 会被注册的HTML代码（如JavaScript）在页面主体结尾处替换。</span></div><div class="line">yii\web\View::endBody()</div></pre></td></tr></table></figure></p>
-<p>布局中访问数据<br>在布局中可访问两个预定义变量：$this 和 $content， 前者对应和普通视图类似的 yii\base\View 视图组件 后者包含调用 yii\base\Controller::render() 方法渲染内容视图的结果。</p>
-<p>使用布局</p>
-<ul>
-<li>yii\base\Application::layout 管理所有控制器的布局</li>
-<li>yii\base\Controller::layout 覆盖总布局来控制单个控制器布局</li>
-</ul>
-<p>嵌套布局</p>
-<p>布局数据块</p>
-<h3 id="使用视图组件"><a href="#使用视图组件" class="headerlink" title="使用视图组件"></a>使用视图组件</h3><h3 id="设置页面标题"><a href="#设置页面标题" class="headerlink" title="设置页面标题"></a>设置页面标题</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">	<span class="keyword">$this</span>-&gt;title = <span class="string">'My page title'</span>;</div><div class="line"><span class="meta">?&gt;</span></div><div class="line"></div><div class="line">&lt;title&gt;<span class="meta">&lt;?</span>= Html::encode(<span class="keyword">$this</span>-&gt;title) <span class="meta">?&gt;</span>&lt;/title&gt;</div></pre></td></tr></table></figure>
-<h3 id="注册-Meta-元标签"><a href="#注册-Meta-元标签" class="headerlink" title="注册 Meta 元标签"></a>注册 Meta 元标签</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">	<span class="keyword">$this</span>-&gt;registerMetaTag([<span class="string">'name'</span> =&gt; <span class="string">'keywords'</span>, <span class="string">'content'</span> =&gt; <span class="string">'yii, framework, php'</span>]);</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
-<h3 id="注册链接标签"><a href="#注册链接标签" class="headerlink" title="注册链接标签"></a>注册链接标签</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">	<span class="keyword">$this</span>-&gt;registerLinkTag([</div><div class="line">	    <span class="string">'title'</span> =&gt; <span class="string">'Live News for Yii'</span>,</div><div class="line">	    <span class="string">'rel'</span> =&gt; <span class="string">'alternate'</span>,</div><div class="line">	    <span class="string">'type'</span> =&gt; <span class="string">'application/rss+xml'</span>,</div><div class="line">	    <span class="string">'href'</span> =&gt; <span class="string">'http://www.yiiframework.com/rss.xml/'</span>,</div><div class="line">	]);</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
-<h3 id="视图事件"><a href="#视图事件" class="headerlink" title="视图事件"></a>视图事件</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// 在控制器渲染文件开始时触发，该事件可设置 yii\base\ViewEvent::isValid 为 false 取消视图渲染。</span></div><div class="line">yii\base\View::EVENT_BEFORE_RENDER:</div><div class="line"></div><div class="line"><span class="comment">// 在布局中调用 yii\base\View::beginPage() 时触发，该事件可获取 yii\base\ViewEvent::output 的渲染结果，可修改该属性来修改渲染结果。</span></div><div class="line">yii\base\View::EVENT_AFTER_RENDER:</div><div class="line"></div><div class="line"><span class="comment">// 在布局调用 yii\base\View::beginPage() 时触发</span></div><div class="line">yii\base\View::EVENT_BEGIN_PAGE:</div><div class="line"></div><div class="line"><span class="comment">// 在布局调用 yii\base\View::endPage() 是触发</span></div><div class="line">yii\base\View::EVENT_END_PAGE:</div><div class="line"></div><div class="line"><span class="comment">// 在布局调用 yii\web\View::beginBody() 时触发</span></div><div class="line">yii\web\View::EVENT_BEGIN_BODY:</div><div class="line"></div><div class="line"><span class="comment">// 在布局调用 yii\web\View::endBody() 时触发</span></div><div class="line">yii\web\View::EVENT_END_BODY:</div></pre></td></tr></table></figure>
-<h2 id="过滤器（中间件）"><a href="#过滤器（中间件）" class="headerlink" title="过滤器（中间件）"></a>过滤器（中间件）</h2><p>过滤器是控制器动作执行之前或之后执行的对象。例如访问控制过滤器可在动作执行之前来控制特殊终端用户是否有权限执行动作， 内容压缩过滤器可在动作执行之后发给终端用户之前压缩响应内容。</p>
-<p>继承 yii\base\ActionFilter 类并覆盖 yii\base\ActionFilter::beforeAction() 和/或 yii\base\ActionFilter::afterAction() 方法来创建动作的过滤器，前者在动作执行之前执行，后者在动作执行之后执行。 yii\base\ActionFilter::beforeAction() 返回值决定动作是否应该执行， 如果为 false，之后的过滤器和动作不会继续执行。</p>
-<h3 id="核心过滤器"><a href="#核心过滤器" class="headerlink" title="核心过滤器"></a>核心过滤器</h3><ul>
-<li>yii\filters\AccessControl<ul>
-<li>AccessControl提供基于yii\filters\AccessControl::rules规则的访问控制</li>
-</ul>
-</li>
-<li>yii\filters\auth\HttpBasicAuth<ul>
-<li>认证方法过滤器通过HTTP Basic Auth或OAuth 2 来认证一个用户， 认证方法过滤器类在 yii\filters\auth 命名空间下</li>
-</ul>
-</li>
-<li>yii\filters\ContentNegotiator<ul>
-<li>ContentNegotiator支持响应内容格式处理和语言处理</li>
-</ul>
-</li>
-<li>yii\filters\HttpCache<ul>
-<li>HttpCache利用Last-Modified 和 Etag HTTP头实现客户端缓存</li>
-</ul>
-</li>
-<li>yii\filters\PageCache<ul>
-<li>PageCache实现服务器端整个页面的缓存</li>
-</ul>
-</li>
-<li>yii\filters\RateLimiter<ul>
-<li>RateLimiter 根据 漏桶算法 来实现速率限制。 主要用在实现RESTful APIs， 更多关于该过滤器详情请参阅 Rate Limiting 一节</li>
-</ul>
-</li>
-<li>yii\filters\VerbFilter<ul>
-<li>VerbFilter检查请求动作的HTTP请求方式是否允许执行， 如果不允许，会抛出HTTP 405异常</li>
-</ul>
-</li>
-<li>yii\filters\Cors<ul>
-<li>跨域资源共享 CORS 机制允许一个网页的许多资源（例如字体、JavaScript等） 这些资源可以通过其他域名访问获取</li>
-</ul>
-</li>
-</ul>
-<h2 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h2><h3 id="请求基础用法"><a href="#请求基础用法" class="headerlink" title="请求基础用法"></a>请求基础用法</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$request = Yii::$app-&gt;request;</div><div class="line"></div><div class="line"><span class="comment">// 等价于: $get = $_GET;</span></div><div class="line">$get = $request-&gt;get();</div><div class="line"></div><div class="line"><span class="comment">// 等价于: $id = isset($_GET['id']) ? $_GET['id'] : null;</span></div><div class="line">$id = $request-&gt;get(<span class="string">'id'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 等价于: $id = isset($_GET['id']) ? $_GET['id'] : 1;</span></div><div class="line">$id = $request-&gt;get(<span class="string">'id'</span>, <span class="number">1</span>);</div><div class="line"></div><div class="line"><span class="comment">// 等价于: $post = $_POST;</span></div><div class="line">$post = $request-&gt;post();</div><div class="line"></div><div class="line"><span class="comment">// 等价于: $name = isset($_POST['name']) ? $_POST['name'] : null;</span></div><div class="line">$name = $request-&gt;post(<span class="string">'name'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 等价于: $name = isset($_POST['name']) ? $_POST['name'] : '';</span></div><div class="line">$name = $request-&gt;post(<span class="string">'name'</span>, <span class="string">''</span>);</div><div class="line"></div><div class="line"><span class="comment">// 返回所有参数</span></div><div class="line">$params = $request-&gt;bodyParams;</div><div class="line"></div><div class="line"><span class="comment">// 返回参数 "id"</span></div><div class="line">$param = $request-&gt;getBodyParam(<span class="string">'id'</span>);</div><div class="line"></div><div class="line"><span class="comment">/* 该请求是一个 AJAX 请求 */</span></div><div class="line"><span class="keyword">if</span> ($request-&gt;isAjax) &#123;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/* 请求方法是 GET */</span></div><div class="line"><span class="keyword">if</span> ($request-&gt;isGet)  &#123;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/* 请求方法是 POST */</span></div><div class="line"><span class="keyword">if</span> ($request-&gt;isPost) &#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/* 请求方法是 PUT */</span></div><div class="line"><span class="keyword">if</span> ($request-&gt;isPut)  &#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="请求-URLs"><a href="#请求-URLs" class="headerlink" title="请求 URLs"></a>请求 URLs</h3><ul>
-<li><strong>yii\web\Request::url</strong><ul>
-<li>返回 /admin/index.php/product?id=100, 此URL不包括host info部分。</li>
-</ul>
-</li>
-<li><strong>yii\web\Request::absoluteUrl</strong><ul>
-<li>返回 <a href="http://example.com/admin/index.php/product?id=100" target="_blank" rel="external">http://example.com/admin/index.php/product?id=100</a>, 包含host infode的整个URL。</li>
-</ul>
-</li>
-<li><strong>yii\web\Request::hostInfo</strong><ul>
-<li>返回 <a href="http://example.com" target="_blank" rel="external">http://example.com</a>, 只有host info部分。</li>
-</ul>
-</li>
-<li><strong>yii\web\Request::pathInfo</strong><ul>
-<li>返回 /product， 这个是入口脚本之后，问号之前（查询字符串）的部分。</li>
-</ul>
-</li>
-<li><strong>yii\web\Request::queryString</strong><ul>
-<li>返回 id=100,问号之后的部分。</li>
-</ul>
-</li>
-<li><strong>yii\web\Request::baseUrl</strong><ul>
-<li>返回 /admin, host info之后， 入口脚本之前的部分。</li>
-</ul>
-</li>
-<li><strong>yii\web\Request::scriptUrl</strong><ul>
-<li>返回 /admin/index.php, 没有path info和查询字符串部分。</li>
-</ul>
-</li>
-<li><strong>yii\web\Request::serverName</strong><ul>
-<li>返回 example.com, URL中的host name。</li>
-</ul>
-</li>
-<li><strong>yii\web\Request::serverPort</strong><ul>
-<li>返回 80, 这是web服务中使用的端口。</li>
-</ul>
-</li>
-</ul>
-<h3 id="HTTP-头"><a href="#HTTP-头" class="headerlink" title="HTTP 头"></a>HTTP 头</h3><p>可以通过 yii\web\Request::headers 属性返回的 yii\web\HeaderCollection 获取HTTP头信息<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="comment">// $headers 是一个 yii\web\HeaderCollection 对象</span></div><div class="line">$headers = Yii::$app-&gt;request-&gt;headers;</div><div class="line"></div><div class="line"><span class="comment">// 返回 Accept header 值</span></div><div class="line">$accept = $headers-&gt;get(<span class="string">'Accept'</span>);</div><div class="line"></div><div class="line"><span class="comment">/* 这是一个 User-Agent 头 */</span></div><div class="line"><span class="keyword">if</span> ($headers-&gt;has(<span class="string">'User-Agent'</span>)) &#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="客户端信息"><a href="#客户端信息" class="headerlink" title="客户端信息"></a>客户端信息</h3><p>可以通过 <code>yii\web\Request::userHost</code> 和 <code>yii\web\Request::userIP</code> 分别获取 host-name 和客户机的 IP 地址<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$userHost = Yii::$app-&gt;request-&gt;userHost;</div><div class="line">$userIP = Yii::$app-&gt;request-&gt;userIP;</div></pre></td></tr></table></figure></p>
-<h2 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h2><h3 id="状态码"><a href="#状态码" class="headerlink" title="状态码"></a>状态码</h3><p>构建响应时，最先应做的是标识请求是否成功处理的状态，可通过设置 yii\web\Response::statusCode 属性，该属性使用一个有效的 HTTP 状态码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Yii::$app-&gt;response-&gt;statusCode = 200;</div></pre></td></tr></table></figure></p>
-<p>当错误处理器 捕获到一个异常，会从异常中提取状态码并赋值到响应， 对于上述的 yii\web\NotFoundHttpException 对应HTTP 404状态码， 以下为Yii预定义的HTTP异常<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">throw new \yii\web\NotFoundHttpException;</div></pre></td></tr></table></figure></p>
-<p>以下为Yii预定义的HTTP异常：</p>
-<ul>
-<li><strong>yii\web\BadRequestHttpException</strong><ul>
-<li>status code 400.</li>
-</ul>
-</li>
-<li><strong>yii\web\ConflictHttpException</strong><ul>
-<li>status code 409.</li>
-</ul>
-</li>
-<li><strong>yii\web\ForbiddenHttpException</strong><ul>
-<li>status code 403.</li>
-</ul>
-</li>
-<li><strong>yii\web\GoneHttpException</strong><ul>
-<li>status code 410.</li>
-</ul>
-</li>
-<li><strong>yii\web\MethodNotAllowedHttpException</strong><ul>
-<li>status code 405.</li>
-</ul>
-</li>
-<li><strong>yii\web\NotAcceptableHttpException</strong><ul>
-<li>status code 406.</li>
-</ul>
-</li>
-<li><strong>yii\web\NotFoundHttpException</strong><ul>
-<li>status code 404.</li>
-</ul>
-</li>
-<li><strong>yii\web\ServerErrorHttpException</strong><ul>
-<li>status code 500.</li>
-</ul>
-</li>
-<li><strong>yii\web\TooManyRequestsHttpException</strong><ul>
-<li>status code 429.</li>
-</ul>
-</li>
-<li><strong>yii\web\UnauthorizedHttpException</strong><ul>
-<li>status code 401.</li>
-</ul>
-</li>
-<li><strong>yii\web\UnsupportedMediaTypeHttpException</strong><ul>
-<li>status code 415.</li>
-</ul>
-</li>
-</ul>
-<p>如果想抛出的异常不在如上列表中，可创建一个yii\web\HttpException异常， 带上状态码抛出，如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">throw</span> <span class="keyword">new</span> \yii\web\HttpException(<span class="number">402</span>);</div></pre></td></tr></table></figure></p>
-<h3 id="HTTP-头部"><a href="#HTTP-头部" class="headerlink" title="HTTP 头部"></a>HTTP 头部</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$headers = Yii::$app-&gt;response-&gt;headers;</div><div class="line"></div><div class="line"><span class="comment">// 增加一个 Pragma 头，已存在的Pragma 头不会被覆盖。</span></div><div class="line">$headers-&gt;add(<span class="string">'Pragma'</span>, <span class="string">'no-cache'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 设置一个Pragma 头. 任何已存在的Pragma 头都会被丢弃</span></div><div class="line">$headers-&gt;set(<span class="string">'Pragma'</span>, <span class="string">'no-cache'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 删除Pragma 头并返回删除的Pragma 头的值到数组</span></div><div class="line">$values = $headers-&gt;remove(<span class="string">'Pragma'</span>);</div></pre></td></tr></table></figure>
-<h3 id="响应主体"><a href="#响应主体" class="headerlink" title="响应主体"></a>响应主体</h3><p>如果在发送给终端用户之前需要格式化，应设置 yii\web\Response::format 和 yii\web\Response::data 属性，yii\web\Response::format 属性指定 yii\web\Response::data 中数据格式化后的样式，例如：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$response = Yii::$app-&gt;response;</div><div class="line">$response-&gt;format = \yii\web\Response::FORMAT_JSON;</div><div class="line">$response-&gt;data = [<span class="string">'message'</span> =&gt; <span class="string">'hello world'</span>];</div></pre></td></tr></table></figure></p>
-<p>Yii支持以下可直接使用的格式，每个实现了 yii\web\ResponseFormatterInterface 类， 可自定义这些格式器或通过配置 yii\web\Response::formatters 属性来增加格式器。</p>
-<ul>
-<li><strong>yii\web\Response::FORMAT_HTML</strong></li>
-<li><strong>yii\web\Response::FORMAT_XML</strong></li>
-<li><strong>yii\web\Response::FORMAT_JSON</strong></li>
-<li><strong>yii\web\Response::FORMAT_JSONP</strong></li>
-</ul>
-<p>正规格式返回 Yii 的 HTTP 响应<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"> <span class="keyword">return</span> \Yii::createObject([</div><div class="line">    <span class="string">'class'</span> =&gt; <span class="string">'yii\web\Response'</span>,</div><div class="line">    <span class="string">'format'</span> =&gt; \yii\web\Response::FORMAT_JSON,</div><div class="line">    <span class="string">'data'</span> =&gt; [</div><div class="line">        <span class="string">'message'</span> =&gt; <span class="string">'hello world'</span>,</div><div class="line">        <span class="string">'code'</span> =&gt; <span class="number">100</span>,</div><div class="line">    ],</div><div class="line">]);</div></pre></td></tr></table></figure></p>
-<h3 id="浏览器跳转"><a href="#浏览器跳转" class="headerlink" title="浏览器跳转"></a>浏览器跳转</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">actionOld</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;redirect(<span class="string">'http://example.com/new'</span>, <span class="number">301</span>);</div><div class="line"></div><div class="line">    \Yii::$app-&gt;response-&gt;redirect(<span class="string">'http://example.com/new'</span>, <span class="number">301</span>)-&gt;send();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="发送文件"><a href="#发送文件" class="headerlink" title="发送文件"></a>发送文件</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">actionDownload</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> \Yii::$app-&gt;response-&gt;sendFile(<span class="string">'path/to/file.txt'</span>);</div><div class="line"></div><div class="line">    \Yii::$app-&gt;response-&gt;sendFile(<span class="string">'path/to/file.txt'</span>)-&gt;send();</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 发送一个已存在的文件到客户端</span></div><div class="line">yii\web\Response::sendFile()</div><div class="line"></div><div class="line"><span class="comment">// 发送一个文本字符串作为文件到客户端</span></div><div class="line">yii\web\Response::sendContentAsFile()</div><div class="line"></div><div class="line"><span class="comment">// 发送一个已存在的文件流作为文件到客户端</span></div><div class="line">yii\web\Response::sendStreamAsFile()</div></pre></td></tr></table></figure>
-<h2 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$session = Yii::$app-&gt;session;</div><div class="line"></div><div class="line"><span class="comment">// 检查session是否开启</span></div><div class="line"><span class="keyword">if</span> ($session-&gt;isActive) &#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 开启session</span></div><div class="line">$session-&gt;open();</div><div class="line"></div><div class="line"><span class="comment">// 关闭session</span></div><div class="line">$session-&gt;close();</div><div class="line"></div><div class="line"><span class="comment">// 销毁session中所有已注册的数据</span></div><div class="line">$session-&gt;destroy();</div><div class="line"></div><div class="line"><span class="comment">// 获取session中的变量值，以下用法是相同的：</span></div><div class="line">$language = $session-&gt;get(<span class="string">'language'</span>);</div><div class="line">$language = $session[<span class="string">'language'</span>];</div><div class="line">$language = <span class="keyword">isset</span>($_SESSION[<span class="string">'language'</span>]) ? $_SESSION[<span class="string">'language'</span>] : <span class="keyword">null</span>;</div><div class="line"></div><div class="line"><span class="comment">// 设置一个session变量，以下用法是相同的：</span></div><div class="line">$session-&gt;set(<span class="string">'language'</span>, <span class="string">'en-US'</span>);</div><div class="line">$session[<span class="string">'language'</span>] = <span class="string">'en-US'</span>;</div><div class="line">$_SESSION[<span class="string">'language'</span>] = <span class="string">'en-US'</span>;</div><div class="line"></div><div class="line"><span class="comment">// 删除一个session变量，以下用法是相同的：</span></div><div class="line">$session-&gt;remove(<span class="string">'language'</span>);</div><div class="line"><span class="keyword">unset</span>($session[<span class="string">'language'</span>]);</div><div class="line"><span class="keyword">unset</span>($_SESSION[<span class="string">'language'</span>]);</div><div class="line"></div><div class="line"><span class="comment">// 检查session变量是否已存在，以下用法是相同的：</span></div><div class="line"><span class="keyword">if</span> ($session-&gt;has(<span class="string">'language'</span>)) ...</div><div class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($session[<span class="string">'language'</span>])) ...</div><div class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_SESSION[<span class="string">'language'</span>])) ...</div><div class="line"></div><div class="line"><span class="comment">// 遍历所有session变量，以下用法是相同的：</span></div><div class="line"><span class="keyword">foreach</span> ($session <span class="keyword">as</span> $name =&gt; $value) ...</div><div class="line"><span class="keyword">foreach</span> ($_SESSION <span class="keyword">as</span> $name =&gt; $value) ...</div><div class="line"></div><div class="line"><span class="comment">// 直接使用$_SESSION (确保Yii::$app-&gt;session-&gt;open() 已经调用)</span></div><div class="line">$_SESSION[<span class="string">'captcha'</span>][<span class="string">'number'</span>] = <span class="number">5</span>;</div><div class="line">$_SESSION[<span class="string">'captcha'</span>][<span class="string">'lifetime'</span>] = <span class="number">3600</span>;</div><div class="line"></div><div class="line"><span class="comment">// 先获取session数据到一个数组，修改数组的值，然后保存数组到session中</span></div><div class="line">$captcha = $session[<span class="string">'captcha'</span>];</div><div class="line">$captcha[<span class="string">'number'</span>] = <span class="number">5</span>;</div><div class="line">$captcha[<span class="string">'lifetime'</span>] = <span class="number">3600</span>;</div><div class="line">$session[<span class="string">'captcha'</span>] = $captcha;</div><div class="line"></div><div class="line"><span class="comment">// 使用ArrayObject 数组对象代替数组</span></div><div class="line">$session[<span class="string">'captcha'</span>] = <span class="keyword">new</span> \ArrayObject;</div><div class="line">...</div><div class="line">$session[<span class="string">'captcha'</span>][<span class="string">'number'</span>] = <span class="number">5</span>;</div><div class="line">$session[<span class="string">'captcha'</span>][<span class="string">'lifetime'</span>] = <span class="number">3600</span>;</div><div class="line"></div><div class="line"><span class="comment">// 使用带通用前缀的键来存储数组</span></div><div class="line">$session[<span class="string">'captcha.number'</span>] = <span class="number">5</span>;</div><div class="line">$session[<span class="string">'captcha.lifetime'</span>] = <span class="number">3600</span>;</div></pre></td></tr></table></figure>
-<h3 id="自定义-Session-存储"><a href="#自定义-Session-存储" class="headerlink" title="自定义 Session 存储"></a>自定义 Session 存储</h3><p>Yii提供以下session类实现不同的session存储方式：</p>
-<ul>
-<li>yii\web\DbSession<ul>
-<li>存储session数据在数据表中</li>
-</ul>
-</li>
-<li>yii\web\CacheSession<ul>
-<li>存储session数据到缓存中，缓存和配置中的缓存组件相关</li>
-</ul>
-</li>
-<li>yii\redis\Session<ul>
-<li>存储session数据到以redis 作为存储媒介中</li>
-</ul>
-</li>
-<li>yii\mongodb\Session<ul>
-<li>存储session数据到MongoDB</li>
-</ul>
-</li>
-</ul>
-<h3 id="Flash-数据"><a href="#Flash-数据" class="headerlink" title="Flash 数据"></a>Flash 数据</h3><p>Flash数据是一种特别的session数据，它一旦在某个请求中设置后， 只会在下次请求中有效，然后该数据就会自动被删除。 常用于实现只需显示给终端用户一次的信息， 如用户提交一个表单后显示确认信息。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$session = Yii::$app-&gt;session;</div><div class="line"></div><div class="line"><span class="comment">// 请求 #1</span></div><div class="line"><span class="comment">// 设置一个名为"postDeleted" flash 信息</span></div><div class="line">$session-&gt;setFlash(<span class="string">'postDeleted'</span>, <span class="string">'You have successfully deleted your post.'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 请求 #2</span></div><div class="line"><span class="comment">// 显示名为"postDeleted" flash 信息</span></div><div class="line"><span class="keyword">echo</span> $session-&gt;getFlash(<span class="string">'postDeleted'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 请求 #3</span></div><div class="line"><span class="comment">// $result 为 false，因为flash信息已被自动删除</span></div><div class="line">$result = $session-&gt;hasFlash(<span class="string">'postDeleted'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 请求 #4</span></div><div class="line"><span class="comment">// 在名称为"alerts"的flash信息增加数据</span></div><div class="line">$session-&gt;addFlash(<span class="string">'alerts'</span>, <span class="string">'You have successfully deleted your post.'</span>);</div><div class="line">$session-&gt;addFlash(<span class="string">'alerts'</span>, <span class="string">'You have successfully added a new friend.'</span>);</div><div class="line">$session-&gt;addFlash(<span class="string">'alerts'</span>, <span class="string">'You are promoted.'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 请求 #5</span></div><div class="line"><span class="comment">// $alerts 为名为'alerts'的flash信息，为数组格式</span></div><div class="line">$alerts = $session-&gt;getFlash(<span class="string">'alerts'</span>);</div></pre></td></tr></table></figure></p>
-<h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2><p>Yii使用 yii\web\Cookie对象来代表每个cookie，yii\web\Request 和 yii\web\Response 通过名为’cookies’的属性维护一个cookie集合， 前者的cookie 集合代表请求提交的cookies， 后者的cookie集合表示发送给用户的cookies。</p>
-<h3 id="读取-Cookies"><a href="#读取-Cookies" class="headerlink" title="读取 Cookies"></a>读取 Cookies</h3><p>当前请求的cookie信息可通过如下代码获取：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="comment">// 从 "request"组件中获取cookie集合(yii\web\CookieCollection)</span></div><div class="line">$cookies = Yii::$app-&gt;request-&gt;cookies;</div><div class="line"></div><div class="line"><span class="comment">// 获取名为 "language" cookie 的值，如果不存在，返回默认值"en"</span></div><div class="line">$language = $cookies-&gt;getValue(<span class="string">'language'</span>, <span class="string">'en'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 另一种方式获取名为 "language" cookie 的值</span></div><div class="line"><span class="keyword">if</span> (($cookie = $cookies-&gt;get(<span class="string">'language'</span>)) !== <span class="keyword">null</span>) &#123;</div><div class="line">    $language = $cookie-&gt;value;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 可将 $cookies当作数组使用</span></div><div class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($cookies[<span class="string">'language'</span>])) &#123;</div><div class="line">    $language = $cookies[<span class="string">'language'</span>]-&gt;value;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 判断是否存在名为"language" 的 cookie</span></div><div class="line"><span class="keyword">if</span> ($cookies-&gt;has(<span class="string">'language'</span>)) ...</div><div class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($cookies[<span class="string">'language'</span>])) ...</div></pre></td></tr></table></figure></p>
-<h3 id="发送-Cookies"><a href="#发送-Cookies" class="headerlink" title="发送 Cookies"></a>发送 Cookies</h3><p>可使用如下代码发送 cookie 到终端用户<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="comment">// 从"response"组件中获取cookie 集合(yii\web\CookieCollection)</span></div><div class="line">$cookies = Yii::$app-&gt;response-&gt;cookies;</div><div class="line"></div><div class="line"><span class="comment">// 在要发送的响应中添加一个新的cookie</span></div><div class="line">$cookies-&gt;add(<span class="keyword">new</span> \yii\web\Cookie([</div><div class="line">    <span class="string">'name'</span> =&gt; <span class="string">'language'</span>,</div><div class="line">    <span class="string">'value'</span> =&gt; <span class="string">'zh-CN'</span>,</div><div class="line">]));</div><div class="line"></div><div class="line"><span class="comment">// 删除一个cookie</span></div><div class="line">$cookies-&gt;remove(<span class="string">'language'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 等同于以下删除代码</span></div><div class="line"><span class="keyword">unset</span>($cookies[<span class="string">'language'</span>]);</div></pre></td></tr></table></figure></p>
-<h2 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">use</span> <span class="title">yii</span>\<span class="title">data</span>\<span class="title">Pagination</span>;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">actionCountry</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    $query = Country::find();</div><div class="line"></div><div class="line">    $pagination = <span class="keyword">new</span> Pagination([</div><div class="line">        <span class="string">'defaultPageSize'</span> =&gt; <span class="number">5</span>,</div><div class="line">        <span class="string">'totalCount'</span>      =&gt; $query-&gt;count(),</div><div class="line">    ]);</div><div class="line"></div><div class="line">    $countries = $query-&gt;orderBy(<span class="string">'name'</span>)</div><div class="line">        -&gt;offset($pagination-&gt;offset)</div><div class="line">        -&gt;limit($pagination-&gt;limit)</div><div class="line">        -&gt;all();</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;render(<span class="string">'country'</span>, compact(<span class="string">'countries'</span>, <span class="string">'pagination'</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="应用主体和应用组件"><a href="#应用主体和应用组件" class="headerlink" title="应用主体和应用组件"></a>应用主体和应用组件</h2><h2 id="应用属性"><a href="#应用属性" class="headerlink" title="应用属性"></a>应用属性</h2><h3 id="必要属性"><a href="#必要属性" class="headerlink" title="必要属性"></a>必要属性</h3><ul>
-<li>id：用来区分其他应用的唯一标识ID。</li>
-<li>basePath ：指定该应用的根目录。</li>
-</ul>
-<h3 id="重要属性"><a href="#重要属性" class="headerlink" title="重要属性"></a>重要属性</h3><ul>
-<li>aliases：该属性允许你用一个数组定义多个别名。 数组的 key 为别名名称，值为对应的路径。</li>
-<li>bootstrap ：这个属性很实用，它允许你用数组指定启动阶段 yii\base\Application::bootstrap() 需要运行的组件。</li>
-<li>catchAll：该属性仅网页应用支持。 它指定一个要处理所有用户请求的控制器方法。</li>
-<li>components：允许你注册多个在其他地方使用的应用组件。</li>
-<li>controllerMap：该属性允许你指定一个控制器 ID 到任意控制器类。</li>
-<li>controllerNamespace：该属性指定控制器类默认的命名空间，默认为 app\controllers。</li>
-<li>language：该属性指定应用展示给终端用户的语言， 默认为 en 标识英文</li>
-<li>modules ：该属性指定应用所包含的模块。</li>
-</ul>
-<h2 id="前端资源"><a href="#前端资源" class="headerlink" title="前端资源"></a>前端资源</h2><h3 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h3><h3 id="资源包"><a href="#资源包" class="headerlink" title="资源包"></a>资源包</h3><h3 id="定义资源包"><a href="#定义资源包" class="headerlink" title="定义资源包"></a>定义资源包</h3><h2 id="表单"><a href="#表单" class="headerlink" title="表单"></a>表单</h2><p>ActiveForm::begin()，ActiveForm::end() 分别用来渲染表单的开始和关闭标签</p>
-<h2 id="查询构建器"><a href="#查询构建器" class="headerlink" title="查询构建器"></a>查询构建器</h2>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/25/Yii-框架之基础篇/" data-id="cixwyy2af001b0f4b1tfxg64w" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/29/Yii-框架之扩展篇/" data-id="cixy8sfrq001l6u4bnzuk59bl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -948,7 +755,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 18px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 14px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 12px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Yii/" style="font-size: 16px;">Yii</a>
+      <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 18.33px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 16.67px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 13.33px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.67px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Yii/" style="font-size: 15px;">Yii</a>
     </div>
   </div>
 
@@ -957,7 +764,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
   </div>
 
@@ -968,6 +775,10 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/01/15/使用-Laravel-Vue-js-进行微信开发（一）/">使用 Laravel + Vue.js 进行微信开发（一）</a>
+          </li>
         
           <li>
             <a href="/2016/12/08/学习-UML（一）/">学习 UML（一）</a>
@@ -983,10 +794,6 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
         
           <li>
             <a href="/2016/11/21/关于-PHP-函数-array-filter-的一些想法/">关于 PHP 函数 array_filter 的一些想法</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/21/关于-PHP-函数-array-map-的一些想法/">关于 PHP 函数 array_map 的一些想法</a>
           </li>
         
       </ul>
