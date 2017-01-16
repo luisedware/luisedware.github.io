@@ -110,9 +110,9 @@
 </li>
 </ul>
 <h2 id="创建微信分组路由"><a href="#创建微信分组路由" class="headerlink" title="创建微信分组路由"></a>创建微信分组路由</h2><p>修改文件 app/Http/routes.php，代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Route::group([</div><div class="line">    <span class="string">'prefix'</span> =&gt; <span class="string">'wechat'</span>,</div><div class="line">    <span class="string">'namespace'</span> =&gt; <span class="string">'WeChat'</span>,</div><div class="line">], <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">require_once</span> <span class="keyword">__DIR__</span> . <span class="string">'/Routes/wechat.php'</span>;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>新增文件 app/Http/Routes/wechat.php，代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Route::any(<span class="string">'/wechat'</span>, [</div><div class="line">    <span class="string">'as'</span> =&gt; <span class="string">''</span>,</div><div class="line">    <span class="string">'uses'</span> =&gt; <span class="string">'WechatController@serve'</span>,</div><div class="line">]);</div></pre></td></tr></table></figure></p>
+<p>新增文件 app/Http/Routes/wechat.php，代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Route::any(<span class="string">'/'</span>, <span class="string">'WeChatServerController@serve'</span>);</div></pre></td></tr></table></figure></p>
 <h2 id="关闭路由-CSRF"><a href="#关闭路由-CSRF" class="headerlink" title="关闭路由 CSRF"></a>关闭路由 CSRF</h2><p>修改文件 app/Http/Middleware/VerifyCSsrfToken.php，代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">protected</span> $except = [</div><div class="line">	<span class="string">'/wechat'</span></div><div class="line">];</div></pre></td></tr></table></figure></p>
-<h2 id="创建控制器"><a href="#创建控制器" class="headerlink" title="创建控制器"></a>创建控制器</h2><p>新增文件 app/Http/Controllers/WeChat/WeChatController.php，代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>\<span class="title">WeChat</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>\<span class="title">Controller</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">EasyWeChat</span>\<span class="title">Foundation</span>\<span class="title">Application</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">Log</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">WeChatController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 处理微信的请求消息</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span> string</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">serve</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        Log::info(<span class="string">'WeChat Server HTTP Request Arrived!'</span>);</div><div class="line"></div><div class="line">        $wechat = app(<span class="string">'wechat'</span>);</div><div class="line">        $wechat-&gt;server-&gt;setMessageHandler(<span class="function"><span class="keyword">function</span><span class="params">($message)</span></span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">"欢迎关注 &#123;$message&#125;!"</span>;</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        Log::info(<span class="string">'Return HTTP Response.'</span>);</div><div class="line"></div><div class="line">        <span class="keyword">return</span> $wechat-&gt;server-&gt;serve();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="创建控制器"><a href="#创建控制器" class="headerlink" title="创建控制器"></a>创建控制器</h2><p>新增文件 app/Http/Controllers/WeChat/WeChatServerController.php，代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>\<span class="title">WeChat</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Http</span>\<span class="title">Request</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>\<span class="title">Controller</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">EasyWeChat</span>\<span class="title">Foundation</span>\<span class="title">Application</span> <span class="title">as</span> <span class="title">WeChat</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">WeChatServerController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 处理微信的请求消息</div><div class="line">     * <span class="doctag">@return</span> string</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">serve</span><span class="params">(Request $request, WeChat $wechat)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> ($request-&gt;getMethod() === <span class="string">'POST'</span>) &#123;</div><div class="line">            $wechat-&gt;server-&gt;setMessageHandler(<span class="function"><span class="keyword">function</span><span class="params">($message)</span> <span class="title">use</span> <span class="params">($request)</span> </span>&#123;</div><div class="line">                <span class="keyword">return</span> <span class="string">"欢迎关注 &#123;$message&#125;!"</span>;</div><div class="line">            &#125;);</div><div class="line"></div><div class="line">            <span class="keyword">return</span> $wechat-&gt;server-&gt;serve();</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> redirect()-&gt;route(<span class="string">'wechat.index'</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><ul>
 <li>配置微信公众平台测试号<ul>
 <li>接口配置信息<ul>
@@ -132,7 +132,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/15/使用-Laravel-Vue-js-进行微信开发（一）/" data-id="cixy8sfs000206u4baq5543z1" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/15/使用-Laravel-Vue-js-进行微信开发（一）/" data-id="cixzhimck00203h4bvx1gfjqq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -241,7 +241,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/12/08/学习-UML（一）/" data-id="cixy8sftf00436u4bwpr3unh1" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/12/08/学习-UML（一）/" data-id="cixzhimea003z3h4baqao8487" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UML/">UML</a></li></ul>
@@ -296,7 +296,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/12/02/Yii2-Working-with-Databases/" data-id="cixy8sfry001u6u4bhbdtjy8p" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/12/02/Yii2-Working-with-Databases/" data-id="cixzhimc7001o3h4bjggq5g7s" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -366,7 +366,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/11/22/关于-PHP-函数-array-walk-的一些想法/" data-id="cixy8sft6003r6u4b4eheutz6" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/11/22/关于-PHP-函数-array-walk-的一些想法/" data-id="cixzhime3003s3h4bjh2d6wqp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -432,7 +432,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/11/21/关于-PHP-函数-array-filter-的一些想法/" data-id="cixy8sfsz003h6u4bzzo4bp90" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/11/21/关于-PHP-函数-array-filter-的一些想法/" data-id="cixzhimdv003h3h4b6xph338b" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -493,7 +493,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/11/21/关于-PHP-函数-array-map-的一些想法/" data-id="cixy8sft4003n6u4b9lec7qkb" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/11/21/关于-PHP-函数-array-map-的一些想法/" data-id="cixzhime0003o3h4b6f6i4b2l" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -542,7 +542,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/11/19/使用-PHPStorm-的-Live-Templates-封装常用代码/" data-id="cixy8sfsc002i6u4b4a2sixhi" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/11/19/使用-PHPStorm-的-Live-Templates-封装常用代码/" data-id="cixzhimd5002h3h4be300c655" class="article-share-link">Share</a>
       
       
     </footer>
@@ -582,7 +582,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/11/03/Yii-框架之工具篇/" data-id="cixy8sfro001g6u4bt3mnqpyj" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/11/03/Yii-框架之工具篇/" data-id="cixzhimbv001g3h4b0h8otzgk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -652,7 +652,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/29/Yii-框架之安全篇/" data-id="cixy8sfrm001d6u4bk42nax5d" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/29/Yii-框架之安全篇/" data-id="cixzhimbo00183h4bfltw3oqj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -710,7 +710,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/29/Yii-框架之扩展篇/" data-id="cixy8sfrq001l6u4bnzuk59bl" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/29/Yii-框架之扩展篇/" data-id="cixzhimc0001i3h4bvhb8pms3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
