@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>使用 Laravel 与 Vue.js 进行微信开发（二） | 七月十五九月初七</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="配置回调地址微信公众平台 -&amp;gt; 开发者工具 -&amp;gt; 公众平台测试帐号 -&amp;gt; 测试号管理 -&amp;gt; 体验接口权限表 -&amp;gt; 功能服务 -&amp;gt; 网页帐号 -&amp;gt; 修改 -&amp;gt; 填写回调域名，格式如：www.baidu.com
+修改配置文件可以修改文件 config/wechat.php ，也可以在 .env 文件进行配置
+wechat.php 文件配置12345678">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 Laravel 与 Vue.js 进行微信开发（二）">
+<meta property="og:url" content="http://luisedware.github.io/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（二）/index.html">
+<meta property="og:site_name" content="七月十五九月初七">
+<meta property="og:description" content="配置回调地址微信公众平台 -&amp;gt; 开发者工具 -&amp;gt; 公众平台测试帐号 -&amp;gt; 测试号管理 -&amp;gt; 体验接口权限表 -&amp;gt; 功能服务 -&amp;gt; 网页帐号 -&amp;gt; 修改 -&amp;gt; 填写回调域名，格式如：www.baidu.com
+修改配置文件可以修改文件 config/wechat.php ，也可以在 .env 文件进行配置
+wechat.php 文件配置12345678">
+<meta property="og:image" content="http://o93kt6djh.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-01-16%2022.24.46.png">
+<meta property="og:image" content="http://o93kt6djh.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-01-16%2022.25.06.png">
+<meta property="og:updated_time" content="2017-01-16T14:34:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用 Laravel 与 Vue.js 进行微信开发（二）">
+<meta name="twitter:description" content="配置回调地址微信公众平台 -&amp;gt; 开发者工具 -&amp;gt; 公众平台测试帐号 -&amp;gt; 测试号管理 -&amp;gt; 体验接口权限表 -&amp;gt; 功能服务 -&amp;gt; 网页帐号 -&amp;gt; 修改 -&amp;gt; 填写回调域名，格式如：www.baidu.com
+修改配置文件可以修改文件 config/wechat.php ，也可以在 .env 文件进行配置
+wechat.php 文件配置12345678">
+<meta name="twitter:image" content="http://o93kt6djh.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-01-16%2022.24.46.png">
+  
+    <link rel="alternate" href="/atom.xml" title="七月十五九月初七" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">七月十五九月初七</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一两祝你手边多银财，二两祝你方寸永不乱</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-使用-Laravel-与-Vue-js-进行微信开发（二）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（二）/" class="article-date">
+  <time datetime="2017-01-16T12:42:22.000Z" itemprop="datePublished">2017-01-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      使用 Laravel 与 Vue.js 进行微信开发（二）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="配置回调地址"><a href="#配置回调地址" class="headerlink" title="配置回调地址"></a>配置回调地址</h2><p>微信公众平台 -&gt; 开发者工具 -&gt; 公众平台测试帐号 -&gt; 测试号管理 -&gt; 体验接口权限表 -&gt; 功能服务 -&gt; 网页帐号 -&gt; 修改 -&gt; 填写回调域名，格式如：www.baidu.com</p>
+<h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><p>可以修改文件 config/wechat.php ，也可以在 .env 文件进行配置</p>
+<p>wechat.php 文件配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line"> * OAuth 配置</div><div class="line"> *</div><div class="line"> * only_wechat_browser: 只在微信浏览器跳转</div><div class="line"> * scopes：公众平台（snsapi_userinfo / snsapi_base），开放平台：snsapi_login</div><div class="line"> * callback：OAuth授权完成后的回调页地址(如果使用中间件，则随便填写。。。)</div><div class="line"> */</div><div class="line"> &apos;oauth&apos; =&gt; [</div><div class="line">     &apos;only_wechat_browser&apos; =&gt; false,</div><div class="line">     &apos;scopes&apos;   =&gt; array_map(&apos;trim&apos;, explode(&apos;,&apos;, env(&apos;WECHAT_OAUTH_SCOPES&apos;, &apos;snsapi_userinfo&apos;))),</div><div class="line">     &apos;callback&apos; =&gt; env(&apos;WECHAT_OAUTH_CALLBACK&apos;, &apos;/examples/oauth_callback.php&apos;),</div><div class="line"> ],</div></pre></td></tr></table></figure></p>
+<p>.env 文件配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">WECHAT_APPID=****</div><div class="line">WECHAT_SECRET=***</div><div class="line">WECHAT_TOKEN=****</div><div class="line">WECHAT_AES_KEY=</div><div class="line"></div><div class="line">WECHAT_OAUTH_SCOPES=snsapi_userinfo</div><div class="line">WECHAT_OAUTH_CALLBACK=/wechat/oauth-callback</div></pre></td></tr></table></figure></p>
+<h2 id="新增路由"><a href="#新增路由" class="headerlink" title="新增路由"></a>新增路由</h2><p>修改文件 app/Http/Routes/wechat.php，代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">/* 处理微信发送消息 */</span></div><div class="line">Route::any(<span class="string">'/request-handler'</span>, <span class="string">'WeChatServerController@requestHandler'</span>);</div><div class="line"></div><div class="line"><span class="comment">/* 处理微信授权回调 */</span></div><div class="line">Route::any(<span class="string">'/oauth-callback'</span>, <span class="string">'WeChatServerController@oauthCallback'</span>);</div><div class="line"></div><div class="line"><span class="comment">/* 微信应用首页 */</span></div><div class="line">Route::get(<span class="string">'/'</span>, [</div><div class="line">    <span class="string">'as'</span> =&gt; <span class="string">'wechat.index'</span>,</div><div class="line">    <span class="string">'uses'</span> =&gt; <span class="string">'WeChatApplicationController@index'</span>,</div><div class="line">    <span class="string">'middleware'</span> =&gt; [],</div><div class="line">]);</div></pre></td></tr></table></figure></p>
+<h2 id="关闭路由-CSRF"><a href="#关闭路由-CSRF" class="headerlink" title="关闭路由 CSRF"></a>关闭路由 CSRF</h2><p>修改文件 app/Http/Middleware/VerifyCSsrfToken.php，代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">protected</span> $except = [</div><div class="line">	<span class="string">'/wechat/request-handler'</span>,</div><div class="line">	<span class="string">'/wechat/oauth-callback'</span></div><div class="line">];</div></pre></td></tr></table></figure></p>
+<h2 id="获取授权"><a href="#获取授权" class="headerlink" title="获取授权"></a>获取授权</h2><h3 id="1-授权页面"><a href="#1-授权页面" class="headerlink" title="1.授权页面"></a>1.授权页面</h3><p>新增文件 app/Http/Controllers/WeChat/WeChatApplicationController.php，代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>\<span class="title">WeChat</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Http</span>\<span class="title">Request</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>\<span class="title">Controller</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">EasyWeChat</span>\<span class="title">Foundation</span>\<span class="title">Application</span> <span class="title">as</span> <span class="title">WeChat</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">WeChatApplicationController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">index</span><span class="params">(Request $request, WeChat $wechat)</span></span></div><div class="line">    &#123;</div><div class="line">    	<span class="comment">// 如果 Session 中没有用户信息，则跳转至微信授权页面</span></div><div class="line">        <span class="keyword">if</span> (<span class="keyword">empty</span>($request-&gt;session()-&gt;has(<span class="string">'weChatUserInfo'</span>))) &#123;</div><div class="line">            $oauth = $wechat-&gt;oauth;</div><div class="line"></div><div class="line">            <span class="keyword">return</span> $oauth-&gt;redirect();</div><div class="line">        &#125;</div><div class="line">        $user = $request-&gt;session()-&gt;get(<span class="string">'weChatUserInfo'</span>);</div><div class="line">        dump($user);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="2-回调操作"><a href="#2-回调操作" class="headerlink" title="2.回调操作"></a>2.回调操作</h3><p>修改文件 app/Http/Controllers/WeChat/WeChatServerController.php，代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 微信用户授权回调</div><div class="line"> * <span class="doctag">@param</span> Request $request</div><div class="line"> * <span class="doctag">@param</span> WeChat $weChat</div><div class="line"> * <span class="doctag">@return</span> \Illuminate\Http\RedirectResponse</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">oauthCallback</span><span class="params">(Request $request, WeChat $weChat)</span></span></div><div class="line">&#123;</div><div class="line">    $oauth = $weChat-&gt;oauth;</div><div class="line">    $user = $oauth-&gt;user();</div><div class="line">    $request-&gt;session()-&gt;put(<span class="string">'weChatUserInfo'</span>, $user-&gt;toArray());</div><div class="line"></div><div class="line">    <span class="keyword">return</span> redirect()-&gt;route(<span class="string">'wechat.index'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="3-访问首页"><a href="#3-访问首页" class="headerlink" title="3.访问首页"></a>3.访问首页</h3><p>下载微信的 Web 开发者工具，在工具中访问授权首页，比如访问:你的域名/wechat,可以跳转至授权页，如下图：<br><img src="http://o93kt6djh.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-01-16%2022.24.46.png" alt=""><br><img src="http://o93kt6djh.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-01-16%2022.25.06.png" alt=""></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（二）/" data-id="ciy06z2t800238x4b8g2i8cbc" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/01/15/使用-Laravel-与-Vue.js-进行微信开发（一）/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">使用 Laravel 与 Vue.js 进行微信开发（一）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Catégories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 18.33px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 16.67px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 13.33px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.67px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Yii/" style="font-size: 15px;">Yii</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（二）/">使用 Laravel 与 Vue.js 进行微信开发（二）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/15/使用-Laravel-与-Vue.js-进行微信开发（一）/">使用 Laravel 与 Vue.js 进行微信开发（一）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/08/学习-UML（一）/">学习 UML（一）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/02/Yii2-Working-with-Databases/">Yii2 Working with Databases</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/22/关于-PHP-函数-array-walk-的一些想法/">关于 PHP 函数 array_walk 的一些想法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Luis Edware<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
