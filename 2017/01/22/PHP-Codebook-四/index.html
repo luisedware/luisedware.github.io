@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>PHP Codebook(四) | 七月十五九月初七</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="4.1 指定并非从元素 0 开始的数组问题希望一步为一个数组赋多个元素，不过不希望第一个元素的索引为0
+实现12345678&amp;lt;?php$presidents = [1 =&amp;gt; &apos;Washington&apos;, &apos;Adams&apos;, &apos;Lincoln&apos;, &apos;Jefferson&apos;];var_dump($presidents);$fruits[1] = &apos;apple&apos;;$fruits[] = &apos;bana">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP Codebook(四)">
+<meta property="og:url" content="http://luisedware.github.io/2017/01/22/PHP-Codebook-四/index.html">
+<meta property="og:site_name" content="七月十五九月初七">
+<meta property="og:description" content="4.1 指定并非从元素 0 开始的数组问题希望一步为一个数组赋多个元素，不过不希望第一个元素的索引为0
+实现12345678&amp;lt;?php$presidents = [1 =&amp;gt; &apos;Washington&apos;, &apos;Adams&apos;, &apos;Lincoln&apos;, &apos;Jefferson&apos;];var_dump($presidents);$fruits[1] = &apos;apple&apos;;$fruits[] = &apos;bana">
+<meta property="og:updated_time" content="2017-01-22T08:50:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP Codebook(四)">
+<meta name="twitter:description" content="4.1 指定并非从元素 0 开始的数组问题希望一步为一个数组赋多个元素，不过不希望第一个元素的索引为0
+实现12345678&amp;lt;?php$presidents = [1 =&amp;gt; &apos;Washington&apos;, &apos;Adams&apos;, &apos;Lincoln&apos;, &apos;Jefferson&apos;];var_dump($presidents);$fruits[1] = &apos;apple&apos;;$fruits[] = &apos;bana">
+  
+    <link rel="alternate" href="/atom.xml" title="七月十五九月初七" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">七月十五九月初七</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一两祝你手边多银财，二两祝你方寸永不乱</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-PHP-Codebook-四" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/22/PHP-Codebook-四/" class="article-date">
+  <time datetime="2017-01-22T06:56:46.000Z" itemprop="datePublished">2017-01-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      PHP Codebook(四)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="4-1-指定并非从元素-0-开始的数组"><a href="#4-1-指定并非从元素-0-开始的数组" class="headerlink" title="4.1 指定并非从元素 0 开始的数组"></a>4.1 指定并非从元素 0 开始的数组</h2><h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>希望一步为一个数组赋多个元素，不过不希望第一个元素的索引为0</p>
+<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$presidents = [<span class="number">1</span> =&gt; <span class="string">'Washington'</span>, <span class="string">'Adams'</span>, <span class="string">'Lincoln'</span>, <span class="string">'Jefferson'</span>];</div><div class="line">var_dump($presidents);</div><div class="line"></div><div class="line">$fruits[<span class="number">1</span>] = <span class="string">'apple'</span>;</div><div class="line">$fruits[] = <span class="string">'banana'</span>;</div><div class="line">var_dump($fruits);</div></pre></td></tr></table></figure>
+<h2 id="4-3-数组初始化为一个整数范围"><a href="#4-3-数组初始化为一个整数范围" class="headerlink" title="4.3 数组初始化为一个整数范围"></a>4.3 数组初始化为一个整数范围</h2><h4 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h4><p>希望将一系列连续的整数赋至一个数组</p>
+<h4 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$cards = range(<span class="number">1</span>,<span class="number">52</span>);</div></pre></td></tr></table></figure>
+<h2 id="4-4-迭代处理数组"><a href="#4-4-迭代处理数组" class="headerlink" title="4.4 迭代处理数组"></a>4.4 迭代处理数组</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$array = range(<span class="number">0</span>, <span class="number">12</span>);</div><div class="line"></div><div class="line"><span class="keyword">foreach</span> ($array <span class="keyword">as</span> $item) &#123;</div><div class="line">    <span class="keyword">echo</span> $item . <span class="string">"\n"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">foreach</span> ($array <span class="keyword">as</span> $key =&gt; $value) &#123;</div><div class="line">    <span class="keyword">echo</span> $value . <span class="string">"\n"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span> ($key = <span class="number">0</span>, $size = count($array); $key &lt; $size; $key++) &#123;</div><div class="line">    <span class="keyword">echo</span> $array[$key] . <span class="string">"\n"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 将内部指针重置为数组起始位置</span></div><div class="line">reset($array);</div><div class="line"><span class="keyword">while</span> (<span class="keyword">list</span>($key, $value) = each($array)) &#123;</div><div class="line">    <span class="keyword">echo</span> $value . <span class="string">"\n"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">array_map(<span class="function"><span class="keyword">function</span><span class="params">($value)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> $value;</div><div class="line">&#125;, $array);</div></pre></td></tr></table></figure>
+<h2 id="4-5-从数组删除元素"><a href="#4-5-从数组删除元素" class="headerlink" title="4.5 从数组删除元素"></a>4.5 从数组删除元素</h2><h4 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h4><p>希望从一个数组删除一个或多个数组</p>
+<h4 id="实现-2"><a href="#实现-2" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$array = range(<span class="number">0</span>, <span class="number">12</span>);</div><div class="line"></div><div class="line"><span class="comment">// 删除元素</span></div><div class="line"><span class="keyword">unset</span>($array[<span class="number">0</span>]);</div><div class="line"></div><div class="line"><span class="comment">// 删除多个连续的元素,array_splice 会自动对数组重新建立索引，避免留出空位。</span></div><div class="line">array_splice($array, <span class="number">1</span>, <span class="number">9</span>);</div><div class="line">var_dump($array);</div></pre></td></tr></table></figure>
+<h2 id="4-6-改变数组大小"><a href="#4-6-改变数组大小" class="headerlink" title="4.6 改变数组大小"></a>4.6 改变数组大小</h2><h4 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h4><p>希望改变一个数组的大小，使它大于或小于目前的大小</p>
+<h4 id="实现-3"><a href="#实现-3" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="comment">// array_pad() 第一个</span></div><div class="line">$array = [<span class="string">'apple'</span>, <span class="string">'banana'</span>, <span class="string">'cocount'</span>];</div><div class="line">$array = array_pad($array, <span class="number">4</span>, <span class="string">'dates'</span>);</div><div class="line">print_r($array);</div><div class="line"></div><div class="line">$array = array_pad($array, <span class="number">-10</span>, <span class="string">'zucchini'</span>);</div><div class="line">print_r($array);</div></pre></td></tr></table></figure>
+<h2 id="4-7-将数组追加到另一个数组"><a href="#4-7-将数组追加到另一个数组" class="headerlink" title="4.7 将数组追加到另一个数组"></a>4.7 将数组追加到另一个数组</h2><h4 id="问题-4"><a href="#问题-4" class="headerlink" title="问题"></a>问题</h4><p>希望把两个数组合并为一个数组</p>
+<h4 id="实现-4"><a href="#实现-4" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// 合并只使用数值键的数组时，数组将重新编号，以保证值不会丢失。</span></div><div class="line">$array1 = [<span class="string">'hello'</span>, <span class="string">'world'</span>];</div><div class="line">$array2 = [<span class="string">'luis'</span>, <span class="string">'edware'</span>, <span class="string">'hello'</span>, <span class="string">'world'</span>];</div><div class="line">$array3 = array_merge($array1, $array2);</div><div class="line">print_r($array3);</div><div class="line"></div><div class="line"><span class="comment">// + 操作符也可以用来合并数组</span></div><div class="line">print_r($array1 + $array2);</div><div class="line"></div><div class="line"><span class="comment">// 倘若两个数组有重复的键，第二数组会覆盖这些重复键的值</span></div><div class="line">$array1 = [<span class="string">'A'</span> =&gt; <span class="string">'apple'</span>, <span class="string">'B'</span> =&gt; <span class="string">'banana'</span>, <span class="string">'O'</span> =&gt; <span class="string">'orange'</span>];</div><div class="line">$array2 = [<span class="string">'A'</span> =&gt; <span class="string">'Luis'</span>, <span class="string">'C'</span> =&gt; <span class="string">'Imooc'</span>];</div><div class="line">print_r(array_merge($array1, $array2));</div></pre></td></tr></table></figure>
+<h2 id="4-8-将数组转换为字符串"><a href="#4-8-将数组转换为字符串" class="headerlink" title="4.8 将数组转换为字符串"></a>4.8 将数组转换为字符串</h2><h4 id="问题-5"><a href="#问题-5" class="headerlink" title="问题"></a>问题</h4><p>希望将一个数组转换为一个格式化的字符串</p>
+<h4 id="实现-5"><a href="#实现-5" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$array = range(<span class="number">0</span>, <span class="number">9</span>);</div><div class="line">$string1 = join(<span class="string">','</span>, $array);</div><div class="line">$string2 = implode(<span class="string">','</span>, $array);</div><div class="line">print_r($string1 . <span class="string">"\n"</span>);</div><div class="line">print_r($string2 . <span class="string">"\n"</span>);</div></pre></td></tr></table></figure>
+<h2 id="4-10-检查一个键是否存在数组中"><a href="#4-10-检查一个键是否存在数组中" class="headerlink" title="4.10 检查一个键是否存在数组中"></a>4.10 检查一个键是否存在数组中</h2><h4 id="问题-6"><a href="#问题-6" class="headerlink" title="问题"></a>问题</h4><p>想知道一个数组是否包含某个键</p>
+<h4 id="实现-6"><a href="#实现-6" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$array = [<span class="string">'a'</span> =&gt; <span class="string">'apple'</span>, <span class="string">'b'</span> =&gt; <span class="string">'banana'</span>, <span class="string">'c'</span> =&gt; <span class="string">'cao ni ma'</span>];</div><div class="line"><span class="keyword">if</span> (array_key_exists(<span class="string">'a'</span>, $array)) &#123;</div><div class="line">    <span class="keyword">echo</span> $array[<span class="string">'a'</span>] . <span class="string">"\n"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($array[<span class="string">'a'</span>])) &#123;</div><div class="line">    <span class="keyword">echo</span> $array[<span class="string">'c'</span>] . <span class="string">"\n"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="4-11-检查一个元素是否在数组中"><a href="#4-11-检查一个元素是否在数组中" class="headerlink" title="4.11 检查一个元素是否在数组中"></a>4.11 检查一个元素是否在数组中</h2><h4 id="问题-7"><a href="#问题-7" class="headerlink" title="问题"></a>问题</h4><p>希望知道一个数组是否包含某个值</p>
+<h4 id="实现-7"><a href="#实现-7" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$array = [<span class="string">'a'</span> =&gt; <span class="string">'apple'</span>, <span class="string">'b'</span> =&gt; <span class="string">'banana'</span>, <span class="string">'c'</span> =&gt; <span class="string">'cao ni ma'</span>];</div><div class="line"></div><div class="line"><span class="keyword">if</span> (in_array(<span class="string">'apple'</span>, $array)) &#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">'Own it'</span>;</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">'Need it'</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$array = [<span class="string">'Emma'</span>, <span class="string">'Pride and Prejudice'</span>, <span class="string">'Northhanger Abbey'</span>];</div><div class="line">$array = array_flip($array);</div><div class="line"><span class="keyword">if</span> (array_key_exists(<span class="string">'Emma'</span>, $array)) &#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">'Own it'</span>;</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">'Need it'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="4-12-查找一个值在数组中的位置"><a href="#4-12-查找一个值在数组中的位置" class="headerlink" title="4.12 查找一个值在数组中的位置"></a>4.12 查找一个值在数组中的位置</h2><h4 id="问题-8"><a href="#问题-8" class="headerlink" title="问题"></a>问题</h4><p>希望知道一个值是否在数组中。如果这个值确实在数组中，希望知道它的键。</p>
+<h4 id="实现-8"><a href="#实现-8" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="comment">// 如果一个值在数组中多次出现，array_serach() 只能保证返回其中一个实例，而不一定是第一个实例。</span></div><div class="line">$position = [<span class="string">'a'</span>=&gt;<span class="string">'apple'</span>,<span class="string">'banana'</span>,<span class="string">'orange'</span>,<span class="string">'b'</span>=&gt;<span class="string">'not bad'</span>];</div><div class="line"><span class="keyword">if</span>(($result = array_search(<span class="string">'123'</span>, $position)) !== <span class="keyword">false</span>)&#123;</div><div class="line">    <span class="keyword">echo</span> $result;</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">'false'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-四/" data-id="ciy8fcnle0015z44bq9v806gq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/01/22/PHP-Codebook-二/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">PHP Codebook(二)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 18.33px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 16.67px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 15px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.67px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Yii/" style="font-size: 13.33px;">Yii</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/01/22/PHP-Codebook-四/">PHP Codebook(四)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/22/PHP-Codebook-二/">PHP Codebook(二)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/22/PHP-Codebook-一/">PHP Codebook(一)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/19/使用-Laravel-与-Vue-js-进行微信开发（四）/">使用 Laravel 与 Vue.js 进行微信开发（四）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（三）/">使用 Laravel 与 Vue.js 进行微信开发（三）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Luis Edware<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
