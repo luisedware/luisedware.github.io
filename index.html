@@ -65,6 +65,70 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-PHP-Codebook-一" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/22/PHP-Codebook-一/" class="article-date">
+  <time datetime="2017-01-21T22:06:56.000Z" itemprop="datePublished">2017-01-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/22/PHP-Codebook-一/">PHP Codebook(一)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-1-访问子串"><a href="#1-1-访问子串" class="headerlink" title="1.1 访问子串"></a>1.1 访问子串</h2><h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>想知道一个字符串是否包含一个特定的子串。例如，想查看一个 email 地址是否包含一个 @</p>
+<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$string = <span class="string">'506510463@qq.com'</span>;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (($length = strpos($string, <span class="string">'@'</span>)) === <span class="keyword">false</span>) &#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">'There was no @ in the e-mail address'</span>;</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">'This is a right e-mail address-'</span> . $length;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>strpos 找到子串时，会返回子串的位置。找不到子串时，会返回 false，为了区分 0 和 false，必须使用 恒等操作符或非恒等操作符来进行判断。</p>
+<h2 id="1-2-抽取子串"><a href="#1-2-抽取子串" class="headerlink" title="1.2 抽取子串"></a>1.2 抽取子串</h2><h4 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h4><p>希望从字符串中的某个特定位置开始抽取这个字符串的一部分。例如，对于输入到一个表单的用户名，想要得到这个用户名的前八位字符。</p>
+<h4 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$start = <span class="number">0</span>;</div><div class="line">$length = <span class="number">8</span>;</div><div class="line">$string = <span class="string">"LuisEdware"</span>;</div><div class="line"></div><div class="line"><span class="keyword">echo</span> substr($string, $start, $length) . <span class="string">"\n"</span>;</div><div class="line"><span class="comment">// LuisEdwa</span></div><div class="line"></div><div class="line"><span class="comment">// 如果忽略 $length，substr() 会返回从 $start 到原字符串末尾的子串</span></div><div class="line">$start = <span class="number">5</span>;</div><div class="line"><span class="keyword">echo</span> substr($string, $start) . <span class="string">"\n"</span>;</div><div class="line"><span class="comment">// dware</span></div><div class="line"></div><div class="line"><span class="comment">// 如果 $start 大于字符串的长度，substr() 将返回 false</span></div><div class="line">$start = <span class="number">20</span>;</div><div class="line">var_dump(substr($string, $start));</div><div class="line"><span class="comment">// false</span></div><div class="line"></div><div class="line"><span class="comment">// 如果 $start 加 $length 超过了字符串末尾，substr() 将返回从 $start 开始至字符串末尾的所有字符</span></div><div class="line"><span class="keyword">echo</span> substr($string, <span class="number">8</span>, <span class="number">5</span>) . <span class="string">"\n"</span>;</div><div class="line"><span class="comment">// re</span></div><div class="line"></div><div class="line"><span class="comment">// 如果 $start 为负数，substr() 会从字符串末尾倒数来确定子串从哪里开始</span></div><div class="line"><span class="keyword">echo</span> substr($string, <span class="number">-6</span>) . <span class="string">"\n"</span>;</div><div class="line"><span class="comment">// Edware</span></div><div class="line"><span class="keyword">echo</span> substr($string, <span class="number">-6</span>, <span class="number">2</span>) . <span class="string">"\n"</span>;</div><div class="line"><span class="comment">// Ed</span></div><div class="line"></div><div class="line"><span class="comment">// 如果 $length 为负数，substr() 会从字符串末尾倒数来确定子串到哪里结束</span></div><div class="line"><span class="keyword">echo</span> substr($string, <span class="number">2</span>, <span class="number">-2</span>) . <span class="string">"\n"</span>;</div><div class="line"><span class="comment">// isEdwa</span></div><div class="line"><span class="keyword">echo</span> substr($string, <span class="number">-4</span>, <span class="number">-2</span>) . <span class="string">"\n"</span>;</div><div class="line"><span class="comment">// wa</span></div></pre></td></tr></table></figure>
+<h2 id="1-3-替换子串"><a href="#1-3-替换子串" class="headerlink" title="1.3 替换子串"></a>1.3 替换子串</h2><h4 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h4><p>希望用另外一个不同的字符串来替换一个子串。例如，打印一个信用卡号之前，想要对除了后四位以外的部分模糊处理。或者当需要显示的文档过大，无法一次全部显示，可能希望显示一部分文本，另外还有一个链接指向其余的文本。</p>
+<h4 id="实现-2"><a href="#实现-2" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$creditCard = <span class="string">"6217 0032 4000 0600 075"</span>;</div><div class="line"><span class="keyword">echo</span> substr_replace($creditCard, <span class="string">'****'</span>, <span class="number">0</span>, strlen($creditCard) - <span class="number">4</span>) . <span class="string">"\n"</span>;</div><div class="line"><span class="comment">// **** 075</span></div><div class="line"></div><div class="line"><span class="keyword">echo</span> substr_replace($creditCard, <span class="string">'**** **** **** ****'</span>, <span class="number">0</span>, strlen($creditCard) - <span class="number">4</span>) . <span class="string">"\n"</span>;</div><div class="line"><span class="comment">// **** **** **** **** 075</span></div><div class="line"></div><div class="line">$text = <span class="string">"Chief Justice Roberts, President Carter, President Clinton, President Bush, President Obama, fellow Americans and people of the world, thank you.</span></div><div class="line"></div><div class="line">We, the citizens of America, are now joined in a great national effort to rebuild our country and restore its promise for all of our people.";</div><div class="line"></div><div class="line"><span class="keyword">echo</span> substr_replace($text, <span class="string">"..."</span>, <span class="number">25</span>);</div></pre></td></tr></table></figure>
+<h2 id="1-4-逐字节处理字符串"><a href="#1-4-逐字节处理字符串" class="headerlink" title="1.4 逐字节处理字符串"></a>1.4 逐字节处理字符串</h2><h4 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h4><p>需要分别处理字符串中的各个字节</p>
+<h4 id="实现-3"><a href="#实现-3" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$string = <span class="string">"This weekend,I am going shopping for pet chicken."</span>;</div><div class="line">$vowels = <span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="keyword">for</span> ($i = <span class="number">0</span>, $j = strlen($string); $i &lt; $j; $i++) &#123;</div><div class="line">    <span class="keyword">if</span> (strstr(<span class="string">'aeiouAEIOU'</span>, $string[$i])) &#123;</div><div class="line">        $vowels++;</div><div class="line">        $string[$i] = ucwords($string[$i]);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">echo</span> $vowels . <span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> $string;</div></pre></td></tr></table></figure>
+<h2 id="1-5-按单词或字节反转字符串"><a href="#1-5-按单词或字节反转字符串" class="headerlink" title="1.5 按单词或字节反转字符串"></a>1.5 按单词或字节反转字符串</h2><h4 id="问题-4"><a href="#问题-4" class="headerlink" title="问题"></a>问题</h4><p>希望反转一个字符串中的单词或字节</p>
+<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$string = <span class="string">"This is not a palindrome"</span>;</div><div class="line"></div><div class="line"><span class="comment">// 按字节反转</span></div><div class="line"><span class="keyword">echo</span> strrev($string) . <span class="string">"\n"</span>;</div><div class="line"><span class="comment">// emordnilap a ton si sihT</span></div><div class="line"></div><div class="line"><span class="comment">// 按单词反转</span></div><div class="line">$string = <span class="string">"Hello World,My Name is Luis Edware."</span>;</div><div class="line"></div><div class="line"><span class="comment">// 将字符串分解为单词</span></div><div class="line">$words = explode(<span class="string">' '</span>, $string);</div><div class="line"></div><div class="line"><span class="comment">// 反转单词数组</span></div><div class="line">$words = array_reverse($words);</div><div class="line"></div><div class="line"><span class="comment">// 重新构建字符串</span></div><div class="line">$string = implode(<span class="string">' '</span>, $words);</div><div class="line"><span class="keyword">echo</span> $string;</div><div class="line"><span class="comment">// Edware. Luis is Name World,My Hello</span></div></pre></td></tr></table></figure>
+<h2 id="1-6-生成随机字符串"><a href="#1-6-生成随机字符串" class="headerlink" title="1.6 生成随机字符串"></a>1.6 生成随机字符串</h2><h4 id="问题-5"><a href="#问题-5" class="headerlink" title="问题"></a>问题</h4><p>希望生成一个随机字符串</p>
+<h4 id="实现-4"><a href="#实现-4" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">str_rand</span><span class="params">($length, $characters = null)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> ($characters === <span class="keyword">null</span>) &#123;</div><div class="line">        $characters = <span class="string">'0123456789qwertyuiopasdfghjklzxcvbnm!@#$%^&amp;*()-=_+[]&#123;&#125;:";,.&lt;&gt;/?'</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (!is_int($length) || $length &lt; <span class="number">0</span>) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    $charactersLength = strlen($characters);</div><div class="line">    $string = <span class="string">''</span>;</div><div class="line"></div><div class="line">    <span class="keyword">for</span> ($i = $length; $i &gt; <span class="number">0</span>; $i--) &#123;</div><div class="line">        $string .= $characters[mt_rand(<span class="number">0</span>, $charactersLength)];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> $string;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">echo</span> str_rand(<span class="number">32</span>);</div></pre></td></tr></table></figure>
+<h2 id="1-8-控制大小写"><a href="#1-8-控制大小写" class="headerlink" title="1.8 控制大小写"></a>1.8 控制大小写</h2><h4 id="问题-6"><a href="#问题-6" class="headerlink" title="问题"></a>问题</h4><p>需要将字符串中的字母全大写或全小写，或者改变字母的大小写。例如，希望名字中的首字母大写，而其余字母都为小写。</p>
+<h4 id="实现-5"><a href="#实现-5" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// 使用 ucfirst() 或 ucwords() 将一个单词或多个单词中的首字母大写</span></div><div class="line">$string = <span class="string">"my name is Luis edware"</span>;</div><div class="line"><span class="keyword">echo</span> ucfirst($string) . <span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> ucwords($string) . <span class="string">"\n"</span>;</div><div class="line"></div><div class="line"><span class="comment">// strtoupper()、strtolower() 将作用整个字符串</span></div><div class="line"><span class="keyword">echo</span> strtoupper($string) . <span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> strtolower($string);</div></pre></td></tr></table></figure>
+<h2 id="1-10-去除字符串首尾的空格"><a href="#1-10-去除字符串首尾的空格" class="headerlink" title="1.10 去除字符串首尾的空格"></a>1.10 去除字符串首尾的空格</h2><h4 id="问题-7"><a href="#问题-7" class="headerlink" title="问题"></a>问题</h4><p>希望从字符串开头和末尾删除空白符。例如，在验证用户输入之前，可能希望先完成清理。</p>
+<h4 id="实现-6"><a href="#实现-6" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">/**</span></div><div class="line"> * ltrim() 函数从字符串开头删除空白符</div><div class="line"> * rtrim() 函数从字符串末尾删除空白符</div><div class="line"> * trim() 函数则删除字符串开头和末尾的空白符</div><div class="line"> */</div><div class="line"></div><div class="line">$lString = <span class="string">"    LuisEdware"</span>;</div><div class="line">$rString = <span class="string">"LuisEdware    "</span>;</div><div class="line">$string = <span class="string">"    LuisEdware    "</span>;</div><div class="line"></div><div class="line"><span class="keyword">echo</span> ltrim($lString) . <span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> rtrim($rString) . <span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> trim($string) . <span class="string">"\n"</span>;</div><div class="line"></div><div class="line"><span class="comment">// trim() 函数还可以从字符串中删除用户指定的字符。</span></div><div class="line"><span class="keyword">echo</span> ltrim(<span class="string">'506510463 2794408425 Luis Edware'</span>, <span class="string">'0..9'</span>) . <span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> rtrim(<span class="string">'LuisEdware 5065104632794408425'</span>, <span class="string">'0..9'</span>) . <span class="string">"\n"</span>;</div></pre></td></tr></table></figure>
+<h2 id="1-13-生成固定宽度字段数据记录"><a href="#1-13-生成固定宽度字段数据记录" class="headerlink" title="1.13 生成固定宽度字段数据记录"></a>1.13 生成固定宽度字段数据记录</h2><h4 id="问题-8"><a href="#问题-8" class="headerlink" title="问题"></a>问题</h4><p>需要格式化数据记录，使得每个字段占据指定数目的字符。</p>
+<h4 id="实现-7"><a href="#实现-7" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$books = [</div><div class="line">    [<span class="string">'trueName'</span>, <span class="string">'nickName'</span>, <span class="string">'birthday'</span>],</div><div class="line">    [<span class="string">'Elmer Gantry'</span>, <span class="string">'Sinclair Lewis'</span>, <span class="number">1927</span>],</div><div class="line">    [<span class="string">'The Scarlatti Inheritance'</span>, <span class="string">'Robert Ludlum'</span>, <span class="number">1971</span>],</div><div class="line">    [<span class="string">'The Parsifal Mosaic'</span>, <span class="string">'William Styron'</span>, <span class="number">1979</span>],</div><div class="line">];</div><div class="line"></div><div class="line"><span class="keyword">foreach</span> ($books <span class="keyword">as</span> $book) &#123;</div><div class="line">    <span class="keyword">print</span> pack(<span class="string">'A30A20A10'</span>, $book[<span class="number">0</span>], $book[<span class="number">1</span>], $book[<span class="number">2</span>]) . <span class="string">"\n"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">/*</span></div><div class="line">trueName                      nickName            birthday</div><div class="line">Elmer Gantry                  Sinclair Lewis      1927</div><div class="line">The Scarlatti Inheritance     Robert Ludlum       1971</div><div class="line">The Parsifal Mosaic           William Styron      1979</div><div class="line"> */</div></pre></td></tr></table></figure>
+<h2 id="1-15-分解字符串"><a href="#1-15-分解字符串" class="headerlink" title="1.15 分解字符串"></a>1.15 分解字符串</h2><h4 id="问题-9"><a href="#问题-9" class="headerlink" title="问题"></a>问题</h4><p>需要将一个字符串分解为片段。例如希望访问用户在一个 <textarea\> 表单域中输入的各行文本<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$string = <span class="string">'My sentence is not very complicated'</span>;</div><div class="line">$words = explode(<span class="string">' '</span>, $string);</div><div class="line"><span class="comment">/*</span></div><div class="line">Array</div><div class="line">(</div><div class="line">    [0] =&gt; My</div><div class="line">    [1] =&gt; sentence</div><div class="line">    [2] =&gt; is</div><div class="line">    [3] =&gt; not</div><div class="line">    [4] =&gt; very</div><div class="line">    [5] =&gt; complicated</div><div class="line">)</div><div class="line">*/</div></pre></td></tr></table></figure></textarea\></p>
+<h2 id="1-16-使文本在指定行长度自动换行"><a href="#1-16-使文本在指定行长度自动换行" class="headerlink" title="1.16 使文本在指定行长度自动换行"></a>1.16 使文本在指定行长度自动换行</h2><h4 id="问题-10"><a href="#问题-10" class="headerlink" title="问题"></a>问题</h4><p>需要实现字符串自动换行</p>
+<h4 id="实现-8"><a href="#实现-8" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$text = <span class="string">"Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum."</span>;</div><div class="line"></div><div class="line"><span class="keyword">echo</span> <span class="string">'&lt;pre&gt;'</span> . $text . <span class="string">'&lt;/pre&gt;'</span> . <span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> wordwrap($text, <span class="number">50</span>);</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-一/" data-id="ciy81geuw0018kx4bias56es6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-使用-Laravel-与-Vue-js-进行微信开发（四）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/01/19/使用-Laravel-与-Vue-js-进行微信开发（四）/" class="article-date">
@@ -96,7 +160,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/19/使用-Laravel-与-Vue-js-进行微信开发（四）/" data-id="ciy81f6gb0024fz4bjn59syiv" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/19/使用-Laravel-与-Vue-js-进行微信开发（四）/" data-id="ciy81gevo0029kx4bhlbw2lpm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -141,7 +205,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（三）/" data-id="ciy81f6gd0028fz4bw2ja38sd" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（三）/" data-id="ciy81gevj0021kx4b31hn91f6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -193,7 +257,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（二）/" data-id="ciy81f6g8001wfz4bauvkqm1d" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（二）/" data-id="ciy81gevn0026kx4bc973352u" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -283,7 +347,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/15/使用-Laravel-与-Vue.js-进行微信开发（一）/" data-id="ciy81f6gi002ffz4bun4bp8jd" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/15/使用-Laravel-与-Vue.js-进行微信开发（一）/" data-id="ciy81gevs002ekx4bsr8f3fdi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -392,7 +456,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/12/08/学习-UML（一）/" data-id="ciy81f6i0004rfz4bskchipda" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/12/08/学习-UML（一）/" data-id="ciy81gexb004kkx4bdingant6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UML/">UML</a></li></ul>
@@ -447,7 +511,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/12/02/Yii2-Working-with-Databases/" data-id="ciy81f6g6001tfz4bqz21iht6" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/12/02/Yii2-Working-with-Databases/" data-id="ciy81gevd001rkx4bbfohb7al" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -517,7 +581,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/11/22/关于-PHP-函数-array-walk-的一些想法/" data-id="ciy81f6hv004cfz4bbk2lag3w" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/11/22/关于-PHP-函数-array-walk-的一些想法/" data-id="ciy81gewy0043kx4bs67glvma" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -583,7 +647,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/11/21/关于-PHP-函数-array-filter-的一些想法/" data-id="ciy81f6ho0040fz4bwvnbzat0" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/11/21/关于-PHP-函数-array-filter-的一些想法/" data-id="ciy81gewx003zkx4bq43mildf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -644,58 +708,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/11/21/关于-PHP-函数-array-map-的一些想法/" data-id="ciy81f6hu0049fz4b8it05vro" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/11/21/关于-PHP-函数-array-map-的一些想法/" data-id="ciy81gex10046kx4b7bfdkwaa" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-使用-PHPStorm-的-Live-Templates-封装常用代码" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/11/19/使用-PHPStorm-的-Live-Templates-封装常用代码/" class="article-date">
-  <time datetime="2016-11-19T07:11:46.000Z" itemprop="datePublished">2016-11-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/19/使用-PHPStorm-的-Live-Templates-封装常用代码/">使用 PHPStorm 的 Live Templates 封装常用代码</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="PHP-Template-Group"><a href="#PHP-Template-Group" class="headerlink" title="PHP Template Group"></a>PHP Template Group</h2><h3 id="fore"><a href="#fore" class="headerlink" title="fore"></a>fore</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">foreach ($ITERABLE$ as $VAR_VALUE$) &#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="forek"><a href="#forek" class="headerlink" title="forek"></a>forek</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">foreach ($ITERABLE$ as $VAR_KEY$ =&gt; $VAR_VALUE$) &#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="prif"><a href="#prif" class="headerlink" title="prif"></a>prif</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">private function $NAME$($PARAMETERS$)&#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="prisf"><a href="#prisf" class="headerlink" title="prisf"></a>prisf</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">private static function $NAME$($PARAMETERS$)&#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="prof"><a href="#prof" class="headerlink" title="prof"></a>prof</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">protected function $NAME$($PARAMETERS$)&#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="prosf"><a href="#prosf" class="headerlink" title="prosf"></a>prosf</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">protected static function $NAME$($PARAMETERS$)&#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="pubf"><a href="#pubf" class="headerlink" title="pubf"></a>pubf</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public function $NAME$($PARAMETERS$)&#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="pubsf"><a href="#pubsf" class="headerlink" title="pubsf"></a>pubsf</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public static function $NAME$($PARAMETERS$)&#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="thr"><a href="#thr" class="headerlink" title="thr"></a>thr</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">throw new $END$</div></pre></td></tr></table></figure>
-<h3 id="tryc"><a href="#tryc" class="headerlink" title="tryc"></a>tryc</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">try &#123;</div><div class="line">    $ITERABLE$</div><div class="line">&#125; catch (\$Exception$ $e) &#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>##</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/11/19/使用-PHPStorm-的-Live-Templates-封装常用代码/" data-id="ciy81f6gt002sfz4bz2mdoady" class="article-share-link">Share</a>
-      
-      
     </footer>
   </div>
   
@@ -758,6 +775,10 @@
       <ul>
         
           <li>
+            <a href="/2017/01/22/PHP-Codebook-一/">PHP Codebook(一)</a>
+          </li>
+        
+          <li>
             <a href="/2017/01/19/使用-Laravel-与-Vue-js-进行微信开发（四）/">使用 Laravel 与 Vue.js 进行微信开发（四）</a>
           </li>
         
@@ -771,10 +792,6 @@
         
           <li>
             <a href="/2017/01/15/使用-Laravel-与-Vue.js-进行微信开发（一）/">使用 Laravel 与 Vue.js 进行微信开发（一）</a>
-          </li>
-        
-          <li>
-            <a href="/2016/12/08/学习-UML（一）/">学习 UML（一）</a>
           </li>
         
       </ul>
