@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="七月十五九月初七">
 <meta property="og:description" content="4.1 指定并非从元素 0 开始的数组问题希望一步为一个数组赋多个元素，不过不希望第一个元素的索引为0
 实现12345678&amp;lt;?php$presidents = [1 =&amp;gt; &apos;Washington&apos;, &apos;Adams&apos;, &apos;Lincoln&apos;, &apos;Jefferson&apos;];var_dump($presidents);$fruits[1] = &apos;apple&apos;;$fruits[] = &apos;bana">
-<meta property="og:updated_time" content="2017-01-22T23:57:36.000Z">
+<meta property="og:updated_time" content="2017-01-23T08:30:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP Codebook(四)">
 <meta name="twitter:description" content="4.1 指定并非从元素 0 开始的数组问题希望一步为一个数组赋多个元素，不过不希望第一个元素的索引为0
@@ -59,9 +59,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -123,11 +123,20 @@
 <h4 id="实现-11"><a href="#实现-11" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$array = range(<span class="number">1</span>, <span class="number">100</span>);</div><div class="line">$array = array_reverse($array);</div><div class="line">print_r($array);</div><div class="line"></div><div class="line">$fruits = [<span class="string">'a'</span> =&gt; <span class="string">'Apple'</span>, <span class="string">'b'</span> =&gt; <span class="string">'Banana'</span>, <span class="string">'o'</span> =&gt; <span class="string">'orange'</span>];</div><div class="line">$fruits = array_reverse($fruits);</div><div class="line">print_r($fruits);</div></pre></td></tr></table></figure>
 <h2 id="4-18-多个数据的排序"><a href="#4-18-多个数据的排序" class="headerlink" title="4.18 多个数据的排序"></a>4.18 多个数据的排序</h2><h4 id="问题-12"><a href="#问题-12" class="headerlink" title="问题"></a>问题</h4><p>希望对多个数组或多位数组排序</p>
 <h4 id="实现-12"><a href="#实现-12" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$colors = [<span class="string">'Red'</span>, <span class="string">'White'</span>, <span class="string">'Blue'</span>];</div><div class="line">$cities = [<span class="string">'Boston'</span>, <span class="string">'New York'</span>, <span class="string">'Chicago'</span>];</div><div class="line">$stuff = [</div><div class="line">    <span class="string">'colors'</span> =&gt; $colors,</div><div class="line">    <span class="string">'cities'</span> =&gt; $cities,</div><div class="line">];</div><div class="line"></div><div class="line">array_multisort($colors, $cities);</div><div class="line">print_r($colors);</div><div class="line">print_r($cities);</div><div class="line"></div><div class="line"></div><div class="line">array_multisort($stuff[<span class="string">'colors'</span>], $stuff[<span class="string">'cities'</span>]);</div><div class="line">print_r($stuff);</div><div class="line"></div><div class="line"></div><div class="line">$numbers = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</div><div class="line">$letters = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>];</div><div class="line"></div><div class="line">array_multisort($numbers, SORT_NUMERIC, SORT_DESC, $letters, SORT_STRING, SORT_DESC);</div><div class="line">print_r($numbers);</div><div class="line">print_r($letters);</div></pre></td></tr></table></figure>
-
+<h2 id="4-20-随机调整数组"><a href="#4-20-随机调整数组" class="headerlink" title="4.20 随机调整数组"></a>4.20 随机调整数组</h2><h4 id="问题-13"><a href="#问题-13" class="headerlink" title="问题"></a>问题</h4><p>希望按一种随机的顺序重排数组中的元素</p>
+<h4 id="实现-13"><a href="#实现-13" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$name = [<span class="string">'Ann'</span>, <span class="string">'Eason'</span>, <span class="string">'Luis'</span>, <span class="string">'Edware'</span>];</div><div class="line">print_r($name);</div><div class="line"></div><div class="line">shuffle($name);</div><div class="line">print_r($name);</div></pre></td></tr></table></figure>
+<h2 id="4-21-删除数组中重复的元素"><a href="#4-21-删除数组中重复的元素" class="headerlink" title="4.21 删除数组中重复的元素"></a>4.21 删除数组中重复的元素</h2><h4 id="问题-14"><a href="#问题-14" class="headerlink" title="问题"></a>问题</h4><p>希望删除数组中重复的元素</p>
+<h4 id="实现-14"><a href="#实现-14" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$array = [<span class="string">'Ann'</span>, <span class="string">'Eason'</span>, <span class="string">'Luis'</span>, <span class="string">'Edware'</span>, <span class="string">'Ann'</span>, <span class="string">'Eason'</span>, <span class="string">'Luis'</span>, <span class="string">'Edware'</span>];</div><div class="line">print_r($array);</div><div class="line"></div><div class="line">$unique = array_unique($array);</div><div class="line">print_r($unique);</div><div class="line"></div><div class="line">$unique2 = [];</div><div class="line"><span class="keyword">foreach</span> ($array <span class="keyword">as</span> $item) &#123;</div><div class="line">    <span class="keyword">if</span> (!in_array($item, $unique2)) &#123;</div><div class="line">        $unique2[] = $item;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">print_r($unique2);</div></pre></td></tr></table></figure>
+<h2 id="4-22-对数组中的各个元素应用一个函数"><a href="#4-22-对数组中的各个元素应用一个函数" class="headerlink" title="4.22 对数组中的各个元素应用一个函数"></a>4.22 对数组中的各个元素应用一个函数</h2><h4 id="问题-15"><a href="#问题-15" class="headerlink" title="问题"></a>问题</h4><p>希望对数组中的各个元素应用一个函数或方法，这就允许一次转换所有输入数据</p>
+<h4 id="实现-15"><a href="#实现-15" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$names = [</div><div class="line">    <span class="string">'firstName'</span> =&gt; <span class="string">'Ann‘Eason'</span>,</div><div class="line">    <span class="string">'lastName'</span> =&gt; <span class="string">'Luis’Edware'</span>,</div><div class="line">];</div><div class="line"></div><div class="line"></div><div class="line">array_walk($names, <span class="function"><span class="keyword">function</span><span class="params">(&amp;$value, $key)</span> </span>&#123;</div><div class="line">    $value = htmlentities($value, ENT_QUOTES);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="keyword">foreach</span> ($names <span class="keyword">as</span> $name) &#123;</div><div class="line">    <span class="keyword">echo</span> $name . <span class="string">"\n"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">echo</span> <span class="string">'****************************************'</span> . <span class="string">"\n"</span>;</div><div class="line"></div><div class="line"><span class="comment">// 对于嵌套数据，可以使用 array_walk_recursive()</span></div><div class="line">$names = [</div><div class="line">    <span class="string">'firstName'</span> =&gt; [<span class="string">'Ann"'</span>, <span class="string">'Luis"'</span>],</div><div class="line">    <span class="string">'lastName'</span> =&gt; [<span class="string">'"Eason'</span>, <span class="string">'"Edware'</span>],</div><div class="line">];</div><div class="line"></div><div class="line">array_walk_recursive($names, <span class="function"><span class="keyword">function</span><span class="params">(&amp;$value, $key)</span> </span>&#123;</div><div class="line">    $value = htmlentities($value, ENT_QUOTES);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="keyword">foreach</span> ($names <span class="keyword">as</span> $name) &#123;</div><div class="line">    <span class="keyword">foreach</span> ($name <span class="keyword">as</span> $item) &#123;</div><div class="line">        <span class="keyword">echo</span> $item . <span class="string">"\n"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="4-23-查找两个数组的并集、交集或差集"><a href="#4-23-查找两个数组的并集、交集或差集" class="headerlink" title="4.23 查找两个数组的并集、交集或差集"></a>4.23 查找两个数组的并集、交集或差集</h2><h4 id="问题-16"><a href="#问题-16" class="headerlink" title="问题"></a>问题</h4><p>有两个数组，希望找出它们的并集、交集、差集和对称差集</p>
+<h4 id="实现-16"><a href="#实现-16" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$a = range(<span class="string">'a'</span>, <span class="string">'n'</span>);</div><div class="line">$b = range(<span class="string">'h'</span>, <span class="string">'t'</span>);</div><div class="line"><span class="comment">// 要计算并集</span></div><div class="line">$union = array_unique(array_merge($a, $b));</div><div class="line">print_r($union);</div><div class="line"></div><div class="line"><span class="comment">// 要计算交集</span></div><div class="line">$intersection = array_intersect($a, $b);</div><div class="line">print_r($intersection);</div><div class="line"></div><div class="line"><span class="comment">// 简单差集</span></div><div class="line">$difference1 = array_diff($a, $b);</div><div class="line">$difference2 = array_diff($b, $a);</div><div class="line">print_r($difference1);</div><div class="line">print_r($difference2);</div><div class="line"></div><div class="line"><span class="comment">// 对称差集</span></div><div class="line">$difference = array_merge(array_diff($a, $b), array_diff($b, $a));</div><div class="line">print_r($difference);</div></pre></td></tr></table></figure>
+<h2 id="4-24-高效迭代处理大型数据集"><a href="#4-24-高效迭代处理大型数据集" class="headerlink" title="4.24 高效迭代处理大型数据集"></a>4.24 高效迭代处理大型数据集</h2><h4 id="问题-17"><a href="#问题-17" class="headerlink" title="问题"></a>问题</h4><p>希望迭代处理一个元素列表，不过整个列表会占用大量内存，或者生成整个列表的速度非常慢。</p>
+<h4 id="实现-17"><a href="#实现-17" class="headerlink" title="实现"></a>实现</h4><h4 id="实现-18"><a href="#实现-18" class="headerlink" title="实现"></a>实现</h4>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-四/" data-id="ciy9brbb60015c14b2vkzt1tq" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-四/" data-id="ciy9ud2rc0018nm4bmo4jusgq" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -140,7 +149,7 @@
   
   
     <a href="/2017/01/22/PHP-Codebook-二/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ouder</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title">PHP Codebook(二)</div>
     </a>
   
@@ -155,7 +164,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categorieën</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -165,7 +174,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Labels</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
     </div>
@@ -175,7 +184,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 18.33px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 16.67px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 15px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.67px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Yii/" style="font-size: 13.33px;">Yii</a>
     </div>
@@ -184,7 +193,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archieven</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
@@ -194,7 +203,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -231,7 +240,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Luis Edware<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
