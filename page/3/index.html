@@ -65,6 +65,199 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-打造扛得住的-MySQL-数据库架构" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/20/打造扛得住的-MySQL-数据库架构/" class="article-date">
+  <time datetime="2016-10-20T12:57:11.000Z" itemprop="datePublished">2016-10-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/20/打造扛得住的-MySQL-数据库架构/">打造扛得住的 MySQL 数据库架构</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="第1章-实例和故事"><a href="#第1章-实例和故事" class="headerlink" title="第1章 实例和故事"></a>第1章 实例和故事</h2><h3 id="1-1-什么决定了电商双11大促的成败"><a href="#1-1-什么决定了电商双11大促的成败" class="headerlink" title="1-1 什么决定了电商双11大促的成败"></a>1-1 什么决定了电商双11大促的成败</h3><p>电商公司的服务器能够承受住双十一期间高并发的访问量，为用户提供稳定高速的购物体验。</p>
+<h3 id="1-2-在双11大促中的数据库服务器"><a href="#1-2-在双11大促中的数据库服务器" class="headerlink" title="1-2 在双11大促中的数据库服务器"></a>1-2 在双11大促中的数据库服务器</h3><p>数据库架构：</p>
+<ul>
+<li>1 台 MySQL 主服务器</li>
+<li>15 台 MySQL 从服务器</li>
+</ul>
+<p>当时没有部署主从复制组件，一旦主服务器出现故障，很难自动进行故障切换，必须由 DBA 进行手动操作。过多的从服务器，对主服务器的网卡容量也是一个不小的挑战。</p>
+<p>数据库性能依据参数：</p>
+<ul>
+<li>QPS</li>
+<li>TPS</li>
+<li>并发量</li>
+<li>CPU 使用率</li>
+<li>磁盘 IO</li>
+</ul>
+<h3 id="1-3-在大促中什么影响了数据库性能"><a href="#1-3-在大促中什么影响了数据库性能" class="headerlink" title="1-3 在大促中什么影响了数据库性能"></a>1-3 在大促中什么影响了数据库性能</h3><p>影响数据库性能的因素</p>
+<ul>
+<li>SQL 查询速度</li>
+<li>服务器硬件</li>
+<li>网卡流量</li>
+<li>磁盘 IO</li>
+</ul>
+<p>数据库性能常见的风险：</p>
+<ul>
+<li>效率低下的 SQL<ul>
+<li>QPS：每秒钟处理的查询量<ul>
+<li>10ms 处理 1个 SQL，1s 处理 100个 SQL，QPS &lt;= 100</li>
+<li>100ms 处理 1个 SQL，1s 处理 10个 SQL，QPS &lt;= 10</li>
+</ul>
+</li>
+<li>TPS：每秒钟处理的事务数</li>
+</ul>
+</li>
+<li>大量的并发和超高的 CPU 使用率<ul>
+<li>大量的并发会导致数据库连接数被占满</li>
+<li>超高的 CPU 使用率会导致服务器因 CPU 资源耗尽而出现宕机</li>
+</ul>
+</li>
+<li>磁盘 IO<ul>
+<li>磁盘 IO 性能突然下降（使用更快的磁盘设备）</li>
+<li>其它大量消耗磁盘性能的计划任务（调整计划任务，做好磁盘维护）</li>
+</ul>
+</li>
+<li>网卡 IO<ul>
+<li>当网卡 IO 被占满时，（千兆网卡 1000 Mb/8=100 MB）会出现无法连接数据库的情况。</li>
+<li>如何避免无法连接数据库的情况<ul>
+<li>减少从服务器的数量</li>
+<li>进行分级缓存</li>
+<li>避免使用 <code>select *</code> 进行查询</li>
+<li>分离业务网络和服务器网络</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>大表<ul>
+<li>什么样的表可以称之为大表<ul>
+<li>记录行数巨大，单表超过千万行</li>
+<li>表数据文件巨大，表数据文件超过 10 G</li>
+</ul>
+</li>
+<li>大表对查询的影响<ul>
+<li>慢查询：很难在一定的时间内过滤出所需要的数据<ul>
+<li>区分度低的数据在查询的时候会产生大量的磁盘 IO，会降低磁盘的效率，导致查询效率低下,出现大量的慢查询。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>大表对 DDL 操作的影响<ul>
+<li>建立索引需要很长的时间<ul>
+<li>MySQL 版本 &lt; 5.5，建立索引会锁表</li>
+<li>MySQL 版本 &gt;= 5.5，虽然不会锁表但会引起主从延迟</li>
+</ul>
+</li>
+<li>修改表结构需要长时间锁表<ul>
+<li>会造成长时间的主从延迟</li>
+<li>影响正常的数据操作</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>解决方案<ul>
+<li>分库分表，把一张大表分成多个小表<ul>
+<li>难点<ul>
+<li>分表主键的选择</li>
+<li>分表后跨分区数据的查询和统计</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>大表的历史数据归档（减少对前后端业务的影响）<ul>
+<li>难点<ul>
+<li>归档时间点的选择</li>
+<li>如何进行归档操作</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>大事务<ul>
+<li>事务的概念<ul>
+<li>事务是数据库系统区别于其它一切文件系统的重要特性之一</li>
+<li>事务是一组具有原子性的 SQL 语句，或是一个独立的工作单元</li>
+</ul>
+</li>
+<li>事务的特性<ul>
+<li>原子性<ul>
+<li>一个事务必须被视为一个不可分割的最小工作单元，整个事务中的所有操作要么全部提交成功，要么全部失败，对于一个事务来说，不可能只执行其中的一部分操作。</li>
+</ul>
+</li>
+<li>一致性<ul>
+<li>一致性是指事务将数据库从一种一致性状态转换到另外一种一致性状态。在事务开始之前和事务结束后，数据库中的数据完整性没有被破坏。</li>
+</ul>
+</li>
+<li>隔离性<ul>
+<li>隔离性要求一个事务对数据库中数据的修改，在未提交完成前对于其它事务是不可见的。</li>
+<li>隔离性的类型<ul>
+<li>未提交读（Read Uncommited）</li>
+<li>已提交读（Read Commited）</li>
+<li>可重复读（Repeatable Read）</li>
+<li>可串行化（Serialization）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>持久性<ul>
+<li>一旦事务提交，则其所做的修改就会永久保存到数据库中。此时即使系统崩溃，已经提交的修改数据也不会丢失</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>什么是大事务<ul>
+<li>定义：运行时间比较长，操作的数据比较多的事务</li>
+<li>风险：<ul>
+<li>锁定太多的数据，造成大量的阻塞和锁超时</li>
+<li>回滚时所需时间比较长</li>
+<li>执行时间长，容易造成主从延迟</li>
+</ul>
+</li>
+<li>处理：<ul>
+<li>避免一次处理太多的数据</li>
+<li>移出不必要在事务中的 SELECT 操作</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="第2章-什么影响了MySQL性能"><a href="#第2章-什么影响了MySQL性能" class="headerlink" title="第2章 什么影响了MySQL性能"></a>第2章 什么影响了MySQL性能</h2><h2 id="第3章-MySQL基准测试"><a href="#第3章-MySQL基准测试" class="headerlink" title="第3章 MySQL基准测试"></a>第3章 MySQL基准测试</h2><h2 id="第4章-MySQL数据库结构优化"><a href="#第4章-MySQL数据库结构优化" class="headerlink" title="第4章 MySQL数据库结构优化"></a>第4章 MySQL数据库结构优化</h2><h2 id="第5章-MySQL高可用架构设计"><a href="#第5章-MySQL高可用架构设计" class="headerlink" title="第5章 MySQL高可用架构设计"></a>第5章 MySQL高可用架构设计</h2><h2 id="第6章-数据库索引优化"><a href="#第6章-数据库索引优化" class="headerlink" title="第6章 数据库索引优化"></a>第6章 数据库索引优化</h2><h2 id="第7章-SQL查询优化"><a href="#第7章-SQL查询优化" class="headerlink" title="第7章 SQL查询优化"></a>第7章 SQL查询优化</h2><h2 id="第8章-数据库的分库分表"><a href="#第8章-数据库的分库分表" class="headerlink" title="第8章 数据库的分库分表"></a>第8章 数据库的分库分表</h2><h2 id="第9章-数据库监控"><a href="#第9章-数据库监控" class="headerlink" title="第9章 数据库监控"></a>第9章 数据库监控</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2016/10/20/打造扛得住的-MySQL-数据库架构/" data-id="ciybbgq8w004z9g4becejct64" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-MySQL-性能优化" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/10/13/MySQL-性能优化/" class="article-date">
@@ -246,7 +439,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/13/MySQL-性能优化/" data-id="ciyay6szn001gl44bxtt881gj" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/13/MySQL-性能优化/" data-id="ciybbgq6c00109g4bkm9ffzdj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -500,7 +693,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之条件判断语句/" data-id="ciyay6sy30000l44bjd8nz31x" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之条件判断语句/" data-id="ciybbgq5d00019g4bjr2qev1x" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -614,7 +807,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之运算符/" data-id="ciyay6syo000al44bc1s4up39" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之运算符/" data-id="ciybbgq5k00059g4bows88bky" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -802,7 +995,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之变量/" data-id="ciyay6syf0004l44bfpisivmf" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之变量/" data-id="ciybbgq5800009g4b2ixt8whr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -847,7 +1040,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/03/Linux-Shell-实战/" data-id="ciyay6syg0005l44b13i4jtxb" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/03/Linux-Shell-实战/" data-id="ciybbgq5o00069g4bx748f6ts" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1006,7 +1199,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/30/Linux-权限管理/" data-id="ciyay6syy000il44b5l4oy0mw" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/30/Linux-权限管理/" data-id="ciybbgq62000l9g4btuvfvc9n" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1245,7 +1438,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/27/Linux-软件安装/" data-id="ciyay6sz8000zl44bhrzzlyv2" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/27/Linux-软件安装/" data-id="ciybbgq66000u9g4bs6yoa0z7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1498,7 +1691,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/26/Linux-定时任务/" data-id="ciyay6syz000ll44byzmgtb8b" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/26/Linux-定时任务/" data-id="ciybbgq5x000d9g4bnpb9i9dc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1879,176 +2072,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/24/Linux-系统管理/" data-id="ciyay6sz0000ol44bnszgc8b9" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Linux-服务管理" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/23/Linux-服务管理/" class="article-date">
-  <time datetime="2016-09-23T12:26:20.000Z" itemprop="datePublished">2016-09-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/23/Linux-服务管理/">Linux 服务管理</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Linux-服务管理"><a href="#Linux-服务管理" class="headerlink" title="Linux 服务管理"></a>Linux 服务管理</h2><h3 id="简介与分类"><a href="#简介与分类" class="headerlink" title="简介与分类"></a>简介与分类</h3><ul>
-<li><h4 id="系统的运行级别"><a href="#系统的运行级别" class="headerlink" title="系统的运行级别"></a>系统的运行级别</h4><ul>
-<li>查看运行级别命令：<code>runlevel</code></li>
-<li>修改运行级别命令：<code>init 运行级别</code></li>
-<li>系统开机进入级别：<code>vim /etc/inittab</code> ~ <code>id:3initdefault:</code></li>
-</ul>
-</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>运行级别</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>关机</td>
-</tr>
-<tr>
-<td>1</td>
-<td>单用户模式，主要用于系统修复</td>
-</tr>
-<tr>
-<td>2</td>
-<td>不完全的命令行模式，不含 NFS 服务</td>
-</tr>
-<tr>
-<td>3</td>
-<td>完全的命令行模式，就是标准字符界面</td>
-</tr>
-<tr>
-<td>4</td>
-<td>系统保留</td>
-</tr>
-<tr>
-<td>5</td>
-<td>图形模式</td>
-</tr>
-<tr>
-<td>6</td>
-<td>重启动</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><h4 id="服务的分类"><a href="#服务的分类" class="headerlink" title="服务的分类"></a>服务的分类</h4><ul>
-<li>Linux 服务<ul>
-<li>PRM 包默认安装的服务<ul>
-<li>独立的服务<ul>
-<li>默认配置文件位置<ul>
-<li>/etc/init.d/ 启动脚本位置</li>
-<li>/etc/sysconfig/ 初始化环境配置文件位置</li>
-<li>/etc/ 配置文件位置</li>
-<li>/etc/xinetd.conf xinetd 配置文件</li>
-<li>/etc/xinetd.d/ 基于 xineted 服务的启动脚本</li>
-<li>/var/lib/ 服务产生的数据放在这里</li>
-<li>/var/log/ 日志</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>基于 xinetd 服务</li>
-</ul>
-</li>
-<li>源码包安装的服务<ul>
-<li>源码包安装位置，一般是 <code>/usr/local</code> 下</li>
-</ul>
-</li>
-<li>PRM 包安装和源码包安装的区别：两者服务安装的位置不同</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><h4 id="服务与端口"><a href="#服务与端口" class="headerlink" title="服务与端口"></a>服务与端口</h4><ul>
-<li>概念：如果把 IP 地址比作一间房子，端口就是出入这间房子的门。真正的房子只有几个门，但是一个 IP 地址的端口可以有 65536 个</li>
-<li>服务与端口的对应：<code>cat /etc/services</code></li>
-<li>查询系统中开启的服务：<code>netstat [选项]</code><ul>
-<li>-t 列出 TCP 数据</li>
-<li>-u 列出 UDP 数据</li>
-<li>-l 列出正在监听的网络服务（不包含已经连接的网络服务）</li>
-<li>-n 用端口号来显示服务，而不是用服务名</li>
-<li>-p 列出该服务的进程 ID</li>
-</ul>
-</li>
-<li>chkconfig 和 netstat 的区别<ul>
-<li><code>chkconfig</code> 查看自启动命令</li>
-<li><code>netstat</code> 查看启动命令</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><h4 id="服务启动与自启动"><a href="#服务启动与自启动" class="headerlink" title="服务启动与自启动"></a>服务启动与自启动</h4><ul>
-<li>独立服务的自启动<ul>
-<li><code>ntsysv</code> 命令图形界面管理自启动</li>
-<li><code>/etc/rc.d/rc.local</code> 文件修改管理自启动</li>
-<li><code>chkconfig --list</code> 查看服务自启动状态，可以看到所有 RPM 包安装的服务</li>
-<li><code>chkconfig [--level 运行级别] [独立服务名] [on|off]</code> 修改服务自启动状态</li>
-</ul>
-</li>
-<li>独立服务的启动<ul>
-<li><code>/etc/init.d/独立服务名 start、stop、status、restart</code></li>
-<li><code>service 独立服务名 start、stop、status、restart</code></li>
-</ul>
-</li>
-<li>源码包安装服务的启动<ul>
-<li>使用绝对路径，调用启动脚本来启动。不同的源码包的启动脚本不同。可以查看源码包的安装说明，查看启动脚本的方法。</li>
-<li>用法：<code>/usr/local/apache2/bin/apachectl start</code></li>
-</ul>
-</li>
-<li>源码包服务的自启动<ul>
-<li><code>vi /etc/rc.d/rc.local</code> 加入 <code>/usr/local/apache2/bin/apachectl start</code></li>
-</ul>
-</li>
-<li>源码包的 Apache 服务能被 Service 命令管理启动<ul>
-<li><code>ln -s /usr/local/apache2/bin/apachectl /etc/init.d/apache</code></li>
-</ul>
-</li>
-<li>源码包的 Apache 服务能被 chkconfig 与 ntsysv 命令管理自启动<ul>
-<li><code>vi /etc/init.d/apache</code> 加入 <code># chkconfig:35 86 76</code> 和 <code>description:source package apache</code></li>
-<li><code>chkconfig --add apache</code> 把源码包 apache 加入 chkconfig 命令</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/23/Linux-服务管理/" data-id="ciyay6syk0006l44bywzgcioi" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/24/Linux-系统管理/" data-id="ciybbgq63000o9g4bvb501xuq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -2093,7 +2117,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 18px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 16px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 16px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 12px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Yii/" style="font-size: 14px;">Yii</a>
+      <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 18.33px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 16.67px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.67px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Yii/" style="font-size: 13.33px;">Yii</a>
     </div>
   </div>
 
@@ -2115,6 +2139,10 @@
       <ul>
         
           <li>
+            <a href="/2017/01/24/PHP-Codebook-九/">PHP Codebook(九)</a>
+          </li>
+        
+          <li>
             <a href="/2017/01/24/PHP-Codebook-六/">PHP Codebook(六)</a>
           </li>
         
@@ -2128,10 +2156,6 @@
         
           <li>
             <a href="/2017/01/22/PHP-Codebook-一/">PHP Codebook(一)</a>
-          </li>
-        
-          <li>
-            <a href="/2017/01/19/使用-Laravel-与-Vue-js-进行微信开发（四）/">使用 Laravel 与 Vue.js 进行微信开发（四）</a>
           </li>
         
       </ul>

@@ -65,6 +65,58 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-PHP-Codebook-九" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/24/PHP-Codebook-九/" class="article-date">
+  <time datetime="2017-01-24T03:15:01.000Z" itemprop="datePublished">2017-01-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/24/PHP-Codebook-九/">PHP Codebook(九)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="9-1-处理表单输入"><a href="#9-1-处理表单输入" class="headerlink" title="9.1 处理表单输入"></a>9.1 处理表单输入</h2><h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>希望使用一个 HTML 页面提交表单，然后在同一个页面中处理这个表单中输入的数据</p>
+<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><p>使用 $_SERVER[‘REQUEST_METHOD’] 变量来确定请求是用 get 还是 post 方法提交的。</p>
+<h2 id="9-2-验证表单输入：毕必填域"><a href="#9-2-验证表单输入：毕必填域" class="headerlink" title="9.2 验证表单输入：毕必填域"></a>9.2 验证表单输入：毕必填域</h2><h4 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h4><p>希望确保必须为一个表单元素提供一个值。例如，希望保证一个文本框不为空</p>
+<h4 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">if</span> (!(filter_has_var(INPUT_GET, <span class="string">'flavor'</span>)</div><div class="line">    &amp;&amp; (strlen(filter_input(INPUT_GET, <span class="string">'flavor'</span>))))</div><div class="line">) &#123;</div><div class="line">    <span class="keyword">print</span> <span class="string">"You must enter your favorite ice cream flavor.\n"</span>;</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">echo</span> $_GET[<span class="string">'flavor'</span>];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">if</span> ((filter_has_var(INPUT_GET, <span class="string">'color'</span>))</div><div class="line">    &amp;&amp; (strlen(filter_input(INPUT_GET, <span class="string">'color'</span>, FILTER_SANITIZE_STRING)) &lt;= <span class="number">5</span>)</div><div class="line">) &#123;</div><div class="line">    <span class="keyword">print</span> <span class="string">"Color must be more than 5 characters."</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (!(filter_has_var(INPUT_GET, <span class="string">'choices'</span>))</div><div class="line">    &amp;&amp; filter_input(INPUT_GET, <span class="string">'choices'</span>, FILTER_DEFAULT, FILTER_REQUIRE_ARRAY)</div><div class="line">) &#123;</div><div class="line">    <span class="keyword">print</span> <span class="string">"You must select some choices.\n"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="9-3-验证表单输入：数字"><a href="#9-3-验证表单输入：数字" class="headerlink" title="9.3 验证表单输入：数字"></a>9.3 验证表单输入：数字</h2><h4 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h4><p>希望确保在一个表单输入框中输入了一个数。</p>
+<h4 id="实现-2"><a href="#实现-2" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$age = filter_input(INPUT_GET, <span class="string">'age'</span>, FILTER_VALIDATE_INT);</div><div class="line"><span class="keyword">if</span> ($age === <span class="keyword">false</span>) &#123;</div><div class="line">    <span class="keyword">print</span> <span class="string">"Submitted age is invalid."</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$price = filter_input(INPUT_GET, <span class="string">'price'</span>, FILTER_VALIDATE_FLOAT);</div><div class="line"><span class="keyword">if</span> ($price === <span class="keyword">false</span>) &#123;</div><div class="line">    <span class="keyword">print</span> <span class="string">"Submitted price is invalid."</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="9-4-验证表单输入：email-地址"><a href="#9-4-验证表单输入：email-地址" class="headerlink" title="9.4 验证表单输入：email 地址"></a>9.4 验证表单输入：email 地址</h2><h4 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h4><p>希望知道用户提供的一个 email 地址是否合法</p>
+<h4 id="实现-3"><a href="#实现-3" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$email = filter_input(INPUT_GET, <span class="string">'email'</span>, FILTER_VALIDATE_EMAIL);</div><div class="line"><span class="keyword">if</span> ($email === <span class="keyword">false</span>) &#123;</div><div class="line">    <span class="keyword">print</span> <span class="string">"Submitted email is invalid."</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="9-16-处理变量名中包含点号的远程变量"><a href="#9-16-处理变量名中包含点号的远程变量" class="headerlink" title="9.16 处理变量名中包含点号的远程变量"></a>9.16 处理变量名中包含点号的远程变量</h2><h4 id="问题-4"><a href="#问题-4" class="headerlink" title="问题"></a>问题</h4><p>希望处理一个变量，变量名中有一个点号，不过提交表单时，无法在 $_GET 或者 $_POST 中找到这个变量。</p>
+<h4 id="实现-4"><a href="#实现-4" class="headerlink" title="实现"></a>实现</h4><p>将变量名中的点号替换为一个下划线。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-九/" data-id="ciybbgq6f00159g4b2wjpfxej" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-PHP-Codebook-六" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/01/24/PHP-Codebook-六/" class="article-date">
@@ -107,7 +159,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-六/" data-id="ciyay6szl001dl44b89lzdgug" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-六/" data-id="ciybbgq6k001g9g4bw6ft8x3a" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -187,7 +239,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-四/" data-id="ciyay6szi001al44bguiutte8" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-四/" data-id="ciybbgq6o001m9g4b0bct0qh1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -245,7 +297,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-二/" data-id="ciyay6szg0015l44bg9scnszb" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-二/" data-id="ciybbgq6l001i9g4b664r7irb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -309,7 +361,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-一/" data-id="ciyay6sza0012l44bhcng3xvk" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-一/" data-id="ciybbgq6g00189g4bwljylbel" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -352,7 +404,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/19/使用-Laravel-与-Vue-js-进行微信开发（四）/" data-id="ciyay6t0h002ol44bt625fkq9" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/19/使用-Laravel-与-Vue-js-进行微信开发（四）/" data-id="ciybbgq7d002n9g4b1pjp6h2q" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -397,7 +449,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（三）/" data-id="ciyay6t09002el44bjcai3okm" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（三）/" data-id="ciybbgq79002g9g4bvksn8djd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -449,7 +501,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（二）/" data-id="ciyay6t0b002hl44bzf33z4eu" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（二）/" data-id="ciybbgq7c002k9g4bi7o6jhek" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -539,7 +591,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/15/使用-Laravel-与-Vue.js-进行微信开发（一）/" data-id="ciyay6t0j002rl44bxbc46d2j" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/15/使用-Laravel-与-Vue.js-进行微信开发（一）/" data-id="ciybbgq7e002r9g4b98hto1m2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -648,65 +700,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/12/08/学习-UML（一）/" data-id="ciyay6t1k004kl44b66tpvld6" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/12/08/学习-UML（一）/" data-id="ciybbgq8u004w9g4bkyeac3cn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UML/">UML</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Yii2-Working-with-Databases" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/12/02/Yii2-Working-with-Databases/" class="article-date">
-  <time datetime="2016-12-02T03:09:02.000Z" itemprop="datePublished">2016-12-02</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/02/Yii2-Working-with-Databases/">Yii2 Working with Databases</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Create"><a href="#Create" class="headerlink" title="Create"></a>Create</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"> <span class="comment">// 单条数据插入</span></div><div class="line">Yii::$app-&gt;db-&gt;createCommand()-&gt;insert(<span class="string">'shop_user'</span>, [</div><div class="line">    <span class="string">'userName'</span> =&gt; <span class="string">'HelloWorld'</span>,</div><div class="line">    <span class="string">'userPass'</span> =&gt; md5(<span class="number">123456</span>),</div><div class="line">    <span class="string">'userEmail'</span> =&gt; <span class="string">'hello@world.com'</span>,</div><div class="line">    <span class="string">'createdAt'</span> =&gt; time(),</div><div class="line">])-&gt;execute();</div><div class="line"></div><div class="line">$customer = <span class="keyword">new</span> Customer();</div><div class="line">$customer-&gt;name = <span class="string">'Ann'</span>;</div><div class="line">$customer-&gt;email = <span class="string">'AnnEason@qq.com'</span>;</div><div class="line">$customer-&gt;save();</div><div class="line"></div><div class="line"><span class="comment">// 批量数据插入</span></div><div class="line">Yii::$app-&gt;db-&gt;createCommand()-&gt;batchInsert(<span class="string">'shop_user'</span>,</div><div class="line">    [<span class="string">'userName'</span>, <span class="string">'userPass'</span>, <span class="string">'userEmail'</span>, <span class="string">'createdAt'</span>],</div><div class="line">    [</div><div class="line">        [<span class="string">'Ann'</span>, md5(<span class="number">123456</span>), <span class="string">'Ann@qq.com'</span>, time()],</div><div class="line">        [<span class="string">'Leon'</span>, md5(<span class="number">123456</span>), <span class="string">'Leon@qq.com'</span>, time()],</div><div class="line">        [<span class="string">'bitch'</span>, md5(<span class="number">123456</span>), <span class="string">'bitch@qq.com'</span>, time()],</div><div class="line">        [<span class="string">'Linda'</span>, md5(<span class="number">123456</span>), <span class="string">'Linda@qq.com'</span>, time()],</div><div class="line">    ]</div><div class="line">)-&gt;execute();</div></pre></td></tr></table></figure>
-<h2 id="Update"><a href="#Update" class="headerlink" title="Update"></a>Update</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// 数据更新方法(表名, 字段与值, 条件)</span></div><div class="line">Yii::$app-&gt;db-&gt;createCommand()-&gt;update(<span class="string">'shop_user'</span>, [<span class="string">'userName'</span> =&gt; <span class="string">'hello'</span>], <span class="string">'userId = 6'</span>)-&gt;execute();</div><div class="line"></div><div class="line">$customer = Customer::findOne(<span class="number">123</span>);</div><div class="line">$customer-&gt;email = <span class="string">'AnnEason@qq.com'</span>;</div><div class="line">$customer-&gt;save();</div><div class="line"></div><div class="line">$values = [</div><div class="line">	<span class="string">'name'</span> =&gt; <span class="string">'Ann'</span>,</div><div class="line">	<span class="string">'email'</span> =&gt; <span class="string">'Ann@qq.com'</span></div><div class="line">];</div><div class="line"></div><div class="line">$customer = <span class="keyword">new</span> Customer();</div><div class="line">$customer-&gt;attributes = $values;</div><div class="line">$customer-&gt;save();</div><div class="line"></div><div class="line">Customer::updateAll([<span class="string">'status'</span> =&gt; Customer::STATUS_ACTIVE],[<span class="string">'like'</span>,<span class="string">'email'</span>,<span class="string">'@example.com'</span>]);</div></pre></td></tr></table></figure>
-<h2 id="Retrieve"><a href="#Retrieve" class="headerlink" title="Retrieve"></a>Retrieve</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// 存在数据返回二维数组,没有数据返回空数组</span></div><div class="line">$orders = Yii::$app-&gt;db-&gt;createCommand(<span class="string">"select * from z_order order by id desc limit 100 ;"</span>)-&gt;queryAll();</div><div class="line">$rows = (<span class="keyword">new</span> \yii\db\Query())-&gt;select([<span class="string">'id'</span>,<span class="string">'email'</span>])-&gt;from(<span class="string">'user'</span>) -&gt;all();</div><div class="line">$models = Model::find()-&gt;where([<span class="string">'status'</span> =&gt; Model::STATUS])-&gt;all();</div><div class="line"></div><div class="line"><span class="comment">// 存在数据返回一维数组,没有数据返回 false</span></div><div class="line">$order = Yii::$app-&gt;db-&gt;createCommand(<span class="string">"select * from z_order where id = 802478;"</span>)-&gt;queryOne();</div><div class="line">$row = (<span class="keyword">new</span> \yii\db\Query())-&gt;from(<span class="string">'user'</span>)-&gt;where([<span class="string">'like'</span>,<span class="string">'username'</span>,<span class="string">'test'</span>])-&gt;one();</div><div class="line">$model = Model::find()-&gt;where([<span class="string">'id'</span>=&gt;<span class="number">1</span>])-&gt;one();</div><div class="line"></div><div class="line"><span class="comment">// 存在数据返回一维数组,没有数据返回空数组</span></div><div class="line">$orderNumbers = Yii::$app-&gt;db-&gt;createCommand(<span class="string">"select orderno from z_order order by id desc limit 100"</span>)</div><div class="line">-&gt;queryColumn();</div><div class="line">$columns = (<span class="keyword">new</span> \yii\db\Query())-&gt;select(<span class="string">'id'</span>)-&gt;from(<span class="string">'user'</span>)-&gt;column()</div><div class="line"></div><div class="line"><span class="comment">// 存在数据返回标量数值,没有数据返回 false</span></div><div class="line">$orderCount = Yii::$app-&gt;db-&gt;createCommand(<span class="string">"select count(orderno) from z_order"</span>)-&gt;queryScalar();</div><div class="line">$count = (<span class="keyword">new</span> \yii\db\Query())-&gt;from(<span class="string">'user'</span>)-&gt;where([<span class="string">'like'</span>,<span class="string">'username'</span>,<span class="string">'test'</span>])-&gt;count();</div><div class="line">$modelCount = Model::find()-&gt;where([<span class="string">'status'</span>=&gt;<span class="number">1</span>])-&gt;count();</div></pre></td></tr></table></figure>
-<h2 id="Delete"><a href="#Delete" class="headerlink" title="Delete"></a>Delete</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// 数据删除方法(表名，条件)</span></div><div class="line">Yii::$app-&gt;db-&gt;createCommand()-&gt;delete(<span class="string">'shop_user'</span>, <span class="string">'userName = "HelloWorld"'</span>)-&gt;execute();</div><div class="line"></div><div class="line">$customer = Customer::findOne(<span class="number">123</span>);</div><div class="line">$customer-&gt;delete();</div><div class="line"></div><div class="line">Customer::deleteAll([<span class="string">'status'</span> =&gt; Customer::STATUS_INACTIVE]);</div></pre></td></tr></table></figure>
-<h2 id="Where"><a href="#Where" class="headerlink" title="Where"></a>Where</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// String Format</span></div><div class="line">$query-&gt;where(<span class="string">'status = 1'</span>);</div><div class="line">$query-&gt;where(<span class="string">'status = :status'</span>, [<span class="string">':status'</span> =&gt; $status]);</div><div class="line">$query-&gt;where(<span class="string">'status = :status'</span>)-&gt;addParams([<span class="string">':status'</span> =&gt; $status]);</div><div class="line"></div><div class="line"><span class="comment">// Hash Format ...WHERE (`status` = 10) AND (`type` IS NULL) AND (`id` IN (4, 8, 15))</span></div><div class="line">$query-&gt;where([</div><div class="line">    <span class="string">'status'</span> =&gt; <span class="number">10</span>,</div><div class="line">    <span class="string">'type'</span> =&gt; <span class="keyword">null</span>,</div><div class="line">    <span class="string">'id'</span> =&gt; [<span class="number">4</span>, <span class="number">8</span>, <span class="number">15</span>],</div><div class="line">]);</div><div class="line"></div><div class="line"><span class="comment">// Operator Format [operator, operand1, operand2, ...]</span></div><div class="line">$query-&gt;where([<span class="string">'and'</span>, <span class="string">'id=1'</span>, <span class="string">'id=2'</span>]);</div><div class="line">$query-&gt;where([<span class="string">'and'</span>, <span class="string">'type=1'</span>, [<span class="string">'or'</span>, <span class="string">'id=1'</span>, <span class="string">'id=2'</span>]]);</div><div class="line"></div><div class="line">$query-&gt;where([<span class="string">'between'</span>, <span class="string">'id'</span>, <span class="number">1</span>, <span class="number">10</span>]);</div><div class="line">$query-&gt;where([<span class="string">'not between'</span>, <span class="string">'id'</span>, <span class="number">1</span>, <span class="number">10</span>]);</div><div class="line"></div><div class="line">$query-&gt;where([<span class="string">'in'</span>, <span class="string">'id'</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]]);</div><div class="line">$query-&gt;where([<span class="string">'not in'</span>, <span class="string">'id'</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]]);</div><div class="line"></div><div class="line">$query-&gt;where([<span class="string">'like'</span>, <span class="string">'name'</span>, <span class="string">'hello'</span>]);</div><div class="line">$query-&gt;where([<span class="string">'like'</span>, <span class="string">'name'</span>, [<span class="string">'hello'</span>, <span class="string">'world'</span>]]);</div><div class="line"></div><div class="line">$query-&gt;where([<span class="string">'&gt;'</span>, <span class="string">'age'</span>, <span class="number">10</span>])</div><div class="line">$query-&gt;andWhere([<span class="string">'like'</span>, <span class="string">'title'</span>, <span class="string">'hello-world'</span>]);</div><div class="line">$query-&gt;orWhere([<span class="string">'like'</span>,<span class="string">'name'</span>,<span class="string">'LuisEdware'</span>]);</div><div class="line"></div><div class="line">$query-&gt;filterWhere([<span class="string">'name'</span> =&gt; $name, <span class="string">'email'</span> =&gt; $email]);</div><div class="line">$query-&gt;andFilterWhere([<span class="string">'!='</span>, <span class="string">'id'</span>, <span class="number">1</span>]);</div><div class="line">$query-&gt;orFilterWhere([<span class="string">'status'</span> =&gt; <span class="number">2</span>]);</div><div class="line"></div><div class="line">$query-&gt;andFilterCompare(<span class="string">'name'</span>, <span class="string">'John Doe'</span>);</div></pre></td></tr></table></figure>
-<h2 id="orderBy"><a href="#orderBy" class="headerlink" title="orderBy"></a>orderBy</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$query-&gt;orderBy([</div><div class="line">	<span class="string">'id'</span> =&gt; SORT_ASC,</div><div class="line">	<span class="string">'name'</span> =&gt; SORT_DESC,</div><div class="line">]);</div><div class="line"></div><div class="line">$query-&gt;orderBy(<span class="string">'id ASC, name DESC'</span>);</div><div class="line"></div><div class="line">$query-&gt;orderBy(<span class="string">'id ASC'</span>)-&gt;addOrderBy(<span class="string">'name DESC'</span>);</div></pre></td></tr></table></figure>
-<h2 id="groupBy"><a href="#groupBy" class="headerlink" title="groupBy"></a>groupBy</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$query-&gt;groupBy([<span class="string">'id'</span>,<span class="string">'status'</span>]);</div><div class="line"></div><div class="line">$query-&gt;groupBy(<span class="string">'id,status'</span>);</div><div class="line"></div><div class="line">$query-&gt;groupBy([<span class="string">'id'</span>,<span class="string">'status'</span>])-&gt;addGroupBy(<span class="string">'age'</span>);</div></pre></td></tr></table></figure>
-<h2 id="having"><a href="#having" class="headerlink" title="having"></a>having</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$query-&gt;having([<span class="string">'status'</span>=&gt;<span class="number">1</span>]);</div><div class="line"></div><div class="line">$query-&gt;having([<span class="string">'status'</span>=&gt;<span class="number">1</span>])-&gt;andHaving([<span class="string">'&gt;'</span>,<span class="string">'age'</span>,<span class="number">30</span>]);</div></pre></td></tr></table></figure>
-<h2 id="limit-and-offset"><a href="#limit-and-offset" class="headerlink" title="limit and offset"></a>limit and offset</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$query-&gt;limit(<span class="number">10</span>)-&gt;offset(<span class="number">20</span>);</div></pre></td></tr></table></figure>
-<h2 id="join"><a href="#join" class="headerlink" title="join"></a>join</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// ... LEFT JOIN `post` ON `post`.`user_id` = `user`.`id`</span></div><div class="line">$query-&gt;join(<span class="string">'LEFT JOIN'</span>,<span class="string">'post'</span>,<span class="string">'post.user_id = user.id'</span>);</div></pre></td></tr></table></figure>
-<h2 id="union"><a href="#union" class="headerlink" title="union"></a>union</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$query1 = (<span class="keyword">new</span> \yii\db\Query())</div><div class="line">	-&gt;select(<span class="string">'id,category_id AS type, name'</span>)</div><div class="line">	-&gt;from(<span class="string">'post'</span>)</div><div class="line">	-&gt;limit(<span class="number">10</span>);</div><div class="line"></div><div class="line">$query2 = (<span class="keyword">new</span> \yii\db\Query())</div><div class="line">	-&gt;select(<span class="string">'id,type,name'</span>)</div><div class="line">	-&gt;from(<span class="string">'user'</span>)</div><div class="line">	-&gt;limit(<span class="number">10</span>);</div><div class="line"></div><div class="line">$query1-&gt;union($query2);</div></pre></td></tr></table></figure>
-<h2 id="find"><a href="#find" class="headerlink" title="find"></a>find</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// SELECT * FROM customer WHERE id = 123;</span></div><div class="line">$customer = Customer::findOne(<span class="number">123</span>);</div><div class="line"></div><div class="line"><span class="comment">// SELECT * FROM customer WHERE id IN (1,2,3,4,5)</span></div><div class="line">$customers = Customer::findOne([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]);</div><div class="line"></div><div class="line">$customer = Customer::findOne([<span class="string">'id'</span>=&gt;<span class="number">123</span>, <span class="string">'status'</span>=&gt; Customer::STATUS]);</div><div class="line">$customers = Customer::findAll([<span class="string">'id'</span>=&gt;<span class="number">123</span>, <span class="string">'status'</span>=&gt; Customer::STATUS_ACTIVE]);</div></pre></td></tr></table></figure>
-<h2 id="Relations"><a href="#Relations" class="headerlink" title="Relations"></a>Relations</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Order</span> <span class="keyword">extends</span> <span class="title">ActiveRecord</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getOrderItems</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;hasMany(OrderItem::className(), [<span class="string">'order_id'</span> =&gt; <span class="string">'id'</span>]);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getItems</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;hasMany(Item::className(), [<span class="string">'id'</span> =&gt; <span class="string">'item_id'</span>])</div><div class="line">            -&gt;via(<span class="string">'orderItems'</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">$items = $order-&gt;items;</div><div class="line"></div><div class="line"></div><div class="line">$customers = Customer::find()-&gt;with(<span class="string">'orders.items'</span>)-&gt;all();</div><div class="line"><span class="comment">// no SQL executed</span></div><div class="line">$items = $customers[<span class="number">0</span>]-&gt;orders[<span class="number">0</span>]-&gt;items;</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/12/02/Yii2-Working-with-Databases/" data-id="ciyay6t020023l44bgij75c4a" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
 
     </footer>
   </div>
@@ -748,7 +745,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 18px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 16px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 16px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 12px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Yii/" style="font-size: 14px;">Yii</a>
+      <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 18.33px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 16.67px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.67px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Yii/" style="font-size: 13.33px;">Yii</a>
     </div>
   </div>
 
@@ -770,6 +767,10 @@
       <ul>
         
           <li>
+            <a href="/2017/01/24/PHP-Codebook-九/">PHP Codebook(九)</a>
+          </li>
+        
+          <li>
             <a href="/2017/01/24/PHP-Codebook-六/">PHP Codebook(六)</a>
           </li>
         
@@ -783,10 +784,6 @@
         
           <li>
             <a href="/2017/01/22/PHP-Codebook-一/">PHP Codebook(一)</a>
-          </li>
-        
-          <li>
-            <a href="/2017/01/19/使用-Laravel-与-Vue-js-进行微信开发（四）/">使用 Laravel 与 Vue.js 进行微信开发（四）</a>
           </li>
         
       </ul>
