@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="七月十五九月初七">
 <meta property="og:description" content="6.4 使用命名参数问题希望按名为函数指定参数，而不是通过函数调用时的位置来指定。
 实现1234567891011121314151617181920212223242526272829303132333435&amp;lt;?phpfunction image1($params)&amp;#123;    if (!isset($params[&apos;src&apos;])) &amp;#123;        $image[&apos;src">
-<meta property="og:updated_time" content="2017-01-24T02:01:25.000Z">
+<meta property="og:updated_time" content="2017-01-24T03:02:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP Codebook(六)">
 <meta name="twitter:description" content="6.4 使用命名参数问题希望按名为函数指定参数，而不是通过函数调用时的位置来指定。
@@ -61,7 +61,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -104,11 +104,15 @@
 <h4 id="实现-2"><a href="#实现-2" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> &amp;<span class="title">array_find_value</span><span class="params">($needle, &amp;$haystack)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">foreach</span> ($haystack <span class="keyword">as</span> $key =&gt; $value) &#123;</div><div class="line">        <span class="keyword">if</span> ($needle == $value) &#123;</div><div class="line">            <span class="keyword">return</span> $haystack[$key];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$names = [<span class="string">'Ann Eason'</span>, <span class="string">'Luis Edware'</span>, <span class="string">'Ivan Tomic'</span>, <span class="string">'RouniFul'</span>];</div><div class="line"></div><div class="line">$prince =&amp; array_find_value(<span class="string">'Ann Eason'</span>, $names);</div><div class="line">$prince = <span class="string">"梁非凡"</span>;</div><div class="line">print_r($names);</div></pre></td></tr></table></figure>
 <h2 id="6-8-返回多个值"><a href="#6-8-返回多个值" class="headerlink" title="6.8 返回多个值"></a>6.8 返回多个值</h2><h4 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h4><p>希望从函数返回多个值。</p>
 <h4 id="实现-3"><a href="#实现-3" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">array_stats</span><span class="params">($values)</span></span></div><div class="line">&#123;</div><div class="line">    $min = min($values);</div><div class="line">    $max = max($values);</div><div class="line">    $mean = array_sum($values) / count($values);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> [$min, $max, $mean];</div><div class="line">&#125;</div><div class="line"></div><div class="line">$values = range(<span class="number">1</span>, <span class="number">100</span>);</div><div class="line"><span class="keyword">list</span>($min, $max, $mean) = array_stats($values);</div><div class="line"></div><div class="line"><span class="keyword">echo</span> sprintf(<span class="string">"min is %d,max is %d,mean is %d"</span>, $min, $max, $mean);</div></pre></td></tr></table></figure>
+<h2 id="6-10-返回失败"><a href="#6-10-返回失败" class="headerlink" title="6.10 返回失败"></a>6.10 返回失败</h2><h4 id="问题-4"><a href="#问题-4" class="headerlink" title="问题"></a>问题</h4><p>希望从函数中指示失败</p>
+<h4 id="实现-4"><a href="#实现-4" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">lookup</span><span class="params">($name)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">empty</span>($name)) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$name = <span class="keyword">false</span>;</div><div class="line"><span class="keyword">if</span> (<span class="keyword">false</span> !== lookup($name)) &#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="6-11-调用可变函数"><a href="#6-11-调用可变函数" class="headerlink" title="6.11  调用可变函数"></a>6.11  调用可变函数</h2><h4 id="问题-5"><a href="#问题-5" class="headerlink" title="问题"></a>问题</h4><p>希望根据一个变量的值来调用不同的函数</p>
+<h4 id="实现-5"><a href="#实现-5" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_file</span><span class="params">($fileName)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> file_get_contents($fileName);</div><div class="line">&#125;</div><div class="line"></div><div class="line">$function = <span class="string">'get_file'</span>;</div><div class="line">$fileName = <span class="string">'graphic.png'</span>;</div><div class="line"></div><div class="line">call_user_func($function, $fileName);</div></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-六/" data-id="ciyavlwt800158n4bgz7t3yy2" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-六/" data-id="ciyay6szl001dl44b89lzdgug" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -121,7 +125,7 @@
   
   
     <a href="/2017/01/22/PHP-Codebook-四/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ouder</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">PHP Codebook(四)</div>
     </a>
   
@@ -136,7 +140,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categorieën</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -146,7 +150,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Labels</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
     </div>
@@ -165,7 +169,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archieven</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
@@ -175,7 +179,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
