@@ -65,6 +65,101 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-在-Yii-2-中使用-CodeCeption" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/14/在-Yii-2-中使用-CodeCeption/" class="article-date">
+  <time datetime="2017-02-14T06:43:55.000Z" itemprop="datePublished">2017-02-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/14/在-Yii-2-中使用-CodeCeption/">在 Yii 2 中使用 CodeCeption</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="安装-Yii2"><a href="#安装-Yii2" class="headerlink" title="安装 Yii2"></a>安装 Yii2</h2><p>使用 Composer 安装 Yii 2 高级模板项目<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo composer global require &quot;fxp/composer-asset-plugin:^1.2.0&quot;</div><div class="line">sudo composer create-project --prefer-dist yiisoft/yii2-app-advanced yii-application</div><div class="line">cd yii-application</div><div class="line">sudo composer install</div></pre></td></tr></table></figure></p>
+<p>配置 Apache 服务器<br><figure class="highlight apache"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"><span class="section">&lt;VirtualHost *:80&gt;</span></div><div class="line">   <span class="attribute"><span class="nomarkup">ServerName</span></span> frontend.dev</div><div class="line">   <span class="attribute"><span class="nomarkup">DocumentRoot</span></span> <span class="string">"/path/to/yii-application/frontend/web/"</span></div><div class="line"></div><div class="line">   <span class="section">&lt;Directory "/path/to/yii-application/frontend/web/"&gt;</span></div><div class="line">       <span class="comment"># use mod_rewrite for pretty URL support</span></div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteEngine</span></span> <span class="literal">on</span></div><div class="line">       <span class="comment"># If a directory or a file exists, use the request directly</span></div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteCond</span></span> <span class="variable">%&#123;REQUEST_FILENAME&#125;</span> !-f</div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteCond</span></span> <span class="variable">%&#123;REQUEST_FILENAME&#125;</span> !-d</div><div class="line">       <span class="comment"># Otherwise forward the request to index.php</span></div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteRule</span></span> . index.php</div><div class="line"></div><div class="line">       <span class="comment"># use index.php as index file</span></div><div class="line">       <span class="attribute">DirectoryIndex</span> index.php</div><div class="line"></div><div class="line">       <span class="comment"># ...other settings...</span></div><div class="line">       <span class="comment"># Apache 2.4</span></div><div class="line">       <span class="attribute">Require</span> <span class="literal">all</span> granted</div><div class="line"></div><div class="line">       <span class="comment">## Apache 2.2</span></div><div class="line">       <span class="comment"># Order allow,deny</span></div><div class="line">       <span class="comment"># Allow from all</span></div><div class="line">   <span class="section">&lt;/Directory&gt;</span></div><div class="line"><span class="section">&lt;/VirtualHost&gt;</span></div><div class="line"></div><div class="line"><span class="section">&lt;VirtualHost *:80&gt;</span></div><div class="line">   <span class="attribute"><span class="nomarkup">ServerName</span></span> backend.dev</div><div class="line">   <span class="attribute"><span class="nomarkup">DocumentRoot</span></span> <span class="string">"/path/to/yii-application/backend/web/"</span></div><div class="line"></div><div class="line">   <span class="section">&lt;Directory "/path/to/yii-application/backend/web/"&gt;</span></div><div class="line">       <span class="comment"># use mod_rewrite for pretty URL support</span></div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteEngine</span></span> <span class="literal">on</span></div><div class="line">       <span class="comment"># If a directory or a file exists, use the request directly</span></div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteCond</span></span> <span class="variable">%&#123;REQUEST_FILENAME&#125;</span> !-f</div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteCond</span></span> <span class="variable">%&#123;REQUEST_FILENAME&#125;</span> !-d</div><div class="line">       <span class="comment"># Otherwise forward the request to index.php</span></div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteRule</span></span> . index.php</div><div class="line"></div><div class="line">       <span class="comment"># use index.php as index file</span></div><div class="line">       <span class="attribute">DirectoryIndex</span> index.php</div><div class="line"></div><div class="line">       <span class="comment"># ...other settings...</span></div><div class="line">       <span class="comment"># Apache 2.4</span></div><div class="line">       <span class="attribute">Require</span> <span class="literal">all</span> granted</div><div class="line"></div><div class="line">       <span class="comment">## Apache 2.2</span></div><div class="line">       <span class="comment"># Order allow,deny</span></div><div class="line">       <span class="comment"># Allow from all</span></div><div class="line">   <span class="section">&lt;/Directory&gt;</span></div><div class="line"><span class="section">&lt;/VirtualHost&gt;</span></div></pre></td></tr></table></figure></p>
+<h2 id="安装-Codeception"><a href="#安装-Codeception" class="headerlink" title="安装 Codeception"></a>安装 Codeception</h2><p>在项目根目录执行以下命令安装 codeception 扩展<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo composer global require &quot;codeception/codeception=*&quot;</div><div class="line">sudo composer global require &quot;codeception/specify=*&quot;</div><div class="line">sudo composer global require &quot;codeception/verify=*&quot;</div><div class="line">sudo composer require --dev &quot;yiisoft/yii2-faker=*&quot;</div></pre></td></tr></table></figure></p>
+<p>将 codeception 命令配置进环境变量中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">vim .zshrc</div><div class="line"></div><div class="line">// 在文件 .zshrc 中添加以下代码，且保存退出</div><div class="line">alias codecept=&quot;/Users/LuisEdware/.composer/vendor/codeception/codeception/codecept&quot;</div><div class="line"></div><div class="line">source .zshrc</div></pre></td></tr></table></figure></p>
+<p>在项目中使用 codeception<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">cd frontend/</div><div class="line">sudo chmod -R 777 tests</div><div class="line">codecept build</div><div class="line">codecept run</div></pre></td></tr></table></figure></p>
+<h2 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h2><p>单元测试是针对程序模块来进行正确性检验的测试工作，可以通过单元测试来确认深藏在代码里面的某些功能仍然可用, 单元测试能消除程序单元的不可靠性。</p>
+<p>Codeception 的单元测试功能是基于 PHPUnit 之上的, 你可以照样写 PHPUnit 的测试代码, Codeception 一样能运行。</p>
+<h4 id="创建单元测试"><a href="#创建单元测试" class="headerlink" title="创建单元测试"></a>创建单元测试</h4><p>使用 Codeception 的生成器来执行以下命令生成单元测试<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd frontend</div><div class="line">codecept generate:test unit Example</div></pre></td></tr></table></figure></p>
+<p>上述命令会在 tests/unit 目录创建一个 ExampleTest 文件，代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">namespace</span> <span class="title">frontend</span>\<span class="title">tests</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExampleTest</span> <span class="keyword">extends</span> \<span class="title">Codeception</span>\<span class="title">Test</span>\<span class="title">Unit</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@var</span> \frontend\tests\UnitTester</div><div class="line">     */</div><div class="line">    <span class="keyword">protected</span> $tester;</div><div class="line"></div><div class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">_before</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">_after</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testPushAndPop</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        $stack = [];</div><div class="line">        <span class="keyword">$this</span>-&gt;assertEquals(<span class="number">0</span>, count($stack));</div><div class="line"></div><div class="line">        array_push($stack, <span class="string">'foo'</span>);</div><div class="line">        <span class="keyword">$this</span>-&gt;assertEquals(<span class="string">'foo'</span>, $stack[count($stack)<span class="number">-1</span>]);</div><div class="line">        <span class="keyword">$this</span>-&gt;assertEquals(<span class="number">1</span>, count($stack));</div><div class="line"></div><div class="line">        <span class="keyword">$this</span>-&gt;assertEquals(<span class="string">'foo'</span>, array_pop($stack));</div><div class="line">        <span class="keyword">$this</span>-&gt;assertEquals(<span class="number">0</span>, count($stack));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h6 id="测试依赖"><a href="#测试依赖" class="headerlink" title="测试依赖"></a>测试依赖</h6><p>通过 @depends 让测试方法之间进行关联依赖</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">namespace</span> <span class="title">frontend</span>\<span class="title">tests</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExampleTest</span> <span class="keyword">extends</span> \<span class="title">Codeception</span>\<span class="title">Test</span>\<span class="title">Unit</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testEmpty</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        $stack = [];</div><div class="line">        <span class="keyword">$this</span>-&gt;assertEmpty($stack);</div><div class="line"></div><div class="line">        <span class="keyword">return</span> $stack;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@depends</span> testEmpty</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testPush</span><span class="params">(array $stack)</span></span></div><div class="line">    &#123;</div><div class="line">        array_push($stack, <span class="string">'foo'</span>);</div><div class="line">        <span class="keyword">$this</span>-&gt;assertEquals(<span class="string">'foo'</span>, $stack[count($stack)<span class="number">-1</span>]);</div><div class="line">        <span class="keyword">$this</span>-&gt;assertNotEmpty($stack);</div><div class="line"></div><div class="line">        <span class="keyword">return</span> $stack;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@depends</span> testPush</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testPop</span><span class="params">(array $stack)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;assertEquals(<span class="string">'foo'</span>, array_pop($stack));</div><div class="line">        <span class="keyword">$this</span>-&gt;assertEmpty($stack);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h6 id="数据提供商"><a href="#数据提供商" class="headerlink" title="数据提供商"></a>数据提供商</h6><p>通过 @dataProvider 让测试方法迭代运行数据提供者方法的数据</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">namespace</span> <span class="title">frontend</span>\<span class="title">tests</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DataTest</span> <span class="keyword">extends</span> \<span class="title">Codeception</span>\<span class="title">Test</span>\<span class="title">Unit</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@var</span> \frontend\tests\UnitTester</div><div class="line">     */</div><div class="line">    <span class="keyword">protected</span> $tester;</div><div class="line"></div><div class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">_before</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">_after</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@dataProvider</span> additionProvider</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testAdd</span><span class="params">($a, $b, $expected)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">echo</span> $a;</div><div class="line">        <span class="keyword">echo</span> $b;</div><div class="line">        <span class="keyword">echo</span> $expected;</div><div class="line">        <span class="keyword">$this</span>-&gt;assertEquals($expected, $a + $b);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">additionProvider</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> [</div><div class="line">            [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</div><div class="line">            [<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>],</div><div class="line">            [<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>],</div><div class="line">            [<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>]</div><div class="line">        ];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h6 id="抛出异常"><a href="#抛出异常" class="headerlink" title="抛出异常"></a>抛出异常</h6><p>通过 @expectedException 或方法 <code>$this-&gt;expectException()</code> 在测试实例中抛出异常</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">namespace</span> <span class="title">frontend</span>\<span class="title">tests</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExceptionTest</span> <span class="keyword">extends</span> \<span class="title">Codeception</span>\<span class="title">Test</span>\<span class="title">Unit</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testException</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;expectException(InvalidArgumentException::class);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@expectedException</span> InvalidArgumentException</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testExceptionTow</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h6 id="断点输出"><a href="#断点输出" class="headerlink" title="断点输出"></a>断点输出</h6><p>通过方法 <code>$this-&gt;expectOutputString()</code> 生成一个预期的输出。当实际输出和预期输出不一致时，则测试不通过。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">use</span> <span class="title">PHPUnit</span>\<span class="title">Framework</span>\<span class="title">TestCase</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">OutputTest</span> <span class="keyword">extends</span> <span class="title">TestCase</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testExpectFooActualFoo</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;expectOutputString(<span class="string">'foo'</span>);</div><div class="line">        <span class="keyword">print</span> <span class="string">'foo'</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testExpectBarActualBaz</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;expectOutputString(<span class="string">'bar'</span>);</div><div class="line">        <span class="keyword">print</span> <span class="string">'baz'</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2017/02/14/在-Yii-2-中使用-CodeCeption/" data-id="ciz6nstwc004bqe4budbrlnyy" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/11/LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）/" class="article-date">
+  <time datetime="2017-02-11T08:23:06.000Z" itemprop="datePublished">2017-02-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/11/LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）/">LuisEdware 版 PHP 编程规范（遵循 PSR-1/PSR-2）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2017/02/11/LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）/" data-id="ciz6nstto000rqe4bndfv18iv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-PHP-Codebook-九" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/01/24/PHP-Codebook-九/" class="article-date">
@@ -93,7 +188,7 @@
       
         <h2 id="9-1-处理表单输入"><a href="#9-1-处理表单输入" class="headerlink" title="9.1 处理表单输入"></a>9.1 处理表单输入</h2><h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>希望使用一个 HTML 页面提交表单，然后在同一个页面中处理这个表单中输入的数据</p>
 <h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><p>使用 $_SERVER[‘REQUEST_METHOD’] 变量来确定请求是用 get 还是 post 方法提交的。</p>
-<h2 id="9-2-验证表单输入：毕必填域"><a href="#9-2-验证表单输入：毕必填域" class="headerlink" title="9.2 验证表单输入：毕必填域"></a>9.2 验证表单输入：毕必填域</h2><h4 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h4><p>希望确保必须为一个表单元素提供一个值。例如，希望保证一个文本框不为空</p>
+<h2 id="9-2-验证表单输入：必填域"><a href="#9-2-验证表单输入：必填域" class="headerlink" title="9.2 验证表单输入：必填域"></a>9.2 验证表单输入：必填域</h2><h4 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h4><p>希望确保必须为一个表单元素提供一个值。例如，希望保证一个文本框不为空</p>
 <h4 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">if</span> (!(filter_has_var(INPUT_GET, <span class="string">'flavor'</span>)</div><div class="line">    &amp;&amp; (strlen(filter_input(INPUT_GET, <span class="string">'flavor'</span>))))</div><div class="line">) &#123;</div><div class="line">    <span class="keyword">print</span> <span class="string">"You must enter your favorite ice cream flavor.\n"</span>;</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">echo</span> $_GET[<span class="string">'flavor'</span>];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">if</span> ((filter_has_var(INPUT_GET, <span class="string">'color'</span>))</div><div class="line">    &amp;&amp; (strlen(filter_input(INPUT_GET, <span class="string">'color'</span>, FILTER_SANITIZE_STRING)) &lt;= <span class="number">5</span>)</div><div class="line">) &#123;</div><div class="line">    <span class="keyword">print</span> <span class="string">"Color must be more than 5 characters."</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (!(filter_has_var(INPUT_GET, <span class="string">'choices'</span>))</div><div class="line">    &amp;&amp; filter_input(INPUT_GET, <span class="string">'choices'</span>, FILTER_DEFAULT, FILTER_REQUIRE_ARRAY)</div><div class="line">) &#123;</div><div class="line">    <span class="keyword">print</span> <span class="string">"You must select some choices.\n"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
 <h2 id="9-3-验证表单输入：数字"><a href="#9-3-验证表单输入：数字" class="headerlink" title="9.3 验证表单输入：数字"></a>9.3 验证表单输入：数字</h2><h4 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h4><p>希望确保在一个表单输入框中输入了一个数。</p>
 <h4 id="实现-2"><a href="#实现-2" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$age = filter_input(INPUT_GET, <span class="string">'age'</span>, FILTER_VALIDATE_INT);</div><div class="line"><span class="keyword">if</span> ($age === <span class="keyword">false</span>) &#123;</div><div class="line">    <span class="keyword">print</span> <span class="string">"Submitted age is invalid."</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$price = filter_input(INPUT_GET, <span class="string">'price'</span>, FILTER_VALIDATE_FLOAT);</div><div class="line"><span class="keyword">if</span> ($price === <span class="keyword">false</span>) &#123;</div><div class="line">    <span class="keyword">print</span> <span class="string">"Submitted price is invalid."</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -105,7 +200,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-九/" data-id="ciybbgq6f00159g4b2wjpfxej" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-九/" data-id="ciz6nstu8001dqe4b4rcxzpd8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -159,7 +254,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-六/" data-id="ciybbgq6k001g9g4bw6ft8x3a" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-六/" data-id="ciz6nstue001jqe4buxjmktlf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -239,7 +334,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-四/" data-id="ciybbgq6o001m9g4b0bct0qh1" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-四/" data-id="ciz6nstun001vqe4byfttfdhc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -297,7 +392,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-二/" data-id="ciybbgq6l001i9g4b664r7irb" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-二/" data-id="ciz6nstub001hqe4bl7mxqwyw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -361,7 +456,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-一/" data-id="ciybbgq6g00189g4bwljylbel" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-一/" data-id="ciz6nstu6001bqe4bml8pmv51" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -404,7 +499,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/19/使用-Laravel-与-Vue-js-进行微信开发（四）/" data-id="ciybbgq7d002n9g4b1pjp6h2q" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/19/使用-Laravel-与-Vue-js-进行微信开发（四）/" data-id="ciz6nstv4002lqe4b8kb352ck" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -449,7 +544,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（三）/" data-id="ciybbgq79002g9g4bvksn8djd" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（三）/" data-id="ciz6nstuz002eqe4bxqfmehhi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -501,209 +596,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（二）/" data-id="ciybbgq7c002k9g4bi7o6jhek" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（二）/" data-id="ciz6nstv5002oqe4bs8w7a6lw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-使用-Laravel-与-Vue.js-进行微信开发（一）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/01/15/使用-Laravel-与-Vue.js-进行微信开发（一）/" class="article-date">
-  <time datetime="2017-01-15T01:11:57.000Z" itemprop="datePublished">2017-01-15</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/15/使用-Laravel-与-Vue.js-进行微信开发（一）/">使用 Laravel 与 Vue.js 进行微信开发（一）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>本文的目标是实现与微信服务器的通信。</p>
-<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
-<li>MacOS</li>
-<li>Laravel 5.1</li>
-<li>Vue.js 2.1</li>
-<li>EasyWeChat</li>
-</ul>
-<h2 id="安装-EasyWechat"><a href="#安装-EasyWechat" class="headerlink" title="安装 EasyWechat"></a>安装 EasyWechat</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">composer require &quot;overtrue/laravel-wechat:~3.0&quot;</div></pre></td></tr></table></figure>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ul>
-<li>注册 ServiceProvider:<ul>
-<li>Overtrue\LaravelWechat\ServiceProvider::class,</li>
-</ul>
-</li>
-<li>创建配置文件<ul>
-<li>php artisan vendor:publish</li>
-</ul>
-</li>
-<li>修改 config/wechat.php<ul>
-<li>app_id：微信测试号 appID</li>
-<li>secret：微信测试号 appsecret</li>
-<li>token：自定义，要与微信测试号填写的 Token 保持一致</li>
-<li>aes_key：加密信息用的，本文采用明文的方式，暂不填写</li>
-</ul>
-</li>
-</ul>
-<h2 id="创建微信分组路由"><a href="#创建微信分组路由" class="headerlink" title="创建微信分组路由"></a>创建微信分组路由</h2><p>修改文件 app/Http/routes.php，代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Route::group([</div><div class="line">    <span class="string">'prefix'</span> =&gt; <span class="string">'wechat'</span>,</div><div class="line">    <span class="string">'namespace'</span> =&gt; <span class="string">'WeChat'</span>,</div><div class="line">    <span class="string">'middleware'</span> =&gt; [],</div><div class="line">], <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">require_once</span> <span class="keyword">__DIR__</span> . <span class="string">'/Routes/wechat.php'</span>;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>新增文件 app/Http/Routes/wechat.php，代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Route::any(<span class="string">'/request-handler'</span>, <span class="string">'WeChatServerController@requestHandler'</span>);</div></pre></td></tr></table></figure></p>
-<h2 id="关闭路由-CSRF"><a href="#关闭路由-CSRF" class="headerlink" title="关闭路由 CSRF"></a>关闭路由 CSRF</h2><p>修改文件 app/Http/Middleware/VerifyCSsrfToken.php，代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">protected</span> $except = [</div><div class="line">	<span class="string">'/wechat/request-handler'</span></div><div class="line">];</div></pre></td></tr></table></figure></p>
-<h2 id="创建控制器"><a href="#创建控制器" class="headerlink" title="创建控制器"></a>创建控制器</h2><p>新增文件 app/Http/Controllers/WeChat/WeChatServerController.php，代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>\<span class="title">WeChat</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Http</span>\<span class="title">Request</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>\<span class="title">Controller</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">EasyWeChat</span>\<span class="title">Foundation</span>\<span class="title">Application</span> <span class="title">as</span> <span class="title">WeChat</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">WeChatServerController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 处理微信的请求消息</div><div class="line">     * <span class="doctag">@return</span> string</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">requestHandler</span><span class="params">(WeChat $weChat)</span></span></div><div class="line">    &#123;</div><div class="line">        $weChat-&gt;server-&gt;setMessageHandler(<span class="function"><span class="keyword">function</span><span class="params">($message)</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">"欢迎关注 &#123;$message&#125;!"</span>;</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        <span class="keyword">return</span> $weChat-&gt;server-&gt;serve();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><ul>
-<li>配置微信公众平台测试号<ul>
-<li>接口配置信息<ul>
-<li>URL：域名/wechat</li>
-<li>Token：自定义，要与 wechat.php 文件的 token 一致</li>
-</ul>
-</li>
-<li>JS 接口安全域名<ul>
-<li>填写域名，例如 baidu.com ，不需要写 www 和 http[s]://</li>
-</ul>
-</li>
-<li>测试号二维码<ul>
-<li>添加测试用户</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>URL 和 Token 通过验证之后，关注微信公众平台测试号，并发送测试消息，成功的话，如下图：<br><img src="http://o93kt6djh.bkt.clouddn.com/yanzhengwechatmessage.jpeg" alt=""></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/15/使用-Laravel-与-Vue.js-进行微信开发（一）/" data-id="ciybbgq7e002r9g4b98hto1m2" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-学习-UML（一）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/12/08/学习-UML（一）/" class="article-date">
-  <time datetime="2016-12-08T09:27:41.000Z" itemprop="datePublished">2016-12-08</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/UML/">UML</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/08/学习-UML（一）/">学习 UML（一）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="UML-是什么"><a href="#UML-是什么" class="headerlink" title="UML 是什么"></a>UML 是什么</h2><p>UML，全称是 Unified Modeling Language，译为统一建模语言，是面向对象软件的标准化建模语言。UML 因其简单、统一的特点，而且能表达软件设计中的动态和静态信息，目前已成为可视化建模语言的工业标准。</p>
-<h2 id="UML-的种类"><a href="#UML-的种类" class="headerlink" title="UML 的种类"></a>UML 的种类</h2><p>UML 2.5 包含的图形如下，一共 14 种。</p>
-<ul>
-<li>图<ul>
-<li>结构图<ul>
-<li>类图</li>
-<li>组件图</li>
-<li>对象图</li>
-<li>扩展机制图</li>
-<li>组合结构图</li>
-<li>部署图</li>
-<li>包图</li>
-</ul>
-</li>
-<li>行为图<ul>
-<li>活动图</li>
-<li>用例图</li>
-<li>状态机图</li>
-<li>交互图<ul>
-<li>序列图</li>
-<li>通信图</li>
-<li>时间图</li>
-<li>交互概述图</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>各建模工作流可以选用的建模元素以及推荐用法如下：</p>
-<table>
-<thead>
-<tr>
-<th>工作流</th>
-<th>思考焦点</th>
-<th>可选建模元素</th>
-<th>推荐建模元素</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>业务建模</td>
-<td>组织内系统之间</td>
-<td>用例图、类图、序列图、活动图</td>
-<td>用例图、类图、序列图</td>
-</tr>
-<tr>
-<td>需求</td>
-<td>系统边界</td>
-<td>用例图、序列图、状态机图、活动图、文本</td>
-<td>用例图、文本</td>
-</tr>
-<tr>
-<td>分析</td>
-<td>系统内核心域</td>
-<td>类图、序列图、状态机图、活动图、通信图、包图</td>
-<td>类图、序列图、（状态机图）</td>
-</tr>
-<tr>
-<td>设计</td>
-<td>系统内各域之间</td>
-<td>类图、序列图、状态机图、活动图、通信图、组件图、部署图、时间图、组合结构图、包图</td>
-<td>用文本表达模型（所谓代码）</td>
-</tr>
-</tbody>
-</table>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/12/08/学习-UML（一）/" data-id="ciybbgq8u004w9g4bkyeac3cn" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UML/">UML</a></li></ul>
 
     </footer>
   </div>
@@ -754,7 +650,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
   </div>
 
@@ -767,6 +663,14 @@
       <ul>
         
           <li>
+            <a href="/2017/02/14/在-Yii-2-中使用-CodeCeption/">在 Yii 2 中使用 CodeCeption</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/11/LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）/">LuisEdware 版 PHP 编程规范（遵循 PSR-1/PSR-2）</a>
+          </li>
+        
+          <li>
             <a href="/2017/01/24/PHP-Codebook-九/">PHP Codebook(九)</a>
           </li>
         
@@ -776,14 +680,6 @@
         
           <li>
             <a href="/2017/01/22/PHP-Codebook-四/">PHP Codebook(四)</a>
-          </li>
-        
-          <li>
-            <a href="/2017/01/22/PHP-Codebook-二/">PHP Codebook(二)</a>
-          </li>
-        
-          <li>
-            <a href="/2017/01/22/PHP-Codebook-一/">PHP Codebook(一)</a>
           </li>
         
       </ul>
