@@ -108,11 +108,33 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">namespace</span> <span class="title">frontend</span>\<span class="title">tests</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExceptionTest</span> <span class="keyword">extends</span> \<span class="title">Codeception</span>\<span class="title">Test</span>\<span class="title">Unit</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testException</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;expectException(InvalidArgumentException::class);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@expectedException</span> InvalidArgumentException</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testExceptionTow</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h6 id="断点输出"><a href="#断点输出" class="headerlink" title="断点输出"></a>断点输出</h6><p>通过方法 <code>$this-&gt;expectOutputString()</code> 生成一个预期的输出。当实际输出和预期输出不一致时，则测试不通过。</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">use</span> <span class="title">PHPUnit</span>\<span class="title">Framework</span>\<span class="title">TestCase</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">OutputTest</span> <span class="keyword">extends</span> <span class="title">TestCase</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testExpectFooActualFoo</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;expectOutputString(<span class="string">'foo'</span>);</div><div class="line">        <span class="keyword">print</span> <span class="string">'foo'</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testExpectBarActualBaz</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;expectOutputString(<span class="string">'bar'</span>);</div><div class="line">        <span class="keyword">print</span> <span class="string">'baz'</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Codeception 的更多 Unit Tests 信息请参考链接：<a href="http://codeception.com/docs/05-UnitTests" target="_blank" rel="external">http://codeception.com/docs/05-UnitTests</a></p>
+<h2 id="创建接口测试"><a href="#创建接口测试" class="headerlink" title="创建接口测试"></a>创建接口测试</h2><p>创建 RESTFUL API 测试配置文件，新增文件 <code>api.suite.yml</code> 和文件夹 <code>api</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">codecept generate:suite api</div></pre></td></tr></table></figure></p>
+<p>修改配置文件 <code>api.suite.yml</code> 如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">class_name: ApiTester</div><div class="line">modules:</div><div class="line">    enabled:</div><div class="line">        - REST:</div><div class="line">            url: http://www.frontend/api/v1</div><div class="line">            depends: Yii2</div><div class="line">        - \ApiBundle\Helper\Api</div><div class="line">    config:</div><div class="line">        - Yii2</div></pre></td></tr></table></figure></p>
+<p>创建 RESTFUL API 测试文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">codecept generate:cept api CreateUser</div></pre></td></tr></table></figure></p>
+<p>修改生成文件代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">use</span> <span class="title">frontend</span>\<span class="title">tests</span>\<span class="title">ApiTester</span>;</div><div class="line"></div><div class="line"><span class="comment">// 发送 HTTP GET 请求</span></div><div class="line">$I = <span class="keyword">new</span> ApiTester($scenario);</div><div class="line">$I-&gt;wantTo(<span class="string">'I want to test RESTFUL API'</span>);</div><div class="line">$I-&gt;sendGET(<span class="string">'/api/v1/users/create'</span>);</div><div class="line">$I-&gt;seeResponseCodeIs(\Codeception\Util\HttpCode::OK);</div><div class="line">$I-&gt;seeResponseIsJson();</div><div class="line">$I-&gt;seeResponseContains(<span class="string">'&#123;"result":"ok"&#125;'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 发送 HTTP POST 请求</span></div><div class="line">$I-&gt;sendPOST(<span class="string">'/users'</span>, [<span class="string">'name'</span> =&gt; <span class="string">'davert'</span>, <span class="string">'email'</span> =&gt; <span class="string">'davert@codeception.com'</span>]);</div><div class="line">$I-&gt;seeResponseMatchesJsonType([</div><div class="line">    <span class="string">'id'</span> =&gt; <span class="string">'integer'</span>,</div><div class="line">    <span class="string">'name'</span> =&gt; <span class="string">'string'</span>,</div><div class="line">    <span class="string">'email'</span> =&gt; <span class="string">'string:email'</span>,</div><div class="line">    <span class="string">'homepage'</span> =&gt; <span class="string">'string:url|null'</span>,</div><div class="line">    <span class="string">'created_at'</span> =&gt; <span class="string">'string:date'</span>,</div><div class="line">    <span class="string">'is_active'</span> =&gt; <span class="string">'boolean'</span></div><div class="line">]);</div></pre></td></tr></table></figure></p>
+<p>常用的 REST API 如下：</p>
+<ul>
+<li>wantTo</li>
+<li>sendGET</li>
+<li>sendPUT</li>
+<li>sendPOST</li>
+<li>sendDELETE</li>
+<li>haveHttpHeader</li>
+<li>seeHttpHeader</li>
+<li>seeResponseCodeIs</li>
+<li>seeResponseContains</li>
+<li>seeResponseContainsJson</li>
+<li>seeResponseIsJson</li>
+<li>seeResponseJsonMatchesJsonPath</li>
+<li>seeResponseMatchesJsonType</li>
+</ul>
+<p>Codeception 的更多 RESTFUL API 信息请参考链接：<a href="http://codeception.com/docs/modules/REST" target="_blank" rel="external">http://codeception.com/docs/modules/REST</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/14/在-Yii-2-中使用-CodeCeption/" data-id="ciz6nstwc004bqe4budbrlnyy" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/14/在-Yii-2-中使用-CodeCeption/" data-id="ciz7saj73004hsx4bwnjb4izz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -150,7 +172,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/11/LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）/" data-id="ciz6nstto000rqe4bndfv18iv" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/11/LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）/" data-id="ciz7saj290010sx4bq6q866sv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -200,7 +222,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-九/" data-id="ciz6nstu8001dqe4b4rcxzpd8" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-九/" data-id="ciz7saj2j0015sx4b5wfsh2f9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -254,7 +276,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-六/" data-id="ciz6nstue001jqe4buxjmktlf" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-六/" data-id="ciz7saj3b001osx4bp5vwqbx9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -334,7 +356,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-四/" data-id="ciz6nstun001vqe4byfttfdhc" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-四/" data-id="ciz7saj3n001usx4beblzaahd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -392,7 +414,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-二/" data-id="ciz6nstub001hqe4bl7mxqwyw" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-二/" data-id="ciz7saj36001jsx4bl8jzg9h7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -456,7 +478,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-一/" data-id="ciz6nstu6001bqe4bml8pmv51" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-一/" data-id="ciz7saj2z001gsx4bn4wxga1v" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -499,7 +521,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/19/使用-Laravel-与-Vue-js-进行微信开发（四）/" data-id="ciz6nstv4002lqe4b8kb352ck" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/19/使用-Laravel-与-Vue-js-进行微信开发（四）/" data-id="ciz7saj4s002rsx4bllpdh1jt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -544,7 +566,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（三）/" data-id="ciz6nstuz002eqe4bxqfmehhi" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（三）/" data-id="ciz7saj4i002hsx4bspq44y0k" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -596,7 +618,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（二）/" data-id="ciz6nstv5002oqe4bs8w7a6lw" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（二）/" data-id="ciz7saj4j002ksx4bh7i9nelu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
