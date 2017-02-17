@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://luisedware.github.io/2017/02/14/在-Yii-2-中使用-CodeCeption/index.html">
 <meta property="og:site_name" content="七月十五九月初七">
 <meta property="og:description" content="安装 Yii2使用 Composer 安装 Yii 2 高级模板项目1234sudo composer global require &amp;quot;fxp/composer-asset-plugin:^1.2.0&amp;quot;sudo composer create-project --prefer-dist yiisoft/yii2-app-advanced yii-applicationcd yi">
-<meta property="og:updated_time" content="2017-02-17T07:21:25.000Z">
+<meta property="og:updated_time" content="2017-02-17T08:53:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在 Yii 2 中使用 CodeCeption">
 <meta name="twitter:description" content="安装 Yii2使用 Composer 安装 Yii 2 高级模板项目1234sudo composer global require &amp;quot;fxp/composer-asset-plugin:^1.2.0&amp;quot;sudo composer create-project --prefer-dist yiisoft/yii2-app-advanced yii-applicationcd yi">
@@ -58,7 +58,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -116,35 +116,51 @@
 <li><a href="https://github.com/Codeception/Codeception/blob/2.0/docs/modules/Yii2.md" target="_blank" rel="external">https://github.com/Codeception/Codeception/blob/2.0/docs/modules/Yii2.md</a></li>
 </ul>
 <h2 id="创建接口测试（RESTFUL-API-TEST）"><a href="#创建接口测试（RESTFUL-API-TEST）" class="headerlink" title="创建接口测试（RESTFUL API TEST）"></a>创建接口测试（RESTFUL API TEST）</h2><p>创建 RESTFUL API 测试配置文件，新增文件 <code>api.suite.yml</code> 和文件夹 <code>api</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">codecept generate:suite api</div></pre></td></tr></table></figure></p>
-<p>修改配置文件 <code>api.suite.yml</code> 如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">class_name: ApiTester</div><div class="line">modules:</div><div class="line">    enabled:</div><div class="line">        - REST:</div><div class="line">            url: http://www.frontend/api/v1</div><div class="line">            depends: Yii2</div><div class="line">        - \ApiBundle\Helper\Api</div><div class="line">    config:</div><div class="line">        - Yii2</div></pre></td></tr></table></figure></p>
+<p>修改配置文件 <code>api.suite.yml</code> 如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">class_name: ApiTester</div><div class="line">modules:</div><div class="line">    enabled:</div><div class="line">        - REST:</div><div class="line">            url: www.frontend.dev/index.php?r=</div><div class="line">            depends: Yii2</div><div class="line">        - \ApiBundle\Helper\Api</div><div class="line">    config:</div><div class="line">        - Yii2</div></pre></td></tr></table></figure></p>
 <p>创建 RESTFUL API 测试文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">codecept generate:cept api CreateUser</div></pre></td></tr></table></figure></p>
 <p>修改生成文件代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">use</span> <span class="title">frontend</span>\<span class="title">tests</span>\<span class="title">ApiTester</span>;</div><div class="line"></div><div class="line"><span class="comment">// 发送 HTTP GET 请求</span></div><div class="line">$I = <span class="keyword">new</span> ApiTester($scenario);</div><div class="line">$I-&gt;wantTo(<span class="string">'I want to test RESTFUL API'</span>);</div><div class="line">$I-&gt;sendGET(<span class="string">'/api/v1/users/create'</span>);</div><div class="line">$I-&gt;seeResponseCodeIs(\Codeception\Util\HttpCode::OK);</div><div class="line">$I-&gt;seeResponseIsJson();</div><div class="line">$I-&gt;seeResponseContains(<span class="string">'&#123;"result":"ok"&#125;'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 发送 HTTP POST 请求</span></div><div class="line">$I-&gt;sendPOST(<span class="string">'/users'</span>, [<span class="string">'name'</span> =&gt; <span class="string">'davert'</span>, <span class="string">'email'</span> =&gt; <span class="string">'davert@codeception.com'</span>]);</div><div class="line"></div><div class="line"><span class="comment">// 验证 JSON 响应数据类型</span></div><div class="line">$I-&gt;seeResponseMatchesJsonType([</div><div class="line">    <span class="string">'id'</span> =&gt; <span class="string">'integer'</span>,</div><div class="line">    <span class="string">'name'</span> =&gt; <span class="string">'string'</span>,</div><div class="line">    <span class="string">'email'</span> =&gt; <span class="string">'string:email'</span>,</div><div class="line">    <span class="string">'homepage'</span> =&gt; <span class="string">'string:url|null'</span>,</div><div class="line">    <span class="string">'created_at'</span> =&gt; <span class="string">'string:date'</span>,</div><div class="line">    <span class="string">'is_active'</span> =&gt; <span class="string">'boolean'</span></div><div class="line">]);</div></pre></td></tr></table></figure></p>
 <p>常用的 REST API 如下：</p>
 <ul>
-<li>wantTo</li>
-<li>sendGET</li>
-<li>sendPUT</li>
-<li>sendPOST</li>
-<li>sendDELETE</li>
-<li>haveHttpHeader</li>
-<li>seeHttpHeader</li>
-<li>seeResponseCodeIs</li>
-<li>seeResponseContains</li>
-<li>seeResponseContainsJson</li>
-<li>seeResponseIsJson</li>
-<li>seeResponseJsonMatchesJsonPath</li>
-<li>seeResponseMatchesJsonType</li>
+<li>wantTo()：配置测试标题</li>
+<li>sendGET()：发送 HTTP GET 请求</li>
+<li>sendPUT()：发送 HTTP PUT 请求</li>
+<li>sendPOST()：发送 HTTP POST 请求</li>
+<li>sendDELETE()：发送 HTTP DELETE 请求</li>
+<li>haveHttpHeader()：设置 HTTP 请求头</li>
+<li>seeHttpHeader()：检查 HTTP 请求头</li>
+<li>seeResponseCodeIs()：检查响应状态码</li>
+<li>seeResponseContains()：检查响应内容</li>
+<li>seeResponseContainsJson()：检查响应数据类型是否为 JSON 和核对响应内容</li>
+<li>seeResponseIsJson()：检查响应是否返回 JSON 数据</li>
+<li>seeResponseJsonMatchesJsonPath()：使用 JSON 数据去检查响应内容</li>
+<li>seeResponseMatchesJsonType()：检查响应数据的数据类型</li>
 </ul>
 <p>Codeception 的更多 RESTFUL API 信息请参考链接：</p>
 <ul>
 <li><a href="https://github.com/Codeception/Codeception/blob/2.0/docs/modules/REST.md" target="_blank" rel="external">https://github.com/Codeception/Codeception/blob/2.0/docs/modules/REST.md</a></li>
 <li><a href="https://github.com/Codeception/Codeception/blob/2.0/docs/10-WebServices.md" target="_blank" rel="external">https://github.com/Codeception/Codeception/blob/2.0/docs/10-WebServices.md</a></li>
 </ul>
+<h2 id="数据库测试（DB-TEST）"><a href="#数据库测试（DB-TEST）" class="headerlink" title="数据库测试（DB TEST）"></a>数据库测试（DB TEST）</h2><p>常用的 DB TEST API 如下：</p>
+<ul>
+<li>seeInDatabase()</li>
+<li>dontSeeInDatabase()</li>
+<li>haveInDatabase()</li>
+<li>grabFromDatabase()</li>
+</ul>
+<p>示例代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// 检查 User 表是否存在 'username' 为 'Davert', 'email' 为 'davert@mail.com' 的数据，存在则报错</span></div><div class="line">$I-&gt;dontSeeInDatabase(<span class="string">'user'</span>, [<span class="string">'username'</span> =&gt; <span class="string">'Davert'</span>, <span class="string">'email'</span> =&gt; <span class="string">'davert@mail.com'</span>]);</div><div class="line"></div><div class="line"><span class="comment">// 检查 User 表是否存在 'username' 为 'okirlin', 'email' 为 'brady.renner@rutherford.com' 的数据，不存在则报错</span></div><div class="line">$I-&gt;seeInDatabase(<span class="string">'user'</span>, [<span class="string">'username'</span> =&gt; <span class="string">'okirlin'</span>, <span class="string">'email'</span> =&gt; <span class="string">'brady.renner@rutherford.com'</span>]);</div><div class="line"></div><div class="line"><span class="comment">// 检查 User 表是否能够新增以下数据，无法新增则报错</span></div><div class="line">$I-&gt;haveInDatabase(<span class="string">'user'</span>,</div><div class="line">  [</div><div class="line">    <span class="string">'username'</span> =&gt; <span class="string">'miles'</span>,</div><div class="line">    <span class="string">'email'</span> =&gt; <span class="string">'miles@davis.com'</span>,</div><div class="line">    <span class="string">'auth_key'</span> =&gt; <span class="string">'EdKfXrx88weFMV0vIxuTMWKgfK2tS321'</span>,</div><div class="line">    <span class="string">'password_hash'</span> =&gt; <span class="string">'$2y$13$g5nv41Px7VBqhS3hVsVN2.MKfgT3jFdkXEsMC4rQJLfaMa7VaJqL2'</span>,</div><div class="line">    <span class="string">'password_reset_token'</span> =&gt; <span class="string">'4BSNyiZNAuxjs5Mty990c47sVrgllIi_1487317115'</span>,</div><div class="line">    <span class="string">'email'</span> =&gt; <span class="string">'506510463@qq.com'</span>,</div><div class="line">    <span class="string">'role'</span> =&gt; <span class="number">10</span>,</div><div class="line">    <span class="string">'status'</span> =&gt; <span class="number">0</span>,</div><div class="line">    <span class="string">'created_at'</span> =&gt; <span class="number">1391885313</span>,</div><div class="line">    <span class="string">'updated_at'</span> =&gt; <span class="number">1391885313</span>,</div><div class="line">]);</div><div class="line"></div><div class="line"><span class="comment">// 按照正序获取一条 username = miles 的数据的 email 字段值</span></div><div class="line">$mail = $I-&gt;grabFromDatabase(<span class="string">'user'</span>, <span class="string">'email'</span>, <span class="keyword">array</span>(<span class="string">'username'</span> =&gt; <span class="string">'troy.becker'</span>));</div><div class="line">var_dump($mail);<span class="keyword">exit</span>;</div></pre></td></tr></table></figure></p>
+<p>Codeception 的更多 DB TEST API 信息请参考链接：</p>
+<ul>
+<li>DB：<a href="https://github.com/Codeception/Codeception/blob/2.0/docs/modules/Db.md" target="_blank" rel="external">https://github.com/Codeception/Codeception/blob/2.0/docs/modules/Db.md</a></li>
+<li>DBH：<a href="https://github.com/Codeception/Codeception/blob/2.0/docs/modules/Dbh.md" target="_blank" rel="external">https://github.com/Codeception/Codeception/blob/2.0/docs/modules/Dbh.md</a></li>
+<li>Doctrine1：<a href="https://github.com/Codeception/Codeception/blob/2.0/docs/modules/Doctrine1.md" target="_blank" rel="external">https://github.com/Codeception/Codeception/blob/2.0/docs/modules/Doctrine1.md</a></li>
+<li>Doctrine2：<a href="https://github.com/Codeception/Codeception/blob/2.0/docs/modules/Doctrine2.md" target="_blank" rel="external">https://github.com/Codeception/Codeception/blob/2.0/docs/modules/Doctrine2.md</a></li>
+<li>Working with Data：<a href="https://github.com/Codeception/Codeception/blob/2.0/docs/09-Data.md" target="_blank" rel="external">https://github.com/Codeception/Codeception/blob/2.0/docs/09-Data.md</a></li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/14/在-Yii-2-中使用-CodeCeption/" data-id="ciz9hmaet004u1p4bgurd6f3e" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/14/在-Yii-2-中使用-CodeCeption/" data-id="ciz9kwf4h004mg74b0csv90qs" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -172,7 +188,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Kategorier</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -201,7 +217,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Arkiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
@@ -211,7 +227,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Siste innlegg</h3>
     <div class="widget">
       <ul>
         
