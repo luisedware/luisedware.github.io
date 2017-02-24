@@ -92,6 +92,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>更新 Yum<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum update</div></pre></td></tr></table></figure></p>
+<p>更新 Yum 源<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm</div><div class="line">rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm</div><div class="line">rpm -Uvh http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm</div></pre></td></tr></table></figure></p>
 <p>安装 Git<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y git</div></pre></td></tr></table></figure></p>
 <p>安装 Htop<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y htop</div></pre></td></tr></table></figure></p>
 <p>安装 Vim<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y vim</div></pre></td></tr></table></figure></p>
@@ -108,8 +109,7 @@
 <p>启动 MariaDB<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl start mariadb</div></pre></td></tr></table></figure></p>
 <p>初始化 MariaDB<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql_secure_installation</div></pre></td></tr></table></figure></p>
 <p>开机启动 MariaDB<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl enable mariadb</div></pre></td></tr></table></figure></p>
-<h2 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h2><p>更新 Yum 源<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm</div><div class="line">rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm</div><div class="line">rpm -Uvh http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm</div></pre></td></tr></table></figure></p>
-<p>安装 PHP<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y php71w php71w-mysql php71w-xml php71w-soap php71w-xmlrpc php71w-mbstring php71w-json php71w-gd php71w-mcrypt php71w-fpm php71w-pdo php71w-pecl-redis</div></pre></td></tr></table></figure></p>
+<h2 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h2><p>安装 PHP<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y php71w php71w-mysql php71w-xml php71w-soap php71w-xmlrpc php71w-mbstring php71w-json php71w-gd php71w-mcrypt php71w-fpm php71w-pdo php71w-pecl-redis</div></pre></td></tr></table></figure></p>
 <p>启动 PHP-FPM<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl start php-fpm</div></pre></td></tr></table></figure></p>
 <p>开机启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl enable php-fpm</div></pre></td></tr></table></figure></p>
 <p>配置 PHP 关联 Nginx，编辑 Nginx 配置文件如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">server&#123;</div><div class="line">    listen       80;</div><div class="line">    server_name  cowcat.cc;</div><div class="line"></div><div class="line">    # note that these lines are originally from the "location /" block</div><div class="line">    root   /usr/share/nginx/html;</div><div class="line">    index index.php index.html index.htm;</div><div class="line"></div><div class="line">    location / &#123;</div><div class="line">        try_files $uri $uri/ =404;</div><div class="line">    &#125;</div><div class="line">    error_page 404 /404.html;</div><div class="line">    error_page 500 502 503 504 /50x.html;</div><div class="line">    location = /50x.html &#123;</div><div class="line">        root /usr/share/nginx/html;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location ~ \.php$ &#123;</div><div class="line">        try_files $uri =404;</div><div class="line">        fastcgi_pass 127.0.0.1:9000;</div><div class="line">        fastcgi_index index.php;</div><div class="line">        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</div><div class="line">        include fastcgi_params;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -121,11 +121,15 @@
 <h2 id="Beanstalkd"><a href="#Beanstalkd" class="headerlink" title="Beanstalkd"></a>Beanstalkd</h2><p>安装 Beanstalkd<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">wget http://cbs.centos.org/kojifiles/packages/beanstalkd/1.9/3.el7/x86_64/beanstalkd-1.9-3.el7.x86_64.rpm</div><div class="line">wget http://cbs.centos.org/kojifiles/packages/beanstalkd/1.9/3.el7/x86_64/beanstalkd-debuginfo-1.9-3.el7.x86_64.rpm</div><div class="line">rpm -ivh beanstalkd-1.9-3.el7.x86_64.rpm</div><div class="line">rpm -ivh beanstalkd-debuginfo-1.9-3.el7.x86_64.rpm</div><div class="line">yum install -y beanstalkd</div></pre></td></tr></table></figure></p>
 <p>启动 Beanstalkd<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl start beanstalkd</div></pre></td></tr></table></figure></p>
 <p>开机启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl enable beanstalkd</div></pre></td></tr></table></figure></p>
+<h2 id="Composer"><a href="#Composer" class="headerlink" title="Composer"></a>Composer</h2><p>安装 Composer<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">curl -sS https://getcomposer.org/installer | php</div><div class="line">mv composer.phar /usr/local/bin/composer</div><div class="line">composer -v</div></pre></td></tr></table></figure></p>
+<p>全局设置国内镜像<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">composer config -g repo.packagist composer https://packagist.phpcomposer.com</div></pre></td></tr></table></figure></p>
+<h2 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h2><p>安装 Node.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum install -y gcc-c++ make</div><div class="line">yum install -y nodejs</div></pre></td></tr></table></figure></p>
+<p>安装 webpack、gulp、bower<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">npm install bower -g</div><div class="line">npm install gulp -g</div><div class="line">npm install webpack -g</div></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/23/「复习」使用阿里云从零开始部署-Laravel/" data-id="cizi6j6ru0024d84by2yecapb" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/02/23/「复习」使用阿里云从零开始部署-Laravel/" data-id="cizj6n7n1002ebu4bv3jt769k" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AliCloud/">AliCloud</a></li></ul>
@@ -192,7 +196,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/17/学习-UML（二）/" data-id="cizi6j6vq0054d84blotrq6c5" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/02/17/学习-UML（二）/" data-id="cizj6n7ps005dbu4bhx1wt89g" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UML/">UML</a></li></ul>
@@ -297,7 +301,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/14/在-Yii-2-中使用-CodeCeption/" data-id="cizi6j6vm004yd84btrbhcfz9" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/02/14/在-Yii-2-中使用-CodeCeption/" data-id="cizj6n7ph004wbu4b0s85nlju" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -376,7 +380,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/11/LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）/" data-id="cizi6j6pv000rd84b8ttfexiq" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/02/11/LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）/" data-id="cizj6n7lq000xbu4bv8tjd6pz" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -428,7 +432,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-九/" data-id="cizi6j6qz001id84blsx8qh0p" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-九/" data-id="cizj6n7m7001gbu4bpoaany8m" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -482,7 +486,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-六/" data-id="cizi6j6r9001od84bicmts4nz" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-六/" data-id="cizj6n7ma001jbu4bt43mb3lo" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -562,7 +566,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-四/" data-id="cizi6j6rj001ud84bqmaozlq0" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-四/" data-id="cizj6n7mg001rbu4bgea5064o" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -620,7 +624,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-二/" data-id="cizi6j6qv001fd84bzjl3h4i5" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-二/" data-id="cizj6n7me001obu4bv3uvdhvb" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -684,7 +688,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-一/" data-id="cizi6j6r4001ld84bwq7xj7c7" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-一/" data-id="cizj6n7m00018bu4bxpak9z6u" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -727,7 +731,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/19/使用-Laravel-与-Vue-js-进行微信开发（四）/" data-id="cizi6j6sx002td84bbh4k8jta" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/01/19/使用-Laravel-与-Vue-js-进行微信开发（四）/" data-id="cizj6n7ne002tbu4bizfqsusq" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>

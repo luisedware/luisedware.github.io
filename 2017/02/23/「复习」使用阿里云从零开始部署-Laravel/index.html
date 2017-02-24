@@ -6,33 +6,18 @@
   <title>「复习」使用阿里云从零开始部署 Laravel | 七月十五九月初七</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="准备更新 Yum1yum update
-安装 Git1yum install -y git
-安装 Htop1yum install -y htop
-安装 Vim1yum install -y vim
-Nginx安装 Nginx 代码仓库1yum install -y epel-release
-安装 Nginx1yum install -y nginx
-启动 Nginx1systemctl star">
+更新 Yum 源123rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpmrpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpmrpm -Uvh http://repo.mysql.com/mysql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="「复习」使用阿里云从零开始部署 Laravel">
 <meta property="og:url" content="http://luisedware.github.io/2017/02/23/「复习」使用阿里云从零开始部署-Laravel/index.html">
 <meta property="og:site_name" content="七月十五九月初七">
 <meta property="og:description" content="准备更新 Yum1yum update
-安装 Git1yum install -y git
-安装 Htop1yum install -y htop
-安装 Vim1yum install -y vim
-Nginx安装 Nginx 代码仓库1yum install -y epel-release
-安装 Nginx1yum install -y nginx
-启动 Nginx1systemctl star">
-<meta property="og:updated_time" content="2017-02-23T09:21:12.000Z">
+更新 Yum 源123rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpmrpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpmrpm -Uvh http://repo.mysql.com/mysql">
+<meta property="og:updated_time" content="2017-02-24T02:10:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「复习」使用阿里云从零开始部署 Laravel">
 <meta name="twitter:description" content="准备更新 Yum1yum update
-安装 Git1yum install -y git
-安装 Htop1yum install -y htop
-安装 Vim1yum install -y vim
-Nginx安装 Nginx 代码仓库1yum install -y epel-release
-安装 Nginx1yum install -y nginx
-启动 Nginx1systemctl star">
+更新 Yum 源123rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpmrpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpmrpm -Uvh http://repo.mysql.com/mysql">
   
     <link rel="alternate" href="/atom.xml" title="七月十五九月初七" type="application/atom+xml">
   
@@ -112,6 +97,7 @@ Nginx安装 Nginx 代码仓库1yum install -y epel-release
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>更新 Yum<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum update</div></pre></td></tr></table></figure></p>
+<p>更新 Yum 源<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm</div><div class="line">rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm</div><div class="line">rpm -Uvh http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm</div></pre></td></tr></table></figure></p>
 <p>安装 Git<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y git</div></pre></td></tr></table></figure></p>
 <p>安装 Htop<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y htop</div></pre></td></tr></table></figure></p>
 <p>安装 Vim<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y vim</div></pre></td></tr></table></figure></p>
@@ -128,8 +114,7 @@ Nginx安装 Nginx 代码仓库1yum install -y epel-release
 <p>启动 MariaDB<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl start mariadb</div></pre></td></tr></table></figure></p>
 <p>初始化 MariaDB<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql_secure_installation</div></pre></td></tr></table></figure></p>
 <p>开机启动 MariaDB<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl enable mariadb</div></pre></td></tr></table></figure></p>
-<h2 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h2><p>更新 Yum 源<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm</div><div class="line">rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm</div><div class="line">rpm -Uvh http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm</div></pre></td></tr></table></figure></p>
-<p>安装 PHP<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y php71w php71w-mysql php71w-xml php71w-soap php71w-xmlrpc php71w-mbstring php71w-json php71w-gd php71w-mcrypt php71w-fpm php71w-pdo php71w-pecl-redis</div></pre></td></tr></table></figure></p>
+<h2 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h2><p>安装 PHP<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y php71w php71w-mysql php71w-xml php71w-soap php71w-xmlrpc php71w-mbstring php71w-json php71w-gd php71w-mcrypt php71w-fpm php71w-pdo php71w-pecl-redis</div></pre></td></tr></table></figure></p>
 <p>启动 PHP-FPM<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl start php-fpm</div></pre></td></tr></table></figure></p>
 <p>开机启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl enable php-fpm</div></pre></td></tr></table></figure></p>
 <p>配置 PHP 关联 Nginx，编辑 Nginx 配置文件如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">server&#123;</div><div class="line">    listen       80;</div><div class="line">    server_name  cowcat.cc;</div><div class="line"></div><div class="line">    # note that these lines are originally from the "location /" block</div><div class="line">    root   /usr/share/nginx/html;</div><div class="line">    index index.php index.html index.htm;</div><div class="line"></div><div class="line">    location / &#123;</div><div class="line">        try_files $uri $uri/ =404;</div><div class="line">    &#125;</div><div class="line">    error_page 404 /404.html;</div><div class="line">    error_page 500 502 503 504 /50x.html;</div><div class="line">    location = /50x.html &#123;</div><div class="line">        root /usr/share/nginx/html;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location ~ \.php$ &#123;</div><div class="line">        try_files $uri =404;</div><div class="line">        fastcgi_pass 127.0.0.1:9000;</div><div class="line">        fastcgi_index index.php;</div><div class="line">        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</div><div class="line">        include fastcgi_params;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -141,11 +126,15 @@ Nginx安装 Nginx 代码仓库1yum install -y epel-release
 <h2 id="Beanstalkd"><a href="#Beanstalkd" class="headerlink" title="Beanstalkd"></a>Beanstalkd</h2><p>安装 Beanstalkd<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">wget http://cbs.centos.org/kojifiles/packages/beanstalkd/1.9/3.el7/x86_64/beanstalkd-1.9-3.el7.x86_64.rpm</div><div class="line">wget http://cbs.centos.org/kojifiles/packages/beanstalkd/1.9/3.el7/x86_64/beanstalkd-debuginfo-1.9-3.el7.x86_64.rpm</div><div class="line">rpm -ivh beanstalkd-1.9-3.el7.x86_64.rpm</div><div class="line">rpm -ivh beanstalkd-debuginfo-1.9-3.el7.x86_64.rpm</div><div class="line">yum install -y beanstalkd</div></pre></td></tr></table></figure></p>
 <p>启动 Beanstalkd<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl start beanstalkd</div></pre></td></tr></table></figure></p>
 <p>开机启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl enable beanstalkd</div></pre></td></tr></table></figure></p>
+<h2 id="Composer"><a href="#Composer" class="headerlink" title="Composer"></a>Composer</h2><p>安装 Composer<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">curl -sS https://getcomposer.org/installer | php</div><div class="line">mv composer.phar /usr/local/bin/composer</div><div class="line">composer -v</div></pre></td></tr></table></figure></p>
+<p>全局设置国内镜像<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">composer config -g repo.packagist composer https://packagist.phpcomposer.com</div></pre></td></tr></table></figure></p>
+<h2 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h2><p>安装 Node.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum install -y gcc-c++ make</div><div class="line">yum install -y nodejs</div></pre></td></tr></table></figure></p>
+<p>安装 webpack、gulp、bower<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">npm install bower -g</div><div class="line">npm install gulp -g</div><div class="line">npm install webpack -g</div></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/23/「复习」使用阿里云从零开始部署-Laravel/" data-id="cizi6j6ru0024d84by2yecapb" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/02/23/「复习」使用阿里云从零开始部署-Laravel/" data-id="cizj6n7n1002ebu4bv3jt769k" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AliCloud/">AliCloud</a></li></ul>
