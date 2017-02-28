@@ -5,13 +5,22 @@
   
   <title>使用 Yii2 构建 RESTFul API | 七月十五九月初七</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
+  <meta name="description" content="安装 Yii2 高级模板12composer global require &amp;quot;fxp/composer-asset-plugin:^1.2.0&amp;quot;composer create-project --prefer-dist yiisoft/yii2-app-advanced Api
+初始化项目12cd Apisudo php init
+打开文件 common/config/main">
+<meta property="og:type" content="article">
 <meta property="og:title" content="使用 Yii2 构建 RESTFul API">
 <meta property="og:url" content="http://luisedware.github.io/2017/02/28/使用-Yii2-构建-RESTFul-API/index.html">
 <meta property="og:site_name" content="七月十五九月初七">
-<meta property="og:updated_time" content="2017-02-28T08:49:29.000Z">
+<meta property="og:description" content="安装 Yii2 高级模板12composer global require &amp;quot;fxp/composer-asset-plugin:^1.2.0&amp;quot;composer create-project --prefer-dist yiisoft/yii2-app-advanced Api
+初始化项目12cd Apisudo php init
+打开文件 common/config/main">
+<meta property="og:updated_time" content="2017-02-28T09:55:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用 Yii2 构建 RESTFul API">
+<meta name="twitter:description" content="安装 Yii2 高级模板12composer global require &amp;quot;fxp/composer-asset-plugin:^1.2.0&amp;quot;composer create-project --prefer-dist yiisoft/yii2-app-advanced Api
+初始化项目12cd Apisudo php init
+打开文件 common/config/main">
   
     <link rel="alternate" href="/atom.xml" title="七月十五九月初七" type="application/atom+xml">
   
@@ -53,9 +62,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -70,6 +79,10 @@
   <time datetime="2017-02-28T08:49:29.000Z" itemprop="datePublished">2017-02-28</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -86,13 +99,32 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="安装-Yii2-高级模板"><a href="#安装-Yii2-高级模板" class="headerlink" title="安装 Yii2 高级模板"></a>安装 Yii2 高级模板</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">composer global require &quot;fxp/composer-asset-plugin:^1.2.0&quot;</div><div class="line">composer create-project --prefer-dist yiisoft/yii2-app-advanced Api</div></pre></td></tr></table></figure>
+<p>初始化项目<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd Api</div><div class="line">sudo php init</div></pre></td></tr></table></figure></p>
+<p>打开文件 <code>common/config/main-local.php</code>，配置数据库信息<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">return</span> [</div><div class="line">    <span class="string">'components'</span> =&gt; [</div><div class="line">        <span class="string">'db'</span> =&gt; [</div><div class="line">            <span class="string">'class'</span> =&gt; <span class="string">'yii\db\Connection'</span>,</div><div class="line">            <span class="string">'dsn'</span> =&gt; <span class="string">'mysql:host=localhost;dbname=api'</span>,</div><div class="line">            <span class="string">'username'</span> =&gt; <span class="string">'root'</span>,</div><div class="line">            <span class="string">'password'</span> =&gt; <span class="string">'123456'</span>,</div><div class="line">            <span class="string">'charset'</span> =&gt; <span class="string">'utf8'</span>,</div><div class="line">        ],</div><div class="line">        <span class="string">'mailer'</span> =&gt; [</div><div class="line">            <span class="string">'class'</span> =&gt; <span class="string">'yii\swiftmailer\Mailer'</span>,</div><div class="line">            <span class="string">'viewPath'</span> =&gt; <span class="string">'@common/mail'</span>,</div><div class="line">            <span class="comment">// send all mails to a file by default. You have to set</span></div><div class="line">            <span class="comment">// 'useFileTransport' to false and configure a transport</span></div><div class="line">            <span class="comment">// for the mailer to send real emails.</span></div><div class="line">            <span class="string">'useFileTransport'</span> =&gt; <span class="keyword">true</span>,</div><div class="line">        ],</div><div class="line">    ],</div><div class="line">];</div></pre></td></tr></table></figure></p>
+<p>执行迁移文件，生成数据表<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php yii migrate</div></pre></td></tr></table></figure></p>
+<p>新建模板 <code>api</code></p>
+<blockquote>
+<p>复制目录 <code>frontend</code> 为 <code>api</code>，复制目录 <code>environments/dev/frontend</code> 为 <code>environments/dev/api</code>，复制目录 <code>environments/prod/frontend</code> 为 <code>environments/prod/api</code>，修改目录 <code>api</code> 里面文件的命名空间 <code>namespace</code>，并在文件 <code>common/config/bootstrap.php</code> 中加入代码 <code>Yii::setAlias(&#39;api&#39;, dirname(dirname(__DIR__)) . &#39;/api&#39;);</code>。</p>
+</blockquote>
+<p>清理模板 <code>api</code>，删除文件如下：</p>
+<ul>
+<li>api/assets</li>
+<li>api/views</li>
+<li>api/controllers</li>
+<li>api/web/assets</li>
+<li>api/web/css</li>
+</ul>
+<p>配置 Apache 虚拟主机<br><figure class="highlight apache"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line"><span class="section">&lt;VirtualHost *:80&gt;</span></div><div class="line">   <span class="attribute"><span class="nomarkup">ServerName</span></span> api.frontend.app</div><div class="line">   <span class="attribute"><span class="nomarkup">DocumentRoot</span></span> <span class="string">"/Users/LuisEdware/Code/Api/frontend/web/"</span></div><div class="line"></div><div class="line">   <span class="section">&lt;Directory "/Users/LuisEdware/Code/Api/frontend/web/"&gt;</span></div><div class="line">       <span class="comment"># use mod_rewrite for pretty URL support</span></div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteEngine</span></span> <span class="literal">on</span></div><div class="line">       <span class="comment"># If a directory or a file exists, use the request directly</span></div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteCond</span></span> <span class="variable">%&#123;REQUEST_FILENAME&#125;</span> !-f</div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteCond</span></span> <span class="variable">%&#123;REQUEST_FILENAME&#125;</span> !-d</div><div class="line">       <span class="comment"># Otherwise forward the request to index.php</span></div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteRule</span></span> . index.php</div><div class="line"></div><div class="line">       <span class="comment"># use index.php as index file</span></div><div class="line">       <span class="attribute">DirectoryIndex</span> index.php</div><div class="line"></div><div class="line">       <span class="comment"># ...other settings...</span></div><div class="line">       <span class="comment"># Apache 2.4</span></div><div class="line">       <span class="attribute">Require</span> <span class="literal">all</span> granted</div><div class="line"></div><div class="line">       <span class="comment">## Apache 2.2</span></div><div class="line">       <span class="comment"># Order allow,deny</span></div><div class="line">       <span class="comment"># Allow from all</span></div><div class="line">   <span class="section">&lt;/Directory&gt;</span></div><div class="line"><span class="section">&lt;/VirtualHost&gt;</span></div><div class="line"></div><div class="line"><span class="section">&lt;VirtualHost *:80&gt;</span></div><div class="line">   <span class="attribute"><span class="nomarkup">ServerName</span></span> api.backend.app</div><div class="line">   <span class="attribute"><span class="nomarkup">DocumentRoot</span></span> <span class="string">"/Users/LuisEdware/Code/Api/backend/web/"</span></div><div class="line"></div><div class="line">   <span class="section">&lt;Directory "/Users/LuisEdware/Code/Api/backend/web/"&gt;</span></div><div class="line">       <span class="comment"># use mod_rewrite for pretty URL support</span></div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteEngine</span></span> <span class="literal">on</span></div><div class="line">       <span class="comment"># If a directory or a file exists, use the request directly</span></div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteCond</span></span> <span class="variable">%&#123;REQUEST_FILENAME&#125;</span> !-f</div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteCond</span></span> <span class="variable">%&#123;REQUEST_FILENAME&#125;</span> !-d</div><div class="line">       <span class="comment"># Otherwise forward the request to index.php</span></div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteRule</span></span> . index.php</div><div class="line"></div><div class="line">       <span class="comment"># use index.php as index file</span></div><div class="line">       <span class="attribute">DirectoryIndex</span> index.php</div><div class="line"></div><div class="line">       <span class="comment"># ...other settings...</span></div><div class="line">       <span class="comment"># Apache 2.4</span></div><div class="line">       <span class="attribute">Require</span> <span class="literal">all</span> granted</div><div class="line"></div><div class="line">       <span class="comment">## Apache 2.2</span></div><div class="line">       <span class="comment"># Order allow,deny</span></div><div class="line">       <span class="comment"># Allow from all</span></div><div class="line">   <span class="section">&lt;/Directory&gt;</span></div><div class="line"><span class="section">&lt;/VirtualHost&gt;</span></div><div class="line"></div><div class="line"><span class="section">&lt;VirtualHost *:80&gt;</span></div><div class="line">   <span class="attribute"><span class="nomarkup">ServerName</span></span> api.app</div><div class="line">   <span class="attribute"><span class="nomarkup">DocumentRoot</span></span> <span class="string">"/Users/LuisEdware/Code/Api/api/web/"</span></div><div class="line"></div><div class="line">   <span class="section">&lt;Directory "/Users/LuisEdware/Code/Api/api/web/"&gt;</span></div><div class="line">       <span class="comment"># use mod_rewrite for pretty URL support</span></div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteEngine</span></span> <span class="literal">on</span></div><div class="line">       <span class="comment"># If a directory or a file exists, use the request directly</span></div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteCond</span></span> <span class="variable">%&#123;REQUEST_FILENAME&#125;</span> !-f</div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteCond</span></span> <span class="variable">%&#123;REQUEST_FILENAME&#125;</span> !-d</div><div class="line">       <span class="comment"># Otherwise forward the request to index.php</span></div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteRule</span></span> . index.php</div><div class="line"></div><div class="line">       <span class="comment"># use index.php as index file</span></div><div class="line">       <span class="attribute">DirectoryIndex</span> index.php</div><div class="line"></div><div class="line">       <span class="comment"># ...other settings...</span></div><div class="line">       <span class="comment"># Apache 2.4</span></div><div class="line">       <span class="attribute">Require</span> <span class="literal">all</span> granted</div><div class="line"></div><div class="line">       <span class="comment">## Apache 2.2</span></div><div class="line">       <span class="comment"># Order allow,deny</span></div><div class="line">       <span class="comment"># Allow from all</span></div><div class="line">   <span class="section">&lt;/Directory&gt;</span></div><div class="line"><span class="section">&lt;/VirtualHost&gt;</span></div></pre></td></tr></table></figure></p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/28/使用-Yii2-构建-RESTFul-API/" data-id="cizpalgcm003crg4b7n01yfik" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/02/28/使用-Yii2-构建-RESTFul-API/" data-id="cizpd0uq5003iql4b0hxsqp8o" class="article-share-link">Partager</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
+
     </footer>
   </div>
   
@@ -101,7 +133,7 @@
   
   
     <a href="/2017/02/23/「复习」使用阿里云从零开始部署-Laravel/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ouder</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title">「复习」使用阿里云从零开始部署 Laravel</div>
     </a>
   
@@ -116,7 +148,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categorieën</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -126,9 +158,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Labels</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
     </div>
   </div>
 
@@ -136,16 +168,16 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AliCloud/" style="font-size: 11.67px;">AliCloud</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 18.33px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 16.67px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.67px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/UML/" style="font-size: 11.67px;">UML</a> <a href="/tags/Yii/" style="font-size: 13.33px;">Yii</a>
+      <a href="/tags/AliCloud/" style="font-size: 11.67px;">AliCloud</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 18.33px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 16.67px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.67px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/UML/" style="font-size: 11.67px;">UML</a> <a href="/tags/Yii/" style="font-size: 13.33px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archieven</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
@@ -155,7 +187,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -192,7 +224,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Luis Edware<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
