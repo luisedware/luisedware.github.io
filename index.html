@@ -95,10 +95,14 @@
 <p>初始化项目<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd Api</div><div class="line">sudo php init</div></pre></td></tr></table></figure></p>
 <p>打开文件 <code>common/config/main-local.php</code>，配置数据库信息<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">return</span> [</div><div class="line">    <span class="string">'components'</span> =&gt; [</div><div class="line">        <span class="string">'db'</span> =&gt; [</div><div class="line">            <span class="string">'class'</span> =&gt; <span class="string">'yii\db\Connection'</span>,</div><div class="line">            <span class="string">'dsn'</span> =&gt; <span class="string">'mysql:host=localhost;dbname=api'</span>,</div><div class="line">            <span class="string">'username'</span> =&gt; <span class="string">'root'</span>,</div><div class="line">            <span class="string">'password'</span> =&gt; <span class="string">'123456'</span>,</div><div class="line">            <span class="string">'charset'</span> =&gt; <span class="string">'utf8'</span>,</div><div class="line">        ],</div><div class="line">        <span class="string">'mailer'</span> =&gt; [</div><div class="line">            <span class="string">'class'</span> =&gt; <span class="string">'yii\swiftmailer\Mailer'</span>,</div><div class="line">            <span class="string">'viewPath'</span> =&gt; <span class="string">'@common/mail'</span>,</div><div class="line">            <span class="comment">// send all mails to a file by default. You have to set</span></div><div class="line">            <span class="comment">// 'useFileTransport' to false and configure a transport</span></div><div class="line">            <span class="comment">// for the mailer to send real emails.</span></div><div class="line">            <span class="string">'useFileTransport'</span> =&gt; <span class="keyword">true</span>,</div><div class="line">        ],</div><div class="line">    ],</div><div class="line">];</div></pre></td></tr></table></figure></p>
 <p>执行迁移文件，生成数据表<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php yii migrate</div></pre></td></tr></table></figure></p>
-<p>新建模板 <code>api</code></p>
-<blockquote>
-<p>复制目录 <code>frontend</code> 为 <code>api</code>，复制目录 <code>environments/dev/frontend</code> 为 <code>environments/dev/api</code>，复制目录 <code>environments/prod/frontend</code> 为 <code>environments/prod/api</code>，修改目录 <code>api</code> 里面文件的命名空间 <code>namespace</code>，并在文件 <code>common/config/bootstrap.php</code> 中加入代码 <code>Yii::setAlias(&#39;api&#39;, dirname(dirname(__DIR__)) . &#39;/api&#39;);</code>。</p>
-</blockquote>
+<p>新建模板 <code>api</code>,执行操作如下：</p>
+<ul>
+<li>复制目录 <code>frontend</code> 为 <code>api</code></li>
+<li>复制目录 <code>environments/dev/frontend</code> 为 <code>environments/dev/api</code></li>
+<li>复制目录 <code>environments/prod/frontend</code> 为 <code>environments/prod/api</code></li>
+<li>修改目录 <code>api</code> 里面文件的命名空间 <code>namespace</code></li>
+<li>打开文件 <code>common/config/bootstrap.php</code> 并加入代码 <code>Yii::setAlias(&#39;api&#39;, dirname(dirname(__DIR__)) . &#39;/api&#39;);</code></li>
+</ul>
 <p>清理模板 <code>api</code>，删除文件如下：</p>
 <ul>
 <li>api/assets</li>
@@ -123,11 +127,19 @@
 <h4 id="创建模型"><a href="#创建模型" class="headerlink" title="创建模型"></a>创建模型</h4><p>新建目录 <code>api/modules/v1/models</code>，在该目录下新增数据模型 <code>Order.php</code>，代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">api</span>\<span class="title">modules</span>\<span class="title">v1</span>\<span class="title">models</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">yii</span>\<span class="title">db</span>\<span class="title">ActiveRecord</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Order</span> <span class="keyword">extends</span> <span class="title">ActiveRecord</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">tableName</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"z_order"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 返回指定的字段</span></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">fields</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> [</div><div class="line">            <span class="string">'id'</span>,</div><div class="line">            <span class="comment">// 重命名字段</span></div><div class="line">            <span class="string">'orderNumber'</span> =&gt; <span class="string">'orderno'</span></div><div class="line">        ];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h4 id="配置路由与模块"><a href="#配置路由与模块" class="headerlink" title="配置路由与模块"></a>配置路由与模块</h4><p>打开文件 <code>api/config/main-local.php</code>，在数组 <code>$config[]</code> 新增模块版本，在数组 <code>$config[&#39;components&#39;][&#39;urlManager&#39;][&#39;rules&#39;]</code> 新增路由规则，代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$config = [</div><div class="line">    <span class="string">'modules'</span> =&gt; [</div><div class="line">        <span class="string">'v1'</span> =&gt; [</div><div class="line">            <span class="string">'class'</span> =&gt; <span class="string">'api\modules\v1\Module'</span>,</div><div class="line">        ],</div><div class="line">    ],</div><div class="line">    <span class="string">'components'</span> =&gt; [</div><div class="line">        <span class="string">'request'</span> =&gt; [</div><div class="line">            <span class="comment">// !!! insert a secret key in the following (if it is empty) - this is required by cookie validation</span></div><div class="line">            <span class="string">'cookieValidationKey'</span> =&gt; <span class="string">'sTGCwRd3spEa33BW2HMjuuwZnsJO6RMM'</span>,</div><div class="line">            <span class="string">'parsers'</span> =&gt; [</div><div class="line">                <span class="string">'application/json'</span> =&gt; <span class="string">'yii\web\JsonParser'</span>,</div><div class="line">            ],</div><div class="line">        ],</div><div class="line">        <span class="string">'urlManager'</span> =&gt; [</div><div class="line">            <span class="string">'enablePrettyUrl'</span> =&gt; <span class="keyword">true</span>,</div><div class="line">            <span class="string">'enableStrictParsing'</span> =&gt; <span class="keyword">true</span>,</div><div class="line">            <span class="string">'showScriptName'</span> =&gt; <span class="keyword">false</span>,</div><div class="line">            <span class="string">'rules'</span> =&gt; [</div><div class="line">                [</div><div class="line">                    <span class="string">'class'</span> =&gt; <span class="string">'yii\rest\UrlRule'</span>,</div><div class="line">                    <span class="string">'controller'</span> =&gt; <span class="string">'user'</span>,</div><div class="line">                    <span class="string">'pluralize'</span> =&gt; <span class="keyword">false</span>,</div><div class="line">                ],</div><div class="line">                [</div><div class="line">                    <span class="string">'class'</span> =&gt; <span class="string">'yii\rest\UrlRule'</span>,</div><div class="line">                    <span class="string">'controller'</span> =&gt; <span class="string">'v1/order'</span>,</div><div class="line">                    <span class="string">'pluralize'</span> =&gt; <span class="keyword">false</span>,</div><div class="line">                ],</div><div class="line">            ],</div><div class="line">        ],</div><div class="line">    ],</div><div class="line">];</div></pre></td></tr></table></figure></p>
 <h4 id="测试接口地址-1"><a href="#测试接口地址-1" class="headerlink" title="测试接口地址"></a>测试接口地址</h4><p>使用 <code>HTTP GET</code> 的方式去访问 <code>http://api.app/v1/order</code>,得到 JSON 数据如下：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"orders"</span>: [</div><div class="line">    &#123;</div><div class="line">      <span class="attr">"id"</span>: <span class="number">57</span>,</div><div class="line">      <span class="attr">"orderNumber"</span>: <span class="string">"201310140001"</span></div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      <span class="attr">"id"</span>: <span class="number">68</span>,</div><div class="line">      <span class="attr">"orderNumber"</span>: <span class="string">"201310150001"</span></div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      <span class="attr">"id"</span>: <span class="number">69</span>,</div><div class="line">      <span class="attr">"orderNumber"</span>: <span class="string">"201310150002"</span></div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      <span class="attr">"id"</span>: <span class="number">70</span>,</div><div class="line">      <span class="attr">"orderNumber"</span>: <span class="string">"201310150003"</span></div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      <span class="attr">"id"</span>: <span class="number">71</span>,</div><div class="line">      <span class="attr">"orderNumber"</span>: <span class="string">"201310170001"</span></div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      <span class="attr">"id"</span>: <span class="number">72</span>,</div><div class="line">      <span class="attr">"orderNumber"</span>: <span class="string">"201310170002"</span></div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      <span class="attr">"id"</span>: <span class="number">73</span>,</div><div class="line">      <span class="attr">"orderNumber"</span>: <span class="string">"201310170003"</span></div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      <span class="attr">"id"</span>: <span class="number">74</span>,</div><div class="line">      <span class="attr">"orderNumber"</span>: <span class="string">"201310170004"</span></div><div class="line">    &#125;,</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="授权认证"><a href="#授权认证" class="headerlink" title="授权认证"></a>授权认证</h2>
+<h2 id="API-认证"><a href="#API-认证" class="headerlink" title="API 认证"></a>API 认证</h2><p>Yii 2 有三种认证用户的验证方式</p>
+<ul>
+<li><code>HttpBasicAuth::className()</code>：是通过弹窗填用户名密码，默认只需要在用户名栏填入 <code>Access-Token</code> 返回接口数据。</li>
+<li><code>HttpBearerAuth::className()</code>：是通过请求 <code>Headers</code> 带上 <code>Authorization: Bearer Access-Token</code> 参数返回接口数据。</li>
+<li><code>QueryParamAuth::className()</code>：是通过 <code>URL</code> 带上 <code>?access-token=Access-Token</code> 参数返回接口数据。</li>
+</ul>
+<p>采用 <code>QueryParamAuth</code> 方式进行验证，因为 <code>RESTFul API</code> 是无状态的，不能通过 <code>session</code> 或 <code>cookie</code> 来保持状态，在模块文件 <code>Module.php</code> 中新增代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">init</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">parent</span>::init();</div><div class="line">    <span class="comment">// 禁止使用 Session</span></div><div class="line">    Yii::$app-&gt;user-&gt;enableSession = <span class="keyword">false</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// v1 模块的请求都需要认证</span></div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">behaviors</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    $behaviors = <span class="keyword">parent</span>::behaviors();</div><div class="line">    $behaviors[<span class="string">'authenticator'</span>] = [</div><div class="line">        <span class="string">'class'</span> =&gt; QueryParamAuth::className(),</div><div class="line">    ];</div><div class="line">    <span class="keyword">return</span> $behaviors;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>使用 <code>HTTP GET</code> 的方式去访问 <code>http://api.app/v1/order?access-token=HelloWorld</code>,得到 JSON 数据如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;orders&quot;: [</div><div class="line">    &#123;</div><div class="line">      &quot;id&quot;: 57,</div><div class="line">      &quot;orderNumber&quot;: &quot;201310140001&quot;</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      &quot;id&quot;: 68,</div><div class="line">      &quot;orderNumber&quot;: &quot;201310150001&quot;</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      &quot;id&quot;: 69,</div><div class="line">      &quot;orderNumber&quot;: &quot;201310150002&quot;</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      &quot;id&quot;: 70,</div><div class="line">      &quot;orderNumber&quot;: &quot;201310150003&quot;</div><div class="line">    &#125;,</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="API-授权"><a href="#API-授权" class="headerlink" title="API 授权"></a>API 授权</h2>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/28/使用-Yii2-构建-RESTFul-API/" data-id="cizqdf6ts003k6z4bfz5rla9a" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/28/使用-Yii2-构建-RESTFul-API/" data-id="cizqk9z5o003g384bmo4bs9no" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
@@ -209,7 +221,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/23/「复习」使用阿里云从零开始部署-Laravel/" data-id="cizqdf6sw002b6z4bjql5nqti" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/23/「复习」使用阿里云从零开始部署-Laravel/" data-id="cizqk9z51002g384bu9pn43y2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AliCloud/">AliCloud</a></li></ul>
@@ -276,7 +288,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/17/学习-UML（二）/" data-id="cizqdf6v3005c6z4b51jetrwo" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/17/学习-UML（二）/" data-id="cizqk9z6x005a384b916mtxzm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UML/">UML</a></li></ul>
@@ -381,7 +393,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/14/在-Yii-2-中使用-CodeCeption/" data-id="cizqdf6ut004s6z4b0yyh9d1n" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/14/在-Yii-2-中使用-CodeCeption/" data-id="cizqk9z6p004y384bi2sqx9nl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -460,7 +472,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/11/LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）/" data-id="cizqdf6rp000x6z4bq8zvs20a" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/11/LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）/" data-id="cizqk9z3u000x384bgwx55fo9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -512,7 +524,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-九/" data-id="cizqdf6s6001b6z4bm6tzbswk" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-九/" data-id="cizqk9z4c001j384bo1360lxy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -566,7 +578,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-六/" data-id="cizqdf6sg001o6z4bsx2snnj1" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-六/" data-id="cizqk9z4h001r384bw4tvqy3f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -646,7 +658,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-四/" data-id="cizqdf6sj001r6z4bmscgs6w9" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-四/" data-id="cizqk9z4f001o384berx8be5y" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -704,7 +716,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-二/" data-id="cizqdf6sc001j6z4bozc7i5f6" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-二/" data-id="cizqk9z4a001g384bgcg1da8g" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -768,7 +780,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-一/" data-id="cizqdf6s8001g6z4bymsdbqae" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-一/" data-id="cizqk9z47001b384b4hvu4s8f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
