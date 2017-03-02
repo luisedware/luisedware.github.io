@@ -15,7 +15,7 @@
 <meta property="og:description" content="安装 Yii2 高级模板12composer global require &amp;quot;fxp/composer-asset-plugin:^1.2.0&amp;quot;composer create-project --prefer-dist yiisoft/yii2-app-advanced Api
 初始化项目12cd Apisudo php init
 打开文件 common/config/main">
-<meta property="og:updated_time" content="2017-03-02T07:19:14.000Z">
+<meta property="og:updated_time" content="2017-03-02T09:46:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用 Yii2 构建 RESTFul API">
 <meta name="twitter:description" content="安装 Yii2 高级模板12composer global require &amp;quot;fxp/composer-asset-plugin:^1.2.0&amp;quot;composer create-project --prefer-dist yiisoft/yii2-app-advanced Api
@@ -62,9 +62,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -149,7 +149,7 @@
 <h4 id="Swagger-PHP-的基本语法"><a href="#Swagger-PHP-的基本语法" class="headerlink" title="Swagger-PHP 的基本语法"></a>Swagger-PHP 的基本语法</h4><ul>
 <li>@SWG\Swagger<ul>
 <li>swagger</li>
-<li>info(required): @SWG\Info</li>
+<li><font color="red">info: @SWG\Info</font></li>
 <li>host</li>
 <li>basePath</li>
 <li>schemes</li>
@@ -159,78 +159,78 @@
 </ul>
 </li>
 <li>@SWG\Info<ul>
-<li>title</li>
-<li>description</li>
-<li>termsOfService</li>
-<li>contact: @SWG\Contact</li>
+<li>title - 文档标题</li>
+<li>description - 文档描述</li>
+<li>termsOfService - 所属团队</li>
+<li>contact: @SWG\Contact - 联系方式</li>
 </ul>
 </li>
 <li>@SWG\Contact<ul>
-<li>name</li>
-<li>url</li>
-<li>email</li>
+<li>url - 联系链接</li>
+<li>name - 联系名称</li>
+<li>email - 联系邮箱</li>
 </ul>
 </li>
 <li>@SWG\License<ul>
-<li>name(required)</li>
-<li>url</li>
+<li><font color="red">name</font> - 开源许可证</li>
+<li>url - 许可证地址</li>
 </ul>
 </li>
 <li>@SWG\Path<ul>
-<li>get: @SWG\Get</li>
-<li>put: @SWG\Put</li>
-<li>post: @SWG\Post</li>
-<li>delete: @SWG\Delete</li>
-<li>options: @SWG\Options</li>
-<li>head: @SWG\Head</li>
+<li>get: @SWG\Get - HTTP Get 请求</li>
+<li>put: @SWG\Put - HTTP Put 请求</li>
+<li>post: @SWG\Post - HTTP Post 请求</li>
+<li>delete: @SWG\Delete - HTTP Delete 请求</li>
+<li>options: @SWG\Options - HTTP Options 请求</li>
 </ul>
 </li>
 <li>@SWG\GET<ul>
-<li>tags</li>
-<li>summary</li>
-<li>description</li>
-<li>operationId</li>
-<li>consumes</li>
-<li>produces</li>
-<li>parameters: @SWG\Parameter</li>
-<li>responses(required): @SWG\Response</li>
-<li>schemes</li>
-<li>deprecated</li>
-<li>security</li>
+<li>tags - 请求分类</li>
+<li>summary - 请求简介</li>
+<li>description - 请求描述</li>
+<li>operationId - 请求编号，要求唯一</li>
+<li>consumes - 请求 Mime Types</li>
+<li>produces - 响应 Mime Types</li>
+<li>parameters: @SWG\Parameter - 请求参数</li>
+<li><font color="red">responses: @SWG\Response - 请求响应</font></li>
+<li>schemes: [“http”,”https”,”ws”,”wss”] - 请求协议</li>
+<li>deprecated - 是否弃用</li>
 </ul>
 </li>
-<li>@SWG\Parameter</li>
+<li>@SWG\Parameter<ul>
+<li><font color="red">name</font> - 请求参数名称</li>
+<li><font color="red">in</font>: [“query”,”header”,”path”,”formData”,”body”] - 请求参数存放方式</li>
+<li>description - 请求参数描述</li>
+<li>required - 是否要求</li>
+<li><font color="red">schema</font> - 当 <code>in</code> 为 <code>body</code> 时可以使用，用于描述参数</li>
+<li><font color="red">type</font>: [“string”, “number”, “integer”, “boolean”, “array”, “file”]</li>
+<li>format</li>
+<li>allowEmptyValue - 是否允许空值</li>
+<li>items - 当 <code>type</code> 为 <code>array</code>,<code>items</code> 为 <code>required</code>，描述参数数组</li>
+<li>collectionFormat</li>
+<li>default - 请求参数默认值</li>
+</ul>
+</li>
 <li>@SWG\Response<ul>
-<li>default(required)<ul>
-<li>response object<ul>
-<li>description(required)</li>
-<li>schema: @SWG\Schema</li>
-<li>headers: @SWG\Header</li>
-<li>example: @SWG\Example</li>
-</ul>
-</li>
-<li>reference object<ul>
-<li>$ref(required)</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><font color="red">default</font><br>- response object<br>  - <font color="red">description</font> - 响应描述<br>  - schema: @SWG\Schema<br>  - headers: @SWG\Header - 响应头部<br>  - example: @SWG\Example - 响应数据例子<br>- reference object<br>  - <font color="red">$ref</font></li>
 <li>HTTP Status Code<ul>
 <li>response object<ul>
-<li>description(required)</li>
+<li><font color="red">description</font></li>
 <li>schema: @SWG\Schema</li>
 <li>headers: @SWG\Header</li>
 <li>example: @SWG\Example</li>
 </ul>
 </li>
 <li>reference object<ul>
-<li>$ref(required)</li>
+<li><font color="red">$ref</font></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </li>
+<li>@SWG\Definition</li>
+<li>@SWG\Property</li>
 </ul>
 <h4 id="配置-Swagger-PHP"><a href="#配置-Swagger-PHP" class="headerlink" title="配置 Swagger-PHP"></a>配置 Swagger-PHP</h4><p>使用 <code>Composer</code> 安装 <code>Swagger-PHP</code>，在项目根目录中执行命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">composer require zircote/swagger-php</div></pre></td></tr></table></figure></p>
 <p>在 <code>api\controllers</code> 新增文档控制器 <code>DocumentController.php</code>，因为要生成不同版本的文档，控制器必须放在公用的目录，代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">api</span>\<span class="title">controllers</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">Yii</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">Swagger</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">yii</span>\<span class="title">base</span>\<span class="title">Exception</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">yii</span>\<span class="title">web</span>\<span class="title">Controller</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DocumentController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">// 根据版本号生成不同版本的 API 文档</span></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">actionBuild</span><span class="params">($version)</span></span></div><div class="line">    &#123;</div><div class="line">        $apiDir = Yii::getAlias(<span class="string">'@api'</span>);</div><div class="line">        $swagger = Swagger\scan($apiDir);</div><div class="line">        $jsonFile = $apiDir . <span class="string">"/web/&#123;$version&#125;/swagger-document/swagger.json"</span>;</div><div class="line">        <span class="keyword">if</span> (!file_exists($jsonFile)) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="keyword">Exception</span>(<span class="string">"Swagger.json 文件不存在"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        $isWrite = file_put_contents($jsonFile, $swagger);</div><div class="line">        <span class="keyword">if</span> ($isWrite == <span class="keyword">true</span>) &#123;</div><div class="line">            <span class="keyword">$this</span>-&gt;redirect(<span class="string">"/&#123;$version&#125;/swagger-ui/dist/index.html"</span>);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="keyword">Exception</span>(<span class="string">"Swagger.json 文件写入失败"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -245,7 +245,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/28/使用-Yii2-构建-RESTFul-API/" data-id="cizs2rcm6003ilw4bqr85iq9b" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/28/使用-Yii2-构建-RESTFul-API/" data-id="cizs7l0hs003ru44brn0uycno" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
@@ -256,9 +256,18 @@
     
 <nav id="article-nav">
   
+    <a href="/2017/03/02/Swagger-PHP-基础使用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          Swagger-PHP 基础使用
+        
+      </div>
+    </a>
+  
   
     <a href="/2017/02/23/「复习」使用阿里云从零开始部署-Laravel/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title">「复习」使用阿里云从零开始部署 Laravel</div>
     </a>
   
@@ -273,7 +282,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -283,9 +292,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
     </div>
   </div>
 
@@ -293,9 +302,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AliCloud/" style="font-size: 11.67px;">AliCloud</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 18.33px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 16.67px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.67px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/UML/" style="font-size: 11.67px;">UML</a> <a href="/tags/Yii/" style="font-size: 13.33px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
+      <a href="/tags/AliCloud/" style="font-size: 11.67px;">AliCloud</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 18.33px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 16.67px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.67px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/UML/" style="font-size: 11.67px;">UML</a> <a href="/tags/Yii/" style="font-size: 13.33px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
     </div>
   </div>
 
@@ -304,7 +313,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
   </div>
 
@@ -312,9 +321,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/03/02/Swagger-PHP-基础使用/">Swagger-PHP 基础使用</a>
+          </li>
         
           <li>
             <a href="/2017/02/28/使用-Yii2-构建-RESTFul-API/">使用 Yii2 构建 RESTFul API</a>
@@ -332,10 +345,6 @@
             <a href="/2017/02/14/在-Yii-2-中使用-CodeCeption/">在 Yii 2 中使用 CodeCeption</a>
           </li>
         
-          <li>
-            <a href="/2017/02/11/LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）/">LuisEdware 版 PHP 编程规范（遵循 PSR-1/PSR-2）</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -349,7 +358,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Luis Edware<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

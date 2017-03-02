@@ -3,14 +3,66 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2016/11 | 七月十五九月初七</title>
+  <title>Swagger-PHP 基础使用 | 七月十五九月初七</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="七月十五九月初七">
-<meta property="og:url" content="http://luisedware.github.io/archives/2016/11/index.html">
+  <meta name="description" content="Swagger-PHP 的基本语法
+@SWG\Swagger
+swagger
+info: @SWG\Info
+host
+basePath
+schemes
+consumes
+produces
+paths: @SWG\Path
+
+
+@SWG\Info
+title - 文档标题
+description - 文档描述
+termsOfService - 所属团队
+contact: @SWG\Contact">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swagger-PHP 基础使用">
+<meta property="og:url" content="http://luisedware.github.io/2017/03/02/Swagger-PHP-基础使用/index.html">
 <meta property="og:site_name" content="七月十五九月初七">
+<meta property="og:description" content="Swagger-PHP 的基本语法
+@SWG\Swagger
+swagger
+info: @SWG\Info
+host
+basePath
+schemes
+consumes
+produces
+paths: @SWG\Path
+
+
+@SWG\Info
+title - 文档标题
+description - 文档描述
+termsOfService - 所属团队
+contact: @SWG\Contact">
+<meta property="og:updated_time" content="2017-03-02T09:48:31.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="七月十五九月初七">
+<meta name="twitter:title" content="Swagger-PHP 基础使用">
+<meta name="twitter:description" content="Swagger-PHP 的基本语法
+@SWG\Swagger
+swagger
+info: @SWG\Info
+host
+basePath
+schemes
+consumes
+produces
+paths: @SWG\Path
+
+
+@SWG\Info
+title - 文档标题
+description - 文档描述
+termsOfService - 所属团队
+contact: @SWG\Contact">
   
     <link rel="alternate" href="/atom.xml" title="七月十五九月初七" type="application/atom+xml">
   
@@ -63,115 +115,143 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/11/22/关于-PHP-函数-array-walk-的一些想法/" class="archive-article-date">
-  <time datetime="2016-11-22T03:21:28.000Z" itemprop="datePublished">Nov 22</time>
+        <section id="main"><article id="post-Swagger-PHP-基础使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/02/Swagger-PHP-基础使用/" class="article-date">
+  <time datetime="2017-03-02T09:47:47.000Z" itemprop="datePublished">2017-03-02</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/11/22/关于-PHP-函数-array-walk-的一些想法/">关于 PHP 函数 array_walk 的一些想法</a>
+    <h1 class="article-title" itemprop="name">
+      Swagger-PHP 基础使用
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/11/21/关于-PHP-函数-array-filter-的一些想法/" class="archive-article-date">
-  <time datetime="2016-11-21T08:00:39.000Z" itemprop="datePublished">Nov 21</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/11/21/关于-PHP-函数-array-filter-的一些想法/">关于 PHP 函数 array_filter 的一些想法</a>
-    </h1>
-  
+        <h2 id="Swagger-PHP-的基本语法"><a href="#Swagger-PHP-的基本语法" class="headerlink" title="Swagger-PHP 的基本语法"></a>Swagger-PHP 的基本语法</h2><ul>
+<li>@SWG\Swagger<ul>
+<li>swagger</li>
+<li><font color="red">info: @SWG\Info</font></li>
+<li>host</li>
+<li>basePath</li>
+<li>schemes</li>
+<li>consumes</li>
+<li>produces</li>
+<li>paths: @SWG\Path</li>
+</ul>
+</li>
+<li>@SWG\Info<ul>
+<li>title - 文档标题</li>
+<li>description - 文档描述</li>
+<li>termsOfService - 所属团队</li>
+<li>contact: @SWG\Contact - 联系方式</li>
+</ul>
+</li>
+<li>@SWG\Contact<ul>
+<li>url - 联系链接</li>
+<li>name - 联系名称</li>
+<li>email - 联系邮箱</li>
+</ul>
+</li>
+<li>@SWG\License<ul>
+<li><font color="red">name</font> - 开源许可证</li>
+<li>url - 许可证地址</li>
+</ul>
+</li>
+<li>@SWG\Path<ul>
+<li>get: @SWG\Get - HTTP Get 请求</li>
+<li>put: @SWG\Put - HTTP Put 请求</li>
+<li>post: @SWG\Post - HTTP Post 请求</li>
+<li>delete: @SWG\Delete - HTTP Delete 请求</li>
+<li>options: @SWG\Options - HTTP Options 请求</li>
+</ul>
+</li>
+<li>@SWG\GET<ul>
+<li>tags - 请求分类</li>
+<li>summary - 请求简介</li>
+<li>description - 请求描述</li>
+<li>operationId - 请求编号，要求唯一</li>
+<li>consumes - 请求 Mime Types</li>
+<li>produces - 响应 Mime Types</li>
+<li>parameters: @SWG\Parameter - 请求参数</li>
+<li><font color="red">responses: @SWG\Response - 请求响应</font></li>
+<li>schemes: [“http”,”https”,”ws”,”wss”] - 请求协议</li>
+<li>deprecated - 是否弃用</li>
+</ul>
+</li>
+<li>@SWG\Parameter<ul>
+<li><font color="red">name</font> - 请求参数名称</li>
+<li><font color="red">in</font>: [“query”,”header”,”path”,”formData”,”body”] - 请求参数存放方式</li>
+<li>description - 请求参数描述</li>
+<li>required - 是否要求</li>
+<li><font color="red">schema</font> - 当 <code>in</code> 为 <code>body</code> 时可以使用，用于描述参数</li>
+<li><font color="red">type</font>: [“string”, “number”, “integer”, “boolean”, “array”, “file”]</li>
+<li>format</li>
+<li>allowEmptyValue - 是否允许空值</li>
+<li>items - 当 <code>type</code> 为 <code>array</code>,<code>items</code> 为 <code>required</code>，描述参数数组</li>
+<li>collectionFormat</li>
+<li>default - 请求参数默认值</li>
+</ul>
+</li>
+<li>@SWG\Response<ul>
+<li><font color="red">default</font><br>- response object<br>  - <font color="red">description</font> - 响应描述<br>  - schema: @SWG\Schema<br>  - headers: @SWG\Header - 响应头部<br>  - example: @SWG\Example - 响应数据例子<br>- reference object<br>  - <font color="red">$ref</font></li>
+<li>HTTP Status Code<ul>
+<li>response object<ul>
+<li><font color="red">description</font></li>
+<li>schema: @SWG\Schema</li>
+<li>headers: @SWG\Header</li>
+<li>example: @SWG\Example</li>
+</ul>
+</li>
+<li>reference object<ul>
+<li><font color="red">$ref</font></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>@SWG\Definition</li>
+<li>@SWG\Property</li>
+</ul>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/11/21/关于-PHP-函数-array-map-的一些想法/" class="archive-article-date">
-  <time datetime="2016-11-21T06:42:50.000Z" itemprop="datePublished">Nov 21</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/11/21/关于-PHP-函数-array-map-的一些想法/">关于 PHP 函数 array_map 的一些想法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/11/19/使用-PHPStorm-的-Live-Templates-封装常用代码/" class="archive-article-date">
-  <time datetime="2016-11-19T07:11:46.000Z" itemprop="datePublished">Nov 19</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2017/03/02/Swagger-PHP-基础使用/" data-id="cizs7l0g7001ru44bvvvk8wj7" class="article-share-link">Partager</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/11/19/使用-PHPStorm-的-Live-Templates-封装常用代码/">使用 PHPStorm 的 Live Templates 封装常用代码</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/11/03/Yii-框架之工具篇/" class="archive-article-date">
-  <time datetime="2016-11-03T12:45:23.000Z" itemprop="datePublished">Nov 3</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/11/03/Yii-框架之工具篇/">Yii 框架之工具篇</a>
-    </h1>
-  
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swagger/">Swagger</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/02/28/使用-Yii2-构建-RESTFul-API/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">使用 Yii2 构建 RESTFul API</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 </section>
         
