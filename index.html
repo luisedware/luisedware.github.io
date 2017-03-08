@@ -54,7 +54,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -177,7 +177,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/02/Swagger-PHP-基础使用/" data-id="cj00d8ky9001uwu4b6qt2wqmm" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/03/02/Swagger-PHP-基础使用/" data-id="cj00mdtds0021a04bkh41rhke" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swagger/">Swagger</a></li></ul>
@@ -357,11 +357,13 @@
 <li>将规则与角色和权限作关联；</li>
 <li>指派角色给用户。</li>
 </ul>
+<p>在项目根目录 <code>console/controllers</code> 文件夹新建控制器 <code>RbacController.php</code>，代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">console</span>\<span class="title">controllers</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">Yii</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">yii</span>\<span class="title">console</span>\<span class="title">Controller</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">RbacController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">actionInit</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        $authManager = Yii::$app-&gt;authManager;</div><div class="line"></div><div class="line">        <span class="comment">// 添加 "createPost" 权限</span></div><div class="line">        $createPost = $authManager-&gt;createPermission(<span class="string">'createPost'</span>);</div><div class="line">        $createPost-&gt;description = <span class="string">'Create a post'</span>;</div><div class="line">        $authManager-&gt;add($createPost);</div><div class="line"></div><div class="line">        <span class="comment">// 添加 "updatePost" 权限</span></div><div class="line">        $updatePost = $authManager-&gt;createPermission(<span class="string">'updatePost'</span>);</div><div class="line">        $updatePost-&gt;description = <span class="string">'Update post'</span>;</div><div class="line">        $authManager-&gt;add($updatePost);</div><div class="line"></div><div class="line">        <span class="comment">// 添加 "author" 角色并赋予 "createPost" 权限</span></div><div class="line">        $author = $authManager-&gt;createRole(<span class="string">'author'</span>);</div><div class="line">        $authManager-&gt;add($author);</div><div class="line">        $authManager-&gt;addChild($author, $createPost);</div><div class="line"></div><div class="line">        <span class="comment">// 添加 "admin" 角色并赋予 "updatePost" 和 "author" 权限</span></div><div class="line">        $admin = $authManager-&gt;createRole(<span class="string">'admin'</span>);</div><div class="line">        $authManager-&gt;add($admin);</div><div class="line">        $authManager-&gt;addChild($admin, $updatePost);</div><div class="line">        $authManager-&gt;addChild($admin, $author);</div><div class="line"></div><div class="line">        <span class="comment">// 为用户指派角色。其中 1 和 2 是由 IdentityInterface::getId() 返回的id （译者注：user表的id）</span></div><div class="line">        $authManager-&gt;assign($admin, <span class="number">1</span>);</div><div class="line">        $authManager-&gt;assign($author, <span class="number">2</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然后在根目录中执行命令 <code>php yii rbac/init</code>，填充 RBAC 的测试数据，并在文件 <code>v1/Module.php</code> 中更改代码如下:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// v1 模块的请求都需要认证</span></div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">behaviors</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    $behaviors = <span class="keyword">parent</span>::behaviors();</div><div class="line"></div><div class="line">    <span class="comment">// API 认证</span></div><div class="line">    $behaviors[<span class="string">'authenticator'</span>] = [</div><div class="line">        <span class="string">'class'</span> =&gt; QueryParamAuth::className(),</div><div class="line">    ];</div><div class="line"></div><div class="line">    <span class="comment">// API 授权</span></div><div class="line">    Yii::$app-&gt;user-&gt;setIdentity(User::findIdentityByAccessToken(Yii::$app-&gt;request-&gt;get(<span class="string">'access-token'</span>)));</div><div class="line">    $operation = Yii::$app-&gt;controller-&gt;id . <span class="string">'/'</span> . Yii::$app-&gt;controller-&gt;action-&gt;id;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (!Yii::$app-&gt;user-&gt;can($operation)) &#123;</div><div class="line">        <span class="keyword">echo</span> <span class="string">'没有'</span> . $operation . <span class="string">'的操作权限'</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/28/使用-Yii2-构建-RESTFul-API/" data-id="cj00d8l02004gwu4b3fb9lzi8" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/28/使用-Yii2-构建-RESTFul-API/" data-id="cj00mdtfi003za04b4wyvwxfv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
@@ -443,7 +445,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/23/「复习」使用阿里云从零开始部署-Laravel/" data-id="cj00d8kyh002bwu4bx6z3o5s5" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/23/「复习」使用阿里云从零开始部署-Laravel/" data-id="cj00mdte1002ea04b19hrudlg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AliCloud/">AliCloud</a></li></ul>
@@ -510,7 +512,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/17/学习-UML（二）/" data-id="cj00d8l0k005cwu4bco8402ku" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/17/学习-UML（二）/" data-id="cj00mdtga005ba04bghl40ymq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UML/">UML</a></li></ul>
@@ -615,7 +617,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/14/在-Yii-2-中使用-CodeCeption/" data-id="cj00d8l0d0050wu4b2jjjr8j3" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/14/在-Yii-2-中使用-CodeCeption/" data-id="cj00mdtg2004za04b6nepqro1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -694,7 +696,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/11/LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）/" data-id="cj00d8kxe000xwu4b21qpp44c" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/11/LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）/" data-id="cj00mdtcu000xa04bupgc7wsg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -746,7 +748,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-九/" data-id="cj00d8kxw001gwu4bm5b367ff" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-九/" data-id="cj00mdtd7001ba04btzw4hyc1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -800,7 +802,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-六/" data-id="cj00d8ky2001owu4bugy4ryf7" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-六/" data-id="cj00mdtdi001ra04bustx5pu8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -880,7 +882,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-四/" data-id="cj00d8ky4001rwu4bdi5vhait" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-四/" data-id="cj00mdtdd001ja04bba95wsq0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -938,7 +940,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-二/" data-id="cj00d8kxy001jwu4b3r2w46fm" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-二/" data-id="cj00mdtdg001oa04bw1a1do3e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -961,7 +963,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Kategorier</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -990,7 +992,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Arkiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
@@ -1000,7 +1002,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Siste innlegg</h3>
     <div class="widget">
       <ul>
         
