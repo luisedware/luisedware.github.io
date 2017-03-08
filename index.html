@@ -177,7 +177,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/02/Swagger-PHP-基础使用/" data-id="cizz86orc001m214bfwz99l6v" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/03/02/Swagger-PHP-基础使用/" data-id="cj00d8ky9001uwu4b6qt2wqmm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swagger/">Swagger</a></li></ul>
@@ -349,11 +349,19 @@
 <p>模型<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">api</span>\<span class="title">modules</span>\<span class="title">v1</span>\<span class="title">models</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">yii</span>\<span class="title">db</span>\<span class="title">ActiveRecord</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Menu</span> <span class="keyword">extends</span> <span class="title">ActiveRecord</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">tableName</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"menu"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 返回指定的字段</span></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">fields</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> [</div><div class="line">            <span class="string">'id'</span>,</div><div class="line">            <span class="string">'name'</span>,</div><div class="line">            <span class="string">'route'</span>,</div><div class="line">        ];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">rules</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> [</div><div class="line">            [</div><div class="line">                [</div><div class="line">                    <span class="string">'name'</span>,</div><div class="line">                    <span class="string">'parent'</span>,</div><div class="line">                    <span class="string">'route'</span>,</div><div class="line">                    <span class="string">'order'</span>,</div><div class="line">                    <span class="string">'data'</span>,</div><div class="line">                ],</div><div class="line">                <span class="string">'required'</span>,</div><div class="line">                <span class="string">'on'</span> =&gt; [<span class="string">'createScenario'</span>],</div><div class="line">            ],</div><div class="line">        ];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>在浏览器中打开 URL: <code>http://api.app/document/build/v1</code> 生成文档。</p>
 <h2 id="API-授权"><a href="#API-授权" class="headerlink" title="API 授权"></a>API 授权</h2><p>现在已经解决了 RESTFUL API 的脚手架、版本化、API 验证和 API 文档生成的问题，接下来我们来完成 API 授权功能。</p>
+<p>首先我们需要建立授权数据，而所有授权数据相关的任务如下：</p>
+<ul>
+<li>定义角色和权限；</li>
+<li>建立角色和权限的关系；</li>
+<li>定义规则；</li>
+<li>将规则与角色和权限作关联；</li>
+<li>指派角色给用户。</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/28/使用-Yii2-构建-RESTFul-API/" data-id="cizz86ot6003o214b1vtsgg2o" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/28/使用-Yii2-构建-RESTFul-API/" data-id="cj00d8l02004gwu4b3fb9lzi8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
@@ -435,7 +443,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/23/「复习」使用阿里云从零开始部署-Laravel/" data-id="cizz86orv002c214bfocd7ez8" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/23/「复习」使用阿里云从零开始部署-Laravel/" data-id="cj00d8kyh002bwu4bx6z3o5s5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AliCloud/">AliCloud</a></li></ul>
@@ -502,7 +510,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/17/学习-UML（二）/" data-id="cizz86oud005j214bt2eephbo" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/17/学习-UML（二）/" data-id="cj00d8l0k005cwu4bco8402ku" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UML/">UML</a></li></ul>
@@ -607,7 +615,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/14/在-Yii-2-中使用-CodeCeption/" data-id="cizz86ou30054214bg0wr5kfh" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/14/在-Yii-2-中使用-CodeCeption/" data-id="cj00d8l0d0050wu4b2jjjr8j3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -686,7 +694,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/11/LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）/" data-id="cizz86or00010214bvqwd9svt" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/11/LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）/" data-id="cj00d8kxe000xwu4b21qpp44c" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -738,7 +746,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-九/" data-id="cizz86or40018214b3mhdc5r6" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-九/" data-id="cj00d8kxw001gwu4bm5b367ff" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -792,7 +800,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-六/" data-id="cizz86or6001b214boslaso6q" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-六/" data-id="cj00d8ky2001owu4bugy4ryf7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -872,7 +880,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-四/" data-id="cizz86or9001i214bd6nrgatj" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-四/" data-id="cj00d8ky4001rwu4bdi5vhait" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -930,7 +938,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-二/" data-id="cizz86or8001g214bnjrj6mfb" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-二/" data-id="cj00d8kxy001jwu4b3r2w46fm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
