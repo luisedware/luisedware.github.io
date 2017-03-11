@@ -177,7 +177,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/02/Swagger-PHP-基础使用/" data-id="cj01tl4y2001u994b3oej47gq" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/03/02/Swagger-PHP-基础使用/" data-id="cj051jc6j001uzq4bjxa7vzvu" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swagger/">Swagger</a></li></ul>
@@ -363,14 +363,41 @@
 <p>然后在根目录中执行命令 <code>php yii rbac/init</code>，填充 RBAC 的测试数据，并在文件 <code>v1/Module.php</code> 中更改代码如下:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// v1 模块的请求都需要认证</span></div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">behaviors</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    $behaviors = <span class="keyword">parent</span>::behaviors();</div><div class="line"></div><div class="line">    <span class="comment">// API 认证</span></div><div class="line">    $behaviors[<span class="string">'authenticator'</span>] = [</div><div class="line">        <span class="string">'class'</span> =&gt; QueryParamAuth::className(),</div><div class="line">    ];</div><div class="line"></div><div class="line">    <span class="comment">// API 授权</span></div><div class="line">    Yii::$app-&gt;user-&gt;setIdentity(User::findIdentityByAccessToken(Yii::$app-&gt;request-&gt;get(<span class="string">'access-token'</span>)));</div><div class="line">    $operation = Yii::$app-&gt;controller-&gt;id . <span class="string">'/'</span> . Yii::$app-&gt;controller-&gt;action-&gt;id;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (!Yii::$app-&gt;user-&gt;can($operation)) &#123;</div><div class="line">        <span class="keyword">echo</span> <span class="string">'没有'</span> . $operation . <span class="string">'的操作权限'</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h2 id="编写测试"><a href="#编写测试" class="headerlink" title="编写测试"></a>编写测试</h2><p>如果是 RESTFul API 的架构，我会选择编写 API 测试和单元测试。首先先从 API 测试开始。首先在 <code>api</code> 中创建 API 测试配置文件,执行命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">codecept generate:suite api</div></pre></td></tr></table></figure></p>
 <p>进入文件夹<code>api/tests</code>，打开文件 <code>api.suite.yml</code>，编写配置如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">class_name: ApiTester</div><div class="line">modules:</div><div class="line">    enabled: [PhpBrowser, REST]</div><div class="line">    config:</div><div class="line">        PhpBrowser:</div><div class="line">            url: http://api.app</div><div class="line">        REST:</div><div class="line">            url: http://api.app</div><div class="line">            depends: PhpBrowser</div></pre></td></tr></table></figure></p>
-<p>在文件夹 <code>api</code> 生成 API 测试文件，执行命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">codecept generate:cept api/v1 SearchMenu</div></pre></td></tr></table></figure></p>
-<p>打开文件 <code>api/tests/api/v1/SearchMenuCept.php</code>，编写代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">use</span> <span class="title">api</span>\<span class="title">tests</span>\<span class="title">ApiTester</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">Codeception</span>\<span class="title">Util</span>\<span class="title">HttpCode</span>;</div><div class="line"></div><div class="line">$I = <span class="keyword">new</span> ApiTester($scenario);</div><div class="line">$I-&gt;wantTo(<span class="string">'search menus'</span>);</div><div class="line">$I-&gt;haveHttpHeader(<span class="string">'Content-Type'</span>, <span class="string">'application/json'</span>);</div><div class="line">$I-&gt;sendGet(<span class="string">'/v1/menu'</span>, [<span class="string">'access-token'</span> =&gt; <span class="string">"HelloWorld"</span>]);</div><div class="line">$I-&gt;seeResponseCodeIs(HttpCode::OK);</div><div class="line">$I-&gt;seeResponseIsJson();</div></pre></td></tr></table></figure></p>
+<p>在文件夹 <code>api</code> 生成 API 测试文件，执行命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">codecept generate:cept api/v1 SearchMenu</div><div class="line">codecept generate:cept api/v1 CreateMenu</div></pre></td></tr></table></figure></p>
+<p>打开文件 <code>api/tests/api/v1/SearchMenuCept.php</code>，编写代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">use</span> <span class="title">api</span>\<span class="title">tests</span>\<span class="title">ApiTester</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">Codeception</span>\<span class="title">Util</span>\<span class="title">HttpCode</span>;</div><div class="line"></div><div class="line">$I = <span class="keyword">new</span> ApiTester($scenario);</div><div class="line">$I-&gt;wantTo(<span class="string">'search menus'</span>);</div><div class="line">$I-&gt;haveHttpHeader(<span class="string">'Content-Type'</span>, <span class="string">'application/json'</span>);</div><div class="line">$I-&gt;sendGet(<span class="string">'/v1/menu'</span>, [<span class="string">'access-token'</span> =&gt; <span class="string">"HelloWorld"</span>]);</div><div class="line">$I-&gt;seeResponseCodeIs(HttpCode::OK);</div><div class="line">$I-&gt;seeResponseIsJson();</div><div class="line">$I-&gt;seeResponseMatchesJsonType([</div><div class="line">    <span class="string">'items'</span> =&gt; <span class="string">'array'</span>,</div><div class="line">    <span class="string">'_links'</span> =&gt; <span class="string">'array'</span>,</div><div class="line">    <span class="string">'_meta'</span> =&gt; [</div><div class="line">        <span class="string">'totalCount'</span> =&gt; <span class="string">'integer'</span>,</div><div class="line">        <span class="string">'pageCount'</span> =&gt; <span class="string">'integer'</span>,</div><div class="line">        <span class="string">'currentPage'</span> =&gt; <span class="string">'integer'</span>,</div><div class="line">        <span class="string">'perPage'</span> =&gt; <span class="string">'integer'</span>,</div><div class="line">    ],</div><div class="line">]);</div></pre></td></tr></table></figure></p>
+<p>打开文件 <code>api/tests/api/v1/CreateMenuCept.php</code>，编写代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">use</span> <span class="title">api</span>\<span class="title">tests</span>\<span class="title">ApiTester</span>;</div><div class="line"></div><div class="line">$I = <span class="keyword">new</span> ApiTester($scenario);</div><div class="line">$I-&gt;wantTo(<span class="string">'create menu'</span>);</div><div class="line">$I-&gt;haveHttpHeader(<span class="string">'Content-Type'</span>, <span class="string">'application/json'</span>);</div><div class="line">$I-&gt;sendPOST(<span class="string">'/v1/menu?access-token=HelloWorld'</span>, [</div><div class="line">    <span class="string">'name'</span> =&gt; <span class="string">'歪理兔'</span>,</div><div class="line">    <span class="string">'parent'</span> =&gt; <span class="string">'1'</span>,</div><div class="line">    <span class="string">'route'</span> =&gt; <span class="string">'/go/to/very-to'</span>,</div><div class="line">    <span class="string">'order'</span> =&gt; <span class="number">0</span>,</div><div class="line">    <span class="string">'data'</span> =&gt; <span class="string">'hello'</span>,</div><div class="line">]);</div><div class="line">$I-&gt;seeResponseCodeIs(<span class="number">201</span>);</div><div class="line">$I-&gt;seeResponseIsJson();</div><div class="line">$I-&gt;seeResponseMatchesJsonType([</div><div class="line">    <span class="string">'id'</span> =&gt; <span class="string">'integer'</span>,</div><div class="line">    <span class="string">'name'</span> =&gt; <span class="string">'string'</span>,</div><div class="line">    <span class="string">'route'</span> =&gt; <span class="string">'string'</span>,</div><div class="line">]);</div></pre></td></tr></table></figure></p>
 <p>接着构建测试环境，并运行所编写的 API 测试，执行命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">codecept build</div><div class="line">codecept run</div></pre></td></tr></table></figure></p>
+<h2 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h2><h4 id="Yii-2-的-REST-框架的-HTTP-状态代码如下："><a href="#Yii-2-的-REST-框架的-HTTP-状态代码如下：" class="headerlink" title="Yii 2 的 REST 框架的 HTTP 状态代码如下："></a>Yii 2 的 REST 框架的 HTTP 状态代码如下：</h4><ul>
+<li>200: OK。一切正常。</li>
+<li>201: 响应 POST 请求时成功创建一个资源。Location header 包含的URL指向新创建的资源。</li>
+<li>204: 该请求被成功处理，响应不包含正文内容 (类似 DELETE 请求)。</li>
+<li>304: 资源没有被修改。可以使用缓存的版本。</li>
+<li>400: 错误的请求。可能通过用户方面的多种原因引起的，例如在请求体内有无效的JSON 数据，无效的操作参数，等等。</li>
+<li>401: 验证失败。</li>
+<li>403: 已经经过身份验证的用户不允许访问指定的 API 末端。</li>
+<li>404: 所请求的资源不存在。</li>
+<li>405: 不被允许的方法。 请检查 Allow header 允许的HTTP方法。</li>
+<li>415: 不支持的媒体类型。 所请求的内容类型或版本号是无效的。</li>
+<li>422: 数据验证失败 (例如，响应一个 POST 请求)。 请检查响应体内详细的错误消息。</li>
+<li>429: 请求过多。 由于限速请求被拒绝。</li>
+<li>500: 内部服务器错误。 这可能是由于内部程序错误引起的。</li>
+</ul>
+<h4 id="对应的-class-使用如下"><a href="#对应的-class-使用如下" class="headerlink" title="对应的 class 使用如下:"></a>对应的 class 使用如下:</h4><ul>
+<li>BadRequestHttpException - 400</li>
+<li>UnauthorizedHttpException - 401</li>
+<li>ForbiddenHttpException - 403</li>
+<li>NotFoundHttpException - 404</li>
+<li>MethodNotAllowedHttpException - 405</li>
+<li>UnsupportedMediaTypeHttpException - 415</li>
+<li>UnprocessableEntityHttpException - 422</li>
+<li>TooManyRequestsHttpException - 429</li>
+<li>ServerErrorHttpException - 500</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/28/使用-Yii2-构建-RESTFul-API/" data-id="cj01tl5080046994bsb1gqb7z" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/02/28/使用-Yii2-构建-RESTFul-API/" data-id="cj051jc8q003tzq4bwhp5ytwp" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
@@ -447,12 +474,20 @@
 <p>创建 gogs 数据库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">CREATE DATABASE IF NOT EXISTS gogs CHARACTER SET utf8 COLLATE utf8_general_ci;</div><div class="line">use gogs;</div><div class="line">SET default_storage_engine=INNODB;</div></pre></td></tr></table></figure></p>
 <p>安装 Go<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y go</div></pre></td></tr></table></figure></p>
 <p>安装 Gogs<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">// 下载二进制包</div><div class="line">wget http://7d9nal.com2.z0.glb.qiniucdn.com/0.10rc/linux_amd64.zip</div><div class="line"></div><div class="line">// 解压</div><div class="line">unzip linux_amd64.zip</div><div class="line"></div><div class="line">cd gogs/</div><div class="line">// 后台运行</div><div class="line">nohup ./gogs web &amp;</div><div class="line">tail -f nohup.out</div></pre></td></tr></table></figure></p>
-<p>访问 URL 进行安装</p>
+<p>访问 URL 进行安装，安装 URL 是主机 IP 地址加上 3000 端口。</p>
+<h2 id="Walle"><a href="#Walle" class="headerlink" title="Walle"></a>Walle</h2><p>进入 MySQL，新增数据库如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">create database walle default character set utf8 COLLATE utf8_general_ci;</div></pre></td></tr></table></figure></p>
+<p>安装依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install ansible</div></pre></td></tr></table></figure></p>
+<p>代码检出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir -p /data/www/                                     # 新建目录</div><div class="line">git clone https://github.com/meolu/walle-web.git        # 代码检出</div></pre></td></tr></table></figure></p>
+<p>连接数据库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">cd walle-web/</div><div class="line">vim config/local.php</div><div class="line"></div><div class="line">// 修改 PHP 数组</div><div class="line">&apos;db&apos; =&gt; [</div><div class="line">    &apos;dsn&apos;       =&gt; &apos;mysql:host=127.0.0.1;dbname=walle&apos;, # 新建数据库walle</div><div class="line">    &apos;username&apos;  =&gt; &apos;username&apos;,                          # 连接的用户名</div><div class="line">    &apos;password&apos;  =&gt; &apos;password&apos;,                          # 连接的密码</div><div class="line">],</div></pre></td></tr></table></figure></p>
+<p>安装 vendor<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /data/www/walle-web</div><div class="line">composer install --prefer-dist --no-dev --optimize-autoloader -vvvv</div></pre></td></tr></table></figure></p>
+<p>初始化项目<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /data/www/walle-web</div><div class="line">./yii walle/setup</div></pre></td></tr></table></figure></p>
+<p>配置 Nginx<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen       80;</div><div class="line">    server_name  walle.compony.com; # 改你的host</div><div class="line">    root /the/dir/of/walle-web/web; # 根目录为web</div><div class="line">    index index.php;</div><div class="line"></div><div class="line">    # 建议放内网</div><div class="line">    # allow 192.168.0.0/24;</div><div class="line">    # deny all;</div><div class="line"></div><div class="line">    location / &#123;</div><div class="line">        try_files $uri $uri/ /index.php$is_args$args;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location ~ \.php$ &#123;</div><div class="line">        try_files $uri = 404;</div><div class="line">        fastcgi_pass   127.0.0.1:9000;</div><div class="line">        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;</div><div class="line">        include        fastcgi_params;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然后访问你配置好的域名或服务器地址，管理员默认账号密码是 <code>admin/admin</code>，开发者默认账号密码是 <code>demo/demo</code>。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/23/「复习」使用阿里云从零开始部署-Laravel/" data-id="cj01tl4yr002m994bu9xg4a97" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/02/23/「复习」使用阿里云从零开始部署-Laravel/" data-id="cj051jc74002fzq4bvoh79b6s" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AliCloud/">AliCloud</a></li></ul>
@@ -519,7 +554,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/17/学习-UML（二）/" data-id="cj01tl51c005k994bzo2b2gpe" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/02/17/学习-UML（二）/" data-id="cj051jc9t005fzq4bpa7mw3jk" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UML/">UML</a></li></ul>
@@ -624,7 +659,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/14/在-Yii-2-中使用-CodeCeption/" data-id="cj01tl5130055994br7r040do" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/02/14/在-Yii-2-中使用-CodeCeption/" data-id="cj051jc9r005azq4baj1ba4py" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -703,7 +738,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/11/LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）/" data-id="cj01tl4xa0010994bzmu9u5az" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/02/11/LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）/" data-id="cj051jc5c000uzq4brx8jy80c" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -755,7 +790,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-九/" data-id="cj01tl4xi001b994bcuyliwje" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-九/" data-id="cj051jc5v0018zq4bqsbgoikl" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -809,7 +844,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-六/" data-id="cj01tl4xo001i994bmxho6xnn" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-六/" data-id="cj051jc6b001ozq4b58wm35gq" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -889,7 +924,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-四/" data-id="cj01tl4xt001p994bwkyg594g" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-四/" data-id="cj051jc69001lzq4b42z8tnbr" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -947,7 +982,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-二/" data-id="cj01tl4xq001m994b2byj4wnj" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-二/" data-id="cj051jc5z001dzq4b7prlhj8q" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
