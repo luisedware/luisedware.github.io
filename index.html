@@ -91,11 +91,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>使用 Yii 2 构建 RESTFul API 项目时，需要实现一个功能。这个功能可以将 HTTP 请求的参数和后端数据模型相映射，实现前端的请求参数命名和后端数据的模型属性不需要保持一致，并在指定场景中实现数据验证。实现代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">/*</span></div><div class="line"> * 前端传递 JSON 数据进来，格式是&#123;"name":"admin","pwd":"123456"&#125;</div><div class="line"> * 需要对数据在指定场景下验证，并对应到模型的 username 属性和 password_hash 属性</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="comment">// 模型代码</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SignInForm</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">public</span> $name;</div><div class="line">	<span class="keyword">public</span> $pwd;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">rules</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        $rules = [</div><div class="line">            [</div><div class="line">                [</div><div class="line">                    <span class="string">'name'</span>,</div><div class="line">                    <span class="string">'pwd'</span>,</div><div class="line">                ],</div><div class="line">                <span class="string">'required'</span>,</div><div class="line">                <span class="string">'on'</span> =&gt; <span class="string">'signIn'</span>,</div><div class="line">            ],</div><div class="line">            [</div><div class="line">                [<span class="string">'name'</span>],</div><div class="line">                <span class="string">'default'</span>,</div><div class="line">                <span class="string">'value'</span> =&gt; <span class="keyword">$this</span>-&gt;username,</div><div class="line">                <span class="string">'on'</span> =&gt; <span class="string">'signIn'</span>,</div><div class="line">            ],</div><div class="line">            [</div><div class="line">                [<span class="string">'pwd'</span>],</div><div class="line">                <span class="string">'default'</span>,</div><div class="line">                <span class="string">'value'</span> =&gt; <span class="keyword">$this</span>-&gt;password_hash,</div><div class="line">                <span class="string">'on'</span> =&gt; <span class="string">'signIn'</span>,</div><div class="line">            ],</div><div class="line">        ];</div><div class="line"></div><div class="line">        <span class="keyword">return</span> $rules;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 控制器代码</span></div><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">Yii</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">workerbee</span>\<span class="title">api</span>\<span class="title">controllers</span>\<span class="title">BaseController</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserController</span> <span class="keyword">extends</span> <span class="title">BaseController</span></span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">actionSignIn</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        $data[<span class="string">'SignInForm'</span>] = Yii::$app-&gt;request-&gt;post();</div><div class="line">        $signInModel = <span class="keyword">new</span> SignInForm([<span class="string">'scenario'</span> =&gt; <span class="string">'signIn'</span>]);</div><div class="line"></div><div class="line">        <span class="keyword">if</span> ($signInModel-&gt;load($data) &amp;&amp; $signInModel-&gt;validate()) &#123;</div><div class="line">            $user = SignInForm::findByUsername($signInModel-&gt;username);</div><div class="line">            $validator = Yii::$app-&gt;getSecurity()-&gt;validatePassword($signInModel-&gt;pwd, $user-&gt;password_hash);</div><div class="line">            <span class="keyword">if</span> ($user !== <span class="keyword">null</span> &amp;&amp; $validator) &#123;</div><div class="line">                $user-&gt;access_token = $signInModel-&gt;getNewAccessToken();</div><div class="line">                <span class="keyword">if</span> ($user-&gt;save()) &#123;</div><div class="line">                    <span class="keyword">return</span> $user;</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> ServerErrorHttpException(<span class="string">'登陆失败.'</span>);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> BadRequestHttpException(<span class="string">'账号名或密码错误.'</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnprocessableEntityHttpException(<span class="string">'数据验证失败.'</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」Yii2-前端请求的参数字段映射数据模型的属性/" data-id="cj0asg1er002lr84byocls211" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」Yii2-前端请求的参数字段映射数据模型的属性/" data-id="cj0assbvd002zx84bytesv8da" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -139,7 +140,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」-htaccess-配置-HTTP-Header/" data-id="cj0asg1en002er84b3axomffq" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」-htaccess-配置-HTTP-Header/" data-id="cj0assbvb002wx84be0s95vpf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -182,7 +183,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」PHP-7-1-命名空间的新特性和使用方法/" data-id="cj0asg1ev002sr84bc5763y7i" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」PHP-7-1-命名空间的新特性和使用方法/" data-id="cj0assbv0002fx84budhstii2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -306,7 +307,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/02/Swagger-PHP-基础使用/" data-id="cj0asg1do001or84btnpwmxut" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/03/02/Swagger-PHP-基础使用/" data-id="cj0assbul001ox84bztjxymxq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swagger/">Swagger</a></li></ul>
@@ -526,7 +527,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/28/使用-Yii2-构建-RESTFul-API/" data-id="cj0asg1ft003zr84bytoysetd" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/28/使用-Yii2-构建-RESTFul-API/" data-id="cj0assbxl0044x84b0k6wyn6t" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
@@ -616,7 +617,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/23/「复习」使用阿里云从零开始部署-Laravel/" data-id="cj0asg1es002or84bywrwkfrp" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/23/「复习」使用阿里云从零开始部署-Laravel/" data-id="cj0assbv4002ix84bdbuj5wmn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AliCloud/">AliCloud</a></li></ul>
@@ -683,7 +684,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/17/学习-UML（二）/" data-id="cj0asg1gf005kr84bsnuvmnq9" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/17/学习-UML（二）/" data-id="cj0assc0d005jx84bytlg7y22" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UML/">UML</a></li></ul>
@@ -788,7 +789,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/14/在-Yii-2-中使用-CodeCeption/" data-id="cj0asg1g7004wr84bgzfdbe6v" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/14/在-Yii-2-中使用-CodeCeption/" data-id="cj0assc02004yx84bs2vilnw4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -867,7 +868,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/11/LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）/" data-id="cj0asg1dj001mr84b6vqr3zkk" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/11/LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）/" data-id="cj0assbu80012x84b1g73ah99" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -919,7 +920,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-九/" data-id="cj0asg1da0018r84b3qodxo85" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-九/" data-id="cj0assbui001lx84b2z7rje56" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
