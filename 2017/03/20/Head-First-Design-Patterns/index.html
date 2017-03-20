@@ -3,24 +3,69 @@
 <head>
   <meta charset="utf-8">
   
-  <title>使用 PHPStorm 的 Live Templates 封装常用代码 | 七月十五九月初七</title>
+  <title>Head First Design Patterns | 七月十五九月初七</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="PHP Template Groupfore123foreach ($ITERABLE$ as $VAR_VALUE$) &amp;#123;    $END$&amp;#125;
-forek123foreach ($ITERABLE$ as $VAR_KEY$ =&amp;gt; $VAR_VALUE$) &amp;#123;    $END$&amp;#125;
-prif123private function $NAME$($PAR">
+  <meta name="description" content="如何定义模式
+模式是某种情景下，针对某问题的某种解决方案。
+
+情景
+应用某个模式的情况，应该是会不断出现的情况
+
+
+问题
+想在某个情景下达到的目标，但也可以是某情景下的约束
+
+
+解决方案
+一个通用的设计，用来解决约束、达到目标
+
+
+
+帮助记忆上述概念的方法
+如果你发现自己处于某个情境下，面对着所欲达到的目标被一群约束影响着的问题，然而，你能够应用某个设计，克服这些约束并达到该目标，将你领向某个解决">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用 PHPStorm 的 Live Templates 封装常用代码">
-<meta property="og:url" content="http://luisedware.github.io/2016/11/19/使用-PHPStorm-的-Live-Templates-封装常用代码/index.html">
+<meta property="og:title" content="Head First Design Patterns">
+<meta property="og:url" content="http://luisedware.github.io/2017/03/20/Head-First-Design-Patterns/index.html">
 <meta property="og:site_name" content="七月十五九月初七">
-<meta property="og:description" content="PHP Template Groupfore123foreach ($ITERABLE$ as $VAR_VALUE$) &amp;#123;    $END$&amp;#125;
-forek123foreach ($ITERABLE$ as $VAR_KEY$ =&amp;gt; $VAR_VALUE$) &amp;#123;    $END$&amp;#125;
-prif123private function $NAME$($PAR">
-<meta property="og:updated_time" content="2016-11-19T07:35:52.000Z">
+<meta property="og:description" content="如何定义模式
+模式是某种情景下，针对某问题的某种解决方案。
+
+情景
+应用某个模式的情况，应该是会不断出现的情况
+
+
+问题
+想在某个情景下达到的目标，但也可以是某情景下的约束
+
+
+解决方案
+一个通用的设计，用来解决约束、达到目标
+
+
+
+帮助记忆上述概念的方法
+如果你发现自己处于某个情境下，面对着所欲达到的目标被一群约束影响着的问题，然而，你能够应用某个设计，克服这些约束并达到该目标，将你领向某个解决">
+<meta property="og:updated_time" content="2017-03-20T03:19:39.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用 PHPStorm 的 Live Templates 封装常用代码">
-<meta name="twitter:description" content="PHP Template Groupfore123foreach ($ITERABLE$ as $VAR_VALUE$) &amp;#123;    $END$&amp;#125;
-forek123foreach ($ITERABLE$ as $VAR_KEY$ =&amp;gt; $VAR_VALUE$) &amp;#123;    $END$&amp;#125;
-prif123private function $NAME$($PAR">
+<meta name="twitter:title" content="Head First Design Patterns">
+<meta name="twitter:description" content="如何定义模式
+模式是某种情景下，针对某问题的某种解决方案。
+
+情景
+应用某个模式的情况，应该是会不断出现的情况
+
+
+问题
+想在某个情景下达到的目标，但也可以是某情景下的约束
+
+
+解决方案
+一个通用的设计，用来解决约束、达到目标
+
+
+
+帮助记忆上述概念的方法
+如果你发现自己处于某个情境下，面对着所欲达到的目标被一群约束影响着的问题，然而，你能够应用某个设计，克服这些约束并达到该目标，将你领向某个解决">
   
     <link rel="alternate" href="/atom.xml" title="七月十五九月初七" type="application/atom+xml">
   
@@ -73,12 +118,16 @@ prif123private function $NAME$($PAR">
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-使用-PHPStorm-的-Live-Templates-封装常用代码" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Head-First-Design-Patterns" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/11/19/使用-PHPStorm-的-Live-Templates-封装常用代码/" class="article-date">
-  <time datetime="2016-11-19T07:11:46.000Z" itemprop="datePublished">2016-11-19</time>
+    <a href="/2017/03/20/Head-First-Design-Patterns/" class="article-date">
+  <time datetime="2017-03-20T02:46:53.000Z" itemprop="datePublished">2017-03-20</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Design-Patterns/">Design Patterns</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -87,7 +136,7 @@ prif123private function $NAME$($PAR">
         
   
     <h1 class="article-title" itemprop="name">
-      使用 PHPStorm 的 Live Templates 封装常用代码
+      Head First Design Patterns
     </h1>
   
 
@@ -95,43 +144,63 @@ prif123private function $NAME$($PAR">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="PHP-Template-Group"><a href="#PHP-Template-Group" class="headerlink" title="PHP Template Group"></a>PHP Template Group</h2><h3 id="fore"><a href="#fore" class="headerlink" title="fore"></a>fore</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">foreach ($ITERABLE$ as $VAR_VALUE$) &#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="forek"><a href="#forek" class="headerlink" title="forek"></a>forek</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">foreach ($ITERABLE$ as $VAR_KEY$ =&gt; $VAR_VALUE$) &#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="prif"><a href="#prif" class="headerlink" title="prif"></a>prif</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">private function $NAME$($PARAMETERS$)&#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="prisf"><a href="#prisf" class="headerlink" title="prisf"></a>prisf</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">private static function $NAME$($PARAMETERS$)&#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="prof"><a href="#prof" class="headerlink" title="prof"></a>prof</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">protected function $NAME$($PARAMETERS$)&#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="prosf"><a href="#prosf" class="headerlink" title="prosf"></a>prosf</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">protected static function $NAME$($PARAMETERS$)&#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="pubf"><a href="#pubf" class="headerlink" title="pubf"></a>pubf</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public function $NAME$($PARAMETERS$)&#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="pubsf"><a href="#pubsf" class="headerlink" title="pubsf"></a>pubsf</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public static function $NAME$($PARAMETERS$)&#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="thr"><a href="#thr" class="headerlink" title="thr"></a>thr</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">throw new $END$</div></pre></td></tr></table></figure>
-<h3 id="tryc"><a href="#tryc" class="headerlink" title="tryc"></a>tryc</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">try &#123;</div><div class="line">    $ITERABLE$</div><div class="line">&#125; catch (\$Exception$ $e) &#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>##</p>
+        <p>如何定义模式</p>
+<p>模式是某种情景下，针对某问题的某种解决方案。</p>
+<ul>
+<li>情景<ul>
+<li>应用某个模式的情况，应该是会不断出现的情况</li>
+</ul>
+</li>
+<li>问题<ul>
+<li>想在某个情景下达到的目标，但也可以是某情景下的约束</li>
+</ul>
+</li>
+<li>解决方案<ul>
+<li>一个通用的设计，用来解决约束、达到目标</li>
+</ul>
+</li>
+</ul>
+<p>帮助记忆上述概念的方法</p>
+<p>如果你发现自己处于某个情境下，面对着所欲达到的目标被一群约束影响着的问题，然而，你能够应用某个设计，克服这些约束并达到该目标，将你领向某个解决方案。</p>
+<p>比如</p>
+<ul>
+<li>问题：我要如何准时上班</li>
+<li>情景：我的钥匙锁在车里了 | 搭地铁肯定要迟早了</li>
+<li>解决方案：打破窗户、进入车内、启动引擎，开车上班 | 打开手机、呼叫滴滴、上出租车，打车上班。</li>
+</ul>
+<p>更多定义的细节：</p>
+<ul>
+<li>意图</li>
+<li>动机</li>
+<li>对比</li>
+<li>适用性</li>
+<li>举一反三</li>
+</ul>
+<p>如何更加详细去定义和学习一个设计模式</p>
+<ul>
+<li>名称：用于学习与分享时共享词汇，概括性描述一个设计模式的作用。</li>
+<li>分类</li>
+<li>动机</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/11/19/使用-PHPStorm-的-Live-Templates-封装常用代码/" data-id="cj0i75xj6003yfj4bjeqzsypn" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/03/20/Head-First-Design-Patterns/" data-id="cj0i75xe30000fj4bwnlp4zjo" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Learning/">Learning</a></li></ul>
+
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/2016/11/21/关于-PHP-函数-array-map-的一些想法/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          关于 PHP 函数 array_map 的一些想法
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/11/03/Yii-框架之工具篇/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/03/15/「Tips」Yii2-前端请求的参数字段映射数据模型的属性/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Yii 框架之工具篇</div>
+      <div class="article-nav-title">「Tips」Yii2 前端请求的参数字段映射数据模型的属性</div>
     </a>
   
 </nav>
