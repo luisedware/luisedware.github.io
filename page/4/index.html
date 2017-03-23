@@ -65,6 +65,302 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Yii-框架之高效篇" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/25/Yii-框架之高效篇/" class="article-date">
+  <time datetime="2016-10-25T12:42:56.000Z" itemprop="datePublished">2016-10-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/25/Yii-框架之高效篇/">Yii 框架之高效篇</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Yii-的延迟加载"><a href="#Yii-的延迟加载" class="headerlink" title="Yii 的延迟加载"></a>Yii 的延迟加载</h2><h3 id="类的延迟加载"><a href="#类的延迟加载" class="headerlink" title="类的延迟加载"></a>类的延迟加载</h3><p>sql_autoload_register</p>
+<p>Yii 如何使用 sql_autoload_register</p>
+<p>自动加载文件路径：vendor/yiisoft/yii2/Yii.php<br>入口文件路径：web/index.php</p>
+<h3 id="类的映射表机制"><a href="#类的映射表机制" class="headerlink" title="类的映射表机制"></a>类的映射表机制</h3><p>yii2快速的机制：使用类的映射表，把常用的类放入映射表中，加快加载速度</p>
+<p>映射表文件：vendor/yiisoft/yii2/classes.php<br>类的映射变量：Yii::$classMap<br>vendor/yiisoft/yii2/BaseYii.php</p>
+<p>可以通过使用Yii::$classMap，对延迟加载机制进行优化，是典型的空间换时间的做法，所以不建议往classMap中放入太多不常用的内容，避免内存占用过多</p>
+<p>只建议将常用的高频率class放进‘类的映射表’，不常用的就不要放，否则映射表大了，不但降低查询效率，还将占用不必要的内存。</p>
+<h3 id="组件的延迟加载"><a href="#组件的延迟加载" class="headerlink" title="组件的延迟加载"></a>组件的延迟加载</h3><ul>
+<li>index.php<ul>
+<li>app<ul>
+<li>application class</li>
+<li>components<ul>
+<li>vendor/yiisoft/yii2/web/Application.php</li>
+<li>vendor/yiisoft/yii2/base/Application.php</li>
+</ul>
+</li>
+<li>controller</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据缓存的使用"><a href="#数据缓存的使用" class="headerlink" title="数据缓存的使用"></a>数据缓存的使用</h2><h3 id="数据缓存的基础使用"><a href="#数据缓存的基础使用" class="headerlink" title="数据缓存的基础使用"></a>数据缓存的基础使用</h3><p>如何配置缓存服务器</p>
+<p>如何将数据写入缓存</p>
+<p>如何将缓存数据读出</p>
+<p>如何修改缓存的数据</p>
+<p>如何删除缓存的数据</p>
+<p>如何清空缓存中数据</p>
+<p>如何设置缓存有效期</p>
+<h3 id="数据缓存的依赖关系详解"><a href="#数据缓存的依赖关系详解" class="headerlink" title="数据缓存的依赖关系详解"></a>数据缓存的依赖关系详解</h3><p>可以用来解决缓存实时更新的问题</p>
+<p>文件依赖<br>yii框架缓存的DB依赖,跟其他缓存依赖一样,如果依赖中的sql取出的数据发生了改变,相关联的缓存就会消失</p>
+<p>表达式依赖</p>
+<p>1、文件依赖(FileDependency)：一旦文件改变，缓存将失效<br>$dependency=new \yii\caching\FileDependency([‘filename’=&gt;’hw.txt’]);<br>$cache-&gt;add(‘file_key’,’hello word!’,3000,$dependency);<br>2、表达式依赖(ExpressionDependency)：一旦表达式改变，缓存将失效，即参数发生了变化<br>$dependency=new \yii\caching\ExpressionDependency([‘expression’=&gt;’\YII::$app-&gt;request-&gt;get[“name”]’]);<br>3、DB依赖(DbDependency)：一旦数据改变，缓存将失效<br>$dependency=new \yii\caching\ExpressionDependency(<br>[‘sql’=&gt;’select count(*) from user’]);</p>
+<p>4.链式依赖<br>5.组依赖</p>
+<p>Yii 框架是如何监听文件改变、表达式改变和数据改变？</p>
+<h2 id="片段缓存的使用"><a href="#片段缓存的使用" class="headerlink" title="片段缓存的使用"></a>片段缓存的使用</h2><p>//片段缓存介绍(主要负责把前端界面的一些区域[不会经常变动的区域：如京东商品分类]缓存起来[缓存到内存或文件中]，下次访问时直接从缓存里把数据拿出来，而不用再从数据库抓取信息，提高了程序的执行效率)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 使用视图组件($this)里的beginCache(&apos;缓存数据的名字&apos;)方法把cache_div给缓存起来;这个方法开启会检查当前有没有缓存，如果没有返回false --&gt;</div><div class="line">&lt;!-- 如何证明cache_div的代码片段被缓存了呢？ 在两个div里都添加上相同的内容。如果cache_div被缓存起来将会使用缓存里的内容，而不会使用修改后的内容。提高了程序的运行效率。 --&gt;</div><div class="line">&lt;?php if($this-&gt;beginCache(&apos;cache_div&apos;))&#123;?&gt;</div><div class="line">&lt;div id=&apos;cache_div&apos;&gt;</div><div class="line">	&lt;div&gt;这里待会会被缓存(这里是缓存过后添加的)&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;?php</div><div class="line">	$this-&gt;endCache();//结束缓存</div><div class="line">&#125;</div><div class="line">?&gt;</div><div class="line"></div><div class="line">&lt;div id=&apos;no_cache_div&apos;&gt;</div><div class="line">	&lt;div&gt;这里不会被缓存(这里是缓存过后添加的)&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<p>片段缓存的设置</p>
+<p>片段缓存的时间<br>$this-&gt;beginCache(‘cache_div’,[‘duration’=&gt;$duration]);<br>$this-&gt;endCache();</p>
+<p>片段缓存的依赖<br>$this-&gt;beginCache(‘cache_div’,[‘dependency’=&gt;$dependency]);<br>$this-&gt;endCache();</p>
+<p>片段缓存的开关<br>$this-&gt;beginCache(‘cache_div’,[‘enabled’=&gt;$enabled’]);<br>$this-&gt;endCache();</p>
+<p>片段缓存的嵌套使用</p>
+<p>谨慎使用：外层的失效时间应该短于内层，外层的依赖条件应该低于内层，以确保最小的片段，返回的是最新的数据。</p>
+<p>片段嵌套缓存  外面的缓存时间大于里面的  那么里面的数据即使超过了缓存时间后有修改也不会被执行</p>
+<h2 id="页面缓存的使用"><a href="#页面缓存的使用" class="headerlink" title="页面缓存的使用"></a>页面缓存的使用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">public function actionIndex()</div><div class="line">&#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">//页面访问index()方法之前会先访问behavior()方法行为。</div><div class="line">public function behavior()</div><div class="line">&#123;</div><div class="line">    return [</div><div class="line">        [</div><div class="line">            &apos;class&apos;      =&gt; &apos;yii\filters\PageCache&apos;,//页面缓存类</div><div class="line">            &apos;duration&apos;   =&gt; 1000,//缓存时间</div><div class="line">            &apos;only&apos;       =&gt; [&apos;index&apos;, &apos;test&apos;],//仅仅缓存index和test方法的数据]</div><div class="line">            &apos;dependency&apos; =&gt; [&apos;class&apos; =&gt; &apos;yii\caching\FileDependency&apos;, &apos;fileName&apos; =&gt; &apos;hw.txt&apos;]//文件缓存依赖</div><div class="line">        ],</div><div class="line">    ];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="HTTP-缓存的使用"><a href="#HTTP-缓存的使用" class="headerlink" title="HTTP 缓存的使用"></a>HTTP 缓存的使用</h2><p>如何校验服务器与浏览器的数据一致</p>
+<p>用矩形L代表浏览器，矩形F代表服务器。<br>1.当用户到F浏览网站或一个页面时，就会用L给F发送一个请求，然后F就会处理这个请求，处理完之后会把处理的结果作为一个响应返回给L，然后L从这个响应里拿数据，再显示出来，这样用户就可以看到他想看到的页面了。<br>2.但这时会遇到一个小问题，如果用户从F拿过来的数据不是他想要的数据(比如12306订票页面想订的票没有了)，这时用户猛刷新L，那么L就会给F发送很多的请求，实际上F的数据是没有发生变化的，F收到这么多请求后都会照常的处理，但处理的结果没有发生变化，所以处理的结果跟第一次返回出去的数据是一样的。所以这样对F来说，很浪费资源、时间。<br>3.F想了一个办法，当F第一次把数据(小圆表示)发送给L时，它让L把数据缓存到L里面，也就是把它缓存起来，缓存起来以后如果下一次L发送了请求到了F这边之后，F会对比F这边的数据和L那边的数据是不是一样的(F是如何校验的呢？)，如果是一样的那就没必要再把这个数据发送回给L了，就让L使用缓存里的数据就行了。<br>4.F如何校验F和L的数据是一样的，F就想了一个办法。当F第一次发送数据给L时，会在数据中塞入一个last-modified字段(记录了F这边数据的修改时间)，那么L也有了这个字段。那么当L下一次发送请求时，会把这个修改时间也带上，也就是把lm(last-modified字段)发送回给F，F会校验lm和F里的那个数据的修改时间是否是一样的，如果是一样的那么这个数据肯定没有被修改过，那就没必要再发送回给L了，直接告诉L去使用缓存里的数据就行了。<br>5.另一种校验方式是基于last-modified的小缺陷设计出来的(开发人员把F的数据@改为#，然后又改回@，那么数据@虽然没变化，但它的修改时间改变了。那么L发送过来的lm和数据@的修改时间是对不上的，然后F又把@发送给L，但实际上@没有发生变化，这样也会造成一些问题)。所以F想了一个办法，F第一次发送@数据包时，会根据@里的内容生成一个标志etag，通过etag可以大概了解数据包@里的内容。F会把etag和last-modified一起发送给L，那么L下一次访问F时，会传lm和etag。那么F先验证lm(两边数据修改时间是否一样)，一样则使用L的缓存；如果不一样，F则验证etag是否一样，如果一样证明@没有被修改，则让L使用缓存</p>
+<p>服务器响应304，not modifired</p>
+<p>服务器怎么告诉浏览器缓存起来？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public function behaviors()&#123;</div><div class="line">	return [</div><div class="line">		[</div><div class="line">			&apos;class&apos;=&gt;&apos;yii\filters\HttpCache&apos;,</div><div class="line">			&apos;lastModified&apos;=&gt;function()&#123;</div><div class="line">				return 1432817564;</div><div class="line">			&#125;,</div><div class="line">			&apos;etagSeed&apos;=&gt;function()&#123;</div><div class="line">				return &apos;etagseed2f;&apos;</div><div class="line">			&#125;</div><div class="line">		]</div><div class="line">	];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>//使用 HttpCache 之后再请求头部header会多了一个Cache-Control:last-modified 来作为标志</p>
+<p>在服务器修改数据之后如何让浏览器更新缓存</p>
+<p>httpCache的依赖:<br>lastModified: 时间标识<br>etagSeed：内容标识<br>当二者同时存时，需要两个均发生变化才会发送200并返回新数据</p>
+<h2 id="gii-工具简介"><a href="#gii-工具简介" class="headerlink" title="gii 工具简介"></a>gii 工具简介</h2><ul>
+<li>Model Generator（数据模型的代码生成器）</li>
+<li>Form Generator（表单的代码生成器）</li>
+<li>Module Generator（模块的代码生成器）</li>
+<li>CRUD Generator（增删改查的代码生成器）</li>
+<li>Controller Generator（控制器的代码生成器）</li>
+<li>Extension Generator（扩展的代码生成器）</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2016/10/25/Yii-框架之高效篇/" data-id="cj0mjkd1o002ies4b5qnjvkd9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-打造扛得住的-MySQL-数据库架构" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/20/打造扛得住的-MySQL-数据库架构/" class="article-date">
+  <time datetime="2016-10-20T12:57:11.000Z" itemprop="datePublished">2016-10-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/20/打造扛得住的-MySQL-数据库架构/">打造扛得住的 MySQL 数据库架构</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="第1章-实例和故事"><a href="#第1章-实例和故事" class="headerlink" title="第1章 实例和故事"></a>第1章 实例和故事</h2><h3 id="1-1-什么决定了电商双11大促的成败"><a href="#1-1-什么决定了电商双11大促的成败" class="headerlink" title="1-1 什么决定了电商双11大促的成败"></a>1-1 什么决定了电商双11大促的成败</h3><p>电商公司的服务器能够承受住双十一期间高并发的访问量，为用户提供稳定高速的购物体验。</p>
+<h3 id="1-2-在双11大促中的数据库服务器"><a href="#1-2-在双11大促中的数据库服务器" class="headerlink" title="1-2 在双11大促中的数据库服务器"></a>1-2 在双11大促中的数据库服务器</h3><p>数据库架构：</p>
+<ul>
+<li>1 台 MySQL 主服务器</li>
+<li>15 台 MySQL 从服务器</li>
+</ul>
+<p>当时没有部署主从复制组件，一旦主服务器出现故障，很难自动进行故障切换，必须由 DBA 进行手动操作。过多的从服务器，对主服务器的网卡容量也是一个不小的挑战。</p>
+<p>数据库性能依据参数：</p>
+<ul>
+<li>QPS</li>
+<li>TPS</li>
+<li>并发量</li>
+<li>CPU 使用率</li>
+<li>磁盘 IO</li>
+</ul>
+<h3 id="1-3-在大促中什么影响了数据库性能"><a href="#1-3-在大促中什么影响了数据库性能" class="headerlink" title="1-3 在大促中什么影响了数据库性能"></a>1-3 在大促中什么影响了数据库性能</h3><p>影响数据库性能的因素</p>
+<ul>
+<li>SQL 查询速度</li>
+<li>服务器硬件</li>
+<li>网卡流量</li>
+<li>磁盘 IO</li>
+</ul>
+<p>数据库性能常见的风险：</p>
+<ul>
+<li>效率低下的 SQL<ul>
+<li>QPS：每秒钟处理的查询量<ul>
+<li>10ms 处理 1个 SQL，1s 处理 100个 SQL，QPS &lt;= 100</li>
+<li>100ms 处理 1个 SQL，1s 处理 10个 SQL，QPS &lt;= 10</li>
+</ul>
+</li>
+<li>TPS：每秒钟处理的事务数</li>
+</ul>
+</li>
+<li>大量的并发和超高的 CPU 使用率<ul>
+<li>大量的并发会导致数据库连接数被占满</li>
+<li>超高的 CPU 使用率会导致服务器因 CPU 资源耗尽而出现宕机</li>
+</ul>
+</li>
+<li>磁盘 IO<ul>
+<li>磁盘 IO 性能突然下降（使用更快的磁盘设备）</li>
+<li>其它大量消耗磁盘性能的计划任务（调整计划任务，做好磁盘维护）</li>
+</ul>
+</li>
+<li>网卡 IO<ul>
+<li>当网卡 IO 被占满时，（千兆网卡 1000 Mb/8=100 MB）会出现无法连接数据库的情况。</li>
+<li>如何避免无法连接数据库的情况<ul>
+<li>减少从服务器的数量</li>
+<li>进行分级缓存</li>
+<li>避免使用 <code>select *</code> 进行查询</li>
+<li>分离业务网络和服务器网络</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>大表<ul>
+<li>什么样的表可以称之为大表<ul>
+<li>记录行数巨大，单表超过千万行</li>
+<li>表数据文件巨大，表数据文件超过 10 G</li>
+</ul>
+</li>
+<li>大表对查询的影响<ul>
+<li>慢查询：很难在一定的时间内过滤出所需要的数据<ul>
+<li>区分度低的数据在查询的时候会产生大量的磁盘 IO，会降低磁盘的效率，导致查询效率低下,出现大量的慢查询。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>大表对 DDL 操作的影响<ul>
+<li>建立索引需要很长的时间<ul>
+<li>MySQL 版本 &lt; 5.5，建立索引会锁表</li>
+<li>MySQL 版本 &gt;= 5.5，虽然不会锁表但会引起主从延迟</li>
+</ul>
+</li>
+<li>修改表结构需要长时间锁表<ul>
+<li>会造成长时间的主从延迟</li>
+<li>影响正常的数据操作</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>解决方案<ul>
+<li>分库分表，把一张大表分成多个小表<ul>
+<li>难点<ul>
+<li>分表主键的选择</li>
+<li>分表后跨分区数据的查询和统计</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>大表的历史数据归档（减少对前后端业务的影响）<ul>
+<li>难点<ul>
+<li>归档时间点的选择</li>
+<li>如何进行归档操作</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>大事务<ul>
+<li>事务的概念<ul>
+<li>事务是数据库系统区别于其它一切文件系统的重要特性之一</li>
+<li>事务是一组具有原子性的 SQL 语句，或是一个独立的工作单元</li>
+</ul>
+</li>
+<li>事务的特性<ul>
+<li>原子性<ul>
+<li>一个事务必须被视为一个不可分割的最小工作单元，整个事务中的所有操作要么全部提交成功，要么全部失败，对于一个事务来说，不可能只执行其中的一部分操作。</li>
+</ul>
+</li>
+<li>一致性<ul>
+<li>一致性是指事务将数据库从一种一致性状态转换到另外一种一致性状态。在事务开始之前和事务结束后，数据库中的数据完整性没有被破坏。</li>
+</ul>
+</li>
+<li>隔离性<ul>
+<li>隔离性要求一个事务对数据库中数据的修改，在未提交完成前对于其它事务是不可见的。</li>
+<li>隔离性的类型<ul>
+<li>未提交读（Read Uncommited）</li>
+<li>已提交读（Read Commited）</li>
+<li>可重复读（Repeatable Read）</li>
+<li>可串行化（Serialization）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>持久性<ul>
+<li>一旦事务提交，则其所做的修改就会永久保存到数据库中。此时即使系统崩溃，已经提交的修改数据也不会丢失</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>什么是大事务<ul>
+<li>定义：运行时间比较长，操作的数据比较多的事务</li>
+<li>风险：<ul>
+<li>锁定太多的数据，造成大量的阻塞和锁超时</li>
+<li>回滚时所需时间比较长</li>
+<li>执行时间长，容易造成主从延迟</li>
+</ul>
+</li>
+<li>处理：<ul>
+<li>避免一次处理太多的数据</li>
+<li>移出不必要在事务中的 SELECT 操作</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="第2章-什么影响了MySQL性能"><a href="#第2章-什么影响了MySQL性能" class="headerlink" title="第2章 什么影响了MySQL性能"></a>第2章 什么影响了MySQL性能</h2><h2 id="第3章-MySQL基准测试"><a href="#第3章-MySQL基准测试" class="headerlink" title="第3章 MySQL基准测试"></a>第3章 MySQL基准测试</h2><h2 id="第4章-MySQL数据库结构优化"><a href="#第4章-MySQL数据库结构优化" class="headerlink" title="第4章 MySQL数据库结构优化"></a>第4章 MySQL数据库结构优化</h2><h2 id="第5章-MySQL高可用架构设计"><a href="#第5章-MySQL高可用架构设计" class="headerlink" title="第5章 MySQL高可用架构设计"></a>第5章 MySQL高可用架构设计</h2><h2 id="第6章-数据库索引优化"><a href="#第6章-数据库索引优化" class="headerlink" title="第6章 数据库索引优化"></a>第6章 数据库索引优化</h2><h2 id="第7章-SQL查询优化"><a href="#第7章-SQL查询优化" class="headerlink" title="第7章 SQL查询优化"></a>第7章 SQL查询优化</h2><h2 id="第8章-数据库的分库分表"><a href="#第8章-数据库的分库分表" class="headerlink" title="第8章 数据库的分库分表"></a>第8章 数据库的分库分表</h2><h2 id="第9章-数据库监控"><a href="#第9章-数据库监控" class="headerlink" title="第9章 数据库监控"></a>第9章 数据库监控</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2016/10/20/打造扛得住的-MySQL-数据库架构/" data-id="cj0mjkd3y0065es4b9moa8knp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-MySQL-性能优化" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/10/13/MySQL-性能优化/" class="article-date">
@@ -246,7 +542,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/13/MySQL-性能优化/" data-id="cj0kqa7jm001aj94bqy3o71e2" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/13/MySQL-性能优化/" data-id="cj0mjkd0z001ges4b2vkfu0jn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -500,7 +796,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之条件判断语句/" data-id="cj0kqa7h50004j94bnfo8219s" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之条件判断语句/" data-id="cj0mjkczv0004es4bnh5jmznd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -614,7 +910,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之运算符/" data-id="cj0kqa7he000aj94b7aa5pcmf" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之运算符/" data-id="cj0mjkczx0005es4bhrd3w0hr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -802,7 +1098,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之变量/" data-id="cj0kqa7gz0001j94bkbj33h90" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之变量/" data-id="cj0mjkczn0001es4bomiogxk4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -847,7 +1143,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/03/Linux-Shell-实战/" data-id="cj0kqa7hb0006j94b3okfyhoh" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/03/Linux-Shell-实战/" data-id="cj0mjkd05000aes4bfxuq1kon" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1006,7 +1302,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/30/Linux-权限管理/" data-id="cj0kqa7ht000jj94btp129oih" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/30/Linux-权限管理/" data-id="cj0mjkd0g000oes4bj7ae0uze" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1245,7 +1541,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/27/Linux-软件安装/" data-id="cj0kqa7ia000wj94b2fkc10b5" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/27/Linux-软件安装/" data-id="cj0mjkd0h000res4b2zg12zdm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1498,557 +1794,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/26/Linux-定时任务/" data-id="cj0kqa7hr000gj94bh682b4ik" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Linux-系统管理" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/24/Linux-系统管理/" class="article-date">
-  <time datetime="2016-09-24T01:01:11.000Z" itemprop="datePublished">2016-09-24</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/24/Linux-系统管理/">Linux 系统管理</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="进程简介"><a href="#进程简介" class="headerlink" title="进程简介"></a>进程简介</h2><p>进程是正在执行的一个程序或命令，每一个进程都是一个运行的实体，都有自己的地址空间，并占用一定的系统资源</p>
-<h2 id="进程管理的作用"><a href="#进程管理的作用" class="headerlink" title="进程管理的作用"></a>进程管理的作用</h2><ul>
-<li>判断服务器健康状态</li>
-<li>查看系统中所有进程</li>
-<li>杀死进程</li>
-</ul>
-<h2 id="进程的查看"><a href="#进程的查看" class="headerlink" title="进程的查看"></a>进程的查看</h2><ul>
-<li><h4 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h4><ul>
-<li><code>ps aux</code> 查看系统中所有进程，使用 BSD 操作系统格式</li>
-<li><code>ps -le</code> 查看系统中所有进程，使用 Linux 标准命令模式</li>
-<li>选项：<ul>
-<li>a 显示一个终端的所有进程，除了会话引线</li>
-<li>u 显示进程的归属用户及内存的使用情况</li>
-<li>x 显示没有控制终端的进程</li>
-<li>-l 长格式显示。显示更加详细的信息</li>
-<li>-e 显示所有进程，和 -A 作用一致</li>
-</ul>
-</li>
-<li>ps 命令输出<ul>
-<li>USER 该进程是由哪个用户产生的</li>
-<li>PID 该进程的 ID 号</li>
-<li>%CPU 该进程占用 CPU 资源的百分比，占用越高，进程越耗费资源</li>
-<li>%MEN 该进程占用物理内存的百分比，占用越高，进程越耗费资源</li>
-<li>VSZ 该进程占用虚拟内存大小，单位 KB</li>
-<li>RSS 该进程占用实际物理内存的大小，单位 KB</li>
-<li>TTY 该进程是在哪个终端中运行的。其中 tty1-tty7 代表本地控制台终端，tty1-tty6 是本地的字符界面终端，tty7 是图形终端。pts/0-255 代表虚拟终端，？ 代表内核运行</li>
-<li>STAT 进程状态<ul>
-<li>R 运行</li>
-<li>S 睡眠</li>
-<li>T 停止状态</li>
-<li><ul>
-<li>位于后台</li>
-</ul>
-</li>
-<li>s 包含子进程</li>
-</ul>
-</li>
-<li>START 该进程的启动时间</li>
-<li>TIME 该进程占用 CPU 的运算时间，注意不是系统时间</li>
-<li>COMMAND 产生此进程的命令名</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><h4 id="pstree"><a href="#pstree" class="headerlink" title="pstree"></a>pstree</h4><ul>
-<li><code>pstree [选项]</code><ul>
-<li>-p 显示进程的 PID</li>
-<li>-u 显示进程的所属用户</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><h4 id="top"><a href="#top" class="headerlink" title="top"></a>top</h4><ul>
-<li><code>top [选项]</code></li>
-<li><code>top -b -n 1 &gt; top.log</code> 把每秒的 top 信息写进 <code>top.log</code> 文件中</li>
-<li>选项：<ul>
-<li>-d 秒数 指定 top 命令每隔几秒更新。默认是 3 秒</li>
-<li>-b 使用批处理模式输出。一般和 “-n” 选项合用</li>
-<li>-n 次数 指定 top 命令执行的次数。一般和 “-b” 选项合用</li>
-</ul>
-</li>
-<li>top 命令交互模式可以执行命令<ul>
-<li>? 或 h 显示帮助</li>
-<li>M 以内存使用率排序</li>
-<li>P 以 CPU 使用率排序，默认此项</li>
-<li>N 以 PID 排序</li>
-<li>q 退出 top</li>
-</ul>
-</li>
-<li>top 参数意义<ul>
-<li>第一行系统信息：<ul>
-<li><code>12:26:46</code> 系统当前时间</li>
-<li><code>up 1 day,13:32</code> 系统运行时间，本机已运行了 1 天 13 小时 32 分钟</li>
-<li><code>2 users</code>  当前系统登录了用户</li>
-<li><code>load average: 0.00,0.00,0.00</code> 系统在之前 1 分钟，5 分钟，15 分钟的平均负载。一般认为小于1时，负载较小。如果大于 1，系统已经超出负荷</li>
-</ul>
-</li>
-<li>第二行进程信息：<ul>
-<li><code>Tasks: 95 total</code> 系统中的进程总数</li>
-<li><code>1 running</code> 正在运行的进程数</li>
-<li><code>94 sleeping</code> 睡眠的进程</li>
-<li><code>0 stopped</code> 正在停止的进程</li>
-<li><code>0 zombie</code> 僵尸进程。如果不是 0，需要手工检查僵尸进程</li>
-</ul>
-</li>
-<li>第三行 CPU 信息：<ul>
-<li><code>Cpu(s) 0.1%us</code> 用户模式占用的 CPU 百分比</li>
-<li><code>0.1%sy</code> 系统模式占用的 CPU 百分比</li>
-<li><code>0.0%ni</code> 改变过优先级的用户进程占用的 CPU 百分比</li>
-<li><code>99.7%id</code> 空闲 CPU 的 CPU 百分比</li>
-<li><code>0.1%wa</code> 等待输入 / 输出的进程的占用 CPU 百分比</li>
-<li><code>0.0%hi</code> 硬中断请求服务占用的 CPU 百分比</li>
-<li><code>0.1%si</code> 软中断请求服务占用的 CPU 百分比</li>
-<li><code>0,0%st</code> 虚拟时间百分比</li>
-</ul>
-</li>
-<li>第四行内存信息：<ul>
-<li><code>Mem: 635344k total</code> 物理内存的总量，单位 KB</li>
-<li><code>571504k used</code> 已经使用的物理内存数量</li>
-<li><code>53840k free</code> 空闲的物理内存数量</li>
-<li><code>65800k buffers</code> 作为缓冲的内存数量</li>
-</ul>
-</li>
-<li>第五行交换分区信息：<ul>
-<li><code>Swap: 524280k total</code> 交换分区（虚拟内存）的总大小</li>
-<li><code>Ok used</code> 已经使用的交互分区的大小</li>
-<li><code>524280k free</code> 空闲交换分区的大小</li>
-<li><code>409280k cached</code> 作为缓存的交互分区的大小</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="杀死进程"><a href="#杀死进程" class="headerlink" title="杀死进程"></a>杀死进程</h2><ul>
-<li>kill<ul>
-<li><code>kill -l</code> 查看可用的进程信号</li>
-<li><code>kill -1 进程 ID</code> 重启进程</li>
-<li><code>kill -9 进程 ID</code> 强制杀死进程</li>
-</ul>
-</li>
-<li>killall<ul>
-<li><code>killall [选项] [信号] 进程名</code><ul>
-<li>选项：<ul>
-<li>-i 交互式，询问是否要杀死某个进程</li>
-<li>-I 忽略进程名的大小写</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>pkill<ul>
-<li><code>pkill [选项] [信号] 进程名</code><ul>
-<li>选项：<ul>
-<li>-t 终端号：按照终端号踢出用户</li>
-</ul>
-</li>
-<li>用法：<ul>
-<li><code>pkill -9 -t tty1</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="修改进程优先级"><a href="#修改进程优先级" class="headerlink" title="修改进程优先级"></a>修改进程优先级</h2><p>Linux 操作系统是一个多用户、多任务的操作系统，Linux 系统中通知运行着非常多的进程。但是 CPU 在同一个时钟周期内只能运算一个指令。进程优先级决定了每个进程处理的先后顺序呢。</p>
-<p>执行命令 <code>ps -le</code> 返回的结果中，PRI 代表 Priority，NI 代表 Nice。这两个值都是优先级，数字越少代表改进程优先级越高。</p>
-<p>用户可以修改 NI 值，注意事项如下：</p>
-<ul>
-<li>NI 值的范围是 -20 到 19</li>
-<li>普通用户调整 NI 值的范围是 0 到 19，而且只能调整自己的进程</li>
-<li>普通用户只能调高 NI 值，而不能降低，如原本 NI 值为0，则只能调整为大于 0</li>
-<li>root 用户才能设定进程 NI 值为负值，而且可以调整任何用户的进程</li>
-<li>PRI（最终值）= PRI（原始值）+ NI</li>
-<li>用户只能修改 NI 的值，不能直接修改 PRI</li>
-</ul>
-<p>修改进程优先级的命令如下：</p>
-<ul>
-<li>nice<ul>
-<li><code>nice [选项] 命令</code> nice 的命令可以给新执行的命令直接赋予 NI 值，但是不能修改已经存在进程的 NI 值<ul>
-<li>选项：<ul>
-<li>-n NI 值：给命令赋予 NI 值</li>
-</ul>
-</li>
-<li>用法：<ul>
-<li><code>nice -n -5 service httpd start</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>renice<ul>
-<li><code>renice [优先级] 进程 ID</code> renice 命令是修改已经存在进程的 NI 值的命令<ul>
-<li>用法：<ul>
-<li><code>renice -10 2125</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="工作管理"><a href="#工作管理" class="headerlink" title="工作管理"></a>工作管理</h2><p>工作管理指的是在单个登录终端中（也就是登录的 Shell 界面中）同时管理多个工作的行为</p>
-<p>工作管理注意事项如下：</p>
-<ul>
-<li>当前的登录终端，只能管理当前终端的工作，而不能管理其他登录终端的工作</li>
-<li>放入后台的命令必须可以持续运行一段时间，这样我们才能扑捉和操作这个工作</li>
-<li>放入后台执行的命令不能和前台用户有交互或需要前台输入，否则放入后台只能暂停，而不能执行</li>
-</ul>
-<h2 id="工作管理方法"><a href="#工作管理方法" class="headerlink" title="工作管理方法"></a>工作管理方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># 把命令放入后台，并在后台执行</div><div class="line">top &amp;</div><div class="line"></div><div class="line"># 按下 ctrl + z 快捷键，放在后台暂停</div><div class="line">top</div></pre></td></tr></table></figure>
-<ul>
-<li>jobs<ul>
-<li><code>josb [选项]</code><ul>
-<li>选项：<ul>
-<li>-l 显示工作的 PID</li>
-</ul>
-</li>
-<li>+ 号代表最近一个放入后台的工作，也是工作恢复时，默认恢复的工作；- 号代表倒数第二个放入后台的工作</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>fg<ul>
-<li><code>fg %工作号</code> 将后台暂停的工作恢复到前台执行，注意 % 号可以省略，但是注意工作号和 PID 的区别</li>
-</ul>
-</li>
-<li>bg<ul>
-<li><code>bg %工作号</code> 后台恢复执行的命令，是不能和前台有交互的，否则不能恢复到后台执行</li>
-</ul>
-</li>
-</ul>
-<h2 id="后台命令脱离登录终端执行的方法"><a href="#后台命令脱离登录终端执行的方法" class="headerlink" title="后台命令脱离登录终端执行的方法"></a>后台命令脱离登录终端执行的方法</h2><ul>
-<li>第一种方法是把需要后台执行的命令加入 /etc/rc.local 文件</li>
-<li>第二种方法是使用系统定时任务，让系统在指定的时间执行某个后台命令</li>
-<li>第三种方法是使用 nohup 命令</li>
-</ul>
-<h2 id="系统资源查看"><a href="#系统资源查看" class="headerlink" title="系统资源查看"></a>系统资源查看</h2><ul>
-<li>vmstat<ul>
-<li><code>vmstat [刷新延时 刷新次数]</code></li>
-<li>用法：<ul>
-<li><code>vmstat 1 3</code></li>
-</ul>
-</li>
-<li>参数：<ul>
-<li>procs：进程信息字段<ul>
-<li>r 等待运行的进程数，数量越大，系统越繁忙</li>
-<li>b 不可被唤醒的进程数量，数量越大，系统越繁忙</li>
-</ul>
-</li>
-<li>memory：内存信息字段<ul>
-<li>free 空闲的内存容量，单位 KB</li>
-<li>buff 缓冲的内存容量，单位 KB</li>
-<li>cache 缓存的内存容量，单位 KB</li>
-<li>swpd 虚拟内存的使用情况，单位 KB</li>
-<li>缓冲和缓存的区别：缓存是用来加速数据读取的，缓冲是用来加速数据写入的</li>
-</ul>
-</li>
-<li>swap：交换分区的信息字段<ul>
-<li>si 从磁盘中交换到内存中数据的数量，单位 KB</li>
-<li>so 从内存中交换到磁盘中数据的数量，单位 KB。此两个数越大，证明数据需要经常在磁盘和内存之间交换，系统性能越差。</li>
-</ul>
-</li>
-<li>io：磁盘读写信息字段<ul>
-<li>bi 从块设备读入数据的总量，单位是块</li>
-<li>bo 写到块设备的数据的总量，单位是块。此两个数越大，代表系统的 I/O 越繁忙</li>
-</ul>
-</li>
-<li>system：系统信息字段<ul>
-<li>in 每秒被中断的进程次数</li>
-<li>cs 每秒进行的事件切换次数。此两个数越大，代表系统与接口设备的通信非常繁忙</li>
-</ul>
-</li>
-<li>CPU：CPU 信息字段<ul>
-<li>us 非内核进程消耗 CPU 运算时间的百分比</li>
-<li>sy 内核进程消耗 CPU 运算时间的百分比</li>
-<li>id 空闲 CPu 的百分比</li>
-<li>wa 等待 I/O 所消耗的 CPU 百分比</li>
-<li>st 被虚拟机消耗的 CPU 百分比</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>dmesg<ul>
-<li><code>dmesg</code> 显示系统内核信息</li>
-</ul>
-</li>
-<li>free<ul>
-<li><code>free [选项]</code> 查看内存使用状态<ul>
-<li>选项：<ul>
-<li>-\b 以字节为单位显示</li>
-<li>-\k 以 KB 为单位显示，默认就是以 KB 为单位显示</li>
-<li>-\m 以 MB 为单位显示</li>
-<li>-\g 以 GB 为单位显示</li>
-</ul>
-</li>
-<li>参数：<ul>
-<li>第一行：total 是总内存数，used 是已经使用的内存数，free 是空闲的内存数，shared 是多个进程共享的内存总数，buffers 是缓冲内存数，cached 是缓存内存数。默认单位是 KB</li>
-<li>第二行：-/buffers/cache 的内存数，相当于第一行的 used-buffers-cached。+/buffers/cache 的内存数，相当于第一行的 free + buffers + cached</li>
-<li>第三行：total 是 swap 的总数；used 是已经使用的 swap 数，free 是空闲的 swap 数。默认单位是 KB</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>cat /proc/cpuinfo<ul>
-<li>查看 CPU 信息</li>
-</ul>
-</li>
-<li>uptime<ul>
-<li>显示系统的启动时间和平均负载，也就是 top 命令的第一行。</li>
-</ul>
-</li>
-<li>uname<ul>
-<li><code>uname [选项]</code><ul>
-<li>选项：<ul>
-<li>-a 查看系统所有相关信息</li>
-<li>-r 查看内核版本</li>
-<li>-s 查看内核名称</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>file /bin/ls<ul>
-<li>查看系统操作位数</li>
-</ul>
-</li>
-<li>lsb_release -a<ul>
-<li>查询当前 Linxu 系统的发行版本</li>
-</ul>
-</li>
-<li>lsof<ul>
-<li><code>lsof    [选项]</code><ul>
-<li>选项：<ul>
-<li>-c 字符串：只列出以字符串开头的进程打开的文件</li>
-<li>-u 用户名：只列出某个用户的进程打开的文件</li>
-<li>-p PID：列出某个 PID 进程打开的文件</li>
-</ul>
-</li>
-<li>例子：<ul>
-<li><code>lsof | more</code></li>
-<li><code>lsof /sbin/init</code></li>
-<li><code>lsof -c httpd</code></li>
-<li><code>lsof -u root</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/24/Linux-系统管理/" data-id="cj0kqa7i1000rj94by0pp31q8" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Linux-服务管理" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/23/Linux-服务管理/" class="article-date">
-  <time datetime="2016-09-23T12:26:20.000Z" itemprop="datePublished">2016-09-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/23/Linux-服务管理/">Linux 服务管理</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Linux-服务管理"><a href="#Linux-服务管理" class="headerlink" title="Linux 服务管理"></a>Linux 服务管理</h2><h3 id="简介与分类"><a href="#简介与分类" class="headerlink" title="简介与分类"></a>简介与分类</h3><ul>
-<li><h4 id="系统的运行级别"><a href="#系统的运行级别" class="headerlink" title="系统的运行级别"></a>系统的运行级别</h4><ul>
-<li>查看运行级别命令：<code>runlevel</code></li>
-<li>修改运行级别命令：<code>init 运行级别</code></li>
-<li>系统开机进入级别：<code>vim /etc/inittab</code> ~ <code>id:3initdefault:</code></li>
-</ul>
-</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>运行级别</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>关机</td>
-</tr>
-<tr>
-<td>1</td>
-<td>单用户模式，主要用于系统修复</td>
-</tr>
-<tr>
-<td>2</td>
-<td>不完全的命令行模式，不含 NFS 服务</td>
-</tr>
-<tr>
-<td>3</td>
-<td>完全的命令行模式，就是标准字符界面</td>
-</tr>
-<tr>
-<td>4</td>
-<td>系统保留</td>
-</tr>
-<tr>
-<td>5</td>
-<td>图形模式</td>
-</tr>
-<tr>
-<td>6</td>
-<td>重启动</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><h4 id="服务的分类"><a href="#服务的分类" class="headerlink" title="服务的分类"></a>服务的分类</h4><ul>
-<li>Linux 服务<ul>
-<li>PRM 包默认安装的服务<ul>
-<li>独立的服务<ul>
-<li>默认配置文件位置<ul>
-<li>/etc/init.d/ 启动脚本位置</li>
-<li>/etc/sysconfig/ 初始化环境配置文件位置</li>
-<li>/etc/ 配置文件位置</li>
-<li>/etc/xinetd.conf xinetd 配置文件</li>
-<li>/etc/xinetd.d/ 基于 xineted 服务的启动脚本</li>
-<li>/var/lib/ 服务产生的数据放在这里</li>
-<li>/var/log/ 日志</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>基于 xinetd 服务</li>
-</ul>
-</li>
-<li>源码包安装的服务<ul>
-<li>源码包安装位置，一般是 <code>/usr/local</code> 下</li>
-</ul>
-</li>
-<li>PRM 包安装和源码包安装的区别：两者服务安装的位置不同</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><h4 id="服务与端口"><a href="#服务与端口" class="headerlink" title="服务与端口"></a>服务与端口</h4><ul>
-<li>概念：如果把 IP 地址比作一间房子，端口就是出入这间房子的门。真正的房子只有几个门，但是一个 IP 地址的端口可以有 65536 个</li>
-<li>服务与端口的对应：<code>cat /etc/services</code></li>
-<li>查询系统中开启的服务：<code>netstat [选项]</code><ul>
-<li>-t 列出 TCP 数据</li>
-<li>-u 列出 UDP 数据</li>
-<li>-l 列出正在监听的网络服务（不包含已经连接的网络服务）</li>
-<li>-n 用端口号来显示服务，而不是用服务名</li>
-<li>-p 列出该服务的进程 ID</li>
-</ul>
-</li>
-<li>chkconfig 和 netstat 的区别<ul>
-<li><code>chkconfig</code> 查看自启动命令</li>
-<li><code>netstat</code> 查看启动命令</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><h4 id="服务启动与自启动"><a href="#服务启动与自启动" class="headerlink" title="服务启动与自启动"></a>服务启动与自启动</h4><ul>
-<li>独立服务的自启动<ul>
-<li><code>ntsysv</code> 命令图形界面管理自启动</li>
-<li><code>/etc/rc.d/rc.local</code> 文件修改管理自启动</li>
-<li><code>chkconfig --list</code> 查看服务自启动状态，可以看到所有 RPM 包安装的服务</li>
-<li><code>chkconfig [--level 运行级别] [独立服务名] [on|off]</code> 修改服务自启动状态</li>
-</ul>
-</li>
-<li>独立服务的启动<ul>
-<li><code>/etc/init.d/独立服务名 start、stop、status、restart</code></li>
-<li><code>service 独立服务名 start、stop、status、restart</code></li>
-</ul>
-</li>
-<li>源码包安装服务的启动<ul>
-<li>使用绝对路径，调用启动脚本来启动。不同的源码包的启动脚本不同。可以查看源码包的安装说明，查看启动脚本的方法。</li>
-<li>用法：<code>/usr/local/apache2/bin/apachectl start</code></li>
-</ul>
-</li>
-<li>源码包服务的自启动<ul>
-<li><code>vi /etc/rc.d/rc.local</code> 加入 <code>/usr/local/apache2/bin/apachectl start</code></li>
-</ul>
-</li>
-<li>源码包的 Apache 服务能被 Service 命令管理启动<ul>
-<li><code>ln -s /usr/local/apache2/bin/apachectl /etc/init.d/apache</code></li>
-</ul>
-</li>
-<li>源码包的 Apache 服务能被 chkconfig 与 ntsysv 命令管理自启动<ul>
-<li><code>vi /etc/init.d/apache</code> 加入 <code># chkconfig:35 86 76</code> 和 <code>description:source package apache</code></li>
-<li><code>chkconfig --add apache</code> 把源码包 apache 加入 chkconfig 命令</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/23/Linux-服务管理/" data-id="cj0kqa7hx000oj94bxc74mzsu" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/26/Linux-定时任务/" data-id="cj0mjkd07000ces4brep6wxvj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -2073,7 +1819,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
   </div>
 
@@ -2083,7 +1829,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
     </div>
   </div>
 
@@ -2093,7 +1839,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AliCloud/" style="font-size: 11.67px;">AliCloud</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 16.67px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 18.33px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.67px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/UML/" style="font-size: 11.67px;">UML</a> <a href="/tags/Yii/" style="font-size: 13.33px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
+      <a href="/tags/AliCloud/" style="font-size: 11.67px;">AliCloud</a> <a href="/tags/Javascript/" style="font-size: 11.67px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 16.67px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 18.33px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.67px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/UML/" style="font-size: 11.67px;">UML</a> <a href="/tags/Yii/" style="font-size: 13.33px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
     </div>
   </div>
 
@@ -2115,6 +1861,14 @@
       <ul>
         
           <li>
+            <a href="/2017/03/23/学习-Javascript-之类型/">学习 Javascript 之类型</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/23/学习-Javascript-之变量/">学习 Javascript 之变量</a>
+          </li>
+        
+          <li>
             <a href="/2017/03/20/Head-First-Design-Patterns/">Head First Design Patterns</a>
           </li>
         
@@ -2124,14 +1878,6 @@
         
           <li>
             <a href="/2017/03/15/「Tips」-htaccess-配置-HTTP-Header/">「Tips」.htaccess 配置 HTTP Header</a>
-          </li>
-        
-          <li>
-            <a href="/2017/03/15/「Tips」PHP-7-1-命名空间的新特性和使用方法/">「Tips」PHP 7.1 命名空间的新特性和使用方法</a>
-          </li>
-        
-          <li>
-            <a href="/2017/03/02/Swagger-PHP-基础使用/">Swagger-PHP 基础使用</a>
           </li>
         
       </ul>

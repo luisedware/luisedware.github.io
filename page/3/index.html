@@ -65,6 +65,170 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-学习-UML（一）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/08/学习-UML（一）/" class="article-date">
+  <time datetime="2016-12-08T09:27:41.000Z" itemprop="datePublished">2016-12-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UML/">UML</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/08/学习-UML（一）/">学习 UML（一）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="UML-是什么"><a href="#UML-是什么" class="headerlink" title="UML 是什么"></a>UML 是什么</h2><p>UML，全称是 Unified Modeling Language，译为统一建模语言，是面向对象软件的标准化建模语言。UML 因其简单、统一的特点，而且能表达软件设计中的动态和静态信息，目前已成为可视化建模语言的工业标准。</p>
+<h2 id="UML-的种类"><a href="#UML-的种类" class="headerlink" title="UML 的种类"></a>UML 的种类</h2><p>UML 2.5 包含的图形如下，一共 14 种。</p>
+<ul>
+<li>图<ul>
+<li>结构图<ul>
+<li>类图</li>
+<li>组件图</li>
+<li>对象图</li>
+<li>扩展机制图</li>
+<li>组合结构图</li>
+<li>部署图</li>
+<li>包图</li>
+</ul>
+</li>
+<li>行为图<ul>
+<li>活动图</li>
+<li>用例图</li>
+<li>状态机图</li>
+<li>交互图<ul>
+<li>序列图</li>
+<li>通信图</li>
+<li>时间图</li>
+<li>交互概述图</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>各建模工作流可以选用的建模元素以及推荐用法如下：</p>
+<table>
+<thead>
+<tr>
+<th>工作流</th>
+<th>思考焦点</th>
+<th>可选建模元素</th>
+<th>推荐建模元素</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>业务建模</td>
+<td>组织内系统之间</td>
+<td>用例图、类图、序列图、活动图</td>
+<td>用例图、类图、序列图</td>
+</tr>
+<tr>
+<td>需求</td>
+<td>系统边界</td>
+<td>用例图、序列图、状态机图、活动图、文本</td>
+<td>用例图、文本</td>
+</tr>
+<tr>
+<td>分析</td>
+<td>系统内核心域</td>
+<td>类图、序列图、状态机图、活动图、通信图、包图</td>
+<td>类图、序列图、（状态机图）</td>
+</tr>
+<tr>
+<td>设计</td>
+<td>系统内各域之间</td>
+<td>类图、序列图、状态机图、活动图、通信图、组件图、部署图、时间图、组合结构图、包图</td>
+<td>用文本表达模型（所谓代码）</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2016/12/08/学习-UML（一）/" data-id="cj0mjkd3p005mes4blmkl9ob9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UML/">UML</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Yii2-Working-with-Databases" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/02/Yii2-Working-with-Databases/" class="article-date">
+  <time datetime="2016-12-02T03:09:02.000Z" itemprop="datePublished">2016-12-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/02/Yii2-Working-with-Databases/">Yii2 Working with Databases</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Create"><a href="#Create" class="headerlink" title="Create"></a>Create</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"> <span class="comment">// 单条数据插入</span></div><div class="line">Yii::$app-&gt;db-&gt;createCommand()-&gt;insert(<span class="string">'shop_user'</span>, [</div><div class="line">    <span class="string">'userName'</span> =&gt; <span class="string">'HelloWorld'</span>,</div><div class="line">    <span class="string">'userPass'</span> =&gt; md5(<span class="number">123456</span>),</div><div class="line">    <span class="string">'userEmail'</span> =&gt; <span class="string">'hello@world.com'</span>,</div><div class="line">    <span class="string">'createdAt'</span> =&gt; time(),</div><div class="line">])-&gt;execute();</div><div class="line"></div><div class="line">$customer = <span class="keyword">new</span> Customer();</div><div class="line">$customer-&gt;name = <span class="string">'Ann'</span>;</div><div class="line">$customer-&gt;email = <span class="string">'AnnEason@qq.com'</span>;</div><div class="line">$customer-&gt;save();</div><div class="line"></div><div class="line"><span class="comment">// 批量数据插入</span></div><div class="line">Yii::$app-&gt;db-&gt;createCommand()-&gt;batchInsert(<span class="string">'shop_user'</span>,</div><div class="line">    [<span class="string">'userName'</span>, <span class="string">'userPass'</span>, <span class="string">'userEmail'</span>, <span class="string">'createdAt'</span>],</div><div class="line">    [</div><div class="line">        [<span class="string">'Ann'</span>, md5(<span class="number">123456</span>), <span class="string">'Ann@qq.com'</span>, time()],</div><div class="line">        [<span class="string">'Leon'</span>, md5(<span class="number">123456</span>), <span class="string">'Leon@qq.com'</span>, time()],</div><div class="line">        [<span class="string">'bitch'</span>, md5(<span class="number">123456</span>), <span class="string">'bitch@qq.com'</span>, time()],</div><div class="line">        [<span class="string">'Linda'</span>, md5(<span class="number">123456</span>), <span class="string">'Linda@qq.com'</span>, time()],</div><div class="line">    ]</div><div class="line">)-&gt;execute();</div></pre></td></tr></table></figure>
+<h2 id="Update"><a href="#Update" class="headerlink" title="Update"></a>Update</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// 数据更新方法(表名, 字段与值, 条件)</span></div><div class="line">Yii::$app-&gt;db-&gt;createCommand()-&gt;update(<span class="string">'shop_user'</span>, [<span class="string">'userName'</span> =&gt; <span class="string">'hello'</span>], <span class="string">'userId = 6'</span>)-&gt;execute();</div><div class="line"></div><div class="line">$customer = Customer::findOne(<span class="number">123</span>);</div><div class="line">$customer-&gt;email = <span class="string">'AnnEason@qq.com'</span>;</div><div class="line">$customer-&gt;save();</div><div class="line"></div><div class="line">$values = [</div><div class="line">	<span class="string">'name'</span> =&gt; <span class="string">'Ann'</span>,</div><div class="line">	<span class="string">'email'</span> =&gt; <span class="string">'Ann@qq.com'</span></div><div class="line">];</div><div class="line"></div><div class="line">$customer = <span class="keyword">new</span> Customer();</div><div class="line">$customer-&gt;attributes = $values;</div><div class="line">$customer-&gt;save();</div><div class="line"></div><div class="line">Customer::updateAll([<span class="string">'status'</span> =&gt; Customer::STATUS_ACTIVE],[<span class="string">'like'</span>,<span class="string">'email'</span>,<span class="string">'@example.com'</span>]);</div></pre></td></tr></table></figure>
+<h2 id="Retrieve"><a href="#Retrieve" class="headerlink" title="Retrieve"></a>Retrieve</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// 存在数据返回二维数组,没有数据返回空数组</span></div><div class="line">$orders = Yii::$app-&gt;db-&gt;createCommand(<span class="string">"select * from z_order order by id desc limit 100 ;"</span>)-&gt;queryAll();</div><div class="line">$rows = (<span class="keyword">new</span> \yii\db\Query())-&gt;select([<span class="string">'id'</span>,<span class="string">'email'</span>])-&gt;from(<span class="string">'user'</span>) -&gt;all();</div><div class="line">$models = Model::find()-&gt;where([<span class="string">'status'</span> =&gt; Model::STATUS])-&gt;all();</div><div class="line"></div><div class="line"><span class="comment">// 存在数据返回一维数组,没有数据返回 false</span></div><div class="line">$order = Yii::$app-&gt;db-&gt;createCommand(<span class="string">"select * from z_order where id = 802478;"</span>)-&gt;queryOne();</div><div class="line">$row = (<span class="keyword">new</span> \yii\db\Query())-&gt;from(<span class="string">'user'</span>)-&gt;where([<span class="string">'like'</span>,<span class="string">'username'</span>,<span class="string">'test'</span>])-&gt;one();</div><div class="line">$model = Model::find()-&gt;where([<span class="string">'id'</span>=&gt;<span class="number">1</span>])-&gt;one();</div><div class="line"></div><div class="line"><span class="comment">// 存在数据返回一维数组,没有数据返回空数组</span></div><div class="line">$orderNumbers = Yii::$app-&gt;db-&gt;createCommand(<span class="string">"select orderno from z_order order by id desc limit 100"</span>)</div><div class="line">-&gt;queryColumn();</div><div class="line">$columns = (<span class="keyword">new</span> \yii\db\Query())-&gt;select(<span class="string">'id'</span>)-&gt;from(<span class="string">'user'</span>)-&gt;column()</div><div class="line"></div><div class="line"><span class="comment">// 存在数据返回标量数值,没有数据返回 false</span></div><div class="line">$orderCount = Yii::$app-&gt;db-&gt;createCommand(<span class="string">"select count(orderno) from z_order"</span>)-&gt;queryScalar();</div><div class="line">$count = (<span class="keyword">new</span> \yii\db\Query())-&gt;from(<span class="string">'user'</span>)-&gt;where([<span class="string">'like'</span>,<span class="string">'username'</span>,<span class="string">'test'</span>])-&gt;count();</div><div class="line">$modelCount = Model::find()-&gt;where([<span class="string">'status'</span>=&gt;<span class="number">1</span>])-&gt;count();</div></pre></td></tr></table></figure>
+<h2 id="Delete"><a href="#Delete" class="headerlink" title="Delete"></a>Delete</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// 数据删除方法(表名，条件)</span></div><div class="line">Yii::$app-&gt;db-&gt;createCommand()-&gt;delete(<span class="string">'shop_user'</span>, <span class="string">'userName = "HelloWorld"'</span>)-&gt;execute();</div><div class="line"></div><div class="line">$customer = Customer::findOne(<span class="number">123</span>);</div><div class="line">$customer-&gt;delete();</div><div class="line"></div><div class="line">Customer::deleteAll([<span class="string">'status'</span> =&gt; Customer::STATUS_INACTIVE]);</div></pre></td></tr></table></figure>
+<h2 id="Where"><a href="#Where" class="headerlink" title="Where"></a>Where</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// String Format</span></div><div class="line">$query-&gt;where(<span class="string">'status = 1'</span>);</div><div class="line">$query-&gt;where(<span class="string">'status = :status'</span>, [<span class="string">':status'</span> =&gt; $status]);</div><div class="line">$query-&gt;where(<span class="string">'status = :status'</span>)-&gt;addParams([<span class="string">':status'</span> =&gt; $status]);</div><div class="line"></div><div class="line"><span class="comment">// Hash Format ...WHERE (`status` = 10) AND (`type` IS NULL) AND (`id` IN (4, 8, 15))</span></div><div class="line">$query-&gt;where([</div><div class="line">    <span class="string">'status'</span> =&gt; <span class="number">10</span>,</div><div class="line">    <span class="string">'type'</span> =&gt; <span class="keyword">null</span>,</div><div class="line">    <span class="string">'id'</span> =&gt; [<span class="number">4</span>, <span class="number">8</span>, <span class="number">15</span>],</div><div class="line">]);</div><div class="line"></div><div class="line"><span class="comment">// Operator Format [operator, operand1, operand2, ...]</span></div><div class="line">$query-&gt;where([<span class="string">'and'</span>, <span class="string">'id=1'</span>, <span class="string">'id=2'</span>]);</div><div class="line">$query-&gt;where([<span class="string">'and'</span>, <span class="string">'type=1'</span>, [<span class="string">'or'</span>, <span class="string">'id=1'</span>, <span class="string">'id=2'</span>]]);</div><div class="line"></div><div class="line">$query-&gt;where([<span class="string">'between'</span>, <span class="string">'id'</span>, <span class="number">1</span>, <span class="number">10</span>]);</div><div class="line">$query-&gt;where([<span class="string">'not between'</span>, <span class="string">'id'</span>, <span class="number">1</span>, <span class="number">10</span>]);</div><div class="line"></div><div class="line">$query-&gt;where([<span class="string">'in'</span>, <span class="string">'id'</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]]);</div><div class="line">$query-&gt;where([<span class="string">'not in'</span>, <span class="string">'id'</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]]);</div><div class="line"></div><div class="line">$query-&gt;where([<span class="string">'like'</span>, <span class="string">'name'</span>, <span class="string">'hello'</span>]);</div><div class="line">$query-&gt;where([<span class="string">'like'</span>, <span class="string">'name'</span>, [<span class="string">'hello'</span>, <span class="string">'world'</span>]]);</div><div class="line"></div><div class="line">$query-&gt;where([<span class="string">'&gt;'</span>, <span class="string">'age'</span>, <span class="number">10</span>])</div><div class="line">$query-&gt;andWhere([<span class="string">'like'</span>, <span class="string">'title'</span>, <span class="string">'hello-world'</span>]);</div><div class="line">$query-&gt;orWhere([<span class="string">'like'</span>,<span class="string">'name'</span>,<span class="string">'LuisEdware'</span>]);</div><div class="line"></div><div class="line">$query-&gt;filterWhere([<span class="string">'name'</span> =&gt; $name, <span class="string">'email'</span> =&gt; $email]);</div><div class="line">$query-&gt;andFilterWhere([<span class="string">'!='</span>, <span class="string">'id'</span>, <span class="number">1</span>]);</div><div class="line">$query-&gt;orFilterWhere([<span class="string">'status'</span> =&gt; <span class="number">2</span>]);</div><div class="line"></div><div class="line">$query-&gt;andFilterCompare(<span class="string">'name'</span>, <span class="string">'John Doe'</span>);</div></pre></td></tr></table></figure>
+<h2 id="orderBy"><a href="#orderBy" class="headerlink" title="orderBy"></a>orderBy</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$query-&gt;orderBy([</div><div class="line">	<span class="string">'id'</span> =&gt; SORT_ASC,</div><div class="line">	<span class="string">'name'</span> =&gt; SORT_DESC,</div><div class="line">]);</div><div class="line"></div><div class="line">$query-&gt;orderBy(<span class="string">'id ASC, name DESC'</span>);</div><div class="line"></div><div class="line">$query-&gt;orderBy(<span class="string">'id ASC'</span>)-&gt;addOrderBy(<span class="string">'name DESC'</span>);</div></pre></td></tr></table></figure>
+<h2 id="groupBy"><a href="#groupBy" class="headerlink" title="groupBy"></a>groupBy</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$query-&gt;groupBy([<span class="string">'id'</span>,<span class="string">'status'</span>]);</div><div class="line"></div><div class="line">$query-&gt;groupBy(<span class="string">'id,status'</span>);</div><div class="line"></div><div class="line">$query-&gt;groupBy([<span class="string">'id'</span>,<span class="string">'status'</span>])-&gt;addGroupBy(<span class="string">'age'</span>);</div></pre></td></tr></table></figure>
+<h2 id="having"><a href="#having" class="headerlink" title="having"></a>having</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$query-&gt;having([<span class="string">'status'</span>=&gt;<span class="number">1</span>]);</div><div class="line"></div><div class="line">$query-&gt;having([<span class="string">'status'</span>=&gt;<span class="number">1</span>])-&gt;andHaving([<span class="string">'&gt;'</span>,<span class="string">'age'</span>,<span class="number">30</span>]);</div></pre></td></tr></table></figure>
+<h2 id="limit-and-offset"><a href="#limit-and-offset" class="headerlink" title="limit and offset"></a>limit and offset</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$query-&gt;limit(<span class="number">10</span>)-&gt;offset(<span class="number">20</span>);</div></pre></td></tr></table></figure>
+<h2 id="join"><a href="#join" class="headerlink" title="join"></a>join</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// ... LEFT JOIN `post` ON `post`.`user_id` = `user`.`id`</span></div><div class="line">$query-&gt;join(<span class="string">'LEFT JOIN'</span>,<span class="string">'post'</span>,<span class="string">'post.user_id = user.id'</span>);</div></pre></td></tr></table></figure>
+<h2 id="union"><a href="#union" class="headerlink" title="union"></a>union</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$query1 = (<span class="keyword">new</span> \yii\db\Query())</div><div class="line">	-&gt;select(<span class="string">'id,category_id AS type, name'</span>)</div><div class="line">	-&gt;from(<span class="string">'post'</span>)</div><div class="line">	-&gt;limit(<span class="number">10</span>);</div><div class="line"></div><div class="line">$query2 = (<span class="keyword">new</span> \yii\db\Query())</div><div class="line">	-&gt;select(<span class="string">'id,type,name'</span>)</div><div class="line">	-&gt;from(<span class="string">'user'</span>)</div><div class="line">	-&gt;limit(<span class="number">10</span>);</div><div class="line"></div><div class="line">$query1-&gt;union($query2);</div></pre></td></tr></table></figure>
+<h2 id="find"><a href="#find" class="headerlink" title="find"></a>find</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// SELECT * FROM customer WHERE id = 123;</span></div><div class="line">$customer = Customer::findOne(<span class="number">123</span>);</div><div class="line"></div><div class="line"><span class="comment">// SELECT * FROM customer WHERE id IN (1,2,3,4,5)</span></div><div class="line">$customers = Customer::findOne([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]);</div><div class="line"></div><div class="line">$customer = Customer::findOne([<span class="string">'id'</span>=&gt;<span class="number">123</span>, <span class="string">'status'</span>=&gt; Customer::STATUS]);</div><div class="line">$customers = Customer::findAll([<span class="string">'id'</span>=&gt;<span class="number">123</span>, <span class="string">'status'</span>=&gt; Customer::STATUS_ACTIVE]);</div></pre></td></tr></table></figure>
+<h2 id="Relations"><a href="#Relations" class="headerlink" title="Relations"></a>Relations</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Order</span> <span class="keyword">extends</span> <span class="title">ActiveRecord</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getOrderItems</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;hasMany(OrderItem::className(), [<span class="string">'order_id'</span> =&gt; <span class="string">'id'</span>]);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getItems</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;hasMany(Item::className(), [<span class="string">'id'</span> =&gt; <span class="string">'item_id'</span>])</div><div class="line">            -&gt;via(<span class="string">'orderItems'</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">$items = $order-&gt;items;</div><div class="line"></div><div class="line"></div><div class="line">$customers = Customer::find()-&gt;with(<span class="string">'orders.items'</span>)-&gt;all();</div><div class="line"><span class="comment">// no SQL executed</span></div><div class="line">$items = $customers[<span class="number">0</span>]-&gt;orders[<span class="number">0</span>]-&gt;items;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2016/12/02/Yii2-Working-with-Databases/" data-id="cj0mjkd1q002mes4bz73zqfl3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-关于-PHP-函数-array-walk-的一些想法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/11/22/关于-PHP-函数-array-walk-的一些想法/" class="article-date">
@@ -123,7 +287,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/11/22/关于-PHP-函数-array-walk-的一些想法/" data-id="cj0kqa7mk0050j94bwrbs284c" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/11/22/关于-PHP-函数-array-walk-的一些想法/" data-id="cj0mjkd3j0057es4bjftsnvc8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -189,7 +353,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/11/21/关于-PHP-函数-array-filter-的一些想法/" data-id="cj0kqa7mj004uj94b2vnjy7bh" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/11/21/关于-PHP-函数-array-filter-的一些想法/" data-id="cj0mjkd3g004yes4btwzswp1z" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -250,7 +414,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/11/21/关于-PHP-函数-array-map-的一些想法/" data-id="cj0kqa7mq0059j94bcl8p37ri" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/11/21/关于-PHP-函数-array-map-的一些想法/" data-id="cj0mjkd3i0054es4bjq7xcbcd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -299,7 +463,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/11/19/使用-PHPStorm-的-Live-Templates-封装常用代码/" data-id="cj0kqa7lx003xj94bmt4hox5o" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/11/19/使用-PHPStorm-的-Live-Templates-封装常用代码/" data-id="cj0mjkd2s003ues4b6ghucjp0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -339,7 +503,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/11/03/Yii-框架之工具篇/" data-id="cj0kqa7kf0026j94bsifjtpff" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/11/03/Yii-框架之工具篇/" data-id="cj0mjkd1l002bes4bqlahqvof" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -409,7 +573,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/29/Yii-框架之安全篇/" data-id="cj0kqa7kh0029j94bdmmnx7fo" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/29/Yii-框架之安全篇/" data-id="cj0mjkd1j0028es4b2qzda5vt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -467,7 +631,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/29/Yii-框架之扩展篇/" data-id="cj0kqa7kc0022j94bh2iyfsmk" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/29/Yii-框架之扩展篇/" data-id="cj0mjkd1n002fes4bjar3ankj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -739,306 +903,10 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/25/Yii-框架之基础篇/" data-id="cj0kqa7kj002cj94boim3tzkl" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/25/Yii-框架之基础篇/" data-id="cj0mjkd1d0024es4but1vjtbr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Yii-框架之高效篇" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/10/25/Yii-框架之高效篇/" class="article-date">
-  <time datetime="2016-10-25T12:42:56.000Z" itemprop="datePublished">2016-10-25</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/25/Yii-框架之高效篇/">Yii 框架之高效篇</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Yii-的延迟加载"><a href="#Yii-的延迟加载" class="headerlink" title="Yii 的延迟加载"></a>Yii 的延迟加载</h2><h3 id="类的延迟加载"><a href="#类的延迟加载" class="headerlink" title="类的延迟加载"></a>类的延迟加载</h3><p>sql_autoload_register</p>
-<p>Yii 如何使用 sql_autoload_register</p>
-<p>自动加载文件路径：vendor/yiisoft/yii2/Yii.php<br>入口文件路径：web/index.php</p>
-<h3 id="类的映射表机制"><a href="#类的映射表机制" class="headerlink" title="类的映射表机制"></a>类的映射表机制</h3><p>yii2快速的机制：使用类的映射表，把常用的类放入映射表中，加快加载速度</p>
-<p>映射表文件：vendor/yiisoft/yii2/classes.php<br>类的映射变量：Yii::$classMap<br>vendor/yiisoft/yii2/BaseYii.php</p>
-<p>可以通过使用Yii::$classMap，对延迟加载机制进行优化，是典型的空间换时间的做法，所以不建议往classMap中放入太多不常用的内容，避免内存占用过多</p>
-<p>只建议将常用的高频率class放进‘类的映射表’，不常用的就不要放，否则映射表大了，不但降低查询效率，还将占用不必要的内存。</p>
-<h3 id="组件的延迟加载"><a href="#组件的延迟加载" class="headerlink" title="组件的延迟加载"></a>组件的延迟加载</h3><ul>
-<li>index.php<ul>
-<li>app<ul>
-<li>application class</li>
-<li>components<ul>
-<li>vendor/yiisoft/yii2/web/Application.php</li>
-<li>vendor/yiisoft/yii2/base/Application.php</li>
-</ul>
-</li>
-<li>controller</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="数据缓存的使用"><a href="#数据缓存的使用" class="headerlink" title="数据缓存的使用"></a>数据缓存的使用</h2><h3 id="数据缓存的基础使用"><a href="#数据缓存的基础使用" class="headerlink" title="数据缓存的基础使用"></a>数据缓存的基础使用</h3><p>如何配置缓存服务器</p>
-<p>如何将数据写入缓存</p>
-<p>如何将缓存数据读出</p>
-<p>如何修改缓存的数据</p>
-<p>如何删除缓存的数据</p>
-<p>如何清空缓存中数据</p>
-<p>如何设置缓存有效期</p>
-<h3 id="数据缓存的依赖关系详解"><a href="#数据缓存的依赖关系详解" class="headerlink" title="数据缓存的依赖关系详解"></a>数据缓存的依赖关系详解</h3><p>可以用来解决缓存实时更新的问题</p>
-<p>文件依赖<br>yii框架缓存的DB依赖,跟其他缓存依赖一样,如果依赖中的sql取出的数据发生了改变,相关联的缓存就会消失</p>
-<p>表达式依赖</p>
-<p>1、文件依赖(FileDependency)：一旦文件改变，缓存将失效<br>$dependency=new \yii\caching\FileDependency([‘filename’=&gt;’hw.txt’]);<br>$cache-&gt;add(‘file_key’,’hello word!’,3000,$dependency);<br>2、表达式依赖(ExpressionDependency)：一旦表达式改变，缓存将失效，即参数发生了变化<br>$dependency=new \yii\caching\ExpressionDependency([‘expression’=&gt;’\YII::$app-&gt;request-&gt;get[“name”]’]);<br>3、DB依赖(DbDependency)：一旦数据改变，缓存将失效<br>$dependency=new \yii\caching\ExpressionDependency(<br>[‘sql’=&gt;’select count(*) from user’]);</p>
-<p>4.链式依赖<br>5.组依赖</p>
-<p>Yii 框架是如何监听文件改变、表达式改变和数据改变？</p>
-<h2 id="片段缓存的使用"><a href="#片段缓存的使用" class="headerlink" title="片段缓存的使用"></a>片段缓存的使用</h2><p>//片段缓存介绍(主要负责把前端界面的一些区域[不会经常变动的区域：如京东商品分类]缓存起来[缓存到内存或文件中]，下次访问时直接从缓存里把数据拿出来，而不用再从数据库抓取信息，提高了程序的执行效率)。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 使用视图组件($this)里的beginCache(&apos;缓存数据的名字&apos;)方法把cache_div给缓存起来;这个方法开启会检查当前有没有缓存，如果没有返回false --&gt;</div><div class="line">&lt;!-- 如何证明cache_div的代码片段被缓存了呢？ 在两个div里都添加上相同的内容。如果cache_div被缓存起来将会使用缓存里的内容，而不会使用修改后的内容。提高了程序的运行效率。 --&gt;</div><div class="line">&lt;?php if($this-&gt;beginCache(&apos;cache_div&apos;))&#123;?&gt;</div><div class="line">&lt;div id=&apos;cache_div&apos;&gt;</div><div class="line">	&lt;div&gt;这里待会会被缓存(这里是缓存过后添加的)&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;?php</div><div class="line">	$this-&gt;endCache();//结束缓存</div><div class="line">&#125;</div><div class="line">?&gt;</div><div class="line"></div><div class="line">&lt;div id=&apos;no_cache_div&apos;&gt;</div><div class="line">	&lt;div&gt;这里不会被缓存(这里是缓存过后添加的)&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
-<p>片段缓存的设置</p>
-<p>片段缓存的时间<br>$this-&gt;beginCache(‘cache_div’,[‘duration’=&gt;$duration]);<br>$this-&gt;endCache();</p>
-<p>片段缓存的依赖<br>$this-&gt;beginCache(‘cache_div’,[‘dependency’=&gt;$dependency]);<br>$this-&gt;endCache();</p>
-<p>片段缓存的开关<br>$this-&gt;beginCache(‘cache_div’,[‘enabled’=&gt;$enabled’]);<br>$this-&gt;endCache();</p>
-<p>片段缓存的嵌套使用</p>
-<p>谨慎使用：外层的失效时间应该短于内层，外层的依赖条件应该低于内层，以确保最小的片段，返回的是最新的数据。</p>
-<p>片段嵌套缓存  外面的缓存时间大于里面的  那么里面的数据即使超过了缓存时间后有修改也不会被执行</p>
-<h2 id="页面缓存的使用"><a href="#页面缓存的使用" class="headerlink" title="页面缓存的使用"></a>页面缓存的使用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">public function actionIndex()</div><div class="line">&#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">//页面访问index()方法之前会先访问behavior()方法行为。</div><div class="line">public function behavior()</div><div class="line">&#123;</div><div class="line">    return [</div><div class="line">        [</div><div class="line">            &apos;class&apos;      =&gt; &apos;yii\filters\PageCache&apos;,//页面缓存类</div><div class="line">            &apos;duration&apos;   =&gt; 1000,//缓存时间</div><div class="line">            &apos;only&apos;       =&gt; [&apos;index&apos;, &apos;test&apos;],//仅仅缓存index和test方法的数据]</div><div class="line">            &apos;dependency&apos; =&gt; [&apos;class&apos; =&gt; &apos;yii\caching\FileDependency&apos;, &apos;fileName&apos; =&gt; &apos;hw.txt&apos;]//文件缓存依赖</div><div class="line">        ],</div><div class="line">    ];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="HTTP-缓存的使用"><a href="#HTTP-缓存的使用" class="headerlink" title="HTTP 缓存的使用"></a>HTTP 缓存的使用</h2><p>如何校验服务器与浏览器的数据一致</p>
-<p>用矩形L代表浏览器，矩形F代表服务器。<br>1.当用户到F浏览网站或一个页面时，就会用L给F发送一个请求，然后F就会处理这个请求，处理完之后会把处理的结果作为一个响应返回给L，然后L从这个响应里拿数据，再显示出来，这样用户就可以看到他想看到的页面了。<br>2.但这时会遇到一个小问题，如果用户从F拿过来的数据不是他想要的数据(比如12306订票页面想订的票没有了)，这时用户猛刷新L，那么L就会给F发送很多的请求，实际上F的数据是没有发生变化的，F收到这么多请求后都会照常的处理，但处理的结果没有发生变化，所以处理的结果跟第一次返回出去的数据是一样的。所以这样对F来说，很浪费资源、时间。<br>3.F想了一个办法，当F第一次把数据(小圆表示)发送给L时，它让L把数据缓存到L里面，也就是把它缓存起来，缓存起来以后如果下一次L发送了请求到了F这边之后，F会对比F这边的数据和L那边的数据是不是一样的(F是如何校验的呢？)，如果是一样的那就没必要再把这个数据发送回给L了，就让L使用缓存里的数据就行了。<br>4.F如何校验F和L的数据是一样的，F就想了一个办法。当F第一次发送数据给L时，会在数据中塞入一个last-modified字段(记录了F这边数据的修改时间)，那么L也有了这个字段。那么当L下一次发送请求时，会把这个修改时间也带上，也就是把lm(last-modified字段)发送回给F，F会校验lm和F里的那个数据的修改时间是否是一样的，如果是一样的那么这个数据肯定没有被修改过，那就没必要再发送回给L了，直接告诉L去使用缓存里的数据就行了。<br>5.另一种校验方式是基于last-modified的小缺陷设计出来的(开发人员把F的数据@改为#，然后又改回@，那么数据@虽然没变化，但它的修改时间改变了。那么L发送过来的lm和数据@的修改时间是对不上的，然后F又把@发送给L，但实际上@没有发生变化，这样也会造成一些问题)。所以F想了一个办法，F第一次发送@数据包时，会根据@里的内容生成一个标志etag，通过etag可以大概了解数据包@里的内容。F会把etag和last-modified一起发送给L，那么L下一次访问F时，会传lm和etag。那么F先验证lm(两边数据修改时间是否一样)，一样则使用L的缓存；如果不一样，F则验证etag是否一样，如果一样证明@没有被修改，则让L使用缓存</p>
-<p>服务器响应304，not modifired</p>
-<p>服务器怎么告诉浏览器缓存起来？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public function behaviors()&#123;</div><div class="line">	return [</div><div class="line">		[</div><div class="line">			&apos;class&apos;=&gt;&apos;yii\filters\HttpCache&apos;,</div><div class="line">			&apos;lastModified&apos;=&gt;function()&#123;</div><div class="line">				return 1432817564;</div><div class="line">			&#125;,</div><div class="line">			&apos;etagSeed&apos;=&gt;function()&#123;</div><div class="line">				return &apos;etagseed2f;&apos;</div><div class="line">			&#125;</div><div class="line">		]</div><div class="line">	];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>//使用 HttpCache 之后再请求头部header会多了一个Cache-Control:last-modified 来作为标志</p>
-<p>在服务器修改数据之后如何让浏览器更新缓存</p>
-<p>httpCache的依赖:<br>lastModified: 时间标识<br>etagSeed：内容标识<br>当二者同时存时，需要两个均发生变化才会发送200并返回新数据</p>
-<h2 id="gii-工具简介"><a href="#gii-工具简介" class="headerlink" title="gii 工具简介"></a>gii 工具简介</h2><ul>
-<li>Model Generator（数据模型的代码生成器）</li>
-<li>Form Generator（表单的代码生成器）</li>
-<li>Module Generator（模块的代码生成器）</li>
-<li>CRUD Generator（增删改查的代码生成器）</li>
-<li>Controller Generator（控制器的代码生成器）</li>
-<li>Extension Generator（扩展的代码生成器）</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/25/Yii-框架之高效篇/" data-id="cj0kqa7ko002jj94b7cfpehx9" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-打造扛得住的-MySQL-数据库架构" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/10/20/打造扛得住的-MySQL-数据库架构/" class="article-date">
-  <time datetime="2016-10-20T12:57:11.000Z" itemprop="datePublished">2016-10-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/20/打造扛得住的-MySQL-数据库架构/">打造扛得住的 MySQL 数据库架构</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="第1章-实例和故事"><a href="#第1章-实例和故事" class="headerlink" title="第1章 实例和故事"></a>第1章 实例和故事</h2><h3 id="1-1-什么决定了电商双11大促的成败"><a href="#1-1-什么决定了电商双11大促的成败" class="headerlink" title="1-1 什么决定了电商双11大促的成败"></a>1-1 什么决定了电商双11大促的成败</h3><p>电商公司的服务器能够承受住双十一期间高并发的访问量，为用户提供稳定高速的购物体验。</p>
-<h3 id="1-2-在双11大促中的数据库服务器"><a href="#1-2-在双11大促中的数据库服务器" class="headerlink" title="1-2 在双11大促中的数据库服务器"></a>1-2 在双11大促中的数据库服务器</h3><p>数据库架构：</p>
-<ul>
-<li>1 台 MySQL 主服务器</li>
-<li>15 台 MySQL 从服务器</li>
-</ul>
-<p>当时没有部署主从复制组件，一旦主服务器出现故障，很难自动进行故障切换，必须由 DBA 进行手动操作。过多的从服务器，对主服务器的网卡容量也是一个不小的挑战。</p>
-<p>数据库性能依据参数：</p>
-<ul>
-<li>QPS</li>
-<li>TPS</li>
-<li>并发量</li>
-<li>CPU 使用率</li>
-<li>磁盘 IO</li>
-</ul>
-<h3 id="1-3-在大促中什么影响了数据库性能"><a href="#1-3-在大促中什么影响了数据库性能" class="headerlink" title="1-3 在大促中什么影响了数据库性能"></a>1-3 在大促中什么影响了数据库性能</h3><p>影响数据库性能的因素</p>
-<ul>
-<li>SQL 查询速度</li>
-<li>服务器硬件</li>
-<li>网卡流量</li>
-<li>磁盘 IO</li>
-</ul>
-<p>数据库性能常见的风险：</p>
-<ul>
-<li>效率低下的 SQL<ul>
-<li>QPS：每秒钟处理的查询量<ul>
-<li>10ms 处理 1个 SQL，1s 处理 100个 SQL，QPS &lt;= 100</li>
-<li>100ms 处理 1个 SQL，1s 处理 10个 SQL，QPS &lt;= 10</li>
-</ul>
-</li>
-<li>TPS：每秒钟处理的事务数</li>
-</ul>
-</li>
-<li>大量的并发和超高的 CPU 使用率<ul>
-<li>大量的并发会导致数据库连接数被占满</li>
-<li>超高的 CPU 使用率会导致服务器因 CPU 资源耗尽而出现宕机</li>
-</ul>
-</li>
-<li>磁盘 IO<ul>
-<li>磁盘 IO 性能突然下降（使用更快的磁盘设备）</li>
-<li>其它大量消耗磁盘性能的计划任务（调整计划任务，做好磁盘维护）</li>
-</ul>
-</li>
-<li>网卡 IO<ul>
-<li>当网卡 IO 被占满时，（千兆网卡 1000 Mb/8=100 MB）会出现无法连接数据库的情况。</li>
-<li>如何避免无法连接数据库的情况<ul>
-<li>减少从服务器的数量</li>
-<li>进行分级缓存</li>
-<li>避免使用 <code>select *</code> 进行查询</li>
-<li>分离业务网络和服务器网络</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>大表<ul>
-<li>什么样的表可以称之为大表<ul>
-<li>记录行数巨大，单表超过千万行</li>
-<li>表数据文件巨大，表数据文件超过 10 G</li>
-</ul>
-</li>
-<li>大表对查询的影响<ul>
-<li>慢查询：很难在一定的时间内过滤出所需要的数据<ul>
-<li>区分度低的数据在查询的时候会产生大量的磁盘 IO，会降低磁盘的效率，导致查询效率低下,出现大量的慢查询。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>大表对 DDL 操作的影响<ul>
-<li>建立索引需要很长的时间<ul>
-<li>MySQL 版本 &lt; 5.5，建立索引会锁表</li>
-<li>MySQL 版本 &gt;= 5.5，虽然不会锁表但会引起主从延迟</li>
-</ul>
-</li>
-<li>修改表结构需要长时间锁表<ul>
-<li>会造成长时间的主从延迟</li>
-<li>影响正常的数据操作</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>解决方案<ul>
-<li>分库分表，把一张大表分成多个小表<ul>
-<li>难点<ul>
-<li>分表主键的选择</li>
-<li>分表后跨分区数据的查询和统计</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>大表的历史数据归档（减少对前后端业务的影响）<ul>
-<li>难点<ul>
-<li>归档时间点的选择</li>
-<li>如何进行归档操作</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>大事务<ul>
-<li>事务的概念<ul>
-<li>事务是数据库系统区别于其它一切文件系统的重要特性之一</li>
-<li>事务是一组具有原子性的 SQL 语句，或是一个独立的工作单元</li>
-</ul>
-</li>
-<li>事务的特性<ul>
-<li>原子性<ul>
-<li>一个事务必须被视为一个不可分割的最小工作单元，整个事务中的所有操作要么全部提交成功，要么全部失败，对于一个事务来说，不可能只执行其中的一部分操作。</li>
-</ul>
-</li>
-<li>一致性<ul>
-<li>一致性是指事务将数据库从一种一致性状态转换到另外一种一致性状态。在事务开始之前和事务结束后，数据库中的数据完整性没有被破坏。</li>
-</ul>
-</li>
-<li>隔离性<ul>
-<li>隔离性要求一个事务对数据库中数据的修改，在未提交完成前对于其它事务是不可见的。</li>
-<li>隔离性的类型<ul>
-<li>未提交读（Read Uncommited）</li>
-<li>已提交读（Read Commited）</li>
-<li>可重复读（Repeatable Read）</li>
-<li>可串行化（Serialization）</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>持久性<ul>
-<li>一旦事务提交，则其所做的修改就会永久保存到数据库中。此时即使系统崩溃，已经提交的修改数据也不会丢失</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>什么是大事务<ul>
-<li>定义：运行时间比较长，操作的数据比较多的事务</li>
-<li>风险：<ul>
-<li>锁定太多的数据，造成大量的阻塞和锁超时</li>
-<li>回滚时所需时间比较长</li>
-<li>执行时间长，容易造成主从延迟</li>
-</ul>
-</li>
-<li>处理：<ul>
-<li>避免一次处理太多的数据</li>
-<li>移出不必要在事务中的 SELECT 操作</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="第2章-什么影响了MySQL性能"><a href="#第2章-什么影响了MySQL性能" class="headerlink" title="第2章 什么影响了MySQL性能"></a>第2章 什么影响了MySQL性能</h2><h2 id="第3章-MySQL基准测试"><a href="#第3章-MySQL基准测试" class="headerlink" title="第3章 MySQL基准测试"></a>第3章 MySQL基准测试</h2><h2 id="第4章-MySQL数据库结构优化"><a href="#第4章-MySQL数据库结构优化" class="headerlink" title="第4章 MySQL数据库结构优化"></a>第4章 MySQL数据库结构优化</h2><h2 id="第5章-MySQL高可用架构设计"><a href="#第5章-MySQL高可用架构设计" class="headerlink" title="第5章 MySQL高可用架构设计"></a>第5章 MySQL高可用架构设计</h2><h2 id="第6章-数据库索引优化"><a href="#第6章-数据库索引优化" class="headerlink" title="第6章 数据库索引优化"></a>第6章 数据库索引优化</h2><h2 id="第7章-SQL查询优化"><a href="#第7章-SQL查询优化" class="headerlink" title="第7章 SQL查询优化"></a>第7章 SQL查询优化</h2><h2 id="第8章-数据库的分库分表"><a href="#第8章-数据库的分库分表" class="headerlink" title="第8章 数据库的分库分表"></a>第8章 数据库的分库分表</h2><h2 id="第9章-数据库监控"><a href="#第9章-数据库监控" class="headerlink" title="第9章 数据库监控"></a>第9章 数据库监控</h2>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/20/打造扛得住的-MySQL-数据库架构/" data-id="cj0kqa7my005wj94bww790vdp" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
 
     </footer>
   </div>
@@ -1060,7 +928,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
   </div>
 
@@ -1070,7 +938,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
     </div>
   </div>
 
@@ -1080,7 +948,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AliCloud/" style="font-size: 11.67px;">AliCloud</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 16.67px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 18.33px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.67px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/UML/" style="font-size: 11.67px;">UML</a> <a href="/tags/Yii/" style="font-size: 13.33px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
+      <a href="/tags/AliCloud/" style="font-size: 11.67px;">AliCloud</a> <a href="/tags/Javascript/" style="font-size: 11.67px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 16.67px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 18.33px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.67px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/UML/" style="font-size: 11.67px;">UML</a> <a href="/tags/Yii/" style="font-size: 13.33px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
     </div>
   </div>
 
@@ -1102,6 +970,14 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
       <ul>
         
           <li>
+            <a href="/2017/03/23/学习-Javascript-之类型/">学习 Javascript 之类型</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/23/学习-Javascript-之变量/">学习 Javascript 之变量</a>
+          </li>
+        
+          <li>
             <a href="/2017/03/20/Head-First-Design-Patterns/">Head First Design Patterns</a>
           </li>
         
@@ -1111,14 +987,6 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
         
           <li>
             <a href="/2017/03/15/「Tips」-htaccess-配置-HTTP-Header/">「Tips」.htaccess 配置 HTTP Header</a>
-          </li>
-        
-          <li>
-            <a href="/2017/03/15/「Tips」PHP-7-1-命名空间的新特性和使用方法/">「Tips」PHP 7.1 命名空间的新特性和使用方法</a>
-          </li>
-        
-          <li>
-            <a href="/2017/03/02/Swagger-PHP-基础使用/">Swagger-PHP 基础使用</a>
           </li>
         
       </ul>

@@ -65,6 +65,132 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-学习-Javascript-之类型" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/23/学习-Javascript-之类型/" class="article-date">
+  <time datetime="2017-03-23T02:17:24.000Z" itemprop="datePublished">2017-03-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Javascript/">Javascript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/23/学习-Javascript-之类型/">学习 Javascript 之类型</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2017/03/23/学习-Javascript-之类型/" data-id="cj0mjkd3s005ues4bfmtyu23p" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-学习-Javascript-之变量" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/23/学习-Javascript-之变量/" class="article-date">
+  <time datetime="2017-03-23T02:16:35.000Z" itemprop="datePublished">2017-03-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Javascript/">Javascript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/23/学习-Javascript-之变量/">学习 Javascript 之变量</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="变量的声明"><a href="#变量的声明" class="headerlink" title="变量的声明"></a>变量的声明</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* 声明变量 */</span></div><div class="line"><span class="keyword">var</span> x = <span class="number">3.14</span>;</div><div class="line"><span class="keyword">var</span> y;</div><div class="line"><span class="keyword">var</span> z = x + y;</div><div class="line"></div><div class="line"><span class="keyword">var</span> a = <span class="number">1</span>, b = <span class="number">2</span>, c = <span class="literal">true</span>;</div><div class="line"><span class="keyword">var</span> foo = <span class="string">"Hello"</span> + <span class="string">"World"</span>;</div><div class="line"><span class="keyword">var</span> bar = <span class="number">2</span> &gt; <span class="number">1</span> ? <span class="number">2</span> != <span class="number">1</span> : <span class="number">1</span> &gt; <span class="number">2</span> ;</div><div class="line"></div><div class="line"><span class="comment">/* 声明常量 */</span></div><div class="line"><span class="keyword">const</span> PI = <span class="number">3.1415</span>;</div><div class="line"></div><div class="line"><span class="comment">/* ES6 - 声明变量 */</span></div><div class="line"><span class="keyword">let</span> a = <span class="number">10</span>;</div><div class="line"><span class="keyword">let</span> [a, b, c] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</div></pre></td></tr></table></figure>
+<h2 id="变量的声明作用域"><a href="#变量的声明作用域" class="headerlink" title="变量的声明作用域"></a>变量的声明作用域</h2><ul>
+<li>var<ul>
+<li>在全局作用域内有效</li>
+</ul>
+</li>
+<li>let<ul>
+<li>只在声明所在的块级作用域内有效</li>
+</ul>
+</li>
+<li>const<ul>
+<li>只在声明所在的块级作用域内有效</li>
+</ul>
+</li>
+</ul>
+<h2 id="变量的声明陷阱"><a href="#变量的声明陷阱" class="headerlink" title="变量的声明陷阱"></a>变量的声明陷阱</h2><ul>
+<li>变量提升<ul>
+<li>变量无法在 let 命令声明之前使用，否则报错</li>
+<li>变量可以在 var 命令声明之前使用，值为 undefined</li>
+</ul>
+</li>
+<li>暂时性死区<ul>
+<li>在代码块内，使用 let 命令声明变量之前，该变量都是不可用的</li>
+</ul>
+</li>
+<li>重复声明<ul>
+<li>var 命令允许在相同作用域内，重复声明一个变量</li>
+<li>let 命令不允许在相同作用域内，重复声明一个变量</li>
+</ul>
+</li>
+</ul>
+<h2 id="解构赋值"><a href="#解构赋值" class="headerlink" title="解构赋值"></a>解构赋值</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* 数组的解构赋值 */</span></div><div class="line"><span class="keyword">let</span> [foo, [[bar], baz]] = [<span class="number">1</span>, [[<span class="number">2</span>], <span class="number">3</span>]];</div><div class="line"></div><div class="line"><span class="comment">/* 对象的解构赋值 */</span></div><div class="line"><span class="keyword">let</span> &#123; foo, bar &#125; = &#123; <span class="attr">foo</span>: <span class="string">"aaa"</span>, <span class="attr">bar</span>: <span class="string">"bbb"</span> &#125;;</div><div class="line"></div><div class="line"><span class="comment">/* 字符串的解构赋值 */</span></div><div class="line"><span class="keyword">const</span> [a, b, c, d, e] = <span class="string">'hello'</span>;</div><div class="line"></div><div class="line"><span class="comment">/* 函数的解构赋值 */</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">[x, y]</span>)</span>&#123;</div><div class="line">  <span class="keyword">return</span> x + y;</div><div class="line">&#125;</div><div class="line">add([<span class="number">1</span>, <span class="number">2</span>]); <span class="comment">// 3</span></div></pre></td></tr></table></figure>
+<p>变量的解构赋值用途如下：</p>
+<ul>
+<li>交换变量的值</li>
+<li>从函数返回多个值</li>
+<li>函数参数的定义</li>
+<li>提取 JSON 数据</li>
+<li>函数参数的默认值</li>
+<li>遍历 Map 结构</li>
+<li>输入模块的指定方法</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2017/03/23/学习-Javascript-之变量/" data-id="cj0mjkd3t005xes4bxow612eg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Head-First-Design-Patterns" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/03/20/Head-First-Design-Patterns/" class="article-date">
@@ -141,7 +267,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/20/Head-First-Design-Patterns/" data-id="cj0kqa7gu0000j94b8suuivgu" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/03/20/Head-First-Design-Patterns/" data-id="cj0mjkcze0000es4bjg2f4b7x" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Learning/">Learning</a></li></ul>
@@ -184,7 +310,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」Yii2-前端请求的参数字段映射数据模型的属性/" data-id="cj0kqa7ky002uj94b737ef7eo" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」Yii2-前端请求的参数字段映射数据模型的属性/" data-id="cj0mjkd1u002wes4bgdbtpl09" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -228,7 +354,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」-htaccess-配置-HTTP-Header/" data-id="cj0kqa7kr002nj94bswb54xoi" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」-htaccess-配置-HTTP-Header/" data-id="cj0mjkd1s002pes4b5mv3jwpe" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -271,7 +397,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」PHP-7-1-命名空间的新特性和使用方法/" data-id="cj0kqa7kv002qj94buhnkvips" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」PHP-7-1-命名空间的新特性和使用方法/" data-id="cj0mjkd1t002tes4b2s7ipvs6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -395,7 +521,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/02/Swagger-PHP-基础使用/" data-id="cj0kqa7kb001zj94bx3us4djt" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/03/02/Swagger-PHP-基础使用/" data-id="cj0mjkd16001tes4bcnxknv72" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swagger/">Swagger</a></li></ul>
@@ -615,7 +741,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/28/使用-Yii2-构建-RESTFul-API/" data-id="cj0kqa7m6004bj94bjf2iig8g" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/28/使用-Yii2-构建-RESTFul-API/" data-id="cj0mjkd300045es4b44fyt9hs" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
@@ -707,7 +833,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/23/「复习」使用阿里云从零开始部署-Laravel/" data-id="cj0kqa7l1002xj94bb6ijen65" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/23/「复习」使用阿里云从零开始部署-Laravel/" data-id="cj0mjkd1z002zes4b8jsmlt4e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AliCloud/">AliCloud</a></li></ul>
@@ -774,194 +900,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/17/学习-UML（二）/" data-id="cj0kqa7mx005tj94b3m167uz9" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/17/学习-UML（二）/" data-id="cj0mjkd3w0060es4btyk2wr6e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UML/">UML</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-在-Yii-2-中使用-CodeCeption" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/02/14/在-Yii-2-中使用-CodeCeption/" class="article-date">
-  <time datetime="2017-02-14T06:43:55.000Z" itemprop="datePublished">2017-02-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/14/在-Yii-2-中使用-CodeCeption/">在 Yii 2 中使用 CodeCeption</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="安装-Yii2"><a href="#安装-Yii2" class="headerlink" title="安装 Yii2"></a>安装 Yii2</h2><p>使用 Composer 安装 Yii 2 高级模板项目<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo composer global require &quot;fxp/composer-asset-plugin:^1.2.0&quot;</div><div class="line">sudo composer create-project --prefer-dist yiisoft/yii2-app-advanced yii-application</div><div class="line">cd yii-application</div><div class="line">sudo composer install</div></pre></td></tr></table></figure></p>
-<p>配置 Apache 服务器<br><figure class="highlight apache"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"><span class="section">&lt;VirtualHost *:80&gt;</span></div><div class="line">   <span class="attribute"><span class="nomarkup">ServerName</span></span> frontend.dev</div><div class="line">   <span class="attribute"><span class="nomarkup">DocumentRoot</span></span> <span class="string">"/path/to/yii-application/frontend/web/"</span></div><div class="line"></div><div class="line">   <span class="section">&lt;Directory "/path/to/yii-application/frontend/web/"&gt;</span></div><div class="line">       <span class="comment"># use mod_rewrite for pretty URL support</span></div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteEngine</span></span> <span class="literal">on</span></div><div class="line">       <span class="comment"># If a directory or a file exists, use the request directly</span></div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteCond</span></span> <span class="variable">%&#123;REQUEST_FILENAME&#125;</span> !-f</div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteCond</span></span> <span class="variable">%&#123;REQUEST_FILENAME&#125;</span> !-d</div><div class="line">       <span class="comment"># Otherwise forward the request to index.php</span></div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteRule</span></span> . index.php</div><div class="line"></div><div class="line">       <span class="comment"># use index.php as index file</span></div><div class="line">       <span class="attribute">DirectoryIndex</span> index.php</div><div class="line"></div><div class="line">       <span class="comment"># ...other settings...</span></div><div class="line">       <span class="comment"># Apache 2.4</span></div><div class="line">       <span class="attribute">Require</span> <span class="literal">all</span> granted</div><div class="line"></div><div class="line">       <span class="comment">## Apache 2.2</span></div><div class="line">       <span class="comment"># Order allow,deny</span></div><div class="line">       <span class="comment"># Allow from all</span></div><div class="line">   <span class="section">&lt;/Directory&gt;</span></div><div class="line"><span class="section">&lt;/VirtualHost&gt;</span></div><div class="line"></div><div class="line"><span class="section">&lt;VirtualHost *:80&gt;</span></div><div class="line">   <span class="attribute"><span class="nomarkup">ServerName</span></span> backend.dev</div><div class="line">   <span class="attribute"><span class="nomarkup">DocumentRoot</span></span> <span class="string">"/path/to/yii-application/backend/web/"</span></div><div class="line"></div><div class="line">   <span class="section">&lt;Directory "/path/to/yii-application/backend/web/"&gt;</span></div><div class="line">       <span class="comment"># use mod_rewrite for pretty URL support</span></div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteEngine</span></span> <span class="literal">on</span></div><div class="line">       <span class="comment"># If a directory or a file exists, use the request directly</span></div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteCond</span></span> <span class="variable">%&#123;REQUEST_FILENAME&#125;</span> !-f</div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteCond</span></span> <span class="variable">%&#123;REQUEST_FILENAME&#125;</span> !-d</div><div class="line">       <span class="comment"># Otherwise forward the request to index.php</span></div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteRule</span></span> . index.php</div><div class="line"></div><div class="line">       <span class="comment"># use index.php as index file</span></div><div class="line">       <span class="attribute">DirectoryIndex</span> index.php</div><div class="line"></div><div class="line">       <span class="comment"># ...other settings...</span></div><div class="line">       <span class="comment"># Apache 2.4</span></div><div class="line">       <span class="attribute">Require</span> <span class="literal">all</span> granted</div><div class="line"></div><div class="line">       <span class="comment">## Apache 2.2</span></div><div class="line">       <span class="comment"># Order allow,deny</span></div><div class="line">       <span class="comment"># Allow from all</span></div><div class="line">   <span class="section">&lt;/Directory&gt;</span></div><div class="line"><span class="section">&lt;/VirtualHost&gt;</span></div></pre></td></tr></table></figure></p>
-<h2 id="安装-Codeception"><a href="#安装-Codeception" class="headerlink" title="安装 Codeception"></a>安装 Codeception</h2><p>在项目根目录执行以下命令安装 codeception 扩展<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo composer global require &quot;codeception/codeception=*&quot;</div><div class="line">sudo composer global require &quot;codeception/specify=*&quot;</div><div class="line">sudo composer global require &quot;codeception/verify=*&quot;</div><div class="line">sudo composer require --dev &quot;yiisoft/yii2-faker=*&quot;</div></pre></td></tr></table></figure></p>
-<p>将 codeception 命令配置进环境变量中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">vim .zshrc</div><div class="line"></div><div class="line">// 在文件 .zshrc 中添加以下代码，且保存退出</div><div class="line">alias codecept=&quot;/Users/LuisEdware/.composer/vendor/codeception/codeception/codecept&quot;</div><div class="line"></div><div class="line">source .zshrc</div></pre></td></tr></table></figure></p>
-<p>在项目中使用 codeception<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">cd frontend/</div><div class="line">sudo chmod -R 777 tests</div><div class="line">codecept build</div><div class="line">codecept run</div></pre></td></tr></table></figure></p>
-<h2 id="单元测试（Unit-Test）"><a href="#单元测试（Unit-Test）" class="headerlink" title="单元测试（Unit Test）"></a>单元测试（Unit Test）</h2><p>单元测试是针对程序模块来进行正确性检验的测试工作，可以通过单元测试来确认深藏在代码里面的某些功能仍然可用, 单元测试能消除程序单元的不可靠性。</p>
-<p>Codeception 的单元测试功能是基于 PHPUnit 之上的, 你可以照样写 PHPUnit 的测试代码, Codeception 一样能运行。</p>
-<h4 id="创建单元测试"><a href="#创建单元测试" class="headerlink" title="创建单元测试"></a>创建单元测试</h4><p>使用 Codeception 的生成器来执行以下命令生成单元测试<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd frontend</div><div class="line">codecept generate:test unit Example</div></pre></td></tr></table></figure></p>
-<p>上述命令会在 tests/unit 目录创建一个 ExampleTest 文件，代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">namespace</span> <span class="title">frontend</span>\<span class="title">tests</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExampleTest</span> <span class="keyword">extends</span> \<span class="title">Codeception</span>\<span class="title">Test</span>\<span class="title">Unit</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@var</span> \frontend\tests\UnitTester</div><div class="line">     */</div><div class="line">    <span class="keyword">protected</span> $tester;</div><div class="line"></div><div class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">_before</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">_after</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testPushAndPop</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        $stack = [];</div><div class="line">        <span class="keyword">$this</span>-&gt;assertEquals(<span class="number">0</span>, count($stack));</div><div class="line"></div><div class="line">        array_push($stack, <span class="string">'foo'</span>);</div><div class="line">        <span class="keyword">$this</span>-&gt;assertEquals(<span class="string">'foo'</span>, $stack[count($stack)<span class="number">-1</span>]);</div><div class="line">        <span class="keyword">$this</span>-&gt;assertEquals(<span class="number">1</span>, count($stack));</div><div class="line"></div><div class="line">        <span class="keyword">$this</span>-&gt;assertEquals(<span class="string">'foo'</span>, array_pop($stack));</div><div class="line">        <span class="keyword">$this</span>-&gt;assertEquals(<span class="number">0</span>, count($stack));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h6 id="测试依赖"><a href="#测试依赖" class="headerlink" title="测试依赖"></a>测试依赖</h6><p>通过 <code>@depends</code> 让测试方法之间进行关联依赖</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">namespace</span> <span class="title">frontend</span>\<span class="title">tests</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExampleTest</span> <span class="keyword">extends</span> \<span class="title">Codeception</span>\<span class="title">Test</span>\<span class="title">Unit</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testEmpty</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        $stack = [];</div><div class="line">        <span class="keyword">$this</span>-&gt;assertEmpty($stack);</div><div class="line"></div><div class="line">        <span class="keyword">return</span> $stack;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@depends</span> testEmpty</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testPush</span><span class="params">(array $stack)</span></span></div><div class="line">    &#123;</div><div class="line">        array_push($stack, <span class="string">'foo'</span>);</div><div class="line">        <span class="keyword">$this</span>-&gt;assertEquals(<span class="string">'foo'</span>, $stack[count($stack)<span class="number">-1</span>]);</div><div class="line">        <span class="keyword">$this</span>-&gt;assertNotEmpty($stack);</div><div class="line"></div><div class="line">        <span class="keyword">return</span> $stack;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@depends</span> testPush</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testPop</span><span class="params">(array $stack)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;assertEquals(<span class="string">'foo'</span>, array_pop($stack));</div><div class="line">        <span class="keyword">$this</span>-&gt;assertEmpty($stack);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h6 id="数据提供商"><a href="#数据提供商" class="headerlink" title="数据提供商"></a>数据提供商</h6><p>通过 <code>@dataProvider</code> 让测试方法迭代运行数据提供者方法的数据</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">namespace</span> <span class="title">frontend</span>\<span class="title">tests</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DataTest</span> <span class="keyword">extends</span> \<span class="title">Codeception</span>\<span class="title">Test</span>\<span class="title">Unit</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@var</span> \frontend\tests\UnitTester</div><div class="line">     */</div><div class="line">    <span class="keyword">protected</span> $tester;</div><div class="line"></div><div class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">_before</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">_after</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@dataProvider</span> additionProvider</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testAdd</span><span class="params">($a, $b, $expected)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">echo</span> $a;</div><div class="line">        <span class="keyword">echo</span> $b;</div><div class="line">        <span class="keyword">echo</span> $expected;</div><div class="line">        <span class="keyword">$this</span>-&gt;assertEquals($expected, $a + $b);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">additionProvider</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> [</div><div class="line">            [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</div><div class="line">            [<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>],</div><div class="line">            [<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>],</div><div class="line">            [<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>]</div><div class="line">        ];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h6 id="抛出异常"><a href="#抛出异常" class="headerlink" title="抛出异常"></a>抛出异常</h6><p>通过 <code>@expectedException</code> 或方法 <code>$this-&gt;expectException()</code> 在测试实例中抛出异常</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">namespace</span> <span class="title">frontend</span>\<span class="title">tests</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExceptionTest</span> <span class="keyword">extends</span> \<span class="title">Codeception</span>\<span class="title">Test</span>\<span class="title">Unit</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testException</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;expectException(InvalidArgumentException::class);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@expectedException</span> InvalidArgumentException</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testExceptionTow</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h6 id="断点输出"><a href="#断点输出" class="headerlink" title="断点输出"></a>断点输出</h6><p>通过方法 <code>$this-&gt;expectOutputString()</code> 生成一个预期的输出。当实际输出和预期输出不一致时，则测试不通过。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">use</span> <span class="title">PHPUnit</span>\<span class="title">Framework</span>\<span class="title">TestCase</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">OutputTest</span> <span class="keyword">extends</span> <span class="title">TestCase</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testExpectFooActualFoo</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;expectOutputString(<span class="string">'foo'</span>);</div><div class="line">        <span class="keyword">print</span> <span class="string">'foo'</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testExpectBarActualBaz</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;expectOutputString(<span class="string">'bar'</span>);</div><div class="line">        <span class="keyword">print</span> <span class="string">'baz'</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>Codeception 的更多 Unit Tests 信息请参考链接：</p>
-<ul>
-<li><a href="https://github.com/Codeception/Codeception/blob/2.0/docs/06-UnitTests.md" target="_blank" rel="external">https://github.com/Codeception/Codeception/blob/2.0/docs/06-UnitTests.md</a></li>
-<li><a href="https://github.com/Codeception/Codeception/blob/2.0/docs/modules/Yii2.md" target="_blank" rel="external">https://github.com/Codeception/Codeception/blob/2.0/docs/modules/Yii2.md</a></li>
-</ul>
-<h2 id="创建接口测试（RESTFUL-API-TEST）"><a href="#创建接口测试（RESTFUL-API-TEST）" class="headerlink" title="创建接口测试（RESTFUL API TEST）"></a>创建接口测试（RESTFUL API TEST）</h2><p>创建 RESTFUL API 测试配置文件，新增文件 <code>api.suite.yml</code> 和文件夹 <code>api</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">codecept generate:suite api</div></pre></td></tr></table></figure></p>
-<p>修改配置文件 <code>api.suite.yml</code> 如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">class_name: ApiTester</div><div class="line">modules:</div><div class="line">    enabled:</div><div class="line">        - REST:</div><div class="line">            url: www.frontend.dev/index.php?r=</div><div class="line">            depends: Yii2</div><div class="line">        - \ApiBundle\Helper\Api</div><div class="line">    config:</div><div class="line">        - Yii2</div></pre></td></tr></table></figure></p>
-<p>创建 RESTFUL API 测试文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">codecept generate:cept api CreateUser</div></pre></td></tr></table></figure></p>
-<p>修改生成文件代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">use</span> <span class="title">frontend</span>\<span class="title">tests</span>\<span class="title">ApiTester</span>;</div><div class="line"></div><div class="line"><span class="comment">// 发送 HTTP GET 请求</span></div><div class="line">$I = <span class="keyword">new</span> ApiTester($scenario);</div><div class="line">$I-&gt;wantTo(<span class="string">'I want to test RESTFUL API'</span>);</div><div class="line">$I-&gt;sendGET(<span class="string">'/api/v1/users/create'</span>);</div><div class="line">$I-&gt;seeResponseCodeIs(\Codeception\Util\HttpCode::OK);</div><div class="line">$I-&gt;seeResponseIsJson();</div><div class="line">$I-&gt;seeResponseContains(<span class="string">'&#123;"result":"ok"&#125;'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 发送 HTTP POST 请求</span></div><div class="line">$I-&gt;sendPOST(<span class="string">'/users'</span>, [<span class="string">'name'</span> =&gt; <span class="string">'davert'</span>, <span class="string">'email'</span> =&gt; <span class="string">'davert@codeception.com'</span>]);</div><div class="line"></div><div class="line"><span class="comment">// 验证 JSON 响应数据类型</span></div><div class="line">$I-&gt;seeResponseMatchesJsonType([</div><div class="line">    <span class="string">'id'</span> =&gt; <span class="string">'integer'</span>,</div><div class="line">    <span class="string">'name'</span> =&gt; <span class="string">'string'</span>,</div><div class="line">    <span class="string">'email'</span> =&gt; <span class="string">'string:email'</span>,</div><div class="line">    <span class="string">'homepage'</span> =&gt; <span class="string">'string:url|null'</span>,</div><div class="line">    <span class="string">'created_at'</span> =&gt; <span class="string">'string:date'</span>,</div><div class="line">    <span class="string">'is_active'</span> =&gt; <span class="string">'boolean'</span></div><div class="line">]);</div></pre></td></tr></table></figure></p>
-<p>常用的 REST API 如下：</p>
-<ul>
-<li>wantTo()：配置测试标题</li>
-<li>sendGET()：发送 HTTP GET 请求</li>
-<li>sendPUT()：发送 HTTP PUT 请求</li>
-<li>sendPOST()：发送 HTTP POST 请求</li>
-<li>sendDELETE()：发送 HTTP DELETE 请求</li>
-<li>haveHttpHeader()：设置 HTTP 请求头</li>
-<li>seeHttpHeader()：检查 HTTP 请求头</li>
-<li>seeResponseCodeIs()：检查响应状态码</li>
-<li>seeResponseContains()：检查响应内容</li>
-<li>seeResponseContainsJson()：检查响应数据类型是否为 JSON 和核对响应内容</li>
-<li>seeResponseIsJson()：检查响应是否返回 JSON 数据</li>
-<li>seeResponseJsonMatchesJsonPath()：使用 JSON 数据去检查响应内容</li>
-<li>seeResponseMatchesJsonType()：检查响应数据的数据类型</li>
-</ul>
-<p>Codeception 的更多 RESTFUL API 信息请参考链接：</p>
-<ul>
-<li><a href="https://github.com/Codeception/Codeception/blob/2.0/docs/modules/REST.md" target="_blank" rel="external">https://github.com/Codeception/Codeception/blob/2.0/docs/modules/REST.md</a></li>
-<li><a href="https://github.com/Codeception/Codeception/blob/2.0/docs/10-WebServices.md" target="_blank" rel="external">https://github.com/Codeception/Codeception/blob/2.0/docs/10-WebServices.md</a></li>
-</ul>
-<h2 id="数据库测试（DB-TEST）"><a href="#数据库测试（DB-TEST）" class="headerlink" title="数据库测试（DB TEST）"></a>数据库测试（DB TEST）</h2><p>常用的 DB TEST API 如下：</p>
-<ul>
-<li>seeInDatabase()</li>
-<li>dontSeeInDatabase()</li>
-<li>haveInDatabase()</li>
-<li>grabFromDatabase()</li>
-</ul>
-<p>示例代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// 检查 User 表是否存在 'username' 为 'Davert', 'email' 为 'davert@mail.com' 的数据，存在则报错</span></div><div class="line">$I-&gt;dontSeeInDatabase(<span class="string">'user'</span>, [<span class="string">'username'</span> =&gt; <span class="string">'Davert'</span>, <span class="string">'email'</span> =&gt; <span class="string">'davert@mail.com'</span>]);</div><div class="line"></div><div class="line"><span class="comment">// 检查 User 表是否存在 'username' 为 'okirlin', 'email' 为 'brady.renner@rutherford.com' 的数据，不存在则报错</span></div><div class="line">$I-&gt;seeInDatabase(<span class="string">'user'</span>, [<span class="string">'username'</span> =&gt; <span class="string">'okirlin'</span>, <span class="string">'email'</span> =&gt; <span class="string">'brady.renner@rutherford.com'</span>]);</div><div class="line"></div><div class="line"><span class="comment">// 检查 User 表是否能够新增以下数据，无法新增则报错</span></div><div class="line">$I-&gt;haveInDatabase(<span class="string">'user'</span>,</div><div class="line">  [</div><div class="line">    <span class="string">'username'</span> =&gt; <span class="string">'miles'</span>,</div><div class="line">    <span class="string">'email'</span> =&gt; <span class="string">'miles@davis.com'</span>,</div><div class="line">    <span class="string">'auth_key'</span> =&gt; <span class="string">'EdKfXrx88weFMV0vIxuTMWKgfK2tS321'</span>,</div><div class="line">    <span class="string">'password_hash'</span> =&gt; <span class="string">'$2y$13$g5nv41Px7VBqhS3hVsVN2.MKfgT3jFdkXEsMC4rQJLfaMa7VaJqL2'</span>,</div><div class="line">    <span class="string">'password_reset_token'</span> =&gt; <span class="string">'4BSNyiZNAuxjs5Mty990c47sVrgllIi_1487317115'</span>,</div><div class="line">    <span class="string">'email'</span> =&gt; <span class="string">'506510463@qq.com'</span>,</div><div class="line">    <span class="string">'role'</span> =&gt; <span class="number">10</span>,</div><div class="line">    <span class="string">'status'</span> =&gt; <span class="number">0</span>,</div><div class="line">    <span class="string">'created_at'</span> =&gt; <span class="number">1391885313</span>,</div><div class="line">    <span class="string">'updated_at'</span> =&gt; <span class="number">1391885313</span>,</div><div class="line">]);</div><div class="line"></div><div class="line"><span class="comment">// 按照正序获取一条 username = miles 的数据的 email 字段值</span></div><div class="line">$mail = $I-&gt;grabFromDatabase(<span class="string">'user'</span>, <span class="string">'email'</span>, <span class="keyword">array</span>(<span class="string">'username'</span> =&gt; <span class="string">'troy.becker'</span>));</div><div class="line">var_dump($mail);<span class="keyword">exit</span>;</div></pre></td></tr></table></figure></p>
-<p>Codeception 的更多 DB TEST API 信息请参考链接：</p>
-<ul>
-<li>DB：<a href="https://github.com/Codeception/Codeception/blob/2.0/docs/modules/Db.md" target="_blank" rel="external">https://github.com/Codeception/Codeception/blob/2.0/docs/modules/Db.md</a></li>
-<li>DBH：<a href="https://github.com/Codeception/Codeception/blob/2.0/docs/modules/Dbh.md" target="_blank" rel="external">https://github.com/Codeception/Codeception/blob/2.0/docs/modules/Dbh.md</a></li>
-<li>Doctrine1：<a href="https://github.com/Codeception/Codeception/blob/2.0/docs/modules/Doctrine1.md" target="_blank" rel="external">https://github.com/Codeception/Codeception/blob/2.0/docs/modules/Doctrine1.md</a></li>
-<li>Doctrine2：<a href="https://github.com/Codeception/Codeception/blob/2.0/docs/modules/Doctrine2.md" target="_blank" rel="external">https://github.com/Codeception/Codeception/blob/2.0/docs/modules/Doctrine2.md</a></li>
-<li>Working with Data：<a href="https://github.com/Codeception/Codeception/blob/2.0/docs/09-Data.md" target="_blank" rel="external">https://github.com/Codeception/Codeception/blob/2.0/docs/09-Data.md</a></li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/14/在-Yii-2-中使用-CodeCeption/" data-id="cj0kqa7mt005ij94b3hg7ftz6" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/02/11/LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）/" class="article-date">
-  <time datetime="2017-02-11T08:23:06.000Z" itemprop="datePublished">2017-02-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/11/LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）/">LuisEdware 版 PHP 编程规范（遵循 PSR-1/PSR-2）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="八荣八耻"><a href="#八荣八耻" class="headerlink" title="八荣八耻"></a>八荣八耻</h2><ul>
-<li>以「<b>动手实践</b>」为荣, 以「<b>只看不练</b>」为耻;</li>
-<li>以「<b>打印日志</b>」为荣, 以「<b>单步跟踪</b>」为耻;</li>
-<li>以「<b>空格缩进</b>」为荣, 以「<b>制表缩进</b>」为耻;</li>
-<li>以「<b>单元测试</b>」为荣, 以「<b>人工测试</b>」为耻;</li>
-<li>以「<b>模块复用</b>」为荣, 以「<b>复制粘贴</b>」为耻;</li>
-<li>以「<b>多态应用</b>」为荣, 以「<b>分支判断</b>」为耻;</li>
-<li>以「<b>优雅高效</b>」为荣, 以「<b>冗余拖沓</b>」为耻;</li>
-<li>以「<b>总结分享</b>」为荣, 以「<b>跪求其解</b>」为耻。</li>
-</ul>
-<h2 id="代码风格"><a href="#代码风格" class="headerlink" title="代码风格"></a>代码风格</h2><p>编程开发时，需要遵循 PSR 规范如下：</p>
-<ul>
-<li>PSR 2（编码风格规范）：<a href="https://laravel-china.org/topics/2079" target="_blank" rel="external">https://laravel-china.org/topics/2079</a></li>
-<li>PSR 4（自动加载规范）：<a href="https://laravel-china.org/topics/2081" target="_blank" rel="external">https://laravel-china.org/topics/2081</a></li>
-</ul>
-<h2 id="目录与文件"><a href="#目录与文件" class="headerlink" title="目录与文件"></a>目录与文件</h2><ul>
-<li>目录使用小写加下划线；</li>
-<li>类库、函数文件统一以 <code>.php</code> 为后缀；</li>
-<li>类的文件名均以命名空间定义，并且命名空间的路径和类库文件所在路径一致；</li>
-<li>类文件采用驼峰法命名（首字母大写），其它文件采用小写+下划线命名；</li>
-<li>类名和类文件名保持一致，统一采用首字母大写的驼峰法命名；</li>
-</ul>
-<h2 id="函数、成员属性、成员方法"><a href="#函数、成员属性、成员方法" class="headerlink" title="函数、成员属性、成员方法"></a>函数、成员属性、成员方法</h2><ul>
-<li>函数的命名使用小写字母和下划线的方式</li>
-<li>成员属性的命名使用首字母小写的驼峰法</li>
-<li>成员方法的命名使用首字母小写的驼峰法</li>
-</ul>
-<h2 id="数据表和字段"><a href="#数据表和字段" class="headerlink" title="数据表和字段"></a>数据表和字段</h2><ul>
-<li>数据表采用小写加下划线方式命名</li>
-<li>字段采用首字母小写的驼峰法命名</li>
-</ul>
-<h2 id="常量和配置"><a href="#常量和配置" class="headerlink" title="常量和配置"></a>常量和配置</h2><ul>
-<li>常量以大写字母和下划线命名</li>
-<li>配置以小写字母和下划线命名</li>
-</ul>
-<h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><p>函数声明示例如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">if</span>( ! function_exists(<span class="string">'array_random'</span>))&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 随机返回数组中的值</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span>  $array</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span> mixed</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">array_random</span><span class="params">($array)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> $array[array_rand($array)];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>类文件声明示例如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 符合 RSR-1,RSR-2 的编程实例</div><div class="line"> *</div><div class="line"> * <span class="doctag">@Date</span>      2017/02/17 18:00</div><div class="line"> * <span class="doctag">@Author</span>    七月十五九月初七</div><div class="line"> * <span class="doctag">@License</span>   广东安乐窝网络科技有限公司</div><div class="line"> * <span class="doctag">@Copyright</span> Copyright (c) 2017 AnLeWo Ltd</div><div class="line"> */</div><div class="line"><span class="keyword">namespace</span> <span class="title">Standard</span>; <span class="comment">// 顶部命名空间</span></div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">Yii</span>;<span class="comment">//  空一行 use 引入类</span></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 类描述</div><div class="line"> * 类名必须大写开头驼峰.</div><div class="line"> */</div><div class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleClass</span> // </span>&#123;&#125;必须换行</div><div class="line">&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 常量描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@var</span> string</div><div class="line">     */</div><div class="line">    <span class="keyword">const</span> THIS_IS_A_CONST = <span class="string">''</span>; <span class="comment">// 常量全部大写下划线分割</span></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 属性描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@var</span> string</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> $nameTest = <span class="string">''</span>; <span class="comment">// 属性名称建议开头小写驼峰,成员属性必须添加public（不能省略）， private, protected修饰符</span></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 属性描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@var</span> string</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> $_privateNameTest = <span class="string">''</span>; <span class="comment">// 类私有成员属性，【个人建议】下划线小写开头驼峰</span></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 构造函数</div><div class="line">     *</div><div class="line">     * 构造函数描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span>  string $value 形参名称/描述</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($value = <span class="string">''</span>)</span>// 成员方法必须添加<span class="title">public</span>（不能省略）， <span class="title">private</span>, <span class="title">protected</span>修饰符</span></div><div class="line">    &#123;<span class="comment">// &#123;&#125;必须换行</span></div><div class="line">        <span class="keyword">$this</span>-&gt;nameTest = <span class="keyword">new</span> TestClass();</div><div class="line">        <span class="comment">// 链式操作</span></div><div class="line">        <span class="keyword">$this</span>-&gt;nameTest-&gt;functionOne()</div><div class="line">            -&gt;functionTwo()</div><div class="line">            -&gt;functionThree();</div><div class="line">        <span class="comment">// 一段代码逻辑执行完毕 换行</span></div><div class="line">        <span class="comment">// code...</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 成员方法名称</div><div class="line">     *</div><div class="line">     * 成员方法描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span>  string $value 形参名称/描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span> 返回值类型 返回值描述</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">staticFunction</span><span class="params">($value = <span class="string">''</span>)</span>// <span class="title">static</span>位于修饰符之后</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// code...</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 成员方法名称</div><div class="line">     *</div><div class="line">     * 成员方法描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span>  string $value 形参名称/描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span> 返回值类型 返回值描述</div><div class="line">     * 返回值类型：string，array，object，mixed（多种，不确定的），void（无返回值）</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testFunction</span><span class="params">($value = <span class="string">''</span>)</span>// 成员方法必须小写开头驼峰</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// code...</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 成员方法名称</div><div class="line">     *</div><div class="line">     * 成员方法描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span>  string $value 形参名称/描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span> 返回值类型 返回值描述</div><div class="line">     */</div><div class="line">    <span class="keyword">abstract</span> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">abstractFunction</span><span class="params">($value = <span class="string">''</span>)</span></span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 成员方法名称.</div><div class="line">     * 成员方法描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span>  string $value 形参名称/描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span> 返回值类型 返回值描述</div><div class="line">     */</div><div class="line">    <span class="keyword">final</span> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">finalFunction</span><span class="params">($value = <span class="string">''</span>)</span>// <span class="title">final</span>位于修饰符之前</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// code...</span></div><div class="line">    &#125; <span class="comment">// abstract位于修饰符之前</span></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 成员方法名称</div><div class="line">     *</div><div class="line">     * 成员方法描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span>  string $paramOne   形参名称/描述</div><div class="line">     * <span class="doctag">@param</span>  string $paramTwo   形参名称/描述</div><div class="line">     * <span class="doctag">@param</span>  string $paramThree 形参名称/描述</div><div class="line">     * <span class="doctag">@param</span>  string $paramFour  形参名称/描述</div><div class="line">     * <span class="doctag">@param</span>  string $paramFive  形参名称/描述</div><div class="line">     * <span class="doctag">@param</span>  string $paramSix   形参名称/描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span> 返回值类型 返回值描述</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">tooLangFunction</span><span class="params">(</span></span></div><div class="line">        $paramOne = <span class="string">''</span>, // 变量命名可小写开头驼峰或者下划线命名</div><div class="line">        $paramTwo = <span class="string">''</span>,</div><div class="line">        $paramThree = <span class="string">''</span>,</div><div class="line">        $paramFour = <span class="string">''</span>,</div><div class="line">        $paramFive = <span class="string">''</span>,</div><div class="line">        $paramSix = <span class="string">''</span></div><div class="line">    )// 参数过多换行</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> ($paramOne === $paramTwo) &#123;<span class="comment">// 控制结构=&gt;后加空格,同&#123;一行，（右边和)左边不加空格</span></div><div class="line">            <span class="comment">// code...</span></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">switch</span> ($paramThree) &#123;</div><div class="line">            <span class="keyword">case</span> <span class="string">'three'</span>:</div><div class="line">                <span class="comment">// code...</span></div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">default</span>:</div><div class="line">                <span class="comment">// code...</span></div><div class="line">                <span class="keyword">break</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">do</span> &#123;</div><div class="line">            <span class="comment">// code...</span></div><div class="line">        &#125; <span class="keyword">while</span> ($paramFour &lt;= <span class="number">10</span>);</div><div class="line"></div><div class="line">        <span class="keyword">while</span> ($paramFive &lt;= <span class="number">10</span>) &#123;</div><div class="line">            <span class="comment">// code...</span></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">for</span> ($i = <span class="number">0</span>; $i &lt; $paramSix; $i++) &#123;</div><div class="line">            <span class="comment">// code...</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 成员方法名称</div><div class="line">     *</div><div class="line">     * 成员方法描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span>  string $value 形参名称/描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span> 返回值类型 返回值描述</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">_privateTestFunction</span><span class="params">($value = <span class="string">''</span>)</span>// 私有成员方法【个人建议】下划线小写开头驼峰</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// code...</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/11/LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）/" data-id="cj0kqa7jb000zj94blr6ypg2u" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
 
     </footer>
   </div>
@@ -983,7 +925,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
   </div>
 
@@ -993,7 +935,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
     </div>
   </div>
 
@@ -1003,7 +945,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AliCloud/" style="font-size: 11.67px;">AliCloud</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 16.67px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 18.33px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.67px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/UML/" style="font-size: 11.67px;">UML</a> <a href="/tags/Yii/" style="font-size: 13.33px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
+      <a href="/tags/AliCloud/" style="font-size: 11.67px;">AliCloud</a> <a href="/tags/Javascript/" style="font-size: 11.67px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 16.67px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 18.33px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.67px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/UML/" style="font-size: 11.67px;">UML</a> <a href="/tags/Yii/" style="font-size: 13.33px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
     </div>
   </div>
 
@@ -1025,6 +967,14 @@
       <ul>
         
           <li>
+            <a href="/2017/03/23/学习-Javascript-之类型/">学习 Javascript 之类型</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/23/学习-Javascript-之变量/">学习 Javascript 之变量</a>
+          </li>
+        
+          <li>
             <a href="/2017/03/20/Head-First-Design-Patterns/">Head First Design Patterns</a>
           </li>
         
@@ -1034,14 +984,6 @@
         
           <li>
             <a href="/2017/03/15/「Tips」-htaccess-配置-HTTP-Header/">「Tips」.htaccess 配置 HTTP Header</a>
-          </li>
-        
-          <li>
-            <a href="/2017/03/15/「Tips」PHP-7-1-命名空间的新特性和使用方法/">「Tips」PHP 7.1 命名空间的新特性和使用方法</a>
-          </li>
-        
-          <li>
-            <a href="/2017/03/02/Swagger-PHP-基础使用/">Swagger-PHP 基础使用</a>
           </li>
         
       </ul>

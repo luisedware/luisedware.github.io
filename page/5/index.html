@@ -65,6 +65,556 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Linux-系统管理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/24/Linux-系统管理/" class="article-date">
+  <time datetime="2016-09-24T01:01:11.000Z" itemprop="datePublished">2016-09-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/24/Linux-系统管理/">Linux 系统管理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="进程简介"><a href="#进程简介" class="headerlink" title="进程简介"></a>进程简介</h2><p>进程是正在执行的一个程序或命令，每一个进程都是一个运行的实体，都有自己的地址空间，并占用一定的系统资源</p>
+<h2 id="进程管理的作用"><a href="#进程管理的作用" class="headerlink" title="进程管理的作用"></a>进程管理的作用</h2><ul>
+<li>判断服务器健康状态</li>
+<li>查看系统中所有进程</li>
+<li>杀死进程</li>
+</ul>
+<h2 id="进程的查看"><a href="#进程的查看" class="headerlink" title="进程的查看"></a>进程的查看</h2><ul>
+<li><h4 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h4><ul>
+<li><code>ps aux</code> 查看系统中所有进程，使用 BSD 操作系统格式</li>
+<li><code>ps -le</code> 查看系统中所有进程，使用 Linux 标准命令模式</li>
+<li>选项：<ul>
+<li>a 显示一个终端的所有进程，除了会话引线</li>
+<li>u 显示进程的归属用户及内存的使用情况</li>
+<li>x 显示没有控制终端的进程</li>
+<li>-l 长格式显示。显示更加详细的信息</li>
+<li>-e 显示所有进程，和 -A 作用一致</li>
+</ul>
+</li>
+<li>ps 命令输出<ul>
+<li>USER 该进程是由哪个用户产生的</li>
+<li>PID 该进程的 ID 号</li>
+<li>%CPU 该进程占用 CPU 资源的百分比，占用越高，进程越耗费资源</li>
+<li>%MEN 该进程占用物理内存的百分比，占用越高，进程越耗费资源</li>
+<li>VSZ 该进程占用虚拟内存大小，单位 KB</li>
+<li>RSS 该进程占用实际物理内存的大小，单位 KB</li>
+<li>TTY 该进程是在哪个终端中运行的。其中 tty1-tty7 代表本地控制台终端，tty1-tty6 是本地的字符界面终端，tty7 是图形终端。pts/0-255 代表虚拟终端，？ 代表内核运行</li>
+<li>STAT 进程状态<ul>
+<li>R 运行</li>
+<li>S 睡眠</li>
+<li>T 停止状态</li>
+<li><ul>
+<li>位于后台</li>
+</ul>
+</li>
+<li>s 包含子进程</li>
+</ul>
+</li>
+<li>START 该进程的启动时间</li>
+<li>TIME 该进程占用 CPU 的运算时间，注意不是系统时间</li>
+<li>COMMAND 产生此进程的命令名</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h4 id="pstree"><a href="#pstree" class="headerlink" title="pstree"></a>pstree</h4><ul>
+<li><code>pstree [选项]</code><ul>
+<li>-p 显示进程的 PID</li>
+<li>-u 显示进程的所属用户</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h4 id="top"><a href="#top" class="headerlink" title="top"></a>top</h4><ul>
+<li><code>top [选项]</code></li>
+<li><code>top -b -n 1 &gt; top.log</code> 把每秒的 top 信息写进 <code>top.log</code> 文件中</li>
+<li>选项：<ul>
+<li>-d 秒数 指定 top 命令每隔几秒更新。默认是 3 秒</li>
+<li>-b 使用批处理模式输出。一般和 “-n” 选项合用</li>
+<li>-n 次数 指定 top 命令执行的次数。一般和 “-b” 选项合用</li>
+</ul>
+</li>
+<li>top 命令交互模式可以执行命令<ul>
+<li>? 或 h 显示帮助</li>
+<li>M 以内存使用率排序</li>
+<li>P 以 CPU 使用率排序，默认此项</li>
+<li>N 以 PID 排序</li>
+<li>q 退出 top</li>
+</ul>
+</li>
+<li>top 参数意义<ul>
+<li>第一行系统信息：<ul>
+<li><code>12:26:46</code> 系统当前时间</li>
+<li><code>up 1 day,13:32</code> 系统运行时间，本机已运行了 1 天 13 小时 32 分钟</li>
+<li><code>2 users</code>  当前系统登录了用户</li>
+<li><code>load average: 0.00,0.00,0.00</code> 系统在之前 1 分钟，5 分钟，15 分钟的平均负载。一般认为小于1时，负载较小。如果大于 1，系统已经超出负荷</li>
+</ul>
+</li>
+<li>第二行进程信息：<ul>
+<li><code>Tasks: 95 total</code> 系统中的进程总数</li>
+<li><code>1 running</code> 正在运行的进程数</li>
+<li><code>94 sleeping</code> 睡眠的进程</li>
+<li><code>0 stopped</code> 正在停止的进程</li>
+<li><code>0 zombie</code> 僵尸进程。如果不是 0，需要手工检查僵尸进程</li>
+</ul>
+</li>
+<li>第三行 CPU 信息：<ul>
+<li><code>Cpu(s) 0.1%us</code> 用户模式占用的 CPU 百分比</li>
+<li><code>0.1%sy</code> 系统模式占用的 CPU 百分比</li>
+<li><code>0.0%ni</code> 改变过优先级的用户进程占用的 CPU 百分比</li>
+<li><code>99.7%id</code> 空闲 CPU 的 CPU 百分比</li>
+<li><code>0.1%wa</code> 等待输入 / 输出的进程的占用 CPU 百分比</li>
+<li><code>0.0%hi</code> 硬中断请求服务占用的 CPU 百分比</li>
+<li><code>0.1%si</code> 软中断请求服务占用的 CPU 百分比</li>
+<li><code>0,0%st</code> 虚拟时间百分比</li>
+</ul>
+</li>
+<li>第四行内存信息：<ul>
+<li><code>Mem: 635344k total</code> 物理内存的总量，单位 KB</li>
+<li><code>571504k used</code> 已经使用的物理内存数量</li>
+<li><code>53840k free</code> 空闲的物理内存数量</li>
+<li><code>65800k buffers</code> 作为缓冲的内存数量</li>
+</ul>
+</li>
+<li>第五行交换分区信息：<ul>
+<li><code>Swap: 524280k total</code> 交换分区（虚拟内存）的总大小</li>
+<li><code>Ok used</code> 已经使用的交互分区的大小</li>
+<li><code>524280k free</code> 空闲交换分区的大小</li>
+<li><code>409280k cached</code> 作为缓存的交互分区的大小</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="杀死进程"><a href="#杀死进程" class="headerlink" title="杀死进程"></a>杀死进程</h2><ul>
+<li>kill<ul>
+<li><code>kill -l</code> 查看可用的进程信号</li>
+<li><code>kill -1 进程 ID</code> 重启进程</li>
+<li><code>kill -9 进程 ID</code> 强制杀死进程</li>
+</ul>
+</li>
+<li>killall<ul>
+<li><code>killall [选项] [信号] 进程名</code><ul>
+<li>选项：<ul>
+<li>-i 交互式，询问是否要杀死某个进程</li>
+<li>-I 忽略进程名的大小写</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>pkill<ul>
+<li><code>pkill [选项] [信号] 进程名</code><ul>
+<li>选项：<ul>
+<li>-t 终端号：按照终端号踢出用户</li>
+</ul>
+</li>
+<li>用法：<ul>
+<li><code>pkill -9 -t tty1</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="修改进程优先级"><a href="#修改进程优先级" class="headerlink" title="修改进程优先级"></a>修改进程优先级</h2><p>Linux 操作系统是一个多用户、多任务的操作系统，Linux 系统中通知运行着非常多的进程。但是 CPU 在同一个时钟周期内只能运算一个指令。进程优先级决定了每个进程处理的先后顺序呢。</p>
+<p>执行命令 <code>ps -le</code> 返回的结果中，PRI 代表 Priority，NI 代表 Nice。这两个值都是优先级，数字越少代表改进程优先级越高。</p>
+<p>用户可以修改 NI 值，注意事项如下：</p>
+<ul>
+<li>NI 值的范围是 -20 到 19</li>
+<li>普通用户调整 NI 值的范围是 0 到 19，而且只能调整自己的进程</li>
+<li>普通用户只能调高 NI 值，而不能降低，如原本 NI 值为0，则只能调整为大于 0</li>
+<li>root 用户才能设定进程 NI 值为负值，而且可以调整任何用户的进程</li>
+<li>PRI（最终值）= PRI（原始值）+ NI</li>
+<li>用户只能修改 NI 的值，不能直接修改 PRI</li>
+</ul>
+<p>修改进程优先级的命令如下：</p>
+<ul>
+<li>nice<ul>
+<li><code>nice [选项] 命令</code> nice 的命令可以给新执行的命令直接赋予 NI 值，但是不能修改已经存在进程的 NI 值<ul>
+<li>选项：<ul>
+<li>-n NI 值：给命令赋予 NI 值</li>
+</ul>
+</li>
+<li>用法：<ul>
+<li><code>nice -n -5 service httpd start</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>renice<ul>
+<li><code>renice [优先级] 进程 ID</code> renice 命令是修改已经存在进程的 NI 值的命令<ul>
+<li>用法：<ul>
+<li><code>renice -10 2125</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="工作管理"><a href="#工作管理" class="headerlink" title="工作管理"></a>工作管理</h2><p>工作管理指的是在单个登录终端中（也就是登录的 Shell 界面中）同时管理多个工作的行为</p>
+<p>工作管理注意事项如下：</p>
+<ul>
+<li>当前的登录终端，只能管理当前终端的工作，而不能管理其他登录终端的工作</li>
+<li>放入后台的命令必须可以持续运行一段时间，这样我们才能扑捉和操作这个工作</li>
+<li>放入后台执行的命令不能和前台用户有交互或需要前台输入，否则放入后台只能暂停，而不能执行</li>
+</ul>
+<h2 id="工作管理方法"><a href="#工作管理方法" class="headerlink" title="工作管理方法"></a>工作管理方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># 把命令放入后台，并在后台执行</div><div class="line">top &amp;</div><div class="line"></div><div class="line"># 按下 ctrl + z 快捷键，放在后台暂停</div><div class="line">top</div></pre></td></tr></table></figure>
+<ul>
+<li>jobs<ul>
+<li><code>josb [选项]</code><ul>
+<li>选项：<ul>
+<li>-l 显示工作的 PID</li>
+</ul>
+</li>
+<li>+ 号代表最近一个放入后台的工作，也是工作恢复时，默认恢复的工作；- 号代表倒数第二个放入后台的工作</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>fg<ul>
+<li><code>fg %工作号</code> 将后台暂停的工作恢复到前台执行，注意 % 号可以省略，但是注意工作号和 PID 的区别</li>
+</ul>
+</li>
+<li>bg<ul>
+<li><code>bg %工作号</code> 后台恢复执行的命令，是不能和前台有交互的，否则不能恢复到后台执行</li>
+</ul>
+</li>
+</ul>
+<h2 id="后台命令脱离登录终端执行的方法"><a href="#后台命令脱离登录终端执行的方法" class="headerlink" title="后台命令脱离登录终端执行的方法"></a>后台命令脱离登录终端执行的方法</h2><ul>
+<li>第一种方法是把需要后台执行的命令加入 /etc/rc.local 文件</li>
+<li>第二种方法是使用系统定时任务，让系统在指定的时间执行某个后台命令</li>
+<li>第三种方法是使用 nohup 命令</li>
+</ul>
+<h2 id="系统资源查看"><a href="#系统资源查看" class="headerlink" title="系统资源查看"></a>系统资源查看</h2><ul>
+<li>vmstat<ul>
+<li><code>vmstat [刷新延时 刷新次数]</code></li>
+<li>用法：<ul>
+<li><code>vmstat 1 3</code></li>
+</ul>
+</li>
+<li>参数：<ul>
+<li>procs：进程信息字段<ul>
+<li>r 等待运行的进程数，数量越大，系统越繁忙</li>
+<li>b 不可被唤醒的进程数量，数量越大，系统越繁忙</li>
+</ul>
+</li>
+<li>memory：内存信息字段<ul>
+<li>free 空闲的内存容量，单位 KB</li>
+<li>buff 缓冲的内存容量，单位 KB</li>
+<li>cache 缓存的内存容量，单位 KB</li>
+<li>swpd 虚拟内存的使用情况，单位 KB</li>
+<li>缓冲和缓存的区别：缓存是用来加速数据读取的，缓冲是用来加速数据写入的</li>
+</ul>
+</li>
+<li>swap：交换分区的信息字段<ul>
+<li>si 从磁盘中交换到内存中数据的数量，单位 KB</li>
+<li>so 从内存中交换到磁盘中数据的数量，单位 KB。此两个数越大，证明数据需要经常在磁盘和内存之间交换，系统性能越差。</li>
+</ul>
+</li>
+<li>io：磁盘读写信息字段<ul>
+<li>bi 从块设备读入数据的总量，单位是块</li>
+<li>bo 写到块设备的数据的总量，单位是块。此两个数越大，代表系统的 I/O 越繁忙</li>
+</ul>
+</li>
+<li>system：系统信息字段<ul>
+<li>in 每秒被中断的进程次数</li>
+<li>cs 每秒进行的事件切换次数。此两个数越大，代表系统与接口设备的通信非常繁忙</li>
+</ul>
+</li>
+<li>CPU：CPU 信息字段<ul>
+<li>us 非内核进程消耗 CPU 运算时间的百分比</li>
+<li>sy 内核进程消耗 CPU 运算时间的百分比</li>
+<li>id 空闲 CPu 的百分比</li>
+<li>wa 等待 I/O 所消耗的 CPU 百分比</li>
+<li>st 被虚拟机消耗的 CPU 百分比</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>dmesg<ul>
+<li><code>dmesg</code> 显示系统内核信息</li>
+</ul>
+</li>
+<li>free<ul>
+<li><code>free [选项]</code> 查看内存使用状态<ul>
+<li>选项：<ul>
+<li>-\b 以字节为单位显示</li>
+<li>-\k 以 KB 为单位显示，默认就是以 KB 为单位显示</li>
+<li>-\m 以 MB 为单位显示</li>
+<li>-\g 以 GB 为单位显示</li>
+</ul>
+</li>
+<li>参数：<ul>
+<li>第一行：total 是总内存数，used 是已经使用的内存数，free 是空闲的内存数，shared 是多个进程共享的内存总数，buffers 是缓冲内存数，cached 是缓存内存数。默认单位是 KB</li>
+<li>第二行：-/buffers/cache 的内存数，相当于第一行的 used-buffers-cached。+/buffers/cache 的内存数，相当于第一行的 free + buffers + cached</li>
+<li>第三行：total 是 swap 的总数；used 是已经使用的 swap 数，free 是空闲的 swap 数。默认单位是 KB</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>cat /proc/cpuinfo<ul>
+<li>查看 CPU 信息</li>
+</ul>
+</li>
+<li>uptime<ul>
+<li>显示系统的启动时间和平均负载，也就是 top 命令的第一行。</li>
+</ul>
+</li>
+<li>uname<ul>
+<li><code>uname [选项]</code><ul>
+<li>选项：<ul>
+<li>-a 查看系统所有相关信息</li>
+<li>-r 查看内核版本</li>
+<li>-s 查看内核名称</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>file /bin/ls<ul>
+<li>查看系统操作位数</li>
+</ul>
+</li>
+<li>lsb_release -a<ul>
+<li>查询当前 Linxu 系统的发行版本</li>
+</ul>
+</li>
+<li>lsof<ul>
+<li><code>lsof    [选项]</code><ul>
+<li>选项：<ul>
+<li>-c 字符串：只列出以字符串开头的进程打开的文件</li>
+<li>-u 用户名：只列出某个用户的进程打开的文件</li>
+<li>-p PID：列出某个 PID 进程打开的文件</li>
+</ul>
+</li>
+<li>例子：<ul>
+<li><code>lsof | more</code></li>
+<li><code>lsof /sbin/init</code></li>
+<li><code>lsof -c httpd</code></li>
+<li><code>lsof -u root</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2016/09/24/Linux-系统管理/" data-id="cj0mjkd0m000zes4b40p8uy6a" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Linux-服务管理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/23/Linux-服务管理/" class="article-date">
+  <time datetime="2016-09-23T12:26:20.000Z" itemprop="datePublished">2016-09-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/23/Linux-服务管理/">Linux 服务管理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Linux-服务管理"><a href="#Linux-服务管理" class="headerlink" title="Linux 服务管理"></a>Linux 服务管理</h2><h3 id="简介与分类"><a href="#简介与分类" class="headerlink" title="简介与分类"></a>简介与分类</h3><ul>
+<li><h4 id="系统的运行级别"><a href="#系统的运行级别" class="headerlink" title="系统的运行级别"></a>系统的运行级别</h4><ul>
+<li>查看运行级别命令：<code>runlevel</code></li>
+<li>修改运行级别命令：<code>init 运行级别</code></li>
+<li>系统开机进入级别：<code>vim /etc/inittab</code> ~ <code>id:3initdefault:</code></li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>运行级别</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>关机</td>
+</tr>
+<tr>
+<td>1</td>
+<td>单用户模式，主要用于系统修复</td>
+</tr>
+<tr>
+<td>2</td>
+<td>不完全的命令行模式，不含 NFS 服务</td>
+</tr>
+<tr>
+<td>3</td>
+<td>完全的命令行模式，就是标准字符界面</td>
+</tr>
+<tr>
+<td>4</td>
+<td>系统保留</td>
+</tr>
+<tr>
+<td>5</td>
+<td>图形模式</td>
+</tr>
+<tr>
+<td>6</td>
+<td>重启动</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><h4 id="服务的分类"><a href="#服务的分类" class="headerlink" title="服务的分类"></a>服务的分类</h4><ul>
+<li>Linux 服务<ul>
+<li>PRM 包默认安装的服务<ul>
+<li>独立的服务<ul>
+<li>默认配置文件位置<ul>
+<li>/etc/init.d/ 启动脚本位置</li>
+<li>/etc/sysconfig/ 初始化环境配置文件位置</li>
+<li>/etc/ 配置文件位置</li>
+<li>/etc/xinetd.conf xinetd 配置文件</li>
+<li>/etc/xinetd.d/ 基于 xineted 服务的启动脚本</li>
+<li>/var/lib/ 服务产生的数据放在这里</li>
+<li>/var/log/ 日志</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>基于 xinetd 服务</li>
+</ul>
+</li>
+<li>源码包安装的服务<ul>
+<li>源码包安装位置，一般是 <code>/usr/local</code> 下</li>
+</ul>
+</li>
+<li>PRM 包安装和源码包安装的区别：两者服务安装的位置不同</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h4 id="服务与端口"><a href="#服务与端口" class="headerlink" title="服务与端口"></a>服务与端口</h4><ul>
+<li>概念：如果把 IP 地址比作一间房子，端口就是出入这间房子的门。真正的房子只有几个门，但是一个 IP 地址的端口可以有 65536 个</li>
+<li>服务与端口的对应：<code>cat /etc/services</code></li>
+<li>查询系统中开启的服务：<code>netstat [选项]</code><ul>
+<li>-t 列出 TCP 数据</li>
+<li>-u 列出 UDP 数据</li>
+<li>-l 列出正在监听的网络服务（不包含已经连接的网络服务）</li>
+<li>-n 用端口号来显示服务，而不是用服务名</li>
+<li>-p 列出该服务的进程 ID</li>
+</ul>
+</li>
+<li>chkconfig 和 netstat 的区别<ul>
+<li><code>chkconfig</code> 查看自启动命令</li>
+<li><code>netstat</code> 查看启动命令</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h4 id="服务启动与自启动"><a href="#服务启动与自启动" class="headerlink" title="服务启动与自启动"></a>服务启动与自启动</h4><ul>
+<li>独立服务的自启动<ul>
+<li><code>ntsysv</code> 命令图形界面管理自启动</li>
+<li><code>/etc/rc.d/rc.local</code> 文件修改管理自启动</li>
+<li><code>chkconfig --list</code> 查看服务自启动状态，可以看到所有 RPM 包安装的服务</li>
+<li><code>chkconfig [--level 运行级别] [独立服务名] [on|off]</code> 修改服务自启动状态</li>
+</ul>
+</li>
+<li>独立服务的启动<ul>
+<li><code>/etc/init.d/独立服务名 start、stop、status、restart</code></li>
+<li><code>service 独立服务名 start、stop、status、restart</code></li>
+</ul>
+</li>
+<li>源码包安装服务的启动<ul>
+<li>使用绝对路径，调用启动脚本来启动。不同的源码包的启动脚本不同。可以查看源码包的安装说明，查看启动脚本的方法。</li>
+<li>用法：<code>/usr/local/apache2/bin/apachectl start</code></li>
+</ul>
+</li>
+<li>源码包服务的自启动<ul>
+<li><code>vi /etc/rc.d/rc.local</code> 加入 <code>/usr/local/apache2/bin/apachectl start</code></li>
+</ul>
+</li>
+<li>源码包的 Apache 服务能被 Service 命令管理启动<ul>
+<li><code>ln -s /usr/local/apache2/bin/apachectl /etc/init.d/apache</code></li>
+</ul>
+</li>
+<li>源码包的 Apache 服务能被 chkconfig 与 ntsysv 命令管理自启动<ul>
+<li><code>vi /etc/init.d/apache</code> 加入 <code># chkconfig:35 86 76</code> 和 <code>description:source package apache</code></li>
+<li><code>chkconfig --add apache</code> 把源码包 apache 加入 chkconfig 命令</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2016/09/23/Linux-服务管理/" data-id="cj0mjkd0c000ges4bwyq7itk4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Linux-Shell-基础之正则表达式" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/09/22/Linux-Shell-基础之正则表达式/" class="article-date">
@@ -292,7 +842,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/22/Linux-Shell-基础之正则表达式/" data-id="cj0kqa7h80005j94b2zmpt4l6" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/22/Linux-Shell-基础之正则表达式/" data-id="cj0mjkd020006es4bggizi9ha" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -671,7 +1221,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/20/Linux-网络基础/" data-id="cj0kqa7jj0012j94b3vwr4lnk" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/20/Linux-网络基础/" data-id="cj0mjkd0k000wes4b7lisp90j" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1509,7 +2059,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/19/Linux-命令基础/" data-id="cj0kqa7hj000cj94bt1erp4jh" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/19/Linux-命令基础/" data-id="cj0mjkd0d000jes4b80xb8byp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1583,7 +2133,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/12/MySQL-5-7-版本新特性/" data-id="cj0kqa7jl0017j94bzzkormbb" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/12/MySQL-5-7-版本新特性/" data-id="cj0mjkd0u001aes4b6q5j9wd6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -2010,7 +2560,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/09/与-MySQL-的零距离接触（二）/" data-id="cj0kqa7l40031j94b2ucfx36t" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/09/与-MySQL-的零距离接触（二）/" data-id="cj0mjkd200032es4bbe8b9au8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -2611,7 +3161,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/07/与-MySQL-的零距离接触（一）/" data-id="cj0kqa7lc0039j94bbjpyqd40" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/07/与-MySQL-的零距离接触（一）/" data-id="cj0mjkd230037es4brscll5qw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -2727,7 +3277,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/04/复习使用-MySQL（三）/" data-id="cj0kqa7ms005fj94bkcifkzxv" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/04/复习使用-MySQL（三）/" data-id="cj0mjkd3o005jes4b5fn0zcs5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -2940,335 +3490,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/04/复习使用-MySQL（二）/" data-id="cj0kqa7mv005oj94bnbqu35ez" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/04/复习使用-MySQL（二）/" data-id="cj0mjkd3q005pes4b2tozuaid" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-复习使用-MySQL（一）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/02/复习使用-MySQL（一）/" class="article-date">
-  <time datetime="2016-09-02T12:59:45.000Z" itemprop="datePublished">2016-09-02</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/02/复习使用-MySQL（一）/">复习使用 MySQL（一）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
-<li>MySQL 5.7.13</li>
-</ul>
-<h2 id="MySQL-及衍生版本"><a href="#MySQL-及衍生版本" class="headerlink" title="MySQL 及衍生版本"></a>MySQL 及衍生版本</h2><ul>
-<li>MySQL</li>
-<li>MariaDB</li>
-<li>Percona Server</li>
-</ul>
-<h2 id="MySQL-SQL-基础"><a href="#MySQL-SQL-基础" class="headerlink" title="MySQL SQL 基础"></a>MySQL SQL 基础</h2><ul>
-<li><h3 id="DDL-Data-Definition-Language-数据定义"><a href="#DDL-Data-Definition-Language-数据定义" class="headerlink" title="DDL(Data Definition Language) - 数据定义"></a>DDL(Data Definition Language) - 数据定义</h3><ul>
-<li>TRUNCATE - 清空<ul>
-<li>TRUNCATE TABLE Syntax - 清空数据表</li>
-</ul>
-</li>
-<li>RENAME - 重命名<ul>
-<li>RENAME TABLE Syntax - 重命名数据表</li>
-</ul>
-</li>
-<li>CREATE - 创建<ul>
-<li>CREATE VIEW Syntax - 创建视图</li>
-<li>CREATE EVENT Syntax - 创建事件</li>
-<li>CREATE INDEX Syntax - 创建索引</li>
-<li>CREATE TABLE Syntax - 创建数据表</li>
-<li>CREATE SERVER Syntax - 创建服务器</li>
-<li>CREATE TRIGGER Syntax - 创建触发器</li>
-<li>CREATE FUNCTION Syntax - 创建自定义函数</li>
-<li>CREATE DATABASE Syntax - 创建数据库</li>
-<li>CREATE PROCEDURE Syntax - 创建存储过程</li>
-<li>CREATE TABLESPACE Syntax - 创建数据表空间</li>
-<li>CREATE LOGFILE GROUP Syntax - 创建日志文件组</li>
-</ul>
-</li>
-<li>ALTER - 修改<ul>
-<li>ALTER VIEW Syntax - 修改视图</li>
-<li>ALTER EVENT Syntax - 修改事件</li>
-<li>ALTER TABLE Syntax - 修改数据表</li>
-<li>ALTER SERVER Syntax - 修改服务器</li>
-<li>ALTER DATABASE Syntax - 修改数据库</li>
-<li>ALTER FUNCTION Syntax - 修改自定义函数</li>
-<li>ALTER INSTANCE Syntax - 修改实例</li>
-<li>ALTER PROCEDURE Syntax - 修改存储过程</li>
-<li>ALTER TABLESPACE Syntax - 修改数据表空间</li>
-<li>ALTER LOGFILE GROUP Syntax - 修改日志分组</li>
-</ul>
-</li>
-<li>DROP - 删除<ul>
-<li>DROP VIEW Syntax - 删除视图</li>
-<li>DROP EVENT Syntax - 删除事件</li>
-<li>DROP INDEX Syntax - 删除索引</li>
-<li>DROP TABLE Syntax - 删除数据表</li>
-<li>DROP SERVER Syntax - 删除服务器</li>
-<li>DROP TRIGGER Syntax - 删除触发器</li>
-<li>DROP DATABASE Syntax - 删除数据库</li>
-<li>DROP FUNCTION Syntax - 删除自定义函数</li>
-<li>DROP PROCEDURE Syntax - 删除存储过程</li>
-<li>DROP TABLESPACE Syntax - 删除数据表空间</li>
-<li>DROP LOGFILE GROUP Syntax - 删除日志分组</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><h3 id="DML-Data-Manipulation-Language-数据操作"><a href="#DML-Data-Manipulation-Language-数据操作" class="headerlink" title="DML(Data Manipulation Language) - 数据操作"></a>DML(Data Manipulation Language) - 数据操作</h3><ul>
-<li>DO</li>
-<li>CALL</li>
-<li>HANDLER</li>
-<li>LOAD XML</li>
-<li>LOAD DATA INFILE</li>
-<li>INSERT - 数据插入</li>
-<li>DELETE - 数据删除</li>
-<li>UPDATE - 数据修改</li>
-<li>SELECT - 数据查询<ul>
-<li>JOIN - 连接<ul>
-<li>LEFT JOIN - 左连接</li>
-<li>RIGHT JOIN - 右连接</li>
-<li>INNER JOIN - 内连接</li>
-</ul>
-</li>
-<li>GROUP - 分组</li>
-<li>UNION - 联合</li>
-</ul>
-</li>
-<li>REPLACE</li>
-<li>Subquery - 子查询</li>
-<li>LIMIT, OFFSET - 分页</li>
-</ul>
-</li>
-<li><h3 id="DCL-Data-Control-Language-数据控制"><a href="#DCL-Data-Control-Language-数据控制" class="headerlink" title="DCL(Data Control Language) - 数据控制"></a>DCL(Data Control Language) - 数据控制</h3><ul>
-<li>GRANT - 授权</li>
-<li>REVOKE - 撤销授权</li>
-</ul>
-</li>
-<li><h3 id="Transactions-and-Lock-事务"><a href="#Transactions-and-Lock-事务" class="headerlink" title="Transactions and Lock - 事务"></a>Transactions and Lock - 事务</h3><ul>
-<li>START TRANSACTION, COMMIT, and ROLLBACK Syntax - 事务开始，事务提交和事务回滚</li>
-<li>Statements That Cannot Be Rolled Back - 不能执行回滚的语句</li>
-<li>Statements That Cause an Implicit Commit - 隐式提交</li>
-<li>SAVEPOINT, ROLLBACK TO SAVEPOINT, and RELEASE SAVEPOINT Syntax - 保存点，回滚到保存点，释放保存点</li>
-<li>LOCK TABLES and UNLOCK TABLES Syntax - 锁表与解锁</li>
-<li>SET TRANSACTION Syntax - 设置事务语法</li>
-<li>XA Transactions - XA 事务</li>
-</ul>
-</li>
-<li><h3 id="MySQL-Utility-Statements-MySQL-实用语句"><a href="#MySQL-Utility-Statements-MySQL-实用语句" class="headerlink" title="MySQL Utility Statements - MySQL 实用语句"></a>MySQL Utility Statements - MySQL 实用语句</h3><ul>
-<li>USE Syntax - 设置当前 SQL 语句默认使用数据库</li>
-<li>HELP Syntax - 从 MySQL 参考手册返回在线信息</li>
-<li>EXPLAIN Syntax - 获取 SQL 执行信息</li>
-<li>DESCRIBE Syntax - 获取表结构信息</li>
-</ul>
-</li>
-<li><h3 id="Database-Administration-Statements-数据库管理员语句"><a href="#Database-Administration-Statements-数据库管理员语句" class="headerlink" title="Database Administration Statements - 数据库管理员语句"></a>Database Administration Statements - 数据库管理员语句</h3><ul>
-<li>SET Syntax - 设置<ul>
-<li>SET NAMES Syntax</li>
-<li>SET CHARACTER SET Syntax</li>
-<li>SET Syntax for Variable Assignment</li>
-</ul>
-</li>
-<li>SHOW Syntax - 查看<ul>
-<li>SHOW BINARY LOGS Syntax - 显示二进制日志</li>
-<li>SHOW BINLOG EVENTS Syntax - 显示二进制事件</li>
-<li>SHOW CHARACTER SET Syntax - 显示字符集</li>
-<li>SHOW COLLATION Syntax - 显示支持的字符</li>
-<li>SHOW COLUMNS Syntax - 显示字段信息</li>
-<li>SHOW CREATE DATABASE Syntax - 显示创建指定数据库的 SQL 语句</li>
-<li>SHOW CREATE EVENT Syntax - 显示创建指定事件的 SQL 语句</li>
-<li>SHOW CREATE FUNCTION Syntax - 显示创建指定自定义函数的 SQL 语句</li>
-<li>SHOW CREATE PROCEDURE Syntax - 显示创建指定存储过程的 SQL 语句</li>
-<li>SHOW CREATE TABLE Syntax - 显示创建指定表的 SQL 语句</li>
-<li>SHOW CREATE TRIGGER Syntax - 显示创建指定触发器的 SQL 语句</li>
-<li>SHOW CREATE USER Syntax - 显示创建指定用户的 SQL 语句</li>
-<li>SHOW CREATE VIEW Syntax - 显示创建指定视图的 SQL 语句</li>
-<li>SHOW DATABASES Syntax - 显示数据库列表</li>
-<li>SHOW ENGINE Syntax - 显示引擎的操作信息</li>
-<li>SHOW ENGINES Syntax - 显示支持的引擎</li>
-<li>SHOW ERRORS Syntax - 显示错误</li>
-<li>SHOW EVENTS Syntax - 显示事件</li>
-<li>SHOW FUNCTION CODE Syntax - 显示自定义函数代码</li>
-<li>SHOW FUNCTION STATUS Syntax - 显示自定义函数状态</li>
-<li>SHOW GRANTS Syntax</li>
-<li>SHOW INDEX Syntax - 显示索引</li>
-<li>SHOW MASTER STATUS Syntax</li>
-<li>SHOW OPEN TABLES Syntax</li>
-<li>SHOW PLUGINS Syntax</li>
-<li>SHOW PRIVILEGES Syntax - 显示当前用户权限</li>
-<li>SHOW PROCEDURE CODE Syntax - 显示存储过程代码</li>
-<li>SHOW PROCEDURE STATUS Syntax - 显示存储过程状态</li>
-<li>SHOW PROCESSLIST Syntax</li>
-<li>SHOW PROFILE Syntax - 显示配置文件</li>
-<li>SHOW PROFILES Syntax - 显示配置文件列表</li>
-<li>SHOW RELAYLOG EVENTS Syntax</li>
-<li>SHOW SLAVE HOSTS Syntax - 查看附属主机</li>
-<li>SHOW SLAVE STATUS Syntax - 查看附属主机状态</li>
-<li>SHOW STATUS Syntax - 查看各种状态</li>
-<li>SHOW TABLE STATUS Syntax - 显示指定数据库的所有表状态</li>
-<li>SHOW TABLES Syntax - 显示指定数据库的所有表</li>
-<li>SHOW TRIGGERS Syntax - 显示触发器</li>
-<li>SHOW VARIABLES Syntax - 显示变量</li>
-<li>SHOW WARNINGS Syntax - 显示警告</li>
-</ul>
-</li>
-<li>Table Maintenance Statements - 表维护语句<ul>
-<li>CHECK TABLE Syntax - 检查表</li>
-<li>REPAIR TABLE Syntax - 修复表</li>
-<li>ANALYZE TABLE Syntax - 分析表</li>
-<li>OPTIMIZE TABLE Syntax - 优化表</li>
-<li>CHECKSUM TABLE Syntax - 校检表</li>
-</ul>
-</li>
-<li>Account Management Statements - 账号管理语句<ul>
-<li>GRANT Syntax - 修复</li>
-<li>REVOKE Syntax - 撤销</li>
-<li>DROP USER Syntax - 删除用户</li>
-<li>ALTER USER Syntax - 修改用户</li>
-<li>CREATE USER Syntax - 创建用户</li>
-<li>RENAME USER Syntax - 重命名用户</li>
-<li>SET PASSWORD Syntax - 设置密码</li>
-</ul>
-</li>
-<li>Other Administrative Statements - 其他管理语句</li>
-<li>Plugin and User-Defined Function Statements - 插件和用户定义的函数语句</li>
-</ul>
-</li>
-<li><h3 id="范式-amp-反范式"><a href="#范式-amp-反范式" class="headerlink" title="范式 &amp; 反范式"></a>范式 &amp; 反范式</h3><ul>
-<li>范式<ul>
-<li>第一范式（1NF）</li>
-<li>第二范式（2NF）</li>
-<li>第三范式（3NF）</li>
-<li>巴斯-科德范式（BCNF）</li>
-<li>第四范式(4NF）</li>
-<li>第五范式（5NF，又称完美范式）</li>
-</ul>
-</li>
-<li>反范式<ul>
-<li>没有冗余的数据库未必是最好的数据库，有时为了提高运行效率，就必须降低范式标准，适当保留冗余数据。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/02/复习使用-MySQL（一）/" data-id="cj0kqa7mr005cj94bs8zyri61" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-查看-Eloquent-模型关联时执行的-SQL-语句" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/01/查看-Eloquent-模型关联时执行的-SQL-语句/" class="article-date">
-  <time datetime="2016-09-01T12:34:56.000Z" itemprop="datePublished">2016-09-01</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/01/查看-Eloquent-模型关联时执行的-SQL-语句/">查看 Eloquent 模型关联时执行的 SQL 语句</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本文目的是查看 Eloquent 在执行模型关联时运行的 SQL 语句</p>
-<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
-<li>PHP 7</li>
-<li>Laravel 5.1</li>
-</ul>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>数据表之间经常会互相进行关联。例如，一篇博客文章可能会有多条评论，或是一张订单可能对应一个下单客户。Eloquent 让管理和处理这些关联变得很容易，同时也支持多种类型的关联：</p>
-<ul>
-<li>一对一</li>
-<li>一对多</li>
-<li>多对多</li>
-<li>远层一对多</li>
-<li>多态关联</li>
-<li>多态多对多关联</li>
-</ul>
-<p>接下来，我会根据公司项目的数据库结构，进行举例说明</p>
-<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>新增控制器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan make:controller EloquentController</div></pre></td></tr></table></figure></p>
-<p>新增路由<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">Route::get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> view(<span class="string">'welcome'</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// 一对一</span></div><div class="line">Route::get(<span class="string">'eloquent/one-to-one'</span>, [</div><div class="line">    <span class="string">'as'</span>   =&gt; <span class="string">'eloquent.one.to.one'</span>,</div><div class="line">    <span class="string">'uses'</span> =&gt; <span class="string">'EloquentController@oneToOne'</span>,</div><div class="line">]);</div><div class="line"></div><div class="line"><span class="comment">// 一对多</span></div><div class="line">Route::get(<span class="string">'eloquent/one-to-many'</span>, [</div><div class="line">    <span class="string">'as'</span>   =&gt; <span class="string">'eloquent.one.to.many'</span>,</div><div class="line">    <span class="string">'uses'</span> =&gt; <span class="string">'EloquentController@oneToMany'</span>,</div><div class="line">]);</div><div class="line"></div><div class="line"><span class="comment">// 多对多</span></div><div class="line">Route::get(<span class="string">'eloquent/many-to-many'</span>, [</div><div class="line">    <span class="string">'as'</span>   =&gt; <span class="string">'eloquent.many.to.many'</span>,</div><div class="line">    <span class="string">'uses'</span> =&gt; <span class="string">'EloquentController@manyToMany'</span>,</div><div class="line">]);</div><div class="line"></div><div class="line"><span class="comment">// 远程一对多</span></div><div class="line">Route::get(<span class="string">'eloquent/has-many-through'</span>, [</div><div class="line">    <span class="string">'as'</span>   =&gt; <span class="string">'eloquent.has.many.through'</span>,</div><div class="line">    <span class="string">'uses'</span> =&gt; <span class="string">'EloquentController@hasManyThrough'</span>,</div><div class="line">]);</div><div class="line"></div><div class="line"><span class="comment">// 多态关联</span></div><div class="line">Route::get(<span class="string">'eloquent/polymorphic-relations'</span>, [</div><div class="line">    <span class="string">'as'</span>   =&gt; <span class="string">'eloquent.polymorphic.relations'</span>,</div><div class="line">    <span class="string">'uses'</span> =&gt; <span class="string">'EloquentController@polymorphicRelations'</span>,</div><div class="line">]);</div><div class="line"></div><div class="line"><span class="comment">// 多对多多态管理</span></div><div class="line">Route::get(<span class="string">'eloquent/many-to-many-polymorphic-relations'</span>, [</div><div class="line">    <span class="string">'as'</span>   =&gt; <span class="string">'eloquent.many.to.many.polymorphic.relations'</span>,</div><div class="line">    <span class="string">'uses'</span> =&gt; <span class="string">'EloquentController@manyToManyPolymorphicRelations'</span>,</div><div class="line">]);</div></pre></td></tr></table></figure></p>
-<h2 id="一对一"><a href="#一对一" class="headerlink" title="一对一"></a>一对一</h2><p>场景是如每一名加盟商都对应着一份加盟商配置</p>
-<p>新增模型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">php artisan make:model Models/League</div><div class="line">php artisan make:model Models/LeagueConfig</div></pre></td></tr></table></figure></p>
-<p>在 <code>League</code> 模型添加代码如下<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// League.php 一名加盟商有一份配置</span></div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">config</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;hasOne(<span class="string">'App\Models\LeagueConfig'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>在 <code>LeagueConfig</code> 模型添加代码如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// LeagueConfig.php 一份配置对应一名加盟商</div><div class="line">public function league()</div><div class="line">&#123;</div><div class="line">    return $this-&gt;hasOne(&apos;App\Models\League&apos;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>控制器新增代码如下<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">oneToOne</span><span class="params">(Request $request)</span></span></div><div class="line">&#123;</div><div class="line">    DB::enableQueryLog();</div><div class="line">    $data = League::find(<span class="number">8</span>)-&gt;config;</div><div class="line">    <span class="keyword">foreach</span> (DB::getQueryLog() <span class="keyword">as</span> $sql) &#123;</div><div class="line">        dump($sql[<span class="string">'query'</span>]);</div><div class="line">    &#125;</div><div class="line">    dump($data);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>查看 SQL<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span></div><div class="line">	*</div><div class="line"><span class="keyword">FROM</span></div><div class="line">	<span class="string">`z_league`</span></div><div class="line"><span class="keyword">WHERE</span></div><div class="line">	<span class="string">`z_league`</span>.<span class="string">`id`</span> = <span class="number">8</span></div><div class="line"><span class="keyword">LIMIT</span> <span class="number">1</span>;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">SELECT</span></div><div class="line">	*</div><div class="line"><span class="keyword">FROM</span></div><div class="line">	<span class="string">`z_leagueconfig`</span></div><div class="line"><span class="keyword">WHERE</span></div><div class="line">	<span class="string">`z_leagueconfig`</span>.<span class="string">`league_id`</span> = <span class="number">8</span></div><div class="line"><span class="keyword">AND</span> <span class="string">`z_leagueconfig`</span>.<span class="string">`league_id`</span> <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="literal">NULL</span></div><div class="line"><span class="keyword">LIMIT</span> <span class="number">1</span>;</div></pre></td></tr></table></figure></p>
-<h2 id="一对多"><a href="#一对多" class="headerlink" title="一对多"></a>一对多</h2><p>场景是仓库一种 SKU 的水果能被多名加盟商进货</p>
-<p>新增模型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">php artisan make:model Models/Product</div><div class="line">php artisan make:model Models/ProductLeague</div></pre></td></tr></table></figure></p>
-<p><code>Product</code> 模型中添加代码<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">league</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;hasMany(<span class="string">'App\Models\ProductLeague'</span>, <span class="string">'pid'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>控制器新增代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"> public function oneToMany(Request $request)</div><div class="line">&#123;</div><div class="line">    DB::enableQueryLog();</div><div class="line">    $data = Product::find(3062)-&gt;league;</div><div class="line">    foreach (DB::getQueryLog() as $sql) &#123;</div><div class="line">        dump($sql[&apos;query&apos;]);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    dump($data);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>查看 SQL<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span></div><div class="line">	*</div><div class="line"><span class="keyword">FROM</span></div><div class="line">	<span class="string">`z_product`</span></div><div class="line"><span class="keyword">WHERE</span></div><div class="line">	<span class="string">`z_product`</span>.<span class="string">`id`</span> = <span class="number">3062</span></div><div class="line"><span class="keyword">LIMIT</span> <span class="number">1</span>;</div><div class="line"></div><div class="line"><span class="keyword">SELECT</span></div><div class="line">	*</div><div class="line"><span class="keyword">FROM</span></div><div class="line">	<span class="string">`z_productleague`</span></div><div class="line"><span class="keyword">WHERE</span></div><div class="line">	<span class="string">`z_productleague`</span>.<span class="string">`pid`</span> = <span class="number">3062</span></div><div class="line"><span class="keyword">AND</span> <span class="string">`z_productleague`</span>.<span class="string">`pid`</span> <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>;</div></pre></td></tr></table></figure></p>
-<h2 id="多对多"><a href="#多对多" class="headerlink" title="多对多"></a>多对多</h2><p>场景是一名用户使用多张不同种类的优惠券，一种优惠券被不同的用户使用</p>
-<p>新增模型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">php artisan make:model Models/User</div><div class="line">php artisan make:model Models/Voucher</div><div class="line">php artisan make:model Models/VoucherRecord</div></pre></td></tr></table></figure></p>
-<p><code>User</code> 模型添加代码如下<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">voucher</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;belongsToMany(<span class="string">'App\Models\Voucher'</span>, <span class="string">'z_voucher_record'</span>, <span class="string">'uid'</span>, <span class="string">'vid'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><code>Voucher</code> 模型添加代码如下<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">user</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;belongsToMany(<span class="string">'App\Models\User'</span>, <span class="string">'z_voucher_record'</span>, <span class="string">'vid'</span>, <span class="string">'uid'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>控制器新增代码如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public function manyToMany(Request $request)</div><div class="line">&#123;</div><div class="line">    DB::enableQueryLog();</div><div class="line">    $vouchers = User::find(412115)-&gt;voucher;</div><div class="line">    foreach (DB::getQueryLog() as $sql) &#123;</div><div class="line">        dump($sql[&apos;query&apos;]);</div><div class="line">    &#125;</div><div class="line">    dump($vouchers);</div><div class="line"></div><div class="line">    DB::enableQueryLog();</div><div class="line">    $user = Voucher::find(395)-&gt;user;</div><div class="line">    foreach (DB::getQueryLog() as $sql) &#123;</div><div class="line">        dump($sql[&apos;query&apos;]);</div><div class="line">    &#125;</div><div class="line">    dump($user);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>查看 SQL<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"># 查询 ID 为 42115 的用户使用过的优惠券</div><div class="line">SELECT</div><div class="line">	*</div><div class="line">FROM</div><div class="line">	`z_user`</div><div class="line">WHERE</div><div class="line">	`z_user`.`id` = 412115;</div><div class="line"></div><div class="line">LIMIT 1 SELECT</div><div class="line">	`z_voucher`.*, `z_voucher_record`.`uid` AS `pivot_uid` ,</div><div class="line">	`z_voucher_record`.`vid` AS `pivot_vid`</div><div class="line">FROM</div><div class="line">	`z_voucher`</div><div class="line">INNER JOIN `z_voucher_record` ON `z_voucher`.`id` = `z_voucher_record`.`vid`</div><div class="line">WHERE</div><div class="line">	`z_voucher_record`.`uid` = 412115;</div><div class="line"></div><div class="line"># 查询 ID 为 395 的优惠券被哪些用户使用过</div><div class="line"></div><div class="line">SELECT</div><div class="line">	*</div><div class="line">FROM</div><div class="line">	`z_voucher`</div><div class="line">WHERE</div><div class="line">	`z_voucher`.`id` = 395;</div><div class="line"></div><div class="line">LIMIT 1 SELECT</div><div class="line">	`z_user`.*, `z_voucher_record`.`vid` AS `pivot_vid` ,</div><div class="line">	`z_voucher_record`.`uid` AS `pivot_uid`</div><div class="line">FROM</div><div class="line">	`z_user`</div><div class="line">INNER JOIN `z_voucher_record` ON `z_user`.`id` = `z_voucher_record`.`uid`</div><div class="line">WHERE</div><div class="line">	`z_voucher_record`.`vid` = 395;</div></pre></td></tr></table></figure></p>
-<h2 id="远程一对多"><a href="#远程一对多" class="headerlink" title="远程一对多"></a>远程一对多</h2><p>新增模型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan make:model Models/Order</div></pre></td></tr></table></figure></p>
-<p><code>Order</code> 模型新增代码如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"> public function order()</div><div class="line">&#123;</div><div class="line">    return $this-&gt;hasManyThrough(&apos;App\Models\Order&apos;, &apos;App\Models\User&apos;, &apos;league_id&apos;, &apos;uid&apos;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>控制器新增代码如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">public function hasManyThrough(Request $request)</div><div class="line">&#123;</div><div class="line">    DB::enableQueryLog();</div><div class="line">    $data = League::find(20)-&gt;order;</div><div class="line">    foreach (DB::getQueryLog() as $sql) &#123;</div><div class="line">        dump($sql[&apos;query&apos;]);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    dump($data);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>查看 SQL<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"># 查询 ID 为 20 的加盟商旗下用户的商品订单</div><div class="line">SELECT</div><div class="line">	*</div><div class="line">FROM</div><div class="line">	`z_league`</div><div class="line">WHERE</div><div class="line">	`z_league`.`id` = 20</div><div class="line">LIMIT 1;</div><div class="line"></div><div class="line">SELECT</div><div class="line">	`z_order`.*, `z_user`.`league_id`</div><div class="line">FROM</div><div class="line">	`z_order`</div><div class="line">INNER JOIN `z_user` ON `z_user`.`id` = `z_order`.`uid`</div><div class="line">WHERE</div><div class="line">	`z_user`.`league_id` = 20;</div></pre></td></tr></table></figure></p>
-<h2 id="多态关联"><a href="#多态关联" class="headerlink" title="多态关联"></a>多态关联</h2><p>新增模型如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">php artisan make:model Models/Staff</div><div class="line">php artisan make:model Models/photos</div><div class="line">php artisan make:model Models/Products</div></pre></td></tr></table></figure></p>
-<p>控制器新增代码如下<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">polymorphicRelations</span><span class="params">(Request $request)</span></span></div><div class="line">&#123;</div><div class="line">    DB::enableQueryLog();</div><div class="line">    $staff = Staff::find(<span class="number">8</span>)-&gt;photos;</div><div class="line">    <span class="keyword">foreach</span> (DB::getQueryLog() <span class="keyword">as</span> $sql) &#123;</div><div class="line">        dump($sql[<span class="string">'query'</span>]);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    dump($staff);</div><div class="line"></div><div class="line">    DB::enableQueryLog();</div><div class="line">    $products = Products::find(<span class="number">1</span>)-&gt;photos;</div><div class="line">    <span class="keyword">foreach</span> (DB::getQueryLog() <span class="keyword">as</span> $sql) &#123;</div><div class="line">        dump($sql[<span class="string">'query'</span>]);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    dump($products);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>查看 SQL<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"># 查看 ID 为 8 的职员的所有照片</div><div class="line">SELECT</div><div class="line">	*</div><div class="line">FROM</div><div class="line">	`eloquent_staff`</div><div class="line">WHERE</div><div class="line">	`eloquent_staff`.`id` = 8</div><div class="line">LIMIT 1;</div><div class="line"></div><div class="line">SELECT</div><div class="line">	*</div><div class="line">FROM</div><div class="line">	`eloquent_photos`</div><div class="line">WHERE</div><div class="line">	`eloquent_photos`.`imageable_id` = 8</div><div class="line">AND `eloquent_photos`.`imageable_id` IS NOT NULL</div><div class="line">AND `eloquent_photos`.`imageable_type` = "App\Models\Staff";</div><div class="line"></div><div class="line"># 查看 ID 为 1 的产品的所有图片</div><div class="line">SELECT</div><div class="line">	*</div><div class="line">FROM</div><div class="line">	`eloquent_products`</div><div class="line">WHERE</div><div class="line">	`eloquent_products`.`id` = 1</div><div class="line">LIMIT 1;</div><div class="line"></div><div class="line">SELECT</div><div class="line">	*</div><div class="line">FROM</div><div class="line">	`eloquent_photos`</div><div class="line">WHERE</div><div class="line">	`eloquent_photos`.`imageable_id` = 1</div><div class="line">AND `eloquent_photos`.`imageable_id` IS NOT NULL</div><div class="line">AND `eloquent_photos`.`imageable_type` = "App\Models\Products";</div></pre></td></tr></table></figure></p>
-<h2 id="多态多对多关联"><a href="#多态多对多关联" class="headerlink" title="多态多对多关联"></a>多态多对多关联</h2><p>新增模型如下<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">php artisan make:model Models/Tag</div><div class="line">php artisan make:model Models/Post</div><div class="line">php artisan make:model Models/Video</div></pre></td></tr></table></figure></p>
-<p>控制器新增代码如下<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">manyToManyPolymorphicRelations</span><span class="params">(Request $request)</span></span></div><div class="line">&#123;</div><div class="line">    DB::enableQueryLog();</div><div class="line">    $post_tags = Post::find(<span class="number">8</span>)-&gt;tags;</div><div class="line">    <span class="keyword">foreach</span> (DB::getQueryLog() <span class="keyword">as</span> $sql) &#123;</div><div class="line">        dump($sql[<span class="string">'query'</span>]);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    dump($post_tags);</div><div class="line"></div><div class="line">    DB::enableQueryLog();</div><div class="line">    $video_tags = Video::find(<span class="number">8</span>)-&gt;tags;</div><div class="line">    <span class="keyword">foreach</span> (DB::getQueryLog() <span class="keyword">as</span> $sql) &#123;</div><div class="line">        dump($sql[<span class="string">'query'</span>]);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    dump($video_tags);</div><div class="line"></div><div class="line">    DB::enableQueryLog();</div><div class="line">    $posts = Tag::find(<span class="number">4</span>)-&gt;posts;</div><div class="line">    <span class="keyword">foreach</span> (DB::getQueryLog() <span class="keyword">as</span> $sql) &#123;</div><div class="line">        dump($sql[<span class="string">'query'</span>]);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    dump($posts);</div><div class="line"></div><div class="line">    DB::enableQueryLog();</div><div class="line">    $videos = Tag::find(<span class="number">4</span>)-&gt;videos;</div><div class="line">    <span class="keyword">foreach</span> (DB::getQueryLog() <span class="keyword">as</span> $sql) &#123;</div><div class="line">        dump($sql[<span class="string">'query'</span>]);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    dump($videos);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>查看 SQL<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line"># 查询 ID 为 8 的文章所使用的标签</div><div class="line">SELECT</div><div class="line">	*</div><div class="line">FROM</div><div class="line">	`eloquent_posts`</div><div class="line">WHERE</div><div class="line">	`eloquent_posts`.`id` = 8</div><div class="line">LIMIT 1;</div><div class="line"></div><div class="line">SELECT</div><div class="line">	`eloquent_tags`.*, `eloquent_taggables`.`taggable_id` AS `pivot_taggable_id` ,</div><div class="line">	`eloquent_taggables`.`tag_id` AS `pivot_tag_id`</div><div class="line">FROM</div><div class="line">	`eloquent_tags`</div><div class="line">INNER JOIN `eloquent_taggables` ON `eloquent_tags`.`id` = `eloquent_taggables`.`tag_id`</div><div class="line">WHERE</div><div class="line">	`eloquent_taggables`.`taggable_id` = 8</div><div class="line">AND `eloquent_taggables`.`taggable_type` = "App\Models\Post";</div><div class="line"></div><div class="line"># 查询 ID 为 8 的视频所使用的标签</div><div class="line">SELECT</div><div class="line">	*</div><div class="line">FROM</div><div class="line">	`eloquent_videos`</div><div class="line">WHERE</div><div class="line">	`eloquent_videos`.`id` = 8</div><div class="line">LIMIT 1;</div><div class="line"></div><div class="line">SELECT</div><div class="line">	`eloquent_tags`.*, `eloquent_taggables`.`taggable_id` AS `pivot_taggable_id` ,</div><div class="line">	`eloquent_taggables`.`tag_id` AS `pivot_tag_id`</div><div class="line">FROM</div><div class="line">	`eloquent_tags`</div><div class="line">INNER JOIN `eloquent_taggables` ON `eloquent_tags`.`id` = `eloquent_taggables`.`tag_id`</div><div class="line">WHERE</div><div class="line">	`eloquent_taggables`.`taggable_id` = 8</div><div class="line">AND `eloquent_taggables`.`taggable_type` = "App\Models\Video";</div><div class="line"></div><div class="line"># 查询 ID 为 4 的标签下的文章</div><div class="line">SELECT</div><div class="line">	*</div><div class="line">FROM</div><div class="line">	`eloquent_tags`</div><div class="line">WHERE</div><div class="line">	`eloquent_tags`.`id` = 4</div><div class="line">LIMIT 1;</div><div class="line"></div><div class="line">SELECT</div><div class="line">	`eloquent_posts`.*, `eloquent_taggables`.`tag_id` AS `pivot_tag_id` ,</div><div class="line">	`eloquent_taggables`.`taggable_id` AS `pivot_taggable_id`</div><div class="line">FROM</div><div class="line">	`eloquent_posts`</div><div class="line">INNER JOIN `eloquent_taggables` ON `eloquent_posts`.`id` = `eloquent_taggables`.`taggable_id`</div><div class="line">WHERE</div><div class="line">	`eloquent_taggables`.`tag_id` = 4</div><div class="line">AND `eloquent_taggables`.`taggable_type` = "App\Modes\Post";</div><div class="line"></div><div class="line"># 查询 ID 为 4 的标签下的视屏</div><div class="line"></div><div class="line">SELECT</div><div class="line">	*</div><div class="line">FROM</div><div class="line">	`eloquent_tags`</div><div class="line">WHERE</div><div class="line">	`eloquent_tags`.`id` = 4</div><div class="line">LIMIT 1;</div><div class="line"></div><div class="line">SELECT</div><div class="line">	`eloquent_videos`.*, `eloquent_taggables`.`tag_id` AS `pivot_tag_id` ,</div><div class="line">	`eloquent_taggables`.`taggable_id` AS `pivot_taggable_id`</div><div class="line">FROM</div><div class="line">	`eloquent_videos`</div><div class="line">INNER JOIN `eloquent_taggables` ON `eloquent_videos`.`id` = `eloquent_taggables`.`taggable_id`</div><div class="line">WHERE</div><div class="line">	`eloquent_taggables`.`tag_id` = 4</div><div class="line">AND `eloquent_taggables`.`taggable_type` = "App\Models\Video";</div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/01/查看-Eloquent-模型关联时执行的-SQL-语句/" data-id="cj0kqa7n2005zj94b4wpvqwtk" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
 
     </footer>
   </div>
@@ -3290,7 +3515,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
   </div>
 
@@ -3300,7 +3525,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
     </div>
   </div>
 
@@ -3310,7 +3535,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AliCloud/" style="font-size: 11.67px;">AliCloud</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 16.67px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 18.33px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.67px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/UML/" style="font-size: 11.67px;">UML</a> <a href="/tags/Yii/" style="font-size: 13.33px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
+      <a href="/tags/AliCloud/" style="font-size: 11.67px;">AliCloud</a> <a href="/tags/Javascript/" style="font-size: 11.67px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 16.67px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 18.33px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.67px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/UML/" style="font-size: 11.67px;">UML</a> <a href="/tags/Yii/" style="font-size: 13.33px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
     </div>
   </div>
 
@@ -3332,6 +3557,14 @@
       <ul>
         
           <li>
+            <a href="/2017/03/23/学习-Javascript-之类型/">学习 Javascript 之类型</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/23/学习-Javascript-之变量/">学习 Javascript 之变量</a>
+          </li>
+        
+          <li>
             <a href="/2017/03/20/Head-First-Design-Patterns/">Head First Design Patterns</a>
           </li>
         
@@ -3341,14 +3574,6 @@
         
           <li>
             <a href="/2017/03/15/「Tips」-htaccess-配置-HTTP-Header/">「Tips」.htaccess 配置 HTTP Header</a>
-          </li>
-        
-          <li>
-            <a href="/2017/03/15/「Tips」PHP-7-1-命名空间的新特性和使用方法/">「Tips」PHP 7.1 命名空间的新特性和使用方法</a>
-          </li>
-        
-          <li>
-            <a href="/2017/03/02/Swagger-PHP-基础使用/">Swagger-PHP 基础使用</a>
           </li>
         
       </ul>
