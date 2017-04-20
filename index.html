@@ -65,6 +65,87 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-设计模式之简单工厂模式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/20/设计模式之简单工厂模式/" class="article-date">
+  <time datetime="2017-04-20T13:46:14.000Z" itemprop="datePublished">2017-04-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Pattern/">Pattern</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/20/设计模式之简单工厂模式/">设计模式之简单工厂模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-简单工厂模式"><a href="#1-简单工厂模式" class="headerlink" title="1.简单工厂模式"></a>1.简单工厂模式</h2><p>目录</p>
+<ul>
+<li><a href="#1.1">模式定义</a><ul>
+<li>名称</li>
+<li>分类</li>
+<li>动机</li>
+</ul>
+</li>
+<li><a href="#1.2">模式分析</a><ul>
+<li>优点缺点</li>
+<li>适用场景</li>
+</ul>
+</li>
+<li><a href="#1.3">模式结构</a><ul>
+<li>类图结构</li>
+<li>时序图</li>
+</ul>
+</li>
+<li><a href="#1.4">模式实现</a><ul>
+<li>已知应用</li>
+<li>范例代码</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-1-模式定义"><a href="#1-1-模式定义" class="headerlink" title="1.1.模式定义"></a>1.1.<span id="1.1">模式定义</span></h2><p>简单工厂模式（Simple Factory Pattern），又称为静态工厂方法模式（Static Factory Method Pattern），它属于类-创建型模式。在简单工厂模式中，可以根据参数的不同返回不同类的实例。简单工厂模式专门定义一个类来负责创建其他类的实例，被创建的实例通常都具有共同的父类。</p>
+<h2 id="1-2-模式分析"><a href="#1-2-模式分析" class="headerlink" title="1.2.模式分析"></a>1.2.<span id="1.2">模式分析</span></h2><h4 id="简单工厂模式的优点"><a href="#简单工厂模式的优点" class="headerlink" title="简单工厂模式的优点"></a>简单工厂模式的优点</h4><ul>
+<li>工厂类含有必要的判断逻辑，可以决定在什么时候创建哪一个产品类的实例，客户端可以免除直接创建产品对象的责任，而仅仅“消费”产品；简单工厂模式通过这种做法实现了对责任的分割，它提供了专门的工厂类用于创建对象。</li>
+<li>客户端无须知道所创建的具体产品类的类名，只需要知道具体产品类所对应的参数即可，对于一些复杂的类名，通过简单工厂模式可以减少使用者的记忆量。</li>
+<li>通过引入配置文件，可以在不修改任何客户端代码的情况下更换和增加新的具体产品类，在一定程度上提高了系统的灵活性。</li>
+</ul>
+<h4 id="简单工厂模式的缺点"><a href="#简单工厂模式的缺点" class="headerlink" title="简单工厂模式的缺点"></a>简单工厂模式的缺点</h4><ul>
+<li>由于工厂类集中了所有产品创建逻辑，一旦不能正常工作，整个系统都要受到影响。<br>使用简单工厂模式将会增加系统中类的个数，在一定程序上增加了系统的复杂度和理解难度。</li>
+<li>系统扩展困难，一旦添加新产品就不得不修改工厂逻辑，在产品类型较多时，有可能造成工厂逻辑过于复杂，不利于系统的扩展和维护。</li>
+<li>简单工厂模式由于使用了静态工厂方法，造成工厂角色无法形成基于继承的等级结构。</li>
+</ul>
+<h4 id="在以下场景中可以使用简单工厂模式："><a href="#在以下场景中可以使用简单工厂模式：" class="headerlink" title="在以下场景中可以使用简单工厂模式："></a>在以下场景中可以使用简单工厂模式：</h4><ul>
+<li>工厂类负责创建的对象比较少；由于创建的对象较少，不会造成工厂方法中的业务逻辑太过复杂。</li>
+<li>客户端只知道传入工厂类的参数，对于如何创建对象不关心；客户端既不需要关心创建细节，甚至连类名都不需要记住，只需要知道类型所对应的参数。</li>
+</ul>
+<h2 id="1-3-模式结构"><a href="#1-3-模式结构" class="headerlink" title="1.3.模式结构"></a>1.3.<span id="1.3">模式结构</span></h2><h2 id="1-4-模式实现"><a href="#1-4-模式实现" class="headerlink" title="1.4.模式实现"></a>1.4.<span id="1.4">模式实现</span></h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2017/04/20/设计模式之简单工厂模式/" data-id="cj1qivc7q006cgk4bb4t54kr4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pattern/">Pattern</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-使用-Laravel-5-3-Vue-js-2-1-开发知乎" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/04/05/使用-Laravel-5-3-Vue-js-2-1-开发知乎/" class="article-date">
@@ -117,7 +198,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/04/05/使用-Laravel-5-3-Vue-js-2-1-开发知乎/" data-id="cj1oul34a003auc4bqeyf54ce" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/04/05/使用-Laravel-5-3-Vue-js-2-1-开发知乎/" data-id="cj1qivc5f003bgk4bhye2aokt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -159,7 +240,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/23/学习-Javascript-之类型/" data-id="cj1oul367005xuc4b8cge0i6a" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/03/23/学习-Javascript-之类型/" data-id="cj1qivc7l0061gk4blio80rgo" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
@@ -243,7 +324,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/23/学习-Javascript-之变量/" data-id="cj1oul3690062uc4bn5izt00e" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/03/23/学习-Javascript-之变量/" data-id="cj1qivc7a005tgk4bx65gg7aw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
@@ -331,7 +412,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/20/Head-First-Design-Patterns/" data-id="cj1oul30u0000uc4bzc6blfdi" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/03/20/Head-First-Design-Patterns/" data-id="cj1qivc280000gk4bsvgxa3ob" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Learning/">Learning</a></li></ul>
@@ -374,7 +455,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」Yii2-前端请求的参数字段映射数据模型的属性/" data-id="cj1oul33y002suc4b69ryz9n8" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」Yii2-前端请求的参数字段映射数据模型的属性/" data-id="cj1qivc590030gk4bq9othg9f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -418,7 +499,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」-htaccess-配置-HTTP-Header/" data-id="cj1oul33m002huc4bhlbl3eq2" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」-htaccess-配置-HTTP-Header/" data-id="cj1qivc53002mgk4buwvjwlfv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -461,7 +542,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」PHP-7-1-命名空间的新特性和使用方法/" data-id="cj1oul33v002luc4bszb7cirv" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」PHP-7-1-命名空间的新特性和使用方法/" data-id="cj1qivc4v002jgk4bn2r0yhxh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -585,7 +666,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/02/Swagger-PHP-基础使用/" data-id="cj1oul32u001zuc4bcco2285q" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/03/02/Swagger-PHP-基础使用/" data-id="cj1qivc4k0021gk4bxpes33da" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swagger/">Swagger</a></li></ul>
@@ -805,152 +886,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/28/使用-Yii2-构建-RESTFul-API/" data-id="cj1oul355004cuc4b7jdu83bi" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/28/使用-Yii2-构建-RESTFul-API/" data-id="cj1qivc5y004dgk4btykkd6wg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-「复习」使用阿里云从零开始部署-Laravel" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/02/23/「复习」使用阿里云从零开始部署-Laravel/" class="article-date">
-  <time datetime="2017-02-23T06:35:50.000Z" itemprop="datePublished">2017-02-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Tooling/">Tooling</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/23/「复习」使用阿里云从零开始部署-Laravel/">「复习」使用阿里云从零开始部署 Laravel</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>更新 Yum<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum update</div></pre></td></tr></table></figure></p>
-<p>更新 Yum 源<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm</div><div class="line">rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm</div><div class="line">rpm -Uvh http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm</div></pre></td></tr></table></figure></p>
-<p>安装 Git<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y git</div></pre></td></tr></table></figure></p>
-<p>安装 Htop<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y htop</div></pre></td></tr></table></figure></p>
-<p>安装 Vim<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y vim</div></pre></td></tr></table></figure></p>
-<h2 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h2><p>安装 Nginx 代码仓库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y epel-release</div></pre></td></tr></table></figure></p>
-<p>安装 Nginx<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y nginx</div></pre></td></tr></table></figure></p>
-<p>启动 Nginx<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl start nginx</div></pre></td></tr></table></figure></p>
-<p>开机启动 Nginx<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl enable nginx</div></pre></td></tr></table></figure></p>
-<p>Nginx 配置文件</p>
-<ul>
-<li>/usr/share/nginx/html 默认的代码目录</li>
-<li>/etc/nginx/conf.d/default.conf 默认的配置文件</li>
-</ul>
-<h2 id="MariaDB"><a href="#MariaDB" class="headerlink" title="MariaDB"></a>MariaDB</h2><p>安装 MariaDB<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y mariadb-server mariadb</div></pre></td></tr></table></figure></p>
-<p>启动 MariaDB<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl start mariadb</div></pre></td></tr></table></figure></p>
-<p>初始化 MariaDB<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql_secure_installation</div></pre></td></tr></table></figure></p>
-<p>开机启动 MariaDB<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl enable mariadb</div></pre></td></tr></table></figure></p>
-<h2 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h2><p>安装 PHP<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y php71w php71w-mysql php71w-xml php71w-soap php71w-xmlrpc php71w-mbstring php71w-json php71w-gd php71w-mcrypt php71w-fpm php71w-pdo php71w-pecl-redis</div></pre></td></tr></table></figure></p>
-<p>启动 PHP-FPM<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl start php-fpm</div></pre></td></tr></table></figure></p>
-<p>开机启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl enable php-fpm</div></pre></td></tr></table></figure></p>
-<p>配置 PHP 关联 Nginx，编辑 Nginx 配置文件如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">server&#123;</div><div class="line">    listen       80;</div><div class="line">    server_name  cowcat.cc;</div><div class="line"></div><div class="line">    # note that these lines are originally from the "location /" block</div><div class="line">    root   /usr/share/nginx/html;</div><div class="line">    index index.php index.html index.htm;</div><div class="line"></div><div class="line">    location / &#123;</div><div class="line">        try_files $uri $uri/ =404;</div><div class="line">    &#125;</div><div class="line">    error_page 404 /404.html;</div><div class="line">    error_page 500 502 503 504 /50x.html;</div><div class="line">    location = /50x.html &#123;</div><div class="line">        root /usr/share/nginx/html;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location ~ \.php$ &#123;</div><div class="line">        try_files $uri =404;</div><div class="line">        fastcgi_pass 127.0.0.1:9000;</div><div class="line">        fastcgi_index index.php;</div><div class="line">        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</div><div class="line">        include fastcgi_params;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>在 <code>/usr/share/nginx/html</code> 新增文件 <code>index.php</code>，编辑代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">phpinfo();</div></pre></td></tr></table></figure></p>
-<p>输入域名，检查 PHP 是否与 Nginx 关联起来</p>
-<h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><p>安装 Redis<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-9.noarch.rpm</div><div class="line">rpm -ivh epel-release-7-9.noarch.rpm</div><div class="line">yum install -y redis</div></pre></td></tr></table></figure></p>
-<p>启动 Redis<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl start redis</div></pre></td></tr></table></figure></p>
-<p>开机启动 Redis<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl enable redis</div></pre></td></tr></table></figure></p>
-<h2 id="Beanstalkd"><a href="#Beanstalkd" class="headerlink" title="Beanstalkd"></a>Beanstalkd</h2><p>安装 Beanstalkd<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">wget http://cbs.centos.org/kojifiles/packages/beanstalkd/1.9/3.el7/x86_64/beanstalkd-1.9-3.el7.x86_64.rpm</div><div class="line">wget http://cbs.centos.org/kojifiles/packages/beanstalkd/1.9/3.el7/x86_64/beanstalkd-debuginfo-1.9-3.el7.x86_64.rpm</div><div class="line">rpm -ivh beanstalkd-1.9-3.el7.x86_64.rpm</div><div class="line">rpm -ivh beanstalkd-debuginfo-1.9-3.el7.x86_64.rpm</div><div class="line">yum install -y beanstalkd</div></pre></td></tr></table></figure></p>
-<p>启动 Beanstalkd<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl start beanstalkd</div></pre></td></tr></table></figure></p>
-<p>开机启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl enable beanstalkd</div></pre></td></tr></table></figure></p>
-<h2 id="Composer"><a href="#Composer" class="headerlink" title="Composer"></a>Composer</h2><p>安装 Composer<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">curl -sS https://getcomposer.org/installer | php</div><div class="line">mv composer.phar /usr/local/bin/composer</div><div class="line">composer -v</div></pre></td></tr></table></figure></p>
-<p>全局设置国内镜像<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">composer config -g repo.packagist composer https://packagist.phpcomposer.com</div></pre></td></tr></table></figure></p>
-<h2 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h2><p>安装 Node.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum install -y gcc-c++ make</div><div class="line">yum install -y nodejs</div></pre></td></tr></table></figure></p>
-<p>安装 webpack、gulp、bower<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">npm install bower -g</div><div class="line">npm install gulp -g</div><div class="line">npm install webpack -g</div></pre></td></tr></table></figure></p>
-<h2 id="Gogs"><a href="#Gogs" class="headerlink" title="Gogs"></a>Gogs</h2><p>设置子域名<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hostnamectl set-hostname git.cowcat.cc</div></pre></td></tr></table></figure></p>
-<p>禁用 SELinux 相关选项<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sed -i /etc/selinux/config -r -e &apos;s/^SELINUX=.*/SELINUX=disabled/g&apos;</div><div class="line">systemctl reboot</div></pre></td></tr></table></figure></p>
-<p>创建 gogs 数据库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">CREATE DATABASE IF NOT EXISTS gogs CHARACTER SET utf8 COLLATE utf8_general_ci;</div><div class="line">use gogs;</div><div class="line">SET default_storage_engine=INNODB;</div></pre></td></tr></table></figure></p>
-<p>安装 Go<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y go</div></pre></td></tr></table></figure></p>
-<p>安装 Gogs<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">// 下载二进制包</div><div class="line">wget http://7d9nal.com2.z0.glb.qiniucdn.com/0.10rc/linux_amd64.zip</div><div class="line"></div><div class="line">// 解压</div><div class="line">unzip linux_amd64.zip</div><div class="line"></div><div class="line">cd gogs/</div><div class="line">// 后台运行</div><div class="line">nohup ./gogs web &amp;</div><div class="line">tail -f nohup.out</div></pre></td></tr></table></figure></p>
-<p>访问 URL 进行安装，安装 URL 是主机 IP 地址加上 3000 端口。</p>
-<p>以守护进程的形式运行 Gogs：<a href="https://github.com/gogits/gogs/blob/master/scripts/init/centos/gogs" target="_blank" rel="external">https://github.com/gogits/gogs/blob/master/scripts/init/centos/gogs</a></p>
-<h2 id="Walle"><a href="#Walle" class="headerlink" title="Walle"></a>Walle</h2><p>进入 MySQL，新增数据库如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">create database walle default character set utf8 COLLATE utf8_general_ci;</div></pre></td></tr></table></figure></p>
-<p>安装依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install ansible</div></pre></td></tr></table></figure></p>
-<p>代码检出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir -p /data/www/                                     # 新建目录</div><div class="line">git clone https://github.com/meolu/walle-web.git        # 代码检出</div></pre></td></tr></table></figure></p>
-<p>连接数据库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">cd walle-web/</div><div class="line">vim config/local.php</div><div class="line"></div><div class="line">// 修改 PHP 数组</div><div class="line">&apos;db&apos; =&gt; [</div><div class="line">    &apos;dsn&apos;       =&gt; &apos;mysql:host=127.0.0.1;dbname=walle&apos;, # 新建数据库walle</div><div class="line">    &apos;username&apos;  =&gt; &apos;username&apos;,                          # 连接的用户名</div><div class="line">    &apos;password&apos;  =&gt; &apos;password&apos;,                          # 连接的密码</div><div class="line">],</div></pre></td></tr></table></figure></p>
-<p>安装 vendor<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /data/www/walle-web</div><div class="line">composer install --prefer-dist --no-dev --optimize-autoloader -vvvv</div></pre></td></tr></table></figure></p>
-<p>初始化项目<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /data/www/walle-web</div><div class="line">./yii walle/setup</div></pre></td></tr></table></figure></p>
-<p>配置 Nginx<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen       80;</div><div class="line">    server_name  walle.compony.com; # 改你的host</div><div class="line">    root /the/dir/of/walle-web/web; # 根目录为web</div><div class="line">    index index.php;</div><div class="line"></div><div class="line">    # 建议放内网</div><div class="line">    # allow 192.168.0.0/24;</div><div class="line">    # deny all;</div><div class="line"></div><div class="line">    location / &#123;</div><div class="line">        try_files $uri $uri/ /index.php$is_args$args;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location ~ \.php$ &#123;</div><div class="line">        try_files $uri = 404;</div><div class="line">        fastcgi_pass   127.0.0.1:9000;</div><div class="line">        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;</div><div class="line">        include        fastcgi_params;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>然后访问你配置好的域名或服务器地址，管理员默认账号密码是 <code>admin/admin</code>，开发者默认账号密码是 <code>demo/demo</code>。</p>
-<p>有些错误 walle 捕捉不到，默认操作日志在 /tmp/walle/ 下，具体可在 config/local.php 里 log.dir 配置路径，tail 着日志，部署看日志。</p>
-<p>如果发现 /tmp/walle 下没有日志，很有可能是因为 CentOs 7 yum 安装的 php-fpm 默认 /tmp 目录不可写：/usr/lib/systemd/system/php-fpm.service 中的 PrivateTmp=true 禁止了向tmp目录写日志，解决方法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">vi /usr/lib/systemd/system/php-fpm.service</div><div class="line">PrivateTmp=false</div><div class="line"></div><div class="line">systemctl daemon-reload</div><div class="line">systemctl reload php-fpm</div></pre></td></tr></table></figure></p>
-<h2 id="Supervisor"><a href="#Supervisor" class="headerlink" title="Supervisor"></a>Supervisor</h2><p>安装 Supervisor<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure></p>
-<h2 id="Vsftpd"><a href="#Vsftpd" class="headerlink" title="Vsftpd"></a>Vsftpd</h2><p>安装 Vsftpd<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y vsftpd</div></pre></td></tr></table></figure></p>
-<p>开机启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl enable vsftpd</div></pre></td></tr></table></figure></p>
-<p>修改配置文件如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">vim /etc/vsftpd/vsftpd.conf</div><div class="line"></div><div class="line"># 编辑选项</div><div class="line">anonymous_enable=NO</div><div class="line">local_enable=YES</div><div class="line">chroot_local_user=YES</div><div class="line">chroot_list_enable=YES</div><div class="line">chroot_list_file=/etc/vsftpd/chroot_list</div><div class="line"></div><div class="line"># 配置文件最后添加</div><div class="line">allow_writeable_chroot=YES</div></pre></td></tr></table></figure></p>
-<p>新增用户<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">useradd -d /data/www/ftp/ -g ftp -s /sbin/nologin ftp.cowcat.cc</div><div class="line">passwd ftp.cowcat.cc</div></pre></td></tr></table></figure></p>
-<h2 id="Alias-常用进程命令"><a href="#Alias-常用进程命令" class="headerlink" title="Alias 常用进程命令"></a>Alias 常用进程命令</h2><ul>
-<li>Nginx<ul>
-<li>alias nginx.start=’systemctl start nginx’</li>
-<li>alias nginx.restart=’systemctl restart nginx’</li>
-<li>alias nginx.stop=’systemctl stop nginx’</li>
-<li>alias nginx.status=’systemctl status nginx’</li>
-</ul>
-</li>
-<li>Mysql<ul>
-<li>alias mysql.start=’systemctl start mysql’</li>
-<li>alias mysql.restart=’systemctl restart mysql’</li>
-<li>alias mysql.stop=’systemctl stop mysql’</li>
-<li>alias mysql.status=’systemctl status mysql’</li>
-</ul>
-</li>
-<li>PHP-FPM<ul>
-<li>alias php-fpm.start=’systemctl start php-fpm’</li>
-<li>alias php-fpm.restart=’systemctl restart php-fpm’</li>
-<li>alias php-fpm.stop=’systemctl stop php-fpm’</li>
-<li>alias php-fpm.status=’systemctl status php-fpm’</li>
-</ul>
-</li>
-<li>Redis<ul>
-<li>alias redis.start=’systemctl start redis’</li>
-<li>alias redis.restart=’systemctl restart redis’</li>
-<li>alias redis.stop=’systemctl stop redis’</li>
-<li>alias redis.status=’systemctl status redis’</li>
-</ul>
-</li>
-<li>Beanstalkd<ul>
-<li>alias beanstalkd.start=’systemctl start beanstalkd’</li>
-<li>alias beanstalkd.restart=’systemctl restart beanstalkd’</li>
-<li>alias beanstalkd.stop=’systemctl stop beanstalkd’</li>
-<li>alias beanstalkd.status=’systemctl status beanstalkd’</li>
-</ul>
-</li>
-<li>Gogs<ul>
-<li>alias gogs.start=’/etc/rc.d/init.d/gogs start’</li>
-<li>alias gogs.stop=’/etc/rc.d/init.d/gogs stop’</li>
-<li>alias gogs.restart=’/etc/rc.d/init.d/gogs restart’</li>
-<li>alias gogs.status=’/etc/rc.d/init.d/gogs status’</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/23/「复习」使用阿里云从零开始部署-Laravel/" data-id="cj1oul343002zuc4bk9got2v9" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AliCloud/">AliCloud</a></li></ul>
 
     </footer>
   </div>
@@ -972,7 +911,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
   </div>
 
@@ -982,7 +921,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
     </div>
   </div>
 
@@ -992,7 +931,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AliCloud/" style="font-size: 11.67px;">AliCloud</a> <a href="/tags/Javascript/" style="font-size: 11.67px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 16.67px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 18.33px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.67px;">PHPStorm</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/UML/" style="font-size: 11.67px;">UML</a> <a href="/tags/Yii/" style="font-size: 13.33px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
+      <a href="/tags/AliCloud/" style="font-size: 11.67px;">AliCloud</a> <a href="/tags/Javascript/" style="font-size: 11.67px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 16.67px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 18.33px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.67px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 10px;">Pattern</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/UML/" style="font-size: 11.67px;">UML</a> <a href="/tags/Yii/" style="font-size: 13.33px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
     </div>
   </div>
 
@@ -1014,6 +953,10 @@
       <ul>
         
           <li>
+            <a href="/2017/04/20/设计模式之简单工厂模式/">设计模式之简单工厂模式</a>
+          </li>
+        
+          <li>
             <a href="/2017/04/05/使用-Laravel-5-3-Vue-js-2-1-开发知乎/">使用 Laravel 5.3 + Vue.js 2.1 开发知乎</a>
           </li>
         
@@ -1027,10 +970,6 @@
         
           <li>
             <a href="/2017/03/20/Head-First-Design-Patterns/">Head First Design Patterns</a>
-          </li>
-        
-          <li>
-            <a href="/2017/03/15/「Tips」Yii2-前端请求的参数字段映射数据模型的属性/">「Tips」Yii2 前端请求的参数字段映射数据模型的属性</a>
           </li>
         
       </ul>
