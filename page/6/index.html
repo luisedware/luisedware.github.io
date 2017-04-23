@@ -54,7 +54,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -64,6 +64,607 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-与-MySQL-的零距离接触（一）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/07/与-MySQL-的零距离接触（一）/" class="article-date">
+  <time datetime="2016-09-07T12:48:20.000Z" itemprop="datePublished">2016-09-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/07/与-MySQL-的零距离接触（一）/">与 MySQL 的零距离接触（一）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="第-1-章-初涉-MySQL"><a href="#第-1-章-初涉-MySQL" class="headerlink" title="第 1 章 初涉 MySQL"></a>第 1 章 初涉 MySQL</h2><ul>
+<li><h3 id="1-1-MySQL概述"><a href="#1-1-MySQL概述" class="headerlink" title="1-1 MySQL概述"></a>1-1 MySQL概述</h3><ul>
+<li>MySQL 是由瑞典 MySQL AB 公司开发的，目前被 Oracle 公司收购了</li>
+<li>MySQL 是一款开源的关系型数据库管理系统</li>
+<li>MySQL 分为社区版和企业版</li>
+</ul>
+</li>
+<li><h3 id="1-2-MySQL的安装与配置"><a href="#1-2-MySQL的安装与配置" class="headerlink" title="1-2 MySQL的安装与配置"></a>1-2 MySQL的安装与配置</h3><ul>
+<li>Mac OS 使用 HomeBrew 安装：<code>brew install mysql</code></li>
+<li>MySQL 目录结构：<ul>
+<li>bin - 存储可执行文件</li>
+<li>lib - 存储库文件</li>
+<li>share - 存储错误消息和字符集文件</li>
+<li>scripts - 存储脚本文件</li>
+<li>include - 存储包含的头文件</li>
+<li>mysql-test</li>
+<li>support-files</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="1-3-启动与停止MySQL服务"><a href="#1-3-启动与停止MySQL服务" class="headerlink" title="1-3 启动与停止MySQL服务"></a>1-3 启动与停止MySQL服务</h3><ul>
+<li>启动 MySQL 服务：<code>launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist&quot;</code></li>
+<li>停止 MySQL 服务：<code>launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist&quot;</code></li>
+</ul>
+</li>
+<li><h3 id="1-4-登录与退出"><a href="#1-4-登录与退出" class="headerlink" title="1-4 登录与退出"></a>1-4 登录与退出</h3><ul>
+<li>登录<ul>
+<li><code>mysql</code> 命令<ul>
+<li>-D, –database=[name] : 指定数据库</li>
+<li>-P, –port=[number] ： 指定端口号</li>
+<li>-u, –user=[name] ： 指定登录用户</li>
+<li>-h, –host=[name] ： 指定服务器</li>
+<li>-p, –password ： 密码</li>
+<li>-V, –version ：查看版本</li>
+<li>–delimiter=[name] ： 指定分隔符</li>
+<li>–prompt=[name] ： 设置提示符</li>
+</ul>
+</li>
+<li><code>mysql</code> 命令例子<ul>
+<li><code>mysql -uroot -p</code></li>
+<li><code>mysql --version</code></li>
+<li><code>mysql -uroot -P6606 -p</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>退出<ul>
+<li><code>mysql</code> CLI 环境中输入<ul>
+<li>exit;</li>
+<li>quit:</li>
+<li>\q;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="1-5-修改MySQL提示符"><a href="#1-5-修改MySQL提示符" class="headerlink" title="1-5 修改MySQL提示符"></a>1-5 修改MySQL提示符</h3><ul>
+<li>连接客户端时通过参数指定：<code>shell&gt;mysql -uroot -proot --prompt 提示符</code></li>
+<li>连接上客户端后，通过设置 prompt 提示符指定：<code>prompt 提示符</code></li>
+<li><code>prompt</code> 提示符参数：<ul>
+<li>\D 完整的日期</li>
+<li>\d 当前数据库</li>
+<li>\h 服务器名称</li>
+<li>\u 当前用户</li>
+</ul>
+</li>
+<li><code>prompt</code> 提示符参数用法：<code>prompt \h-\u-\p-\D</code></li>
+</ul>
+</li>
+<li><h3 id="1-6-MySQL-常用命令以及语法规范"><a href="#1-6-MySQL-常用命令以及语法规范" class="headerlink" title="1-6 MySQL 常用命令以及语法规范"></a>1-6 MySQL 常用命令以及语法规范</h3><ul>
+<li>常用命令：<ul>
+<li>查看数据库版本 - <code>SELECT VERSION();</code></li>
+<li>查看数据库当前时间 - <code>SELECT NEW();</code></li>
+<li>查看数据库当前用户 - <code>SELECT USER();</code></li>
+<li>查看数据库列表 - <code>SHOW DATABASES;</code></li>
+<li>查看警告日志 - <code>SHOW WARINGS;</code></li>
+</ul>
+</li>
+<li>语法规范：<ul>
+<li>关键字与函数名称全部大写</li>
+<li>数据库名称、表名称、字段名称全部小写</li>
+<li>SQL 语句必须以分号结尾</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="1-7-操作数据库"><a href="#1-7-操作数据库" class="headerlink" title="1-7 操作数据库"></a>1-7 操作数据库</h3><ul>
+<li><p>创建数据库 - <code>CREATE {DATABASE | SCHEMA} [IF NOT EXISTS] db_name [DEFAULT] CHARACTER SET [=] charset_name;</code></p>
+</li>
+<li><p>修改数据库 - <code>ALTER {DATABASE | SCHEMA} [db_name] [DEFAULT] CHARACTER SET [=] charset_name;</code></p>
+</li>
+<li><p>删除数据库 - <code>DROP {DATABASE | SCHEMA} [IF EXISTS] db_name</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="第-2-章-数据类型与操作数据表"><a href="#第-2-章-数据类型与操作数据表" class="headerlink" title="第 2 章 数据类型与操作数据表"></a>第 2 章 数据类型与操作数据表</h2><ul>
+<li><h3 id="2-1-内容回顾"><a href="#2-1-内容回顾" class="headerlink" title="2-1 内容回顾"></a>2-1 内容回顾</h3><ul>
+<li>略</li>
+</ul>
+</li>
+<li><h3 id="2-2-数据类型之整型"><a href="#2-2-数据类型之整型" class="headerlink" title="2-2 数据类型之整型"></a>2-2 数据类型之整型</h3><ul>
+<li>数据类型的概念：数据类型是指列、存储过程参数、表达式和局部变量的数据特征，它决定了数据的存储格式，代表了不同的信息类型。</li>
+<li>整型类型：<ul>
+<li><code>TINYINT</code><ul>
+<li>有符号值：-128 ~ 127 （- 2）</li>
+<li>无符号值：0 ~ 255</li>
+<li>字节：1</li>
+</ul>
+</li>
+<li><code>SMALLINT</code><ul>
+<li>有符号值：-32768 ~ 32767</li>
+<li>无符号值：0 ~ 65535</li>
+<li>字节：2</li>
+</ul>
+</li>
+<li><code>MEDIUMINT</code><ul>
+<li>有符号值：-8388608 ~ 8388607</li>
+<li>无符号值：0 ~ 16777215</li>
+<li>字节：3</li>
+</ul>
+</li>
+<li><code>INT</code><ul>
+<li>有符号值：-2147483648 ~ 2147483647</li>
+<li>无符号值：0 ~ 4294967295</li>
+<li>字节：4</li>
+</ul>
+</li>
+<li><code>BIGINT</code><ul>
+<li>有符号值：-9223372036854775808 ~ 9223372036854775807</li>
+<li>无符号值：0 ~ 18446744073709551615</li>
+<li>字节：8</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="2-3-数据类型之浮点型"><a href="#2-3-数据类型之浮点型" class="headerlink" title="2-3 数据类型之浮点型"></a>2-3 数据类型之浮点型</h3><ul>
+<li><code>FLOAT</code> [(M,D)]：M 是数字总位数，D 是小数点后面的位数。如果 M 和 D 被省略，根据硬件允许的限制来保存值。单精度浮点数精确到大约 7 位小数位。</li>
+<li><code>DOUBLE</code> [(M,D)]</li>
+</ul>
+</li>
+<li><h3 id="2-4-数据类型之日期时间型"><a href="#2-4-数据类型之日期时间型" class="headerlink" title="2-4 数据类型之日期时间型"></a>2-4 数据类型之日期时间型</h3><ul>
+<li><code>YEAR</code></li>
+<li><code>TIME</code></li>
+<li><code>DATE</code></li>
+<li><code>DATETIME</code></li>
+<li><code>TIMESTAMP</code></li>
+</ul>
+</li>
+<li><h3 id="2-5-数据类型之字符型"><a href="#2-5-数据类型之字符型" class="headerlink" title="2-5 数据类型之字符型"></a>2-5 数据类型之字符型</h3><ul>
+<li><code>CHAR</code>：M 个字节，0 &lt;= M &lt;= 255</li>
+<li><code>VARCHAR</code>：L + 1 个字节，其中 L &lt;= M 且 0 &lt;= M &lt;= 65535</li>
+<li><code>TINYTEXT</code>：L + 1 个字节，其中 L &lt; 2^8</li>
+<li><code>TEXT</code>：L + 2 个字节，其中 L &lt; 2^16</li>
+<li><code>MEDIUMTEXT</code>：L + 3 个字节，其中 L &lt; 2^24</li>
+<li><code>LONGTEXT</code>：L + 4 个字节，其中 L &lt; 2^32</li>
+<li><code>ENUM</code>(‘value1’,’value2’,…)：1 或 2 个字节，取决于枚举值的个数（最多 65535 个值）</li>
+<li><code>SET</code>(‘value1’,’value2’,…)：1、2、3、4 或者 8 个字节，取决于 set 成员的数目（最多64个）</li>
+</ul>
+</li>
+<li><h3 id="2-6-创建数据表"><a href="#2-6-创建数据表" class="headerlink" title="2-6 创建数据表"></a>2-6 创建数据表</h3><ul>
+<li>数据表概念：数据表是数据库最重要的组成部分一直，是其他对象的基础。</li>
+<li>选择数据库 - <code>use {database}</code></li>
+<li>创建数据表 - <code>CREATE TABLE [IF NOT EXISTS] table_name(column_name data_type,....)</code></li>
+</ul>
+</li>
+<li><h3 id="2-7-查看数据表："><a href="#2-7-查看数据表：" class="headerlink" title="2-7 查看数据表："></a>2-7 查看数据表：</h3><ul>
+<li><code>SHOW TABLES [FROM db_name] [LIKE &#39;pattern&#39;|WHERE expr]</code></li>
+</ul>
+</li>
+<li><h3 id="2-8-查看数据表结构："><a href="#2-8-查看数据表结构：" class="headerlink" title="2-8 查看数据表结构："></a>2-8 查看数据表结构：</h3><ul>
+<li><code>SHOW COLUMNS FROM tbl_name</code></li>
+</ul>
+</li>
+<li><h3 id="2-9-记录的插入与查找："><a href="#2-9-记录的插入与查找：" class="headerlink" title="2-9 记录的插入与查找："></a>2-9 记录的插入与查找：</h3><ul>
+<li>插入：<code>INSERT [INTO] tal_name[(col_name)VALUES(val,..)]</code></li>
+<li>插入省略字段需要为所有字段都要赋值，否则数据库报错</li>
+<li>查找：<code>SELECT expr,... FROM tbl_name</code></li>
+</ul>
+</li>
+<li><h3 id="2-10-空值与非空"><a href="#2-10-空值与非空" class="headerlink" title="2-10 空值与非空"></a>2-10 空值与非空</h3><ul>
+<li><code>NULL</code>，字段值可以为空</li>
+<li><code>NOT NULL</code>，字段值禁止为空</li>
+</ul>
+</li>
+<li><h3 id="2-11-自动编号"><a href="#2-11-自动编号" class="headerlink" title="2-11 自动编号"></a>2-11 自动编号</h3><ul>
+<li><code>AUTO_INCREMENT</code>，自动编号，且必须与主键组合使用</li>
+<li>默认情况下，起始值为 1，每次的增量为 1</li>
+</ul>
+</li>
+<li><h3 id="2-12-初涉主键约束"><a href="#2-12-初涉主键约束" class="headerlink" title="2-12 初涉主键约束"></a>2-12 初涉主键约束</h3><ul>
+<li><code>PRIMARY KEY</code><ul>
+<li>主键约束</li>
+<li>主键自动为 NOT NULL</li>
+<li>主键保证记录的唯一性</li>
+<li>每张数据表只能存在一个主键</li>
+<li><code>AUTO_INCREMENT</code> 必须和 <code>PRIMARY KEY</code> 一起使用，<code>PRIMARY KEY</code>  不必须和 <code>AUTO_INCREMENT</code> 一起使用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="2-13-初涉唯一约束"><a href="#2-13-初涉唯一约束" class="headerlink" title="2-13 初涉唯一约束"></a>2-13 初涉唯一约束</h3><ul>
+<li><code>UNIQUE KEY</code><ul>
+<li>唯一约束</li>
+<li>唯约束可以保证记录的唯一性</li>
+<li>唯一约束的字段可以为空值（NULL）</li>
+<li>每张数据表可以存在多个唯一索引</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="2-14-初涉默认约束"><a href="#2-14-初涉默认约束" class="headerlink" title="2-14 初涉默认约束"></a>2-14 初涉默认约束</h3><ul>
+<li><code>DEFAULT</code><ul>
+<li>默认值</li>
+<li>当插入记录时，如果没有明确为字段赋值，则自动赋予默认值</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="第-3-章-约束以及修改数据表"><a href="#第-3-章-约束以及修改数据表" class="headerlink" title="第 3 章 约束以及修改数据表"></a>第 3 章 约束以及修改数据表</h2><ul>
+<li><h3 id="3-1-回顾和概述"><a href="#3-1-回顾和概述" class="headerlink" title="3-1 回顾和概述"></a>3-1 回顾和概述</h3><ul>
+<li>略</li>
+</ul>
+</li>
+<li><h3 id="3-2-外键约束的要求解析"><a href="#3-2-外键约束的要求解析" class="headerlink" title="3-2 外键约束的要求解析"></a>3-2 外键约束的要求解析</h3><ul>
+<li>约束<ul>
+<li>约束保证数据的完整性和一致性</li>
+<li>约束分为表级约束和列级约束</li>
+<li>约束类型：<ul>
+<li><code>DEFAULT</code>（默认约束）</li>
+<li><code>NOT NULL</code>（非空约束）</li>
+<li><code>UNIQUE KEY</code>（唯一约束）</li>
+<li><code>PRIMARY KEY</code>（主键约束）</li>
+<li><code>FOREIGN KEY</code>（外键约束）</li>
+</ul>
+</li>
+<li>FOREIGN KEY - 外键约束<ul>
+<li>保持数据一致性，完整性</li>
+<li>实现一对一或一对多关系</li>
+</ul>
+</li>
+<li>使用外键约束的要求<ul>
+<li>父表和子表必须使用相同的存储引擎，而且禁止使用临时表</li>
+<li>数据表的存储引擎只能为 InnoDB</li>
+<li>外键列和参照列必须具有相似的数据类型。其中数字的长度或是是否有符号位必须相同；而字符的长度则可以不同</li>
+<li>外键列和参照列必须创建索引，如果参照列不存在索引的话，MySQL 将自动创建索引</li>
+</ul>
+</li>
+<li>编辑数据表的默认存储引擎：<code>default-storage-engine=INNODB</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="3-3-外键约束的参照操作"><a href="#3-3-外键约束的参照操作" class="headerlink" title="3-3 外键约束的参照操作"></a>3-3 外键约束的参照操作</h3><ul>
+<li><code>CASCADE</code>：从父表删除或更新且自动删除或更新子表中匹配的行</li>
+<li><code>SET NULL</code>：从父表删除或更新行，并设置子表中的外键列为 NULL。如果使用该选项，必须保证子表列没有指定 NOT NULL</li>
+<li><code>RESTRICT</code>：拒绝对父表的删除或更新操作</li>
+<li><code>NO ACTION</code>：标准 SQL 的关键字，在 MySQL 中与 RESTRICE 相同</li>
+</ul>
+</li>
+<li><h3 id="3-4-表级约束与列级约束"><a href="#3-4-表级约束与列级约束" class="headerlink" title="3-4 表级约束与列级约束"></a>3-4 表级约束与列级约束</h3><ul>
+<li>对一个数据列建立的约束，称为列级约束</li>
+<li>对多个数据列建立的约束，称为表级约束</li>
+<li>列级约束既可以在列定义时声明，也可以在列定义后声明</li>
+<li>表级约束只能在列定义后声明</li>
+</ul>
+</li>
+<li><h3 id="3-5-修改数据表-添加-删除列"><a href="#3-5-修改数据表-添加-删除列" class="headerlink" title="3-5 修改数据表-添加/删除列"></a>3-5 修改数据表-添加/删除列</h3><ul>
+<li>添加单列：<code>ALTER TABLE tbl_name ADD [COLUMN] col_name column_definition [FIRST | AFTER col_name]</code></li>
+<li>添加多列：<code>ALTER TABLE tbl_name ADD [COLUMN] (col_name column_definition,...)</code></li>
+<li>删除单列：<code>ALTER TABLE tbl_name DROP [COLUMN] col_name</code></li>
+</ul>
+</li>
+<li><h3 id="3-6-修改数据表–添加约束"><a href="#3-6-修改数据表–添加约束" class="headerlink" title="3-6 修改数据表–添加约束"></a>3-6 修改数据表–添加约束</h3><ul>
+<li>添加主键约束：<code>ALTER TABLE tbl_name ADD [CONSTRAINT [symbol]] PRIMARY KEY [index_type](index_col_name,...)</code></li>
+<li>添加唯一约束：<code>ALTER TABLE tbl_name ADD [CONSTRAINT [symbol]] UNIQUE [INDEX|KEY][index_name][index_type](index_col_name,...)</code></li>
+<li>添加外键约束：<code>ALTER TABLE tbl_name ADD [CONSTRAINT [symbol]] FOREIGN KEY [index_name](index_col_name,...) reference_definition</code></li>
+<li>添加/删除默认约束：<code>ALTER TABLE tbl_name ALTER [COLUMN] col_name {SET DEFAULT literal | DROP DEFAULT}</code></li>
+</ul>
+</li>
+<li><h3 id="3-7-修改数据表–删除约束"><a href="#3-7-修改数据表–删除约束" class="headerlink" title="3-7 修改数据表–删除约束"></a>3-7 修改数据表–删除约束</h3><ul>
+<li>删除主键约束：<code>ALTER TABLE tbl_name DROP PRIMARY KEY</code></li>
+<li>删除唯一约束：<code>ALTER TABLE tbl_name DROP {INDEX | KEY} index_name</code></li>
+<li>删除外键约束：<code>ALTER TABLE tbl_name DROP FOREIGN KEY fk_symbol</code></li>
+</ul>
+</li>
+<li><h3 id="3-8-修改数据表–修改列定义和更名数据表"><a href="#3-8-修改数据表–修改列定义和更名数据表" class="headerlink" title="3-8 修改数据表–修改列定义和更名数据表"></a>3-8 修改数据表–修改列定义和更名数据表</h3><ul>
+<li>修改表名称<ul>
+<li><code>ALTER TABLE tbl_name RENAME [TO|AS] new_tbl_name</code></li>
+<li><code>RENAME TABLE tbl_name TO new_tbl_name [,tbl_name2 To ewn_tbl_name2,...]</code></li>
+</ul>
+</li>
+<li>修改列定义：<code>ALTER TABLE tbl_name MODIFY [COLUMN] col_name column_definition [FIRST | AFTER col_name]</code></li>
+<li>修改列名称：<code>ALTER TABLE tbl_name CHANGE [COLUMN] old_col_name new_col_name column_definition [FIRST|AFTER col_name]</code></li>
+</ul>
+</li>
+<li><h3 id="3-9-小结"><a href="#3-9-小结" class="headerlink" title="3-9 小结"></a>3-9 小结</h3><ul>
+<li>约束<ul>
+<li>功能<ul>
+<li><code>NOT NULL</code>（非空约束）</li>
+<li><code>PRIMARY KEY</code>（主键约束）</li>
+<li><code>UNIQUE KEY</code>（唯一约束）</li>
+<li><code>DEFAULT</code>（默认约束）</li>
+<li><code>FOREIGN KEY</code>（外键约束）</li>
+</ul>
+</li>
+<li>数据列的数目<ul>
+<li>表级约束</li>
+<li>列级约束</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>修改数据表<ul>
+<li>针对字段的操作：添加 / 删除字段、修改列定义，修改列名称等</li>
+<li>针对约束的操作：添加 / 删除各种约束</li>
+<li>针对数据表的操作：数据表更名（两种方式）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="第-4-章-操作数据表中的记录"><a href="#第-4-章-操作数据表中的记录" class="headerlink" title="第 4 章 操作数据表中的记录"></a>第 4 章 操作数据表中的记录</h2><ul>
+<li><h3 id="4-1-回顾和概述"><a href="#4-1-回顾和概述" class="headerlink" title="4-1 回顾和概述"></a>4-1 回顾和概述</h3><ul>
+<li>略</li>
+</ul>
+</li>
+<li><h3 id="4-2-插入记录-INSERT"><a href="#4-2-插入记录-INSERT" class="headerlink" title="4-2 插入记录 INSERT"></a>4-2 插入记录 <code>INSERT</code></h3><ul>
+<li>INSERT<ul>
+<li><code>INSERT [INFO] tbl_name [(col_name,...)] {VALUES | VALUE}({expr|DEFAULT},...),(...)</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="4-3-插入记录-INSERT-SET-SELECT"><a href="#4-3-插入记录-INSERT-SET-SELECT" class="headerlink" title="4-3 插入记录 INSERT SET-SELECT"></a>4-3 插入记录 <code>INSERT SET-SELECT</code></h3><ul>
+<li>INSERT SET 与 INSERT 的区别在于，此方法可以使用子查询（SubQuery）<ul>
+<li><code>INSERT [INTO] tbl_name SET col_name={expr | DEFAULT},...</code></li>
+</ul>
+</li>
+<li>INSERT SELECT 与 INSERT 的区别在于，此方法可以将查询结果插入到指定数据表<ul>
+<li><code>INSERT [INTO] tbl_name [(col_name,...)] SELECT ...</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="4-4-单表更新记录-UPDATE"><a href="#4-4-单表更新记录-UPDATE" class="headerlink" title="4-4 单表更新记录 UPDATE"></a>4-4 单表更新记录 UPDATE</h3><ul>
+<li><code>UPDATE</code><ul>
+<li><code>UPDATE [LOW_PRIORITY] [IGNORE] table_reference SET col_name1={expr | DEFAULT}[,col_name2={expr2|DEFAULT}]...[WHERE where_condition]</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="4-5-单表删除记录-DELETE"><a href="#4-5-单表删除记录-DELETE" class="headerlink" title="4-5 单表删除记录 DELETE"></a>4-5 单表删除记录 DELETE</h3><ul>
+<li><code>DELETE</code><ul>
+<li><code>DELETE FROM tbl_name [WHERE where_condition]</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="4-6-查询表达式解析"><a href="#4-6-查询表达式解析" class="headerlink" title="4-6 查询表达式解析"></a>4-6 查询表达式解析</h3><ul>
+<li><code>SELECT</code><ul>
+<li><code>SELECT select_expr[,select_expr ...]</code></li>
+<li><code>[</code><ul>
+<li><code>FROM table_references</code></li>
+<li><code>[WHERE where_condition]</code></li>
+<li><code>[GROUP BY {col_name | position} [ASC | DESC], ...]</code></li>
+<li><code>[HAVING where_condition]</code></li>
+<li><code>[ORDER BY {col_name | expr | position} [ASC | DESC],...]</code></li>
+<li><code>[LIMIT {[offset,] row_count | row_count OFFSET offset}]</code></li>
+</ul>
+</li>
+<li><code>]</code></li>
+</ul>
+</li>
+<li>select_expr - 查询表达式<ul>
+<li>每一个表达式表示想要的一列，必须有至少一个。</li>
+<li>多个列之间以英文逗号分隔</li>
+<li>星号（<em>）表示所有列。tbl_name.</em> 可以表示命名表的所有列</li>
+<li>查询表达式可以使用 <code>[ AS ]</code> alias_name 为其赋予别名</li>
+<li>别名可用于 <code>GROUP BY</code>，<code>ORDER BY</code> 或 <code>HAVING</code> 子句</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="4-7-WHERE-语句进行条件查询"><a href="#4-7-WHERE-语句进行条件查询" class="headerlink" title="4-7 WHERE 语句进行条件查询"></a>4-7 <code>WHERE</code> 语句进行条件查询</h3><ul>
+<li><code>WHERE</code> - 条件表达式<ul>
+<li>对记录进行过滤，如果没有指定 <code>WHERE</code> 子句，则显示所有记录</li>
+<li>在 <code>WHERE</code> 表达式中，可以使用 MySQL 支持的函数或者运算符</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="4-8-GROUP-BY-语句对查询结果分组"><a href="#4-8-GROUP-BY-语句对查询结果分组" class="headerlink" title="4-8 GROUP BY 语句对查询结果分组"></a>4-8 <code>GROUP BY</code> 语句对查询结果分组</h3><ul>
+<li><code>[GROUP BY {col_name | position} [ASC | DESC], ...]</code></li>
+</ul>
+</li>
+<li><h3 id="4-9-HAVING-语句设置分组条件"><a href="#4-9-HAVING-语句设置分组条件" class="headerlink" title="4-9 HAVING 语句设置分组条件"></a>4-9 <code>HAVING</code> 语句设置分组条件</h3><ul>
+<li><code>[HAVING where_condition]</code></li>
+<li>请使用聚合函数或 select_column，否则报错</li>
+</ul>
+</li>
+<li><h3 id="4-10-ORDER-BY-语句对查询结果排序"><a href="#4-10-ORDER-BY-语句对查询结果排序" class="headerlink" title="4-10 ORDER BY 语句对查询结果排序"></a>4-10 <code>ORDER BY</code> 语句对查询结果排序</h3><ul>
+<li><code>[ORDER BY {col_name | expr | position} [ASC | DESC],...]</code></li>
+</ul>
+</li>
+<li><h3 id="4-11-LIMIT-语句限制查询数量"><a href="#4-11-LIMIT-语句限制查询数量" class="headerlink" title="4-11 LIMIT 语句限制查询数量"></a>4-11 <code>LIMIT</code> 语句限制查询数量</h3><ul>
+<li><code>[LIMIT {[offset,] row_count | row_count OFFSET offset}]</code></li>
+<li>想要获取第三、第四条记录，写法是 <code>LIMIT 2 OFFSET 2</code></li>
+</ul>
+</li>
+<li><h3 id="4-12-小结"><a href="#4-12-小结" class="headerlink" title="4-12 小结"></a>4-12 小结</h3><ul>
+<li>略</li>
+</ul>
+</li>
+</ul>
+<h2 id="第-5-章-子查询与连接"><a href="#第-5-章-子查询与连接" class="headerlink" title="第 5 章 子查询与连接"></a>第 5 章 子查询与连接</h2><ul>
+<li><h3 id="5-1-数据准备"><a href="#5-1-数据准备" class="headerlink" title="5-1 数据准备"></a>5-1 数据准备</h3><ul>
+<li>数据可以在「资料下载」栏目中获取</li>
+</ul>
+</li>
+<li><h3 id="5-2-子查询简介"><a href="#5-2-子查询简介" class="headerlink" title="5-2 子查询简介"></a>5-2 子查询简介</h3><ul>
+<li>简介<ul>
+<li>子查询（Subquery）是指出现在其他 SQL 语句内的 SELECT 子句</li>
+<li>子查询指嵌套在查询内部，且必须始终出现在圆括号内</li>
+<li>子查询可以包含多个关键字或条件，如 DISTINCT、GROUP BY、ORDER BY、LIMIT、函数等</li>
+<li>子查询的外层查询可以：SELECT、INSERT、UPDATE、SET、DO 等</li>
+<li>子查询可以返回标量、一行、一列或子查询</li>
+</ul>
+</li>
+<li>例子<ul>
+<li><code>SELECT * FROM t1 WHERE col1 = (SELECT col2 FROM t2)</code>;<ul>
+<li>其中 <code>SELECT * FROM t1</code>，称为 Outer Query / Outer Statement</li>
+<li><code>SELECT col2 FROM t2</code>，称为 SubQuery</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="5-3-由比较运算符引发的子查询"><a href="#5-3-由比较运算符引发的子查询" class="headerlink" title="5-3 由比较运算符引发的子查询"></a>5-3 由比较运算符引发的子查询</h3><ul>
+<li>使用比较运算符的子查询：=，&gt;，&lt;，&gt;=，&lt;=，&lt;&gt;，!=，&lt;=&gt;</li>
+<li>语法结构：operand comparison_operator subquery</li>
+<li>比较运算符<ul>
+<li>operand comparison_operator ANY(subquery)<ul>
+<li>>、&gt;= 最小值</li>
+<li>&lt;、&lt;= 最大值</li>
+<li>=     任意值</li>
+<li>&lt;&gt;、!=</li>
+</ul>
+</li>
+<li>operand comparison_operator ALL(subquery)<ul>
+<li>>、&gt;= 最大值</li>
+<li>&lt;、&lt;= 最小值</li>
+<li>=</li>
+<li>&lt;&gt;、!=    任意值</li>
+</ul>
+</li>
+<li>operand comparison_operator SOME(subquery)<ul>
+<li>>、&gt;= 最小值</li>
+<li>&lt;、&lt;= 最大值</li>
+<li>=     任意值</li>
+<li>&lt;&gt;、!=</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="5-4-由-NOT-IN-EXISTS引发的子查询"><a href="#5-4-由-NOT-IN-EXISTS引发的子查询" class="headerlink" title="5-4 由[NOT] IN/EXISTS引发的子查询"></a>5-4 由[NOT] IN/EXISTS引发的子查询</h3><ul>
+<li>语法结构：operand comparison_operator [NOT] IN (subquery)<ul>
+<li>=ANY 运算符与 IN 等效</li>
+<li>!=ALL 或 &lt;&gt;ALL 运算符与 NOT IN 等效</li>
+</ul>
+</li>
+<li>语法结构：operand comparison_operator [NOT] EXISTS<ul>
+<li>如果子查询返回任何行，EXISTE 将返回 TRUE，否则为 FALSE</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="5-5-使用INSERT…SELECT插入记录"><a href="#5-5-使用INSERT…SELECT插入记录" class="headerlink" title="5-5 使用INSERT…SELECT插入记录"></a>5-5 使用INSERT…SELECT插入记录</h3><ul>
+<li>INSERT..SELECT<ul>
+<li>将查询结果写入数据表：<code>INSERT [INTO] tbl_name [(col_name)] SELECT...</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="5-6-多表更新"><a href="#5-6-多表更新" class="headerlink" title="5-6 多表更新"></a>5-6 多表更新</h3><ul>
+<li><code>UPDATE table_references</code></li>
+<li><code>SET col_name1={expr1|DEFAULT}</code></li>
+<li><code>[,col_name2={expr2|DEFAULT}]</code></li>
+<li><code>[WHERE where_condition]</code></li>
+</ul>
+</li>
+<li><h3 id="5-7-多表更新之一步到位"><a href="#5-7-多表更新之一步到位" class="headerlink" title="5-7 多表更新之一步到位"></a>5-7 多表更新之一步到位</h3><ul>
+<li>CREATE…SELECT<ul>
+<li>创建数据表同时将查询结果写入到数据表：<code>CREATE TABLE [IF NOT EXISTS] tbl_name [(create_definition,...)] select_statement</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="5-8-连接的语法结构"><a href="#5-8-连接的语法结构" class="headerlink" title="5-8 连接的语法结构"></a>5-8 连接的语法结构</h3><ul>
+<li>连接<ul>
+<li>MySQL 在 SELECT 语句、多表更新、多表删除语句中支持 JOIN 操作</li>
+<li>语法结构<ul>
+<li><code>table_reference</code> - 数据表参照<ul>
+<li><code>tbl_name [[AS] alias] | table_subquery [AS] alias</code><ul>
+<li>数据表可以使用 tbl_name As alias_name 或 tbl_name alias_name 赋予别名</li>
+<li>table_subquery 可以作为子查询使用在 FROM 子句中，这样的子查询必须为其赋予别名</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>{[INNER | CROSS] JOIN | {LEFT | RIGHT} [OUTER] JOIN}</code></li>
+<li><code>table_reference</code></li>
+<li><code>ON conditional_expr</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="5-9-内连接-INNER-JOIN"><a href="#5-9-内连接-INNER-JOIN" class="headerlink" title="5-9 内连接 INNER JOIN"></a>5-9 内连接 INNER JOIN</h3></li>
+<li><h3 id="5-10-外连接-OUTER-JOIN"><a href="#5-10-外连接-OUTER-JOIN" class="headerlink" title="5-10 外连接 OUTER JOIN"></a>5-10 外连接 OUTER JOIN</h3><ul>
+<li>LEFT JOIN</li>
+<li>RIGHT JOIN</li>
+</ul>
+</li>
+<li><h3 id="5-11-多表连接"><a href="#5-11-多表连接" class="headerlink" title="5-11 多表连接"></a>5-11 多表连接</h3><ul>
+<li>略</li>
+</ul>
+</li>
+<li><h3 id="5-12-关于连接的几点说明"><a href="#5-12-关于连接的几点说明" class="headerlink" title="5-12 关于连接的几点说明"></a>5-12 关于连接的几点说明</h3><ul>
+<li>外连接<ul>
+<li>A LEFT JOIN B join_condtion<ul>
+<li>数据表 B 的结果集依赖数据表 A</li>
+<li>数据表 A 的结果集根据左连接条件依赖所有数据表</li>
+<li>左外连接条件决定如何检索数据表 B</li>
+<li>如果数据表 A 的某条记录符合 WHERE 条件，但是在数据表 B 不存在，符合连接条件的记录，将生成一个所有列为空的额外的行</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="5-13-无限级分类表设计"><a href="#5-13-无限级分类表设计" class="headerlink" title="5-13 无限级分类表设计"></a>5-13 无限级分类表设计</h3><ul>
+<li>略</li>
+</ul>
+</li>
+<li><h3 id="5-14-多表删除"><a href="#5-14-多表删除" class="headerlink" title="5-14 多表删除"></a>5-14 多表删除</h3><ul>
+<li><code>DELETE tbl_name[.*] [,tbl_name[.*]] ... FROM table_references [WHERE where_condition]</code></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2016/09/07/与-MySQL-的零距离接触（一）/" data-id="cj1u9eu1x0034k04bpyrf6168" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-复习使用-MySQL（三）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -169,7 +770,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/04/复习使用-MySQL（三）/" data-id="cj1ruq1j8005n5d4btafgrkih" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/04/复习使用-MySQL（三）/" data-id="cj1u9eu2x005rk04bzer8htsu" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -382,7 +983,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/04/复习使用-MySQL（二）/" data-id="cj1ruq1j9005q5d4bmkvwcgoa" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/04/复习使用-MySQL（二）/" data-id="cj1u9eu2v005lk04bahj0vj9q" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -621,7 +1222,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/02/复习使用-MySQL（一）/" data-id="cj1ruq1j8005k5d4br4hkf3qu" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/02/复习使用-MySQL（一）/" data-id="cj1u9eu2u005ik04bpoikc232" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -707,7 +1308,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/01/查看-Eloquent-模型关联时执行的-SQL-语句/" data-id="cj1ruq1jg006f5d4btzzm4ybp" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/01/查看-Eloquent-模型关联时执行的-SQL-语句/" data-id="cj1u9eu320062k04bwltualf2" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -840,7 +1441,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/08/31/使用阿里云从零开始部署-Laravel/" data-id="cj1ruq1j500585d4bgmpq7zz3" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/08/31/使用阿里云从零开始部署-Laravel/" data-id="cj1u9eu2r0053k04bnvjukcmu" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AliCloud/">AliCloud</a></li></ul>
@@ -901,7 +1502,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/08/25/使用-Laravel-编写自定义命令/" data-id="cj1ruq1ij003r5d4blcw8bwxp" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/08/25/使用-Laravel-编写自定义命令/" data-id="cj1u9eu27003pk04bxarfhonb" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -965,7 +1566,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/08/08/使用-Laravel-基于-SMTP-驱动实现发送邮件/" data-id="cj1ruq1il003u5d4b9lo375rp" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/08/08/使用-Laravel-基于-SMTP-驱动实现发送邮件/" data-id="cj1u9eu23003lk04blcggo104" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -1025,7 +1626,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/06/27/使用-PHPStorm-与-Xdebug-调试-Laravel-二/" data-id="cj1ruq1in00415d4bp2wrxfqm" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/06/27/使用-PHPStorm-与-Xdebug-调试-Laravel-二/" data-id="cj1u9eu29003wk04bh981mvb2" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li></ul>
@@ -1115,7 +1716,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/06/20/使用-PHPStorm-与-Xdebug-调试-Laravel-一/" data-id="cj1ruq1ih003n5d4bs2x54jcl" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/06/20/使用-PHPStorm-与-Xdebug-调试-Laravel-一/" data-id="cj1u9eu28003sk04bjxgr3e58" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li></ul>
@@ -1127,281 +1728,10 @@
 
 
   
-    <article id="post-PHP Web Application 运行流程、概念术语、机制原理和代码实践" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/10/PHP Web Application 运行流程、概念术语、机制原理和代码实践/" class="article-date">
-  <time datetime="2016-06-10T12:55:55.000Z" itemprop="datePublished">2016-06-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/10/PHP Web Application 运行流程、概念术语、机制原理和代码实践/">PHP Web Application 运行流程、概念术语、机制原理和代码实践</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本文的目的在于了解 PHP 处理 HTTP 请求的过程</p>
-<h2 id="运行流程"><a href="#运行流程" class="headerlink" title="运行流程"></a>运行流程</h2><ol>
-<li>客户端做出请求操作（输入网址、点击链接、提交表单）。</li>
-<li>向客户端设定的 DNS 服务器请求 IP 地址。</li>
-<li>客户端根据 DNS 服务器返回 IP 地址采用三次握手与服务端建立 TCP 连接。</li>
-<li>TCP 连接成功后，客户端向服务端发送 HTTP 请求。</li>
-<li>服务端的 Web Server 会判断 HTTP 请求的资源类型，进行内容分发处理；如果请求的资源为 PHP 文件，服务端软件会启动对应的 CGI 程序进行处理，并返回处理结果。</li>
-<li>服务端将 Web Server 的处理结果响应给客户端</li>
-<li>客户端接收服务端的响应，并渲染处理结果，呈现出来并断开 TCP 连接。</li>
-</ol>
-<h2 id="概念术语"><a href="#概念术语" class="headerlink" title="概念术语"></a>概念术语</h2><p>1.<strong>客户端</strong></p>
-<p>客户端，是指与服务端相对应，为客户提供本地服务的程序。一般安装在普通的用户机上，需要与服务端互相配合运行。Web Application 的客户端一般是浏览器。</p>
-<p>2.<strong>服务端</strong></p>
-<p>服务端是为客户端服务的，服务的内容诸如向客户端提供资源，保存客户端数据。</p>
-<p>3.<strong>三次握手</strong></p>
-<p>三次握手，又名询问握手协议，是一个用来验证用户或网络提供者的协议。</p>
-<p>4.<strong>CGI</strong></p>
-<p>CGI 全称是 Common Gateway Interface，CGI 是外部应用程序与 Web Server 之间的接口标准，是在 CGI 程序和 Web 服务器之间传递信息的规程。CGI 规范允许 Web Server 执行外部程序，并将它们的输出发送给Web浏览器。</p>
-<p>5.<strong>DNS</strong></p>
-<p>DNS 全称是 Domain Name System，译为域名系统。它可以将域名和 IP 地址互相映射，能够让用户使用域名就可以访问互联网服务。</p>
-<p>6.<strong>HTTP</strong></p>
-<p>HTTP 全称是 HyperText Transfer Protocol，译为超文本传输协议，是一种网络协议。</p>
-<p>7.<strong>Web Server</strong></p>
-<p>通常指 Apache、Nginx 等服务器软件</p>
-<p>##机制原理</p>
-<p>首先从 HTTP 协议开始谈起，HTTP 协议工作流程是客户端发送一个请求给服务端，服务端在接收到这个请求后将产生一个响应返回给客户端。那么 HTTP 请求和 HTTP 响应是什么？</p>
-<h3 id="HTTP-请求"><a href="#HTTP-请求" class="headerlink" title="HTTP 请求"></a>HTTP 请求</h3><p>当客户端向服务端发出请求时，它向服务端传递一个数据块，即请求信息，HTTP 请求信息由三部分组成：</p>
-<ul>
-<li><strong>请求行</strong></li>
-<li><strong>请求报头</strong></li>
-<li><strong>请求正文</strong></li>
-</ul>
-<h3 id="请求行"><a href="#请求行" class="headerlink" title="请求行"></a>请求行</h3><p>请求行以一个方法符号开头，以空格分开，后面跟着请求的 URI 和协议的版本，格式如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Request Method - URI HTTP-Version CRLF</div></pre></td></tr></table></figure></p>
-<p>上述格式中各参数说明如下：</p>
-<ul>
-<li><strong>Method</strong>：请求方法，请求方法有多种<ul>
-<li>PUT</li>
-<li>GET</li>
-<li>POST</li>
-<li>HEAD</li>
-<li>TRACE</li>
-<li>DELETE</li>
-<li>OPTIONS</li>
-<li>CONNECT</li>
-</ul>
-</li>
-<li><strong>Request-URI</strong>：一个统一资源标识符</li>
-<li><strong>HTTP-Version</strong>：请求的 HTTP 协议版本。</li>
-<li><strong>CRLF</strong>：回车和换行</li>
-</ul>
-<h3 id="请求报头"><a href="#请求报头" class="headerlink" title="请求报头"></a>请求报头</h3><p>请求报头属于 HTTP 消息报头之一，请求报头允许客户端向服务端传递请求的附加信息以及客户端自身的信息。<br>每个报头域组成形式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">名字 + : + 空格 + 值</div></pre></td></tr></table></figure></p>
-<p>比较重要的几个报头如下：</p>
-<ul>
-<li><strong>Host</strong>：头域指定请求资源的 Internet 主机和端口号，必须表示请求 URL 的原始服务器或者网关的位置。</li>
-<li><strong>Accept</strong>：告诉服务器可以接受的文件格式。</li>
-<li><strong>Cookie</strong>：Cookie 份两种，一种是客户端向服务器发送的，使用 Cookie 报头，用来标记一些信息；另一种是服务器发送给浏览器的，报头为 Set-Cookie。</li>
-<li><strong>Referer</strong>：头域允许客户端指定请求 URI 的源资源地址，这可以允许服务器生成回退链表，可用来登录、优化缓存等。</li>
-<li><strong>User-Agent</strong>：UA 包含发出请求的用户信息。通常 User-Agent 包含浏览者的信息，主要是浏览器的名称版本和所用的操作系统。</li>
-<li><strong>Connection</strong>：表示是否需要持久连接。</li>
-<li><strong>Cache-Control</strong>：指定请求和响应遵循的缓存机制</li>
-<li><strong>Content-Range</strong>：响应的资源范围。可以在每次请求中标记请求的资源范围，在连接断开重连时，客户端只请求重连时，客户端只请求该资源未下载的部分，而不是重新请求整个资源。</li>
-<li><strong>Content-Length</strong>：内容长度</li>
-<li><strong>Accept-Encoding</strong>：指定所能接受的编码方式。通常服务器会对页面进行 GZIP 压缩后再输出以减少流量。一般浏览器均支持对这种压缩后的数据进行处理。</li>
-</ul>
-<h3 id="请求正文"><a href="#请求正文" class="headerlink" title="请求正文"></a>请求正文</h3><p>请求头和请求正文之间的一个空行表示请求头已经结束了。请求正文中可以包含提交的查询字符串信息。GET 方式没有请求正文。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">username=admin&amp;password=123456</div></pre></td></tr></table></figure></p>
-<h3 id="HTTP-请求示例"><a href="#HTTP-请求示例" class="headerlink" title="HTTP 请求示例"></a>HTTP 请求示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">GET /menu HTTP/1.1</div><div class="line">Host: localhost:5000</div><div class="line">Connection: keep-alive</div><div class="line">Cache-Control: max-age=0</div><div class="line">Upgrade-Insecure-Requests: 1</div><div class="line">User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.84 Safari/537.36</div><div class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</div><div class="line">Accept-Encoding: gzip, deflate, sdch</div><div class="line">Accept-Language: zh-CN,zh;q=0.8,en;q=0.6</div><div class="line">Cookie: cartalyst_sentry=luisedware#anneason</div></pre></td></tr></table></figure>
-<h3 id="HTTP-响应"><a href="#HTTP-响应" class="headerlink" title="HTTP 响应"></a>HTTP 响应</h3><p>服务端在接收和解释请求消息后，服务端会返回一个 HTTP 响应消息。HTTP 响应也由三个部分组成，分别是：</p>
-<ul>
-<li><strong>响应行</strong></li>
-<li><strong>响应报头</strong></li>
-<li><strong>响应正文</strong></li>
-</ul>
-<h3 id="响应行"><a href="#响应行" class="headerlink" title="响应行"></a>响应行</h3><p>响应行格式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">HTTP - Version Status  - Code Reason - Phrase CRLF</div></pre></td></tr></table></figure></p>
-<p>上述格式中各参数说明如下：</p>
-<ul>
-<li><strong>HTTP - Version</strong>：服务端 HTTP 协议的版本。</li>
-<li><strong>Status-Code</strong>：服务端发回的响应状态代码。<ul>
-<li>状态代码由三位数字组成，第一个数字定义了响应的类别，有五种可能取值：<ul>
-<li>1xx：提示信息 - 请求已接收，继续处理。</li>
-<li>2xx：成功 - 请求已被成功接收、理解、接受。</li>
-<li>3xx：重定向 - 要完成请求必须进行更进一步的操作。</li>
-<li>4xx：客户端错误 - 请求有语法错误或请求无法实现。</li>
-<li>5xx：服务端错误 - 服务器未能实现合法的请求。</li>
-</ul>
-</li>
-<li>常见状态代码、状态描述和说明如下：<ul>
-<li>200 OK： 客户端请求成功</li>
-<li>400 Bad Request：客户端请求有语法错误，不能被服务器所理解</li>
-<li>401 Unauthorize：请求未经授权，这个状态代码必须和 WWW-Authenticate 报头域一起使用</li>
-<li>403 Forbidden：服务器收到请求，但是拒绝提供服务。</li>
-<li>404 Not Found：请求资源不存在，例如输入了错误的 URL</li>
-<li>500 Internal Server Error：服务器发生了不可预期的错误。</li>
-<li>503 Server Unavailable：服务器当前不能处理客户端的请求，一段时间后可能恢复正常</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>Reason-Phrase</strong>：状态代码的文本描述。</li>
-</ul>
-<h3 id="响应报头"><a href="#响应报头" class="headerlink" title="响应报头"></a>响应报头</h3><p>响应报头属于 HTTP 消息报头之一，响应报头允许服务器传递不能放在响应行中的附加响应信息，以及关于服务器的信息和对 Request-URI 所标识的资源进行下一步的访问的信息（如 Location）</p>
-<h3 id="响应正文"><a href="#响应正文" class="headerlink" title="响应正文"></a>响应正文</h3><p>响应正文就是服务端返回的资源内容，响应报头和正文之间也必须使用空行分隔。</p>
-<h3 id="HTTP-响应示例"><a href="#HTTP-响应示例" class="headerlink" title="HTTP 响应示例"></a>HTTP 响应示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">HTTP/1.1 200 OK</div><div class="line">host: localhost:8000</div><div class="line">connection: close</div><div class="line">x-powered-by: PHP/7.0.5</div><div class="line">cache-control: no-cache</div><div class="line">date: Fri, 10 Jun 2016 09:29:07 GMT</div><div class="line">content-type: text/html; charset=UTF-8</div><div class="line">set-cookie: XSRF-TOKEN=eyJpdiI6IlwvKzBIXC9JNzN2YUtpNGNaNndyTG40dz09IiwidmFsdWUiOiJtZlBDOEFQSmNUdzkyMXNQV1NSN2hPVjVFK1FHXC8xVU9nVGMwWFdcL3Q4MWlzc1A0dnhvRlBQckw1YVNpV0hQSTdFODBOQ2FFanF6YVg1TlRiQUhleEtnPT0iLCJtYWMiOiI5ZGRkOWEyYzk3OWY2YzZhOTA5MmFiOTA5ZmFmZmRiNTYxMzA5MjQ4NDdjYjcyNzIzNThjMzAxNmRjNDkzN2UxIn0%3D; expires=Fri, 10-Jun-2016 11:29:07 GMT; Max-Age=7200; path=/</div><div class="line">set-cookie: laravel_session=eyJpdiI6ImdZWUZNOGFKTzV6YWpcL1lPRzRDTHdnPT0iLCJ2YWx1ZSI6IjFxRGRUOG5jRGVSdWJLXC9CMTl6MVJFdVlmaVpER04xb0piMWp3Q3JcL3dMZmR6b3UrU3lpb3FzQTR5QlpoTWxlOE92cmVCbW5iZGZwUUZ1a0d3ZjQrVUE9PSIsIm1hYyI6ImQ5N2M2MjVmYjcxNmE5YzgyY2IyZWJhODhiZTA0NGUxNTdlYmZhYjBkOGEzYzdiNTBiYmJjODE3MWJiOTA5NTIifQ%3D%3D; expires=Fri, 10-Jun-2016 11:29:07 GMT; Max-Age=7200; path=/; HttpOnly</div><div class="line">Transfer-Encoding: chunked</div><div class="line"></div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">&lt;title&gt;HTTP响应示例&lt;title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">Hello World!</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
-<h2 id="Apache-PHP-Nginx-FPM-PHP-的工作原理"><a href="#Apache-PHP-Nginx-FPM-PHP-的工作原理" class="headerlink" title="Apache + PHP/Nginx + FPM + PHP 的工作原理"></a>Apache + PHP/Nginx + FPM + PHP 的工作原理</h2><p>当服务端接收 HTTP 请求后，服务端的服务器软件，如Apache、Nginx则会根据配置处理 HTTP 请求进行分发处理。如果客户端请求的是 index.html 文件，那么 Web Server 会根据配置文件去对应目录下找到这个文件，然后让服务端发送给客户端，这样分发的是静态资源。如果客户端请求的是 index.php 文件，根据配置文件，Web Server 知道这个不是静态资源，需要去找 PHP 解析器来处理，那么 Web Server 会把这个请求简单处理，然后交给 PHP 解析器。</p>
-<p>当 Web Server 收到 index.php 这个请求后，会启动对应的 CGI 程序，CGI 程序就是 PHP 的解析器了。PHP 解析器会解析 php.ini 文件，初始化执行环境，然后处理请求，再以 CGI 规定的格式返回处理结果，Web Server 再把结果返回给客户端。实现 PHP 解析器的方法有三种：</p>
-<ul>
-<li><strong>Module</strong>：PHP Module加载方法。</li>
-<li><strong>PHP-CGI</strong>：是 PHP 对 Web Server 提供的 CGI 协议的接口程序。</li>
-<li><strong>PHP-FPM</strong>：是 PHP 对 Web Server 提供的 FastCGI 协议的接口程序，额外提供了相对智能的任务管理。</li>
-</ul>
-<p>以上三种实现方法都是本质都是通过 PHP 的 SAPI 层调用 PHP 执行的。</p>
-<h3 id="Module"><a href="#Module" class="headerlink" title="Module"></a>Module</h3><p>在了解 CGI 之前，我们先了解一下 Apache 处理 PHP 的一种常见方法：PHP Module 加载方式。在 Apache 的配置文件 httpd.conf，我们可以查找到以下语句：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">LoadModule php7_module  /usr/local/opt/php70/libexec/apache2/libphp7.so</div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">FilesMatch</span> <span class="attr">.php</span>$&gt;</span></div><div class="line">    SetHandler application/x-httpd-php</div><div class="line"><span class="tag">&lt;/<span class="name">FilesMatch</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">IfModule</span> <span class="attr">dir_module</span>&gt;</span></div><div class="line">    DirectoryIndex index.php index.html</div><div class="line"><span class="tag">&lt;/<span class="name">IfModule</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>这种方法，本质上是使用 Apache 的 <code>LoadModule</code> 来加载 <code>php7_module</code>，也就是把 PHP 作为 Apache 一个子模块来运行。当客户端请求 PHP 文件时，<code>Apache</code> 就会调用 <code>php7_module</code> 来解析 PHP 代码。</p>
-<p>这种模式将 PHP 模块安装到 Apache 中，每一次 Apache 接收请求时，都会产生一条进程，这条进程就完整的包括 PHP 的运算计算，数据读取等各种操作。</p>
-<p>由于每次请求都需要产生一条进程来连接 SAPI 来完成请求，一旦并发数过高，服务端就会承受不住。而且把 php7_module 加载进 Apache 中，出现问题时很难定位是 PHP 的问题 还是 Apache 的问题。</p>
-<h3 id="PHP-CGI"><a href="#PHP-CGI" class="headerlink" title="PHP-CGI"></a>PHP-CGI</h3><p>PHP-CGI 是使用 PHP 实现 CGI 接口的程序。当 Web Server 接收到 PHP 文件请求时，会分发给 CGI 程序处理，CGI 程序处理完毕后，会返回结果给 Web Server，Web Server 再返回给客户端。</p>
-<p>PHP-CGI 的好处就是完全独立于 Web Server，只是作为中间层，提供接口给 Apache 和 PHP，它们通过 CGI 来完成数据传递。这样做的好处就减少了两者之间的关联，出现错误时能够较好地定位。</p>
-<p>但是 PHP-CGI 采用的是 fork-and-execute 模式，就是每次请求都会有进程启动和退出的过程，在高并发下，Web Server 容易奔溃。</p>
-<h3 id="PHP-FPM"><a href="#PHP-FPM" class="headerlink" title="PHP-FPM"></a>PHP-FPM</h3><p>在了解 PHP-FPM 之前，我们先来了解一下 FastCGI。</p>
-<p>从根本上来说，FastCGI 是用来提高 CGI 程序性能的。类似于 CGI，FastCGI 也可以说是一种协议。</p>
-<p>FastCGI 像是一个常驻（long-live）型的 CGI，它可以一直执行着，只要激活后，不会每次都要花费时间去 fork 一次。它还支持分布式的运算, 即 FastCGI 程序可以在网站服务器以外的主机上执行，并且接受来自其它网站服务器来的请求。</p>
-<p>FastCGI 是语言无关的、可伸缩架构的 CGI 开放扩展，其主要行为是将 CGI 解释器进程保持在内存中，并因此获得较高的性能。众所周知，CGI 解释器的反复加载是 CGI 性能低下的主要原因，如果 CGI 解释器保持在内存中，并接受 FastCGI 进程管理器调度，则可以提供良好的性能、伸缩性、Fail- Over 特性等等。</p>
-<p>FastCGI 接口方式采用C/S结构，可以将 Web Server 和脚本解析服务器分开，同时在脚本解析服务器上启动一个或者多个脚本解析守护进程。当HTTP服务器每次遇到动态程序时，可以将其直接交付给 FastCGI 进程来执行，然后将得到的结果返回给浏览器。这种方式可以让 Web Server 专一地处理静态请求，或者将动态脚本服务器的结果返回给客户端，这在很大程度上提高了整个应用系统的性能。</p>
-<p>PHP-FPM 是对 FastCGI 协议的具体实现，它负责管理一个进程池，来处理 Web Server 的请求。它自身并不直接处理请求，它会交给 PHP-CGI 去进行处理。因为 PHP-CGI 只是一个 CGI 程序，它只会解析请求，返回结果，不会管理进程。PHP-FPM 是用于调度管理 PHP 解释器 PHPCGI 的管理程序。</p>
-<h3 id="CGI、FastCGI、PHP-CGI、PHP-FPM-的区别"><a href="#CGI、FastCGI、PHP-CGI、PHP-FPM-的区别" class="headerlink" title="CGI、FastCGI、PHP-CGI、PHP-FPM 的区别"></a>CGI、FastCGI、PHP-CGI、PHP-FPM 的区别</h3><ul>
-<li><strong>CGI</strong>：是一种协议，是外部应用程序与 Web Server 之间的接口标准，是在 CGI 程序和 Web 服务器之间传递信息的规程。</li>
-<li><strong>FastCGI</strong>：是一种协议，通过守护进程来管理 CGI 程序，将 CGI 程序常驻于内存中，不必每次处理请求重新初始化 php.ini 和其他数据，提高 CGI 程序的性能。其本身并不处理 PHP 文件，只是负责进程的调度。</li>
-<li><strong>PHP-CGI</strong>：是使用 PHP 实现 CGI 协议的程序，用于解析和处理 PHP 脚本。</li>
-<li><strong>PHP-FPM</strong>：是一个只用于 PHP 的进程管理器，提供更好的 PHP 进程管理方式，可以有效控制进程，平滑地加载 PHP 配置文件。</li>
-</ul>
-<h3 id="Apache-常用的配置与模块"><a href="#Apache-常用的配置与模块" class="headerlink" title="Apache 常用的配置与模块"></a>Apache 常用的配置与模块</h3><ul>
-<li><strong>Options</strong>（配置选项）<ul>
-<li><strong>Indexes</strong>：目录浏览，是否允许在目录下没有 index.html,index.php 的时候显示目录。</li>
-<li><strong>Multiviews</strong>：文件匹配，服务器执行一个隐含的文件名模式匹配，并在其结果中选择。</li>
-<li><strong>FollowSymLinks</strong>：符号链接，是否允许通过符号链接跨越 DocumentRoot 访问其他目录。</li>
-</ul>
-</li>
-<li><strong>AllowOverride</strong>（是否允许根目录下的 <code>.htaccess</code> 文件起到 <code>URL rewrite</code> 的作用）<ul>
-<li><strong>All</strong></li>
-<li><strong>None</strong></li>
-</ul>
-</li>
-<li><strong>LoadModule</strong>（加载模块）</li>
-<li><strong>Listen</strong>（Apache 默认监听端口）</li>
-<li><strong>ServerRoot</strong>：Apache 安装的基础目录</li>
-<li><strong>DocumentRoot</strong>：Apache 缺省文件根目录</li>
-<li><strong>DirectoryIndex</strong>：网站默认首页文件</li>
-<li><strong>LogLevel</strong>：日志级别设置</li>
-<li><strong>ErrorLog</strong>：错误日志存放路径</li>
-<li><strong>CustomLog</strong>：访问日志存放路径</li>
-<li><strong>VirutalHost</strong>（虚拟主机与配置参数）<ul>
-<li><strong>ServerName</strong>：虚拟域名</li>
-<li><strong>ServerAlias</strong>：虚拟域名的别名</li>
-<li><strong>ServerAdmin</strong>：服务器管理员邮箱</li>
-<li><strong>DocumentRoot</strong>：项目代码根目录</li>
-<li><strong>LogLevel</strong>：日志级别设置</li>
-<li><strong>ErrorLog</strong>：错误日志存放路径</li>
-<li><strong>CustomLog</strong>：访问日志存放路径</li>
-</ul>
-</li>
-<li><strong>MPM</strong>（工作模式/多处理模块）<ul>
-<li><strong>Prefork</strong><ul>
-<li><strong>StartServers</strong>：服务器启动时默认开启的进程数</li>
-<li><strong>MinSpareServers</strong>：最小的空闲进程数</li>
-<li><strong>MaxSpareServers</strong>：最大的空闲进程数</li>
-<li><strong>ServerLimit</strong>：在Apache的生命周期内，限制MaxClients的最大值</li>
-<li><strong>MaxClients</strong>：最大的并发请求数，最大值不能超过 ServerLimit 设置的值</li>
-<li><strong>MaxRequestsPerChild</strong>：一个进程可以处理的最多的请求数（进程复用），如请求超过该设置则杀死进程，0表示永不过期。</li>
-</ul>
-</li>
-<li><strong>Worker</strong></li>
-<li><strong>Event</strong></li>
-</ul>
-</li>
-<li><strong>Order, Deny, Allow</strong>（认证，授权与访问控制）</li>
-<li><strong>HostnameLookups off</strong>（避免 DNS 查询）</li>
-<li><strong>Timeout</strong>（请求超时）</li>
-<li><strong>Include</strong>（文件包含）</li>
-<li><strong>Proxy、mod_proxy</strong>（代理）</li>
-<li><strong>Cache Guide</strong>（缓存）</li>
-</ul>
-<h3 id="Nginx-常用模块与配置指令上下文"><a href="#Nginx-常用模块与配置指令上下文" class="headerlink" title="Nginx 常用模块与配置指令上下文"></a>Nginx 常用模块与配置指令上下文</h3><h4 id="Nginx-模块"><a href="#Nginx-模块" class="headerlink" title="Nginx 模块"></a>Nginx 模块</h4><p>Nginx 的模块从功能角度主要可以分为以下三类：</p>
-<ul>
-<li><strong>Handler</strong> 模块：主要负责处理客户端请求并产生待响应内容，比如 <code>ngx_http_static_module</code>模块，负责客户端的静态页面请求处理并将对应的磁盘文件准备为响应内容输出。</li>
-<li><strong>Filter</strong> 模块：主要负责对输出的内容进行处理，可以对输出进行修改，如 <code>ngx_http_not_modified_filter_module</code>,<code>ngx_http_header_filter_module</code> 模块。</li>
-<li><strong>Upstream</strong> 模块：实现反向代理的功能，将真正的请求转发到后端服务器上，如 <code>ngx_http_proxy_module</code>、<code>ngx_http_fastcgi_module</code> 模块。</li>
-</ul>
-<h4 id="Nginx-配置指令"><a href="#Nginx-配置指令" class="headerlink" title="Nginx 配置指令"></a>Nginx 配置指令</h4><ul>
-<li><strong>main</strong>（Nginx 在运行时与具体业务功能无关的一些参数，比如工作进程数，运行的身份等）<ul>
-<li><strong>user</strong></li>
-<li><strong>worker_processes</strong></li>
-<li><strong>error_log</strong></li>
-<li><strong>events</strong></li>
-<li><strong>http</strong></li>
-<li><strong>mall</strong></li>
-</ul>
-</li>
-<li><strong>events</strong>（定义 Nginx 事件工作模式与连接数上限等参数）<ul>
-<li><strong>use</strong> [ kqueue | rtsig | epoll | /dev/poll | select | poll ];</li>
-<li><strong>worker_connections</strong></li>
-</ul>
-</li>
-<li><strong>http</strong>（与提供 HTTP 服务相关的一些配置参数，如是否使用 keepalive、是否使用 gzip 进行压缩等）<ul>
-<li><strong>server</strong></li>
-</ul>
-</li>
-<li><strong>server</strong>（http服务上支持若干虚拟主机。每个虚拟主机一个对应的server配置项，配置项里面包含该虚拟主机相关的配置。在提供mail服务的代理时，也可以建立若干server.每个server通过监听的地址来区分）<ul>
-<li><strong>listen</strong></li>
-<li><strong>server_name</strong></li>
-<li><strong>access_log</strong></li>
-<li><strong>location</strong></li>
-<li><strong>protocol</strong></li>
-<li><strong>proxy</strong></li>
-<li><strong>smtp_auth</strong></li>
-<li><strong>xclient</strong></li>
-</ul>
-</li>
-<li><strong>location</strong>（http服务中，某些特定的URL对应的一系列配置项。）<ul>
-<li><strong>root</strong></li>
-<li><strong>index</strong></li>
-</ul>
-</li>
-<li><strong>mail</strong>（实现email相关的SMTP/IMAP/POP3代理时，共享的一些配置项（因为可能实现多个代理，工作在多个监听地址上）<ul>
-<li><strong>server</strong></li>
-<li><strong>auth_http</strong></li>
-<li><strong>imap_capabilities</strong></li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/06/10/PHP Web Application 运行流程、概念术语、机制原理和代码实践/" data-id="cj1ruq1h9001a5d4bssvz8jng" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/5/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/7/">__('next') &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/5/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/7/">__('next') &raquo;</a>
   </nav>
 </section>
         
@@ -1409,7 +1739,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Categorieën</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -1419,7 +1749,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Labels</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
     </div>
@@ -1431,14 +1761,14 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AliCloud/" style="font-size: 11.67px;">AliCloud</a> <a href="/tags/Javascript/" style="font-size: 11.67px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 16.67px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 18.33px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.67px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 10px;">Pattern</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/UML/" style="font-size: 11.67px;">UML</a> <a href="/tags/Yii/" style="font-size: 13.33px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
+      <a href="/tags/AliCloud/" style="font-size: 11.67px;">AliCloud</a> <a href="/tags/Javascript/" style="font-size: 11.67px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 16.67px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 18.33px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.67px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 11.67px;">Pattern</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/UML/" style="font-size: 11.67px;">UML</a> <a href="/tags/Yii/" style="font-size: 13.33px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
@@ -1448,9 +1778,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/04/21/设计模式之工厂方法模式/">设计模式之工厂方法模式</a>
+          </li>
         
           <li>
             <a href="/2017/04/20/设计模式之简单工厂模式/">设计模式之简单工厂模式</a>
@@ -1466,10 +1800,6 @@
         
           <li>
             <a href="/2017/03/23/学习-Javascript-之变量/">学习 Javascript 之变量</a>
-          </li>
-        
-          <li>
-            <a href="/2017/03/20/Head-First-Design-Patterns/">Head First Design Patterns</a>
           </li>
         
       </ul>
