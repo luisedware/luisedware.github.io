@@ -54,7 +54,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -100,8 +100,8 @@
 </ul>
 </li>
 <li><a href="#1.2">模式分析</a><ul>
+<li>分析描述</li>
 <li>优点缺点</li>
-<li>适用场景</li>
 </ul>
 </li>
 <li><a href="#1.3">模式结构</a><ul>
@@ -116,7 +116,8 @@
 </li>
 </ul>
 <h2 id="1-1-模式定义"><a href="#1-1-模式定义" class="headerlink" title="1.1.模式定义"></a>1.1.<span id="1.1">模式定义</span></h2><p>工厂方法模式定义了一个创建对象的接口，但由子类决定要实例化的类是哪一个。编写创建者类时，不需要知道实际创建的产品是哪一个。选择了使用哪个子类，自然就决定了实际创建的产品是什么。工厂方法模式让类把实例化推迟到子类。</p>
-<h2 id="1-2-模式分析"><a href="#1-2-模式分析" class="headerlink" title="1.2.模式分析"></a>1.2.<span id="1.2">模式分析</span></h2><h4 id="工厂方法模式的优点"><a href="#工厂方法模式的优点" class="headerlink" title="工厂方法模式的优点"></a>工厂方法模式的优点</h4><ul>
+<h2 id="1-2-模式分析"><a href="#1-2-模式分析" class="headerlink" title="1.2.模式分析"></a>1.2.<span id="1.2">模式分析</span></h2><h4 id="工厂方法模式的分析描述"><a href="#工厂方法模式的分析描述" class="headerlink" title="工厂方法模式的分析描述"></a>工厂方法模式的分析描述</h4><p>工厂方法模式是简单工厂模式的进一步抽象和推广。由于使用了面向对象的多态性，工厂方法模式保持了简单工厂模式的优点，而且克服了它的缺点。在工厂方法模式中，核心的工厂类不再负责所有产品的创建，而是将具体创建工作交给子类去做。这个核心类仅仅负责给出具体工厂必须实现的接口，而不负责哪一个产品类被实例化这种细节，这使得工厂方法模式可以允许系统在不修改工厂角色的情况下引进新产品。</p>
+<h4 id="工厂方法模式的优点"><a href="#工厂方法模式的优点" class="headerlink" title="工厂方法模式的优点"></a>工厂方法模式的优点</h4><ul>
 <li>在工厂方法模式中，工厂方法用来创建客户所需要的产品，同时还向客户隐藏了哪种具体产品类将被实例化这一细节，用户只需要关心所需产品对应的工厂，无须关心创建细节，甚至无须知道具体产品类的类名。</li>
 <li>基于工厂角色和产品角色的多态性设计是工厂方法模式的关键。它能够使工厂可以自主确定创建何种产品对象，而如何创建这个对象的细节则完全封装在具体工厂内部。工厂方法模式之所以又被称为多态工厂模式，是因为所有的具体工厂类都具有同一抽象父类。</li>
 <li>使用工厂方法模式的另一个优点是在系统中加入新产品时，无须修改抽象工厂和抽象产品提供的接口，无须修改客户端，也无须修改其他的具体工厂和具体产品，而只要添加一个具体工厂和具体产品就可以了。这样，系统的可扩展性也就变得非常好，完全符合“开闭原则”。</li>
@@ -125,7 +126,14 @@
 <li>在添加新产品时，需要编写新的具体产品类，而且还要提供与之对应的具体工厂类，系统中类的个数将成对增加，在一定程度上增加了系统的复杂度，有更多的类需要编译和运行，会给系统带来一些额外的开销。</li>
 <li>由于考虑到系统的可扩展性，需要引入抽象层，在客户端代码中均使用抽象层进行定义，增加了系统的抽象性和理解难度，且在实现时可能需要用到DOM、反射等技术，增加了系统的实现难度。</li>
 </ul>
-<h4 id="在以下场景中可以使用工厂方法模式："><a href="#在以下场景中可以使用工厂方法模式：" class="headerlink" title="在以下场景中可以使用工厂方法模式："></a>在以下场景中可以使用工厂方法模式：</h4><h2 id="1-3-模式结构"><a href="#1-3-模式结构" class="headerlink" title="1.3.模式结构"></a>1.3.<span id="1.3">模式结构</span></h2><h4 id="UML-类图"><a href="#UML-类图" class="headerlink" title="UML 类图"></a>UML 类图</h4><h2 id="1-4-模式实现"><a href="#1-4-模式实现" class="headerlink" title="1.4.模式实现"></a>1.4.<span id="1.4">模式实现</span></h2>
+<h4 id="在以下场景中可以使用工厂方法模式："><a href="#在以下场景中可以使用工厂方法模式：" class="headerlink" title="在以下场景中可以使用工厂方法模式："></a>在以下场景中可以使用工厂方法模式：</h4><h2 id="1-3-模式结构"><a href="#1-3-模式结构" class="headerlink" title="1.3.模式结构"></a>1.3.<span id="1.3">模式结构</span></h2><p>工厂方法模式包含如下角色：</p>
+<ul>
+<li>Product：抽象产品</li>
+<li>ConcreteProduct：具体产品</li>
+<li>Factory：抽象工厂</li>
+<li>ConcreteFactory：具体工厂</li>
+</ul>
+<h4 id="UML-类图"><a href="#UML-类图" class="headerlink" title="UML 类图"></a>UML 类图</h4><h2 id="1-4-模式实现"><a href="#1-4-模式实现" class="headerlink" title="1.4.模式实现"></a>1.4.<span id="1.4">模式实现</span></h2>
       
     </div>
     <footer class="article-footer">
@@ -176,8 +184,8 @@
 </ul>
 </li>
 <li><a href="#1.2">模式分析</a><ul>
+<li>分析描述</li>
 <li>优点缺点</li>
-<li>适用场景</li>
 </ul>
 </li>
 <li><a href="#1.3">模式结构</a><ul>
@@ -192,7 +200,13 @@
 </li>
 </ul>
 <h2 id="1-1-模式定义"><a href="#1-1-模式定义" class="headerlink" title="1.1.模式定义"></a>1.1.<span id="1.1">模式定义</span></h2><p>简单工厂模式（Simple Factory Pattern），又称为静态工厂方法模式（Static Factory Method Pattern），它属于类-创建型模式。在简单工厂模式中，可以根据参数的不同返回不同类的实例。简单工厂模式专门定义一个类来负责创建其他类的实例，被创建的实例通常都具有共同的父类。</p>
-<h2 id="1-2-模式分析"><a href="#1-2-模式分析" class="headerlink" title="1.2.模式分析"></a>1.2.<span id="1.2">模式分析</span></h2><h4 id="简单工厂模式的优点"><a href="#简单工厂模式的优点" class="headerlink" title="简单工厂模式的优点"></a>简单工厂模式的优点</h4><ul>
+<h2 id="1-2-模式分析"><a href="#1-2-模式分析" class="headerlink" title="1.2.模式分析"></a>1.2.<span id="1.2">模式分析</span></h2><h4 id="简单工厂模式的分析描述"><a href="#简单工厂模式的分析描述" class="headerlink" title="简单工厂模式的分析描述"></a>简单工厂模式的分析描述</h4><ul>
+<li>将对象的创建和对象本身业务处理分离可以降低系统的耦合度，使得两者修改起来都相对容易。</li>
+<li>在调用工厂类的工厂方法时，由于工厂方法是静态方法，使用起来很方便，可通过类名直接调用，而且只需要传入一个简单的参数即可，在实际开发中，还可以在调用时将所传入的参数保存在XML等格式的配置文件中，修改参数时无须修改任何源代码。</li>
+<li>简单工厂模式最大的问题在于工厂类的职责相对过重，增加新的产品需要修改工厂类的判断逻辑，这一点与开闭原则是相违背的。</li>
+<li>简单工厂模式的要点在于：当你需要什么，只需要传入一个正确的参数，就可以获取你所需要的对象，而无须知道其创建细节。</li>
+</ul>
+<h4 id="简单工厂模式的优点"><a href="#简单工厂模式的优点" class="headerlink" title="简单工厂模式的优点"></a>简单工厂模式的优点</h4><ul>
 <li>工厂类含有必要的判断逻辑，可以决定在什么时候创建哪一个产品类的实例，客户端可以免除直接创建产品对象的责任，而仅仅“消费”产品；简单工厂模式通过这种做法实现了对责任的分割，它提供了专门的工厂类用于创建对象。</li>
 <li>客户端无须知道所创建的具体产品类的类名，只需要知道具体产品类所对应的参数即可，对于一些复杂的类名，通过简单工厂模式可以减少使用者的记忆量。</li>
 <li>通过引入配置文件，可以在不修改任何客户端代码的情况下更换和增加新的具体产品类，在一定程度上提高了系统的灵活性。</li>
@@ -221,7 +235,8 @@
 </ul>
 </li>
 </ul>
-<h4 id="UML-类图"><a href="#UML-类图" class="headerlink" title="UML 类图"></a>UML 类图</h4><h2 id="1-4-模式实现"><a href="#1-4-模式实现" class="headerlink" title="1.4.模式实现"></a>1.4.<span id="1.4">模式实现</span></h2>
+<h4 id="UML-类图"><a href="#UML-类图" class="headerlink" title="UML 类图"></a>UML 类图</h4><h2 id="1-4-模式实现"><a href="#1-4-模式实现" class="headerlink" title="1.4.模式实现"></a>1.4.<span id="1.4">模式实现</span></h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Product</div><div class="line"> */</div><div class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Storage</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">abstract</span> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">upload</span><span class="params">()</span></span>;</div><div class="line">	<span class="keyword">abstract</span> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">download</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Concrete Product</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">QiNiuStorage</span> <span class="keyword">extends</span> <span class="title">Storage</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span>&#123;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">upload</span><span class="params">()</span></span>&#123;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">download</span><span class="params">()</span></span>&#123;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Concrete Product</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">QingYunStorage</span> <span class="keyword">extends</span> <span class="title">Storage</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span>&#123;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">upload</span><span class="params">()</span></span>&#123;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">download</span><span class="params">()</span></span>&#123;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Simple Factory(Static Factory)</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SimpleStorageFactory</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">createStorage</span><span class="params">(string $name)</span> : <span class="title">Storage</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> ($name === <span class="string">'qiniu'</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> QiNiuStorage();</div><div class="line">        &#125;<span class="keyword">elseif</span>($name === <span class="string">'qingyun'</span>)&#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> QingYunStorage();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$concreteStorage = SimpleStorageFactory::createStorage(<span class="string">"qiniu"</span>);</div><div class="line">print_r($concreteStorage);</div></pre></td></tr></table></figure>
+
       
     </div>
     <footer class="article-footer">
@@ -780,7 +795,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Kategorier</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -809,7 +824,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Arkiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
@@ -819,7 +834,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Siste innlegg</h3>
     <div class="widget">
       <ul>
         
