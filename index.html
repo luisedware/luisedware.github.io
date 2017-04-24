@@ -54,7 +54,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -129,7 +129,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/04/21/设计模式之工厂方法模式/" data-id="cj1u9eu35006ak04bso0yy5fi" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/04/21/设计模式之工厂方法模式/" data-id="cj1vngrnl006fhr4b72i5r9db" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pattern/">Pattern</a></li></ul>
@@ -206,11 +206,26 @@
 <li>工厂类负责创建的对象比较少；由于创建的对象较少，不会造成工厂方法中的业务逻辑太过复杂。</li>
 <li>客户端只知道传入工厂类的参数，对于如何创建对象不关心；客户端既不需要关心创建细节，甚至连类名都不需要记住，只需要知道类型所对应的参数。</li>
 </ul>
-<h2 id="1-3-模式结构"><a href="#1-3-模式结构" class="headerlink" title="1.3.模式结构"></a>1.3.<span id="1.3">模式结构</span></h2><h4 id="UML-类图"><a href="#UML-类图" class="headerlink" title="UML 类图"></a>UML 类图</h4><h2 id="1-4-模式实现"><a href="#1-4-模式实现" class="headerlink" title="1.4.模式实现"></a>1.4.<span id="1.4">模式实现</span></h2>
+<h2 id="1-3-模式结构"><a href="#1-3-模式结构" class="headerlink" title="1.3.模式结构"></a>1.3.<span id="1.3">模式结构</span></h2><p>简单工厂模式包含如下角色：</p>
+<ul>
+<li>Factory：工厂角色<ul>
+<li>工厂角色负责实现创建所有实例的内部逻辑</li>
+</ul>
+</li>
+<li>Product：抽象产品角色<ul>
+<li>抽象产品角色是所创建的所有对象的父类，负责描述所有实例所共有的公共接口</li>
+</ul>
+</li>
+<li>ConcreteProduct：具体产品角色<ul>
+<li>具体产品角色是创建目标，所有创建的对象都充当这个角色的某个具体类的实例</li>
+</ul>
+</li>
+</ul>
+<h4 id="UML-类图"><a href="#UML-类图" class="headerlink" title="UML 类图"></a>UML 类图</h4><h2 id="1-4-模式实现"><a href="#1-4-模式实现" class="headerlink" title="1.4.模式实现"></a>1.4.<span id="1.4">模式实现</span></h2>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/04/20/设计模式之简单工厂模式/" data-id="cj1u9eu3a006ik04bc6rqg1l6" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/04/20/设计模式之简单工厂模式/" data-id="cj1vngrno006khr4bbea2ja6m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pattern/">Pattern</a></li></ul>
@@ -274,7 +289,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/04/05/使用-Laravel-5-3-Vue-js-2-1-开发知乎/" data-id="cj1u9eu1z003bk04b9d1jwzl3" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/04/05/使用-Laravel-5-3-Vue-js-2-1-开发知乎/" data-id="cj1vngrlz0037hr4bk5vyuhcy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -316,7 +331,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/23/学习-Javascript-之类型/" data-id="cj1u9eu2w005ok04buzqrv327" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/03/23/学习-Javascript-之类型/" data-id="cj1vngrnb005thr4bb2zrfjzy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
@@ -400,7 +415,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/23/学习-Javascript-之变量/" data-id="cj1u9eu340067k04b95uet8xj" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/03/23/学习-Javascript-之变量/" data-id="cj1vngrnc005whr4b7m1w78k9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
@@ -488,7 +503,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/20/Head-First-Design-Patterns/" data-id="cj1u9eu010001k04bszp7izuq" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/03/20/Head-First-Design-Patterns/" data-id="cj1vngriy0000hr4bm9c3srzb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Learning/">Learning</a></li></ul>
@@ -531,7 +546,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」Yii2-前端请求的参数字段映射数据模型的属性/" data-id="cj1u9eu1t002tk04b037jrf1p" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」Yii2-前端请求的参数字段映射数据模型的属性/" data-id="cj1vngrlu002whr4bii09166d" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -575,7 +590,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」-htaccess-配置-HTTP-Header/" data-id="cj1u9eu1q002ik04bo79hpi5u" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」-htaccess-配置-HTTP-Header/" data-id="cj1vngrlq002phr4bxdcc8i0h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -618,7 +633,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」PHP-7-1-命名空间的新特性和使用方法/" data-id="cj1u9eu1p002gk04bhhu9epuj" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」PHP-7-1-命名空间的新特性和使用方法/" data-id="cj1vngrlr002shr4b5yzwrel2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -742,7 +757,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/02/Swagger-PHP-基础使用/" data-id="cj1u9eu1c001zk04b9sqmwu97" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/03/02/Swagger-PHP-基础使用/" data-id="cj1vngrl80021hr4b2otar7l9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swagger/">Swagger</a></li></ul>
@@ -765,7 +780,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categorieën</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -775,7 +790,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Labels</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
     </div>
@@ -794,7 +809,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archieven</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
@@ -804,7 +819,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
