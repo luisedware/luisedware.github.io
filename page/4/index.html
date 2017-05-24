@@ -52,9 +52,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -64,6 +64,53 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-使用-PHPStorm-的-Live-Templates-封装常用代码" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/19/使用-PHPStorm-的-Live-Templates-封装常用代码/" class="article-date">
+  <time datetime="2016-11-19T07:11:46.000Z" itemprop="datePublished">2016-11-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/19/使用-PHPStorm-的-Live-Templates-封装常用代码/">使用 PHPStorm 的 Live Templates 封装常用代码</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="PHP-Template-Group"><a href="#PHP-Template-Group" class="headerlink" title="PHP Template Group"></a>PHP Template Group</h2><h3 id="fore"><a href="#fore" class="headerlink" title="fore"></a>fore</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">foreach ($ITERABLE$ as $VAR_VALUE$) &#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="forek"><a href="#forek" class="headerlink" title="forek"></a>forek</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">foreach ($ITERABLE$ as $VAR_KEY$ =&gt; $VAR_VALUE$) &#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="prif"><a href="#prif" class="headerlink" title="prif"></a>prif</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">private function $NAME$($PARAMETERS$)&#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="prisf"><a href="#prisf" class="headerlink" title="prisf"></a>prisf</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">private static function $NAME$($PARAMETERS$)&#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="prof"><a href="#prof" class="headerlink" title="prof"></a>prof</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">protected function $NAME$($PARAMETERS$)&#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="prosf"><a href="#prosf" class="headerlink" title="prosf"></a>prosf</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">protected static function $NAME$($PARAMETERS$)&#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="pubf"><a href="#pubf" class="headerlink" title="pubf"></a>pubf</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public function $NAME$($PARAMETERS$)&#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="pubsf"><a href="#pubsf" class="headerlink" title="pubsf"></a>pubsf</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public static function $NAME$($PARAMETERS$)&#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="thr"><a href="#thr" class="headerlink" title="thr"></a>thr</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">throw new $END$</div></pre></td></tr></table></figure>
+<h3 id="tryc"><a href="#tryc" class="headerlink" title="tryc"></a>tryc</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">try &#123;</div><div class="line">    $ITERABLE$</div><div class="line">&#125; catch (\$Exception$ $e) &#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>##</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2016/11/19/使用-PHPStorm-的-Live-Templates-封装常用代码/" data-id="cj329lek40044qm4bxoqoj24g" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-Yii-框架之工具篇" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -95,7 +142,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/11/03/Yii-框架之工具篇/" data-id="cj2ytk3d70028b44b6dxdbwgi" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/11/03/Yii-框架之工具篇/" data-id="cj329lehw0029qm4bg7izwbfc" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -165,7 +212,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/29/Yii-框架之安全篇/" data-id="cj2ytk3d50024b44bwdm2frv6" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/29/Yii-框架之安全篇/" data-id="cj329lei9002gqm4baz4u6orr" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -223,7 +270,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/29/Yii-框架之扩展篇/" data-id="cj2ytk3da002eb44bz53hjawx" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/29/Yii-框架之扩展篇/" data-id="cj329leih002jqm4bj6s5oty2" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -495,7 +542,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/25/Yii-框架之基础篇/" data-id="cj2ytk3d9002bb44bbz7e1nxc" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/25/Yii-框架之基础篇/" data-id="cj329lehu0024qm4bxzzb7kar" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -598,7 +645,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/25/Yii-框架之高效篇/" data-id="cj2ytk3dc002ib44brs775vti" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/25/Yii-框架之高效篇/" data-id="cj329leip002nqm4be8pwl90i" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -791,7 +838,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/20/打造扛得住的-MySQL-数据库架构/" data-id="cj2ytk3fc0068b44b7w34uz6x" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/20/打造扛得住的-MySQL-数据库架构/" data-id="cj329leqm006iqm4btjl3qr17" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -984,7 +1031,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/13/MySQL-性能优化/" data-id="cj2ytk3cn001db44b13r2q15v" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/13/MySQL-性能优化/" data-id="cj329lefg001aqm4bluibeblj" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -1238,7 +1285,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之条件判断语句/" data-id="cj2ytk3bk0004b44bvz6awgn5" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之条件判断语句/" data-id="cj329led40004qm4buw8s2prp" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1352,195 +1399,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之运算符/" data-id="cj2ytk3bs000ab44b48dybgef" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Linux-Shell-基础之变量" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/10/04/Linux-Shell-基础之变量/" class="article-date">
-  <time datetime="2016-10-04T02:50:53.000Z" itemprop="datePublished">2016-10-04</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/04/Linux-Shell-基础之变量/">Linux Shell 基础之变量</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Shell-变量概述"><a href="#Shell-变量概述" class="headerlink" title="Shell 变量概述"></a>Shell 变量概述</h2><p>Shell 与其他语言的对比</p>
-<ul>
-<li>PHP 和 JAVA 主要实现功能</li>
-<li>Shell 简化管理操作</li>
-</ul>
-<p>什么是变量</p>
-<ul>
-<li>变量是计算机内存的单元，其中存放的值可以改变</li>
-<li>变量让你能够把程序中准备使用的每一段数据都赋给一个简短、易于记忆的名字，因此它们十分有用</li>
-</ul>
-<p>变量命名规则</p>
-<ul>
-<li>变量名必须以字母或下划线开头，名字中间只能由字母、数字和下划线组成</li>
-<li>变量名的长度不得超过 255 个字符</li>
-<li>变量名在有效的范围内必须是唯一的</li>
-<li>在 Bash 中，变量的默认类型都是字符串型</li>
-</ul>
-<p>变量存储类型</p>
-<ul>
-<li>整型</li>
-<li>浮点型</li>
-<li>日期型</li>
-<li>字符串型</li>
-</ul>
-<p>变量定义分类</p>
-<ul>
-<li>用户自定义变量：用户自定义的变量</li>
-<li>环境变量：这种变量中主要保存的是和系统操作环境相关的数据。变量可以自定义，但是对系统生效的环境变量名和变量作用是固定的。</li>
-<li>位置参数变量：这种变量主要是用来向脚本当中传递参数或数据的。变量名不能自定义，变量作用固定。</li>
-<li>预定义变量：是 Bash 中已经定义好的变量，变量名不能自定义，变量作用也是固定的。</li>
-</ul>
-<h2 id="Shell-变量与变量分类"><a href="#Shell-变量与变量分类" class="headerlink" title="Shell 变量与变量分类"></a>Shell 变量与变量分类</h2><ul>
-<li>用户自定义变量<ul>
-<li>变量定义<ul>
-<li><code>变量名=变量值</code><ul>
-<li><code>x=5</code></li>
-<li><code>name=&quot;Luis&quot;</code></li>
-</ul>
-</li>
-<li>变量赋值时候，变量名与变量值之间不能有空格</li>
-</ul>
-</li>
-<li>变量调用<ul>
-<li><code>echo $x</code></li>
-<li><code>echo $name</code></li>
-</ul>
-</li>
-<li>变量叠加<ul>
-<li>x=123</li>
-<li>x=”$x”456</li>
-<li>x=${x}789</li>
-</ul>
-</li>
-<li>变量查看<ul>
-<li>set<ul>
-<li>-u 如果设定此选项，调用未声明变量时会报错（默认无任何显示）</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>变量删除<ul>
-<li><code>unset 变量名</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>环境变量<ul>
-<li>用户自定义环境变量<ul>
-<li>设置环境变量<ul>
-<li><code>export 变量名=变量值</code></li>
-<li><code>变量名=变量值;export 变量名</code></li>
-</ul>
-</li>
-<li>查看环境变量<ul>
-<li><code>set</code> 查看所有变量</li>
-<li><code>env</code> 查看环境变量</li>
-</ul>
-</li>
-<li>删除环境变量<ul>
-<li><code>unset 变量名</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>系统常用的环境变量<ul>
-<li>HOSTNAME 主机名</li>
-<li>SHELL 当前的 Shell</li>
-<li>TERM 终端环境</li>
-<li>HISTSIZE 历史命令条数</li>
-<li>SSH_CLIENT 当前操作环境是用 ssh 连接的，这里记录客户端 IP</li>
-<li>SSH_TTY ssh 连接的终端时 pts/1</li>
-<li>USER 当前登录的用户</li>
-<li>PATH 系统查找命令的路径<ul>
-<li><code>echo $PATH</code> 查看 PATH 环境变量</li>
-<li><code>PATH=&quot;$PATH&quot;:/root/sh</code> 增加 PATH 变量的值</li>
-</ul>
-</li>
-<li>PS1 变量 命令提示符设置<ul>
-<li>\d 显示日期，格式为”星期 月 日”</li>
-<li>\H 显示完整的主机名，如默认主机名 “localhost.localdomain”</li>
-<li>\t 显示 24 小时制时间，格式为 “HH:MM:SS”</li>
-<li>\A 显示 24 小时制时间，格式为 “HH:MM”</li>
-<li>\u 显示当前用户名</li>
-<li>\w 显示当前所在目录的完整名称</li>
-<li>\W 显示当前所在目录的最后一个目录</li>
-<li>\$ 提示符。如果是 root 用户会显示提示符为 “#”，如果是普通用户会显示提示符为 “$”</li>
-<li>例子 <code>PS1=&#39;[\u@\A \w]\$ &#39;</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>语系变量<ul>
-<li><code>locale</code> 查询当前系统语系（<code>echo $LANG</code>）<ul>
-<li>LANG 定义系统主语系的变量</li>
-<li>LC_ALL 定义整体语系的变量</li>
-</ul>
-</li>
-<li><code>locale -a | more</code> 查看 Linux 支持的所有语系</li>
-<li><code>cat /etc/sysconfig/i18n</code> 查询系统默认语系（下次开机语系变量）</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>位置参数变量</p>
-<p>  位置参数变量|作用<br>  —|—<br>  $n|n 为数字，$0 代表命令本身，$1-$9 代表第一到第九个参数，十以上的参数需要用大括号包含，如 ${10}<br>  $*|这个变量代表命令行中所有的参数，$* 把所有的参数看成一个整体<br>  $@|这个变量代表命令行中所有的参数，不过 $@ 把每个参数区分对待<br>  $#|这个变量代表命令行中所有参数的个数</p>
-</li>
-<li><p>预定义变量</p>
-<p>  预定义变量|作用<br>  —|—<br>  $? | 最后一次执行的命令的返回状态。如果这个变量的值为 0，证明上一个命令正确执行；如果这个变量的值为非 0(具体是哪个数，由命令自己决定，则证明上一个命令执行不正确)<br>  $$ | 当前进程的进程号<br>  $! | 后台运行的最后一个进程的进程号</p>
-</li>
-<li><p>接收键盘输入</p>
-<ul>
-<li><code>read [选项] [变量名]</code><ul>
-<li>-p 提示信息：在等待 read 输入时，输出提示信息</li>
-<li>-t 秒数：read 命令会一直等待用户输入，使用此选项可以指定等待时间</li>
-<li>-n 字符数：read 命令只接受指定的字符数，就会执行</li>
-<li>-s 隐藏输入的数据，适用于机密信息的输入</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="Shell-变量例子"><a href="#Shell-变量例子" class="headerlink" title="Shell 变量例子"></a>Shell 变量例子</h2><p>位置参数例子 1</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">num1=$1</div><div class="line">num2=$2</div><div class="line"></div><div class="line"># 变量 sum 的和是 num1 加 num2</div><div class="line">sum=$(($num1+$num2))</div><div class="line"></div><div class="line"># 打印变量 sum 的值</div><div class="line">echo $sum</div></pre></td></tr></table></figure>
-<p>位置参数例子 2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line"># 使用 $# 代表所有参数的个数</div><div class="line">echo &quot;A total of $# parameters&quot;</div><div class="line"></div><div class="line"># 使用 $* 代表所有的参数</div><div class="line">echo &quot;The parameters is:$*&quot;</div><div class="line"></div><div class="line"># 使用 $@ 也代表所有参数</div><div class="line">echo &quot;The parameters is:$@&quot;</div></pre></td></tr></table></figure></p>
-<p>位置参数例子 3（$* 与 $@ 的区别）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">for i in &quot;$*&quot;</div><div class="line"># $* 中的所有参数看成是一个整体，所以这个 for 循环只会循环一次</div><div class="line">do</div><div class="line">	echo &quot;The parameters is: $i&quot;</div><div class="line">done</div><div class="line"></div><div class="line">for y in &quot;$@&quot;</div><div class="line"># $@ 中的每个参数都看成是独立的，所以 &quot;$@&quot; 中有几个参数，就会循环几次</div><div class="line">do</div><div class="line">	echo &quot;Parameter:$y&quot;</div><div class="line">done</div></pre></td></tr></table></figure></p>
-<p>接收键盘输入例子 1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">read -p &quot;Please input your name: &quot; -t 30 name</div><div class="line">echo $name</div><div class="line"></div><div class="line">read -p &quot;Please input your passwd: &quot; -s passed</div><div class="line">echo -e &quot;\n&quot;</div><div class="line">echo $passwd</div><div class="line"></div><div class="line">read -p &quot;Please input your sex [M/F]: &quot; -n 1 sex</div><div class="line">echo -e &quot;\n&quot;</div><div class="line">echo $sex</div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之变量/" data-id="cj2ytk3be0001b44bep9ldavz" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之运算符/" data-id="cj329led50005qm4bpyjmyzb3" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1563,7 +1422,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Kategorier</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -1573,7 +1432,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
     </div>
@@ -1583,7 +1442,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 18.57px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
     </div>
@@ -1592,9 +1451,9 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Arkiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
   </div>
 
@@ -1602,9 +1461,13 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Siste innlegg</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/05/23/PHP-的性能优化/">PHP 的性能优化</a>
+          </li>
         
           <li>
             <a href="/2017/04/24/设计模式之抽象工厂模式/">设计模式之抽象工厂模式</a>
@@ -1622,10 +1485,6 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
             <a href="/2017/04/05/使用-Laravel-5-3-Vue-js-2-1-开发知乎/">使用 Laravel 5.3 + Vue.js 2.1 开发知乎</a>
           </li>
         
-          <li>
-            <a href="/2017/03/23/学习-Javascript-之类型/">学习 Javascript 之类型</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1639,7 +1498,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Luis Edware<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
