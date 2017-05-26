@@ -52,9 +52,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -64,6 +64,1223 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Linux-网络基础" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/20/Linux-网络基础/" class="article-date">
+  <time datetime="2016-09-20T12:33:54.000Z" itemprop="datePublished">2016-09-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/20/Linux-网络基础/">Linux 网络基础</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="网络基础"><a href="#网络基础" class="headerlink" title="网络基础"></a>网络基础</h2><h3 id="ISO-OSI-七层模型简介"><a href="#ISO-OSI-七层模型简介" class="headerlink" title="ISO / OSI 七层模型简介"></a>ISO / OSI 七层模型简介</h3><ul>
+<li>ISO：国际标准化组织</li>
+<li>OSI：开放系统互联模型<ul>
+<li>OSI 的七层模型<ul>
+<li>应用层 - APDU<ul>
+<li>APDU 是应用协议数据单元</li>
+</ul>
+</li>
+<li>表示层 - PPDU<ul>
+<li>PPDU 是表示层协议数据单元</li>
+</ul>
+</li>
+<li>会话层 - SPDU<ul>
+<li>SPDU 是会话协议数据单元</li>
+</ul>
+</li>
+<li>传输层 - TPDU<ul>
+<li>TPDU 是传输协议数据单元</li>
+</ul>
+</li>
+<li>网络层 - 报文<ul>
+<li>IP 地址负责外网通信</li>
+</ul>
+</li>
+<li>数据链路层 - 帧<ul>
+<li>MAC 地址负责局域网通信</li>
+</ul>
+</li>
+<li>物理层 - 比特</li>
+</ul>
+</li>
+<li>数据发送时候，从上层向下层传递；数据接收时候，从下层向上层传递。</li>
+</ul>
+</li>
+</ul>
+<h3 id="ISO-OSI-七层模型详解"><a href="#ISO-OSI-七层模型详解" class="headerlink" title="ISO / OSI 七层模型详解"></a>ISO / OSI 七层模型详解</h3><ul>
+<li>应用层 - APDU<ul>
+<li>用户接口</li>
+</ul>
+</li>
+<li>表示层 - PPDU<ul>
+<li>数据的表现形式、特定功能的实现如-加密</li>
+</ul>
+</li>
+<li>会话层 - SPDU<ul>
+<li>对应用会话的管理、同步</li>
+</ul>
+</li>
+<li>传输层 - TPDU<ul>
+<li>可靠与不可靠的传输、传输前的错误检测、流控</li>
+</ul>
+</li>
+<li>网络层 - 报文<ul>
+<li>提供逻辑地址、选路</li>
+</ul>
+</li>
+<li>数据链路层 - 帧<ul>
+<li>城帧、用 MAC 地址访问媒介、错误检测与修正</li>
+</ul>
+</li>
+<li>物理层 - 比特<ul>
+<li>设备之间的比特流的传输、物理接口、电器特征等</li>
+</ul>
+</li>
+</ul>
+<h3 id="TCP-IP-四层模型"><a href="#TCP-IP-四层模型" class="headerlink" title="TCP / IP 四层模型"></a>TCP / IP 四层模型</h3><ul>
+<li>TCP / IP 四层模型<ul>
+<li>应用层 （对应 OSI 模型的应用层、表示层、会话层）<ul>
+<li>应用层对应于 OSI 参考模型的应用层、表示层、会话层，为用户提供所需要的各种服务，例如：FTP、Telnet、DNS、SMTP 等</li>
+</ul>
+</li>
+<li>传输层 （对应 OSI 模型的传输层）<ul>
+<li>传输层对应于 OSI 模型的传输层，为应用层实体提供端到端的通信功能，保证了数据包的顺序传送及数据的完整性。该层定义了两个主要的协议：传输控制协议（TCP）和用户数据协议（UDP）</li>
+</ul>
+</li>
+<li>网际互联层（对应 OSI 模型的网络层）<ul>
+<li>网际互联对应于 OSI 模型的网络层，主要解决主机到主机的通信问题。它所包含的协议涉及数据包在整个网络上的逻辑传输。该层有三个主要协议：网际协议（IP）、互联网组管理协议（IGMP）和互联网控制报文协议（ICMP）。</li>
+</ul>
+</li>
+<li>网络接口层（对应 OSI 模型的数据链路层、物理层）<ul>
+<li>网络接口层与 OSI 模型中的物理层和数据链路层相对应。它负责监视数据在主机和网络之间的交换。事实上，TCP /IP 本身并未定义该层的协议，而由参与互连的各网络使用自己的物理层和数据链路层协议，然后与 TCP / IP 的网络接口层进行连接。地址解析协议（ARP）工作在此层，即 OSI 参考模型的数据链路层。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>TCP / IP 三次握手（两军问题）</p>
+<p>数据封装过程</p>
+<table>
+<thead>
+<tr>
+<th>应用数据</th>
+<th>字节流（数据）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>应用层</td>
+<td>FTP + 数据</td>
+</tr>
+<tr>
+<td>传输层</td>
+<td>TCP 头 + FTP + 数据</td>
+</tr>
+<tr>
+<td>网络层</td>
+<td>IP 头 + TCP 头 + FTP + 数据</td>
+</tr>
+<tr>
+<td>数据链路层</td>
+<td>以太帧头 + (IP 头 + TCP 头 + FTP + 数据) = IP 数据报</td>
+</tr>
+<tr>
+<td>最后</td>
+<td>以太帧头 + 目的地址 + 源地址 + 包类型 + 包数据（IP 数据报） + CRC</td>
+</tr>
+</tbody>
+</table>
+<h3 id="IP地址详解"><a href="#IP地址详解" class="headerlink" title="IP地址详解"></a>IP地址详解</h3><ul>
+<li>IP 包头<ul>
+<li>第一行<ul>
+<li>版本（4）</li>
+<li>头部长度（4）</li>
+<li>优先级和服务类型（8）</li>
+<li>总长度（16）</li>
+</ul>
+</li>
+<li>第二行<ul>
+<li>标识（16）</li>
+<li>标志（3）</li>
+<li>片偏移（13）</li>
+</ul>
+</li>
+<li>第三行<ul>
+<li>生存时间（8）</li>
+<li>协议（8）</li>
+<li>头部校验和（16）</li>
+</ul>
+</li>
+<li>第四行<ul>
+<li>源 IP 地址（32）</li>
+</ul>
+</li>
+<li>第五行<ul>
+<li>目的 IP 地址（32）</li>
+</ul>
+</li>
+<li>第六行<ul>
+<li>选项</li>
+</ul>
+</li>
+<li>第七行<ul>
+<li>数据</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>IP 地址分类</p>
+<table>
+<thead>
+<tr>
+<th>网络类别</th>
+<th>最大网络数</th>
+<th>IP 地址范围</th>
+<th>最大主机数</th>
+<th>私有 IP 地址范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>126</td>
+<td>1.0.0.0 – 126.255.255.255</td>
+<td>2^24-2</td>
+<td>10.0.0.0 – 10.255.255.255</td>
+</tr>
+<tr>
+<td>B</td>
+<td>16384</td>
+<td>128.0.0.0 – 191.255.255.255</td>
+<td>2^16-2</td>
+<td>172.16.0.0 – 172.31.255.255</td>
+</tr>
+<tr>
+<td>C</td>
+<td>2098152</td>
+<td>192.0.0.0 – 223.255.255.255</td>
+<td>2^8-2</td>
+<td>192.168.0.0 – 192.168.255.255</td>
+</tr>
+</tbody>
+</table>
+<h3 id="子网掩码"><a href="#子网掩码" class="headerlink" title="子网掩码"></a>子网掩码</h3><h3 id="网关作用"><a href="#网关作用" class="headerlink" title="网关作用"></a>网关作用</h3><ul>
+<li>网关（Gateway）又称为网间连接器、协议转换器</li>
+<li>网关在网络层以上实现网络互连，是最复杂的网络互连设备，仅用于两个高层协议不同的网络互连</li>
+<li>网关既可以用于广域网互连，也可以用于局域网互连</li>
+<li>网关是一种充当转换重任的服务器或路由器</li>
+</ul>
+<h3 id="端口作用"><a href="#端口作用" class="headerlink" title="端口作用"></a>端口作用</h3><ul>
+<li>TCP 协议包头<ul>
+<li>第一行<ul>
+<li>源端口（16）</li>
+<li>目的端口（16）</li>
+</ul>
+</li>
+<li>第二行<ul>
+<li>序列号（32）</li>
+</ul>
+</li>
+<li>第三行<ul>
+<li>确认号（32）</li>
+</ul>
+</li>
+<li>第四行<ul>
+<li>数据偏移（4）</li>
+<li>保留（6）</li>
+<li>标志（6）</li>
+<li>窗口（16）</li>
+</ul>
+</li>
+<li>第五行<ul>
+<li>校验和（16）</li>
+<li>紧急指针（16）</li>
+</ul>
+</li>
+<li>第六行<ul>
+<li>选项</li>
+</ul>
+</li>
+<li>第七行<ul>
+<li>数据</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>UDP 协议包头<ul>
+<li>第一行<ul>
+<li>源端口（16）</li>
+<li>目的端口（16）</li>
+</ul>
+</li>
+<li>第二行<ul>
+<li>长度（16）</li>
+<li>校验和（16）</li>
+</ul>
+</li>
+<li>第三行<ul>
+<li>数据</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>常见端口号</p>
+<ul>
+<li>FTP（文件传输协议）：20 21</li>
+<li>SSH（安全 Shell 协议）：22</li>
+<li>TELNET（远程登录协议）：23</li>
+<li>DNS（域名系统）：53</li>
+<li>HTTP（超文本传输协议）：80</li>
+<li>SMTP（简单邮件传输协议）：25</li>
+<li>POP3（邮局协议 3 代）：110</li>
+</ul>
+<p>查看本机启用的端口</p>
+<ul>
+<li>netstat -an<ul>
+<li>-a 查看所有连接和监听端口</li>
+<li>-n 显示 IP 地址和端口号，而不显示域名和服务名</li>
+</ul>
+</li>
+</ul>
+<h3 id="DNS-作用"><a href="#DNS-作用" class="headerlink" title="DNS 作用"></a>DNS 作用</h3><ul>
+<li>DNS 的作用：将域名解析为 IP 地址<ul>
+<li>客户机向 DNS 服务器发送域名查询请求</li>
+<li>DNS 服务器告知客户机 Web 服务器的 IP 地址</li>
+<li>客户机与 Web 服务器通信</li>
+</ul>
+</li>
+<li>DNS 的查询类型<ul>
+<li>从查询方式上分<ul>
+<li>递归查询<ul>
+<li>要么做出查询成功响应，要么做出查询失败的响应，一般客户机和服务器之间属于递归查询，即当客户机向 DNS 服务器发出请求后，若 DNS 服务器本身不能解析，则会向另外的 DNS 服务器发出查询请求，得到结果后转交给客户机。</li>
+</ul>
+</li>
+<li>迭代查询<ul>
+<li>服务器收到一次迭代查询回复一次结果，这个结果不一定是目标 IP 与域名的映射关系，也可以是其他 DNS 服务器的地址</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>从查询内容上分<ul>
+<li>正向查询由域名查找 IP 地址</li>
+<li>反向查询由 IP 地址查找域名</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Linux-网络配置"><a href="#Linux-网络配置" class="headerlink" title="Linux 网络配置"></a>Linux 网络配置</h2><h3 id="IP-地址配置"><a href="#IP-地址配置" class="headerlink" title="IP 地址配置"></a>IP 地址配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># 查看与配置网络状态命令</div><div class="line">ifconfig</div><div class="line"></div><div class="line"># 临时设置 eth0 网卡的 IP 地址与子网掩码</div><div class="line">ifconfig eth0 192.168.0.200 netmask 255.255.255.0</div><div class="line"></div><div class="line"># setup 图形界面（红帽专用）</div><div class="line">setup</div></pre></td></tr></table></figure>
+<h3 id="使用文件配置-IP-地址"><a href="#使用文件配置-IP-地址" class="headerlink" title="使用文件配置 IP 地址"></a>使用文件配置 IP 地址</h3><p>网卡信息文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/sysconfig/network-scripts/ifcfg-eth0</div></pre></td></tr></table></figure></p>
+<p>主机名文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/sysconfig/network</div></pre></td></tr></table></figure></p>
+<h2 id="Linux-网络命令"><a href="#Linux-网络命令" class="headerlink" title="Linux 网络命令"></a>Linux 网络命令</h2><h3 id="网络环境查看命令"><a href="#网络环境查看命令" class="headerlink" title="网络环境查看命令"></a>网络环境查看命令</h3><ul>
+<li><code>ifconfig</code> 查看与配置网络状态命令<ul>
+<li>只能看到 IP 和子网掩码，看不到网关和 DNS</li>
+</ul>
+</li>
+<li><code>ifdown 网卡设备名称</code> 禁用指定网卡设备</li>
+<li><code>ifup 网卡设置名称</code> 启用指定网卡设备</li>
+<li><code>netstat 选项</code><ul>
+<li>-t 列出 TCP 协议端口</li>
+<li>-u 列出 UDP 协议端口</li>
+<li>-n 不使用域名与服务名，而是用 IP 地址和端口号</li>
+<li>-l 仅列出在监听状态网络服务</li>
+<li>-a 列出所有的网络连接</li>
+</ul>
+</li>
+<li><code>route -n</code> 查看路由列表</li>
+<li><code>route add default gw 192.168.1.1</code> 临时设定网关</li>
+<li><code>nslookup [主机名或 IP]</code> 进行域名与 IP 地址解析</li>
+<li><code>nslookup &gt;server</code> 查看本机 DNS 服务器</li>
+</ul>
+<h3 id="网络测试命令"><a href="#网络测试命令" class="headerlink" title="网络测试命令"></a>网络测试命令</h3><ul>
+<li><code>ping [选项] [IP 或域名]</code> 探测指定 IP 或域名的网络状况<ul>
+<li>-c 次数 指定 ping 包的次数</li>
+</ul>
+</li>
+<li><code>telnet [域名或 IP] [端口]</code> 远程管理与端口探测命令</li>
+<li><code>wget URL</code> 下载命令</li>
+<li><code>tcpdump -i eth0 -nnX port 21</code><ul>
+<li>-i 指定网卡接口</li>
+<li>-X 以十六进制和 ASCII 码显示数据包内容</li>
+<li>-nn 将数据包中的域名与服务转为 IP 和端口</li>
+<li>port 指定监听的端口</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2016/09/20/Linux-网络基础/" data-id="cj35mbn5p000x5w4blymqhl5v" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Linux-命令基础" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/19/Linux-命令基础/" class="article-date">
+  <time datetime="2016-09-19T12:34:56.000Z" itemprop="datePublished">2016-09-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/19/Linux-命令基础/">Linux 命令基础</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="命令基本格式及文件处理命令"><a href="#命令基本格式及文件处理命令" class="headerlink" title="命令基本格式及文件处理命令"></a>命令基本格式及文件处理命令</h2><h3 id="命令提示符"><a href="#命令提示符" class="headerlink" title="命令提示符"></a>命令提示符</h3><p>命令提示符例子：<code>[root@localhost ~]#</code>，参数意义如下：</p>
+<ul>
+<li>root：当前登录用户名称</li>
+<li>@：分隔用户名称和主机名称</li>
+<li>localhost：主机名称</li>
+<li>~：当前所在目录</li>
+<li>#：超级用户提示符，普通用户提示符是 $</li>
+</ul>
+<h3 id="命令格式"><a href="#命令格式" class="headerlink" title="命令格式"></a>命令格式</h3><blockquote>
+<p>命令 [选项] [参数]</p>
+</blockquote>
+<ul>
+<li>个别命令使用不遵循此格式</li>
+<li>当有多个选项时，可以写在一起</li>
+<li>简化选项与完整选项：-a 等于 –all</li>
+</ul>
+<h3 id="查询目录中内容：ls"><a href="#查询目录中内容：ls" class="headerlink" title="查询目录中内容：ls"></a>查询目录中内容：ls</h3><blockquote>
+<p>ls [选项] [文件或目录]</p>
+</blockquote>
+<p>选项：</p>
+<ul>
+<li>-a：显示所有文件，包括隐藏文件</li>
+<li>-l：显示详细信息</li>
+<li>-d：查看目录属性</li>
+<li>-h：人性化显示文件大小</li>
+<li>-i：显示 inode</li>
+</ul>
+<p>命令 <code>ls -l</code> 等于命令 <code>ll</code></p>
+<h3 id="目录处理命令"><a href="#目录处理命令" class="headerlink" title="目录处理命令"></a>目录处理命令</h3><ul>
+<li>新建目录：mkdir<ul>
+<li><code>mkdir -p [目录名称]</code></li>
+<li>-p 递归创建</li>
+<li>命令英文原意：make directories</li>
+</ul>
+</li>
+<li>切换所在目录：cd<ul>
+<li><code>cd [目录名称]</code><ul>
+<li>cd ~ ：进入当前用户的家目录</li>
+<li>cd - ：进入上次目录</li>
+<li>cd . ：进入当前目录</li>
+<li>cd .. ：进入上一级目录</li>
+</ul>
+</li>
+<li>命令英文原意：change directory</li>
+<li>相对路径：参照当前所在目录，进行查找</li>
+<li>绝对路径：从根目录开始制定，一级一级递归查找。在任何目录下，都能进入指定目录</li>
+</ul>
+</li>
+<li>查询所在目录位置：pwd<ul>
+<li><code>pwd</code></li>
+<li>命令英文原意：print working directory</li>
+</ul>
+</li>
+<li>删除空目录：rmdir<ul>
+<li><code>rmdir [目录名称]</code></li>
+<li>命令英文原意：remove empty directories</li>
+</ul>
+</li>
+<li>删除文件或目录：rm<ul>
+<li><code>rm -rf [文件或目录]</code><ul>
+<li>-r ：删除目录</li>
+<li>-f ：强制</li>
+</ul>
+</li>
+<li>命令英文原意：remove</li>
+</ul>
+</li>
+<li>复制命令：cp<ul>
+<li><code>cp [选项] [原文件或目录] [目标目录]</code><ul>
+<li>-r ：复制目录</li>
+<li>-p ：连带文件属性复制</li>
+<li>-d ：若源文件是链接文件，则复制链接属性</li>
+<li>-a ：相当于 -pdr</li>
+</ul>
+</li>
+<li>命令英文原意：copy</li>
+</ul>
+</li>
+<li>剪切或重命名命令：mv<ul>
+<li><code>mv [原文件或目录] [目标目录]</code></li>
+<li>命令英文原意：move</li>
+</ul>
+</li>
+</ul>
+<h3 id="常见目录作用"><a href="#常见目录作用" class="headerlink" title="常见目录作用"></a>常见目录作用</h3><ul>
+<li>/ ：根目录</li>
+<li>/bin ：命令保存目录</li>
+<li>/dev ：设备文件保存目录</li>
+<li>/etc ：配置文件保存目录</li>
+<li>/lib ：系统保存目录</li>
+<li>/mnt ：系统挂载目录</li>
+<li>/tmp ：临时目录</li>
+<li>/sys ：</li>
+<li>/var ：系统相关文档内容</li>
+<li>/usr ：系统软件资源目录<ul>
+<li>/usr/bin ：系统命令（普通用户）</li>
+<li>/usr/sbin ：系统命令（超级用户）</li>
+</ul>
+</li>
+<li>/boot ：启动目录，启动相关文件</li>
+<li>/home ：普通用户的家目录</li>
+<li>/root ：超级用户的家目录</li>
+<li>/sbin ：命令保存目录</li>
+<li>/proc ：直接写入内存的</li>
+<li>/media ： 挂载目录</li>
+</ul>
+<h3 id="链接命令"><a href="#链接命令" class="headerlink" title="链接命令"></a>链接命令</h3><ul>
+<li>链接命令：ln<ul>
+<li><code>ln [参数] [原文件] [目标文件]</code><ul>
+<li>-s ：创建软链接</li>
+<li>默认创建硬链接</li>
+</ul>
+</li>
+<li>命令英文原意：link</li>
+<li>功能描述：生成链接文件</li>
+</ul>
+</li>
+<li>硬链接特征：<ul>
+<li>拥有相同的 I 节点和存储 Block 块，可以看做是同一个文件</li>
+<li>可通过 I 节点识别</li>
+<li>不能跨分区</li>
+<li>不能针对目录使用</li>
+</ul>
+</li>
+<li>软连接特征：<ul>
+<li>类似 Windows 快捷方式</li>
+<li>软链接拥有自己的 I 节点和 Block 块，但是数据块中只保存原文件的文件名和 I 节点号，并没有实际的文件数据</li>
+<li>软连接文件权限都为：rwxrwxrwx</li>
+<li>修改任意文件，另一个都改变</li>
+<li>删除原文件，软链接不能使用</li>
+</ul>
+</li>
+</ul>
+<h2 id="文件搜索命令"><a href="#文件搜索命令" class="headerlink" title="文件搜索命令"></a>文件搜索命令</h2><h3 id="文件搜索命令-locate"><a href="#文件搜索命令-locate" class="headerlink" title="文件搜索命令 locate"></a>文件搜索命令 locate</h3><ul>
+<li><code>locate 文件名</code>（只能搜索文件名）<ul>
+<li>在后台数据库中按文件名搜索，搜索速度更快</li>
+</ul>
+</li>
+<li><code>/var/lib/mlocate</code><ul>
+<li>locate 命令所搜索的后台数据库</li>
+</ul>
+</li>
+<li><code>updatedb</code><ul>
+<li>更新数据库</li>
+</ul>
+</li>
+<li><code>/etc/updatedb.conf</code> 配置文件<ul>
+<li>PRUNE_BIND_MOUNTS = “yes” (开启搜索限制)</li>
+<li>PRUNEFS = （搜索时，不搜索的文件系统）</li>
+<li>PRUNENAMES = （搜索时，不搜索的文件类型）</li>
+<li>PRUNEPATHS = （搜索时，不搜索的路径）</li>
+</ul>
+</li>
+</ul>
+<h3 id="命令搜索命令-whereis-与-which"><a href="#命令搜索命令-whereis-与-which" class="headerlink" title="命令搜索命令 whereis 与 which"></a>命令搜索命令 whereis 与 which</h3><ul>
+<li>whereis<ul>
+<li>搜索命令所在路径及帮助文档所在位置</li>
+<li>选项<ul>
+<li>-b    只查找可执行文件</li>
+<li>-m    只查找帮助文件</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>which （能看到命令的别名，只能看到命令的所在位置）</li>
+</ul>
+<h3 id="文件搜索命令-find"><a href="#文件搜索命令-find" class="headerlink" title="文件搜索命令 find"></a>文件搜索命令 find</h3><ul>
+<li><code>find [搜索范围] [搜索条件]</code><ul>
+<li>搜索文件</li>
+</ul>
+</li>
+<li><code>find / -name install.log</code><ul>
+<li>避免大范围搜索，会非常耗费系统资源</li>
+<li>find 是在系统当中搜索符合条件的文件名。如果需要匹配，使用通配符匹配，通配符是完全匹配</li>
+<li>Linux 中的通配符<ul>
+<li><ul>
+<li>匹配任意内容</li>
+</ul>
+</li>
+<li>?  匹配任意一个字符</li>
+<li>[] 匹配任意一个中括号内的字符</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>find /root -iname install.log</code> 不区分大小写</li>
+<li><code>find /root -user root</code> 按照所有者搜索</li>
+<li><code>find /root -nouser</code> 查找没有所有者的文件</li>
+<li><code>find /var/log/ -mtime +10</code> 查找 10 天前修改的文件<ul>
+<li>10 10 天当天修改的文件</li>
+<li>-10 10 天内修改文件</li>
+<li>+10 10 天前修改的文件</li>
+<li>atime 文件访问时间</li>
+<li>ctime 改变文件属性</li>
+<li>mtime 修改文件内容</li>
+</ul>
+</li>
+<li><code>find . -size 25k</code> 查找文件大小是 25 KB 的文件<ul>
+<li>25K 等于 25 KB的文件</li>
+<li>-25K 小于 25 KB的文件</li>
+<li>+25K 大于 25KB 的文件</li>
+</ul>
+</li>
+<li><code>find . -inum 262422</code> 查找 i 节点是 262422 的文件</li>
+<li><code>find /etc -size +20k -a -size -50k</code> 查找 /etc/ 目录下，大于 20 KB 并且小于 50 KB 的文件<ul>
+<li>-a and 逻辑与，两个条件都满足</li>
+<li>-o or 逻辑或，两个条件满足一个即可</li>
+</ul>
+</li>
+<li><code>find /etc -size +20k -a -size -50k -exec ls -lh {} \;</code> 查找 /etc/，大于 20 KB 并且小于 50 KB 的文件，并显示详细信息，-exec/ -ok 命令 {}\; 对搜索结果执行操作</li>
+</ul>
+<h3 id="字符串搜索命令-grep"><a href="#字符串搜索命令-grep" class="headerlink" title="字符串搜索命令 grep"></a>字符串搜索命令 grep</h3><ul>
+<li><code>grep [选项] 字符串 文件名</code> 在文件当中匹配符合条件的字符串<ul>
+<li>-i 忽略大小写</li>
+<li>-v 排除指定字符串</li>
+</ul>
+</li>
+</ul>
+<h3 id="find-命令与-grep-命令的区别"><a href="#find-命令与-grep-命令的区别" class="headerlink" title="find 命令与 grep 命令的区别"></a>find 命令与 grep 命令的区别</h3><p>find 命令：在系统当中搜索符合条件的文件名，如果需要匹配，使用通配符匹配，通配符是完全匹配。</p>
+<p>grep 命令：在文件当中搜索符合条件的字符串，如果需要匹配，使用正则表达式进行匹配，正则表达式时包含匹配。</p>
+<h2 id="帮助命令"><a href="#帮助命令" class="headerlink" title="帮助命令"></a>帮助命令</h2><h3 id="帮助命令-man"><a href="#帮助命令-man" class="headerlink" title="帮助命令 man"></a>帮助命令 man</h3><ul>
+<li><code>man 命令</code>  获取指定命令的帮助</li>
+<li><code>man -f 命令</code> 相当于 <code>whatis 命令</code> 查看命令的帮助级别</li>
+<li><code>man -k 命令</code> 相当于 <code>apropos 命令</code> 查看和命令相关的所有帮助</li>
+<li>man 的级别<ul>
+<li>1 ： 查看命令的帮助</li>
+<li>2 ： 查看可被内核调用的函数的帮助</li>
+<li>3 ： 查看函数和函数库的帮助</li>
+<li>4 ： 查看特殊文件的帮助（主要是 /dev 目录下的文件）</li>
+<li>5 ： 查看配置文件的帮助</li>
+<li>6 ： 查看游戏的帮助</li>
+<li>7 ： 查看其他杂项的帮助</li>
+<li>8 ： 查看系统管理员可用命令的帮助</li>
+<li>9 ： 查看和内核相关文件的帮助</li>
+</ul>
+</li>
+</ul>
+<h3 id="其他帮助命令"><a href="#其他帮助命令" class="headerlink" title="其他帮助命令"></a>其他帮助命令</h3><ul>
+<li><code>命令 --help</code> 获取命令选项的帮助<ul>
+<li><code>ls --help</code></li>
+</ul>
+</li>
+<li><code>help shell 内部命令</code> 获取 shell 内部命令的帮助<ul>
+<li><code>whereis cd</code> 确定是否是 shell 内部命令</li>
+<li><code>help cd</code> 获取内部命令帮助</li>
+</ul>
+</li>
+<li><code>info 命令</code><ul>
+<li>回车 ： 进入子帮助页面</li>
+<li>u ： 进入上层页面</li>
+<li>n ： 进入下一个帮助小节</li>
+<li>p ： 进入上一个帮助小节</li>
+<li>q ： 退出</li>
+</ul>
+</li>
+</ul>
+<h2 id="压缩命令"><a href="#压缩命令" class="headerlink" title="压缩命令"></a>压缩命令</h2><ul>
+<li>常用的压缩格式：<ul>
+<li>.zip</li>
+<li>.gz</li>
+<li>.bz2</li>
+<li>.tar.gz</li>
+<li>.tar.bz2</li>
+</ul>
+</li>
+<li>.zip 格式<ul>
+<li><code>zip 压缩文件名 源文件</code> 压缩文件</li>
+<li><code>zip -r 压缩文件名 源目录</code> 压缩目录</li>
+<li><code>unzip 压缩文件</code> 解压 <code>.zip</code> 文件</li>
+</ul>
+</li>
+<li>.gz 格式<ul>
+<li><code>gzip 源文件</code> 压缩为 <code>.gz</code> 格式的压缩文件，源文件消失</li>
+<li><code>gzip -c 源文件 &gt; 压缩文件</code> 压缩为 <code>.gz</code> 格式的压缩文件，源文件保留</li>
+<li><code>gzip -r 目录</code> 压缩目录下所有的子文件，但是不能压缩目录</li>
+<li><code>gzip -d 压缩文件</code> 解压文件</li>
+<li><code>gunzip 压缩文件</code> 解压文件</li>
+</ul>
+</li>
+<li>.bz2<ul>
+<li><code>bzip2 源文件</code> 压缩为 <code>.bz2</code> 格式的压缩文件，不保留源文件</li>
+<li><code>bzip2 -k 源文件</code> 压缩为 <code>.bz2</code> 格式的压缩文件，保留源文件</li>
+<li><code>bzip2</code> 命令不能压缩目录</li>
+</ul>
+</li>
+<li>tar.gz<ul>
+<li><code>tar -cvf 打包文件名 源文件</code><ul>
+<li>选项<ul>
+<li>-c ： 打包</li>
+<li>-v ： 显示过程</li>
+<li>-f    ： 指定打包后的文件名</li>
+</ul>
+</li>
+<li>举例：<code>tar -cvf longzls.tar longzls</code></li>
+</ul>
+</li>
+<li><code>tar -xvf 打包文件名</code><ul>
+<li>选项<ul>
+<li>-x ： 解打包</li>
+</ul>
+</li>
+<li>举例：<code>tar -xvf longzls.tar</code></li>
+</ul>
+</li>
+<li><code>tar -zcvf 压缩包名.tar.gz 源文件</code> 压缩为 <code>.tar.gz</code> 格式的压缩文件</li>
+<li><code>tar -zxvf 压缩包名.tar.gz</code> 解压 <code>.tar.gz</code> 格式的文件</li>
+<li><code>tar -jcvf 压缩包名.tar.bz2 源文件</code> 压缩为 <code>.tar.bz2</code> 格式的压缩文件</li>
+<li><code>tar -jxvf 压缩包名.tar.bz2</code> 解压 <code>.tar.bz2</code> 格式的文件</li>
+</ul>
+</li>
+</ul>
+<h2 id="关机重启命令"><a href="#关机重启命令" class="headerlink" title="关机重启命令"></a>关机重启命令</h2><ul>
+<li>shutdown 命令<ul>
+<li><code>shutdown [选项] 时间</code></li>
+<li>选项<ul>
+<li>-c ：取消前一个关机命令</li>
+<li>-h ：关机（尽可能少用）</li>
+<li>-r ：重启</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>其他关机命令<ul>
+<li>halt</li>
+<li>poweroff</li>
+<li>init 0</li>
+</ul>
+</li>
+<li>其他重启命令<ul>
+<li>reboot</li>
+<li>init 6</li>
+</ul>
+</li>
+<li>系统运行级别<ul>
+<li>0 关机</li>
+<li>1 单用户</li>
+<li>2 不完全多用户，不含 NFS 服务</li>
+<li>3 完全多用户</li>
+<li>4 未分配</li>
+<li>5 图形界面</li>
+<li>6 重启</li>
+</ul>
+</li>
+<li><code>cat /etc/inittab</code> 可以修复系统默认运行级别</li>
+<li><code>runlevel</code> 查询系统运行级别</li>
+<li><code>logout</code> 退出登录命令</li>
+</ul>
+<h2 id="挂载命令"><a href="#挂载命令" class="headerlink" title="挂载命令"></a>挂载命令</h2><ul>
+<li>查询与自动挂载<ul>
+<li><code>mount [-t 文件系统] [-o 特殊选项] 设备 文件名 挂载点</code><ul>
+<li>-t 文件系统：加入文件系统类型来指定挂载的类型，可以 ext3、ext4、iso 9660 等文件系统</li>
+<li>-o 特殊选项：可以指定挂载的额外选项</li>
+</ul>
+</li>
+<li><code>mount</code> 查询系统中已经挂载的设备</li>
+<li><code>mount -a</code> 依据配置文件 /etc/fstab 的内容，自动挂载</li>
+</ul>
+</li>
+<li>光盘的挂载<ul>
+<li>挂载光盘<ul>
+<li><code>mkdir /mnt/cdrom/</code> 建立挂载点</li>
+<li><code>mount -t iso9660 /dev/cdrom /mnt/cdrom/</code> 挂载光盘</li>
+<li><code>mount /dev/sr0 /mnt/cdrom/</code></li>
+</ul>
+</li>
+<li>卸载命令<ul>
+<li><code>umount 设备文件名或挂载点</code></li>
+<li><code>umount /mnt/cdrom</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>U 盘的挂载<ul>
+<li><code>fdisk -l</code> 查看存储设备文件名</li>
+<li><code>mount -t vfat /dev/sdb1 /mnt/usb/</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="用户登录查看命令"><a href="#用户登录查看命令" class="headerlink" title="用户登录查看命令"></a>用户登录查看命令</h2><ul>
+<li>w<ul>
+<li>USER ：登录的用户名</li>
+<li>TTY ：登录终端</li>
+<li>FROM ：从哪个 IP 地址登录</li>
+<li>LOGIN@ ：登录时间</li>
+<li>IDLE ：用户闲置时间</li>
+<li>JCPU ：指的是和该终端连接的所有进程占用的时间。这个时间里并不包括过去的后台作业时间，但却包括当前正在运行的后台作业所占用的时间；</li>
+<li>PCPU ：是指当前进程所占用的时间；</li>
+<li>WHAT ：当前正在运行的命令</li>
+</ul>
+</li>
+<li>who<ul>
+<li>用户名</li>
+<li>登录终端</li>
+<li>登录时间（登录来源 IP 地址）</li>
+</ul>
+</li>
+<li>last（查询当前登录和过去登录的用户信息）<ul>
+<li>last 命令默认是读取 /var/log/wtmp 文件数据</li>
+<li>命令输出<ul>
+<li>用户名</li>
+<li>登录终端</li>
+<li>登录 IP</li>
+<li>登录时间</li>
+<li>退出时间（在线时间）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>lastlog（查看所有用户的最后一次登录时间）<ul>
+<li>lastlog 命令默认是读取 /var/log/lastlog 文件内容</li>
+<li>命令输出<ul>
+<li>用户名</li>
+<li>登录终端</li>
+<li>登录 IP</li>
+<li>最后一次登录时间</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Shell-基础"><a href="#Shell-基础" class="headerlink" title="Shell 基础"></a>Shell 基础</h2><h3 id="Shell-概述"><a href="#Shell-概述" class="headerlink" title="Shell 概述"></a>Shell 概述</h3><p>Shell 是一个命令行解释器，它为用户提供了一个向 Linux 内核发送请求以便运行程序的界面系统级程序，<br>用户可以用 Shell 来启动、挂起、停止甚至是编写一些程序。</p>
+<p>Shell 还是一个功能相当强大的编程语言，易编写，易调试，灵活性比较强。<br>Shell 是解释执行的脚本语言，在 Shell 中可以直接调用 Linux 的系统命令</p>
+<p>Shell 的分类</p>
+<ul>
+<li>Bourne Shell<ul>
+<li>sh、ksh、Bash、psh、zsh</li>
+</ul>
+</li>
+<li>C Shell<ul>
+<li>csh、tcsh</li>
+</ul>
+</li>
+</ul>
+<h3 id="脚本执行方式"><a href="#脚本执行方式" class="headerlink" title="脚本执行方式"></a>脚本执行方式</h3><ul>
+<li>echo 输出命令<ul>
+<li><code>echo [选项] [输出内容]</code></li>
+<li>选项<ul>
+<li>-e ：支持反斜线控制的字符转换</li>
+</ul>
+</li>
+<li>字符转换<ul>
+<li>\a 输出警告音</li>
+<li>\b 退格键，也就是向左删除键</li>
+<li>\n 换行符</li>
+<li>\r 回车键</li>
+<li>\t 制表符</li>
+<li>\v 垂直制表符</li>
+<li>\0nnn 按照八进制 ASCII 码表输出字符。其中 0 为数字零，nnn 是三位八进制数</li>
+<li>\xhh 按照十六进制 ASCII 码表输出字符。其中 hh 是两位十六进制数</li>
+</ul>
+</li>
+<li>使用颜色<ul>
+<li>30m=黑色</li>
+<li>31m=红色</li>
+<li>32m=绿色</li>
+<li>33m=黄色</li>
+<li>34m=蓝色</li>
+<li>35m=洋红</li>
+<li>36m=青色</li>
+<li>37m=白色</li>
+<li>\e[1;31m \e[0m</li>
+</ul>
+</li>
+<li>例子<ul>
+<li><code>echo -e &quot;hell\bo&quot;;</code></li>
+<li><code>echo -e &quot;\x68\t\x65\t\x6c\n\x6c\t\x6f\t&quot;;</code></li>
+<li><code>echo -e &quot;\e[1;31mHello World \e[0m&quot;;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="命令别名与快捷键"><a href="#命令别名与快捷键" class="headerlink" title="命令别名与快捷键"></a>命令别名与快捷键</h3><ul>
+<li><code>alias</code> 查看系统中所有的命令别名</li>
+<li><code>alias 别名=&#39;原命令&#39;</code> 设定命令别名<ul>
+<li>例子：<code>alias vi=&#39;vim&#39;</code></li>
+</ul>
+</li>
+<li><code>vi ~/.bashrc</code> 写入环境变量配置文件</li>
+<li><code>unalias 别名</code> 删除别名</li>
+<li>命令生效顺序<ul>
+<li>第一顺位执行用绝对路径或相对路径执行的命令</li>
+<li>第二顺位执行别名</li>
+<li>第三顺位执行 Bash 的内部命令</li>
+<li>第四顺位执行按照 $PATH 环境变量定义的目录查找顺序找到的第一个命令</li>
+</ul>
+</li>
+<li>常用快捷键<ul>
+<li><code>Ctrl + c</code> 强制终止当前命令</li>
+<li><code>Ctrl + l</code> 清屏</li>
+<li><code>Ctrl + a</code> 光标移动到命令行首</li>
+<li><code>Ctrl + e</code> 光标移动到命令行尾</li>
+<li><code>Ctrl + u</code> 从光标所在位置删除到行首</li>
+<li><code>Ctrl + z</code> 把命令放入后台</li>
+<li><code>Ctrl + r</code> 在历史命令中搜索</li>
+</ul>
+</li>
+</ul>
+<h3 id="历史命令"><a href="#历史命令" class="headerlink" title="历史命令"></a>历史命令</h3><ul>
+<li><code>history [选项] [历史命令保存文件]</code><ul>
+<li>选项<ul>
+<li>-c ：清空历史缓存</li>
+<li>-w ：把缓存中的历史命令写入历史命令保存文件 <code>~/.bash_history</code></li>
+</ul>
+</li>
+<li>历史命令默认会保存 1000 条，可以在环境变量配置文件 <code>/etc/profile</code> 中的 <code>HISTSIZE</code> 进行修改</li>
+<li>历史命令的调用<ul>
+<li>使用上、下箭头调用以前的历史命令</li>
+<li>使用 <code>!n</code> 重复执行第 n 条历史命令</li>
+<li>使用 <code>!!</code> 重复执行上一条命令</li>
+<li>使用 <code>!字符</code> 重复执行最后一条以该字符串开头的命令</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="输出重定向"><a href="#输出重定向" class="headerlink" title="输出重定向"></a>输出重定向</h3><p>1.标准输入输出</p>
+<table>
+<thead>
+<tr>
+<th>设备</th>
+<th>设备文件名</th>
+<th>文件描述符</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>键盘</td>
+<td>/dev/stdin</td>
+<td>0</td>
+<td>标准输入</td>
+</tr>
+<tr>
+<td>显示器</td>
+<td>/dev/sdtout</td>
+<td>1</td>
+<td>标准输入</td>
+</tr>
+<tr>
+<td>显示器</td>
+<td>/dev/sdterr</td>
+<td>2</td>
+<td>标准错误输出</td>
+</tr>
+</tbody>
+</table>
+<p>2.输出重定向</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>符号</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>标准输出重定向</td>
+<td>命令 &gt; 文件</td>
+<td>以覆盖的方式，把命令的正确输出，输出到指定的文件或设备中</td>
+</tr>
+<tr>
+<td>标准输出重定向</td>
+<td>命令 &gt;&gt; 文件</td>
+<td>以追加的方式，把命令的正确输出，输出到指定的文件或设备中</td>
+</tr>
+<tr>
+<td>标准错误输出重定向</td>
+<td>错误命令2&gt;文件</td>
+<td>以覆盖的方式，把命令的错误输出，输出到指定的文件或设备中</td>
+</tr>
+<tr>
+<td>标准错误输出重定向</td>
+<td>错误命令2&gt;&gt;文件</td>
+<td>以追加的方式，把命令的错误输出，输出到指定的文件或设备中</td>
+</tr>
+<tr>
+<td>正确输出和错误输出同时保存</td>
+<td>命令 &gt; 文件 2&gt;&amp;1</td>
+<td>以覆盖的方式，把正确输出和错误输出都保存到同一个文件当中</td>
+</tr>
+<tr>
+<td>正确输出和错误输出同时保存</td>
+<td>命令 &gt;&gt; 文件 2&gt;&amp;1</td>
+<td>以追加的方式，把正确输出和错误输出都保存到同一个文件当中</td>
+</tr>
+<tr>
+<td>正确输出和错误输出同时保存</td>
+<td>命令 &amp;&gt;文件</td>
+<td>以覆盖的方式，把正确输出和错误输出都保存都同一个文件当中</td>
+</tr>
+<tr>
+<td>正确输出和错误输出同时保存</td>
+<td>命令 &amp;&gt;&gt;文件</td>
+<td>以追加的方式，把正确输出和错误输出都保存到同一个文件当中</td>
+</tr>
+<tr>
+<td>正确输出和错误输出同时保存</td>
+<td>命令&gt;&gt;文件1 2&gt;&gt;文件2</td>
+<td>把正确的输出追加到文件 1 中，把错误的输出追加到文件 2 中</td>
+</tr>
+</tbody>
+</table>
+<p>3.输入重定向</p>
+<ul>
+<li><code>wc [选项] [文件名]</code> 输入重定向<ul>
+<li>选项<ul>
+<li>-c ：统计字节数</li>
+<li>-w ：统计单词数</li>
+<li>-i ：统计行数<h3 id="管道符"><a href="#管道符" class="headerlink" title="管道符"></a>管道符</h3></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>1.多命令顺序执行</p>
+<table>
+<thead>
+<tr>
+<th>多命令执行符</th>
+<th>格式</th>
+<th>作用</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>;</td>
+<td>命令1;命令2</td>
+<td>多个命令顺序执行，命令之间没有任何逻辑联系，即使报错也会往下执行</td>
+<td>date ; ls ; cd ~; history;</td>
+</tr>
+<tr>
+<td>&amp;&amp;</td>
+<td>命令1&amp;&amp;命令2</td>
+<td>逻辑与，当命令 1 正确执行，则命令 2 才会执行，当命令 1 执行不正确，则命令 2 不会执行</td>
+<td>ls &amp;&amp; echo yes</td>
+</tr>
+<tr>
+<td>II</td>
+<td>命令1 II 命令2</td>
+<td>逻辑或，当命令 1 执行不正确，则命令 2 才会执行，当命令 1 正确执行，则命令 2 不会执行</td>
+<td>lsls II echo no</td>
+</tr>
+</tbody>
+</table>
+<p>2.管道符</p>
+<ul>
+<li>格式：命令 1 | 命令 2</li>
+<li>作用：命令 1 的正确输出作为命令 2 的操作对象</li>
+</ul>
+<h3 id="通配符"><a href="#通配符" class="headerlink" title="通配符"></a>通配符</h3><p>1.通配符</p>
+<table>
+<thead>
+<tr>
+<th>通配符</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>?</td>
+<td>匹配一个任意字符</td>
+</tr>
+<tr>
+<td>*</td>
+<td>匹配 0 个或任意多个任意字符，也就是可以匹配任何内容</td>
+</tr>
+<tr>
+<td>[]</td>
+<td>匹配中括号中任意一个字符，例如：[abc] 代表一定匹配一个字符，或是 a,或是 b,或是 c</td>
+</tr>
+<tr>
+<td>[-]</td>
+<td>匹配中括号中任意一个字符，- 代表一个范围，例如：[a-z] 代表匹配一个小写字母</td>
+</tr>
+<tr>
+<td>[^]</td>
+<td>逻辑非，表示匹配不是中括号内的一个字符，例如：[^0-9] 代表匹配一个不是数字的字符</td>
+</tr>
+</tbody>
+</table>
+<p>通配符执行例子</p>
+<ul>
+<li>存在文件夹<code>dzp</code>,<code>dzp2</code>,<code>dzp3</code>,<code>dzp34</code>,<code>dzpa</code>，<code>dzpbols</code>,<code>dzpcang</code></li>
+<li>执行命令 <code>ls dzp</code>，显示文件夹 <code>dzp</code></li>
+<li>执行命令 <code>ls dzp?</code>，显示文件夹 <code>dzp2</code>，<code>dzp3</code></li>
+<li>执行命令 <code>ls dzp[0-9]</code>，显示文件夹 <code>dzp2</code>，<code>dzp3</code></li>
+<li>执行命令 <code>ls dzp[0-9][0-9]</code>，显示文件夹 <code>dzp34</code></li>
+<li>执行命令 <code>ls dzp[^0-9]</code>，显示文件夹 <code>dzpa</code></li>
+<li>执行命令 <code>ls dzp[^0-9]*</code>，显示文件夹 <code>dzpa</code>，<code>dzpbols</code>，<code>dzpcang</code></li>
+</ul>
+<p>2.Bash 中其他特殊符号</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>‘’</td>
+<td>单引号。在单引号中所有特殊符号，如 $ 和 ` 都没有特殊含义。</td>
+</tr>
+<tr>
+<td>“”</td>
+<td>双引号。在双引号中特殊符号都没有特殊含义，但是 $ 、`、\ 是例外，拥有<em>调用变量值</em>，<em>引用命令</em>，<em>转义符</em>的特殊含义</td>
+</tr>
+<tr>
+<td>``</td>
+<td>反引号。反引号包括起来的内容是系统命令，在 Bash 中会先执行它。和 $() 作用一样，不过推荐使用 $()，因为反引号非常容易看错。</td>
+</tr>
+<tr>
+<td>$()</td>
+<td>和反引号作用一样，用来引用系统命令</td>
+</tr>
+<tr>
+<td>#</td>
+<td>在 Shell 脚本中，# 开头的行代表注释</td>
+</tr>
+<tr>
+<td>$</td>
+<td>用于调用变量的值，如需要调用变量 name 的值时，需要用 $name 的方式得到变量的值</td>
+</tr>
+<tr>
+<td>\</td>
+<td>转义符，跟在 \ 之后的</td>
+</tr>
+</tbody>
+</table>
+<h2 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h2><h3 id="用户和用户组的概念"><a href="#用户和用户组的概念" class="headerlink" title="用户和用户组的概念"></a>用户和用户组的概念</h3><ul>
+<li>用户：使用操作系统的人</li>
+<li>用户组：具有相同系统权限的一组用户</li>
+<li><code>/etc/group</code> 存储当前系统中所有用户组信息<ul>
+<li>Group:x:499:root,luis,daemon</li>
+<li>组名称：组密码占位符：组编号：组中用户名列表</li>
+</ul>
+</li>
+<li><code>/etc/gshadow</code> 存储当前系统中用户组的密码信息<ul>
+<li>Group:*:    :root,luis</li>
+<li>组名称：组密码：组管理者：组中用户名列表</li>
+</ul>
+</li>
+<li><code>/etc/passwd</code> 存储当前系统中所有用户的账号信息<ul>
+<li>root:x:0:0:root:/root:/bin/bash</li>
+<li>用户名：密码占位符：用户编号：用户组编号：用户注释信息：用户主目录：Shell 类型</li>
+</ul>
+</li>
+<li><code>/etc/shadow</code> 存储当前系统中所有用户的密码信息<ul>
+<li>root:$6$tBDREHKV$JfcEQ/hTxaOWI8QKoRPARviOq3etqaE.szqFoqW8/Uxh6nAkCvlQzp8nRhg4kRM4ySRjpsfyS7kxXfa5cOlLa.:17044:0:99999:7:::</li>
+<li>用户名:密码:::</li>
+</ul>
+</li>
+</ul>
+<h3 id="用户和用户组的基本命令"><a href="#用户和用户组的基本命令" class="headerlink" title="用户和用户组的基本命令"></a>用户和用户组的基本命令</h3><ul>
+<li>用户组基本命令<ul>
+<li>新增用户组：<code>groupadd 用户组名称</code></li>
+<li>新增用户组并指定编号：<code>groupadd -g 数字编号 用户组名称</code></li>
+<li>修改用户组名称：<code>groupmod -n 新名称 旧名称</code></li>
+<li>修改用户组编号：<code>groupmod -g 数字编号 用户组名称</code></li>
+<li>删除用户组：<code>groupdel 用户组名称</code></li>
+</ul>
+</li>
+<li>用户基本命令<ul>
+<li>删除用户：<code>userdel 用户名称</code></li>
+<li>删除用户并删除个人文件夹：<code>userdel -r 用户名称</code></li>
+<li>新增用户并指定用户组：<code>useradd -g 用户组名称 用户名称</code></li>
+<li>新增用户并指定用户个人文件夹：<code>useradd -d 目录路径 用户名称</code></li>
+<li>修改用户名称：<code>usermod -l 新名称 旧名称</code></li>
+<li>修改用户备注信息：<code>usermod -c 备注信息 用户名称</code></li>
+<li>修改用户的用户组信息：<code>usermod -g 用户组名称 用户名称</code></li>
+<li>指定用户新的个人文件夹：<code>usermod -d 目录路径 用户名称</code></li>
+</ul>
+</li>
+<li>其他命令<ul>
+<li>切换用户：<code>su</code></li>
+<li>锁定用户：<code>passwd -l 用户名称</code></li>
+<li>解锁用户：<code>passwd -u 用户名称</code></li>
+<li>无密码登录：<code>passwd -d 用户名称</code></li>
+<li>设置组密码：<code>gpasswd 用户组名称</code></li>
+<li>显示用户详情:<ul>
+<li>显示当前登录用户名：<code>whoami</code></li>
+<li>显示用户信息和组信息：<code>id 用户名称</code></li>
+<li>显示用户所在的所有组：<code>groups 用户名称</code></li>
+</ul>
+</li>
+<li>设置用户资料：<code>chfn 用户名称</code></li>
+<li>新增用户附属组：<code>gpasswd -a 用户名称 用户组名称</code>（在 Linux 当中，一个用户可以属于多个用户组，但只能有一个主要组，其余都是附属组）</li>
+<li>删除用户附属组：<code>gpasswd -d 用户名称</code></li>
+<li>切换用户附属组：<code>newgrp 用户组名称</code></li>
+<li>新增用户指定主要组和附属组：<code>useradd -g 主要组名称 -G 附属组名称</code></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2016/09/19/Linux-命令基础/" data-id="cj35mbn5d000m5w4bba9qbh2x" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-MySQL-5-7-版本新特性" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -127,7 +1344,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/12/MySQL-5-7-版本新特性/" data-id="cj329lef90012qm4b47ywtoyd" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/12/MySQL-5-7-版本新特性/" data-id="cj35mbn65001a5w4bgd16ue14" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -554,7 +1771,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/09/与-MySQL-的零距离接触（二）/" data-id="cj329lej9003cqm4bheefkrn7" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/09/与-MySQL-的零距离接触（二）/" data-id="cj35mbn7x003d5w4bi8rkq22f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -1155,7 +2372,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/07/与-MySQL-的零距离接触（一）/" data-id="cj329leiz0034qm4bpt5q3mkj" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/07/与-MySQL-的零距离接触（一）/" data-id="cj35mbn7u00355w4b9jvrmvyp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -1271,7 +2488,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/04/复习使用-MySQL（三）/" data-id="cj329leq4005tqm4b9b6oc7km" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/04/复习使用-MySQL（三）/" data-id="cj35mbna3005o5w4brf6ydq2e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -1484,7 +2701,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/04/复习使用-MySQL（二）/" data-id="cj329leq1005qqm4brrjlvp1a" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/04/复习使用-MySQL（二）/" data-id="cj35mbna5005r5w4bksu18usb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -1723,7 +2940,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/02/复习使用-MySQL（一）/" data-id="cj329lepz005nqm4brgdbgbiv" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/02/复习使用-MySQL（一）/" data-id="cj35mbna2005l5w4bnbiwaj6m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -1809,7 +3026,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/01/查看-Eloquent-模型关联时执行的-SQL-语句/" data-id="cj329leqh0067qm4bx28cf759" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/01/查看-Eloquent-模型关联时执行的-SQL-语句/" data-id="cj35mbnaf006d5w4bmqh8x5nc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -1942,135 +3159,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/08/31/使用阿里云从零开始部署-Laravel/" data-id="cj329leps005hqm4bfrpx5qzh" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/08/31/使用阿里云从零开始部署-Laravel/" data-id="cj35mbn9x00565w4b70j24aht" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AliCloud/">AliCloud</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-使用-Laravel-编写自定义命令" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/25/使用-Laravel-编写自定义命令/" class="article-date">
-  <time datetime="2016-08-25T13:48:36.000Z" itemprop="datePublished">2016-08-25</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/25/使用-Laravel-编写自定义命令/">使用 Laravel 编写自定义命令</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本文讲述了如何使用 Laravel 开发命令行</p>
-<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
-<li>PHP 7</li>
-<li>Laravel 5.1</li>
-<li>OS X El Capitan 10.11.4</li>
-</ul>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Artisan 是 Laravel 的命令行接口的名称，它提供了许多实用的命令来帮助你开发 Laravel 应用，它由强大的 Symfony Console 组件所驱动。</p>
-<h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p> <a href="http://laravel-china.org/docs/5.1/artisan" target="_blank" rel="external">Artisan</a></p>
-<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>本文目的旨在实现三个简单的命令，分别是优化项目、清除缓存和发送邮件</p>
-<h2 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h2><h3 id="新建命令"><a href="#新建命令" class="headerlink" title="新建命令"></a>新建命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">php artisan make:console LaravelOptimize --command=laravel:optimize</div><div class="line">php artisan make:console LaravelClean --command=laravel:clean</div><div class="line">php artisan make:console SendEmails --command=emails:send</div></pre></td></tr></table></figure>
-<h3 id="注册命令"><a href="#注册命令" class="headerlink" title="注册命令"></a>注册命令</h3><p>打开文件 <code>app/Console/Kernel.php</code>，修改代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">protected $commands = [</div><div class="line">    \App\Console\Commands\Inspire::class,</div><div class="line">    \App\Console\Commands\SendEmails::class,</div><div class="line">    \App\Console\Commands\LaravelClean::class,</div><div class="line">    \App\Console\Commands\LaravelOptimize::class,</div><div class="line">];</div></pre></td></tr></table></figure></p>
-<h3 id="编写命令执行代码"><a href="#编写命令执行代码" class="headerlink" title="编写命令执行代码"></a>编写命令执行代码</h3><p>文件 <code>SendEmails.php</code> 代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"></div><div class="line">namespace App\Console\Commands;</div><div class="line"></div><div class="line">use App\Facades\UserRepository;</div><div class="line">use Illuminate\Console\Command;</div><div class="line">use Mail;</div><div class="line"></div><div class="line">class SendEmails extends Command</div><div class="line">&#123;</div><div class="line">    /**</div><div class="line">     * The name and signature of the console command.</div><div class="line">     *</div><div class="line">     * @var string</div><div class="line">     */</div><div class="line">    protected $signature = &apos;emails:send&apos;;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * The console command description.</div><div class="line">     *</div><div class="line">     * @var string</div><div class="line">     */</div><div class="line">    protected $description = &apos;use SendCloud to send emails&apos;;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Create a new command instance.</div><div class="line">     *</div><div class="line">     * @return void</div><div class="line">     */</div><div class="line">    public function __construct()</div><div class="line">    &#123;</div><div class="line">        parent::__construct();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Execute the console command.</div><div class="line">     *</div><div class="line">     * @return mixed</div><div class="line">     */</div><div class="line">    public function handle()</div><div class="line">    &#123;</div><div class="line">        $this-&gt;line(&quot;即将执行邮件发送命令&quot;);</div><div class="line"></div><div class="line">        if($this-&gt;confirm(&apos;确定执行?&apos;))&#123;</div><div class="line">            $users = UserRepository::all();</div><div class="line"></div><div class="line">            $bar = $this-&gt;output-&gt;createProgressBar(count($users));</div><div class="line"></div><div class="line">            foreach ($users as $user) &#123;</div><div class="line">                $icon = &quot;http://o93kt6djh.bkt.clouddn.com/Laravel-SendEmaillaravel-200x50.png&quot;;</div><div class="line">                $image = &quot;http://o93kt6djh.bkt.clouddn.com/Laravel-SendEmaillaravel-600x300.jpg&quot;;</div><div class="line"></div><div class="line">                Mail::send(&apos;emails.test-image&apos;,</div><div class="line">                    [</div><div class="line">                        &apos;name&apos;  =&gt; $user-&gt;name,</div><div class="line">                        &apos;icon&apos;  =&gt; $icon,</div><div class="line">                        &apos;image&apos; =&gt; $image,</div><div class="line">                    ],</div><div class="line">                    function ($email) use ($user) &#123;</div><div class="line">                        $email-&gt;to($user-&gt;email)-&gt;subject(&apos;图文邮件标题&apos;);</div><div class="line">                    &#125;);</div><div class="line"></div><div class="line">                $bar-&gt;advance();</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            $bar-&gt;finish();</div><div class="line"></div><div class="line">            $this-&gt;info(&quot;发送邮件完毕&quot;);</div><div class="line">        &#125; else &#123;</div><div class="line">            $this-&gt;info(&quot;取消执行邮件发送命令&quot;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>文件 <code>LaravelOptimize.php</code> 代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"></div><div class="line">namespace App\Console\Commands;</div><div class="line"></div><div class="line">use Illuminate\Console\Command;</div><div class="line">use Illuminate\Support\Facades\Artisan;</div><div class="line"></div><div class="line">class LaravelOptimize extends Command</div><div class="line">&#123;</div><div class="line">    /**</div><div class="line">     * The name and signature of the console command.</div><div class="line">     *</div><div class="line">     * @var string</div><div class="line">     */</div><div class="line">    protected $signature = &apos;laravel:optimize&apos;;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * The console command description.</div><div class="line">     *</div><div class="line">     * @var string</div><div class="line">     */</div><div class="line">    protected $description = &apos;optimize laravel project&apos;;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Create a new command instance.</div><div class="line">     *</div><div class="line">     * @return void</div><div class="line">     */</div><div class="line">    public function __construct()</div><div class="line">    &#123;</div><div class="line">        parent::__construct();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Execute the console command.</div><div class="line">     *</div><div class="line">     * @return mixed</div><div class="line">     */</div><div class="line">    public function handle()</div><div class="line">    &#123;</div><div class="line">        $this-&gt;line(&quot;即将执行优化缓存命令&quot;);</div><div class="line">        if($this-&gt;confirm(&apos;确定执行?&apos;))&#123;</div><div class="line">            $this-&gt;line(&quot;开始执行缓存命令&quot;);</div><div class="line"></div><div class="line">            Artisan::call(&quot;config:cache&quot;);</div><div class="line">            $this-&gt;info(&apos;Configuration cache cleared!&apos;);</div><div class="line">            $this-&gt;info(&apos;Configuration cached successfully!&apos;);</div><div class="line"></div><div class="line">            Artisan::call(&quot;route:cache&quot;);</div><div class="line">            $this-&gt;info(&apos;Route cache cleared!&apos;);</div><div class="line">            $this-&gt;info(&apos;Routes cached successfully!&apos;);</div><div class="line"></div><div class="line">            Artisan::call(&quot;optimize&quot;);</div><div class="line">            $this-&gt;info(&apos;Generating optimized class loader&apos;);</div><div class="line"></div><div class="line">            if(function_exists(&apos;exec&apos;))&#123;</div><div class="line">                exec(&quot;composer dump-autoload&quot;);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            Artisan::call(&quot;ide-helper:generate&quot;);</div><div class="line">            $this-&gt;info(&apos;A new helper file was written to _ide_helper.php&apos;);</div><div class="line"></div><div class="line">            $this-&gt;info(&quot;优化缓存成功&quot;);</div><div class="line">        &#125; else &#123;</div><div class="line">            $this-&gt;info(&quot;取消执行优化缓存命令&quot;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>文件 <code>LaravelClean.php</code> 代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"></div><div class="line">namespace App\Console\Commands;</div><div class="line"></div><div class="line">use Illuminate\Console\Command;</div><div class="line">use Illuminate\Support\Facades\Artisan;</div><div class="line"></div><div class="line">class LaravelClean extends Command</div><div class="line">&#123;</div><div class="line">    /**</div><div class="line">     * The name and signature of the console command.</div><div class="line">     *</div><div class="line">     * @var string</div><div class="line">     */</div><div class="line">    protected $signature = &apos;laravel:clean&apos;;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * The console command description.</div><div class="line">     *</div><div class="line">     * @var string</div><div class="line">     */</div><div class="line">    protected $description = &apos;clean project all cache&apos;;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Create a new command instance.</div><div class="line">     *</div><div class="line">     * @return void</div><div class="line">     */</div><div class="line">    public function __construct()</div><div class="line">    &#123;</div><div class="line">        parent::__construct();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Execute the console command.</div><div class="line">     *</div><div class="line">     * @return mixed</div><div class="line">     */</div><div class="line">    public function handle()</div><div class="line">    &#123;</div><div class="line">        $this-&gt;line(&quot;即将执行清除缓存命令&quot;);</div><div class="line">        if($this-&gt;confirm(&apos;确定执行?&apos;))&#123;</div><div class="line">            $this-&gt;line(&quot;开始执行缓存命令&quot;);</div><div class="line"></div><div class="line">            Artisan::call(&quot;clear-compiled&quot;);</div><div class="line"></div><div class="line">            Artisan::call(&quot;auth:clear-resets&quot;);</div><div class="line">            $this-&gt;info(&apos;Expired reset tokens cleared!&apos;);</div><div class="line"></div><div class="line">            Artisan::call(&quot;cache:clear&quot;);</div><div class="line">            $this-&gt;info(&apos;Application cache cleared!&apos;);</div><div class="line"></div><div class="line">            Artisan::call(&quot;config:clear&quot;);</div><div class="line">            $this-&gt;info(&apos;Configuration cache cleared!&apos;);</div><div class="line"></div><div class="line">            Artisan::call(&quot;debugbar:clear&quot;);</div><div class="line">            $this-&gt;info(&apos;Debugbar Storage cleared!&apos;);</div><div class="line"></div><div class="line">            Artisan::call(&quot;route:clear&quot;);</div><div class="line">            $this-&gt;info(&apos;Route cache cleared!&apos;);</div><div class="line"></div><div class="line">            Artisan::call(&quot;view:clear&quot;);</div><div class="line">            $this-&gt;info(&apos;Compiled views cleared!&apos;);</div><div class="line"></div><div class="line">            $this-&gt;info(&quot;清除缓存成功&quot;);</div><div class="line">        &#125; else &#123;</div><div class="line">            $this-&gt;info(&quot;取消执行清除缓存命令&quot;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="执行效果"><a href="#执行效果" class="headerlink" title="执行效果"></a>执行效果</h2><p>在终端分别执行以下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">php artisan laravel:optimize</div><div class="line">php artisan laravel:clean</div><div class="line">php artisan emails:send</div></pre></td></tr></table></figure></p>
-<p>执行效果分别如下显示：</p>
-<h4 id="php-artisan-laravel-optimize"><a href="#php-artisan-laravel-optimize" class="headerlink" title="php artisan laravel:optimize"></a>php artisan laravel:optimize</h4><p><img src="http://o93kt6djh.bkt.clouddn.com/laravel-optimize.png" alt="执行缓存清楚"></p>
-<h4 id="php-artisan-laravel-clean"><a href="#php-artisan-laravel-clean" class="headerlink" title="php artisan laravel:clean"></a>php artisan laravel:clean</h4><p><img src="http://o93kt6djh.bkt.clouddn.com/laravel-clean.png" alt="执行缓存清楚"></p>
-<h4 id="php-artisan-emails-send"><a href="#php-artisan-emails-send" class="headerlink" title="php artisan emails:send"></a>php artisan emails:send</h4><p><img src="http://o93kt6djh.bkt.clouddn.com/email-send.png" alt="执行邮件发送"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/08/25/使用-Laravel-编写自定义命令/" data-id="cj329lejs003tqm4bzgyihwzz" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-使用-Laravel-基于-SMTP-驱动实现发送邮件" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/08/使用-Laravel-基于-SMTP-驱动实现发送邮件/" class="article-date">
-  <time datetime="2016-08-08T13:44:47.000Z" itemprop="datePublished">2016-08-08</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/08/使用-Laravel-基于-SMTP-驱动实现发送邮件/">使用 Laravel 基于 SMTP 驱动实现发送邮件</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本文主要讲述了如何快速使用 Laravel 构建发送邮件的功能</p>
-<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
-<li>PHP 7</li>
-<li>Laravel 5.1</li>
-<li>OS X El Capitan 10.11.4</li>
-</ul>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Laravel 基于热门的 SwiftMailer 函数库提供了一个简洁的 API。Laravel 为 SMTP、Mailgun、Mandrill、Amazon SES、PHP 的 mail 函数及 sendmail 提供驱动，让你可以快速地从所选择的本地或云端服务开始发送邮件。（摘录 PHPhub 翻译文档）</p>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>邮件配置文件是<code>config/mail.php</code><br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">return</span> [</div><div class="line">	<span class="comment">// 默认发送邮件驱动</span></div><div class="line">	<span class="string">'driver'</span> =&gt; env(<span class="string">'MAIL_DRIVER'</span>, <span class="string">'smtp'</span>),</div><div class="line"></div><div class="line">	<span class="comment">// 发送邮件主机地址</span></div><div class="line">    <span class="string">'host'</span> =&gt; env(<span class="string">'MAIL_HOST'</span>, <span class="string">'smtp.mailgun.org'</span>),</div><div class="line"></div><div class="line">    <span class="comment">// 发送邮件主机端口</span></div><div class="line">    <span class="string">'port'</span> =&gt; env(<span class="string">'MAIL_PORT'</span>, <span class="number">587</span>),</div><div class="line"></div><div class="line">    <span class="comment">// 指定发送邮件的邮箱地址和用户名称</span></div><div class="line">    <span class="string">'from'</span> =&gt; [<span class="string">'address'</span> =&gt; <span class="keyword">null</span>, <span class="string">'name'</span> =&gt; <span class="keyword">null</span>],</div><div class="line"></div><div class="line">    <span class="comment">// 指定发送邮件协议</span></div><div class="line">    <span class="string">'encryption'</span> =&gt; env(<span class="string">'MAIL_ENCRYPTION'</span>, <span class="string">'tls'</span>),</div><div class="line"></div><div class="line">    <span class="comment">// 邮箱登录账号</span></div><div class="line">    <span class="string">'username'</span> =&gt; env(<span class="string">'MAIL_USERNAME'</span>),</div><div class="line"></div><div class="line">    <span class="comment">// 邮箱登录密码</span></div><div class="line">    <span class="string">'password'</span> =&gt; env(<span class="string">'MAIL_PASSWORD'</span>),</div><div class="line"></div><div class="line">    <span class="comment">// 当驱动为 sendmail 时，指定驱动的命令地址</span></div><div class="line">    <span class="string">'sendmail'</span> =&gt; <span class="string">'/usr/sbin/sendmail -bs'</span>,</div><div class="line"></div><div class="line">	<span class="comment">// false 发送邮件不记录日志，true 记录日志不发送邮件</span></div><div class="line">    <span class="string">'pretend'</span> =&gt; <span class="keyword">false</span>,</div><div class="line">];</div></pre></td></tr></table></figure></p>
-<h2 id="编写发送文字邮件程序"><a href="#编写发送文字邮件程序" class="headerlink" title="编写发送文字邮件程序"></a>编写发送文字邮件程序</h2><h3 id="env"><a href="#env" class="headerlink" title="env"></a>env</h3><p>本文采用 QQ 邮箱进行测试，首先修改邮箱配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">MAIL_DRIVER=smtp</div><div class="line">MAIL_HOST=smtp.qq.com</div><div class="line">MAIL_PORT=465</div><div class="line">MAIL_USERNAME=（填写 QQ 邮箱账号）</div><div class="line">MAIL_PASSWORD=（填写 QQ 邮箱密码）</div><div class="line">MAIL_ENCRYPTION=ssl</div></pre></td></tr></table></figure></p>
-<h3 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">/* 发送文字邮件 */</div><div class="line">Route::get(&apos;email/send/&#123;id&#125;&apos;, [</div><div class="line">    &apos;as&apos;   =&gt; &apos;backend.email.send&apos;,</div><div class="line">    &apos;uses&apos; =&gt; &apos;EmailController@send&apos;,</div><div class="line">]);</div></pre></td></tr></table></figure>
-<h3 id="控制器"><a href="#控制器" class="headerlink" title="控制器"></a>控制器</h3><p>新增控制器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan make:controller Backend/EmailController --plain</div></pre></td></tr></table></figure></p>
-<p>控制器代码如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"></div><div class="line">namespace App\Http\Controllers\Backend;</div><div class="line"></div><div class="line">use App\Facades\UserRepository;</div><div class="line">use Illuminate\Http\Request;</div><div class="line"></div><div class="line">use App\Http\Requests;</div><div class="line">use App\Http\Controllers\Controller;</div><div class="line"></div><div class="line">use Mail;</div><div class="line"></div><div class="line">class EmailController extends Controller</div><div class="line">&#123;</div><div class="line">    public function send(Request $request, $id)</div><div class="line">    &#123;</div><div class="line">        $user = UserRepository::find($id);</div><div class="line"></div><div class="line">        Mail::send(&apos;emails.test&apos;, [&apos;user&apos; =&gt; $user], function ($email) use ($user) &#123;</div><div class="line">            $email-&gt;to(&apos;2794408425@qq.com&apos;)-&gt;subject(&apos;Hello World&apos;);</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h3><p>新增视图<code>emails/test.blade.php</code>，代码如下：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    	你好,&#123;&#123;$user-&gt;name&#125;&#125;,这是一封测试邮件。</div><div class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<h3 id="执行代码"><a href="#执行代码" class="headerlink" title="执行代码"></a>执行代码</h3><p>在浏览器访问指定路由，然后去邮箱查看邮件是否发送成功。<br><img src="http://o93kt6djh.bkt.clouddn.com/Laravel-SendEmail%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-09%2009.49.12.png" alt="发送文字邮件"></p>
-<h2 id="编写发送图文邮件程序"><a href="#编写发送图文邮件程序" class="headerlink" title="编写发送图文邮件程序"></a>编写发送图文邮件程序</h2><h3 id="路由-1"><a href="#路由-1" class="headerlink" title="路由"></a>路由</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Route::get(<span class="string">'email/sendPicture/&#123;id&#125;'</span>, [</div><div class="line">    <span class="string">'as'</span>   =&gt; <span class="string">'backend.email.sendPicture'</span>,</div><div class="line">    <span class="string">'uses'</span> =&gt; <span class="string">'EmailController@sendPicture'</span>,</div><div class="line">]);</div></pre></td></tr></table></figure>
-<h3 id="控制器-1"><a href="#控制器-1" class="headerlink" title="控制器"></a>控制器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public function sendPicture(Request $request, $id)</div><div class="line">&#123;</div><div class="line">    $user = UserRepository::find($id);</div><div class="line">    $icon = &quot;http://o93kt6djh.bkt.clouddn.com/Laravel-SendEmaillaravel-200x50.png&quot;;</div><div class="line">    $image = &quot;http://o93kt6djh.bkt.clouddn.com/Laravel-SendEmaillaravel-600x300.jpg&quot;;</div><div class="line"></div><div class="line">    Mail::send(&apos;emails.image&apos;, [&apos;name&apos; =&gt; $user-&gt;name, &apos;icon&apos; =&gt; $icon, &apos;image&apos; =&gt; $image], function ($email) &#123;</div><div class="line">        $someOne = &apos;2794408425@qq.com&apos;;</div><div class="line">        $email-&gt;to($someOne)-&gt;subject(&apos;图文邮件标题&apos;);</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    echo &quot;已发送邮件,请注意查收&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="视图-1"><a href="#视图-1" class="headerlink" title="视图"></a>视图</h3><p>新增视图<code>emails/image.blade.php</code>，代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div><div class="line">338</div><div class="line">339</div><div class="line">340</div><div class="line">341</div><div class="line">342</div><div class="line">343</div><div class="line">344</div><div class="line">345</div><div class="line">346</div><div class="line">347</div><div class="line">348</div><div class="line">349</div><div class="line">350</div><div class="line">351</div><div class="line">352</div><div class="line">353</div><div class="line">354</div><div class="line">355</div><div class="line">356</div><div class="line">357</div><div class="line">358</div><div class="line">359</div><div class="line">360</div><div class="line">361</div><div class="line">362</div><div class="line">363</div><div class="line">364</div><div class="line">365</div><div class="line">366</div><div class="line">367</div><div class="line">368</div><div class="line">369</div><div class="line">370</div><div class="line">371</div><div class="line">372</div><div class="line">373</div><div class="line">374</div><div class="line">375</div><div class="line">376</div><div class="line">377</div><div class="line">378</div><div class="line">379</div><div class="line">380</div><div class="line">381</div><div class="line">382</div><div class="line">383</div><div class="line">384</div><div class="line">385</div><div class="line">386</div><div class="line">387</div><div class="line">388</div><div class="line">389</div><div class="line">390</div><div class="line">391</div><div class="line">392</div><div class="line">393</div><div class="line">394</div><div class="line">395</div><div class="line">396</div><div class="line">397</div><div class="line">398</div><div class="line">399</div><div class="line">400</div><div class="line">401</div><div class="line">402</div><div class="line">403</div><div class="line">404</div><div class="line">405</div><div class="line">406</div><div class="line">407</div><div class="line">408</div><div class="line">409</div><div class="line">410</div><div class="line">411</div><div class="line">412</div><div class="line">413</div><div class="line">414</div><div class="line">415</div><div class="line">416</div><div class="line">417</div><div class="line">418</div><div class="line">419</div><div class="line">420</div><div class="line">421</div><div class="line">422</div><div class="line">423</div><div class="line">424</div><div class="line">425</div><div class="line">426</div><div class="line">427</div><div class="line">428</div><div class="line">429</div><div class="line">430</div><div class="line">431</div><div class="line">432</div><div class="line">433</div><div class="line">434</div><div class="line">435</div><div class="line">436</div><div class="line">437</div><div class="line">438</div><div class="line">439</div><div class="line">440</div><div class="line">441</div><div class="line">442</div><div class="line">443</div><div class="line">444</div><div class="line">445</div><div class="line">446</div><div class="line">447</div><div class="line">448</div><div class="line">449</div><div class="line">450</div><div class="line">451</div><div class="line">452</div><div class="line">453</div><div class="line">454</div><div class="line">455</div><div class="line">456</div><div class="line">457</div><div class="line">458</div><div class="line">459</div><div class="line">460</div><div class="line">461</div><div class="line">462</div><div class="line">463</div><div class="line">464</div><div class="line">465</div><div class="line">466</div><div class="line">467</div><div class="line">468</div><div class="line">469</div><div class="line">470</div><div class="line">471</div><div class="line">472</div><div class="line">473</div><div class="line">474</div><div class="line">475</div><div class="line">476</div><div class="line">477</div><div class="line">478</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</div><div class="line">&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width&quot;/&gt;</div><div class="line">    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;/&gt;</div><div class="line">    &lt;title&gt;CowCat Email Test&lt;/title&gt;</div><div class="line">    &lt;style type=&quot;text/css&quot;&gt;</div><div class="line">        * &#123;</div><div class="line">            margin: 0;</div><div class="line">            padding: 0;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        * &#123;</div><div class="line">            font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        img &#123;</div><div class="line">            max-width: 100%;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        .collapse &#123;</div><div class="line">            margin: 0;</div><div class="line">            padding: 0;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        body &#123;</div><div class="line">            -webkit-font-smoothing: antialiased;</div><div class="line">            -webkit-text-size-adjust: none;</div><div class="line">            width: 100% !important;</div><div class="line">            height: 100%;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        /* -------------------------------------</div><div class="line">                ELEMENTS</div><div class="line">        ------------------------------------- */</div><div class="line">        a &#123;</div><div class="line">            color: #2BA6CB;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        .btn &#123;</div><div class="line">            text-decoration: none;</div><div class="line">            color: #FFF;</div><div class="line">            background-color: #666;</div><div class="line">            padding: 10px 16px;</div><div class="line">            font-weight: bold;</div><div class="line">            margin-right: 10px;</div><div class="line">            text-align: center;</div><div class="line">            cursor: pointer;</div><div class="line">            display: inline-block;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        p.callout &#123;</div><div class="line">            padding: 15px;</div><div class="line">            background-color: #ECF8FF;</div><div class="line">            margin-bottom: 15px;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        .callout a &#123;</div><div class="line">            font-weight: bold;</div><div class="line">            color: #2BA6CB;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        table.social &#123;</div><div class="line">            /*  padding:15px; */</div><div class="line">            background-color: #ebebeb;</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        .social .soc-btn &#123;</div><div class="line">            padding: 3px 7px;</div><div class="line">            font-size: 12px;</div><div class="line">            margin-bottom: 10px;</div><div class="line">            text-decoration: none;</div><div class="line">            color: #FFF;</div><div class="line">            font-weight: bold;</div><div class="line">            display: block;</div><div class="line">            text-align: center;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        a.fb &#123;</div><div class="line">            background-color: #3B5998 !important;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        a.tw &#123;</div><div class="line">            background-color: #1daced !important;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        a.gp &#123;</div><div class="line">            background-color: #DB4A39 !important;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        a.ms &#123;</div><div class="line">            background-color: #000 !important;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        .sidebar .soc-btn &#123;</div><div class="line">            display: block;</div><div class="line">            width: 100%;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        /* -------------------------------------</div><div class="line">                HEADER</div><div class="line">        ------------------------------------- */</div><div class="line">        table.head-wrap &#123;</div><div class="line">            width: 100%;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        .header.container table td.logo &#123;</div><div class="line">            padding: 15px;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        .header.container table td.label &#123;</div><div class="line">            padding: 15px;</div><div class="line">            padding-left: 0px;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        /* -------------------------------------</div><div class="line">                BODY</div><div class="line">        ------------------------------------- */</div><div class="line">        table.body-wrap &#123;</div><div class="line">            width: 100%;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        /* -------------------------------------</div><div class="line">                FOOTER</div><div class="line">        ------------------------------------- */</div><div class="line">        table.footer-wrap &#123;</div><div class="line">            width: 100%;</div><div class="line">            clear: both !important;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        .footer-wrap .container td.content p &#123;</div><div class="line">            border-top: 1px solid rgb(215, 215, 215);</div><div class="line">            padding-top: 15px;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        .footer-wrap .container td.content p &#123;</div><div class="line">            font-size: 10px;</div><div class="line">            font-weight: bold;</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        /* -------------------------------------</div><div class="line">                TYPOGRAPHY</div><div class="line">        ------------------------------------- */</div><div class="line">        h1, h2, h3, h4, h5, h6 &#123;</div><div class="line">            font-family: &quot;HelveticaNeue-Light&quot;, &quot;Helvetica Neue Light&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Lucida Grande&quot;, sans-serif;</div><div class="line">            line-height: 1.1;</div><div class="line">            margin-bottom: 15px;</div><div class="line">            color: #000;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        h1 small, h2 small, h3 small, h4 small, h5 small, h6 small &#123;</div><div class="line">            font-size: 60%;</div><div class="line">            color: #6f6f6f;</div><div class="line">            line-height: 0;</div><div class="line">            text-transform: none;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        h1 &#123;</div><div class="line">            font-weight: 200;</div><div class="line">            font-size: 44px;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        h2 &#123;</div><div class="line">            font-weight: 200;</div><div class="line">            font-size: 37px;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        h3 &#123;</div><div class="line">            font-weight: 500;</div><div class="line">            font-size: 27px;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        h4 &#123;</div><div class="line">            font-weight: 500;</div><div class="line">            font-size: 23px;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        h5 &#123;</div><div class="line">            font-weight: 900;</div><div class="line">            font-size: 17px;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        h6 &#123;</div><div class="line">            font-weight: 900;</div><div class="line">            font-size: 14px;</div><div class="line">            text-transform: uppercase;</div><div class="line">            color: #444;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        .collapse &#123;</div><div class="line">            margin: 0 !important;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        p, ul &#123;</div><div class="line">            margin-bottom: 10px;</div><div class="line">            font-weight: normal;</div><div class="line">            font-size: 14px;</div><div class="line">            line-height: 1.6;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        p.lead &#123;</div><div class="line">            font-size: 17px;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        p.last &#123;</div><div class="line">            margin-bottom: 0px;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        ul li &#123;</div><div class="line">            margin-left: 5px;</div><div class="line">            list-style-position: inside;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        /* -------------------------------------</div><div class="line">                SIDEBAR</div><div class="line">        ------------------------------------- */</div><div class="line">        ul.sidebar &#123;</div><div class="line">            background: #ebebeb;</div><div class="line">            display: block;</div><div class="line">            list-style-type: none;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        ul.sidebar li &#123;</div><div class="line">            display: block;</div><div class="line">            margin: 0;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        ul.sidebar li a &#123;</div><div class="line">            text-decoration: none;</div><div class="line">            color: #666;</div><div class="line">            padding: 10px 16px;</div><div class="line">            /*  font-weight:bold; */</div><div class="line">            margin-right: 10px;</div><div class="line">            /*  text-align:center; */</div><div class="line">            cursor: pointer;</div><div class="line">            border-bottom: 1px solid #777777;</div><div class="line">            border-top: 1px solid #FFFFFF;</div><div class="line">            display: block;</div><div class="line">            margin: 0;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        ul.sidebar li a.last &#123;</div><div class="line">            border-bottom-width: 0px;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        ul.sidebar li a h1, ul.sidebar li a h2, ul.sidebar li a h3, ul.sidebar li a h4, ul.sidebar li a h5, ul.sidebar li a h6, ul.sidebar li a p &#123;</div><div class="line">            margin-bottom: 0 !important;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        /* ---------------------------------------------------</div><div class="line">                RESPONSIVENESS</div><div class="line">                Nuke it from orbit. It&apos;s the only way to be sure.</div><div class="line">        ------------------------------------------------------ */</div><div class="line"></div><div class="line">        /* Set a max-width, and make it display as block so it will automatically stretch to that width, but will also shrink down on a phone or something */</div><div class="line">        .container &#123;</div><div class="line">            display: block !important;</div><div class="line">            max-width: 600px !important;</div><div class="line">            margin: 0 auto !important; /* makes it centered */</div><div class="line">            clear: both !important;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        /* This should also be a block element, so that it will fill 100% of the .container */</div><div class="line">        .content &#123;</div><div class="line">            padding: 15px;</div><div class="line">            max-width: 600px;</div><div class="line">            margin: 0 auto;</div><div class="line">            display: block;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        /* Let&apos;s make sure tables in the content area are 100% wide */</div><div class="line">        .content table &#123;</div><div class="line">            width: 100%;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        /* Odds and ends */</div><div class="line">        .column &#123;</div><div class="line">            width: 300px;</div><div class="line">            float: left;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        .column tr td &#123;</div><div class="line">            padding: 15px;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        .column-wrap &#123;</div><div class="line">            padding: 0 !important;</div><div class="line">            margin: 0 auto;</div><div class="line">            max-width: 600px !important;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        .column table &#123;</div><div class="line">            width: 100%;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        .social .column &#123;</div><div class="line">            width: 280px;</div><div class="line">            min-width: 279px;</div><div class="line">            float: left;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        /* Be sure to place a .clear element after each set of columns, just to be safe */</div><div class="line">        .clear &#123;</div><div class="line">            display: block;</div><div class="line">            clear: both;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        /* -------------------------------------------</div><div class="line">                PHONE</div><div class="line">                For clients that support media queries.</div><div class="line">                Nothing fancy.</div><div class="line">        -------------------------------------------- */</div><div class="line">        @media only screen and (max-width: 600px) &#123;</div><div class="line"></div><div class="line">            a[class=&quot;btn&quot;] &#123;</div><div class="line">                display: block !important;</div><div class="line">                margin-bottom: 10px !important;</div><div class="line">                background-image: none !important;</div><div class="line">                margin-right: 0 !important;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            div[class=&quot;column&quot;] &#123;</div><div class="line">                width: auto !important;</div><div class="line">                float: none !important;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            table.social div[class=&quot;column&quot;] &#123;</div><div class="line">                width: auto !important;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125;</div><div class="line">    &lt;/style&gt;</div><div class="line">&lt;/head&gt;</div><div class="line"></div><div class="line">&lt;body bgcolor=&quot;#FFFFFF&quot;&gt;</div><div class="line"></div><div class="line">&lt;!-- HEADER --&gt;</div><div class="line">&lt;table class=&quot;head-wrap&quot; bgcolor=&quot;#999999&quot;&gt;</div><div class="line">    &lt;tr&gt;</div><div class="line">        &lt;td&gt;&lt;/td&gt;</div><div class="line">        &lt;td class=&quot;header container&quot;&gt;</div><div class="line"></div><div class="line">            &lt;div class=&quot;content&quot;&gt;</div><div class="line">                &lt;table bgcolor=&quot;#999999&quot;&gt;</div><div class="line">                    &lt;tr&gt;</div><div class="line">                        &lt;td&gt;&lt;img src=&quot;&#123;&#123;$icon&#125;&#125;&quot;/&gt;&lt;/td&gt;</div><div class="line">                        &lt;td align=&quot;right&quot;&gt;&lt;h6 class=&quot;collapse&quot;&gt;Test&lt;/h6&gt;&lt;/td&gt;</div><div class="line">                    &lt;/tr&gt;</div><div class="line">                &lt;/table&gt;</div><div class="line">            &lt;/div&gt;</div><div class="line"></div><div class="line">        &lt;/td&gt;</div><div class="line">        &lt;td&gt;&lt;/td&gt;</div><div class="line">    &lt;/tr&gt;</div><div class="line">&lt;/table&gt;&lt;!-- /HEADER --&gt;</div><div class="line"></div><div class="line"></div><div class="line">&lt;!-- BODY --&gt;</div><div class="line">&lt;table class=&quot;body-wrap&quot;&gt;</div><div class="line">    &lt;tr&gt;</div><div class="line">        &lt;td&gt;&lt;/td&gt;</div><div class="line">        &lt;td class=&quot;container&quot; bgcolor=&quot;#FFFFFF&quot;&gt;</div><div class="line"></div><div class="line">            &lt;div class=&quot;content&quot;&gt;</div><div class="line">                &lt;table&gt;</div><div class="line">                    &lt;tr&gt;</div><div class="line">                        &lt;td&gt;</div><div class="line"></div><div class="line">                            &lt;h3&gt;Welcome, &#123;&#123;$name&#125;&#125;&lt;/h3&gt;</div><div class="line">                            &lt;p class=&quot;lead&quot;&gt;This is a Test Email of the CowCat&lt;/p&gt;</div><div class="line"></div><div class="line">                            &lt;!-- A Real Hero (and a real human being) --&gt;</div><div class="line">                            &lt;p&gt;&lt;img src=&quot;&#123;&#123;$image&#125;&#125;&quot;/&gt;&lt;/p&gt;&lt;!-- /hero --&gt;</div><div class="line"></div><div class="line">                            &lt;!-- Callout Panel --&gt;</div><div class="line">                            &lt;p class=&quot;callout&quot;&gt;</div><div class="line">                                Laravel is the best PHP Framework</div><div class="line">                                &lt;a href=&quot;http://laravel-china.org/docs/5.1&quot;&gt;Learn it Now! &amp;raquo;&lt;/a&gt;</div><div class="line">                            &lt;/p&gt;&lt;!-- /Callout Panel --&gt;</div><div class="line"></div><div class="line">                            &lt;h3&gt;Hello</div><div class="line">                                &lt;small&gt;World&lt;/small&gt;</div><div class="line">                            &lt;/h3&gt;</div><div class="line">                            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</div><div class="line">                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</div><div class="line">                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure</div><div class="line">                                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</div><div class="line">                                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</div><div class="line">                                mollit anim id est laborum.&lt;/p&gt;</div><div class="line">                            &lt;a class=&quot;btn&quot;&gt;Click Me!&lt;/a&gt;</div><div class="line"></div><div class="line">                            &lt;br/&gt;</div><div class="line">                            &lt;br/&gt;</div><div class="line"></div><div class="line">                            &lt;!-- social &amp; contact --&gt;</div><div class="line">                            &lt;table class=&quot;social&quot; width=&quot;100%&quot;&gt;</div><div class="line">                                &lt;tr&gt;</div><div class="line">                                    &lt;td&gt;</div><div class="line"></div><div class="line">                                        &lt;!--- column 1 --&gt;</div><div class="line">                                        &lt;table align=&quot;left&quot; class=&quot;column&quot;&gt;</div><div class="line">                                            &lt;tr&gt;</div><div class="line">                                                &lt;td&gt;</div><div class="line"></div><div class="line">                                                    &lt;h5 class=&quot;&quot;&gt;Connect with Us:&lt;/h5&gt;</div><div class="line">                                                    &lt;p class=&quot;&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;soc-btn fb&quot;&gt;Facebook&lt;/a&gt;</div><div class="line">                                                        &lt;a href=&quot;#&quot; class=&quot;soc-btn tw&quot;&gt;Twitter&lt;/a&gt;</div><div class="line">                                                        &lt;a href=&quot;#&quot; class=&quot;soc-btn gp&quot;&gt;Google+&lt;/a&gt;&lt;/p&gt;</div><div class="line"></div><div class="line"></div><div class="line">                                                &lt;/td&gt;</div><div class="line">                                            &lt;/tr&gt;</div><div class="line">                                        &lt;/table&gt;&lt;!-- /column 1 --&gt;</div><div class="line"></div><div class="line">                                        &lt;!--- column 2 --&gt;</div><div class="line">                                        &lt;table align=&quot;left&quot; class=&quot;column&quot;&gt;</div><div class="line">                                            &lt;tr&gt;</div><div class="line">                                                &lt;td&gt;</div><div class="line"></div><div class="line">                                                    &lt;h5 class=&quot;&quot;&gt;Contact Info:&lt;/h5&gt;</div><div class="line">                                                    &lt;p&gt;Phone: &lt;strong&gt;408.341.0600&lt;/strong&gt;&lt;br/&gt;</div><div class="line">                                                        Email:</div><div class="line">                                                        &lt;strong&gt;&lt;a href=&quot;emailto:hseldon@trantor.com&quot;&gt;hseldon@trantor</div><div class="line">                                                                .com&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;</div><div class="line"></div><div class="line">                                                &lt;/td&gt;</div><div class="line">                                            &lt;/tr&gt;</div><div class="line">                                        &lt;/table&gt;&lt;!-- /column 2 --&gt;</div><div class="line"></div><div class="line">                                        &lt;span class=&quot;clear&quot;&gt;&lt;/span&gt;</div><div class="line"></div><div class="line">                                    &lt;/td&gt;</div><div class="line">                                &lt;/tr&gt;</div><div class="line">                            &lt;/table&gt;&lt;!-- /social &amp; contact --&gt;</div><div class="line"></div><div class="line"></div><div class="line">                        &lt;/td&gt;</div><div class="line">                    &lt;/tr&gt;</div><div class="line">                &lt;/table&gt;</div><div class="line">            &lt;/div&gt;</div><div class="line"></div><div class="line">        &lt;/td&gt;</div><div class="line">        &lt;td&gt;&lt;/td&gt;</div><div class="line">    &lt;/tr&gt;</div><div class="line">&lt;/table&gt;&lt;!-- /BODY --&gt;</div><div class="line"></div><div class="line">&lt;!-- FOOTER --&gt;</div><div class="line">&lt;table class=&quot;footer-wrap&quot;&gt;</div><div class="line">    &lt;tr&gt;</div><div class="line">        &lt;td&gt;&lt;/td&gt;</div><div class="line">        &lt;td class=&quot;container&quot;&gt;</div><div class="line"></div><div class="line">            &lt;!-- content --&gt;</div><div class="line">            &lt;div class=&quot;content&quot;&gt;</div><div class="line">                &lt;table&gt;</div><div class="line">                    &lt;tr&gt;</div><div class="line">                        &lt;td align=&quot;center&quot;&gt;</div><div class="line">                            &lt;p&gt;</div><div class="line">                                &lt;a href=&quot;#&quot;&gt;Terms&lt;/a&gt; |</div><div class="line">                                &lt;a href=&quot;#&quot;&gt;Privacy&lt;/a&gt; |</div><div class="line">                                &lt;a href=&quot;#&quot;&gt;</div><div class="line">                                    &lt;unsubscribe&gt;Unsubscribe&lt;/unsubscribe&gt;</div><div class="line">                                &lt;/a&gt;</div><div class="line">                            &lt;/p&gt;</div><div class="line">                        &lt;/td&gt;</div><div class="line">                    &lt;/tr&gt;</div><div class="line">                &lt;/table&gt;</div><div class="line">            &lt;/div&gt;&lt;!-- /content --&gt;</div><div class="line"></div><div class="line">        &lt;/td&gt;</div><div class="line">        &lt;td&gt;&lt;/td&gt;</div><div class="line">    &lt;/tr&gt;</div><div class="line">&lt;/table&gt;&lt;!-- /FOOTER --&gt;</div><div class="line"></div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
-<h3 id="执行代码-1"><a href="#执行代码-1" class="headerlink" title="执行代码"></a>执行代码</h3><p>在浏览器访问指定路由，然后去邮箱查看邮件是否发送成功。<br><img src="http://o93kt6djh.bkt.clouddn.com/Laravel-SendEmail%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-09%2016.46.51.png" alt="发送图文邮件"></p>
-<h2 id="编写发送附件邮件程序"><a href="#编写发送附件邮件程序" class="headerlink" title="编写发送附件邮件程序"></a>编写发送附件邮件程序</h2><h2 id="路由-2"><a href="#路由-2" class="headerlink" title="路由"></a>路由</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Route::get(&apos;email/sendFile/&#123;id&#125;&apos;, [</div><div class="line">    &apos;as&apos;   =&gt; &apos;backend.email.sendFile&apos;,</div><div class="line">    &apos;uses&apos; =&gt; &apos;EmailController@sendFile&apos;,</div><div class="line">]);</div></pre></td></tr></table></figure>
-<h2 id="控制器-2"><a href="#控制器-2" class="headerlink" title="控制器"></a>控制器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">public function sendFile(Request $request, $id)</div><div class="line">&#123;</div><div class="line">    $user = UserRepository::find($id);</div><div class="line">    $icon = &quot;http://o93kt6djh.bkt.clouddn.com/Laravel-SendEmaillaravel-200x50.png&quot;;</div><div class="line"></div><div class="line">    Mail::send(&apos;emails.test-file&apos;, [&apos;name&apos; =&gt; $user-&gt;name, &apos;icon&apos; =&gt; $icon], function ($message) &#123;</div><div class="line">        $someOne = &quot;2794408425@qq.com&quot;;</div><div class="line">        $file = storage_path(&quot;app/PHP7介绍和应用实践.pdf&quot;);</div><div class="line">        $message-&gt;to($someOne)-&gt;subject(&quot;附件邮件标题&quot;);</div><div class="line">        $message-&gt;attach($file, [&apos;as&apos; =&gt; &apos;PHP7 Introduction and Application Action.pdf&apos;, &apos;mime&apos; =&gt; &apos;application/pdf&apos;]);</div><div class="line">    &#125;);</div><div class="line"></div><div class="line"></div><div class="line">    echo &apos;已发送邮件,请注意查收&apos;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="视图-2"><a href="#视图-2" class="headerlink" title="视图"></a>视图</h2><p>新增视图<code>emails/test-file.blade.php</code>，代码如下：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">            你好,&#123;&#123;$name&#125;&#125;,这是一封测试邮件。</div><div class="line">            下面将会显示一张原始数据图片</div><div class="line">        <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"&#123;&#123;$message-&gt;embed($icon)&#125;&#125;"</span> <span class="attr">alt</span>=<span class="string">"原始数据图片"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<h2 id="执行代码-2"><a href="#执行代码-2" class="headerlink" title="执行代码"></a>执行代码</h2><p>在浏览器访问指定路由，然后去邮箱查看邮件是否发送成功。<br><img src="http://o93kt6djh.bkt.clouddn.com/Laravel-SendEmail%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-10%2013.40.54.png" alt="发送附件邮件"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/08/08/使用-Laravel-基于-SMTP-驱动实现发送邮件/" data-id="cj329leka0047qm4bfr6lv0ua" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
 
     </footer>
   </div>
@@ -2090,7 +3182,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -2100,7 +3192,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
     </div>
@@ -2110,9 +3202,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 18.57px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
+      <a href="/tags/AliCloud/" style="font-size: 11.67px;">AliCloud</a> <a href="/tags/Javascript/" style="font-size: 11.67px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 18.33px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 16.67px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.67px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 13.33px;">Pattern</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/UML/" style="font-size: 11.67px;">UML</a> <a href="/tags/Yii/" style="font-size: 15px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
     </div>
   </div>
 
@@ -2129,9 +3221,17 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/05/25/高性能的-PHP-日志系统/">高性能的 PHP 日志系统</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/24/LNMP-性能优化之-PHP-性能优化/">LNMP 性能优化之 PHP 性能优化</a>
+          </li>
         
           <li>
             <a href="/2017/05/23/PHP-的性能优化/">PHP 的性能优化</a>
@@ -2143,14 +3243,6 @@
         
           <li>
             <a href="/2017/04/21/设计模式之工厂方法模式/">设计模式之工厂方法模式</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/20/设计模式之简单工厂模式/">设计模式之简单工厂模式</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/05/使用-Laravel-5-3-Vue-js-2-1-开发知乎/">使用 Laravel 5.3 + Vue.js 2.1 开发知乎</a>
           </li>
         
       </ul>
@@ -2166,7 +3258,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Luis Edware<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

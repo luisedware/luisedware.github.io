@@ -13,10 +13,10 @@ PHP 语法使用得不恰当
 PHP 自身的短板
 尚未排查出的问题
 
-PHP 性能问题简析PHP 的性能问题，占整体项目性能问题的比例一般是 25% ~ 45%，但也不仅仅局限于对 PHP 的性能优化。
+PHP 性能问题简析PHP 的性能问题，占整体项目性能问题的比例一般是三成，但也不仅仅局限于对 PHP 的性能优化。
 PHP 的性能问题的解决方向，优化难度是从简单到困难
 
-PH">
+PHP 语言级的性能">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PHP 的性能优化">
 <meta property="og:url" content="http://luisedware.github.io/2017/05/23/PHP-的性能优化/index.html">
@@ -29,11 +29,11 @@ PHP 语法使用得不恰当
 PHP 自身的短板
 尚未排查出的问题
 
-PHP 性能问题简析PHP 的性能问题，占整体项目性能问题的比例一般是 25% ~ 45%，但也不仅仅局限于对 PHP 的性能优化。
+PHP 性能问题简析PHP 的性能问题，占整体项目性能问题的比例一般是三成，但也不仅仅局限于对 PHP 的性能优化。
 PHP 的性能问题的解决方向，优化难度是从简单到困难
 
-PH">
-<meta property="og:updated_time" content="2017-05-23T23:24:07.000Z">
+PHP 语言级的性能">
+<meta property="og:updated_time" content="2017-05-24T12:39:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP 的性能优化">
 <meta name="twitter:description" content="PHP 性能优化初探什么情况下，会遇到了 PHP 性能问题？
@@ -44,10 +44,10 @@ PHP 语法使用得不恰当
 PHP 自身的短板
 尚未排查出的问题
 
-PHP 性能问题简析PHP 的性能问题，占整体项目性能问题的比例一般是 25% ~ 45%，但也不仅仅局限于对 PHP 的性能优化。
+PHP 性能问题简析PHP 的性能问题，占整体项目性能问题的比例一般是三成，但也不仅仅局限于对 PHP 的性能优化。
 PHP 的性能问题的解决方向，优化难度是从简单到困难
 
-PH">
+PHP 语言级的性能">
   
     <link rel="alternate" href="/atom.xml" title="七月十五九月初七" type="application/atom+xml">
   
@@ -89,9 +89,9 @@ PH">
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -134,7 +134,7 @@ PH">
 <li>PHP 自身的短板</li>
 <li>尚未排查出的问题</li>
 </ul>
-<h2 id="PHP-性能问题简析"><a href="#PHP-性能问题简析" class="headerlink" title="PHP 性能问题简析"></a>PHP 性能问题简析</h2><p>PHP 的性能问题，占整体项目性能问题的比例一般是 25% ~ 45%，但也不仅仅局限于对 PHP 的性能优化。</p>
+<h2 id="PHP-性能问题简析"><a href="#PHP-性能问题简析" class="headerlink" title="PHP 性能问题简析"></a>PHP 性能问题简析</h2><p>PHP 的性能问题，占整体项目性能问题的比例一般是三成，但也不仅仅局限于对 PHP 的性能优化。</p>
 <p>PHP 的性能问题的解决方向，优化难度是从简单到困难</p>
 <ul>
 <li>PHP 语言级的性能优化</li>
@@ -143,6 +143,7 @@ PH">
 </ul>
 <h2 id="压力测试工具简介"><a href="#压力测试工具简介" class="headerlink" title="压力测试工具简介"></a>压力测试工具简介</h2><p>Apache Benchmark(ab)</p>
 <p>简介</p>
+<p>ApacheBench 是 Apache 服务器自带的一个web压力测试工具,缩写为 ab ,旨在高压高并发下体现出各种问题和瓶颈.<br>ab 命令会模拟多个用户同时访问一个url (伪装一个并发访问的环境).<br>此命令对本地cpu要求不高,内存要求也不多,但是会对访问目标服务器造成严重的负载甚至资源耗尽而宿机,很类似与cc攻击.</p>
 <p>如何使用</p>
 <p>./ab -n1000 -c100 <a href="http://www.baidu.com/，其中" target="_blank" rel="external">http://www.baidu.com/，其中</a> -n 是请求书，-c 是并发数，后面的是压测地址。</p>
 <p>压测呈现的数据，比较重要的三个</p>
@@ -277,12 +278,13 @@ PH">
 </code></pre><p>如果后一个请求不强依赖前一个请求的返回结果，可以使用将网络请求并行化。</p>
 <p>旁路方案</p>
 <p>如果后一个请求不强依赖前一个请求的返回结果，可以使用旁路方案。</p>
+<h2 id="PHP-性能问题的具体分析"><a href="#PHP-性能问题的具体分析" class="headerlink" title="PHP 性能问题的具体分析"></a>PHP 性能问题的具体分析</h2><p>工具：XHPorf(源自 Fackbook 的 PHP 性能分析工具)<br>实践：通过分析 Wordpress 程序，做优化</p>
 <h2 id="PHP-性能瓶颈解决方法"><a href="#PHP-性能瓶颈解决方法" class="headerlink" title="PHP 性能瓶颈解决方法"></a>PHP 性能瓶颈解决方法</h2><p>Opcode Cache: PHP 扩展 Yac<br>扩展实现：通过 PHP 扩展代替原 PHP 代码中高频逻辑<br>Runtime 优化：HHVM,PHP-JIT</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/05/23/PHP-的性能优化/" data-id="cj329leh4001oqm4bc7jshwcb" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/05/23/PHP-的性能优化/" data-id="cj35mbn7200205w4bnbv3zp6t" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -293,9 +295,18 @@ PH">
     
 <nav id="article-nav">
   
+    <a href="/2017/05/24/LNMP-性能优化之-PHP-性能优化/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          LNMP 性能优化之 PHP 性能优化
+        
+      </div>
+    </a>
+  
   
     <a href="/2017/04/24/设计模式之抽象工厂模式/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">设计模式之抽象工厂模式</div>
     </a>
   
@@ -310,7 +321,7 @@ PH">
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -320,7 +331,7 @@ PH">
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
     </div>
@@ -330,9 +341,9 @@ PH">
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 18.57px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
+      <a href="/tags/AliCloud/" style="font-size: 11.67px;">AliCloud</a> <a href="/tags/Javascript/" style="font-size: 11.67px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 18.33px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 16.67px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.67px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 13.33px;">Pattern</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/UML/" style="font-size: 11.67px;">UML</a> <a href="/tags/Yii/" style="font-size: 15px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
     </div>
   </div>
 
@@ -349,9 +360,17 @@ PH">
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/05/25/高性能的-PHP-日志系统/">高性能的 PHP 日志系统</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/24/LNMP-性能优化之-PHP-性能优化/">LNMP 性能优化之 PHP 性能优化</a>
+          </li>
         
           <li>
             <a href="/2017/05/23/PHP-的性能优化/">PHP 的性能优化</a>
@@ -363,14 +382,6 @@ PH">
         
           <li>
             <a href="/2017/04/21/设计模式之工厂方法模式/">设计模式之工厂方法模式</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/20/设计模式之简单工厂模式/">设计模式之简单工厂模式</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/05/使用-Laravel-5-3-Vue-js-2-1-开发知乎/">使用 Laravel 5.3 + Vue.js 2.1 开发知乎</a>
           </li>
         
       </ul>
@@ -386,7 +397,7 @@ PH">
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Luis Edware<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
