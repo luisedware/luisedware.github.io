@@ -47,7 +47,7 @@ PHP 语言级性能优化
 尽可能避免使用魔法方法来完成任务
 尽可能避免使用错误抑制符来完成任务
 尽可能避">
-<meta property="og:updated_time" content="2017-05-26T23:00:13.000Z">
+<meta property="og:updated_time" content="2017-05-30T07:35:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LNMP 性能优化之 PHP 性能优化">
 <meta name="twitter:description" content="目录
@@ -231,7 +231,7 @@ PHP 语言级性能优化
 <h4 id="尽可能避免在遍历或循环内做各种运算"><a href="#尽可能避免在遍历或循环内做各种运算" class="headerlink" title="尽可能避免在遍历或循环内做各种运算"></a><a id="3.6">尽可能避免在遍历或循环内做各种运算</a></h4><p>使用 for、while 循环的时候，循环内的计算式将会被重复计算，这样就造成了一些可避免的不必要性能开销。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="comment">// 修改前</span></div><div class="line"><span class="keyword">for</span>($i = <span class="number">0</span>; $i &lt; strlen(<span class="string">"hello world"</span>); $i++)&#123;</div><div class="line">	<span class="comment">//do something</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 修改后</span></div><div class="line">$str = <span class="string">"hello world"</span>;</div><div class="line">$strlen = strlen($str);</div><div class="line"><span class="keyword">for</span>($i = <span class="number">0</span>; $i &lt; $strlen; $i++)&#123;</div><div class="line">	<span class="comment">//do something</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h4 id="尽可能避免在计算密集型的业务中使用"><a href="#尽可能避免在计算密集型的业务中使用" class="headerlink" title="尽可能避免在计算密集型的业务中使用"></a><a id="3.7">尽可能避免在计算密集型的业务中使用</a></h4><p>什么是计算密集型的业务？一般来说是大批量的日志分析、大批量的数据运算。PHP 的语言特性决定了 PHP 不适合做大数据量的运算。因为 PHP 是由 C 语言编写的，<br>PHP 的代码最终还是要转换成 C 语言去执行，这就需要一部分的性能开销。再加上 PHP 自身环境和语言特性缘故，PHP 做运算相比于 C 语言来说，不仅性能开销大，运算速度也慢，所以 PHP 不是适合做计算密集型的业务。PHP 的语言特性决定了它比较适合衔接后端服务或渲染页面。</p>
 <h2 id="PHP-周边级性能优化"><a href="#PHP-周边级性能优化" class="headerlink" title="PHP 周边级性能优化"></a><a id="4">PHP 周边级性能优化</a></h2><h4 id="Server-服务器"><a href="#Server-服务器" class="headerlink" title="Server 服务器"></a><a id="4.1">Server 服务器</a></h4><p>从服务器方面进行优化，可以选择将服务器不安装其他后端服务软件，仅仅安装 PHP 以及其必要扩展。使单机的性能全部向 PHP 倾斜。同时也对 PHP 的相关参数进行优化，将 PHP 单机服务器性能最大化。在大数据、高并发的场景下，可以尝试将 PHP 服务器集群化，通过负载均衡，将网络请求分配至不同的 PHP 单机服务器处理。</p>
-<h4 id="Network-网络"><a href="#Network-网络" class="headerlink" title="Network 网络"></a><a id="4.2">Network 网络</a></h4><p>从网络方面进行优化时的需要注意的几点：</p>
+<h4 id="Network-网络"><a href="#Network-网络" class="headerlink" title="Network 网络"></a><a id="4.2">Network 网络</a></h4><p>从网络方面进行优化时的需要注意的两点：</p>
 <ul>
 <li>对接接口是否稳定</li>
 <li>连接网络是否稳定</li>
@@ -258,11 +258,20 @@ PHP 语言级性能优化
 </ul>
 </li>
 </ul>
-<h4 id="Database-数据库"><a href="#Database-数据库" class="headerlink" title="Database 数据库"></a><a id="4.3">Database 数据库</a></h4><h4 id="Cache-缓存"><a href="#Cache-缓存" class="headerlink" title="Cache 缓存"></a><a id="4.4">Cache 缓存</a></h4><h4 id="File-文件"><a href="#File-文件" class="headerlink" title="File 文件"></a><a id="4.5">File 文件</a></h4><h2 id="PHP-瓶颈级性能优化"><a href="#PHP-瓶颈级性能优化" class="headerlink" title="PHP 瓶颈级性能优化"></a><a id="5">PHP 瓶颈级性能优化</a></h2><h4 id="Opcode-优化"><a href="#Opcode-优化" class="headerlink" title="Opcode 优化"></a><a id="5.3">Opcode 优化</a></h4><h4 id="Runtime-优化"><a href="#Runtime-优化" class="headerlink" title="Runtime 优化"></a><a id="5.4">Runtime 优化</a></h4><h4 id="PHP-扩展编写"><a href="#PHP-扩展编写" class="headerlink" title="PHP 扩展编写"></a><a id="5.1">PHP 扩展编写</a></h4><h2 id="PHP-性能分析工具"><a href="#PHP-性能分析工具" class="headerlink" title="PHP 性能分析工具"></a><a id="6">PHP 性能分析工具</a></h2><h4 id="ApacheBench-的参数讲解与基础使用"><a href="#ApacheBench-的参数讲解与基础使用" class="headerlink" title="ApacheBench 的参数讲解与基础使用"></a><a id="6.1">ApacheBench 的参数讲解与基础使用</a></h4><h4 id="Vld-Opcache-的参数讲解与基础使用"><a href="#Vld-Opcache-的参数讲解与基础使用" class="headerlink" title="Vld Opcache 的参数讲解与基础使用"></a><a id="6.2">Vld Opcache 的参数讲解与基础使用</a></h4><h4 id="Tideways-的参数讲解与基础使用"><a href="#Tideways-的参数讲解与基础使用" class="headerlink" title="Tideways 的参数讲解与基础使用"></a><a id="6.3">Tideways 的参数讲解与基础使用</a></h4>
+<h4 id="Database-数据库"><a href="#Database-数据库" class="headerlink" title="Database 数据库"></a><a id="4.3">Database 数据库</a></h4><p>数据库可以进行优化的层面：</p>
+<ul>
+<li>服务器硬件</li>
+<li>数据库配置</li>
+<li>数据库表结构</li>
+<li>SQL 语句和索引</li>
+</ul>
+<p>在服务器硬件方面，可以选择多核的 CPU，现在数据库软件对多核 CPU 都有优化；在数据库配置方面，可以根据监控日志和性能压测数据进行调优；数据表结构方面可以根据需要存储的数据选择最优的数据类型,设计时可以根据数据库表的范式来设计减少冗余数据，也可以反范式设计提高查询性能；如果数据库表过大，可以采取垂直拆分和水平拆分。</p>
+<h4 id="Cache-缓存"><a href="#Cache-缓存" class="headerlink" title="Cache 缓存"></a><a id="4.4">Cache 缓存</a></h4><h4 id="File-文件"><a href="#File-文件" class="headerlink" title="File 文件"></a><a id="4.5">File 文件</a></h4><h2 id="PHP-瓶颈级性能优化"><a href="#PHP-瓶颈级性能优化" class="headerlink" title="PHP 瓶颈级性能优化"></a><a id="5">PHP 瓶颈级性能优化</a></h2><h4 id="Opcode-优化"><a href="#Opcode-优化" class="headerlink" title="Opcode 优化"></a><a id="5.3">Opcode 优化</a></h4><h4 id="Runtime-优化"><a href="#Runtime-优化" class="headerlink" title="Runtime 优化"></a><a id="5.4">Runtime 优化</a></h4><h4 id="PHP-扩展编写"><a href="#PHP-扩展编写" class="headerlink" title="PHP 扩展编写"></a><a id="5.1">PHP 扩展编写</a></h4><h2 id="PHP-性能分析工具"><a href="#PHP-性能分析工具" class="headerlink" title="PHP 性能分析工具"></a><a id="6">PHP 性能分析工具</a></h2><h4 id="ApacheBench-的参数讲解与基础使用"><a href="#ApacheBench-的参数讲解与基础使用" class="headerlink" title="ApacheBench 的参数讲解与基础使用"></a><a id="6.1">ApacheBench 的参数讲解与基础使用</a></h4><p><a href="https://github.com/luisedware/Archives/issues/2" target="_blank" rel="external">ApacheBench 参数讲解与基础使用：https://github.com/luisedware/Archives/issues/2</a></p>
+<h4 id="Vld-Opcache-的参数讲解与基础使用"><a href="#Vld-Opcache-的参数讲解与基础使用" class="headerlink" title="Vld Opcache 的参数讲解与基础使用"></a><a id="6.2">Vld Opcache 的参数讲解与基础使用</a></h4><h4 id="Tideways-的参数讲解与基础使用"><a href="#Tideways-的参数讲解与基础使用" class="headerlink" title="Tideways 的参数讲解与基础使用"></a><a id="6.3">Tideways 的参数讲解与基础使用</a></h4>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/05/24/LNMP-性能优化之-PHP-性能优化/" data-id="cj3awq12p000a7w4balpw9a8u" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/05/24/LNMP-性能优化之-PHP-性能优化/" data-id="cj3b91fcm0001ib4bqw7nfyz1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -343,7 +352,7 @@ PHP 语言级性能优化
       <ul>
         
           <li>
-            <a href="/2017/05/27/ApacheBench-的参数讲解与基础使用/">ApacheBench 的参数讲解与基础使用</a>
+            <a href="/2017/05/27/ApacheBench-的参数讲解与基础使用/">ApacheBench 参数讲解与基础使用</a>
           </li>
         
           <li>
