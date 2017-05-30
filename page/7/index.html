@@ -52,9 +52,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -186,7 +186,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/08/31/使用阿里云从零开始部署-Laravel/" data-id="cj3b91fgh005aib4byxkzhr3a" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/08/31/使用阿里云从零开始部署-Laravel/" data-id="cj3bjdvfk0051ik4bdja3gvr3" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AliCloud/">AliCloud</a></li></ul>
@@ -247,7 +247,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/08/25/使用-Laravel-编写自定义命令/" data-id="cj3b91ffm003xib4bfl0bnmdm" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/08/25/使用-Laravel-编写自定义命令/" data-id="cj3bjdvee003tik4ba5jvwllc" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -311,7 +311,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/08/08/使用-Laravel-基于-SMTP-驱动实现发送邮件/" data-id="cj3b91fg6004nib4bgcgnnga3" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/08/08/使用-Laravel-基于-SMTP-驱动实现发送邮件/" data-id="cj3bjdve9003pik4b82i5q0c6" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -371,7 +371,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/06/27/使用-PHPStorm-与-Xdebug-调试-Laravel-二/" data-id="cj3b91ffz004aib4b4bvxpe3b" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/06/27/使用-PHPStorm-与-Xdebug-调试-Laravel-二/" data-id="cj3bjdvel003zik4buzbzq0a5" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li></ul>
@@ -461,7 +461,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/06/20/使用-PHPStorm-与-Xdebug-调试-Laravel-一/" data-id="cj3b91ffw0043ib4by4rzwhfv" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/06/20/使用-PHPStorm-与-Xdebug-调试-Laravel-一/" data-id="cj3bjdve2003mik4b2x8l275o" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li></ul>
@@ -524,6 +524,7 @@
 <li><a href="#4.2">PHP-CGI</a></li>
 <li><a href="#4.3">PHP-FPM</a></li>
 <li><a href="#4.4">CGI、FastCGI、PHP-CGI、PHP-FPM 的区别</a></li>
+<li><a href="#4.5">PHP-FPM 优劣势分析与解决方案</a></li>
 </ul>
 </li>
 <li><a href="#5">Web Server 的配置使用</a><ul>
@@ -739,6 +740,9 @@
 <li><strong>PHP-CGI</strong>：使用 PHP 实现 CGI 协议的程序，用于解析和处理 PHP 脚本。</li>
 <li><strong>PHP-FPM</strong>：是一个只用于 PHP 的进程管理器，提供更好的 PHP 进程管理方式，可以有效控制进程，平滑地加载 PHP 配置文件。</li>
 </ul>
+<h4 id="PHP-FPM-优劣势分析与解决方案"><a href="#PHP-FPM-优劣势分析与解决方案" class="headerlink" title="PHP-FPM 优劣势分析与解决方案"></a><a id="4.5">PHP-FPM 优劣势分析与解决方案</a></h4><h6 id="优劣势分析"><a href="#优劣势分析" class="headerlink" title="优劣势分析"></a>优劣势分析</h6><p>PHP-FPM 的优势有许多，如实现了 FastCGI 协议来处理 HTTP 请求，有着更高的性能和更小的开销。每当 PHP-FPM 的子进程处理完 HTTP 请求后，相关资源自动销毁，不用担心资源回收的问题。哪怕在运行的过程中报错了，也不影响其他子进程的运行，使得开发者不用过分担心未知的错误而进行面面俱到的防御性编码。在低负载时硬件开销低，只需要 fork 多几个子进程就满足日常访问量。</p>
+<p>PHP-FPM 的劣势也很明显。首先是不适合高并发和高负载的场景。因为在高负载的情况，由于 PHP-FPM 多进程模型，会显得子进程的初始化开销过高。加上进程、文件句柄、请求连接等，会使得内存过多地消耗，而 CPU 也得不到充分的利用。又因为子进程的开销过高，导致服务器的内存容易饱满，使得网络连接数过低。由于 PHP-FPM 在完成请求会自动销毁资源，因此也不支持 Websocket 或其他长连接协议。</p>
+<h6 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h6><p>针对 PHP 高初始化开销这个问题，可以使用 C 扩展的框架来重写相关业务，如 Phalcon、Yaf。针对 PHP 高内存开销，设置好短连接、短超时，和使用并行化 RPC 来尽快处理请求。而针对地连接数，只能是加大内存，增加服务器了。不支持 Websocket，只能使用 Nginx 进行反向代理，将 Websocket 等或其他长连接交给服务器其他 Web Server 处理。如 PHP 的 Swoole 或 C/C++/Go/Java 等语言编写的 Web Server。</p>
 <h2 id="Web-Server-的配置使用"><a href="#Web-Server-的配置使用" class="headerlink" title="Web Server 的配置使用"></a><a id="5">Web Server 的配置使用</a></h2><h4 id="Apache"><a href="#Apache" class="headerlink" title="Apache"></a><a id="5.1">Apache</a></h4><p>Apache HTTP Server（简称Apache）是 Apache 软件基金会的一个开放源代码的网页服务器软件，可以在大多数电脑操作系统中运行，由于其跨平台和安全性被广泛使用，是最流行的Web服务器软件之一。它快速、可靠并且可通过简单的API扩充，将 PHP／Perl／Python 等解释器编译到服务器中。</p>
 <h4 id="Apache-常用命令"><a href="#Apache-常用命令" class="headerlink" title="Apache 常用命令"></a><a id="5.1.3">Apache 常用命令</a></h4><figure class="highlight apache"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">httpd</span>                       # 启动 Apache</div><div class="line"><span class="attribute">httpd</span> -h                    # 显示帮助</div><div class="line"><span class="attribute">httpd</span> -v                    # 显示版本信息</div><div class="line"><span class="attribute">httpd</span> -V                    # 显示版本，编译器版本和配置参数</div><div class="line"><span class="attribute">httpd</span> -t                    # 检查配置文件语法错误</div><div class="line"><span class="attribute">httpd</span> -l                    # 显示编译模块</div><div class="line"><span class="attribute">httpd</span> -L                    # 显示配置指令说明</div><div class="line"><span class="attribute">httpd</span> -f &lt;/path/to/config&gt;  # 指定配置文件</div><div class="line"><span class="attribute">httpd</span> -S                    # 显示配置文件中的设定</div></pre></td></tr></table></figure>
 <h4 id="Apache-常用的配置与模块"><a href="#Apache-常用的配置与模块" class="headerlink" title="Apache 常用的配置与模块"></a><a id="5.1.1">Apache 常用的配置与模块</a></h4><ul>
@@ -885,7 +889,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/06/10/PHP Web Application 运行流程、概念术语、机制原理和代码实践/" data-id="cj3b91fea001wib4bqv4gzeaa" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/06/10/PHP Web Application 运行流程、概念术语、机制原理和代码实践/" data-id="cj3bjdvb8001aik4bw67h8cb5" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -962,7 +966,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（九）/" data-id="cj3b91fgb004yib4br2mww8oy" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（九）/" data-id="cj3bjdvf9004lik4bsgb2kbqc" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -1019,7 +1023,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（七）/" data-id="cj3b91fg3004kib4b208i96jj" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（七）/" data-id="cj3bjdvez004cik4b62iaocss" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -1079,7 +1083,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（六）/" data-id="cj3b91fgc0051ib4baziyc8dz" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（六）/" data-id="cj3bjdvff004vik4bmg086116" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -1153,7 +1157,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（五）/" data-id="cj3b91fgd0057ib4bn8vdiynv" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（五）/" data-id="cj3bjdvfd004sik4b443nmbr4" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -1176,7 +1180,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -1186,7 +1190,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
     </div>
@@ -1196,7 +1200,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/AliCloud/" style="font-size: 11.67px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.67px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 18.33px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 16.67px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.67px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 13.33px;">Pattern</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/UML/" style="font-size: 11.67px;">UML</a> <a href="/tags/Yii/" style="font-size: 15px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
     </div>
@@ -1215,7 +1219,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -1252,7 +1256,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Luis Edware<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
