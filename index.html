@@ -52,9 +52,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -64,6 +64,55 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-MySQLDumpSlow-的参数讲解与基础使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/02/MySQLDumpSlow-的参数讲解与基础使用/" class="article-date">
+  <time datetime="2017-06-02T09:57:50.000Z" itemprop="datePublished">2017-06-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/02/MySQLDumpSlow-的参数讲解与基础使用/">MySQLDumpSlow 的参数讲解与基础使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li><a href="#1">认识 MySQLDumpSlow</a></li>
+<li><a href="#2">MySQLDumpSlow 的命令参数</a></li>
+<li><a href="#3">MySQLDumpSlow 的结果参数</a></li>
+<li><a href="#4">MySQLDumpSlow 的使用建议</a></li>
+<li><a href="#5">MySQLDumpSlow 的使用实例</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2017/06/02/MySQLDumpSlow-的参数讲解与基础使用/" data-id="cj3fon01y001aho4b65tjbhsk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-XHprof-的安装配置与使用分析" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -118,12 +167,11 @@
 <li>XHPROF_FLAGS_MEMORY (integer)：使输出的性能数据中添加内存数据</li>
 </ul>
 <h2 id="XHProf-范例"><a href="#XHProf-范例" class="headerlink" title="XHProf 范例"></a>XHProf 范例</h2><p>范例一如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">xhprof_enable(XHPROF_FLAGS_CPU + XHPROF_FLAGS_MEMORY);</div><div class="line"></div><div class="line"><span class="keyword">for</span> ($i = <span class="number">0</span>; $i &lt;= <span class="number">1000</span>; $i++) &#123;</div><div class="line">    $a = $i * $i;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$uid = uniqid();</div><div class="line">$file = (ini_get(<span class="string">'xhprof.output_dir'</span>) ? : <span class="string">'/tmp'</span>) . <span class="string">'/'</span> . $uid . <span class="string">'.xhprof'</span>;</div><div class="line">file_put_contents($file, serialize(xhprof_disable()));</div><div class="line"></div><div class="line"><span class="keyword">echo</span> $uid;</div></pre></td></tr></table></figure></p>
-<p>范例二如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/06/01/XHprof-的安装配置与使用分析/" data-id="cj3fjhmrw002d1p4bpabrsaui" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/06/01/XHprof-的安装配置与使用分析/" data-id="cj3fon02w002eho4bfro1z30d" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -176,7 +224,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/05/31/学习-Swoole/" data-id="cj3fjhn15006d1p4bw4e1caq2" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/05/31/学习-Swoole/" data-id="cj3fon05y006mho4bx3k3l6q9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swoole/">Swoole</a></li></ul>
@@ -218,7 +266,7 @@
 <li><a href="#1">认识 Apache Bench</a></li>
 <li><a href="#2">Apache Bench 的命令参数</a></li>
 <li><a href="#3">Apache Bench 的结果参数</a></li>
-<li><a href="#4">Apache Bench 的压测建议</a></li>
+<li><a href="#4">Apache Bench 的使用建议</a></li>
 <li><a href="#5">Apache Bench 的使用实例</a></li>
 </ul>
 <h2 id="认识-Apache-Bench"><a href="#认识-Apache-Bench" class="headerlink" title="认识 Apache Bench"></a><a id="1">认识 Apache Bench</a></h2><p>Apache Bench 是 Apache 自带的一个命令式程序。它可以创建并发访问线程，同时模拟多个并发请求对某一个 URL 地址进行访问。它的测试目标是基于 URL 的。因此，Apache Bench 即可测试 Apache 的负载压力，也能测试 Nginx、LigntHttp、Tomcat、IIS 等其他 Web Server 的压力。</p>
@@ -483,11 +531,11 @@
 </blockquote>
 </li>
 </ul>
-<h2 id="Apache-Bench-的压测建议"><a href="#Apache-Bench-的压测建议" class="headerlink" title="Apache Bench 的压测建议"></a><a id="4">Apache Bench 的压测建议</a></h2><h3 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h3><h2 id="Apache-Bench-的使用实例"><a href="#Apache-Bench-的使用实例" class="headerlink" title="Apache Bench 的使用实例"></a><a id="5">Apache Bench 的使用实例</a></h2><h3 id="TODO-1"><a href="#TODO-1" class="headerlink" title="TODO"></a>TODO</h3>
+<h2 id="Apache-Bench-的使用建议"><a href="#Apache-Bench-的使用建议" class="headerlink" title="Apache Bench 的使用建议"></a><a id="4">Apache Bench 的使用建议</a></h2><h3 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h3><h2 id="Apache-Bench-的使用实例"><a href="#Apache-Bench-的使用实例" class="headerlink" title="Apache Bench 的使用实例"></a><a id="5">Apache Bench 的使用实例</a></h2><h3 id="TODO-1"><a href="#TODO-1" class="headerlink" title="TODO"></a>TODO</h3>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/05/27/ApacheBench-的参数讲解与基础使用/" data-id="cj3fjhmpe00001p4bdpu7rdd1" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/05/27/ApacheBench-的参数讲解与基础使用/" data-id="cj3fomzzu0000ho4bf6sn24po" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Apache/">Apache</a></li></ul>
@@ -601,7 +649,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/05/25/高性能的-PHP-日志系统/" data-id="cj3fjhn2800741p4buosmyh23" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/05/25/高性能的-PHP-日志系统/" data-id="cj3fon06o0077ho4byq98px8a" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -758,7 +806,7 @@
 <li>数据库表结构</li>
 <li>SQL 语句和索引</li>
 </ul>
-<p>以 MySQL 为例，在服务器硬件方面，可以选择多核的 CPU，现在数据库软件对多核 CPU 都有优化；在数据库配置方面，可以根据监控日志和性能压测数据进行调优；数据表结构方面可以根据需要存储的数据选择最优的数据类型,设计时可以根据数据库表的范式来设计减少冗余数据，也可以反范式设计提高查询性能；如果数据库表过大，可以采取垂直拆分和水平拆分。而 SQL 语句和索引方面，可以通过开启 mysqldumpslow 和 pt-query-digest 来查看慢查询。使用 EXPLAIN 分析 SQL 的执行计划；使用普通索引或复合索引增加查询数据；了解 MySQL 执行的细节写出最优解的 SQL 语句。</p>
+<p>以 MySQL 为例，在服务器硬件方面，可以选择多核 CPU，增加内存，使用 SSD 和选择适合的 RAID 方案,选择千兆以上的网卡；在数据库配置方面，可以根据监控日志和性能压测数据进行调优；数据表结构方面可以根据需要存储的数据选择最优的数据类型,设计时可以根据数据库表的范式来设计减少冗余数据，也可以反范式设计提高查询性能；如果数据库表过大，可以采取垂直拆分和水平拆分。而 SQL 语句和索引方面，可以通过开启 mysqldumpslow 和 pt-query-digest 来查看慢查询。使用 EXPLAIN 分析 SQL 的执行计划；使用普通索引或复合索引增加查询数据；了解 MySQL 执行的细节写出最优解的 SQL 语句。</p>
 <h4 id="Cache-缓存"><a href="#Cache-缓存" class="headerlink" title="Cache 缓存"></a><a id="4.4">Cache 缓存</a></h4><h4 id="TODO-2"><a href="#TODO-2" class="headerlink" title="TODO"></a>TODO</h4><h4 id="File-文件"><a href="#File-文件" class="headerlink" title="File 文件"></a><a id="4.5">File 文件</a></h4><h4 id="TODO-3"><a href="#TODO-3" class="headerlink" title="TODO"></a>TODO</h4><h2 id="PHP-瓶颈级性能优化"><a href="#PHP-瓶颈级性能优化" class="headerlink" title="PHP 瓶颈级性能优化"></a><a id="5">PHP 瓶颈级性能优化</a></h2><h4 id="Opcode-优化"><a href="#Opcode-优化" class="headerlink" title="Opcode 优化"></a><a id="5.3">Opcode 优化</a></h4><ul>
 <li>启用 Zend Opcache，以 PHP 7 为例，在配置文件 php.ini 加入以下代码即可：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">zend_extension=opcache.so</div><div class="line">opcache.enable=1</div><div class="line">opcache.enable_cli=1&quot;</div></pre></td></tr></table></figure>
 </li>
@@ -776,7 +824,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/05/24/LNMP-性能优化之-PHP-性能优化/" data-id="cj3fjhmpn00041p4bpw3wlv5c" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/05/24/LNMP-性能优化之-PHP-性能优化/" data-id="cj3fon0070005ho4bzliwc48c" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -945,7 +993,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/05/23/PHP-的性能优化/" data-id="cj3fjhmrt00271p4bxqi4hxtd" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/05/23/PHP-的性能优化/" data-id="cj3fon02n0025ho4bmz56m00z" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -1011,7 +1059,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/04/24/设计模式之抽象工厂模式/" data-id="cj3fjhn1q006t1p4b7347n0dl" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/04/24/设计模式之抽象工厂模式/" data-id="cj3fon069006sho4b4ftak30l" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pattern/">Pattern</a></li></ul>
@@ -1096,7 +1144,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/04/21/设计模式之工厂方法模式/" data-id="cj3fjhn1n006o1p4b3c1yqe36" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/04/21/设计模式之工厂方法模式/" data-id="cj3fon06l0070ho4bgqiqpx8l" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pattern/">Pattern</a></li></ul>
@@ -1199,74 +1247,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/04/20/设计模式之简单工厂模式/" data-id="cj3fjhn2500711p4bspq0cz5f" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/04/20/设计模式之简单工厂模式/" data-id="cj3fon06e006who4by30y0thc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pattern/">Pattern</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-使用-Laravel-5-3-Vue-js-2-1-开发知乎" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/05/使用-Laravel-5-3-Vue-js-2-1-开发知乎/" class="article-date">
-  <time datetime="2017-04-05T06:00:49.000Z" itemprop="datePublished">2017-04-05</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/05/使用-Laravel-5-3-Vue-js-2-1-开发知乎/">使用 Laravel 5.3 + Vue.js 2.1 开发知乎</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="项目配置"><a href="#项目配置" class="headerlink" title="项目配置"></a>项目配置</h2><p>创建 Laravel 项目，并使用 PHPStorm 打开项目，将 app 目录设置为 <code>Sources Root</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">laravel new zhihu</div></pre></td></tr></table></figure></p>
-<p>打开用户表迁移文件，新增字段代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure></p>
-<h2 id="发送邮件"><a href="#发送邮件" class="headerlink" title="发送邮件"></a>发送邮件</h2><p>安装 Laravel-SendCloud<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">composer require naux/sendcloud</div></pre></td></tr></table></figure></p>
-<p>添加服务提供者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Naux\Mail\SendCloudServiceProvider::class,</div></pre></td></tr></table></figure></p>
-<p>修改 .env 驱动和配置密钥<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">MAIL_DRIVER=sendcloud</div><div class="line">SEND_CLOUD_USER=   # 创建的 api_user</div><div class="line">SEND_CLOUD_KEY=    # 分配的 api_key</div></pre></td></tr></table></figure></p>
-<p>快速生成用户验证界面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan make:auth</div></pre></td></tr></table></figure></p>
-<p>快速生成控制器，并修改代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">php artisan make:controller EmailController</div><div class="line"></div><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">User</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Http</span>\<span class="title">Request</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Support</span>\<span class="title">Facades</span>\<span class="title">Auth</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">EmailController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">verify</span><span class="params">($token)</span></span></div><div class="line">    &#123;</div><div class="line">        $user = User::where(<span class="string">'confirmationToken'</span>, $token)-&gt;first();</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (is_null($user)) &#123;</div><div class="line">            <span class="keyword">return</span> redirect(<span class="string">'/'</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        $user-&gt;isActive = <span class="number">1</span>;</div><div class="line">        $user-&gt;confirmationToken = str_random(<span class="number">40</span>);</div><div class="line">        $user-&gt;save();</div><div class="line">        Auth::login($user);</div><div class="line"></div><div class="line">        <span class="keyword">return</span> redirect(<span class="string">'/home'</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>修改注册控制器代码<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Create a new user instance after a valid registration.</div><div class="line"> *</div><div class="line"> * <span class="doctag">@param</span>  array  $data</div><div class="line"> * <span class="doctag">@return</span> User</div><div class="line"> */</div><div class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">create</span><span class="params">(array $data)</span></span></div><div class="line">&#123;</div><div class="line">    $user = User::create([</div><div class="line">        <span class="string">'name'</span> =&gt; $data[<span class="string">'name'</span>],</div><div class="line">        <span class="string">'email'</span> =&gt; $data[<span class="string">'email'</span>],</div><div class="line">        <span class="string">'avatar'</span> =&gt; <span class="string">'/images/avatars/default.png'</span>,</div><div class="line">        <span class="string">'confirmationToken'</span> =&gt; str_random(<span class="number">40</span>),</div><div class="line">        <span class="string">'password'</span> =&gt; bcrypt($data[<span class="string">'password'</span>]),</div><div class="line">    ]);</div><div class="line">    <span class="keyword">$this</span>-&gt;sendVerifyEmailTo($user);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> $user;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 验证用户邮箱</div><div class="line"> *</div><div class="line"> * <span class="doctag">@param</span> $user</div><div class="line"> *</div><div class="line"> * <span class="doctag">@return</span> void</div><div class="line"> */</div><div class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">sendVerifyEmailTo</span><span class="params">($user)</span></span></div><div class="line">&#123;</div><div class="line">    $data = [</div><div class="line">        <span class="string">'url'</span> =&gt; route(<span class="string">'email.verify'</span>, [<span class="string">'token'</span> =&gt; $user-&gt;confirmationToken]),</div><div class="line">        <span class="string">'name'</span> =&gt; $user-&gt;name,</div><div class="line">    ];</div><div class="line">    $template = <span class="keyword">new</span> SendCloudTemplate(<span class="string">'zhihu_app_register'</span>, $data);</div><div class="line"></div><div class="line">    Mail::raw($template, <span class="function"><span class="keyword">function</span><span class="params">($message)</span> <span class="title">use</span><span class="params">($user)</span> </span>&#123;</div><div class="line">        $message-&gt;from(<span class="string">'luis@mail.cowcat.cc'</span>, <span class="string">'Laravel'</span>);</div><div class="line">        $message-&gt;to($user-&gt;email);</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>新增路由<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Route::get(&apos;email/verify/&#123;token&#125;&apos;, [&apos;as&apos; =&gt; &apos;email.verify&apos;, &apos;uses&apos; =&gt; &apos;EmailController@verify&apos;]);</div></pre></td></tr></table></figure></p>
-<h2 id="Flash-消息提示"><a href="#Flash-消息提示" class="headerlink" title="Flash 消息提示"></a>Flash 消息提示</h2><p>安装 Laracasts Flash<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">composer require laracasts/flash</div></pre></td></tr></table></figure></p>
-<p>添加服务提供者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Laracasts\Flash\FlashServiceProvider::class,</div></pre></td></tr></table></figure></p>
-<h2 id="本地化"><a href="#本地化" class="headerlink" title="本地化"></a>本地化</h2><p>安装 caouecs/Laravel-lang<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">composer require caouecs/laravel-lang:~3.0</div></pre></td></tr></table></figure></p>
-<p>安装完毕之后，把对应的文件复制粘贴到 <code>resource/lang</code> 目录下</p>
-<h2 id="富文本编辑器"><a href="#富文本编辑器" class="headerlink" title="富文本编辑器"></a>富文本编辑器</h2><p>安装 overtrue/laravel-ueditor<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">composer require &quot;overtrue/laravel-ueditor:~1.0&quot;</div></pre></td></tr></table></figure></p>
-<p>添加服务提供者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Overtrue\LaravelUEditor\UEditorServiceProvider::class,</div></pre></td></tr></table></figure></p>
-<p>发布配置文件与资源<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan vendor:publish</div></pre></td></tr></table></figure></p>
-<p>模板引入编辑器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@include(&apos;vendor.ueditor.assets&apos;)</div></pre></td></tr></table></figure></p>
-<p>编辑器的初始化<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 实例化编辑器 --&gt;</div><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">    var ue = UE.getEditor(&apos;container&apos;);</div><div class="line">    ue.ready(function() &#123;</div><div class="line">        ue.execCommand(&apos;serverparam&apos;, &apos;_token&apos;, &apos;&#123;&#123; csrf_token() &#125;&#125;&apos;); // 设置 CSRF token.</div><div class="line">    &#125;);</div><div class="line">&lt;/script&gt;</div><div class="line"></div><div class="line">&lt;!-- 编辑器容器 --&gt;</div><div class="line">&lt;script id=&quot;container&quot; name=&quot;content&quot; type=&quot;text/plain&quot;&gt;&lt;/script&gt;</div></pre></td></tr></table></figure></p>
-<h2 id="简化富文本编辑器"><a href="#简化富文本编辑器" class="headerlink" title="简化富文本编辑器"></a>简化富文本编辑器</h2><p>1.clone 代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/JellyBool/simple-ueditor.git</div></pre></td></tr></table></figure></p>
-<p>2.用此项目的 ueditor 目录替换原来的 ueditor 目录</p>
-<p>3.实例化编辑器的时候配置 toolbar ，主要是 toolbar 的配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var ue = UE.getEditor(&apos;editor&apos;, &#123;</div><div class="line">    toolbars: [</div><div class="line">            [&apos;bold&apos;, &apos;italic&apos;, &apos;underline&apos;, &apos;strikethrough&apos;, &apos;blockquote&apos;, &apos;insertunorderedlist&apos;, &apos;insertorderedlist&apos;, &apos;justifyleft&apos;,&apos;justifycenter&apos;, &apos;justifyright&apos;,  &apos;link&apos;, &apos;insertimage&apos;, &apos;fullscreen&apos;]</div><div class="line">        ],</div><div class="line">    elementPathEnabled: false,</div><div class="line">    enableContextMenu: false,</div><div class="line">    autoClearEmptyNode:true,</div><div class="line">    wordCount:false,</div><div class="line">    imagePopup:false,</div><div class="line">    autotypeset:&#123; indent: true,imageBlockLine: &apos;center&apos; &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<h2 id="使用-select-2-组件"><a href="#使用-select-2-组件" class="headerlink" title="使用 select 2 组件"></a>使用 select 2 组件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://select2.github.io/</div></pre></td></tr></table></figure>
-<h2 id="使用-Laravel-Repository"><a href="#使用-Laravel-Repository" class="headerlink" title="使用 Laravel-Repository"></a>使用 Laravel-Repository</h2>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/04/05/使用-Laravel-5-3-Vue-js-2-1-开发知乎/" data-id="cj3fjhmsy003e1p4b9r51ehjz" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
 
     </footer>
   </div>
@@ -1286,7 +1270,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -1296,7 +1280,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
     </div>
@@ -1306,7 +1290,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
     </div>
@@ -1325,9 +1309,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/06/02/MySQLDumpSlow-的参数讲解与基础使用/">MySQLDumpSlow 的参数讲解与基础使用</a>
+          </li>
         
           <li>
             <a href="/2017/06/01/XHprof-的安装配置与使用分析/">XHProf 的安装配置与使用分析</a>
@@ -1345,10 +1333,6 @@
             <a href="/2017/05/25/高性能的-PHP-日志系统/">高性能的 PHP 日志系统</a>
           </li>
         
-          <li>
-            <a href="/2017/05/24/LNMP-性能优化之-PHP-性能优化/">LNMP 性能优化之 PHP 性能优化</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1362,7 +1346,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Luis Edware<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

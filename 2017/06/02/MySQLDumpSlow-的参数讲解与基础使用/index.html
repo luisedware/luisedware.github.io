@@ -3,51 +3,33 @@
 <head>
   <meta charset="utf-8">
   
-  <title>PHP 的性能优化 | 七月十五九月初七</title>
+  <title>MySQLDumpSlow 的参数讲解与基础使用 | 七月十五九月初七</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="PHP 性能优化初探什么情况下，会遇到了 PHP 性能问题？
-
-PHP 语法使用得不恰当
-使用 PHP 语言做了它不擅长做的事情
-使用 PHP 语言连接的服务不给力
-PHP 自身的短板
-尚未排查出的问题
-
-PHP 性能问题简析PHP 的性能问题，占整体项目性能问题的比例一般是三成，但也不仅仅局限于对 PHP 的性能优化。
-PHP 的性能问题的解决方向，优化难度是从简单到困难
-
-PHP 语言级的性能">
+  <meta name="description" content="目录
+认识 MySQLDumpSlow
+MySQLDumpSlow 的命令参数
+MySQLDumpSlow 的结果参数
+MySQLDumpSlow 的使用建议
+MySQLDumpSlow 的使用实例">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PHP 的性能优化">
-<meta property="og:url" content="http://luisedware.github.io/2017/05/23/PHP-的性能优化/index.html">
+<meta property="og:title" content="MySQLDumpSlow 的参数讲解与基础使用">
+<meta property="og:url" content="http://luisedware.github.io/2017/06/02/MySQLDumpSlow-的参数讲解与基础使用/index.html">
 <meta property="og:site_name" content="七月十五九月初七">
-<meta property="og:description" content="PHP 性能优化初探什么情况下，会遇到了 PHP 性能问题？
-
-PHP 语法使用得不恰当
-使用 PHP 语言做了它不擅长做的事情
-使用 PHP 语言连接的服务不给力
-PHP 自身的短板
-尚未排查出的问题
-
-PHP 性能问题简析PHP 的性能问题，占整体项目性能问题的比例一般是三成，但也不仅仅局限于对 PHP 的性能优化。
-PHP 的性能问题的解决方向，优化难度是从简单到困难
-
-PHP 语言级的性能">
-<meta property="og:updated_time" content="2017-05-29T04:14:15.000Z">
+<meta property="og:description" content="目录
+认识 MySQLDumpSlow
+MySQLDumpSlow 的命令参数
+MySQLDumpSlow 的结果参数
+MySQLDumpSlow 的使用建议
+MySQLDumpSlow 的使用实例">
+<meta property="og:updated_time" content="2017-06-02T10:03:28.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PHP 的性能优化">
-<meta name="twitter:description" content="PHP 性能优化初探什么情况下，会遇到了 PHP 性能问题？
-
-PHP 语法使用得不恰当
-使用 PHP 语言做了它不擅长做的事情
-使用 PHP 语言连接的服务不给力
-PHP 自身的短板
-尚未排查出的问题
-
-PHP 性能问题简析PHP 的性能问题，占整体项目性能问题的比例一般是三成，但也不仅仅局限于对 PHP 的性能优化。
-PHP 的性能问题的解决方向，优化难度是从简单到困难
-
-PHP 语言级的性能">
+<meta name="twitter:title" content="MySQLDumpSlow 的参数讲解与基础使用">
+<meta name="twitter:description" content="目录
+认识 MySQLDumpSlow
+MySQLDumpSlow 的命令参数
+MySQLDumpSlow 的结果参数
+MySQLDumpSlow 的使用建议
+MySQLDumpSlow 的使用实例">
   
     <link rel="alternate" href="/atom.xml" title="七月十五九月初七" type="application/atom+xml">
   
@@ -100,14 +82,14 @@ PHP 语言级的性能">
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-PHP-的性能优化" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-MySQLDumpSlow-的参数讲解与基础使用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/05/23/PHP-的性能优化/" class="article-date">
-  <time datetime="2017-05-23T13:39:58.000Z" itemprop="datePublished">2017-05-23</time>
+    <a href="/2017/06/02/MySQLDumpSlow-的参数讲解与基础使用/" class="article-date">
+  <time datetime="2017-06-02T09:57:50.000Z" itemprop="datePublished">2017-06-02</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
   </div>
 
   </div>
@@ -118,7 +100,7 @@ PHP 语言级的性能">
         
   
     <h1 class="article-title" itemprop="name">
-      PHP 的性能优化
+      MySQLDumpSlow 的参数讲解与基础使用
     </h1>
   
 
@@ -126,141 +108,21 @@ PHP 语言级的性能">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="PHP-性能优化初探"><a href="#PHP-性能优化初探" class="headerlink" title="PHP 性能优化初探"></a>PHP 性能优化初探</h2><p>什么情况下，会遇到了 PHP 性能问题？</p>
-<ul>
-<li>PHP 语法使用得不恰当</li>
-<li>使用 PHP 语言做了它不擅长做的事情</li>
-<li>使用 PHP 语言连接的服务不给力</li>
-<li>PHP 自身的短板</li>
-<li>尚未排查出的问题</li>
+        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li><a href="#1">认识 MySQLDumpSlow</a></li>
+<li><a href="#2">MySQLDumpSlow 的命令参数</a></li>
+<li><a href="#3">MySQLDumpSlow 的结果参数</a></li>
+<li><a href="#4">MySQLDumpSlow 的使用建议</a></li>
+<li><a href="#5">MySQLDumpSlow 的使用实例</a></li>
 </ul>
-<h2 id="PHP-性能问题简析"><a href="#PHP-性能问题简析" class="headerlink" title="PHP 性能问题简析"></a>PHP 性能问题简析</h2><p>PHP 的性能问题，占整体项目性能问题的比例一般是三成，但也不仅仅局限于对 PHP 的性能优化。</p>
-<p>PHP 的性能问题的解决方向，优化难度是从简单到困难</p>
-<ul>
-<li>PHP 语言级的性能优化</li>
-<li>PHP 周边问题的性能优化</li>
-<li>PHP 底层级的性能优化</li>
-</ul>
-<h2 id="压力测试工具简介"><a href="#压力测试工具简介" class="headerlink" title="压力测试工具简介"></a>压力测试工具简介</h2><p>Apache Benchmark(ab)</p>
-<p>简介</p>
-<p>ApacheBench 是 Apache 服务器自带的一个web压力测试工具,缩写为 ab ,旨在高压高并发下体现出各种问题和瓶颈.<br>ab 命令会模拟多个用户同时访问一个url (伪装一个并发访问的环境).<br>此命令对本地cpu要求不高,内存要求也不多,但是会对访问目标服务器造成严重的负载甚至资源耗尽而宿机,很类似与cc攻击.</p>
-<p>如何使用</p>
-<p>./ab -n1000 -c100 <a href="http://www.baidu.com/，其中" target="_blank" rel="external">http://www.baidu.com/，其中</a> -n 是请求书，-c 是并发数，后面的是压测地址。</p>
-<p>压测呈现的数据，比较重要的三个</p>
-<ul>
-<li>Requests per second: 每秒处理的请求</li>
-<li>Time per request: 每处理一个请求所消耗的时间</li>
-<li>Time taken for test: 完成这次压测所消耗的时间</li>
-</ul>
-<h2 id="PHP-语言级的性能优化"><a href="#PHP-语言级的性能优化" class="headerlink" title="PHP 语言级的性能优化"></a>PHP 语言级的性能优化</h2><p>优化点：产生额外开销的错误抑制符 @</p>
-<ul>
-<li>情况描述：PHP 提供的错误抑制符只是为了方便懒人</li>
-<li>@ 的实际逻辑：在代码开始前、结束后，增加 Opcode，忽略报错</li>
-<li>vld - PHP Opcode 查看扩展</li>
-<li><p>举例说明：file_get_contents()</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php -dvld.active=1 -dvld.execute=0 XXX.php 只查看不执行</div></pre></td></tr></table></figure>
-</li>
-<li><p>好的建议：尽量不要使用 @ 错误抑制符</p>
-</li>
-</ul>
-<p>优化点：合理使用内存</p>
-<ul>
-<li>情况描述：PHP 有内存回收机制保底，但也请小心使用内存</li>
-<li>好的建议：利用 unset 及时释放不使用的内存</li>
-</ul>
-<p>优化点：减少计算密集型业务</p>
-<ul>
-<li>情况描述：PHP 不适合密集型运算的场景</li>
-<li>为什么：PHP 语言特性决定了 PHP 不适合做大数据量运算</li>
-<li>PHP 使用场景：适合衔接 Webserver 与后端服务、UI 呈现</li>
-</ul>
-<p>优化点：务必使用带引号字符串做键值</p>
-<ul>
-<li>情况描述：PHP 会将没有引号的键值当做常量，产生查找常量的开销</li>
-<li>好的建议：严格使用引号作为键值</li>
-</ul>
-<h2 id="PHP-周边问题的性能优化"><a href="#PHP-周边问题的性能优化" class="headerlink" title="PHP 周边问题的性能优化"></a>PHP 周边问题的性能优化</h2><ul>
-<li>Linux 环境</li>
-<li>网络的性能</li>
-<li>缓存的性能</li>
-<li>数据库的性能</li>
-<li>服务器硬盘的性能</li>
-</ul>
-<p>php =&gt; 网络 =》 DB 的场景，找出问题的和核心，并且找到大头去优化。</p>
-<p>减少文件类操作：</p>
-<ul>
-<li>PHP 常见的开销场景<ul>
-<li>读写硬盘</li>
-<li>读写数据库</li>
-<li>读写内存</li>
-<li>读写网络数据</li>
-</ul>
-</li>
-<li>PHP 常见的开销场景的开销次序<ul>
-<li>读写内存 小于 读写数据库</li>
-<li>读写数据库 小于 读写硬盘</li>
-<li>读写硬盘 小于 读写网络数据（网络延迟）</li>
-<li>读写数据库、读写硬盘、读写网络数据都是基于文件类操作</li>
-</ul>
-</li>
-<li>优化网络请求<ul>
-<li>问题<ul>
-<li>API 的不确定因素</li>
-<li>网络稳定性</li>
-</ul>
-</li>
-<li>如何优化<ul>
-<li>1.设置超时时间<ul>
-<li>连接超时 200ms</li>
-<li>读超时 800ms</li>
-<li>写超时 500ms</li>
-</ul>
-</li>
-<li>2.将串行请求并行化<ul>
-<li>使用 curl<em>multi</em>*()</li>
-<li>使用 Swoole 扩展</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>压缩 PHP 接口输出</p>
-<ul>
-<li>如何压缩<ul>
-<li>使用 Gzip 即可</li>
-</ul>
-</li>
-<li>压缩输出的利与弊<ul>
-<li>利于我们的数据输出， Client 端能更快获取数据</li>
-<li>额外的 CPU 开销（如果传输数据大于 100 KB，能取得不错的效果）</li>
-</ul>
-</li>
-</ul>
-<p>缓存重复计算内容</p>
-<ul>
-<li>什么情况下做输出内容的缓存<ul>
-<li>多次请求，内容不变情况</li>
-</ul>
-</li>
-</ul>
-<p>重叠时间窗口思想：</p>
-<pre><code>- 串行
-- 重叠时间窗口思想
-</code></pre><p>如果后一个请求不强依赖前一个请求的返回结果，可以使用将网络请求并行化。</p>
-<p>旁路方案</p>
-<p>如果后一个请求不强依赖前一个请求的返回结果，可以使用旁路方案。</p>
-<h2 id="PHP-性能问题的具体分析"><a href="#PHP-性能问题的具体分析" class="headerlink" title="PHP 性能问题的具体分析"></a>PHP 性能问题的具体分析</h2><p>工具：XHPorf(源自 Fackbook 的 PHP 性能分析工具)<br>实践：通过分析 Wordpress 程序，做优化</p>
-<h2 id="PHP-性能瓶颈解决方法"><a href="#PHP-性能瓶颈解决方法" class="headerlink" title="PHP 性能瓶颈解决方法"></a>PHP 性能瓶颈解决方法</h2><p>Opcode Cache: PHP 扩展 Yac<br>扩展实现：通过 PHP 扩展代替原 PHP 代码中高频逻辑<br>Runtime 优化：HHVM,PHP-JIT</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/05/23/PHP-的性能优化/" data-id="cj3fon02n0025ho4bmz56m00z" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/06/02/MySQLDumpSlow-的参数讲解与基础使用/" data-id="cj3fon01y001aho4b65tjbhsk" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
 
     </footer>
   </div>
@@ -268,19 +130,10 @@ PHP 语言级的性能">
     
 <nav id="article-nav">
   
-    <a href="/2017/05/24/LNMP-性能优化之-PHP-性能优化/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          LNMP 性能优化之 PHP 性能优化
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/04/24/设计模式之抽象工厂模式/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/06/01/XHprof-的安装配置与使用分析/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">设计模式之抽象工厂模式</div>
+      <div class="article-nav-title">XHProf 的安装配置与使用分析</div>
     </a>
   
 </nav>

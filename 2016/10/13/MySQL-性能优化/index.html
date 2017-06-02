@@ -5,37 +5,40 @@
   
   <title>MySQL 性能优化 | 七月十五九月初七</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="可以进行优化的层面
-硬件
-系统配置
-数据库表结构
+  <meta name="description" content="目录
+数据准备
 SQL 语句和索引
+服务器硬件
+数据库系统配置
+数据库表结构
 
-进行优化前的数据准备打开以下链接下载数据1http://downloads.mysql.com/docs/sakila-db.zip
-打开终端，执行以下命令1234567891011# 登录 MySQL Cli 模式mysql -uroot -p# 创建数据库SOURCE /Users/LuisEdware/Downloads">
+数据准备打开以下链接下载数据1http://downloads.mysql.com/docs/sakila-db.zip
+打开终端，执行以下命令1234567891011# 登录 MySQL Cli 模式mysql -uroot -p# 创建数据库SOURCE /Users/LuisEdware/Downloads/s">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL 性能优化">
 <meta property="og:url" content="http://luisedware.github.io/2016/10/13/MySQL-性能优化/index.html">
 <meta property="og:site_name" content="七月十五九月初七">
-<meta property="og:description" content="可以进行优化的层面
-硬件
-系统配置
-数据库表结构
+<meta property="og:description" content="目录
+数据准备
 SQL 语句和索引
+服务器硬件
+数据库系统配置
+数据库表结构
 
-进行优化前的数据准备打开以下链接下载数据1http://downloads.mysql.com/docs/sakila-db.zip
-打开终端，执行以下命令1234567891011# 登录 MySQL Cli 模式mysql -uroot -p# 创建数据库SOURCE /Users/LuisEdware/Downloads">
-<meta property="og:updated_time" content="2016-10-19T09:17:57.000Z">
+数据准备打开以下链接下载数据1http://downloads.mysql.com/docs/sakila-db.zip
+打开终端，执行以下命令1234567891011# 登录 MySQL Cli 模式mysql -uroot -p# 创建数据库SOURCE /Users/LuisEdware/Downloads/s">
+<meta property="og:updated_time" content="2017-06-02T09:53:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL 性能优化">
-<meta name="twitter:description" content="可以进行优化的层面
-硬件
-系统配置
-数据库表结构
+<meta name="twitter:description" content="目录
+数据准备
 SQL 语句和索引
+服务器硬件
+数据库系统配置
+数据库表结构
 
-进行优化前的数据准备打开以下链接下载数据1http://downloads.mysql.com/docs/sakila-db.zip
-打开终端，执行以下命令1234567891011# 登录 MySQL Cli 模式mysql -uroot -p# 创建数据库SOURCE /Users/LuisEdware/Downloads">
+数据准备打开以下链接下载数据1http://downloads.mysql.com/docs/sakila-db.zip
+打开终端，执行以下命令1234567891011# 登录 MySQL Cli 模式mysql -uroot -p# 创建数据库SOURCE /Users/LuisEdware/Downloads/s">
   
     <link rel="alternate" href="/atom.xml" title="七月十五九月初七" type="application/atom+xml">
   
@@ -77,9 +80,9 @@ SQL 语句和索引
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -114,15 +117,16 @@ SQL 语句和索引
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="可以进行优化的层面"><a href="#可以进行优化的层面" class="headerlink" title="可以进行优化的层面"></a>可以进行优化的层面</h2><ul>
-<li>硬件</li>
-<li>系统配置</li>
-<li>数据库表结构</li>
-<li>SQL 语句和索引</li>
+        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li><a href="#1">数据准备</a></li>
+<li><a href="#2">SQL 语句和索引</a></li>
+<li><a href="#3">服务器硬件</a></li>
+<li><a href="#4">数据库系统配置</a></li>
+<li><a href="#5">数据库表结构</a></li>
 </ul>
-<h2 id="进行优化前的数据准备"><a href="#进行优化前的数据准备" class="headerlink" title="进行优化前的数据准备"></a>进行优化前的数据准备</h2><p>打开以下链接下载数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://downloads.mysql.com/docs/sakila-db.zip</div></pre></td></tr></table></figure></p>
+<h2 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a><a id="1">数据准备</a></h2><p>打开以下链接下载数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://downloads.mysql.com/docs/sakila-db.zip</div></pre></td></tr></table></figure></p>
 <p>打开终端，执行以下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"># 登录 MySQL Cli 模式</div><div class="line">mysql -uroot -p</div><div class="line"></div><div class="line"># 创建数据库</div><div class="line">SOURCE /Users/LuisEdware/Downloads/sakila-db/sakila-schema.sql.sql</div><div class="line"></div><div class="line"># 填充数据到数据库</div><div class="line">SOURCE /Users/LuisEdware/Downloads/sakila-db/sakila-data.sql</div><div class="line"></div><div class="line"># 使用 sakila 数据库</div><div class="line">USE sakila;</div></pre></td></tr></table></figure></p>
-<h2 id="SQL-语句和索引"><a href="#SQL-语句和索引" class="headerlink" title="SQL 语句和索引"></a>SQL 语句和索引</h2><h3 id="MySQL-慢查询日志"><a href="#MySQL-慢查询日志" class="headerlink" title="MySQL 慢查询日志"></a>MySQL 慢查询日志</h3><p>如何发现有问题的 SQL？答案是使用 MySQL 慢查询日志对有效率问题的 SQL 进行监控，执行命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"># 查看是否开启慢查询日志</div><div class="line">show variables like &quot;slow_query_log&quot;;</div><div class="line"></div><div class="line"># 查看是否设置了把没有索引的记录到慢查询日志</div><div class="line">show variables like &quot;log_queries_not_using_indexes&quot;;</div><div class="line"></div><div class="line"># 查看是否设置慢查询的 SQL 执行时间</div><div class="line">show variables like &quot;long_query_time&quot;;</div><div class="line"></div><div class="line"># 查看慢查询日志记录位置</div><div class="line">show variables like &quot;slow_query_log_file&quot;;</div><div class="line"></div><div class="line"># 开启慢查询日志</div><div class="line">set global slow_query_log=on</div><div class="line"></div><div class="line"># 设置没有索引的记录到慢查询日志</div><div class="line">set global log_queries_not_using_indexes=on</div><div class="line"></div><div class="line"># 设置到慢查询日志的 SQL 执行时间</div><div class="line">set global long_query_time=0</div><div class="line"></div><div class="line"># 查看慢查询日志（在 Linux 终端下执行）</div><div class="line">tail -50 /usr/local/var/mysql/luyiyuandeMacBook-Pro-slow.log;</div></pre></td></tr></table></figure></p>
+<h2 id="SQL-语句和索引"><a href="#SQL-语句和索引" class="headerlink" title="SQL 语句和索引"></a>SQL 语句和索引</h2><h3 id="MySQL-慢查询日志"><a href="#MySQL-慢查询日志" class="headerlink" title="MySQL 慢查询日志"></a>MySQL 慢查询日志</h3><p>如何发现有问题的 SQL？答案是使用 MySQL 慢查询日志对有效率问题的 SQL 进行监控，执行命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"># 查看是否开启慢查询日志</div><div class="line">show variables like &quot;slow_query_log&quot;;</div><div class="line"></div><div class="line"># 查看是否设置了把没有索引的记录到慢查询日志</div><div class="line">show variables like &quot;log_queries_not_using_indexes&quot;;</div><div class="line"></div><div class="line"># 查看是否设置慢查询的 SQL 执行时间</div><div class="line">show variables like &quot;long_query_time&quot;;</div><div class="line"></div><div class="line"># 查看慢查询日志记录位置</div><div class="line">show variables like &quot;slow_query_log_file&quot;;</div><div class="line"></div><div class="line"># 开启慢查询日志</div><div class="line">set global slow_query_log=on</div><div class="line"></div><div class="line"># 设置没有索引的记录到慢查询日志</div><div class="line">set global log_queries_not_using_indexes=on</div><div class="line"></div><div class="line"># 设置到慢查询日志的 SQL 执行时间（1 代表 1 秒）</div><div class="line">set global long_query_time=1</div><div class="line"></div><div class="line"># 查看慢查询日志（在 Linux 终端下执行）</div><div class="line">tail -50 /usr/local/var/mysql/luyiyuandeMacBook-Pro-slow.log;</div></pre></td></tr></table></figure></p>
 <p>慢查询日志所包含的内容</p>
 <ul>
 <li>SQL 的执行时间：<strong># Time: 2016-10-13T10:01:45.914267Z</strong></li>
@@ -269,7 +273,7 @@ SQL 语句和索引
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/13/MySQL-性能优化/" data-id="cj3fjhmr6001g1p4bupuocool" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/10/13/MySQL-性能优化/" data-id="cj3fon026001lho4bwc30hwzy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -281,7 +285,7 @@ SQL 语句和索引
 <nav id="article-nav">
   
     <a href="/2016/10/20/打造扛得住的-MySQL-数据库架构/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
+      <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
           打造扛得住的 MySQL 数据库架构
@@ -291,7 +295,7 @@ SQL 语句和索引
   
   
     <a href="/2016/10/04/Linux-Shell-基础之条件判断语句/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">Linux Shell 基础之条件判断语句</div>
     </a>
   
@@ -306,7 +310,7 @@ SQL 语句和索引
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -316,7 +320,7 @@ SQL 语句和索引
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
     </div>
@@ -326,7 +330,7 @@ SQL 语句和索引
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
     </div>
@@ -345,9 +349,13 @@ SQL 语句和索引
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/06/02/MySQLDumpSlow-的参数讲解与基础使用/">MySQLDumpSlow 的参数讲解与基础使用</a>
+          </li>
         
           <li>
             <a href="/2017/06/01/XHprof-的安装配置与使用分析/">XHProf 的安装配置与使用分析</a>
@@ -365,10 +373,6 @@ SQL 语句和索引
             <a href="/2017/05/25/高性能的-PHP-日志系统/">高性能的 PHP 日志系统</a>
           </li>
         
-          <li>
-            <a href="/2017/05/24/LNMP-性能优化之-PHP-性能优化/">LNMP 性能优化之 PHP 性能优化</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -382,7 +386,7 @@ SQL 语句和索引
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Luis Edware<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

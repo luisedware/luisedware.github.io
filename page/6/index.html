@@ -52,9 +52,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -64,6 +64,259 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Linux-定时任务" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/26/Linux-定时任务/" class="article-date">
+  <time datetime="2016-09-26T09:25:18.000Z" itemprop="datePublished">2016-09-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/26/Linux-定时任务/">Linux 定时任务</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Linux-定时任务"><a href="#Linux-定时任务" class="headerlink" title="Linux 定时任务"></a>Linux 定时任务</h2><ul>
+<li>at 一次性定时任务</li>
+<li>crontab 循环定时任务</li>
+<li>crontab 设置</li>
+<li>anacron 配置</li>
+</ul>
+<h2 id="at-一次性定时任务"><a href="#at-一次性定时任务" class="headerlink" title="at 一次性定时任务"></a>at 一次性定时任务</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># at 服务是否安装</div><div class="line">chkconfig --list | grep atd</div><div class="line"></div><div class="line"># at 服务的启动</div><div class="line">service atd restart</div></pre></td></tr></table></figure>
+<p>at 的访问控制</p>
+<ul>
+<li>如果系统中有 /etc/at.allow 文件，那么只有写入 /etc/at.allow （白名单）文件中的用户可以使用 at 命令（/etc/at.deny 文件会被忽略）</li>
+<li>如果系统中没有 /etc/at.allow 文件，只有 /etc/at.deny 文件，那么写入 /etc/at.deny （黑名单）文件中的用户不能使用 at 命令。对 root 不起作用</li>
+<li>如果系统中这两个文件都不存在，那么只有 root 用户可以使用 at 命令</li>
+</ul>
+<p>at 命令</p>
+<ul>
+<li>at<ul>
+<li><code>at [选项] 时间</code><ul>
+<li>选项：<ul>
+<li>-m 当 at 工作完成后，无论命令是否有输出，都用 email 通知执行 at 命令的用户</li>
+<li>-c 工作号：显示该 at 工作的实际内容</li>
+</ul>
+</li>
+<li>时间：<ul>
+<li>HH:MM 02:30</li>
+<li>HH:MM YYYY-MM-DD 02:30 2013-07-25</li>
+<li>HH:MM[am|pm] [month] [date] 02:30 July 25</li>
+<li>HH:MM[am|pm] + [minutes|hours|days|weeks] now + 5 minutes</li>
+</ul>
+</li>
+<li>例子：<ul>
+<li><code>at now + 2 minutes</code> &amp;&amp; <code>/root/hello.sh &gt;&gt; /root/hello.log</code></li>
+<li><code>at 02:00 2013-07-26</code> &amp;&amp; <code>/bin/sync</code> &amp;&amp; <code>/sbin/shutdown -r now</code></li>
+</ul>
+</li>
+<li>其他：<ul>
+<li><code>atq</code> 查询当前服务器上的 at 工作</li>
+<li><code>atrm [工作号]</code> 删除指定的 at 任务</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="anncron"><a href="#anncron" class="headerlink" title="anncron"></a>anncron</h2><p>anacron 是用来保证在系统关机的时候错过的定时任务，可以在系统开机之后再执行</p>
+<p>anacron 检测周期</p>
+<ul>
+<li>anacron 会使用一天，七天，一个月作为检测周期</li>
+<li>在系统的 /var/spool/anacron/ 目录中存在 cron.{daily，weekly，monthly} 文件，用于记录上次执行的 cron 的时间</li>
+<li>和当前时间做比较，如果两个时间的差值超过了 anacron 的指定时间差值，证明有 cron 任务被漏执行</li>
+</ul>
+<p>anacron 配置文件</p>
+<ul>
+<li>vim /etc/anacrontab<ul>
+<li><code>RANDOM_DELAY=45</code> 最大随机延迟</li>
+<li><code>START_HOURS_RANGE=3-22</code> anacron 的执行时间范围是 3:00 - 22:00</li>
+<li><code>1    5    cron.daily         nice run-parts /etc/cron.daily</code> 天数 强制延迟（分钟） 工作名称 实际执行的命令</li>
+</ul>
+</li>
+</ul>
+<p>anacron 执行过程（以 cron.daily 为例）</p>
+<ul>
+<li>首先读取 /var/spool/anacron/cron.daily 中的上一次 anacron 执行的时间</li>
+<li>和当前时间比较，如果两个时间的差值超过 1 天，就执行 cron.daily 工作</li>
+<li>执行这个工作只能在 03:00-22:00 之间</li>
+<li>执行工作时强制延迟时间为 5 分钟，再随机延迟 0-45 分钟时间</li>
+<li>使用 nice 命令指定默认优先级，使用 run-parts 脚本执行 /etc/cron.daily 目录中的所有可执行文件</li>
+</ul>
+<h2 id="Crontab-简介"><a href="#Crontab-简介" class="headerlink" title="Crontab 简介"></a>Crontab 简介</h2><p>业务场景</p>
+<ul>
+<li>每分钟需要执行一个程序检查系统运行状态</li>
+<li>每天凌晨需要对过去一天的业务数据进行统计</li>
+<li>每个星期需要把日志文件备份</li>
+<li>每个月需要把数据库进行备份</li>
+</ul>
+<p>概念理解</p>
+<p><strong>Crontab 是一个用于设置周期性被执行的任务的工具。</strong></p>
+<h2 id="Crontab-实践"><a href="#Crontab-实践" class="headerlink" title="Crontab 实践"></a>Crontab 实践</h2><ul>
+<li>相关工具<ul>
+<li>Mac OS 自带 SSH</li>
+</ul>
+</li>
+<li>安装并检查 Crontab 服务<ul>
+<li>检查 cron 服务<ul>
+<li>检查 Crontab 工具是否安装：<code>crontab -l</code></li>
+<li>检查 Crontab 可执行的命令：<code>service crond</code></li>
+<li>检查 Crontab 服务是否启动：<code>service crond status</code></li>
+<li>删除当前用户所有的定时任务： <code>crontab -r</code></li>
+<li>打开定时任务列表，进行编辑：<code>crontab -e</code><ul>
+<li>实际上在修改目录 <code>/var/spool/cron/root</code> 下用户对应的文件</li>
+<li><code>crontab 文件名</code> 会把（crontab -e）文件里的内容都覆盖，使用时需要注意</li>
+</ul>
+</li>
+<li>启动 Crontab 服务：<code>service crond start</code></li>
+</ul>
+</li>
+<li>安装 Crontab 服务（依次执行）<ul>
+<li><code>yum install vixie-cron</code></li>
+<li><code>yum install crontabs</code></li>
+</ul>
+</li>
+<li><code>tail</code> 命令<ul>
+<li>作用：按照要求将指定的文件的最后部分输出到标准设备，如果文件有更新，tail 会主动刷新，确保你看到最新的文件内容</li>
+<li>选项<ul>
+<li>-f 循环读取</li>
+<li>-q 不显示处理信息</li>
+<li>-v 显示详细的处理信息</li>
+<li>-c [数目] 显示的字节数</li>
+<li>-n [行数] 显示行数</li>
+<li>-s 与-f合用,表示在每次反复的间隔休眠 s 秒</li>
+<li>-q 从不输出给出文件名的首部</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Crontab 的基本组成<ul>
+<li>配置文件</li>
+<li>系统服务 Crond</li>
+<li>配置工具 Crontab</li>
+</ul>
+</li>
+<li>Crontab 的配置文件格式<ul>
+<li><code>* * * * * Command</code><ul>
+<li>第一个星号：分钟 0~59</li>
+<li>第二个星号：小时 0~23</li>
+<li>第三个星号：日期 1~31</li>
+<li>第四个星号：月份 1~12</li>
+<li>第五个星号：星期 0~7（0、7 都是星期天）</li>
+</ul>
+</li>
+<li>用法：<ul>
+<li>每晚的 21:30 重启 apache<ul>
+<li><strong><code>30 21 * * * service httpd restart</code></strong></li>
+</ul>
+</li>
+<li>每月 1 到 10 日的 4:45 重启 apache<ul>
+<li><strong><code>45 4 1-10 * * service httpd restart</code></strong></li>
+</ul>
+</li>
+<li>每月 1、10、22 日的 4:45 重启 apache<ul>
+<li><strong><code>45 4 1,10,22 * * service httpd restart</code></strong></li>
+</ul>
+</li>
+<li>每隔两分钟重启 apache 服务器<ul>
+<li><strong><code>*/2 * * * * service httpd restart</code></strong></li>
+</ul>
+</li>
+<li>晚上 11 点到早上 7 点之间，每隔一小时重启 apache<ul>
+<li><strong><code>0 23-7/1 * * * service httpd restart</code></strong></li>
+</ul>
+</li>
+<li>每天 18:00 至 23:00 之间每隔 30 分钟重启 apache<ul>
+<li><strong><code>0,30 18-23 * * * service httpd restart</code></strong></li>
+<li><strong><code>0-59/30 18-23 * * * service httpd restart</code></strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>总结：<ul>
+<li>* 表示任何时候都匹配</li>
+<li>可以用 “A,B,C” 表示 A 或者 B 或者 C 时执行命令</li>
+<li>可以用 “A-B” 表示 A 到 B 之间时执行命令</li>
+<li>可以用 “*/A” 表示每 A 时间执行一次命令</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Crontab 配置文件<ul>
+<li>全局配置文件<ul>
+<li><code>/etc/crontab</code> 查看系统级别的 Crontab</li>
+</ul>
+</li>
+<li>用户配置文件<ul>
+<li><code>/var/spool/cron/用户名称</code> 查看用户级别的 Crontab</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Crontab 的日志<ul>
+<li>监听 Crontab 执行日志：<code>tail -f /var/log/cron</code>，可以看到用户级别和系统级别的 Crontab</li>
+<li>查看每天的 Crontab 日志：<code>ls /var/log/cron*</code></li>
+</ul>
+</li>
+<li>Crontab 常见错误<ul>
+<li>环境变量：涉及到文件路径时写全局路径。注意声明 <code>#!/bin/bash</code> 确保脚本中环境变量能够被识别</li>
+<li>第三和第五个域之间执行的是 “或” 操作<ul>
+<li>四月的第一个星期日早晨 1 时 59 分运行 a.sh：<code>59 1 1-7 4 * test &#39;date + \%w -eq 0 &amp;&amp; /root/a.sh&#39;</code></li>
+</ul>
+</li>
+<li>两个小时运行一次<ul>
+<li>错误例子：<code>* 0,2,4,6,8,10,12,14,16,18,20,22 * * * date</code></li>
+<li>正确例子：<code>0 */2 * * * date</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Crontab 补充<ul>
+<li>半分钟执行命令<ul>
+<li><code>date &amp;&amp; sleep 0.5s &amp;&amp; date</code></li>
+</ul>
+</li>
+<li>Crontab 最小时间是 1 分钟，控制 1 分钟执行多次，本应该是同时执行，但第二条被推迟了30s执行，效果就是1分钟执行了2次<ul>
+<li><code>*/1 * * * * date &gt;&gt; /root/test/half.log</code></li>
+<li><code>*/1 * * * * sleep 30s; date &gt;&gt; /root/test/half.log</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2016/09/26/Linux-定时任务/" data-id="cj3fon01j000pho4bycyci0kb" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-Linux-系统管理" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -434,7 +687,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/24/Linux-系统管理/" data-id="cj3fjhmqv00131p4bq3suxv49" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/24/Linux-系统管理/" data-id="cj3fon01r0012ho4bmcno3ioo" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -603,7 +856,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/23/Linux-服务管理/" data-id="cj3fjhmq6000h1p4bnhyh1mzc" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/23/Linux-服务管理/" data-id="cj3fon01e000hho4bdd44808h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -842,7 +1095,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/22/Linux-Shell-基础之正则表达式/" data-id="cj3fjhmpw000a1p4bg3q1zsh6" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/22/Linux-Shell-基础之正则表达式/" data-id="cj3fon017000cho4bvyb9u4c4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1221,7 +1474,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/20/Linux-网络基础/" data-id="cj3fjhmql000v1p4b5810epr9" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/20/Linux-网络基础/" data-id="cj3fon01w0015ho4bt4yruva1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -2059,7 +2312,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/19/Linux-命令基础/" data-id="cj3fjhmqe000n1p4b2vakzm2b" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/19/Linux-命令基础/" data-id="cj3fon01i000mho4bpdoionhe" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -2133,7 +2386,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/12/MySQL-5-7-版本新特性/" data-id="cj3fjhmr1001b1p4bopupcd0a" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/12/MySQL-5-7-版本新特性/" data-id="cj3fon024001iho4b4e8eg1gw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -2604,7 +2857,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/09/与-MySQL-的零距离接触（二）/" data-id="cj3fjhmt0003j1p4bmd2bjjzi" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/09/与-MySQL-的零距离接触（二）/" data-id="cj3fon04b003fho4baonfswpk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -3252,7 +3505,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/07/与-MySQL-的零距离接触（一）/" data-id="cj3fjhmsv00381p4bm4p6647o" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/07/与-MySQL-的零距离接触（一）/" data-id="cj3fon04c003kho4b10oxl3pi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -3368,220 +3621,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/04/复习使用-MySQL（三）/" data-id="cj3fjhmzb005w1p4b02t8zh34" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-复习使用-MySQL（二）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/04/复习使用-MySQL（二）/" class="article-date">
-  <time datetime="2016-09-04T12:41:22.000Z" itemprop="datePublished">2016-09-04</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/04/复习使用-MySQL（二）/">复习使用 MySQL（二）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
-<li>MySQL 5.7.13</li>
-</ul>
-<h2 id="MySQL-主要存储引擎"><a href="#MySQL-主要存储引擎" class="headerlink" title="MySQL 主要存储引擎"></a>MySQL 主要存储引擎</h2><table>
-<thead>
-<tr>
-<th>特性/引擎</th>
-<th>MyISAM</th>
-<th>Aria</th>
-<th>InnoDB</th>
-<th>XtraDB</th>
-<th>Memory</th>
-<th>Archive</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>数据存储</td>
-<td>传统顺序数据储存</td>
-<td>传统顺序数据储存</td>
-<td>表空间存储方式</td>
-<td>表空间存储方式</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>事务支持</td>
-<td>不支持</td>
-<td>支持</td>
-<td>支持</td>
-<td>支持</td>
-<td>不支持</td>
-<td>不支持</td>
-<td></td>
-</tr>
-<tr>
-<td>外键</td>
-<td>不支持</td>
-<td>不支持</td>
-<td>支持</td>
-<td>支持</td>
-<td>不支持</td>
-<td>不支持</td>
-<td></td>
-</tr>
-<tr>
-<td>全文检索</td>
-<td>支持</td>
-<td>支持</td>
-<td>5.6 之后支持</td>
-<td>5.6 之后支持</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>锁级别</td>
-<td>表级锁</td>
-<td>表级锁</td>
-<td>行级锁</td>
-<td>行级锁</td>
-<td>表级锁</td>
-<td>行级锁</td>
-<td></td>
-</tr>
-<tr>
-<td>Count 速度</td>
-<td>快</td>
-<td>快</td>
-<td>慢</td>
-<td>慢</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>适合业务</td>
-<td>读多写少、单表数据量小于 1 KW</td>
-<td>读多写少、单表数据量小于 1 KW</td>
-<td>读写均衡、数据量不限</td>
-<td>读写均衡、数据量不限</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>可用版本</td>
-<td>MySQL、MariaDB、Percona</td>
-<td>MariaDB</td>
-<td>MySQL、MariaDB、Percona</td>
-<td>MariaDB、Percona</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>其他说明</td>
-<td>传统顺序索引数据库，适合读多写少小数据量业务</td>
-<td>MyISAM 增强版，性能更好</td>
-<td>适合高压力高性能的业务模型</td>
-<td>InnoDB 增强版</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h2 id="MySQL-索引定义"><a href="#MySQL-索引定义" class="headerlink" title="MySQL 索引定义"></a>MySQL 索引定义</h2><p>MySQL 的索引（Index）是帮助 MySQL 高效获取数据的数据结构</p>
-<h2 id="MySQL-索引类型"><a href="#MySQL-索引类型" class="headerlink" title="MySQL 索引类型"></a>MySQL 索引类型</h2><ul>
-<li>Normal<ul>
-<li>普通索引，对存储的数值没有任何限制</li>
-</ul>
-</li>
-<li>Unique<ul>
-<li>唯一索引，不允许数值重复，但允许空值</li>
-</ul>
-</li>
-<li>Primary<ul>
-<li>主键索引，是一种特殊的唯一索引，不允许存在数值重复或空值</li>
-</ul>
-</li>
-<li>Spatial（R-Tree）<ul>
-<li>GIS 相关空间查询使用索引数据结构。</li>
-</ul>
-</li>
-<li>Fulltext<ul>
-<li>主要用于全文检索，目前只有 MyISAM 和 MySQL 5.6 + 的 InnoDB 支持；目前只支持英文。</li>
-</ul>
-</li>
-</ul>
-<h2 id="MySQL-索引方法"><a href="#MySQL-索引方法" class="headerlink" title="MySQL 索引方法"></a>MySQL 索引方法</h2><ul>
-<li>B+Tree<ul>
-<li>可用于排序的索引数据结构，可应用于 =，&gt;，&lt; 等各个范围查询，并且可以排序</li>
-<li>时间复杂度：O(log2N)</li>
-</ul>
-</li>
-<li>Hash<ul>
-<li>只能用于 =，IN 等操作，无法进行范围操作，Key 冲突严重情况下可能性能比 B-Tree 低下</li>
-<li>时间复杂度：O(1)</li>
-</ul>
-</li>
-</ul>
-<h2 id="MyISAM-索引结构：B-Tree"><a href="#MyISAM-索引结构：B-Tree" class="headerlink" title="MyISAM 索引结构：B+ Tree"></a>MyISAM 索引结构：B+ Tree</h2><ul>
-<li>MyISAM 主索引和辅助索引<ul>
-<li>区别在于：主索引 Key 是唯一；辅助索引 Key 可以重复</li>
-</ul>
-</li>
-<li>MyISAM 为非聚簇索引</li>
-</ul>
-<h2 id="InnoDB-索引结构：B-Tree"><a href="#InnoDB-索引结构：B-Tree" class="headerlink" title="InnoDB 索引结构：B+ Tree"></a>InnoDB 索引结构：B+ Tree</h2><ul>
-<li>InnoDB 主索引和辅助索引<ul>
-<li>InnoDB 的主索引是聚簇索引，数据和 Key 本身都会存储在 B+Tree 的叶子节点</li>
-<li>InnoDB 的辅助索引本身主要是记录主索引的 Key,最终查找数据还是从辅助索引再去主索引查找</li>
-</ul>
-</li>
-<li>InnoDB 为聚簇索引</li>
-</ul>
-<h2 id="存储引擎及版本选择"><a href="#存储引擎及版本选择" class="headerlink" title="存储引擎及版本选择"></a>存储引擎及版本选择</h2><p>结论：</p>
-<ul>
-<li>使用 InnoDB 于生产环境</li>
-<li>使用 MySQL 5.5+ 于生产环境</li>
-</ul>
-<p>原因：</p>
-<ul>
-<li>更稳定可靠的数据存储和索引结构；整个存储引擎设计思想更可靠先进，接近于Oracle、SQL Server级别的数据库（有兴趣可以去阅读源码了解细节）</li>
-<li>更多可靠特性支持，比如事务、外键等支持（支付等关键领域事务非常重要）</li>
-<li>运行更稳定，不论读写数据的量级，都能够保证比较稳定的性能响应</li>
-<li>更好地崩溃恢复机制，特别利用一些Percona的一些工具，更有效运维InnoDB</li>
-<li>MySQL 5.5+ 对比 MySQL 5.1.x 总体功能和性能提升太多，改进太多</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/04/复习使用-MySQL（二）/" data-id="cj3fjhn0n005z1p4bk0drf48a" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/04/复习使用-MySQL（三）/" data-id="cj3fon05r0063ho4bdamcn2c9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -3604,7 +3644,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -3614,7 +3654,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
     </div>
@@ -3624,7 +3664,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
     </div>
@@ -3643,9 +3683,13 @@ insert test(username) values(username); return last_insert_id(); end //</code></
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/06/02/MySQLDumpSlow-的参数讲解与基础使用/">MySQLDumpSlow 的参数讲解与基础使用</a>
+          </li>
         
           <li>
             <a href="/2017/06/01/XHprof-的安装配置与使用分析/">XHProf 的安装配置与使用分析</a>
@@ -3663,10 +3707,6 @@ insert test(username) values(username); return last_insert_id(); end //</code></
             <a href="/2017/05/25/高性能的-PHP-日志系统/">高性能的 PHP 日志系统</a>
           </li>
         
-          <li>
-            <a href="/2017/05/24/LNMP-性能优化之-PHP-性能优化/">LNMP 性能优化之 PHP 性能优化</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -3680,7 +3720,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Luis Edware<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
