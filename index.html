@@ -54,7 +54,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -98,11 +98,111 @@
 <li><a href="#4">MySQLDumpSlow 的使用建议</a></li>
 <li><a href="#5">MySQLDumpSlow 的使用实例</a></li>
 </ul>
-
+<h2 id="认识-MySQLDumpSlow"><a href="#认识-MySQLDumpSlow" class="headerlink" title="认识 MySQLDumpSlow"></a><a id="1">认识 MySQLDumpSlow</a></h2><p>MySQLDumpSlow 是一个针对于 MySQL 慢查询的命令行程序。在配置 MySQL 相关参数后，可以通过 MySQLDumpSlow 查找出查询较慢的 SQL 语句。</p>
+<p>进入 MySQL 命令行，执行命令 <code>mysql&gt; show variables like &quot;%query%&quot; ;</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">mysql&gt; mysql&gt; show variables like &quot;%quer%&quot; ;</div><div class="line">+----------------------------------------+-----------------------------------------------------+</div><div class="line">| Variable_name                          | Value                                               |</div><div class="line">+----------------------------------------+-----------------------------------------------------+</div><div class="line">| binlog_rows_query_log_events           | OFF                                                 |</div><div class="line">| ft_query_expansion_limit               | 20                                                  |</div><div class="line">| have_query_cache                       | YES                                                 |</div><div class="line">| log_queries_not_using_indexes          | OFF                                                 |</div><div class="line">| log_throttle_queries_not_using_indexes | 0                                                   |</div><div class="line">| long_query_time                        | 10.000000                                           |</div><div class="line">| query_alloc_block_size                 | 8192                                                |</div><div class="line">| query_cache_limit                      | 1048576                                             |</div><div class="line">| query_cache_min_res_unit               | 4096                                                |</div><div class="line">| query_cache_size                       | 1048576                                             |</div><div class="line">| query_cache_type                       | OFF                                                 |</div><div class="line">| query_cache_wlock_invalidate           | OFF                                                 |</div><div class="line">| query_prealloc_size                    | 8192                                                |</div><div class="line">| slow_query_log                         | OFF                                                 |</div><div class="line">| slow_query_log_file                    | /usr/local/var/mysql/luyiyuandeMacBook-Pro-slow.log |</div><div class="line">+----------------------------------------+-----------------------------------------------------+</div><div class="line">15 rows in set (0.01 sec)</div></pre></td></tr></table></figure></p>
+<p>与 MySQLDumpSlow 相关的配置变量</p>
+<ul>
+<li>slow_query_log：是否开启慢查询日志</li>
+<li>long_query_time：是否设置慢查询的 SQL 执行规定时间</li>
+<li>slow_query_log_file：设置慢查询日志记录位置</li>
+<li>log_queries_not_using_indexes：是否设置了把没有索引的记录到慢查询日志</li>
+</ul>
+<p>配置变量设置格式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"># 开启慢查询日志</div><div class="line">set global slow_query_log=on;</div><div class="line"></div><div class="line"># 设置没有索引的记录到慢查询日志</div><div class="line">set global log_queries_not_using_indexes=on;</div><div class="line"></div><div class="line"># 设置到慢查询日志的 SQL 执行时间（1 代表 1 秒）</div><div class="line">set global long_query_time=1;</div><div class="line"></div><div class="line"># 设置慢查询日志的存放位置</div><div class="line">set global slow_query_log_file=&quot;/Users/LuisEdware/Code/output/mysql-slow.log&quot;;</div></pre></td></tr></table></figure></p>
+<p>设置完毕后，不要重启 MySQL 服务，否则设置会失效，如果想要配置持久生效，需要在 my.ini 配置文件编辑上述变量。</p>
+<h2 id="MySQLDumpSlow-的命令参数"><a href="#MySQLDumpSlow-的命令参数" class="headerlink" title="MySQLDumpSlow 的命令参数"></a><a id="2">MySQLDumpSlow 的命令参数</a></h2><p>执行命令 <code>mysqldumpslow --help</code>，显示命令参数如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">Usage: mysqldumpslow [ OPTS... ] [ LOGS... ]</div><div class="line"></div><div class="line">Parse and summarize the MySQL slow query log. Options are</div><div class="line"></div><div class="line">  --verbose    verbose</div><div class="line">  --debug      debug</div><div class="line">  --help       write this text to standard output</div><div class="line"></div><div class="line">  -v           verbose</div><div class="line">  -d           debug</div><div class="line">  -s ORDER     what to sort by (al, at, ar, c, l, r, t), &apos;at&apos; is default</div><div class="line">                al: average lock time</div><div class="line">                ar: average rows sent</div><div class="line">                at: average query time</div><div class="line">                 c: count</div><div class="line">                 l: lock time</div><div class="line">                 r: rows sent</div><div class="line">                 t: query time</div><div class="line">  -r           reverse the sort order (largest last instead of first)</div><div class="line">  -t NUM       just show the top n queries</div><div class="line">  -a           don&apos;t abstract all numbers to N and strings to &apos;S&apos;</div><div class="line">  -n NUM       abstract numbers with at least n digits within names</div><div class="line">  -g PATTERN   grep: only consider stmts that include this string</div><div class="line">  -h HOSTNAME  hostname of db server for *-slow.log filename (can be wildcard),</div><div class="line">               default is &apos;*&apos;, i.e. match all</div><div class="line">  -i NAME      name of server instance (if using mysql.server startup script)</div><div class="line">  -l           don&apos;t subtract lock time from total time</div></pre></td></tr></table></figure></p>
+<p>命令参数意义如下：</p>
+<ul>
+<li><p>-v、–verbose</p>
+<blockquote>
+<p>在详细模式下运行，打印有关该程序的更多信息。</p>
+</blockquote>
+</li>
+<li><p>-d、–debug</p>
+<blockquote>
+<p>在调试模式下运行。</p>
+</blockquote>
+</li>
+<li><p>–help</p>
+<blockquote>
+<p>显示帮助信息并退出程序</p>
+</blockquote>
+</li>
+<li><p>-s [sort_type]</p>
+<blockquote>
+<p>sort_type 是信息排序的依据</p>
+<ul>
+<li>al：按平均锁定时间排序</li>
+<li>ar：按平均返回行数排序</li>
+<li>at：按平均查询时间排序</li>
+<li>c：按计数排序</li>
+<li>l：按锁定时间排序</li>
+<li>r：按返回函数排序</li>
+<li>t：按查询时间排序</li>
+</ul>
+</blockquote>
+</li>
+<li><p>-r 「reverse the sort order (largest last instead of first)」</p>
+<blockquote>
+<p>倒序信息排序</p>
+</blockquote>
+</li>
+<li><p>-t NUM「just show the top n queries」</p>
+<blockquote>
+<p>只显示前 n 个查询</p>
+</blockquote>
+</li>
+<li><p>-a 「Do not abstract all numbers to N and strings to ‘S’.」</p>
+<blockquote>
+<p>TODO</p>
+</blockquote>
+</li>
+<li><p>-n NUM 「abstract numbers with at least n digits within names」</p>
+<blockquote>
+<p>TODO</p>
+</blockquote>
+</li>
+<li><p>-g PATTERN 「grep: only consider stmts that include this string」</p>
+<blockquote>
+<p>TODO</p>
+</blockquote>
+</li>
+<li><p>-h HOSTNAME 「hostname of db server for <em>-slow.log filename (can be wildcard), default is ‘</em>‘, i.e. match all」</p>
+<blockquote>
+<p>根据服务器名称选择慢查询日志</p>
+</blockquote>
+</li>
+<li><p>-i NAME 「name of server instance (if using mysql.server startup script)」</p>
+<blockquote>
+<p>根据服务器 MySQL 实例名称选择慢查询日志</p>
+</blockquote>
+</li>
+<li><p>-l 「don’t subtract lock time from total time」</p>
+<blockquote>
+<p>不要将总时间减去锁定时间</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="MySQLDumpSlow-的结果参数"><a href="#MySQLDumpSlow-的结果参数" class="headerlink" title="MySQLDumpSlow 的结果参数"></a><a id="3">MySQLDumpSlow 的结果参数</a></h2><p>使用 Vim 打开慢查询日志 <code>mysql-slow.log</code>，内容如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">/usr/local/opt/mysql/bin/mysqld, Version: 5.7.18 (Homebrew). started with:</div><div class="line">Tcp port: 3306  Unix socket: /tmp/mysql.sock</div><div class="line">Time                 Id Command    Argument</div><div class="line">/usr/local/opt/mysql/bin/mysqld, Version: 5.7.18 (Homebrew). started with:</div><div class="line">Tcp port: 3306  Unix socket: /tmp/mysql.sock</div><div class="line">Time                 Id Command    Argument</div><div class="line"># Time: 2017-06-03T06:47:46.502825Z</div><div class="line"># User@Host: root[root] @ localhost []  Id:     3</div><div class="line"># Query_time: 0.195360  Lock_time: 0.000131 Rows_sent: 10000  Rows_examined: 10000</div><div class="line">use bingoshuiguo;</div><div class="line">SET timestamp=1496472466;</div><div class="line">select * from z_order limit 10000;</div><div class="line"># Time: 2017-06-03T06:48:27.030315Z</div><div class="line"># User@Host: root[root] @ localhost []  Id:     3</div><div class="line"># Query_time: 1.896889  Lock_time: 0.000823 Rows_sent: 100000  Rows_examined: 100000</div><div class="line">SET timestamp=1496472507;</div><div class="line">select * from z_order limit 100000;</div><div class="line"># Time: 2017-06-03T06:53:37.786379Z</div><div class="line"># User@Host: root[root] @ localhost []  Id:     3</div><div class="line"># Query_time: 3.456264  Lock_time: 0.008454 Rows_sent: 100000  Rows_examined: 200000</div><div class="line">SET timestamp=1496472817;</div><div class="line">select * from z_order left join z_league on z_order.league_id = z_league.id limit 100000;</div><div class="line"># Time: 2017-06-03T07:03:25.615137Z</div><div class="line"># User@Host: root[root] @ localhost []  Id:     3</div><div class="line"># Query_time: 3.837932  Lock_time: 0.000648 Rows_sent: 100000  Rows_examined: 200000</div><div class="line">SET timestamp=1496473405;</div><div class="line">select * from z_order left join z_league on z_order.league_id = z_league.id limit 100000;</div></pre></td></tr></table></figure></p>
+<p>其中参数如下：</p>
+<ul>
+<li>SQL 的执行时间：<strong># Time: 2017-06-03T06:53:37.786379Z</strong></li>
+<li>SQL 的执行主机：<strong># User@Host: root[root] @ localhost []  Id:     3</strong></li>
+<li>SQL 的执行信息：<strong># Query_time: 3.456264  Lock_time: 0.008454 Rows_sent: 100000  Rows_examined: 200000</strong></li>
+<li>SQL 的执行时间：<strong>SET timestamp=1496472817;</strong></li>
+<li>SQL 的执行内容：<strong>select * from z_order left join z_league on z_order.league_id = z_league.id limit 100000;</strong></li>
+</ul>
+<p>执行 MySQLDumpSlow 的命令 <code>mysqldumpslow mysql-slow.log</code>，查看内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Reading mysql slow query log from mysql-slow.log</div><div class="line">Count: 2  Time=3.64s (7s)  Lock=0.00s (0s)  Rows=100000.0 (200000), root[root]@localhost</div><div class="line">  select * from z_order left join z_league on z_order.league_id = z_league.id limit N</div><div class="line"></div><div class="line">Count: 2  Time=1.05s (2s)  Lock=0.00s (0s)  Rows=55000.0 (110000), root[root]@localhost</div><div class="line">  select * from z_order limit N</div></pre></td></tr></table></figure></p>
+<ul>
+<li>Count：出现次数,</li>
+<li>Time：执行最长时间和累计总耗费时间</li>
+<li>Lock：等待锁的时间</li>
+<li>Rows：返回客户端行总数和扫描行总数</li>
+</ul>
+<h2 id="MySQLDumpSlow-的使用建议"><a href="#MySQLDumpSlow-的使用建议" class="headerlink" title="MySQLDumpSlow 的使用建议"></a><a id="4">MySQLDumpSlow 的使用建议</a></h2><h4 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h4><h2 id="MySQLDumpSlow-的使用实例"><a href="#MySQLDumpSlow-的使用实例" class="headerlink" title="MySQLDumpSlow 的使用实例"></a><a id="5">MySQLDumpSlow 的使用实例</a></h2>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/06/02/MySQLDumpSlow-的参数讲解与基础使用/" data-id="cj3fon01y001aho4b65tjbhsk" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/06/02/MySQLDumpSlow-的参数讲解与基础使用/" data-id="cj3gyqval001jxo4bzkudakpt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -171,7 +271,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/06/01/XHprof-的安装配置与使用分析/" data-id="cj3fon02w002eho4bfro1z30d" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/06/01/XHprof-的安装配置与使用分析/" data-id="cj3gyqvb8002fxo4btjgltmph" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -224,7 +324,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/05/31/学习-Swoole/" data-id="cj3fon05y006mho4bx3k3l6q9" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/05/31/学习-Swoole/" data-id="cj3gyqvdy006jxo4b96vca91t" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swoole/">Swoole</a></li></ul>
@@ -535,7 +635,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/05/27/ApacheBench-的参数讲解与基础使用/" data-id="cj3fomzzu0000ho4bf6sn24po" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/05/27/ApacheBench-的参数讲解与基础使用/" data-id="cj3gyqv970004xo4b349umsj2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Apache/">Apache</a></li></ul>
@@ -649,7 +749,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/05/25/高性能的-PHP-日志系统/" data-id="cj3fon06o0077ho4byq98px8a" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/05/25/高性能的-PHP-日志系统/" data-id="cj3gyqvec0075xo4b5gb7pbu2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -824,7 +924,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/05/24/LNMP-性能优化之-PHP-性能优化/" data-id="cj3fon0070005ho4bzliwc48c" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/05/24/LNMP-性能优化之-PHP-性能优化/" data-id="cj3gyqv8z0001xo4bmjr73lr5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -993,7 +1093,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/05/23/PHP-的性能优化/" data-id="cj3fon02n0025ho4bmz56m00z" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/05/23/PHP-的性能优化/" data-id="cj3gyqvb6002axo4b0ln6lqzk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -1059,7 +1159,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/04/24/设计模式之抽象工厂模式/" data-id="cj3fon069006sho4b4ftak30l" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/04/24/设计模式之抽象工厂模式/" data-id="cj3gyqveb0072xo4b07hgvp56" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pattern/">Pattern</a></li></ul>
@@ -1144,7 +1244,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/04/21/设计模式之工厂方法模式/" data-id="cj3fon06l0070ho4bgqiqpx8l" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/04/21/设计模式之工厂方法模式/" data-id="cj3gyqvee007axo4bjn8bgm1c" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pattern/">Pattern</a></li></ul>
@@ -1247,7 +1347,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/04/20/设计模式之简单工厂模式/" data-id="cj3fon06e006who4by30y0thc" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/04/20/设计模式之简单工厂模式/" data-id="cj3gyqveg007dxo4bq16ksa1s" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pattern/">Pattern</a></li></ul>
@@ -1270,7 +1370,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Kategorier</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -1299,7 +1399,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Arkiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
@@ -1309,7 +1409,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Siste innlegg</h3>
     <div class="widget">
       <ul>
         
