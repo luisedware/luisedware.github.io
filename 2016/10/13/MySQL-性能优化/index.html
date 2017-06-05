@@ -7,38 +7,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="目录
 数据准备
-SQL 语句和索引
-服务器硬件
-数据库系统配置
-数据库表结构
+数据库结构优化
+选择合适的数据类型
+数据库表的范式化优化与反范式化优化
+数据库表垂直拆分
+数据库表垂直拆分实践
+数据库表水平拆分
+数据库表水平拆分实践
 
-数据准备打开以下链接下载数据1http://downloads.mysql.com/docs/sakila-db.zip
-打开终端，执行以下命令1234567891011# 登录 MySQL Cli 模式mysql -uroot -p# 创建数据库SOURCE /Users/LuisEdware/Downloads/s">
+
+MySQL 慢查询日志
+EXPLAIN 分析 SQL
+SQL 优化
+索引优化
+
+数据准备打开链接下载数据1http://downloads.mysql.com/docs/sakila-db.zip
+打开终端，执行以下命令1234">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL 性能优化">
 <meta property="og:url" content="http://luisedware.github.io/2016/10/13/MySQL-性能优化/index.html">
 <meta property="og:site_name" content="七月十五九月初七">
 <meta property="og:description" content="目录
 数据准备
-SQL 语句和索引
-服务器硬件
-数据库系统配置
-数据库表结构
+数据库结构优化
+选择合适的数据类型
+数据库表的范式化优化与反范式化优化
+数据库表垂直拆分
+数据库表垂直拆分实践
+数据库表水平拆分
+数据库表水平拆分实践
 
-数据准备打开以下链接下载数据1http://downloads.mysql.com/docs/sakila-db.zip
-打开终端，执行以下命令1234567891011# 登录 MySQL Cli 模式mysql -uroot -p# 创建数据库SOURCE /Users/LuisEdware/Downloads/s">
-<meta property="og:updated_time" content="2017-06-03T09:09:57.000Z">
+
+MySQL 慢查询日志
+EXPLAIN 分析 SQL
+SQL 优化
+索引优化
+
+数据准备打开链接下载数据1http://downloads.mysql.com/docs/sakila-db.zip
+打开终端，执行以下命令1234">
+<meta property="og:updated_time" content="2017-06-05T01:48:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL 性能优化">
 <meta name="twitter:description" content="目录
 数据准备
-SQL 语句和索引
-服务器硬件
-数据库系统配置
-数据库表结构
+数据库结构优化
+选择合适的数据类型
+数据库表的范式化优化与反范式化优化
+数据库表垂直拆分
+数据库表垂直拆分实践
+数据库表水平拆分
+数据库表水平拆分实践
 
-数据准备打开以下链接下载数据1http://downloads.mysql.com/docs/sakila-db.zip
-打开终端，执行以下命令1234567891011# 登录 MySQL Cli 模式mysql -uroot -p# 创建数据库SOURCE /Users/LuisEdware/Downloads/s">
+
+MySQL 慢查询日志
+EXPLAIN 分析 SQL
+SQL 优化
+索引优化
+
+数据准备打开链接下载数据1http://downloads.mysql.com/docs/sakila-db.zip
+打开终端，执行以下命令1234">
   
     <link rel="alternate" href="/atom.xml" title="七月十五九月初七" type="application/atom+xml">
   
@@ -82,7 +109,7 @@ SQL 语句和索引
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -119,14 +146,47 @@ SQL 语句和索引
       
         <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
 <li><a href="#1">数据准备</a></li>
-<li><a href="#2">SQL 语句和索引</a></li>
-<li><a href="#3">服务器硬件</a></li>
-<li><a href="#4">数据库系统配置</a></li>
-<li><a href="#5">数据库表结构</a></li>
+<li><a href="#6">数据库结构优化</a><ul>
+<li><a href="#6-1">选择合适的数据类型</a></li>
+<li><a href="#6-2">数据库表的范式化优化与反范式化优化</a></li>
+<li><a href="#6-3">数据库表垂直拆分</a></li>
+<li><a href="#6-5">数据库表垂直拆分实践</a></li>
+<li><a href="#6-4">数据库表水平拆分</a></li>
+<li><a href="#6-6">数据库表水平拆分实践</a></li>
 </ul>
-<h2 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a><a id="1">数据准备</a></h2><p>打开以下链接下载数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://downloads.mysql.com/docs/sakila-db.zip</div></pre></td></tr></table></figure></p>
-<p>打开终端，执行以下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"># 登录 MySQL Cli 模式</div><div class="line">mysql -uroot -p</div><div class="line"></div><div class="line"># 创建数据库</div><div class="line">SOURCE /Users/LuisEdware/Downloads/sakila-db/sakila-schema.sql.sql</div><div class="line"></div><div class="line"># 填充数据到数据库</div><div class="line">SOURCE /Users/LuisEdware/Downloads/sakila-db/sakila-data.sql</div><div class="line"></div><div class="line"># 使用 sakila 数据库</div><div class="line">USE sakila;</div></pre></td></tr></table></figure></p>
-<h2 id="SQL-语句和索引"><a href="#SQL-语句和索引" class="headerlink" title="SQL 语句和索引"></a>SQL 语句和索引</h2><h3 id="MySQL-慢查询日志"><a href="#MySQL-慢查询日志" class="headerlink" title="MySQL 慢查询日志"></a>MySQL 慢查询日志</h3><p>如何发现有问题的 SQL？答案是使用 MySQL 慢查询日志对有效率问题的 SQL 进行监控，执行命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"># 查看是否开启慢查询日志</div><div class="line">show variables like &quot;slow_query_log&quot;;</div><div class="line"></div><div class="line"># 查看是否设置了把没有索引的记录到慢查询日志</div><div class="line">show variables like &quot;log_queries_not_using_indexes&quot;;</div><div class="line"></div><div class="line"># 查看是否设置慢查询的 SQL 执行时间</div><div class="line">show variables like &quot;long_query_time&quot;;</div><div class="line"></div><div class="line"># 查看慢查询日志记录位置</div><div class="line">show variables like &quot;slow_query_log_file&quot;;</div><div class="line"></div><div class="line"># 开启慢查询日志</div><div class="line">set global slow_query_log=on</div><div class="line"></div><div class="line"># 设置没有索引的记录到慢查询日志</div><div class="line">set global log_queries_not_using_indexes=on</div><div class="line"></div><div class="line"># 设置到慢查询日志的 SQL 执行时间（1 代表 1 秒）</div><div class="line">set global long_query_time=1</div><div class="line"></div><div class="line"># 查看慢查询日志（在 Linux 终端下执行）</div><div class="line">tail -50 /usr/local/var/mysql/luyiyuandeMacBook-Pro-slow.log;</div></pre></td></tr></table></figure></p>
+</li>
+<li><a href="#2">MySQL 慢查询日志</a></li>
+<li><a href="#3">EXPLAIN 分析 SQL</a></li>
+<li><a href="#4">SQL 优化</a></li>
+<li><a href="#5">索引优化</a></li>
+</ul>
+<h2 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a><a id="1">数据准备</a></h2><p>打开链接下载数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://downloads.mysql.com/docs/sakila-db.zip</div></pre></td></tr></table></figure></p>
+<p>打开终端，执行以下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"># 登录 MySQL Cli 模式</div><div class="line">mysql -uroot -p</div><div class="line"></div><div class="line"># 创建数据库</div><div class="line">SOURCE /Users/LuisEdware/Downloads/sakila-db/sakila-schema.sql</div><div class="line"></div><div class="line"># 填充数据到数据库</div><div class="line">SOURCE /Users/LuisEdware/Downloads/sakila-db/sakila-data.sql</div><div class="line"></div><div class="line"># 使用 sakila 数据库</div><div class="line">USE sakila;</div></pre></td></tr></table></figure></p>
+<h2 id="数据库结构优化"><a href="#数据库结构优化" class="headerlink" title="数据库结构优化"></a><a id="6">数据库结构优化</a></h2><h4 id="选择合适的数据类型"><a href="#选择合适的数据类型" class="headerlink" title="选择合适的数据类型"></a><a id="6-1">选择合适的数据类型</a></h4><ul>
+<li>使用可以存下你的数据的最小的数据类型</li>
+<li>使用简单的数据类型。Integer 要比 Varchar 类型在 MySQL 中处理更高效</li>
+<li>尽可能使用 not null 定义字段</li>
+<li>尽量少用 text 类型，非用不可时最好考虑分表</li>
+</ul>
+<h4 id="数据库表的范式化优化与反范式化优化"><a href="#数据库表的范式化优化与反范式化优化" class="headerlink" title="数据库表的范式化优化与反范式化优化"></a><a id="6-2">数据库表的范式化优化与反范式化优化</a></h4><p>为了避免冗余数据，可以根据数据库表设计第三范式对数据的储存进行优化设计；也可以为了提高性能，采用数据库表设计反范式化设计去冗余数据，使得数据库的查询更加的快速。</p>
+<h4 id="数据库表垂直拆分"><a href="#数据库表垂直拆分" class="headerlink" title="数据库表垂直拆分"></a><a id="6-3">数据库表垂直拆分</a></h4><p>垂直拆分，就是把原来一个有很多列的表拆分成多个表，这解决了表的宽度问题。通常垂直拆分就可以按以下原则进行：</p>
+<ul>
+<li>把不太常用的字段单独存放到一个表中</li>
+<li>把大字段独立存放到一个表中</li>
+<li>把经常一起使用的字段放到一起</li>
+</ul>
+<h4 id="数据库表垂直拆分实践"><a href="#数据库表垂直拆分实践" class="headerlink" title="数据库表垂直拆分实践"></a><a id="6-5">数据库表垂直拆分实践</a></h4><h4 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h4><h4 id="数据库表水平拆分"><a href="#数据库表水平拆分" class="headerlink" title="数据库表水平拆分"></a><a id="6-4">数据库表水平拆分</a></h4><p>当单表的数据量过大，导致增删查改等操作过慢，这时候需要对表进行水平拆分。水平拆分的表，每一张表的结构都是完全一致的。</p>
+<p>常用的水平拆分方法为：</p>
+<ol>
+<li>对 customer_id 进行 hash 运算，如果要拆分成 5 个表则使用 mod(customer_id,5) 取出 0-4 个值</li>
+<li>针对不同的 hashID 把数据存到不同的表中</li>
+</ol>
+<p>挑战：</p>
+<ul>
+<li>跨分区表进行数据查询</li>
+<li>统计及后台报表操作</li>
+</ul>
+<h4 id="数据库表水平拆分实践"><a href="#数据库表水平拆分实践" class="headerlink" title="数据库表水平拆分实践"></a><a id="6-6">数据库表水平拆分实践</a></h4><h4 id="TODO-1"><a href="#TODO-1" class="headerlink" title="TODO"></a>TODO</h4><h2 id="MySQL-慢查询日志"><a href="#MySQL-慢查询日志" class="headerlink" title="MySQL 慢查询日志"></a>MySQL 慢查询日志</h2><p>如何发现有问题的 SQL？答案是使用 MySQL 慢查询日志对有效率问题的 SQL 进行监控，执行命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"># 查看是否开启慢查询日志</div><div class="line">show variables like &quot;slow_query_log&quot;;</div><div class="line"></div><div class="line"># 查看是否设置了把没有索引的记录到慢查询日志</div><div class="line">show variables like &quot;log_queries_not_using_indexes&quot;;</div><div class="line"></div><div class="line"># 查看是否设置慢查询的 SQL 执行时间</div><div class="line">show variables like &quot;long_query_time&quot;;</div><div class="line"></div><div class="line"># 查看慢查询日志记录位置</div><div class="line">show variables like &quot;slow_query_log_file&quot;;</div><div class="line"></div><div class="line"># 开启慢查询日志</div><div class="line">set global slow_query_log=on</div><div class="line"></div><div class="line"># 设置没有索引的记录到慢查询日志</div><div class="line">set global log_queries_not_using_indexes=on</div><div class="line"></div><div class="line"># 设置到慢查询日志的 SQL 执行时间（1 代表 1 秒）</div><div class="line">set global long_query_time=1</div><div class="line"></div><div class="line"># 查看慢查询日志（在 Linux 终端下执行）</div><div class="line">tail -50 /usr/local/var/mysql/luyiyuandeMacBook-Pro-slow.log;</div></pre></td></tr></table></figure></p>
 <p>慢查询日志所包含的内容</p>
 <ul>
 <li>SQL 的执行时间：<strong># Time: 2016-10-13T10:01:45.914267Z</strong></li>
@@ -139,27 +199,30 @@ SQL 语句和索引
 <ul>
 <li>mysqldumpslow<ul>
 <li>安装：MySQL 数据库自带</li>
-<li>使用：<code>mysqldumpslow /usr/local/var/mysql/luyiyuandeMacBook-Pro-slow.log;</code><ul>
-<li>教程：<a href="https://github.com/luisedware/Archives/issues/7" target="_blank" rel="external">点击查看详情</a></li>
-</ul>
-</li>
+<li>使用：<code>mysqldumpslow /usr/local/var/mysql/luyiyuandeMacBook-Pro-slow.log;</code></li>
+<li>详解：<a href="https://github.com/luisedware/Archives/issues/7" target="_blank" rel="external">点击查看详情</a></li>
 </ul>
 </li>
 <li>pt-query-digest<ul>
 <li>安装：<code>brew install brew install percona-toolkit</code></li>
 <li>使用：<code>pt-query-digest /usr/local/var/mysql/luyiyuandeMacBook-Pro-slow.log | more;</code></li>
-<li>选项</li>
-<li>参数</li>
+<li>详解：TODO</li>
+</ul>
+</li>
+<li>mysqlsla<ul>
+<li>安装：TODO</li>
+<li>使用：TODO</li>
+<li>详解：TODO</li>
 </ul>
 </li>
 </ul>
 <p>如何通过慢查询日志发现有问题的 SQL？</p>
 <ul>
 <li>查询次数多且每次查询占用时间长的 SQL</li>
-<li>IO 大的 SQL</li>
 <li>未命中索引的 SQL</li>
+<li>IO 大的 SQL</li>
 </ul>
-<h3 id="EXPLAIN-分析-SQL-的执行计划"><a href="#EXPLAIN-分析-SQL-的执行计划" class="headerlink" title="EXPLAIN 分析 SQL 的执行计划"></a>EXPLAIN 分析 SQL 的执行计划</h3><p>使用 EXPLAIN 分析 SQL 的执行计划的例子如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">EXPLAIN</span> <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> staff;</div></pre></td></tr></table></figure></p>
+<h2 id="SQL-语句和索引"><a href="#SQL-语句和索引" class="headerlink" title="SQL 语句和索引"></a>SQL 语句和索引</h2><h3 id="EXPLAIN-分析-SQL-的执行计划"><a href="#EXPLAIN-分析-SQL-的执行计划" class="headerlink" title="EXPLAIN 分析 SQL 的执行计划"></a>EXPLAIN 分析 SQL 的执行计划</h3><p>使用 EXPLAIN 分析 SQL 的执行计划的例子如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">EXPLAIN</span> <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> staff;</div></pre></td></tr></table></figure></p>
 <p>使用 EXPLAIN 分析 SQL 的各列参数含义如下：</p>
 <ul>
 <li>id：SQL 语句执行顺序编号</li>
@@ -207,30 +270,6 @@ SQL 语句和索引
 <p>执行结果如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># ########################################################################</div><div class="line"># Summary of indexes</div><div class="line"># ########################################################################</div><div class="line"></div><div class="line"># Size Duplicate Indexes   118425374</div><div class="line"># Total Duplicate Indexes  24</div><div class="line"># Total Indexes            1439</div></pre></td></tr></table></figure></p>
 <h4 id="3-删除不用的索引"><a href="#3-删除不用的索引" class="headerlink" title="3.删除不用的索引"></a>3.删除不用的索引</h4><p>目前 MySQL 中还没有记录索引的使用情况，但是在 PerconMySQL 和 MariaDB 中可以通过 INDEX_STATISTICS 表来查看哪些索引未使用，但在 MySQL 中目前只能通过慢查询日志配合共组 <code>pt-index-usage</code> 来进行索引使用情况的分析。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pt-index-usage -uroot -p &apos;123456&apos; /usr/local/var/mysql/luyiyuandeMacBook-Pro-slow.log;</div></pre></td></tr></table></figure>
-<h2 id="数据库结构优化"><a href="#数据库结构优化" class="headerlink" title="数据库结构优化"></a>数据库结构优化</h2><h3 id="选择合适的数据类型"><a href="#选择合适的数据类型" class="headerlink" title="选择合适的数据类型"></a>选择合适的数据类型</h3><ul>
-<li>使用可以存下你的数据的最小的数据类型</li>
-<li>使用简单的数据类型。Integer 要比 varchar 类型在 MySQL 中处理更高效</li>
-<li>尽可能使用 not null 定义字段</li>
-<li>尽量少用 text 类型，非用不可时最好考虑分表</li>
-</ul>
-<h3 id="数据库表的范式化优化与反范式化优化"><a href="#数据库表的范式化优化与反范式化优化" class="headerlink" title="数据库表的范式化优化与反范式化优化"></a>数据库表的范式化优化与反范式化优化</h3><p>略</p>
-<h3 id="数据库表的垂直拆分"><a href="#数据库表的垂直拆分" class="headerlink" title="数据库表的垂直拆分"></a>数据库表的垂直拆分</h3><p>垂直拆分，就是把原来一个有很多列的表拆分成多个表，这解决了表的宽度问题。通常垂直拆分就可以按以下原则进行：</p>
-<ul>
-<li>把不太常用的字段单独存放到一个表中</li>
-<li>把大字段独立存放到一个表中</li>
-<li>把经常一起使用的字段放到一起</li>
-</ul>
-<h3 id="数据库表的水平拆分"><a href="#数据库表的水平拆分" class="headerlink" title="数据库表的水平拆分"></a>数据库表的水平拆分</h3><p>当单表的数据量过大，导致增删查改等操作过慢，这时候需要对表进行水平拆分。水平拆分的表，每一张表的结构都是完全一致的。</p>
-<p>常用的水平拆分方法为：</p>
-<ol>
-<li>对 customer_id 进行 hash 运算，如果要拆分成 5 个表则使用 mod(customer_id,5) 取出 0-4 个值</li>
-<li>针对不同的 hashID 把数据存到不同的表中</li>
-</ol>
-<p>挑战：</p>
-<ul>
-<li>跨分区表进行数据查询</li>
-<li>统计及后台报表操作</li>
-</ul>
 <h2 id="系统配置优化"><a href="#系统配置优化" class="headerlink" title="系统配置优化"></a>系统配置优化</h2><h3 id="数据库系统配置优化"><a href="#数据库系统配置优化" class="headerlink" title="数据库系统配置优化"></a>数据库系统配置优化</h3><p>数据库是基于操作系统的，目前大多数 MySQL 都是安装在Linux 系统之上，所以对于操作系统的一些参数配置也会影响到 MySQL 的性能，下面列举一些常用到的系统配置。</p>
 <p>网络方面的配置，要修改文件 <code>/etc/sysctl.conf</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># 增加 tcp 支持的队列数</div><div class="line">net.ipv4.tcp_max_syn_backlog = 65535</div><div class="line"></div><div class="line"># 减少断开连接时，资源回收</div><div class="line">net.ipv4.tcp_max_tw_buckets = 8000</div><div class="line">net.ipv4.tcp_tw_reuse = 1</div><div class="line">net.ipv4.tcp_tw_recycle = 1</div><div class="line">net.ipv4.tcp_fin_timeout = 10</div></pre></td></tr></table></figure></p>
 <p>打开文件数的限制，可以使用 ulimit -a 查看目录的各项限制，可以修改文件 <code>/etc/security/limits.conf</code> ，增加以下内容以修改打开文件数量的限制<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">soft nofile 65535</div><div class="line">hard nofile 65535</div></pre></td></tr></table></figure></p>
@@ -274,7 +313,7 @@ SQL 语句和索引
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/13/MySQL-性能优化/" data-id="cj3h27j8n001j6t4b9zku1p9b" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/13/MySQL-性能优化/" data-id="cj3jh9pf50015f54bx5qn26tn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -311,7 +350,7 @@ SQL 语句和索引
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Kategorier</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -340,7 +379,7 @@ SQL 语句和索引
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Arkiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
@@ -350,7 +389,7 @@ SQL 语句和索引
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Siste innlegg</h3>
     <div class="widget">
       <ul>
         
