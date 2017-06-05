@@ -52,9 +52,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -325,7 +325,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/25/Yii-框架之基础篇/" data-id="cj3jh9pg9002sf54bh2iej6p0" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/25/Yii-框架之基础篇/" data-id="cj3jjtk57002rwt4bgarpdqra" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -428,7 +428,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/25/Yii-框架之高效篇/" data-id="cj3jh9pg7002pf54b8nik449o" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/25/Yii-框架之高效篇/" data-id="cj3jjtk5a002ywt4bnby7ccrj" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -621,7 +621,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/20/打造扛得住的-MySQL-数据库架构/" data-id="cj3jh9pj1006nf54bb5of63ce" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/20/打造扛得住的-MySQL-数据库架构/" data-id="cj3jjtk8c006swt4b5h65dnyy" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -670,9 +670,22 @@
 <li><a href="#6-6">数据库表水平拆分实践</a></li>
 </ul>
 </li>
-<li><a href="#2">MySQL 慢查询日志</a></li>
+<li><a href="#2">MySQL 慢查询日志</a><ul>
+<li><a href="#2-1">慢查询日志配置</a></li>
+<li><a href="#2-2">慢查询日志所存内容</a></li>
+<li><a href="#2-3">慢查询日志分析工具</a></li>
+<li><a href="#2-4">慢查询日志判断问题 SQL 的依据</a></li>
+</ul>
+</li>
 <li><a href="#3">EXPLAIN 分析 SQL</a></li>
-<li><a href="#4">SQL 优化</a></li>
+<li><a href="#4">SQL 优化</a><ul>
+<li><a href="#4-1">MAX() 优化</a></li>
+<li><a href="#4-2">COUNT() 优化</a></li>
+<li><a href="#4-5">子查询优化</a></li>
+<li><a href="#4-3">GROUP BY 优化</a></li>
+<li><a href="#4-4">LIMIT 优化</a></li>
+</ul>
+</li>
 <li><a href="#5">索引优化</a></li>
 </ul>
 <h2 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a><a id="1">数据准备</a></h2><p>打开链接下载数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://downloads.mysql.com/docs/sakila-db.zip</div></pre></td></tr></table></figure></p>
@@ -701,17 +714,15 @@
 <li>跨分区表进行数据查询</li>
 <li>统计及后台报表操作</li>
 </ul>
-<h4 id="数据库表水平拆分实践"><a href="#数据库表水平拆分实践" class="headerlink" title="数据库表水平拆分实践"></a><a id="6-6">数据库表水平拆分实践</a></h4><h4 id="TODO-1"><a href="#TODO-1" class="headerlink" title="TODO"></a>TODO</h4><h2 id="MySQL-慢查询日志"><a href="#MySQL-慢查询日志" class="headerlink" title="MySQL 慢查询日志"></a>MySQL 慢查询日志</h2><p>如何发现有问题的 SQL？答案是使用 MySQL 慢查询日志对有效率问题的 SQL 进行监控，执行命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"># 查看是否开启慢查询日志</div><div class="line">show variables like &quot;slow_query_log&quot;;</div><div class="line"></div><div class="line"># 查看是否设置了把没有索引的记录到慢查询日志</div><div class="line">show variables like &quot;log_queries_not_using_indexes&quot;;</div><div class="line"></div><div class="line"># 查看是否设置慢查询的 SQL 执行时间</div><div class="line">show variables like &quot;long_query_time&quot;;</div><div class="line"></div><div class="line"># 查看慢查询日志记录位置</div><div class="line">show variables like &quot;slow_query_log_file&quot;;</div><div class="line"></div><div class="line"># 开启慢查询日志</div><div class="line">set global slow_query_log=on</div><div class="line"></div><div class="line"># 设置没有索引的记录到慢查询日志</div><div class="line">set global log_queries_not_using_indexes=on</div><div class="line"></div><div class="line"># 设置到慢查询日志的 SQL 执行时间（1 代表 1 秒）</div><div class="line">set global long_query_time=1</div><div class="line"></div><div class="line"># 查看慢查询日志（在 Linux 终端下执行）</div><div class="line">tail -50 /usr/local/var/mysql/luyiyuandeMacBook-Pro-slow.log;</div></pre></td></tr></table></figure></p>
-<p>慢查询日志所包含的内容</p>
-<ul>
+<h4 id="数据库表水平拆分实践"><a href="#数据库表水平拆分实践" class="headerlink" title="数据库表水平拆分实践"></a><a id="6-6">数据库表水平拆分实践</a></h4><h4 id="TODO-1"><a href="#TODO-1" class="headerlink" title="TODO"></a>TODO</h4><h2 id="MySQL-慢查询日志"><a href="#MySQL-慢查询日志" class="headerlink" title="MySQL 慢查询日志"></a><a id="2">MySQL 慢查询日志</a></h2><h4 id="慢查询日志配置"><a href="#慢查询日志配置" class="headerlink" title="慢查询日志配置"></a><a id="2-1">慢查询日志配置</a></h4><p>如何发现有问题的 SQL？答案是使用 MySQL 慢查询日志对有效率问题的 SQL 进行监控，执行命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"># 查看是否开启慢查询日志</div><div class="line">show variables like &quot;slow_query_log&quot;;</div><div class="line"></div><div class="line"># 查看是否设置了把没有索引的记录到慢查询日志</div><div class="line">show variables like &quot;log_queries_not_using_indexes&quot;;</div><div class="line"></div><div class="line"># 查看是否设置慢查询的 SQL 执行时间</div><div class="line">show variables like &quot;long_query_time&quot;;</div><div class="line"></div><div class="line"># 查看慢查询日志记录位置</div><div class="line">show variables like &quot;slow_query_log_file&quot;;</div><div class="line"></div><div class="line"># 开启慢查询日志</div><div class="line">set global slow_query_log=on</div><div class="line"></div><div class="line"># 设置没有索引的记录到慢查询日志</div><div class="line">set global log_queries_not_using_indexes=on</div><div class="line"></div><div class="line"># 设置到慢查询日志的 SQL 执行时间（1 代表 1 秒）</div><div class="line">set global long_query_time=1</div><div class="line"></div><div class="line"># 查看慢查询日志（在 Linux 终端下执行）</div><div class="line">tail -50 /usr/local/var/mysql/luyiyuandeMacBook-Pro-slow.log;</div></pre></td></tr></table></figure></p>
+<h4 id="慢查询日志所存内容"><a href="#慢查询日志所存内容" class="headerlink" title="慢查询日志所存内容"></a><a id="2-2">慢查询日志所存内容</a></h4><ul>
 <li>SQL 的执行时间：<strong># Time: 2016-10-13T10:01:45.914267Z</strong></li>
 <li>SQL 的执行主机：<strong># User@Host: root[root] @ localhost []  Id:   949</strong></li>
 <li>SQL 的执行信息：<strong># Query_time: 0.000227  Lock_time: 0.000099 Rows_sent: 2  Rows_examined: 2</strong></li>
 <li>SQL 的执行时间：<strong>SET timestamp=1476352905;</strong></li>
 <li>SQL 的执行内容：<strong>select * from store;</strong></li>
 </ul>
-<p>慢查询日志分析工具</p>
-<ul>
+<h4 id="慢查询日志分析工具"><a href="#慢查询日志分析工具" class="headerlink" title="慢查询日志分析工具"></a><a id="2-3">慢查询日志分析工具</a></h4><ul>
 <li>mysqldumpslow<ul>
 <li>安装：MySQL 数据库自带</li>
 <li>使用：<code>mysqldumpslow /usr/local/var/mysql/luyiyuandeMacBook-Pro-slow.log;</code></li>
@@ -731,14 +742,13 @@
 </ul>
 </li>
 </ul>
-<p>如何通过慢查询日志发现有问题的 SQL？</p>
-<ul>
+<h4 id="慢查询日志判断问题-SQL-的依据"><a href="#慢查询日志判断问题-SQL-的依据" class="headerlink" title="慢查询日志判断问题 SQL 的依据"></a><a id="2-4">慢查询日志判断问题 SQL 的依据</a></h4><ul>
 <li>查询次数多且每次查询占用时间长的 SQL</li>
 <li>未命中索引的 SQL</li>
 <li>IO 大的 SQL</li>
 </ul>
-<h2 id="SQL-语句和索引"><a href="#SQL-语句和索引" class="headerlink" title="SQL 语句和索引"></a>SQL 语句和索引</h2><h3 id="EXPLAIN-分析-SQL-的执行计划"><a href="#EXPLAIN-分析-SQL-的执行计划" class="headerlink" title="EXPLAIN 分析 SQL 的执行计划"></a>EXPLAIN 分析 SQL 的执行计划</h3><p>使用 EXPLAIN 分析 SQL 的执行计划的例子如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">EXPLAIN</span> <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> staff;</div></pre></td></tr></table></figure></p>
-<p>使用 EXPLAIN 分析 SQL 的各列参数含义如下：</p>
+<h2 id="EXPLAIN-分析-SQL-的执行计划"><a href="#EXPLAIN-分析-SQL-的执行计划" class="headerlink" title="EXPLAIN 分析 SQL 的执行计划"></a><a id="3">EXPLAIN 分析 SQL 的执行计划</a></h2><p>使用 EXPLAIN 分析 SQL<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">EXPLAIN</span> <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> staff;</div></pre></td></tr></table></figure></p>
+<p>使用 EXPLAIN 分析 SQL 后各个参数含义如下：</p>
 <ul>
 <li>id：SQL 语句执行顺序编号</li>
 <li>select_type：SQL 语句执行的类型，主要区别普通查询、联合查询和子查询之类的复杂查询</li>
@@ -751,24 +761,25 @@
 <li>rows：MySQL 认为必须检查的用来返回请求数据的行数</li>
 <li>Extra：提供 MySQL 优化器一系列额外信息</li>
 </ul>
-<h3 id="MAX-和-COUNT-的优化"><a href="#MAX-和-COUNT-的优化" class="headerlink" title="MAX() 和 COUNT() 的优化"></a>MAX() 和 COUNT() 的优化</h3><h4 id="MAX"><a href="#MAX" class="headerlink" title="MAX()"></a>MAX()</h4><p>分析 SQL 语句：使用 MAX() 方法查询最后一笔交易的时间<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">EXPLAIN SELECT MAX(payment_date) FROM payment_date</div></pre></td></tr></table></figure></p>
+<p>执行 EXPLAIN 分析 SQL 返回结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">mysql&gt; EXPLAIN select * from z_order left join z_league on z_order.league_id = z_league.id limit 10000\G;</div><div class="line">*************************** 1. row ***************************</div><div class="line">           id: 1</div><div class="line">  select_type: SIMPLE</div><div class="line">        table: z_order</div><div class="line">   partitions: NULL</div><div class="line">         type: ALL</div><div class="line">possible_keys: NULL</div><div class="line">          key: NULL</div><div class="line">      key_len: NULL</div><div class="line">          ref: NULL</div><div class="line">         rows: 740339</div><div class="line">     filtered: 100.00</div><div class="line">        Extra: NULL</div><div class="line">*************************** 2. row ***************************</div><div class="line">           id: 1</div><div class="line">  select_type: SIMPLE</div><div class="line">        table: z_league</div><div class="line">   partitions: NULL</div><div class="line">         type: eq_ref</div><div class="line">possible_keys: PRIMARY</div><div class="line">          key: PRIMARY</div><div class="line">      key_len: 4</div><div class="line">          ref: bingoshuiguo.z_order.league_id</div><div class="line">         rows: 1</div><div class="line">     filtered: 100.00</div><div class="line">        Extra: Using where</div><div class="line">2 rows in set, 1 warning (0.00 sec)</div></pre></td></tr></table></figure></p>
+<h2 id="SQL-优化"><a href="#SQL-优化" class="headerlink" title="SQL 优化"></a><a id="4">SQL 优化</a></h2><h4 id="MAX-优化"><a href="#MAX-优化" class="headerlink" title="MAX() 优化"></a><a id="4-1">MAX() 优化</a></h4><p>分析 SQL 语句：使用 MAX() 方法查询最后一笔交易的时间<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">EXPLAIN SELECT MAX(payment_date) FROM payment_date</div></pre></td></tr></table></figure></p>
 <p>执行结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">*************************** 1. row ***************************</div><div class="line">           id: 1</div><div class="line">  select_type: SIMPLE</div><div class="line">        table: payment</div><div class="line">   partitions: NULL</div><div class="line">         type: ALL</div><div class="line">possible_keys: NULL</div><div class="line">          key: NULL</div><div class="line">      key_len: NULL</div><div class="line">          ref: NULL</div><div class="line">         rows: 16086</div><div class="line">     filtered: 100.00</div><div class="line">        Extra: NULL</div><div class="line">1 row in set, 1 warning (0.00 sec)</div></pre></td></tr></table></figure></p>
 <p>如果数据表的数据非常大，查询频率又非常高，那么服务器的 IO 消耗也会非常高，所以这条 SQL 语句需要优化。可以通过建立索引进行优化。执行代码如下：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> idx_paydate <span class="keyword">ON</span> payment(payment_date);</div></pre></td></tr></table></figure>
 <p>然后再分析 SQL 语句，执行结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">*************************** 1. row ***************************</div><div class="line">           id: 1</div><div class="line">  select_type: SIMPLE</div><div class="line">        table: NULL</div><div class="line">   partitions: NULL</div><div class="line">         type: NULL</div><div class="line">possible_keys: NULL</div><div class="line">          key: NULL</div><div class="line">      key_len: NULL</div><div class="line">          ref: NULL</div><div class="line">         rows: NULL</div><div class="line">     filtered: NULL</div><div class="line">        Extra: Select tables optimized away</div><div class="line">1 row in set, 1 warning (0.01 sec)</div></pre></td></tr></table></figure></p>
 <p>经过优化之后，由于索引是按顺序排列的，MySQL 不需要查询表中的数据，而是通过查询索引最后的一个数据，就可以得知执行结果了。而且这个时候，不管表的数据量多大，查询 MAX() 所需要的时间都是基本固定的，这样就尽可能地减少了 IO 操作。</p>
-<h4 id="COUNT"><a href="#COUNT" class="headerlink" title="COUNT()"></a>COUNT()</h4><p>分析 SQL 语句：使用 COUNT() 函数在一条 SQL 中同时查出 2006 年和 2007 年电影的数量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">SELECT</div><div class="line">	count(release_year = &apos;2006&apos; OR NULL) AS &apos;2006 年电影数量&apos; ,</div><div class="line">	count(release_year = &apos;2007&apos; OR NULL) AS &apos;2007 年电影数量&apos;</div><div class="line">FROM</div><div class="line">	film;</div></pre></td></tr></table></figure></p>
+<h4 id="COUNT-优化"><a href="#COUNT-优化" class="headerlink" title="COUNT() 优化"></a><a id="4-2">COUNT() 优化</a></h4><p>分析 SQL 语句：使用 COUNT() 函数在一条 SQL 中同时查出 2006 年和 2007 年电影的数量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">SELECT</div><div class="line">  count(release_year = &apos;2006&apos; OR NULL) AS &apos;2006 年电影数量&apos; ,</div><div class="line">  count(release_year = &apos;2007&apos; OR NULL) AS &apos;2007 年电影数量&apos;</div><div class="line">FROM</div><div class="line">  film;</div></pre></td></tr></table></figure></p>
 <p>count(*) 包含空值，count(id) 不包含空值。上述语句就是优化 Count() 函数取值</p>
-<h3 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h3><p>分析 SQL 语句：查询 sandra 出演的所有影片<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span></div><div class="line">	title ,</div><div class="line">	release_year ,</div><div class="line">	<span class="keyword">LENGTH</span></div><div class="line"><span class="keyword">FROM</span></div><div class="line">	film</div><div class="line"><span class="keyword">WHERE</span></div><div class="line">	film_id <span class="keyword">IN</span>(</div><div class="line">		<span class="keyword">SELECT</span></div><div class="line">			film_id</div><div class="line">		<span class="keyword">FROM</span></div><div class="line">			film_actor</div><div class="line">		<span class="keyword">WHERE</span></div><div class="line">			actor_id <span class="keyword">IN</span>(</div><div class="line">				<span class="keyword">SELECT</span></div><div class="line">					actor_id</div><div class="line">				<span class="keyword">FROM</span></div><div class="line">					actor</div><div class="line">				<span class="keyword">WHERE</span></div><div class="line">					first_name = <span class="string">'sandra'</span></div><div class="line">			)</div><div class="line">	)</div></pre></td></tr></table></figure></p>
+<h4 id="子查询优化"><a href="#子查询优化" class="headerlink" title="子查询优化"></a><a id="4-5">子查询优化</a></h4><p>分析 SQL 语句：查询 sandra 出演的所有影片<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">SELECT</div><div class="line">  title ,</div><div class="line">  release_year ,</div><div class="line">  LENGTH</div><div class="line">FROM</div><div class="line">  film</div><div class="line">WHERE</div><div class="line">  film_id IN(</div><div class="line">    SELECT</div><div class="line">      film_id</div><div class="line">    FROM</div><div class="line">      film_actor</div><div class="line">    WHERE</div><div class="line">      actor_id IN(</div><div class="line">        SELECT</div><div class="line">          actor_id</div><div class="line">        FROM</div><div class="line">          actor</div><div class="line">        WHERE</div><div class="line">          first_name = &apos;sandra&apos;</div><div class="line">      )</div><div class="line">  )</div></pre></td></tr></table></figure></p>
 <p>通常情况下，需要把子查询优化为 join 查询，但在优化时要注意关联键是否有一对多的关系，要注意重复数据。</p>
-<h3 id="GROUP-BY"><a href="#GROUP-BY" class="headerlink" title="GROUP BY"></a>GROUP BY</h3><p>group by 可能会出现临时表、文件排序等，影响效率。可以通过关联的子查询，来避免产生临时表和文件排序，可以节省 IO。</p>
-<p>group by 查询优化前：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">EXPLAIN</span> <span class="keyword">SELECT</span></div><div class="line">	actor.first_name ,</div><div class="line">	actor.last_name ,</div><div class="line">	<span class="keyword">Count</span>(*)</div><div class="line"><span class="keyword">FROM</span></div><div class="line">	sakila.film_actor</div><div class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> sakila.actor <span class="keyword">USING</span>(actor_id)</div><div class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span></div><div class="line">	film_actor.actor_id;</div></pre></td></tr></table></figure></p>
+<h4 id="GROUP-BY-优化"><a href="#GROUP-BY-优化" class="headerlink" title="GROUP BY 优化"></a><a id="4-3">GROUP BY 优化</a></h4><p>group by 可能会出现临时表、文件排序等，影响效率。可以通过关联的子查询，来避免产生临时表和文件排序，可以节省 IO。</p>
+<p>group by 查询优化前：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">EXPLAIN SELECT</div><div class="line">	actor.first_name ,</div><div class="line">	actor.last_name ,</div><div class="line">	Count(*)</div><div class="line">FROM</div><div class="line">	sakila.film_actor</div><div class="line">INNER JOIN sakila.actor USING(actor_id)</div><div class="line">GROUP BY</div><div class="line">	film_actor.actor_id;</div></pre></td></tr></table></figure></p>
 <p>执行结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">*************************** 1. row ***************************</div><div class="line">           id: 1</div><div class="line">  select_type: SIMPLE</div><div class="line">        table: actor</div><div class="line">   partitions: NULL</div><div class="line">         type: ALL</div><div class="line">possible_keys: PRIMARY</div><div class="line">          key: NULL</div><div class="line">      key_len: NULL</div><div class="line">          ref: NULL</div><div class="line">         rows: 200</div><div class="line">     filtered: 100.00</div><div class="line">        Extra: Using temporary; Using filesort</div><div class="line">*************************** 2. row ***************************</div><div class="line">           id: 1</div><div class="line">  select_type: SIMPLE</div><div class="line">        table: film_actor</div><div class="line">   partitions: NULL</div><div class="line">         type: ref</div><div class="line">possible_keys: PRIMARY,idx_fk_film_id</div><div class="line">          key: PRIMARY</div><div class="line">      key_len: 2</div><div class="line">          ref: sakila.actor.actor_id</div><div class="line">         rows: 27</div><div class="line">     filtered: 100.00</div><div class="line">        Extra: Using index</div><div class="line">2 rows in set, 1 warning (0.01 sec)</div></pre></td></tr></table></figure></p>
 <p>group by 查询优化后：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">EXPLAIN SELECT</div><div class="line">	actor.first_name ,</div><div class="line">	actor.last_name ,</div><div class="line">	c.cnt</div><div class="line">FROM</div><div class="line">	sakila.actor</div><div class="line">INNER JOIN(</div><div class="line">	SELECT</div><div class="line">		actor_id ,</div><div class="line">		count(*) AS cnt</div><div class="line">	FROM</div><div class="line">		sakila.film_actor</div><div class="line">	GROUP BY</div><div class="line">		actor_id</div><div class="line">) AS c USING(actor_id);</div></pre></td></tr></table></figure></p>
 <p>执行结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">*************************** 1. row ***************************</div><div class="line">           id: 1</div><div class="line">  select_type: PRIMARY</div><div class="line">        table: actor</div><div class="line">   partitions: NULL</div><div class="line">         type: ALL</div><div class="line">possible_keys: PRIMARY</div><div class="line">          key: NULL</div><div class="line">      key_len: NULL</div><div class="line">          ref: NULL</div><div class="line">         rows: 200</div><div class="line">     filtered: 100.00</div><div class="line">        Extra: NULL</div><div class="line">*************************** 2. row ***************************</div><div class="line">           id: 1</div><div class="line">  select_type: PRIMARY</div><div class="line">        table: &lt;derived2&gt;</div><div class="line">   partitions: NULL</div><div class="line">         type: ref</div><div class="line">possible_keys: &lt;auto_key0&gt;</div><div class="line">          key: &lt;auto_key0&gt;</div><div class="line">      key_len: 2</div><div class="line">          ref: sakila.actor.actor_id</div><div class="line">         rows: 27</div><div class="line">     filtered: 100.00</div><div class="line">        Extra: NULL</div><div class="line">*************************** 3. row ***************************</div><div class="line">           id: 2</div><div class="line">  select_type: DERIVED</div><div class="line">        table: film_actor</div><div class="line">   partitions: NULL</div><div class="line">         type: index</div><div class="line">possible_keys: PRIMARY,idx_fk_film_id</div><div class="line">          key: PRIMARY</div><div class="line">      key_len: 4</div><div class="line">          ref: NULL</div><div class="line">         rows: 5462</div><div class="line">     filtered: 100.00</div><div class="line">        Extra: Using index</div><div class="line">3 rows in set, 1 warning (0.00 sec)</div></pre></td></tr></table></figure></p>
-<h3 id="LIMIT"><a href="#LIMIT" class="headerlink" title="LIMIT"></a>LIMIT</h3><p>LIMIT 常用于分页处理，时常会伴随 ORDER BY 从句使用，因此大多时候会使用 Filesorts ，这样会造成大量的 IO 问题</p>
+<h4 id="LIMIT-优化"><a href="#LIMIT-优化" class="headerlink" title="LIMIT 优化"></a><a id="4-4">LIMIT 优化</a></h4><p>LIMIT 常用于分页处理，时常会伴随 ORDER BY 从句使用，因此大多时候会使用 Filesorts ，这样会造成大量的 IO 问题</p>
 <p>优化步骤1：使用有索引的列或主键进行 Order By 操作<br>优化步骤2：记录上次返回的主键，在下次查询时使用主键过滤（保证主键是自增且有索引）</p>
-<h3 id="索引优化"><a href="#索引优化" class="headerlink" title="索引优化"></a>索引优化</h3><h4 id="1-为合适的列建立索引"><a href="#1-为合适的列建立索引" class="headerlink" title="1.为合适的列建立索引"></a>1.为合适的列建立索引</h4><ul>
+<h2 id="索引优化"><a href="#索引优化" class="headerlink" title="索引优化"></a>索引优化</h2><h4 id="1-为合适的列建立索引"><a href="#1-为合适的列建立索引" class="headerlink" title="1.为合适的列建立索引"></a>1.为合适的列建立索引</h4><ul>
 <li>在 where 从句，group by 从句，order by 从句，on 从句中出现的列</li>
 <li>索引字段越小越好</li>
 <li>离散度的列放到联合索引的前面</li>
@@ -828,7 +839,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/13/MySQL-性能优化/" data-id="cj3jh9pf50015f54bx5qn26tn" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/13/MySQL-性能优化/" data-id="cj3jjtk4f001rwt4by9iuvliu" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -1082,7 +1093,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之条件判断语句/" data-id="cj3jh9pdx0005f54bbsa5i98l" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之条件判断语句/" data-id="cj3jjtk310006wt4buzm6x001" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1196,7 +1207,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之运算符/" data-id="cj3jh9pe9000cf54bkgju73x2" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之运算符/" data-id="cj3jjtk36000cwt4bd9dmn0oc" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1384,7 +1395,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之变量/" data-id="cj3jh9pe4000af54bneb2da6b" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之变量/" data-id="cj3jjtk2t0004wt4bcep7vwqf" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1429,7 +1440,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/03/Linux-Shell-实战/" data-id="cj3jh9ped000ff54bame968zu" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/03/Linux-Shell-实战/" data-id="cj3jjtk3c000fwt4bxvkx9k9q" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1588,7 +1599,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/30/Linux-权限管理/" data-id="cj3jh9pem000uf54bl5ga8jrf" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/30/Linux-权限管理/" data-id="cj3jjtk3q000uwt4bkrdk94d3" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1827,7 +1838,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/27/Linux-软件安装/" data-id="cj3jh9peo000xf54b15162kf6" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/27/Linux-软件安装/" data-id="cj3jjtk3w0012wt4bqckn57wu" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1850,7 +1861,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Kategorier</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -1860,7 +1871,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
     </div>
@@ -1870,7 +1881,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
     </div>
@@ -1879,7 +1890,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Arkiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
@@ -1889,7 +1900,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Siste innlegg</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -1926,7 +1937,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Luis Edware<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
