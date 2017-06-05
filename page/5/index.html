@@ -325,7 +325,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/25/Yii-框架之基础篇/" data-id="cj3jjtk57002rwt4bgarpdqra" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/10/25/Yii-框架之基础篇/" data-id="cj3jma87x002mnl4ba7uv1m2r" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -428,7 +428,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/25/Yii-框架之高效篇/" data-id="cj3jjtk5a002ywt4bnby7ccrj" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/10/25/Yii-框架之高效篇/" data-id="cj3jma883002znl4b68h0ljxf" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -621,7 +621,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/20/打造扛得住的-MySQL-数据库架构/" data-id="cj3jjtk8c006swt4b5h65dnyy" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/10/20/打造扛得住的-MySQL-数据库架构/" data-id="cj3jma8aq006rnl4btwxqt4tw" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -686,7 +686,20 @@
 <li><a href="#4-4">LIMIT 优化</a></li>
 </ul>
 </li>
-<li><a href="#5">索引优化</a></li>
+<li><a href="#5">索引优化</a><ul>
+<li><a href="#5-1">为合适的列建立索引</a></li>
+<li><a href="#5-2">找到重复和冗余的索引</a></li>
+<li><a href="#5-3">删除不用的索引</a></li>
+</ul>
+</li>
+<li><a href="#8">系统配置优化</a><ul>
+<li><a href="#8-1">数据库系统配置优化</a></li>
+<li><a href="#8-2">MySQL 配置文件</a></li>
+<li><a href="#8-4">存储引擎及版本的选择</a></li>
+<li><a href="#8-3">第三方配置工具使用</a></li>
+</ul>
+</li>
+<li><a href="#7">服务器硬件优化</a></li>
 </ul>
 <h2 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a><a id="1">数据准备</a></h2><p>打开链接下载数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://downloads.mysql.com/docs/sakila-db.zip</div></pre></td></tr></table></figure></p>
 <p>打开终端，执行以下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"># 登录 MySQL Cli 模式</div><div class="line">mysql -uroot -p</div><div class="line"></div><div class="line"># 创建数据库</div><div class="line">SOURCE /Users/LuisEdware/Downloads/sakila-db/sakila-schema.sql</div><div class="line"></div><div class="line"># 填充数据到数据库</div><div class="line">SOURCE /Users/LuisEdware/Downloads/sakila-db/sakila-data.sql</div><div class="line"></div><div class="line"># 使用 sakila 数据库</div><div class="line">USE sakila;</div></pre></td></tr></table></figure></p>
@@ -779,34 +792,33 @@
 <p>执行结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">*************************** 1. row ***************************</div><div class="line">           id: 1</div><div class="line">  select_type: PRIMARY</div><div class="line">        table: actor</div><div class="line">   partitions: NULL</div><div class="line">         type: ALL</div><div class="line">possible_keys: PRIMARY</div><div class="line">          key: NULL</div><div class="line">      key_len: NULL</div><div class="line">          ref: NULL</div><div class="line">         rows: 200</div><div class="line">     filtered: 100.00</div><div class="line">        Extra: NULL</div><div class="line">*************************** 2. row ***************************</div><div class="line">           id: 1</div><div class="line">  select_type: PRIMARY</div><div class="line">        table: &lt;derived2&gt;</div><div class="line">   partitions: NULL</div><div class="line">         type: ref</div><div class="line">possible_keys: &lt;auto_key0&gt;</div><div class="line">          key: &lt;auto_key0&gt;</div><div class="line">      key_len: 2</div><div class="line">          ref: sakila.actor.actor_id</div><div class="line">         rows: 27</div><div class="line">     filtered: 100.00</div><div class="line">        Extra: NULL</div><div class="line">*************************** 3. row ***************************</div><div class="line">           id: 2</div><div class="line">  select_type: DERIVED</div><div class="line">        table: film_actor</div><div class="line">   partitions: NULL</div><div class="line">         type: index</div><div class="line">possible_keys: PRIMARY,idx_fk_film_id</div><div class="line">          key: PRIMARY</div><div class="line">      key_len: 4</div><div class="line">          ref: NULL</div><div class="line">         rows: 5462</div><div class="line">     filtered: 100.00</div><div class="line">        Extra: Using index</div><div class="line">3 rows in set, 1 warning (0.00 sec)</div></pre></td></tr></table></figure></p>
 <h4 id="LIMIT-优化"><a href="#LIMIT-优化" class="headerlink" title="LIMIT 优化"></a><a id="4-4">LIMIT 优化</a></h4><p>LIMIT 常用于分页处理，时常会伴随 ORDER BY 从句使用，因此大多时候会使用 Filesorts ，这样会造成大量的 IO 问题</p>
 <p>优化步骤1：使用有索引的列或主键进行 Order By 操作<br>优化步骤2：记录上次返回的主键，在下次查询时使用主键过滤（保证主键是自增且有索引）</p>
-<h2 id="索引优化"><a href="#索引优化" class="headerlink" title="索引优化"></a>索引优化</h2><h4 id="1-为合适的列建立索引"><a href="#1-为合适的列建立索引" class="headerlink" title="1.为合适的列建立索引"></a>1.为合适的列建立索引</h4><ul>
-<li>在 where 从句，group by 从句，order by 从句，on 从句中出现的列</li>
+<h2 id="索引优化"><a href="#索引优化" class="headerlink" title="索引优化"></a><a id="5">索引优化</a></h2><h4 id="为合适的列建立索引"><a href="#为合适的列建立索引" class="headerlink" title="为合适的列建立索引"></a><a id="5-1">为合适的列建立索引</a></h4><ul>
+<li>在 WHERE 从句，GROUP BY 从句，ORDER BY 从句，ON 从句中出现的字段</li>
 <li>索引字段越小越好</li>
-<li>离散度的列放到联合索引的前面</li>
+<li>离散度的字段放到联合索引的前面</li>
 </ul>
 <p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SELECT * FROM payment WHERE staff_id = 2 AND customer_id = 584;</div></pre></td></tr></table></figure></p>
-<p>上述 SQL 语句，是 <code>index(staff_id,customer_id)</code> 合理，还是 <code>index(customer_id,staff_id)</code> 合理。执行语句如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">SELECT count(DISTINCT customer_id) , count(DISTINCT staff_id) FROM payment;</div><div class="line"></div><div class="line">-- 结果是 599	2</div></pre></td></tr></table></figure></p>
+<p>上述 SQL 语句，是 <code>index(staff_id,customer_id)</code> 合理，还是 <code>index(customer_id,staff_id)</code> 合理。执行语句如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">SELECT count(DISTINCT customer_id) , count(DISTINCT staff_id) FROM payment;</div><div class="line"></div><div class="line">count(DISTINCT customer_id):599</div><div class="line">count(DISTINCT staff_id):2</div></pre></td></tr></table></figure></p>
 <p>由于 customer_id 的离散度更大，所以应该使用 <code>index(customer_id,staff_id)</code></p>
-<h4 id="2-找到重复和冗余的索引"><a href="#2-找到重复和冗余的索引" class="headerlink" title="2.找到重复和冗余的索引"></a>2.找到重复和冗余的索引</h4><p>之所以要找到重复和冗余的索引，是因为过多的索引不但影响写入，而且影响查询，索引越多，分析越慢。那么为何重复索引、冗余索引？概念如下：</p>
-<p>重复索引是指相同的列以相同的顺序建立的同类型的索引，如下表中 primary key 和 ID 列上的索引就是重复索引，例子如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">test</span>(</div><div class="line">	<span class="keyword">id</span> <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> PRIMARY <span class="keyword">KEY</span> ,</div><div class="line">	<span class="keyword">NAME</span> <span class="built_in">VARCHAR</span>(<span class="number">10</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> ,</div><div class="line">	title <span class="built_in">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> ,</div><div class="line">	<span class="keyword">UNIQUE</span>(<span class="keyword">id</span>)</div><div class="line">) <span class="keyword">ENGINE</span> = <span class="keyword">INNODB</span>;</div></pre></td></tr></table></figure></p>
-<p><code>UNIQUE(ID)</code> 和 <code>PRIMARY KEY</code> 重复了。</p>
-<p>冗余索引是指多个索引的前缀列相同，或是在联合索引中包含了主键的索引，例子如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">test</span>(</div><div class="line">	<span class="keyword">id</span> <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> PRIMARY <span class="keyword">KEY</span> ,</div><div class="line">	<span class="keyword">NAME</span> <span class="built_in">VARCHAR</span>(<span class="number">10</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> ,</div><div class="line">	title <span class="built_in">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> ,</div><div class="line">	<span class="keyword">KEY</span>(<span class="keyword">NAME</span> , <span class="keyword">id</span>)</div><div class="line">) <span class="keyword">ENGINE</span> = <span class="keyword">INNODB</span>;</div></pre></td></tr></table></figure></p>
+<h4 id="找到重复和冗余的索引"><a href="#找到重复和冗余的索引" class="headerlink" title="找到重复和冗余的索引"></a><a id="5-2">找到重复和冗余的索引</a></h4><p>之所以要找到重复和冗余的索引，是因为过多的索引不但影响写入，而且影响查询，索引越多，分析越慢。那么为何重复索引、冗余索引？概念如下：</p>
+<p>重复索引是指相同的列以相同的顺序建立的同类型的索引，如下表中 primary key 和 ID 列上的索引就是重复索引，例子如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE test(</div><div class="line">	id INT NOT NULL PRIMARY KEY ,</div><div class="line">	NAME VARCHAR(10) NOT NULL ,</div><div class="line">	title VARCHAR(50) NOT NULL ,</div><div class="line">	UNIQUE(id)</div><div class="line">) ENGINE = INNODB;</div></pre></td></tr></table></figure></p>
+<p><code>UNIQUE(ID)</code> 和 <code>PRIMARY KEY</code> 重复了。<br>冗余索引是指多个索引的前缀列相同，或是在联合索引中包含了主键的索引，例子如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE test(</div><div class="line">	id INT NOT NULL PRIMARY KEY ,</div><div class="line">	NAME VARCHAR(10) NOT NULL ,</div><div class="line">	title VARCHAR(50) NOT NULL ,</div><div class="line">	KEY(NAME , id)</div><div class="line">) ENGINE = INNODB;</div></pre></td></tr></table></figure></p>
 <p>查找重复及冗余索引的 SQL 语句如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">USE information_schema;</div><div class="line"></div><div class="line">SELECT</div><div class="line">	a.TABLE_SCHEMA AS &apos;数据名&apos; ,</div><div class="line">	a.table_name AS &apos;表名&apos; ,</div><div class="line">	a.index_name AS &apos;索引1&apos; ,</div><div class="line">	b.INDEX_NAME AS &apos;索引2&apos; ,</div><div class="line">	a.COLUMN_NAME AS &apos;重复列名&apos;</div><div class="line">FROM</div><div class="line">	STATISTICS a</div><div class="line">JOIN STATISTICS b ON a.TABLE_SCHEMA = b.TABLE_SCHEMA</div><div class="line">AND a.TABLE_NAME = b.table_name</div><div class="line">AND a.SEQ_IN_INDEX = b.SEQ_IN_INDEX</div><div class="line">AND a.COLUMN_NAME = b.COLUMN_NAME</div><div class="line">WHERE</div><div class="line">	a.SEQ_IN_INDEX = 1</div><div class="line">AND a.INDEX_NAME &lt;&gt; b.INDEX_NAME</div></pre></td></tr></table></figure></p>
 <p>也可以使用工具 <code>pt-duplicate-key-checker</code> 检查重复索引和冗余索引,使用例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pt-duplicate-key-checker -uroot -p &apos;123456&apos; -h 127.0.0.1 -d sakila</div></pre></td></tr></table></figure></p>
-<p>执行结果如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># ########################################################################</div><div class="line"># Summary of indexes</div><div class="line"># ########################################################################</div><div class="line"></div><div class="line"># Size Duplicate Indexes   118425374</div><div class="line"># Total Duplicate Indexes  24</div><div class="line"># Total Indexes            1439</div></pre></td></tr></table></figure></p>
-<h4 id="3-删除不用的索引"><a href="#3-删除不用的索引" class="headerlink" title="3.删除不用的索引"></a>3.删除不用的索引</h4><p>目前 MySQL 中还没有记录索引的使用情况，但是在 PerconMySQL 和 MariaDB 中可以通过 INDEX_STATISTICS 表来查看哪些索引未使用，但在 MySQL 中目前只能通过慢查询日志配合共组 <code>pt-index-usage</code> 来进行索引使用情况的分析。</p>
+<p>执行结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># ########################################################################</div><div class="line"># Summary of indexes</div><div class="line"># ########################################################################</div><div class="line"></div><div class="line"># Size Duplicate Indexes   118425374</div><div class="line"># Total Duplicate Indexes  24</div><div class="line"># Total Indexes            1439</div></pre></td></tr></table></figure></p>
+<h4 id="删除不用的索引"><a href="#删除不用的索引" class="headerlink" title="删除不用的索引"></a><a id="5-3">删除不用的索引</a></h4><p>目前 MySQL 中还没有记录索引的使用情况，但是在 PerconMySQL 和 MariaDB 中可以通过 INDEX_STATISTICS 表来查看哪些索引未使用，但在 MySQL 中目前只能通过慢查询日志配合共组 <code>pt-index-usage</code> 来进行索引使用情况的分析。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pt-index-usage -uroot -p &apos;123456&apos; /usr/local/var/mysql/luyiyuandeMacBook-Pro-slow.log;</div></pre></td></tr></table></figure>
-<h2 id="系统配置优化"><a href="#系统配置优化" class="headerlink" title="系统配置优化"></a>系统配置优化</h2><h3 id="数据库系统配置优化"><a href="#数据库系统配置优化" class="headerlink" title="数据库系统配置优化"></a>数据库系统配置优化</h3><p>数据库是基于操作系统的，目前大多数 MySQL 都是安装在Linux 系统之上，所以对于操作系统的一些参数配置也会影响到 MySQL 的性能，下面列举一些常用到的系统配置。</p>
+<h2 id="系统配置优化"><a href="#系统配置优化" class="headerlink" title="系统配置优化"></a><a id="8">系统配置优化</a></h2><h4 id="数据库系统配置优化"><a href="#数据库系统配置优化" class="headerlink" title="数据库系统配置优化"></a><a id="8-1">数据库系统配置优化</a></h4><p>数据库是基于操作系统的，目前大多数 MySQL 都是安装在Linux 系统之上，所以对于操作系统的一些参数配置也会影响到 MySQL 的性能，下面列举一些常用到的系统配置。</p>
 <p>网络方面的配置，要修改文件 <code>/etc/sysctl.conf</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># 增加 tcp 支持的队列数</div><div class="line">net.ipv4.tcp_max_syn_backlog = 65535</div><div class="line"></div><div class="line"># 减少断开连接时，资源回收</div><div class="line">net.ipv4.tcp_max_tw_buckets = 8000</div><div class="line">net.ipv4.tcp_tw_reuse = 1</div><div class="line">net.ipv4.tcp_tw_recycle = 1</div><div class="line">net.ipv4.tcp_fin_timeout = 10</div></pre></td></tr></table></figure></p>
 <p>打开文件数的限制，可以使用 ulimit -a 查看目录的各项限制，可以修改文件 <code>/etc/security/limits.conf</code> ，增加以下内容以修改打开文件数量的限制<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">soft nofile 65535</div><div class="line">hard nofile 65535</div></pre></td></tr></table></figure></p>
 <p>除此之外最好在 MySQL 服务器上关闭 iptables，selinux 等防火墙软件。</p>
-<h3 id="MySQL-配置文件"><a href="#MySQL-配置文件" class="headerlink" title="MySQL 配置文件"></a>MySQL 配置文件</h3><p>MySQL 可以通过启动时指定配置参数和使用配置文件两种方法进行配置，在一般情况下，配置文件位于 <code>/etc/my.cnf</code> 或是 <code>/etc/mysql/my.cnf</code>，MySQL 查询配置文件的顺序是可以通过以下方法过的</p>
+<h4 id="MySQL-配置文件"><a href="#MySQL-配置文件" class="headerlink" title="MySQL 配置文件"></a><a id="8-2">MySQL 配置文件</a></h4><p>MySQL 可以通过启动时指定配置参数和使用配置文件两种方法进行配置，在一般情况下，配置文件位于 <code>/etc/my.cnf</code> 或是 <code>/etc/mysql/my.cnf</code>，MySQL 查询配置文件的顺序是可以通过以下方法过的</p>
 <p>常用参数说明</p>
 <ul>
 <li><p>innodb_buffer_pool_size：用于配置 Innodb 的缓冲池</p>
 <ul>
 <li>如果数据库中只有 Innodb 表，则推荐配置量为总内存的 75%</li>
-<li>Innodb_buffer_pool_size &gt;= Total MB<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span></div><div class="line"><span class="keyword">ENGINE</span> ,</div><div class="line"><span class="keyword">round</span>(</div><div class="line">  <span class="keyword">sum</span>(data_length + index_length) / <span class="number">1024</span> / <span class="number">1024</span> ,</div><div class="line">  <span class="number">1</span></div><div class="line">) <span class="keyword">AS</span> <span class="string">'Total MB'</span></div><div class="line"><span class="keyword">FROM</span></div><div class="line">information_schema. <span class="keyword">TABLES</span></div><div class="line"><span class="keyword">WHERE</span></div><div class="line">table_schema <span class="keyword">NOT</span> <span class="keyword">IN</span>(</div><div class="line">  <span class="string">"information_schema"</span> ,</div><div class="line">  <span class="string">"performance_schema"</span></div><div class="line">)</div><div class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span></div><div class="line"><span class="keyword">ENGINE</span>;</div></pre></td></tr></table></figure>
+<li>Innodb_buffer_pool_size &gt;= Total MB<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">SELECT</div><div class="line">  ENGINE ,</div><div class="line">  round(</div><div class="line">    sum(data_length + index_length) / 1024 / 1024 ,</div><div class="line">    1</div><div class="line">  ) AS &apos;Total MB&apos;</div><div class="line">FROM</div><div class="line">  information_schema. TABLES</div><div class="line">WHERE</div><div class="line">  table_schema NOT IN(</div><div class="line">    &quot;information_schema&quot; ,</div><div class="line">    &quot;performance_schema&quot;</div><div class="line">  )</div><div class="line">GROUP BY</div><div class="line">  ENGINE;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
@@ -817,14 +829,34 @@
 <li><strong>innodb_file_per_table</strong>：控制 Innodb 每一个表都使用独立的表空间，默认为 OFF，也就是所有表都会建立在共享表空间中。</li>
 <li><strong>innodb_stats_on_metadata</strong>：决定 MySQL 在什么情况下会刷新 innodb 表的统计信息。</li>
 </ul>
-<h3 id="第三方配置工具使用"><a href="#第三方配置工具使用" class="headerlink" title="第三方配置工具使用"></a>第三方配置工具使用</h3><p><strong><code>percona：https://tools.percona.com/</code></strong></p>
-<h2 id="服务器硬件优化"><a href="#服务器硬件优化" class="headerlink" title="服务器硬件优化"></a>服务器硬件优化</h2><ul>
-<li>如何选择 CPU<ul>
+<h4 id="存储引擎及版本的选择"><a href="#存储引擎及版本的选择" class="headerlink" title="存储引擎及版本的选择"></a><a id="8-4">存储引擎及版本的选择</a></h4><p>请选择 MySQL InnoDB 存储引擎及 MySQL 5.5+ 的版本，原因如下：</p>
+<ul>
+<li>更稳定可靠的数据存储和索引结构；整个存储引擎设计思想更可靠先进，接近于 Oracle、SQL Server 级别的数据库</li>
+<li>更多可靠特性支持，比如事务、外键等支持（支付等关键领域事务非常重要）</li>
+<li>运行更稳定，不论读写数据的量级，都能够保证比较稳定的性能响应</li>
+<li>更好地崩溃恢复机制，特别利用一些 Percona 的一些工具，更有效地运维 InnoDB</li>
+<li>MySQL 5.5+ 对比 MySQL 5.1.x 总体功能和性能提升太多，改进太多</li>
+</ul>
+<h4 id="第三方配置工具使用"><a href="#第三方配置工具使用" class="headerlink" title="第三方配置工具使用"></a><a id="8-3">第三方配置工具使用</a></h4><p><strong><code>percona：https://tools.percona.com/</code></strong></p>
+<h2 id="服务器硬件优化"><a href="#服务器硬件优化" class="headerlink" title="服务器硬件优化"></a><a id="7">服务器硬件优化</a></h2><ul>
+<li>CPU<ul>
+<li>使用多核 CPU，能够充分发挥新版 MySQL 多核下的效果</li>
 <li>MySQL 有一些工作只能使用到单核 CPU，选择高频</li>
 <li>MySQL 对 CPU 核数的支持并不是越多越快，MySQL 5.5 版本不要超过 32 个核</li>
 </ul>
 </li>
+<li>内存<ul>
+<li>选择高频内存</li>
+<li>如果数据量比较大，建议使用不要低于 20 G 内存的服务器</li>
+</ul>
+</li>
+<li>网络<ul>
+<li>保证足够的吞吐量，建议千兆网卡</li>
+<li>增加带宽，加快网络通信速度</li>
+</ul>
+</li>
 <li>硬盘 IO 优化<ul>
+<li>使用 SSD 硬盘，提高 TPS，选择适合的 RAID 方案</li>
 <li>RAID 级别简介<ul>
 <li>RAID 0：也称为条带，就是把多个磁盘链接成一个硬盘使用，这个级别 IO 最好</li>
 <li>RAID 1：也成为镜像，要求至少两个磁盘，每组磁盘存储的数据相同</li>
@@ -839,7 +871,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/13/MySQL-性能优化/" data-id="cj3jjtk4f001rwt4by9iuvliu" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/10/13/MySQL-性能优化/" data-id="cj3jma86r001gnl4b9djzqvp8" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -1093,7 +1125,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之条件判断语句/" data-id="cj3jjtk310006wt4buzm6x001" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之条件判断语句/" data-id="cj3jma856000anl4bp7jb2848" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1207,7 +1239,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之运算符/" data-id="cj3jjtk36000cwt4bd9dmn0oc" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之运算符/" data-id="cj3jma84x0006nl4b9op119mo" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1395,7 +1427,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之变量/" data-id="cj3jjtk2t0004wt4bcep7vwqf" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之变量/" data-id="cj3jma84u0005nl4bjpt25kjs" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1440,7 +1472,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/03/Linux-Shell-实战/" data-id="cj3jjtk3c000fwt4bxvkx9k9q" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/10/03/Linux-Shell-实战/" data-id="cj3jma85c000cnl4b7o5j9sub" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1599,7 +1631,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/30/Linux-权限管理/" data-id="cj3jjtk3q000uwt4bkrdk94d3" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/30/Linux-权限管理/" data-id="cj3jma85o000nnl4b6unnnifa" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1838,7 +1870,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/27/Linux-软件安装/" data-id="cj3jjtk3w0012wt4bqckn57wu" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/27/Linux-软件安装/" data-id="cj3jma8690010nl4bwmde9fx3" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1905,7 +1937,7 @@
       <ul>
         
           <li>
-            <a href="/2017/06/02/MySQLDumpSlow-的参数讲解与基础使用/">MySQLDumpSlow 的参数讲解与基础使用</a>
+            <a href="/2017/06/02/MySQLDumpSlow-的参数讲解与基础使用/">mysqldumpslow 的参数讲解与基础使用</a>
           </li>
         
           <li>

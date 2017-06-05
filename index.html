@@ -83,7 +83,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/02/MySQLDumpSlow-的参数讲解与基础使用/">MySQLDumpSlow 的参数讲解与基础使用</a>
+      <a class="article-title" href="/2017/06/02/MySQLDumpSlow-的参数讲解与基础使用/">mysqldumpslow 的参数讲解与基础使用</a>
     </h1>
   
 
@@ -92,15 +92,15 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
-<li><a href="#1">认识 MySQLDumpSlow</a></li>
-<li><a href="#2">MySQLDumpSlow 的命令参数</a></li>
-<li><a href="#3">MySQLDumpSlow 的结果参数</a></li>
-<li><a href="#4">MySQLDumpSlow 的使用建议</a></li>
-<li><a href="#5">MySQLDumpSlow 的项目实战</a></li>
+<li><a href="#1">认识 mysqldumpslow</a></li>
+<li><a href="#2">mysqldumpslow 的命令参数</a></li>
+<li><a href="#3">mysqldumpslow 的结果参数</a></li>
+<li><a href="#4">mysqldumpslow 的使用建议</a></li>
+<li><a href="#5">mysqldumpslow 的项目实战</a></li>
 </ul>
-<h2 id="认识-MySQLDumpSlow"><a href="#认识-MySQLDumpSlow" class="headerlink" title="认识 MySQLDumpSlow"></a><a id="1">认识 MySQLDumpSlow</a></h2><p>MySQLDumpSlow 是一个针对于 MySQL 慢查询的命令行程序。在配置 MySQL 相关参数后，可以通过 MySQLDumpSlow 查找出查询较慢的 SQL 语句。</p>
+<h2 id="认识-mysqldumpslow"><a href="#认识-mysqldumpslow" class="headerlink" title="认识 mysqldumpslow"></a><a id="1">认识 mysqldumpslow</a></h2><p>mysqldumpslow 是一个针对于 MySQL 慢查询的命令行程序。在配置 MySQL 相关参数后，可以通过 mysqldumpslow 查找出查询较慢的 SQL 语句。</p>
 <p>进入 MySQL 命令行，执行命令 <code>mysql&gt; show variables like &quot;%query%&quot; ;</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">mysql&gt; mysql&gt; show variables like &quot;%quer%&quot; ;</div><div class="line">+----------------------------------------+-----------------------------------------------------+</div><div class="line">| Variable_name                          | Value                                               |</div><div class="line">+----------------------------------------+-----------------------------------------------------+</div><div class="line">| binlog_rows_query_log_events           | OFF                                                 |</div><div class="line">| ft_query_expansion_limit               | 20                                                  |</div><div class="line">| have_query_cache                       | YES                                                 |</div><div class="line">| log_queries_not_using_indexes          | OFF                                                 |</div><div class="line">| log_throttle_queries_not_using_indexes | 0                                                   |</div><div class="line">| long_query_time                        | 10.000000                                           |</div><div class="line">| query_alloc_block_size                 | 8192                                                |</div><div class="line">| query_cache_limit                      | 1048576                                             |</div><div class="line">| query_cache_min_res_unit               | 4096                                                |</div><div class="line">| query_cache_size                       | 1048576                                             |</div><div class="line">| query_cache_type                       | OFF                                                 |</div><div class="line">| query_cache_wlock_invalidate           | OFF                                                 |</div><div class="line">| query_prealloc_size                    | 8192                                                |</div><div class="line">| slow_query_log                         | OFF                                                 |</div><div class="line">| slow_query_log_file                    | /usr/local/var/mysql/luyiyuandeMacBook-Pro-slow.log |</div><div class="line">+----------------------------------------+-----------------------------------------------------+</div><div class="line">15 rows in set (0.01 sec)</div></pre></td></tr></table></figure></p>
-<p>与 MySQLDumpSlow 相关的配置变量</p>
+<p>与 mysqldumpslow 相关的配置变量</p>
 <ul>
 <li>slow_query_log：是否开启慢查询日志</li>
 <li>long_query_time：是否设置慢查询的 SQL 执行规定时间</li>
@@ -109,7 +109,7 @@
 </ul>
 <p>配置变量设置格式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"># 开启慢查询日志</div><div class="line">set global slow_query_log=on;</div><div class="line"></div><div class="line"># 设置没有索引的记录到慢查询日志</div><div class="line">set global log_queries_not_using_indexes=on;</div><div class="line"></div><div class="line"># 设置到慢查询日志的 SQL 执行时间（1 代表 1 秒）</div><div class="line">set global long_query_time=1;</div><div class="line"></div><div class="line"># 设置慢查询日志的存放位置</div><div class="line">set global slow_query_log_file=&quot;/Users/LuisEdware/Code/output/mysql-slow.log&quot;;</div></pre></td></tr></table></figure></p>
 <p>设置完毕后，不要重启 MySQL 服务，否则设置会失效，如果想要配置持久生效，需要在 my.ini 配置文件编辑上述变量。</p>
-<h2 id="MySQLDumpSlow-的命令参数"><a href="#MySQLDumpSlow-的命令参数" class="headerlink" title="MySQLDumpSlow 的命令参数"></a><a id="2">MySQLDumpSlow 的命令参数</a></h2><p>执行命令 <code>mysqldumpslow --help</code>，显示命令参数如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">Usage: mysqldumpslow [ OPTS... ] [ LOGS... ]</div><div class="line"></div><div class="line">Parse and summarize the MySQL slow query log. Options are</div><div class="line"></div><div class="line">  --verbose    verbose</div><div class="line">  --debug      debug</div><div class="line">  --help       write this text to standard output</div><div class="line"></div><div class="line">  -v           verbose</div><div class="line">  -d           debug</div><div class="line">  -s ORDER     what to sort by (al, at, ar, c, l, r, t), &apos;at&apos; is default</div><div class="line">                al: average lock time</div><div class="line">                ar: average rows sent</div><div class="line">                at: average query time</div><div class="line">                 c: count</div><div class="line">                 l: lock time</div><div class="line">                 r: rows sent</div><div class="line">                 t: query time</div><div class="line">  -r           reverse the sort order (largest last instead of first)</div><div class="line">  -t NUM       just show the top n queries</div><div class="line">  -a           don&apos;t abstract all numbers to N and strings to &apos;S&apos;</div><div class="line">  -n NUM       abstract numbers with at least n digits within names</div><div class="line">  -g PATTERN   grep: only consider stmts that include this string</div><div class="line">  -h HOSTNAME  hostname of db server for *-slow.log filename (can be wildcard),</div><div class="line">               default is &apos;*&apos;, i.e. match all</div><div class="line">  -i NAME      name of server instance (if using mysql.server startup script)</div><div class="line">  -l           don&apos;t subtract lock time from total time</div></pre></td></tr></table></figure></p>
+<h2 id="mysqldumpslow-的命令参数"><a href="#mysqldumpslow-的命令参数" class="headerlink" title="mysqldumpslow 的命令参数"></a><a id="2">mysqldumpslow 的命令参数</a></h2><p>执行命令 <code>mysqldumpslow --help</code>，显示命令参数如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">Usage: mysqldumpslow [ OPTS... ] [ LOGS... ]</div><div class="line"></div><div class="line">Parse and summarize the MySQL slow query log. Options are</div><div class="line"></div><div class="line">  --verbose    verbose</div><div class="line">  --debug      debug</div><div class="line">  --help       write this text to standard output</div><div class="line"></div><div class="line">  -v           verbose</div><div class="line">  -d           debug</div><div class="line">  -s ORDER     what to sort by (al, at, ar, c, l, r, t), &apos;at&apos; is default</div><div class="line">                al: average lock time</div><div class="line">                ar: average rows sent</div><div class="line">                at: average query time</div><div class="line">                 c: count</div><div class="line">                 l: lock time</div><div class="line">                 r: rows sent</div><div class="line">                 t: query time</div><div class="line">  -r           reverse the sort order (largest last instead of first)</div><div class="line">  -t NUM       just show the top n queries</div><div class="line">  -a           don&apos;t abstract all numbers to N and strings to &apos;S&apos;</div><div class="line">  -n NUM       abstract numbers with at least n digits within names</div><div class="line">  -g PATTERN   grep: only consider stmts that include this string</div><div class="line">  -h HOSTNAME  hostname of db server for *-slow.log filename (can be wildcard),</div><div class="line">               default is &apos;*&apos;, i.e. match all</div><div class="line">  -i NAME      name of server instance (if using mysql.server startup script)</div><div class="line">  -l           don&apos;t subtract lock time from total time</div></pre></td></tr></table></figure></p>
 <p>命令参数意义如下：</p>
 <ul>
 <li><p>-v、–verbose</p>
@@ -182,7 +182,7 @@
 </blockquote>
 </li>
 </ul>
-<h2 id="MySQLDumpSlow-的结果参数"><a href="#MySQLDumpSlow-的结果参数" class="headerlink" title="MySQLDumpSlow 的结果参数"></a><a id="3">MySQLDumpSlow 的结果参数</a></h2><p>使用 Vim 打开慢查询日志 <code>mysql-slow.log</code>，内容如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">/usr/local/opt/mysql/bin/mysqld, Version: 5.7.18 (Homebrew). started with:</div><div class="line">Tcp port: 3306  Unix socket: /tmp/mysql.sock</div><div class="line">Time                 Id Command    Argument</div><div class="line">/usr/local/opt/mysql/bin/mysqld, Version: 5.7.18 (Homebrew). started with:</div><div class="line">Tcp port: 3306  Unix socket: /tmp/mysql.sock</div><div class="line">Time                 Id Command    Argument</div><div class="line"># Time: 2017-06-03T06:47:46.502825Z</div><div class="line"># User@Host: root[root] @ localhost []  Id:     3</div><div class="line"># Query_time: 0.195360  Lock_time: 0.000131 Rows_sent: 10000  Rows_examined: 10000</div><div class="line">use bingoshuiguo;</div><div class="line">SET timestamp=1496472466;</div><div class="line">select * from z_order limit 10000;</div><div class="line"># Time: 2017-06-03T06:48:27.030315Z</div><div class="line"># User@Host: root[root] @ localhost []  Id:     3</div><div class="line"># Query_time: 1.896889  Lock_time: 0.000823 Rows_sent: 100000  Rows_examined: 100000</div><div class="line">SET timestamp=1496472507;</div><div class="line">select * from z_order limit 100000;</div><div class="line"># Time: 2017-06-03T06:53:37.786379Z</div><div class="line"># User@Host: root[root] @ localhost []  Id:     3</div><div class="line"># Query_time: 3.456264  Lock_time: 0.008454 Rows_sent: 100000  Rows_examined: 200000</div><div class="line">SET timestamp=1496472817;</div><div class="line">select * from z_order left join z_league on z_order.league_id = z_league.id limit 100000;</div><div class="line"># Time: 2017-06-03T07:03:25.615137Z</div><div class="line"># User@Host: root[root] @ localhost []  Id:     3</div><div class="line"># Query_time: 3.837932  Lock_time: 0.000648 Rows_sent: 100000  Rows_examined: 200000</div><div class="line">SET timestamp=1496473405;</div><div class="line">select * from z_order left join z_league on z_order.league_id = z_league.id limit 100000;</div></pre></td></tr></table></figure></p>
+<h2 id="mysqldumpslow-的结果参数"><a href="#mysqldumpslow-的结果参数" class="headerlink" title="mysqldumpslow 的结果参数"></a><a id="3">mysqldumpslow 的结果参数</a></h2><p>使用 Vim 打开慢查询日志 <code>mysql-slow.log</code>，内容如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">/usr/local/opt/mysql/bin/mysqld, Version: 5.7.18 (Homebrew). started with:</div><div class="line">Tcp port: 3306  Unix socket: /tmp/mysql.sock</div><div class="line">Time                 Id Command    Argument</div><div class="line">/usr/local/opt/mysql/bin/mysqld, Version: 5.7.18 (Homebrew). started with:</div><div class="line">Tcp port: 3306  Unix socket: /tmp/mysql.sock</div><div class="line">Time                 Id Command    Argument</div><div class="line"># Time: 2017-06-03T06:47:46.502825Z</div><div class="line"># User@Host: root[root] @ localhost []  Id:     3</div><div class="line"># Query_time: 0.195360  Lock_time: 0.000131 Rows_sent: 10000  Rows_examined: 10000</div><div class="line">use bingoshuiguo;</div><div class="line">SET timestamp=1496472466;</div><div class="line">select * from z_order limit 10000;</div><div class="line"># Time: 2017-06-03T06:48:27.030315Z</div><div class="line"># User@Host: root[root] @ localhost []  Id:     3</div><div class="line"># Query_time: 1.896889  Lock_time: 0.000823 Rows_sent: 100000  Rows_examined: 100000</div><div class="line">SET timestamp=1496472507;</div><div class="line">select * from z_order limit 100000;</div><div class="line"># Time: 2017-06-03T06:53:37.786379Z</div><div class="line"># User@Host: root[root] @ localhost []  Id:     3</div><div class="line"># Query_time: 3.456264  Lock_time: 0.008454 Rows_sent: 100000  Rows_examined: 200000</div><div class="line">SET timestamp=1496472817;</div><div class="line">select * from z_order left join z_league on z_order.league_id = z_league.id limit 100000;</div><div class="line"># Time: 2017-06-03T07:03:25.615137Z</div><div class="line"># User@Host: root[root] @ localhost []  Id:     3</div><div class="line"># Query_time: 3.837932  Lock_time: 0.000648 Rows_sent: 100000  Rows_examined: 200000</div><div class="line">SET timestamp=1496473405;</div><div class="line">select * from z_order left join z_league on z_order.league_id = z_league.id limit 100000;</div></pre></td></tr></table></figure></p>
 <p>其中参数如下：</p>
 <ul>
 <li>SQL 的执行时间：<strong># Time: 2017-06-03T06:53:37.786379Z</strong></li>
@@ -191,18 +191,18 @@
 <li>SQL 的执行时间：<strong>SET timestamp=1496472817;</strong></li>
 <li>SQL 的执行内容：<strong>select * from z_order left join z_league on z_order.league_id = z_league.id limit 100000;</strong></li>
 </ul>
-<p>执行 MySQLDumpSlow 的命令 <code>mysqldumpslow mysql-slow.log</code>，查看内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Reading mysql slow query log from mysql-slow.log</div><div class="line">Count: 2  Time=3.64s (7s)  Lock=0.00s (0s)  Rows=100000.0 (200000), root[root]@localhost</div><div class="line">  select * from z_order left join z_league on z_order.league_id = z_league.id limit N</div><div class="line"></div><div class="line">Count: 2  Time=1.05s (2s)  Lock=0.00s (0s)  Rows=55000.0 (110000), root[root]@localhost</div><div class="line">  select * from z_order limit N</div></pre></td></tr></table></figure></p>
+<p>执行 mysqldumpslow 的命令 <code>mysqldumpslow mysql-slow.log</code>，查看内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Reading mysql slow query log from mysql-slow.log</div><div class="line">Count: 2  Time=3.64s (7s)  Lock=0.00s (0s)  Rows=100000.0 (200000), root[root]@localhost</div><div class="line">  select * from z_order left join z_league on z_order.league_id = z_league.id limit N</div><div class="line"></div><div class="line">Count: 2  Time=1.05s (2s)  Lock=0.00s (0s)  Rows=55000.0 (110000), root[root]@localhost</div><div class="line">  select * from z_order limit N</div></pre></td></tr></table></figure></p>
 <ul>
 <li>Count：出现次数,</li>
 <li>Time：执行最长时间和累计总耗费时间</li>
 <li>Lock：等待锁的时间</li>
 <li>Rows：返回客户端行总数和扫描行总数</li>
 </ul>
-<h2 id="MySQLDumpSlow-的使用建议"><a href="#MySQLDumpSlow-的使用建议" class="headerlink" title="MySQLDumpSlow 的使用建议"></a><a id="4">MySQLDumpSlow 的使用建议</a></h2><h4 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h4><h2 id="MySQLDumpSlow-的项目实战"><a href="#MySQLDumpSlow-的项目实战" class="headerlink" title="MySQLDumpSlow 的项目实战"></a><a id="5">MySQLDumpSlow 的项目实战</a></h2><h4 id="TODO-1"><a href="#TODO-1" class="headerlink" title="TODO"></a>TODO</h4>
+<h2 id="mysqldumpslow-的使用建议"><a href="#mysqldumpslow-的使用建议" class="headerlink" title="mysqldumpslow 的使用建议"></a><a id="4">mysqldumpslow 的使用建议</a></h2><h4 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h4><h2 id="mysqldumpslow-的项目实战"><a href="#mysqldumpslow-的项目实战" class="headerlink" title="mysqldumpslow 的项目实战"></a><a id="5">mysqldumpslow 的项目实战</a></h2><h4 id="TODO-1"><a href="#TODO-1" class="headerlink" title="TODO"></a>TODO</h4>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/06/02/MySQLDumpSlow-的参数讲解与基础使用/" data-id="cj3jjtk47001gwt4bke33y3bi" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/06/02/MySQLDumpSlow-的参数讲解与基础使用/" data-id="cj3jma86u001jnl4bt2y046r0" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -271,7 +271,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/06/01/XHprof-的安装配置与使用分析/" data-id="cj3jjtk4r0025wt4bvrenab0j" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/06/01/XHprof-的安装配置与使用分析/" data-id="cj3jma87k002fnl4bp3tajqbp" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -324,7 +324,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/05/31/学习-Swoole/" data-id="cj3jjtk85006kwt4b7bo2rc29" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/05/31/学习-Swoole/" data-id="cj3jma8ai006gnl4b3yvcvwkv" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swoole/">Swoole</a></li></ul>
@@ -635,7 +635,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/05/27/ApacheBench-的参数讲解与基础使用/" data-id="cj3jjtk2f0000wt4b3cupzg70" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/05/27/ApacheBench-的参数讲解与基础使用/" data-id="cj3jma84m0001nl4boeqleaa9" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Apache/">Apache</a></li></ul>
@@ -749,7 +749,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/05/25/高性能的-PHP-日志系统/" data-id="cj3jjtk990079wt4bgn4ech68" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/05/25/高性能的-PHP-日志系统/" data-id="cj3jma8b9007cnl4be1jlci9f" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -924,7 +924,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/05/24/LNMP-性能优化之-PHP-性能优化/" data-id="cj3jjtk2y0005wt4biqk95356" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/05/24/LNMP-性能优化之-PHP-性能优化/" data-id="cj3jma84s0004nl4bddmy739a" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -1093,7 +1093,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/05/23/PHP-的性能优化/" data-id="cj3jjtk4v002bwt4bqpjnu831" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/05/23/PHP-的性能优化/" data-id="cj3jma87o002inl4b1o1oaduw" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -1159,7 +1159,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/04/24/设计模式之抽象工厂模式/" data-id="cj3jjtk960076wt4bgxzqh8k8" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/04/24/设计模式之抽象工厂模式/" data-id="cj3jma8ay006znl4btys1nzzk" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pattern/">Pattern</a></li></ul>
@@ -1244,7 +1244,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/04/21/设计模式之工厂方法模式/" data-id="cj3jjtk8v006ywt4bueuocpts" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/04/21/设计模式之工厂方法模式/" data-id="cj3jma8b20074nl4b6swsq9w4" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pattern/">Pattern</a></li></ul>
@@ -1347,7 +1347,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/04/20/设计模式之简单工厂模式/" data-id="cj3jjtk900071wt4b4lc8e26h" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/04/20/设计模式之简单工厂模式/" data-id="cj3jma8b50077nl4b38c44h18" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pattern/">Pattern</a></li></ul>
@@ -1414,7 +1414,7 @@
       <ul>
         
           <li>
-            <a href="/2017/06/02/MySQLDumpSlow-的参数讲解与基础使用/">MySQLDumpSlow 的参数讲解与基础使用</a>
+            <a href="/2017/06/02/MySQLDumpSlow-的参数讲解与基础使用/">mysqldumpslow 的参数讲解与基础使用</a>
           </li>
         
           <li>
