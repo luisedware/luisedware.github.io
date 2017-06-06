@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>LNMP 中常用的 Linux 命令 | 七月十五九月初七</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="目录
+ps：报告当前系统的进程状态
+ps 语法
+ps 选项
+ps 实例
+显示所有进程信息：ps -A
+显示指定用户进程信息：ps -u LuisEdware
+查找进程并显示进程所有信息：ps -ef | grep httpd
+将目前属于自己这次登入的 PID 与相关信息列示出来：ps -l
+显示目前所有的正在内存当中的程序：ps aux
+根据 CPU 使用来升序排序：ps -aux --sort">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LNMP 中常用的 Linux 命令">
+<meta property="og:url" content="http://luisedware.github.io/2017/06/05/LNMP-中常用的-Linux-命令/index.html">
+<meta property="og:site_name" content="七月十五九月初七">
+<meta property="og:description" content="目录
+ps：报告当前系统的进程状态
+ps 语法
+ps 选项
+ps 实例
+显示所有进程信息：ps -A
+显示指定用户进程信息：ps -u LuisEdware
+查找进程并显示进程所有信息：ps -ef | grep httpd
+将目前属于自己这次登入的 PID 与相关信息列示出来：ps -l
+显示目前所有的正在内存当中的程序：ps aux
+根据 CPU 使用来升序排序：ps -aux --sort">
+<meta property="og:updated_time" content="2017-06-06T03:07:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LNMP 中常用的 Linux 命令">
+<meta name="twitter:description" content="目录
+ps：报告当前系统的进程状态
+ps 语法
+ps 选项
+ps 实例
+显示所有进程信息：ps -A
+显示指定用户进程信息：ps -u LuisEdware
+查找进程并显示进程所有信息：ps -ef | grep httpd
+将目前属于自己这次登入的 PID 与相关信息列示出来：ps -l
+显示目前所有的正在内存当中的程序：ps aux
+根据 CPU 使用来升序排序：ps -aux --sort">
+  
+    <link rel="alternate" href="/atom.xml" title="七月十五九月初七" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">七月十五九月初七</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一两祝你手边多银财，二两祝你方寸永不乱</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-LNMP-中常用的-Linux-命令" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/05/LNMP-中常用的-Linux-命令/" class="article-date">
+  <time datetime="2017-06-05T08:41:13.000Z" itemprop="datePublished">2017-06-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      LNMP 中常用的 Linux 命令
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li><a href="#1">ps：报告当前系统的进程状态</a><ul>
+<li><a href="#1-1">ps 语法</a></li>
+<li><a href="#1-2">ps 选项</a></li>
+<li><a href="#1-3">ps 实例</a><ul>
+<li><a href="#1-3-1">显示所有进程信息：<code>ps -A</code></a></li>
+<li><a href="#1-3-2">显示指定用户进程信息：<code>ps -u LuisEdware</code></a></li>
+<li><a href="#1-3-3">查找进程并显示进程所有信息：<code>ps -ef | grep httpd</code></a></li>
+<li><a href="#1-3-4">将目前属于自己这次登入的 PID 与相关信息列示出来：<code>ps -l</code></a></li>
+<li><a href="#1-3-5">显示目前所有的正在内存当中的程序：<code>ps aux</code></a></li>
+<li><a href="#1-3-6">根据 CPU 使用来升序排序：<code>ps -aux --sort -pcpu</code></a></li>
+<li><a href="#1-3-7">根据内存使用来升序排序：<code>ps -aux --sort -pmem</code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#2">lsof：显示 Linux 系统当前已打开的所有文件列表</a></li>
+<li><a href="#3">top：显示或管理执行中的程序</a></li>
+<li><a href="#4">vmstat：显示虚拟内存状态</a></li>
+<li><a href="#5">netstat：查看 Linux 中网络系统状态信息</a></li>
+<li><a href="#6">sar：系统运行状态统计工具</a></li>
+<li><a href="#7">ss：获取 Socket 统计信息</a></li>
+</ul>
+<h2 id="ps：报告当前系统的进程状态"><a href="#ps：报告当前系统的进程状态" class="headerlink" title="ps：报告当前系统的进程状态"></a><a id="1">ps：报告当前系统的进程状态</a></h2><p>ps 命令用于报告当前系统的进程状态。可以搭配 kill 命令随时中断、删除不必要的程序。ps 命令是最基本同时也是非常强大的进程查看命令，使用该命令可以确定有哪些进程正在运行和运行的状态、进程是否结束、进程有没有僵死、哪些进程占用了过多的资源等等，总之大部分信息都是可以通过执行该命令得到的。</p>
+<h4 id="ps-语法"><a href="#ps-语法" class="headerlink" title="ps 语法"></a><a id="1-1">ps 语法</a></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ps (选项)</div></pre></td></tr></table></figure>
+<h4 id="ps-选项"><a href="#ps-选项" class="headerlink" title="ps 选项"></a><a id="1-2">ps 选项</a></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">a				显示所有进程</div><div class="line">-a				显示同一终端下的所有程序</div><div class="line">-A				显示所有进程</div><div class="line">c				显示进程的真实名称</div><div class="line">-N				反向选择</div><div class="line">-e				等于“-A”</div><div class="line">e				显示环境变量</div><div class="line">f				显示程序间的关系</div><div class="line">-H				显示树状结构</div><div class="line">r				显示当前终端的进程</div><div class="line">T				显示当前终端的所有程序</div><div class="line">u				指定用户的所有进程</div><div class="line">-au				显示较详细的资讯</div><div class="line">-aux			显示所有包含其他使用者的行程</div><div class="line">-C&lt;命令&gt;			列出指定命令的状况</div><div class="line">--lines&lt;行数&gt;	每页显示的行数</div><div class="line">--width&lt;字符数&gt;	每页显示的字符数</div><div class="line">--help			显示帮助信息</div><div class="line">--version		显示版本显示</div></pre></td></tr></table></figure>
+<h4 id="ps-实例"><a href="#ps-实例" class="headerlink" title="ps 实例"></a><a id="1-3">ps 实例</a></h4><p>ps 这个命令的结果一般会很长，为了便于查看，可以结合 <code>less</code> 命令和管道来使用</p>
+<h6 id="显示所有进程信息：ps-A"><a href="#显示所有进程信息：ps-A" class="headerlink" title="显示所有进程信息：ps -A"></a><a id="1-3-1">显示所有进程信息：<code>ps -A</code></a></h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">PID TTY           TIME CMD</div><div class="line">  1 ??         0:09.53 /sbin/launchd</div><div class="line"> 49 ??         0:00.65 /usr/sbin/syslogd</div><div class="line"> 50 ??         0:01.81 /usr/libexec/UserEventAgent (System)</div><div class="line"> 52 ??         0:00.17 /System/Library/PrivateFrameworks/Uninstall.framework/Resources/uninstalld</div><div class="line"> 53 ??         0:03.00 /usr/libexec/kextd</div><div class="line"> 54 ??         0:02.52 /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/FSEvents.framewor</div><div class="line"> 56 ??         0:00.16 /System/Library/PrivateFrameworks/MediaRemote.framework/Support/mediaremoted</div><div class="line"> 60 ??         0:00.21 /System/Library/CoreServices/appleeventsd --server</div><div class="line"> 61 ??         0:01.16 /usr/libexec/configd</div></pre></td></tr></table></figure>
+<h6 id="显示指定用户进程信息：ps-u-LuisEdware"><a href="#显示指定用户进程信息：ps-u-LuisEdware" class="headerlink" title="显示指定用户进程信息：ps -u LuisEdware"></a><a id="1-3-2">显示指定用户进程信息：<code>ps -u LuisEdware</code></a></h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">UID   PID TTY           TIME CMD</div><div class="line">501   297 ??         0:00.58 /usr/libexec/UserEventAgent (Aqua)</div><div class="line">501   299 ??         0:04.05 /usr/sbin/distnoted agent</div><div class="line">501   301 ??         0:00.98 /usr/sbin/cfprefsd agent</div><div class="line">501   302 ??         0:00.96 /System/Library/Frameworks/CoreTelephony.framework/Support/CommCenter -L</div><div class="line">501   304 ??         0:03.09 /usr/libexec/trustd --agent</div><div class="line">501   305 ??         0:00.65 /usr/libexec/lsd</div><div class="line">501   307 ??         0:01.31 /usr/sbin/usernoted</div><div class="line">501   311 ??         0:00.43 /usr/libexec/sharingd</div></pre></td></tr></table></figure>
+<h6 id="查找进程并显示进程所有信息：：ps-ef-grep-httpd"><a href="#查找进程并显示进程所有信息：：ps-ef-grep-httpd" class="headerlink" title="查找进程并显示进程所有信息：：ps -ef | grep httpd"></a><a id="1-3-3">查找进程并显示进程所有信息：：<code>ps -ef | grep httpd</code></a></h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">0  1825     1   0  8:43上午 ??         0:00.16 /usr/local/Cellar/httpd24/2.4.25/bin/httpd -k start</div><div class="line">1  1876  1825   0  8:43上午 ??         0:01.11 /usr/local/Cellar/httpd24/2.4.25/bin/httpd -k start</div><div class="line">1  1877  1825   0  8:43上午 ??         0:00.25 /usr/local/Cellar/httpd24/2.4.25/bin/httpd -k start</div><div class="line">1  1878  1825   0  8:43上午 ??         0:00.17 /usr/local/Cellar/httpd24/2.4.25/bin/httpd -k start</div><div class="line">1  1879  1825   0  8:43上午 ??         0:00.18 /usr/local/Cellar/httpd24/2.4.25/bin/httpd -k start</div><div class="line">1  1880  1825   0  8:43上午 ??         0:00.26 /usr/local/Cellar/httpd24/2.4.25/bin/httpd -k start</div><div class="line">1  1992  1825   0  8:46上午 ??         0:00.16 /usr/local/Cellar/httpd24/2.4.25/bin/httpd -k start</div><div class="line">1  1995  1825   0  8:46上午 ??         0:00.25 /usr/local/Cellar/httpd24/2.4.25/bin/httpd -k start</div><div class="line">1  1996  1825   0  8:46上午 ??         0:00.16 /usr/local/Cellar/httpd24/2.4.25/bin/httpd -k start</div><div class="line">1  1997  1825   0  8:46上午 ??         0:00.30 /usr/local/Cellar/httpd24/2.4.25/bin/httpd -k start</div><div class="line">1  2038  1825   0  8:55上午 ??         0:00.19 /usr/local/Cellar/httpd24/2.4.25/bin/httpd -k start</div></pre></td></tr></table></figure>
+<h6 id="将目前属于自己这次登入的-PID-与相关信息列示出来：ps-l"><a href="#将目前属于自己这次登入的-PID-与相关信息列示出来：ps-l" class="headerlink" title="将目前属于自己这次登入的 PID 与相关信息列示出来：ps -l"></a><a id="1-3-4">将目前属于自己这次登入的 PID 与相关信息列示出来：<code>ps -l</code></a></h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"> UID   PID  PPID        F CPU PRI NI       SZ    RSS WCHAN     S             ADDR TTY           TIME CMD</div><div class="line"> 501   911   909     4006   0  31  0  2481960   2976 -      Ss                  0 ttys000    0:00.04 /Users/LuisE</div><div class="line"> 501   913   912     4006   0  31  0  2461752   1624 -      S                   0 ttys000    0:00.34 -zsh</div><div class="line"> 501  1624   913     4006   0  31  0  3129968  15188 -      S+                  0 ttys000    0:01.39 npm</div><div class="line"> 501  1752  1624     4006   0  31  0  3382196 268376 -      S+                  0 ttys000   39:16.48 node build/d</div><div class="line"> 501  1816  1752     4006   0  31  0  2500188   3920 -      S+                  0 ttys000    0:00.07 open -W http</div><div class="line"> 501  1625   909     4006   0  31  0  2481960   3044 -      Ss                  0 ttys001    0:00.04 /Users/LuisE</div><div class="line"> 501  1627  1626     4006   0  31  0  2462840   4408 -      S                   0 ttys001    0:00.47 -zsh</div><div class="line"></div><div class="line">F 		代表当前进程的旗标 (flag)， 4 代表使用者为 super user</div><div class="line">S 		代表当前进程的状态 (STAT)，关于各 STAT 的意义将在内文介绍</div><div class="line">UID 	当前进程所属用户的 ID</div><div class="line">PID 	当前进程的 ID</div><div class="line">PPID 	当前进程的父级进程的 ID</div><div class="line">C 		当前进程使用 CPU 资源的百分比</div><div class="line">PRI 	优先执行等级</div><div class="line">NI 		当前是 Nice 值，在下一小节我们会持续介绍</div><div class="line">ADDR 	当前进程所在的内存位置。如果是个 running 的程序，一般就是 &quot;-&quot;</div><div class="line">SZ 		当前进程使用内存资源的大小</div><div class="line">WCHAN 	判断当前进程是否在运作，若为 - 表示正在运作</div><div class="line">TTY 	服务器登入者的终端机位置</div><div class="line">TIME 	该进程实际使用 CPU 运作的时间</div><div class="line">CMD 	当前进程所运行的命令</div></pre></td></tr></table></figure>
+<h6 id="列出目前所有的正在内存当中的程序：ps-aux"><a href="#列出目前所有的正在内存当中的程序：ps-aux" class="headerlink" title="列出目前所有的正在内存当中的程序：ps aux"></a><a id="1-3-5">列出目前所有的正在内存当中的程序：<code>ps aux</code></a></h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">USER               PID  %CPU %MEM      VSZ    RSS   TT  STAT STARTED      TIME COMMAND</div><div class="line">LuisEdware        1752  62.5  3.2  3382196 268440 s000  S+    8:42上午  40:41.18 node build/dev-server.js</div><div class="line">LuisEdware         899   4.9  2.9  4328408 243804   ??  S     8:39上午   4:44.41 /Applications/QQ.app/Contents/MacOS/QQ</div><div class="line">_windowserver      194   3.2  1.4  4104716 121620   ??  Ss    8:30上午   6:44.72 /System/Library/PrivateFrameworks/SkyLight.framework/Resources/WindowServer -daemon</div><div class="line">LuisEdware         909   2.6  0.9  3843120  75844   ??  S     8:42上午   1:05.74 /Users/LuisEdware/Applications/iTerm.app/Contents/MacOS/iTerm2</div><div class="line">LuisEdware        2281   1.5  4.1  4300024 343468   ??  S     9:14上午   1:57.11 /Applications/NeteaseMusic.app/Contents/MacOS/NeteaseMusic</div><div class="line">_coreaudiod        214   0.7  0.1  2474372   8044   ??  Ss    8:30上午   0:19.79 /usr/sbin/coreaudiod</div><div class="line">root                 1   0.3  0.2  2492048  12796   ??  Ss    8:30上午   0:12.43 /sbin/launchd</div><div class="line">root                93   0.3  0.1  2511440  12104   ??  Ss    8:30上午   0:03.20 /usr/libexec/opendirectoryd</div><div class="line">root               118   0.3  0.0  2470524   2016   ??  Ss    8:30上午   0:02.05 /usr/sbin/notifyd</div><div class="line">LuisEdware        2219   0.2  1.6  3206280 132620   ??  S     8:58上午   0:28.23 /Applications/Sublime Text.app/Contents/MacOS/plugin_host 2218</div><div class="line">LuisEdware         407   0.2  0.4  2687024  32212   ??  R     8:30上午   0:04.06 /System/Library/CoreServices/Finder.app/Contents/MacOS/Finder</div><div class="line">LuisEdware         665   0.1  0.5  2717352  41656   ??  S     8:30上午   0:21.83 /Applications/MacPomodoroTimer.app/Contents/MacOS/MacPomodoroTimer -psn_0_254014</div><div class="line">LuisEdware        2218   0.1  2.3  4088360 195860   ??  S     8:58上午   1:19.86 /Applications/Sublime Text.app/Contents/MacOS/Sublime Text</div><div class="line"></div><div class="line">USER	该进程属于那个使用者账号的</div><div class="line">PID 	该进程的 ID</div><div class="line">%CPU	该进程使用掉的 CPU 资源百分比</div><div class="line">%MEM	该进程所占用的物理内存百分比</div><div class="line">VSZ 	该进程使用掉的虚拟内存量 (Kbytes)</div><div class="line">RSS 	该进程占用的固定的内存量 (Kbytes)</div><div class="line">TTY 	该进程是在哪个终端机上面运作，若与终端机无关，则显示 ?，另外， tty1-tty6 是本机上面的登入者程序，若为 pts/0 等等的，则表示为由网络连接进主机的程序。</div><div class="line">STAT	该进程目前的状态，主要的状态有</div><div class="line">	R 	该进程目前正在运作，或者是可被运作</div><div class="line">	S 	该进程目前正在睡眠当中 (可说是 idle 状态)，但可被某些讯号 (signal) 唤醒。</div><div class="line">	T 	该进程目前正在侦测或者是停止了</div><div class="line">	Z 	该进程应该已经终止，但是其父进程却无法正常的终止他，造成 zombie (疆尸) 进程的状态</div><div class="line">STARTED	该进程被触发启动的时间</div><div class="line">TIME 	该进程实际使用 CPU 运作的时间</div><div class="line">COMMAND	当前进程所运行的命令</div></pre></td></tr></table></figure>
+<h6 id="根据-CPU-使用来升序排序：ps-aux-sort-pcpu"><a href="#根据-CPU-使用来升序排序：ps-aux-sort-pcpu" class="headerlink" title="根据 CPU 使用来升序排序：ps -aux --sort -pcpu"></a>根据 CPU 使用来升序排序：<code>ps -aux --sort -pcpu</code></h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND</div><div class="line">redis     1296  0.1  0.5 142692  5596 ?        Ssl  3月30 100:40 /usr/bin/redis-server 127.0.0.1:6379</div><div class="line">root     17921  0.1  1.3 125652 13828 ?        Ssl  6月05   1:57 /usr/local/aegis/aegis_client/aegis_10_23/AliYunDun</div><div class="line">root         1  0.0  0.2 190544  2772 ?        Ss   3月30   3:18 /usr/lib/systemd/systemd --switched-root --system --deserialize 21</div><div class="line">root         2  0.0  0.0      0     0 ?        S    3月30   0:00 [kthreadd]</div><div class="line">root         3  0.0  0.0      0     0 ?        S    3月30   0:07 [ksoftirqd/0]</div><div class="line">root         5  0.0  0.0      0     0 ?        S&lt;   3月30   0:00 [kworker/0:0H]</div><div class="line">root         6  0.0  0.0      0     0 ?        S    3月30   0:17 [kworker/u30:0]</div><div class="line">root         7  0.0  0.0      0     0 ?        S    3月30   0:00 [migration/0]</div><div class="line">root         8  0.0  0.0      0     0 ?        S    3月30   0:00 [rcu_bh]</div><div class="line">root         9  0.0  0.0      0     0 ?        S    3月30  29:07 [rcu_sched]</div></pre></td></tr></table></figure>
+<h6 id="根据内存使用来升序排序：ps-aux-sort-pmem"><a href="#根据内存使用来升序排序：ps-aux-sort-pmem" class="headerlink" title="根据内存使用来升序排序：ps -aux --sort -pmem"></a>根据内存使用来升序排序：<code>ps -aux --sort -pmem</code></h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND</div><div class="line">mysql     1071  0.0 10.1 1197928 102632 ?      Sl   3月30  41:46 /usr/libexec/mysqld --basedir=/usr --datadir=/var/lib/mysql --plugin-dir=/usr/lib64/mysql/plugin --log-error=/var/log/mariadb/mariadb.log --pid-file=/var/run/mariadb/mariadb.pid --socket=/var/lib/mysql/mysql.sock</div><div class="line">root       335  0.0  4.2 106532 42852 ?        Ss   3月30   1:13 /usr/lib/systemd/systemd-journald</div><div class="line">git       1322  0.0  3.1 200676 31512 ?        Sl   3月30  13:14 /home/git/gogs/gogs web</div><div class="line">www       5099  0.0  2.1 430056 22168 ?        S    5月30   0:20 php-fpm: pool www</div><div class="line">www       5097  0.0  2.1 430056 22164 ?        S    5月30   0:21 php-fpm: pool www</div><div class="line">www       5098  0.0  2.1 430056 22144 ?        S    5月30   0:21 php-fpm: pool www</div><div class="line">www       7762  0.0  2.1 430056 22116 ?        S    5月31   0:19 php-fpm: pool www</div><div class="line">root       797  0.0  2.1 514268 21916 ?        Ssl  3月30   0:25 /usr/sbin/rsyslogd -n</div><div class="line">www       5100  0.0  1.9 428008 20060 ?        S    5月30   0:20 php-fpm: pool www</div><div class="line">www       5096  0.0  1.9 428032 20044 ?        S    5月30   0:20 php-fpm: pool www</div><div class="line">root      5094  0.0  1.3 418136 13832 ?        Ss   5月30   0:31 php-fpm: master process (/etc/php-fpm.conf)</div></pre></td></tr></table></figure>
+<h2 id="lsof：显示Linux系统当前已打开的所有文件列表"><a href="#lsof：显示Linux系统当前已打开的所有文件列表" class="headerlink" title="lsof：显示Linux系统当前已打开的所有文件列表"></a><a id="2">lsof：显示Linux系统当前已打开的所有文件列表</a></h2><p>lsof 命令用于查看你进程开打的文件、打开文件的进程，进程打开的端口(TCP、UDP)。找回/恢复删除的文件。是十分方便的系统监视工具，因为 lsof 命令需要访问核心内存和各种文件，所以需要 root 用户执行。</p>
+<p>在 Linux 环境下，任何事物都以文件的形式存在，通过文件不仅仅可以访问常规数据，还可以访问网络连接和硬件。所以如传输控制协议 (TCP) 和用户数据报协议 (UDP) 套接字等，系统在后台都为该应用程序分配了一个文件描述符，无论这个文件的本质如何，该文件描述符为应用程序与基础操作系统之间的交互提供了通用接口。因为应用程序打开文件的描述符列表提供了大量关于这个应用程序本身的信息，因此通过 lsof 工具能够查看这个列表对系统监测以及排错将是很有帮助的。</p>
+<h2 id="top：显示或管理执行中的程序"><a href="#top：显示或管理执行中的程序" class="headerlink" title="top：显示或管理执行中的程序"></a>top：显示或管理执行中的程序</h2><p>top 命令可以实时动态地查看系统的整体运行情况，是一个综合了多方信息监测系统性能和运行信息的实用工具。通过 top 命令所提供的互动式界面，用热键可以管理。</p>
+<p>语法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">top(选项)</div></pre></td></tr></table></figure></p>
+<p>选项<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">-b：以批处理模式操作；</div><div class="line">-c：显示完整的治命令；</div><div class="line">-d：屏幕刷新间隔时间；</div><div class="line">-I：忽略失效过程；</div><div class="line">-s：保密模式；</div><div class="line">-S：累积模式；</div><div class="line">-i&lt;时间&gt;：设置间隔时间；</div><div class="line">-u&lt;用户名&gt;：指定用户名；</div><div class="line">-p&lt;进程号&gt;：指定进程；</div><div class="line">-n&lt;次数&gt;：循环显示的次数。</div></pre></td></tr></table></figure></p>
+<p>交互命令</p>
+<p>在 top 命令执行过程中可以使用的一些交互命令。这些命令都是单字母的，如果在命令行中使用了-s选项， 其中一些命令可能会被屏蔽。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">h：显示帮助画面，给出一些简短的命令总结说明；</div><div class="line">k：终止一个进程；</div><div class="line">i：忽略闲置和僵死进程，这是一个开关式命令；</div><div class="line">q：退出程序；</div><div class="line">r：重新安排一个进程的优先级别；</div><div class="line">S：切换到累计模式；</div><div class="line">s：改变两次刷新之间的延迟时间（单位为s），如果有小数，就换算成ms。输入0值则系统将不断刷新，默认值是5s；</div><div class="line">f 或者 F：从当前显示中添加或者删除项目；</div><div class="line">o 或者 O：改变显示项目的顺序；</div><div class="line">l：切换显示平均负载和启动时间信息；</div><div class="line">m：切换显示内存信息；</div><div class="line">t：切换显示进程和CPU状态信息；</div><div class="line">c：切换显示命令名称和完整命令行；</div><div class="line">M：根据驻留内存大小进行排序；</div><div class="line">P：根据CPU使用百分比大小进行排序；</div><div class="line">T：根据时间/累计时间进行排序；</div><div class="line">w：将当前设置写入~/.toprc文件中。</div></pre></td></tr></table></figure></p>
+<p>实例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[root@git ~]# top</div><div class="line">top - 17:00:57 up 66 days, 23:40,  1 user,  load average: 0.00, 0.01, 0.05</div><div class="line">Tasks:  75 total,   1 running,  74 sleeping,   0 stopped,   0 zombie</div><div class="line">%Cpu(s):  0.3 us,  0.0 sy,  0.0 ni, 99.3 id,  0.0 wa,  0.0 hi,  0.0 si,  0.3 st</div><div class="line">KiB Mem :  1014984 total,   260416 free,   264124 used,   490444 buff/cache</div><div class="line">KiB Swap:        0 total,        0 free,        0 used.   589108 avail Mem</div></pre></td></tr></table></figure></p>
+<p>参数意义：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">top - 09:44:56[当前系统时间],</div><div class="line">16 days[系统已经运行了16天],</div><div class="line">1 user[个用户当前登录],</div><div class="line">load average: 9.59, 4.75, 1.92[系统负载，即任务队列的平均长度]</div><div class="line">Tasks: 145 total[总进程数],</div><div class="line">2 running[正在运行的进程数],</div><div class="line">143 sleeping[睡眠的进程数],</div><div class="line">0 stopped[停止的进程数],</div><div class="line">0 zombie[冻结进程数],</div><div class="line">Cpu(s): 99.8%us[用户空间占用CPU百分比],</div><div class="line">0.1%sy[内核空间占用CPU百分比],</div><div class="line">0.0%ni[用户进程空间内改变过优先级的进程占用CPU百分比],</div><div class="line">0.2%id[空闲CPU百分比], 0.0%wa[等待输入输出的CPU时间百分比],</div><div class="line">0.0%hi[],</div><div class="line">0.0%st[],</div><div class="line">Mem: 4147888k total[物理内存总量],</div><div class="line">2493092k used[使用的物理内存总量],</div><div class="line">1654796k free[空闲内存总量],</div><div class="line">158188k buffers[用作内核缓存的内存量]</div><div class="line">Swap: 5144568k total[交换区总量],</div><div class="line">56k used[使用的交换区总量],</div><div class="line">5144512k free[空闲交换区总量],</div><div class="line">2013180k cached[缓冲的交换区总量]</div></pre></td></tr></table></figure></p>
+<h2 id="vmstat：显示虚拟内存状态"><a href="#vmstat：显示虚拟内存状态" class="headerlink" title="vmstat：显示虚拟内存状态"></a>vmstat：显示虚拟内存状态</h2><p>vmstat 命令的含义为显示虚拟内存状态（“Viryual Memor Statics”），但是它可以报告关于进程、内存、I/O等系统整体运行状态。</p>
+<p>语法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vmstat(选项)(参数)</div></pre></td></tr></table></figure></p>
+<p>选项<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">-a：显示活动内页；</div><div class="line">-f：显示启动后创建的进程总数；</div><div class="line">-m：显示slab信息；</div><div class="line">-n：头信息仅显示一次；</div><div class="line">-s：以表格方式显示事件计数器和内存状态；</div><div class="line">-d：报告磁盘状态；</div><div class="line">-p：显示指定的硬盘分区状态；</div><div class="line">-S：输出信息的单位。</div></pre></td></tr></table></figure></p>
+<p>参数</p>
+<ul>
+<li>事件间隔：状态信息刷新的时间间隔</li>
+<li>次数：显示报告的次数</li>
+</ul>
+<p>实例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">[root@git ~]# vmstat 3</div><div class="line">procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----</div><div class="line"> r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st</div><div class="line"> 0  0      0 260224 123132 367448    0    0     0     2    7    5  0  0 100  0  0</div><div class="line"> 0  0      0 260224 123132 367480    0    0     0     0  141  291  0  0 100  0  0</div><div class="line"> 0  0      0 260224 123140 367472    0    0     0     4  132  280  0  0 99  0  0</div><div class="line"> 0  0      0 260224 123140 367480    0    0     0     0  155  322  1  0 99  0  0</div><div class="line"> 0  0      0 260224 123140 367480    0    0     0     0  132  282  0  0 100  0  0</div><div class="line"> 0  0      0 260224 123140 367480    0    0     0     0  132  279  0  0 100  0  0</div><div class="line"> 0  0      0 260224 123140 367480    0    0     0     0  125  274  0  0 100  0  0</div></pre></td></tr></table></figure></p>
+<p>Procs（进程）</p>
+<p>r: 运行队列中进程数量，这个值也可以判断是否需要增加CPU。（长期大于1）<br>b: 等待IO的进程数量。<br>Memory（内存）</p>
+<p>swpd: 使用虚拟内存大小，如果swpd的值不为0，但是SI，SO的值长期为0，这种情况不会影响系统性能。<br>free: 空闲物理内存大小。<br>buff: 用作缓冲的内存大小。<br>cache: 用作缓存的内存大小，如果cache的值大的时候，说明cache处的文件数多，如果频繁访问到的文件都能被cache处，那么磁盘的读IO bi会非常小。<br>Swap</p>
+<p>si: 每秒从交换区写到内存的大小，由磁盘调入内存。<br>so: 每秒写入交换区的内存大小，由内存调入磁盘。<br>注意：内存够用的时候，这2个值都是0，如果这2个值长期大于0时，系统性能会受到影响，磁盘IO和CPU资源都会被消耗。有些朋友看到空闲内存（free）很少的或接近于0时，就认为内存不够用了，不能光看这一点，还要结合si和so，如果free很少，但是si和so也很少（大多时候是0），那么不用担心，系统性能这时不会受到影响的。</p>
+<p>IO（现在的Linux版本块的大小为1kb）</p>
+<p>bi: 每秒读取的块数<br>bo: 每秒写入的块数<br>注意：随机磁盘读写的时候，这2个值越大（如超出1024k)，能看到CPU在IO等待的值也会越大。</p>
+<p>system（系统）</p>
+<p>in: 每秒中断数，包括时钟中断。<br>cs: 每秒上下文切换数。<br>注意：上面2个值越大，会看到由内核消耗的CPU时间会越大。</p>
+<p>CPU（以百分比表示）</p>
+<p>us: 用户进程执行时间百分比(user time)<br>us的值比较高时，说明用户进程消耗的CPU时间多，但是如果长期超50%的使用，那么我们就该考虑优化程序算法或者进行加速。</p>
+<p>sy: 内核系统进程执行时间百分比(system time)<br>sy的值高时，说明系统内核消耗的CPU资源多，这并不是良性表现，我们应该检查原因。</p>
+<p>wa: IO等待时间百分比<br>wa的值高时，说明IO等待比较严重，这可能由于磁盘大量作随机访问造成，也有可能磁盘出现瓶颈（块操作）。</p>
+<p>id: 空闲时间百分比</p>
+<h2 id="netstat：查看Linux中网络系统状态信息"><a href="#netstat：查看Linux中网络系统状态信息" class="headerlink" title="netstat：查看Linux中网络系统状态信息"></a><a id="5">netstat：查看Linux中网络系统状态信息</a></h2><h4 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h4><h2 id="sar：系统运行状态统计工具"><a href="#sar：系统运行状态统计工具" class="headerlink" title="sar：系统运行状态统计工具"></a><a id="6">sar：系统运行状态统计工具</a></h2><h4 id="TODO-1"><a href="#TODO-1" class="headerlink" title="TODO"></a>TODO</h4><h3 id="ss：获取-Socket-统计信息"><a href="#ss：获取-Socket-统计信息" class="headerlink" title="ss：获取 Socket 统计信息"></a><a id="7">ss：获取 Socket 统计信息</a></h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2017/06/05/LNMP-中常用的-Linux-命令/" data-id="cj3kzjypw00043u4bgt56jw6s" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/06/02/mysqldumpslow-参数讲解与基础使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">mysqldumpslow 参数讲解与基础使用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/06/05/LNMP-中常用的-Linux-命令/">LNMP 中常用的 Linux 命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/02/mysqldumpslow-参数讲解与基础使用/">mysqldumpslow 参数讲解与基础使用</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/01/XHprof-的安装配置与使用分析/">XHProf 的安装配置与使用分析</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/31/学习-Swoole/">学习 Swoole</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/27/ApacheBench-的参数讲解与基础使用/">ApacheBench 参数讲解与基础使用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Luis Edware<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

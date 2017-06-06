@@ -52,9 +52,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -64,6 +64,245 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Linux-软件安装" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/27/Linux-软件安装/" class="article-date">
+  <time datetime="2016-09-27T14:29:56.000Z" itemprop="datePublished">2016-09-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/27/Linux-软件安装/">Linux 软件安装</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="软件包管理简介"><a href="#软件包管理简介" class="headerlink" title="软件包管理简介"></a>软件包管理简介</h2><ul>
+<li>软件包分类<ul>
+<li>源码包<ul>
+<li>优点：<ul>
+<li>开源，如果有足够的能力，可以修改代码</li>
+<li>可以自由选择所需的功能</li>
+<li>软件是编译安装，所以更加适合自己的系统，更加稳定也效率更高</li>
+<li>卸载方便</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>安装步骤较多，尤其安装较大的软件集合时，容易出现拼写错误</li>
+<li>编译过程时间较长，安装比二进制安装时间长</li>
+<li>编译安装一旦报错，新手很难解决安装错误</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>二进制包（RPM 包、系统默认包）<ul>
+<li>优点：<ul>
+<li>包管理系统简单，只通过几个命令就可以实现包的安装、升级、查询和卸载</li>
+<li>安装速度比源码包安装快得多</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>经过编译，不再可以看到源代码</li>
+<li>功能选择不如源码包灵活</li>
+<li>依赖性</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>脚本安装包（本质是源码包和二进制包）<ul>
+<li>优点：安装简单、快捷</li>
+<li>缺点：完全丧失了自定义性</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="RPM-命令管理"><a href="#RPM-命令管理" class="headerlink" title="RPM 命令管理"></a>RPM 命令管理</h2><h3 id="RPM-包命令规则"><a href="#RPM-包命令规则" class="headerlink" title="RPM 包命令规则"></a>RPM 包命令规则</h3><ul>
+<li><code>httpd-2.2.15-15.el6.centos.1.i686.rpm</code><ul>
+<li>httpd：软件包名</li>
+<li>2.2.15：软件版本</li>
+<li>15：软件发布的次数</li>
+<li>el6.centos：适合的 Linux 平台</li>
+<li>i686：适合的硬件平台</li>
+<li>rpm：rpm 包扩展名</li>
+</ul>
+</li>
+</ul>
+<p>RPM 包依赖性</p>
+<ul>
+<li>树形依赖：a-&gt;b-&gt;c</li>
+<li>环形依赖：a-&gt;b-&gt;c-&gt;a</li>
+<li>模块依赖：查询网站：www.rpmfind.net</li>
+</ul>
+<h3 id="RPM-安装命令"><a href="#RPM-安装命令" class="headerlink" title="RPM 安装命令"></a>RPM 安装命令</h3><p>包全名与包名</p>
+<ul>
+<li>包全名：操作的包是没有安装的软件包时，使用包全名。而且要注意路径。</li>
+<li>包名：操作已经安装的软件包时，使用包名，是搜索 /var/lib/rpm/ 中的数据库</li>
+</ul>
+<p>RPM 包安装</p>
+<ul>
+<li>安装<ul>
+<li><code>rpm [选项] 包全名</code><ul>
+<li>选项：<ul>
+<li>-i（install）安装</li>
+<li>-v（verbose）显示详细信息</li>
+<li>-h（hash）显示进度</li>
+<li>--nodeps 不检测依赖性</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>升级<ul>
+<li><code>rpm -Uvh  包全名</code><ul>
+<li>选项：<ul>
+<li>-U 升级</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>卸载<ul>
+<li><code>rpm -e 包名</code><ul>
+<li>选项：<ul>
+<li>-e 卸载</li>
+<li>–nodeps 不检查依赖性</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>查询<ul>
+<li><code>rpm -qa</code> 查询所有已经安装的 RPM 包</li>
+<li><code>rpm -q 包名</code> 查询包是否安装</li>
+<li><code>rpm -qi 包名</code> 查询软件包详细信息</li>
+<li><code>rpm -ql 包名</code> 查询包中文件安装位置<ul>
+<li>RPM 包默认安装路径<ul>
+<li>/etc 配置文件安装目录</li>
+<li>/usr/bin 可执行命令安装目录</li>
+<li>/usr/lib 程序所使用的函数库保存位置</li>
+<li>/usr/share/doc 基本的软件使用手册保存位置</li>
+<li>/usr/share/man/ 帮助文件保存位置</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>rpm -qf 系统文件名</code><ul>
+<li>选项：<ul>
+<li>-f 查询系统文件属于哪个软件包（file）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>rpm -qR 包名</code><ul>
+<li>选项：<ul>
+<li>-R 查询软件包的依赖性</li>
+<li>-p 查询未安装包信息</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Yum-命令管理"><a href="#Yum-命令管理" class="headerlink" title="Yum 命令管理"></a>Yum 命令管理</h2><ul>
+<li>查询<ul>
+<li><code>yum list</code> 查询所有可用软件包列表</li>
+<li><code>yum search 关键字</code> 搜索服务器上所有和关键字相关的包</li>
+</ul>
+</li>
+<li>安装<ul>
+<li><code>yum -y install 包名</code><ul>
+<li>选项：<ul>
+<li>install 安装</li>
+<li>-y 自动回答 yes</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>升级<ul>
+<li><code>yum -y update 包名</code><ul>
+<li>选项：<ul>
+<li>update 升级</li>
+<li>-y 自动回答 yes</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>卸载<ul>
+<li><code>yum -y remove 包名</code><ul>
+<li>选项：<ul>
+<li>remove 卸载</li>
+<li>-y 自动回答 yes</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>组管理<ul>
+<li><code>yum grouplist</code> 列出所有可用的软件组列表</li>
+<li><code>yum groupinstall 软件组名</code> 安装指定软件组，组名可以由 grouplist 查询出来</li>
+<li><code>yum groupremove 软件组名</code> 卸载指定软件组</li>
+</ul>
+</li>
+</ul>
+<h2 id="源码包安装"><a href="#源码包安装" class="headerlink" title="源码包安装"></a>源码包安装</h2><p>源码包安装位置需要手动指定，一般安装在 <code>/usr/local/软件名</code></p>
+<p>安装源码包之前需要安装 C 语言编译器</p>
+<p>源码包安装过程</p>
+<ul>
+<li>下载源码包</li>
+<li>解压缩下载的源码包</li>
+<li>进入解压缩目录</li>
+<li><code>./configure 软件配置与检查</code><ul>
+<li>定义需要的功能选项</li>
+<li>检测系统环境是否符合安装要求</li>
+<li>把定义好的功能选项和检测系统环境的信息都写入 Makefile 文件，用于后续的编辑</li>
+</ul>
+</li>
+<li><code>make</code> 编译<ul>
+<li><code>make clean</code> 如果编译错误，尝试执行 <code>make clean</code></li>
+</ul>
+</li>
+<li><code>make install</code> 编译安装</li>
+</ul>
+<p>源码包不需要卸载命令，直接删除安装目录即可。不会遗留垃圾文件</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2016/09/27/Linux-软件安装/" data-id="cj3kzjyqy001d3u4bl3s4nz6x" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-Linux-定时任务" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -306,7 +545,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/26/Linux-定时任务/" data-id="cj3jma85n000lnl4b7sog1lzm" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/26/Linux-定时任务/" data-id="cj3kzjyqo00103u4bguqf3utr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -687,7 +926,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/24/Linux-系统管理/" data-id="cj3jma866000vnl4bpz990iem" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/24/Linux-系统管理/" data-id="cj3kzjyqv00183u4b2ptm5k45" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -856,7 +1095,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/23/Linux-服务管理/" data-id="cj3jma85g000hnl4bcyjepkjc" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/23/Linux-服务管理/" data-id="cj3kzjyqj000u3u4bf3svdh3o" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1095,7 +1334,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/22/Linux-Shell-基础之正则表达式/" data-id="cj3jma85s000snl4beg0w9pdt" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/22/Linux-Shell-基础之正则表达式/" data-id="cj3kzjyqg000m3u4bll53fwbo" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1474,7 +1713,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/20/Linux-网络基础/" data-id="cj3jma86b0013nl4bv0dr8ox2" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/20/Linux-网络基础/" data-id="cj3kzjyqt00153u4butr0z2ka" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -2312,7 +2551,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/19/Linux-命令基础/" data-id="cj3jma85e000fnl4b3wlhpojl" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/19/Linux-命令基础/" data-id="cj3kzjyqg000p3u4bwm9j4x4y" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -2386,7 +2625,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/12/MySQL-5-7-版本新特性/" data-id="cj3jma86n001bnl4bv7kusp5f" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/12/MySQL-5-7-版本新特性/" data-id="cj3kzjyr3001m3u4bf8og1xrl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -2857,7 +3096,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/09/与-MySQL-的零距离接触（二）/" data-id="cj3jma88g003jnl4br7le4tm5" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/09/与-MySQL-的零距离接触（二）/" data-id="cj3kzjyss003t3u4b0rl3ide4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -3505,123 +3744,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/07/与-MySQL-的零距离接触（一）/" data-id="cj3jma88l003unl4by61yguds" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-复习使用-MySQL（三）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/04/复习使用-MySQL（三）/" class="article-date">
-  <time datetime="2016-09-04T13:08:24.000Z" itemprop="datePublished">2016-09-04</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/04/复习使用-MySQL（三）/">复习使用 MySQL（三）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
-<li>MySQL 5.7.13</li>
-</ul>
-<h2 id="MySQL-优化：硬件"><a href="#MySQL-优化：硬件" class="headerlink" title="MySQL 优化：硬件"></a>MySQL 优化：硬件</h2><ul>
-<li>CPU：使用多核 CPU，能够充分发挥新版 MySQL 多核下的效果，建议 4 核以上</li>
-<li>内存：如果数据量比较大，建议使用不要低于 20 G 内存的服务器</li>
-<li>硬盘：SSD 硬盘，提高 TPS，选择适合的 RAID 方案</li>
-<li>网卡：保证足够的吞吐量，建议千兆网卡</li>
-</ul>
-<h2 id="MySQL-优化：软件"><a href="#MySQL-优化：软件" class="headerlink" title="MySQL 优化：软件"></a>MySQL 优化：软件</h2><ul>
-<li>OS 类型<ul>
-<li>Linux</li>
-<li>FreeBSD</li>
-</ul>
-</li>
-<li>Linux 关键配置<ul>
-<li>文件打开描述符：/etc/security/limits.conf 中 nofile、/proc/sys/fs/nr_open</li>
-<li>可分配文件句柄数：/etc/sysctl.conf 中 fs.file-max、/proc/sys/fs/file-max</li>
-<li>进程数：/etc/security/limits.conf 中的 nproc</li>
-<li>线程数：/proc/sys/kernel/thread-max</li>
-<li>其他 TCP 和网络相关选项：/etc/sysctl.conf</li>
-<li>这些都可以通过ulimit 或 直接调整 /proc 中变量进行临时修改</li>
-<li>建议关闭 SWAP 分区（内存要足够大才行）；如果数据太大，为了防止夯死主机，可以设置 2G 左右的 SWAP 分区</li>
-</ul>
-</li>
-</ul>
-<h2 id="MySQL-优化：基础配置"><a href="#MySQL-优化：基础配置" class="headerlink" title="MySQL 优化：基础配置"></a>MySQL 优化：基础配置</h2><p>基础配置 &amp; MyISAM 配置<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">max_connections=<span class="number">3000</span></div><div class="line">max_user_connections=<span class="number">2800</span></div><div class="line">max_connect_errors=<span class="number">10</span></div><div class="line">max_allowed_packet=<span class="number">64</span>M</div><div class="line">max_heap_table_size=<span class="number">512</span>M</div><div class="line">tmp_table_size=<span class="number">512</span>M</div><div class="line">max_length_for_sort_data=<span class="number">16</span>k</div><div class="line">wait_timeout=<span class="number">172800</span></div><div class="line">interactive_timeout=<span class="number">172800</span></div><div class="line"></div><div class="line">net_buffer_length=<span class="number">8</span>K</div><div class="line">read_buffer_size=<span class="number">4</span>M</div><div class="line">read_rnd_buffer_size=<span class="number">1</span>M</div><div class="line">sort_buffer_size=<span class="number">256</span>K</div><div class="line">join_buffer_size=<span class="number">2</span>M</div><div class="line">table_open_cache=<span class="number">512</span></div><div class="line">thread_cache_size=<span class="number">512</span></div><div class="line">query_cache_type=<span class="number">1</span></div><div class="line">query_cache_size=<span class="number">256</span>M</div></pre></td></tr></table></figure></p>
-<p>InnoDB 配置<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">innodb_file_per_table=<span class="number">1</span></div><div class="line">innodb_open_files=<span class="number">7168</span></div><div class="line">innodb_use_sys_malloc=<span class="number">1</span></div><div class="line">innodb_additional_mem_pool_size=<span class="number">64</span>M</div><div class="line">innodb_buffer_pool_instances=<span class="number">4</span></div><div class="line">innodb_buffer_pool_size=<span class="number">20</span>G</div><div class="line">innodb_data_home_dir=/home/work/data</div><div class="line">innodb_data_file_path=ibdata1:<span class="number">1024</span>M:autoextend</div><div class="line">innodb_autoextend_increment=<span class="number">128</span></div><div class="line">innodb_thread_concurrency=<span class="number">0</span></div><div class="line">innodb_flush_log_at_trx_commit=<span class="number">1</span></div><div class="line">innodb_fast_shutdown=<span class="number">1</span></div><div class="line">innodb_force_recovery=<span class="number">0</span></div><div class="line"></div><div class="line">innodb_log_buffer_size=<span class="number">16</span>M</div><div class="line">innodb_log_file_size=<span class="number">128</span>M</div><div class="line">innodb_log_files_in_group=<span class="number">4</span></div><div class="line">innodb_log_group_home_dir=/home/work/data</div><div class="line">innodb_max_dirty_pages_pct=<span class="number">60</span></div><div class="line">innodb_purge_threads=<span class="number">0</span></div><div class="line">innodb_lock_wait_timeout=<span class="number">50</span></div><div class="line">innodb_rollback_on_timeout=<span class="number">1</span></div><div class="line">innodb_commit_concurrency=<span class="number">0</span></div><div class="line">innodb_concurrency_tickets=<span class="number">1024</span></div><div class="line">innodb_autoinc_lock_mode=<span class="number">2</span></div><div class="line">innodb_change_buffering=all</div></pre></td></tr></table></figure></p>
-<h2 id="MySQL-优化：表设计原则"><a href="#MySQL-优化：表设计原则" class="headerlink" title="MySQL 优化：表设计原则"></a>MySQL 优化：表设计原则</h2><ul>
-<li>互联网业务的特点：数据量大、读写操作多、业务模式相对简单</li>
-<li>单表字段不宜过多，尽量不按照第三范式去设计表结构，</li>
-<li>尽量减少表关联，适当的冗余保证不联表查询</li>
-<li>表名和字段尽量采用小写字母+下划线的命名规则，尽量使用英文，例如：user_score</li>
-<li>每个表一定要有主键，一般建议自增ID；单表索引不宜过多，一般5~6个索引</li>
-<li>字段尽量使用高效类型，比如数字或时间，IP地址、手机号等都可以使用数字类型存储，非不得已采用字符</li>
-</ul>
-<h2 id="MySQL-优化：查询语句"><a href="#MySQL-优化：查询语句" class="headerlink" title="MySQL 优化：查询语句"></a>MySQL 优化：查询语句</h2><ul>
-<li>不要写太复杂的SQL语句，尽量简单，能够让业务去做的，就不要让数据库区操作</li>
-<li>尽量避免：子查询、group by、distinct 等操作（子查询可以用left join替代）</li>
-<li>where、order by 等关键字段一定要建立索引，where里多个条件经常使用的可以建立联合索引（注意建立索引的数据必须是尽量分布多并且具备单调性，重复率低）</li>
-<li>把数据当做神一样来供着，能够缓存的尽量缓存（redis、memcached等），能够多次查询的就不要关联查询</li>
-<li>所有的变更操作（update、delete）必须有where条件！</li>
-<li>不适合使用MySQL服务的数据功能操作，尽量采用别的第三方服务支持，比如全文检索功能</li>
-</ul>
-<h2 id="MySQL-优化：SQL-优化实例"><a href="#MySQL-优化：SQL-优化实例" class="headerlink" title="MySQL 优化：SQL 优化实例"></a>MySQL 优化：SQL 优化实例</h2><ul>
-<li>Like 优化</li>
-<li>Limit 优化</li>
-<li>InnoDB 中 count 优化</li>
-<li>定期使用 Explain 查看执行计划</li>
-</ul>
-<h2 id="PHP-与-MySQL-交互"><a href="#PHP-与-MySQL-交互" class="headerlink" title="PHP 与 MySQL 交互"></a>PHP 与 MySQL 交互</h2><ul>
-<li>扩展层</li>
-<li><p>代码层</p>
-<ul>
-<li>为防止mysql太慢夯住PHP，建议设置SQL超时，或者设置execute_time等超时设置</li>
-<li>$mysqli-&gt;options(MYSQL_OPT_READ_TIMEOUT, 3);</li>
-<li>$mysqli-&gt;options(MYSQL_OPT_WRITE_TIMEOUT, 1);</li>
-<li>务必在代码里记录相关SQL语句执行性能和时间等信息，方便后续优化</li>
-</ul>
-</li>
-<li><p>超时设置</p>
-<ul>
-<li>PHP代码连接后端的超时设置</li>
-<li>php.ini中execute_time设置</li>
-<li>php-fpm中request_terminate_timeout，request_slowlog_timeout</li>
-<li>nginx upstream相关超时设置</li>
-</ul>
-</li>
-</ul>
-<h2 id="PHP-与-MySQL-安全"><a href="#PHP-与-MySQL-安全" class="headerlink" title="PHP 与 MySQL 安全"></a>PHP 与 MySQL 安全</h2><ul>
-<li>SQL 注入</li>
-<li>MySQL 服务端</li>
-<li>备份机制</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/04/复习使用-MySQL（三）/" data-id="cj3jma8ac005znl4blp5swgmw" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/07/与-MySQL-的零距离接触（一）/" data-id="cj3kzjysd003e3u4b6fkivw92" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -3644,7 +3767,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -3654,7 +3777,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
     </div>
@@ -3664,7 +3787,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
     </div>
@@ -3683,12 +3806,16 @@ insert test(username) values(username); return last_insert_id(); end //</code></
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
           <li>
-            <a href="/2017/06/02/MySQLDumpSlow-的参数讲解与基础使用/">mysqldumpslow 的参数讲解与基础使用</a>
+            <a href="/2017/06/05/LNMP-中常用的-Linux-命令/">LNMP 中常用的 Linux 命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/02/mysqldumpslow-参数讲解与基础使用/">mysqldumpslow 参数讲解与基础使用</a>
           </li>
         
           <li>
@@ -3701,10 +3828,6 @@ insert test(username) values(username); return last_insert_id(); end //</code></
         
           <li>
             <a href="/2017/05/27/ApacheBench-的参数讲解与基础使用/">ApacheBench 参数讲解与基础使用</a>
-          </li>
-        
-          <li>
-            <a href="/2017/05/25/高性能的-PHP-日志系统/">高性能的 PHP 日志系统</a>
           </li>
         
       </ul>
@@ -3720,7 +3843,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Luis Edware<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
