@@ -9,10 +9,9 @@
 认识 mysqldumpslow
 mysqldumpslow 的命令参数
 mysqldumpslow 的结果参数
-mysqldumpslow 的使用建议
-mysqldumpslow 的项目实战
 
-认识 mysqldumpslowmysqldumpslow 是一个针对于 MySQL 慢查询的命令行程序。在配置 MySQL 相关参数后，可以通过 mysqldumpslow 查找出查询较慢的 SQ">
+认识 mysqldumpslowmysqldumpslow 是一个针对于 MySQL 慢查询的命令行程序。在配置 MySQL 相关参数后，可以通过 mysqldumpslow 查找出查询较慢的 SQL 语句。
+进入 MySQL 命令行，执行命令 mysql&amp;gt; show v">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mysqldumpslow 参数讲解与基础使用">
 <meta property="og:url" content="http://luisedware.github.io/2017/06/02/mysqldumpslow-参数讲解与基础使用/index.html">
@@ -21,21 +20,19 @@ mysqldumpslow 的项目实战
 认识 mysqldumpslow
 mysqldumpslow 的命令参数
 mysqldumpslow 的结果参数
-mysqldumpslow 的使用建议
-mysqldumpslow 的项目实战
 
-认识 mysqldumpslowmysqldumpslow 是一个针对于 MySQL 慢查询的命令行程序。在配置 MySQL 相关参数后，可以通过 mysqldumpslow 查找出查询较慢的 SQ">
-<meta property="og:updated_time" content="2017-06-05T06:54:51.000Z">
+认识 mysqldumpslowmysqldumpslow 是一个针对于 MySQL 慢查询的命令行程序。在配置 MySQL 相关参数后，可以通过 mysqldumpslow 查找出查询较慢的 SQL 语句。
+进入 MySQL 命令行，执行命令 mysql&amp;gt; show v">
+<meta property="og:updated_time" content="2017-06-12T03:42:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysqldumpslow 参数讲解与基础使用">
 <meta name="twitter:description" content="目录
 认识 mysqldumpslow
 mysqldumpslow 的命令参数
 mysqldumpslow 的结果参数
-mysqldumpslow 的使用建议
-mysqldumpslow 的项目实战
 
-认识 mysqldumpslowmysqldumpslow 是一个针对于 MySQL 慢查询的命令行程序。在配置 MySQL 相关参数后，可以通过 mysqldumpslow 查找出查询较慢的 SQ">
+认识 mysqldumpslowmysqldumpslow 是一个针对于 MySQL 慢查询的命令行程序。在配置 MySQL 相关参数后，可以通过 mysqldumpslow 查找出查询较慢的 SQL 语句。
+进入 MySQL 命令行，执行命令 mysql&amp;gt; show v">
   
     <link rel="alternate" href="/atom.xml" title="七月十五九月初七" type="application/atom+xml">
   
@@ -118,8 +115,6 @@ mysqldumpslow 的项目实战
 <li><a href="#1">认识 mysqldumpslow</a></li>
 <li><a href="#2">mysqldumpslow 的命令参数</a></li>
 <li><a href="#3">mysqldumpslow 的结果参数</a></li>
-<li><a href="#4">mysqldumpslow 的使用建议</a></li>
-<li><a href="#5">mysqldumpslow 的项目实战</a></li>
 </ul>
 <h2 id="认识-mysqldumpslow"><a href="#认识-mysqldumpslow" class="headerlink" title="认识 mysqldumpslow"></a><a id="1">认识 mysqldumpslow</a></h2><p>mysqldumpslow 是一个针对于 MySQL 慢查询的命令行程序。在配置 MySQL 相关参数后，可以通过 mysqldumpslow 查找出查询较慢的 SQL 语句。</p>
 <p>进入 MySQL 命令行，执行命令 <code>mysql&gt; show variables like &quot;%query%&quot; ;</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">mysql&gt; mysql&gt; show variables like &quot;%quer%&quot; ;</div><div class="line">+----------------------------------------+-----------------------------------------------------+</div><div class="line">| Variable_name                          | Value                                               |</div><div class="line">+----------------------------------------+-----------------------------------------------------+</div><div class="line">| binlog_rows_query_log_events           | OFF                                                 |</div><div class="line">| ft_query_expansion_limit               | 20                                                  |</div><div class="line">| have_query_cache                       | YES                                                 |</div><div class="line">| log_queries_not_using_indexes          | OFF                                                 |</div><div class="line">| log_throttle_queries_not_using_indexes | 0                                                   |</div><div class="line">| long_query_time                        | 10.000000                                           |</div><div class="line">| query_alloc_block_size                 | 8192                                                |</div><div class="line">| query_cache_limit                      | 1048576                                             |</div><div class="line">| query_cache_min_res_unit               | 4096                                                |</div><div class="line">| query_cache_size                       | 1048576                                             |</div><div class="line">| query_cache_type                       | OFF                                                 |</div><div class="line">| query_cache_wlock_invalidate           | OFF                                                 |</div><div class="line">| query_prealloc_size                    | 8192                                                |</div><div class="line">| slow_query_log                         | OFF                                                 |</div><div class="line">| slow_query_log_file                    | /usr/local/var/mysql/luyiyuandeMacBook-Pro-slow.log |</div><div class="line">+----------------------------------------+-----------------------------------------------------+</div><div class="line">15 rows in set (0.01 sec)</div></pre></td></tr></table></figure></p>
@@ -221,11 +216,11 @@ mysqldumpslow 的项目实战
 <li>Lock：等待锁的时间</li>
 <li>Rows：返回客户端行总数和扫描行总数</li>
 </ul>
-<h2 id="mysqldumpslow-的使用建议"><a href="#mysqldumpslow-的使用建议" class="headerlink" title="mysqldumpslow 的使用建议"></a><a id="4">mysqldumpslow 的使用建议</a></h2><h4 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h4><h2 id="mysqldumpslow-的项目实战"><a href="#mysqldumpslow-的项目实战" class="headerlink" title="mysqldumpslow 的项目实战"></a><a id="5">mysqldumpslow 的项目实战</a></h2><h4 id="TODO-1"><a href="#TODO-1" class="headerlink" title="TODO"></a>TODO</h4>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/06/02/mysqldumpslow-参数讲解与基础使用/" data-id="cj3q103ey002yre4bsrnd855e" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/06/02/mysqldumpslow-参数讲解与基础使用/" data-id="cj3tlf9og00356l4bhg6b3g3e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
