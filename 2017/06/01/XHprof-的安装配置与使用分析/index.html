@@ -29,7 +29,7 @@ XHProf + XHGui
 
 简介XHProf，中文名为层次式性能分析器，是一个分层PHP性能分析工具。 它报告函数级别的请求次数和各种指标，包括阻塞时间，CPU时间和内存使用情况。 一个函数的开销，可细分成调用者和被调用者的开销。
 安装配置以 XHProf for PHP 7 为例，安装步骤如下：12345">
-<meta property="og:updated_time" content="2017-06-02T08:45:05.000Z">
+<meta property="og:updated_time" content="2017-06-16T15:45:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="XHProf 的安装配置与使用分析">
 <meta name="twitter:description" content="目录
@@ -146,12 +146,11 @@ XHProf + XHGui
 <li>XHPROF_FLAGS_CPU (integer)：使输出的性能数据中添加 CPU 数据。</li>
 <li>XHPROF_FLAGS_MEMORY (integer)：使输出的性能数据中添加内存数据</li>
 </ul>
-<h2 id="XHProf-范例"><a href="#XHProf-范例" class="headerlink" title="XHProf 范例"></a>XHProf 范例</h2><p>范例一如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">xhprof_enable(XHPROF_FLAGS_CPU + XHPROF_FLAGS_MEMORY);</div><div class="line"></div><div class="line"><span class="keyword">for</span> ($i = <span class="number">0</span>; $i &lt;= <span class="number">1000</span>; $i++) &#123;</div><div class="line">    $a = $i * $i;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$uid = uniqid();</div><div class="line">$file = (ini_get(<span class="string">'xhprof.output_dir'</span>) ? : <span class="string">'/tmp'</span>) . <span class="string">'/'</span> . $uid . <span class="string">'.xhprof'</span>;</div><div class="line">file_put_contents($file, serialize(xhprof_disable()));</div><div class="line"></div><div class="line"><span class="keyword">echo</span> $uid;</div></pre></td></tr></table></figure></p>
-
+<h2 id="XHProf-范例"><a href="#XHProf-范例" class="headerlink" title="XHProf 范例"></a>XHProf 范例</h2>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/06/01/XHprof-的安装配置与使用分析/" data-id="cj400l9i00027qn4boytxv2ku" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/06/01/XHprof-的安装配置与使用分析/" data-id="cj4013bl9002ai64bkkdd5o3o" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
