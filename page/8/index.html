@@ -54,7 +54,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -64,6 +64,436 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-PHP Web Application 运行流程、概念术语、机制原理和代码实践" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/10/PHP Web Application 运行流程、概念术语、机制原理和代码实践/" class="article-date">
+  <time datetime="2016-06-10T12:55:55.000Z" itemprop="datePublished">2016-06-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/10/PHP Web Application 运行流程、概念术语、机制原理和代码实践/">以 PHP 为例的一次完整 HTTP 事务的执行过程</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li><a href="#1">HTTP 事务执行过程</a></li>
+<li><a href="#2">HTTP 相关概念术语</a></li>
+<li><a href="#3">HTTP 请求与响应</a><ul>
+<li><a href="#3.1">HTTP 请求</a><ul>
+<li><a href="#3.1.1">HTTP 请求行</a></li>
+<li><a href="#3.1.2">HTTP 请求头</a></li>
+<li><a href="#3.1.3">HTTP 请求正文</a></li>
+<li><a href="#3.1.4">HTTP 请求示例</a></li>
+</ul>
+</li>
+<li><a href="#3.2">HTTP 响应</a><ul>
+<li><a href="#3.2.1">HTTP 响应行</a></li>
+<li><a href="#3.2.2">HTTP 响应头</a></li>
+<li><a href="#3.2.3">HTTP 响应正文</a></li>
+<li><a href="#3.2.4">HTTP 响应示例</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#4">PHP 和 Web Server 的工作原理</a><ul>
+<li><a href="#4.1">Module</a></li>
+<li><a href="#4.2">PHP-CGI</a></li>
+<li><a href="#4.3">PHP-FPM</a></li>
+<li><a href="#4.4">CGI、FastCGI、PHP-CGI、PHP-FPM 的区别</a></li>
+<li><a href="#4.5">PHP-FPM 优劣势分析与解决方案</a></li>
+</ul>
+</li>
+<li><a href="#5">Web Server 的配置使用</a><ul>
+<li><a href="#5.1">Apache</a><ul>
+<li><a href="#5.1.3">Apache 常用命令</a></li>
+<li><a href="#5.1.1">Apache 常用的配置与模块</a></li>
+<li><a href="#5.1.2">Apache 配置示例</a></li>
+</ul>
+</li>
+<li><a href="#5.2">Nginx</a><ul>
+<li><a href="#5.2.3">Nginx 常用命令</a></li>
+<li><a href="#5.2.1">Nginx 常用的模块与配置指令</a></li>
+<li><a href="#5.2.2">Nginx 配置示例</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="HTTP-事务执行过程"><a href="#HTTP-事务执行过程" class="headerlink" title="HTTP 事务执行过程"></a><a id="1">HTTP 事务执行过程</a></h2><ol>
+<li>客户端（浏览器）做出请求操作（输入网址、点击链接、提交表单）。</li>
+<li>客户端对域名进行解析，向设定的 DNS 服务器请求 IP 地址。</li>
+<li>客户端根据 DNS 服务器返回 IP 地址采用三次握手与服务端建立 TCP/IP 连接。</li>
+<li>TCP/IP 连接成功后，客户端向服务端发送 HTTP 请求。</li>
+<li>服务端的 Web Server 会判断 HTTP 请求的资源类型，进行内容分发处理；如果请求的资源为 PHP 文件，服务端软件会启动对应的 CGI 程序进行处理，并返回处理结果。</li>
+<li>服务端将 Web Server 的处理结果响应给客户端</li>
+<li>客户端接收服务端的响应，并渲染处理结果，如果响应内容需要请求其他静态资源，通过 CDN 加速访问所需资源。</li>
+<li>客户端将渲染好的视图呈现出来并断开 TCP/IP 连接</li>
+</ol>
+<h2 id="HTTP-相关概念术语"><a href="#HTTP-相关概念术语" class="headerlink" title="HTTP 相关概念术语"></a><a id="2">HTTP 相关概念术语</a></h2><p>1.客户端</p>
+<blockquote>
+<p>客户端，是指与服务端相对应，为客户提供本地服务的程序。一般安装在普通的用户机上，需要与服务端互相配合运行。Web Application 的客户端一般是浏览器。</p>
+</blockquote>
+<p>2.服务端</p>
+<blockquote>
+<p>服务端是为客户端服务的，服务的内容诸如向客户端提供资源，保存客户端数据。</p>
+</blockquote>
+<p>3.三次握手</p>
+<blockquote>
+<p>三次握手，又名询问握手协议，是一个用来验证用户或网络提供者的协议。</p>
+</blockquote>
+<p>4.CGI</p>
+<blockquote>
+<p>CGI 全称是 Common Gateway Interface，CGI 是外部应用程序与 Web Server 之间的接口标准，是在 CGI 程序和 Web 服务器之间传递信息的规程。CGI 规范允许 Web Server 执行外部程序，并将它们的输出发送给Web浏览器。</p>
+</blockquote>
+<p>5.DNS</p>
+<blockquote>
+<p>DNS 全称是 Domain Name System，译为域名系统。它可以将域名和 IP<br>地址互相映射，能够让用户使用域名就可以访问互联网服务。</p>
+</blockquote>
+<p>6.HTTP</p>
+<blockquote>
+<p>HTTP 全称是 HyperText Transfer Protocol，译为超文本传输协议，是一种网络协议。</p>
+</blockquote>
+<p>7.Web Server</p>
+<blockquote>
+<p>通常指 Apache、Nginx 等服务器软件</p>
+</blockquote>
+<h2 id="HTTP-请求与响应"><a href="#HTTP-请求与响应" class="headerlink" title="HTTP 请求与响应"></a><a id="3">HTTP 请求与响应</a></h2><p>首先从 HTTP 协议开始谈起，HTTP 协议工作流程是客户端发送一个请求给服务端，服务端在接收到这个请求后将产生一个响应返回给客户端。那么 HTTP 请求和 HTTP 响应是什么？</p>
+<h4 id="HTTP-请求"><a href="#HTTP-请求" class="headerlink" title="HTTP 请求"></a><a id="3.1">HTTP 请求</a></h4><p>当客户端向服务端发出请求时，它向服务端传递一个数据块，即请求信息，HTTP 请求信息由三部分组成：</p>
+<ul>
+<li>HTTP Request Line（HTTP 请求行）</li>
+<li>HTTP Request Header（HTTP 请求头）</li>
+<li>HTTP Request Body（HTTP 请求正文）</li>
+</ul>
+<h4 id="HTTP-请求行"><a href="#HTTP-请求行" class="headerlink" title="HTTP 请求行"></a><a id="3.1.1">HTTP 请求行</a></h4><p>请求行以一个方法符号开头，以空格分开，后面跟着请求的 URI 和协议的版本，格式如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Request Method - URI HTTP-Version CRLF</div></pre></td></tr></table></figure></p>
+<p>上述格式中各参数说明如下：</p>
+<table>
+<thead>
+<tr>
+<th>HTTP Request Line</th>
+<th>说明</th>
+<th>参数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Method</td>
+<td>请求方法</td>
+<td>GET、POST、PUT、HEAD、DELETE、OPTIONS、TRACE、CONNECT</td>
+</tr>
+<tr>
+<td>Request-URI</td>
+<td>统一资源标识符</td>
+<td><a href="https://github.com" target="_blank" rel="external">https://github.com</a></td>
+</tr>
+<tr>
+<td>HTTP-Version</td>
+<td>请求的 HTTP 协议版本</td>
+<td>HTTP/1.0、HTTP/1.1</td>
+</tr>
+<tr>
+<td>CRLF</td>
+<td>回车和换行</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="HTTP-请求头"><a href="#HTTP-请求头" class="headerlink" title="HTTP 请求头"></a><a id="3.1.2">HTTP 请求头</a></h4><p>HTTP 请求头允许客户端向服务端传递请求的附加信息以及客户端自身的信息。<br>每个头域组成形式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">名字 + : + 空格 + 值</div></pre></td></tr></table></figure></p>
+<p>常见的 HTTP 请求头如下：</p>
+<ul>
+<li>Host<blockquote>
+<p>头域指定请求资源的 Internet 主机和端口号，必须表示请求 URL 的原始服务器或者网关的位置。</p>
+</blockquote>
+</li>
+<li>Accept<blockquote>
+<p>告诉服务器可以接受的文件格式。</p>
+</blockquote>
+</li>
+<li>Cookie<blockquote>
+<p>Cookie 份两种，一种是客户端向服务器发送的，使用 Cookie 头，用来标记一些信息；另一种是服务器发送给浏览器的，头为 Set-Cookie。</p>
+</blockquote>
+</li>
+<li>Referer<blockquote>
+<p>头域允许客户端指定请求 URI 的源资源地址，这可以允许服务器生成回退链表，可用来登录、优化缓存等。</p>
+</blockquote>
+</li>
+<li>User-Agent<blockquote>
+<p>UA 包含发出请求的用户信息。通常 User-Agent 包含浏览者的信息，主要是浏览器的名称版本和所用的操作系统。</p>
+</blockquote>
+</li>
+<li>Connection<blockquote>
+<p>表示是否需要持久连接。</p>
+</blockquote>
+</li>
+<li>Cache-Control<blockquote>
+<p>指定请求和响应遵循的缓存机制</p>
+</blockquote>
+</li>
+<li>Content-Range<blockquote>
+<p>响应的资源范围。可以在每次请求中标记请求的资源范围，在连接断开重连时，客户端只请求重连时，客户端只请求该资源未下载的部分，而不是重新请求整个资源。</p>
+</blockquote>
+</li>
+<li>Content-Length<blockquote>
+<p>内容长度</p>
+</blockquote>
+</li>
+<li>Accept-Encoding<blockquote>
+<p>指定所能接受的编码方式。通常服务器会对页面进行 GZIP 压缩后再输出以减少流量。一般浏览器均支持对这种压缩后的数据进行处理。</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="HTTP-请求正文"><a href="#HTTP-请求正文" class="headerlink" title="HTTP 请求正文"></a><a id="3.1.3">HTTP 请求正文</a></h4><p>HTTP 请求头和 HTTP 请求正文之间的一个空行表示请求头已经结束了。请求正文中可以包含提交的查询字符串信息。GET 方式没有请求正文。</p>
+<h4 id="HTTP-请求示例"><a href="#HTTP-请求示例" class="headerlink" title="HTTP 请求示例"></a><a id="3.1.4">HTTP 请求示例</a></h4><p>HTTP GET 请求<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">GET /doc HTTP/1.1</div><div class="line">Host: workerbee.app</div><div class="line">Connection: keep-alive</div><div class="line">Cache-Control: max-age=0</div><div class="line">Upgrade-Insecure-Requests: 1</div><div class="line">User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36</div><div class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</div><div class="line">Accept-Encoding: gzip, deflate, sdch</div><div class="line">Accept-Language: zh-CN,zh;q=0.8,en;q=0.6</div><div class="line">Cookie: cartalyst_sentry=hello#world</div></pre></td></tr></table></figure></p>
+<p>HTTP POST 请求<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">POST /v1/user/sign-in HTTP/1.1</div><div class="line">Host: workerbee.test.anlewo.com:9351</div><div class="line">Connection: keep-alive</div><div class="line">Content-Length: 25</div><div class="line">Accept: application/json</div><div class="line">Origin: http://workerbee.app</div><div class="line">User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36</div><div class="line">Content-Type: application/x-www-form-urlencoded</div><div class="line">Referer: http://workerbee.app/doc</div><div class="line">Accept-Encoding: gzip, deflate</div><div class="line">Accept-Language: zh-CN,zh;q=0.8,en;q=0.6</div><div class="line"></div><div class="line">username=admin&amp;pwd=123456</div></pre></td></tr></table></figure></p>
+<h4 id="HTTP-响应"><a href="#HTTP-响应" class="headerlink" title="HTTP 响应"></a><a id="3.2">HTTP 响应</a></h4><p>服务端在接收和解释请求消息后，服务端会返回一个 HTTP 响应消息。HTTP 响应也由三个部分组成，分别是：</p>
+<ul>
+<li>HTTP Response Line（HTTP 响应行）</li>
+<li>HTTP Response Header（HTTP 响应头）</li>
+<li>HTTP Response Body（HTTP 响应正文）</li>
+</ul>
+<h4 id="HTTP-响应行"><a href="#HTTP-响应行" class="headerlink" title="HTTP 响应行"></a><a id="3.2.1">HTTP 响应行</a></h4><p>响应行格式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">HTTP - Version Status  - Code Reason - Phrase CRLF</div></pre></td></tr></table></figure></p>
+<p>上述格式中各参数说明如下：</p>
+<ul>
+<li><strong>HTTP - Version</strong>：服务端 HTTP 协议的版本。</li>
+<li><strong>Status-Code</strong>：服务端发回的响应状态代码。<ul>
+<li>状态代码由三位数字组成，第一个数字定义了响应的类别，有五种可能取值：<ul>
+<li>1XX：提示信息 - 表示请求已被成功接收，继续处理。</li>
+<li>2XX：成功 - 表示请求已被成功接收，理解，接受。<ul>
+<li>200 OK： 客户端请求成功。</li>
+<li>201 Created： 请求成功并且服务器创建了新的资源。</li>
+<li>204 No Content：服务器成功处理了请求，但没有返回任何内容。</li>
+</ul>
+</li>
+<li>3XX：重定向 - 要完成请求必须进行更进一步的处理。<ul>
+<li>302 Found：浏览器会使用新的 URL，重新发送 HTTP Request</li>
+<li>304 Not Modified：表示上次的资源已经被缓存了，还可以继续使用</li>
+</ul>
+</li>
+<li>4XX：客户端错误 - 请求有语法错误或请求无法实现。<ul>
+<li>400 Bad Request：客户端请求有语法错误，不能被服务器所理解</li>
+<li>401 Unauthorize：请求未经授权，这个状态代码必须和 WWW-Authenticate 头域一起使用</li>
+<li>403 Forbidden：服务器收到请求，但是拒绝提供服务。</li>
+<li>404 Not Found：请求资源不存在，例如输入了错误的 URL</li>
+</ul>
+</li>
+<li>5XX：服务器端错误 - 服务器未能实现合法的请求。<ul>
+<li>500 Internal Server Error：服务器发生了不可预期的错误。</li>
+<li>503 Server Unavailable：服务器当前不能处理客户端的请求，一段时间后可能恢复正常</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Reason-Phrase</strong>：状态代码的文本描述。</li>
+</ul>
+<h4 id="HTTP-响应头"><a href="#HTTP-响应头" class="headerlink" title="HTTP 响应头"></a><a id="3.2.2">HTTP 响应头</a></h4><p>HTTP 响应头允许服务器传递不能放在响应行中的附加响应信息，以及关于服务器的信息和对 Request-URI 所标识的资源进行下一步的访问的信息（如 Location）</p>
+<h4 id="HTTP-响应正文"><a href="#HTTP-响应正文" class="headerlink" title="HTTP 响应正文"></a><a id="3.2.3">HTTP 响应正文</a></h4><p>HTTP 响应正文就是服务端返回的资源内容，HTTP 响应头和 HTTP 响应正文之间也必须使用空行分隔。</p>
+<h4 id="HTTP-响应示例"><a href="#HTTP-响应示例" class="headerlink" title="HTTP 响应示例"></a><a id="3.2.4">HTTP 响应示例</a></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">HTTP/1.1 200 OK</div><div class="line">host: localhost:8000</div><div class="line">connection: close</div><div class="line">x-powered-by: PHP/7.0.5</div><div class="line">cache-control: no-cache</div><div class="line">date: Fri, 10 Jun 2016 09:29:07 GMT</div><div class="line">content-type: text/html; charset=UTF-8</div><div class="line">set-cookie: XSRF-TOKEN=eyJpdiI6IlwvKzBIXC9JNzN2YUtpNGNaNndyTG40dz09IiwidmFsdWUiOiJtZlBDOEFQSmNUdzkyMXNQV1NSN2hPVjVFK1FHXC8xVU9nVGMwWFdcL3Q4MWlzc1A0dnhvRlBQckw1YVNpV0hQSTdFODBOQ2FFanF6YVg1TlRiQUhleEtnPT0iLCJtYWMiOiI5ZGRkOWEyYzk3OWY2YzZhOTA5MmFiOTA5ZmFmZmRiNTYxMzA5MjQ4NDdjYjcyNzIzNThjMzAxNmRjNDkzN2UxIn0%3D; expires=Fri, 10-Jun-2016 11:29:07 GMT; Max-Age=7200; path=/</div><div class="line">set-cookie: laravel_session=eyJpdiI6ImdZWUZNOGFKTzV6YWpcL1lPRzRDTHdnPT0iLCJ2YWx1ZSI6IjFxRGRUOG5jRGVSdWJLXC9CMTl6MVJFdVlmaVpER04xb0piMWp3Q3JcL3dMZmR6b3UrU3lpb3FzQTR5QlpoTWxlOE92cmVCbW5iZGZwUUZ1a0d3ZjQrVUE9PSIsIm1hYyI6ImQ5N2M2MjVmYjcxNmE5YzgyY2IyZWJhODhiZTA0NGUxNTdlYmZhYjBkOGEzYzdiNTBiYmJjODE3MWJiOTA5NTIifQ%3D%3D; expires=Fri, 10-Jun-2016 11:29:07 GMT; Max-Age=7200; path=/; HttpOnly</div><div class="line">Transfer-Encoding: chunked</div><div class="line"></div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">&lt;title&gt;HTTP 响应示例&lt;title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">Hello World!</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<h2 id="PHP-和-Web-Server-的工作原理"><a href="#PHP-和-Web-Server-的工作原理" class="headerlink" title="PHP 和 Web Server 的工作原理"></a><a id="4">PHP 和 Web Server 的工作原理</a></h2><p>当服务端接收 HTTP 请求后，服务端的服务器软件，如 Apache、Nginx 则会根据配置处理 HTTP 请求进行分发处理。如果客户端请求的是 index.html 文件，那么 Web Server 会根据配置文件去对应目录下找到这个文件，然后让服务端发送给客户端，这样分发的是静态资源。如果客户端请求的是 index.php 文件，根据配置文件，Web Server 会去找 PHP 解析器来处理。</p>
+<p>当 PHP 解析器收到 index.php 这个请求后，会启动对应的 CGI 程序，PHP-CGI 程序就是 PHP 对 CGI 协议的程序实现了。PHP-CGI 程序会解析 php.ini 文件，初始化执行环境，然后处理请求，再以 CGI 规定的格式把结果返回给 Web Server，接着 Web Server 再把结果返回给客户端。</p>
+<p>实现 PHP 解析器的方法有三种：</p>
+<ul>
+<li><strong>Module</strong>：PHP Module 加载方法。</li>
+<li><strong>PHP-CGI</strong>：PHP 对 Web Server 提供的 CGI 协议的接口程序。</li>
+<li><strong>PHP-FPM</strong>：PHP 对 Web Server 提供的 FastCGI 协议的接口程序，额外提供了相对智能的任务管理。</li>
+</ul>
+<p>以上三种实现方法都是本质都是通过 PHP 的 SAPI 层调用 PHP 执行的。</p>
+<h4 id="Module"><a href="#Module" class="headerlink" title="Module"></a><a id="4.1">Module</a></h4><p>在了解 CGI 之前，我们先了解一下 PHP Module 加载方式。以 Apache 为例，在 Apache 的配置文件 httpd.conf，我们可以查找到以下语句：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">LoadModule php7_module  /usr/local/opt/php70/libexec/apache2/libphp7.so</div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">FilesMatch</span> <span class="attr">.php</span>$&gt;</span></div><div class="line">    SetHandler application/x-httpd-php</div><div class="line"><span class="tag">&lt;/<span class="name">FilesMatch</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">IfModule</span> <span class="attr">dir_module</span>&gt;</span></div><div class="line">    DirectoryIndex index.php index.html</div><div class="line"><span class="tag">&lt;/<span class="name">IfModule</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>这种方法，本质上是使用 Apache 的 <code>LoadModule</code> 来加载 <code>php7_module</code>，也就是把 PHP 作为 Apache 一个子模块来运行。当客户端请求 PHP 文件时，<code>Apache</code> 就会调用 <code>php7_module</code> 来解析 PHP 代码。</p>
+<p>这种模式将 PHP 模块安装到 Apache 中，每一次 Apache 接收请求时，都会产生一条 Apache 进程，这条进程就完整的包括 PHP 的运算计算，数据读取等各种操作。</p>
+<p>由于每次请求都需要产生一条进程来连接 SAPI 来完成请求，一旦并发数过高，服务端就会承受不住。而且把 php7_module 加载进 Apache 中，出现问题时很难定位是 PHP 的问题 还是 Apache 的问题。</p>
+<h4 id="PHP-CGI"><a href="#PHP-CGI" class="headerlink" title="PHP-CGI"></a><a id="4.2">PHP-CGI</a></h4><p>PHP-CGI 是使用 PHP 实现 CGI 接口的程序。当 Web Server 接收到 PHP 文件请求时，会分发给 CGI 程序处理，CGI 程序处理完毕后，会返回结果给 Web Server，Web Server 再返回给客户端。</p>
+<p>PHP-CGI 的好处就是完全独立于 Web Server，只是作为中间层，提供接口给 Apache 和 PHP，它们通过 CGI 来完成数据传递。这样做的好处就减少了两者之间的关联，出现错误时能够较好地定位。</p>
+<p>但是 PHP-CGI 采用的是 fork-and-execute 模式，就是每次请求都会有进程启动和退出的过程，在高并发下，Web Server 容易奔溃。</p>
+<h4 id="PHP-FPM"><a href="#PHP-FPM" class="headerlink" title="PHP-FPM"></a><a id="4.3">PHP-FPM</a></h4><p>在了解 PHP-FPM 之前，我们先来了解一下 FastCGI。</p>
+<p>从根本上来说，FastCGI 是用来提高 CGI 程序性能的。类似于 CGI，FastCGI 也可以说是一种协议。</p>
+<p>FastCGI 像是一个常驻（long-live）型的 CGI，它可以一直执行着，只要激活后，不会每次都要花费时间去 fork 一次。它还支持分布式的运算, 即 FastCGI 程序可以在网站服务器以外的主机上执行，并且接受来自其它网站服务器来的请求。</p>
+<p>FastCGI 是语言无关的、可伸缩架构的 CGI 开放扩展，其主要行为是将 CGI 解释器进程保持在内存中，并因此获得较高的性能。众所周知，CGI 解释器的反复加载是 CGI 性能低下的主要原因，如果 CGI 解释器保持在内存中，并接受 FastCGI 进程管理器调度，则可以提供良好的性能、伸缩性、Fail- Over 特性等等。</p>
+<p>FastCGI 接口方式采用 C/S 结构，可以将 Web Server 和脚本解析服务器分开，同时在脚本解析服务器上启动一个或者多个脚本解析守护进程。当 Web Server 每次遇到动态程序请求时，可以将其直接交付给 FastCGI 进程来执行，然后将得到的结果返回给浏览器。这种方式可以让 Web Server 专一地处理静态请求，或者将动态脚本服务器的结果返回给客户端，这在很大程度上提高了整个应用系统的性能。</p>
+<p>PHP-FPM 是对 FastCGI 协议的具体实现，它负责管理一个进程池，来处理 Web Server 的请求。它自身并不直接处理请求，它会交给 PHP-CGI 去进行处理。因为 PHP-CGI 只是一个 CGI 程序，它只会解析请求，返回结果，不会管理进程。PHP-FPM 是用于调度管理 PHP 解释器 PHPCGI 的管理程序。</p>
+<h4 id="CGI、FastCGI、PHP-CGI、PHP-FPM-的区别"><a href="#CGI、FastCGI、PHP-CGI、PHP-FPM-的区别" class="headerlink" title="CGI、FastCGI、PHP-CGI、PHP-FPM 的区别"></a><a id="4.4">CGI、FastCGI、PHP-CGI、PHP-FPM 的区别</a></h4><ul>
+<li><strong>CGI</strong>：一种协议，是外部应用程序与 Web Server 之间的接口标准，是在 CGI 程序和 Web Server 之间传递信息的规程。</li>
+<li><strong>FastCGI</strong>：一种协议，通过守护进程来管理 CGI 程序，将 CGI 程序常驻于内存中，不必每次处理请求重新初始化 php.ini 和其他数据，提高 CGI 程序的性能。其本身并不处理动态文件，只是负责进程的调度。</li>
+<li><strong>PHP-CGI</strong>：使用 PHP 实现 CGI 协议的程序，用于解析和处理 PHP 脚本。</li>
+<li><strong>PHP-FPM</strong>：是一个只用于 PHP 的进程管理器，提供更好的 PHP 进程管理方式，可以有效控制进程，平滑地加载 PHP 配置文件。</li>
+</ul>
+<h4 id="PHP-FPM-优劣势分析与解决方案"><a href="#PHP-FPM-优劣势分析与解决方案" class="headerlink" title="PHP-FPM 优劣势分析与解决方案"></a><a id="4.5">PHP-FPM 优劣势分析与解决方案</a></h4><h6 id="优劣势分析"><a href="#优劣势分析" class="headerlink" title="优劣势分析"></a>优劣势分析</h6><p>PHP-FPM 的优势有许多，如实现了 FastCGI 协议来处理 HTTP 请求，有着更高的性能和更小的开销。每当 PHP-FPM 的子进程处理完 HTTP 请求后，相关资源自动销毁，不用担心资源回收的问题。哪怕在运行的过程中报错了，也不影响其他子进程的运行，使得开发者不用过分担心未知的错误而进行面面俱到的防御性编码。在低负载时硬件开销低，只需要 fork 多几个子进程就满足日常访问量。</p>
+<p>PHP-FPM 的劣势也很明显。首先是不适合高并发和高负载的场景。因为在高负载的情况，由于 PHP-FPM 多进程模型，会显得子进程的初始化开销过高。加上进程、文件句柄、请求连接等，会使得内存过多地消耗，而 CPU 也得不到充分的利用。又因为子进程的开销过高，导致服务器的内存容易饱满，使得网络连接数过低。由于 PHP-FPM 在完成请求会自动销毁资源，因此也不支持 Websocket 或其他长连接协议。</p>
+<h6 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h6><p>针对 PHP 高初始化开销这个问题，可以使用 C 扩展的框架来重写相关业务，如 Phalcon、Yaf。针对 PHP 高内存开销，设置好短连接、短超时，和使用并行化 RPC 来尽快处理请求。而针对地连接数，只能是加大内存，增加服务器了。不支持 Websocket，只能使用 Nginx 进行反向代理，将 Websocket 等或其他长连接交给服务器其他 Web Server 处理。如 PHP 的 Swoole 或 C/C++/Go/Java 等语言编写的 Web Server。</p>
+<h2 id="Web-Server-的配置使用"><a href="#Web-Server-的配置使用" class="headerlink" title="Web Server 的配置使用"></a><a id="5">Web Server 的配置使用</a></h2><h4 id="Apache"><a href="#Apache" class="headerlink" title="Apache"></a><a id="5.1">Apache</a></h4><p>Apache HTTP Server（简称Apache）是 Apache 软件基金会的一个开放源代码的网页服务器软件，可以在大多数电脑操作系统中运行，由于其跨平台和安全性被广泛使用，是最流行的Web服务器软件之一。它快速、可靠并且可通过简单的API扩充，将 PHP／Perl／Python 等解释器编译到服务器中。</p>
+<h4 id="Apache-常用命令"><a href="#Apache-常用命令" class="headerlink" title="Apache 常用命令"></a><a id="5.1.3">Apache 常用命令</a></h4><figure class="highlight apache"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">httpd</span>                       # 启动 Apache</div><div class="line"><span class="attribute">httpd</span> -h                    # 显示帮助</div><div class="line"><span class="attribute">httpd</span> -v                    # 显示版本信息</div><div class="line"><span class="attribute">httpd</span> -V                    # 显示版本，编译器版本和配置参数</div><div class="line"><span class="attribute">httpd</span> -t                    # 检查配置文件语法错误</div><div class="line"><span class="attribute">httpd</span> -l                    # 显示编译模块</div><div class="line"><span class="attribute">httpd</span> -L                    # 显示配置指令说明</div><div class="line"><span class="attribute">httpd</span> -f &lt;/path/to/config&gt;  # 指定配置文件</div><div class="line"><span class="attribute">httpd</span> -S                    # 显示配置文件中的设定</div></pre></td></tr></table></figure>
+<h4 id="Apache-常用的配置与模块"><a href="#Apache-常用的配置与模块" class="headerlink" title="Apache 常用的配置与模块"></a><a id="5.1.1">Apache 常用的配置与模块</a></h4><ul>
+<li><strong>Options</strong>（配置选项）<ul>
+<li><strong>Indexes</strong>：目录浏览，是否允许在目录下没有 index.html,index.php 的时候显示目录。</li>
+<li><strong>Multiviews</strong>：文件匹配，服务器执行一个隐含的文件名模式匹配，并在其结果中选择。</li>
+<li><strong>FollowSymLinks</strong>：符号链接，是否允许通过符号链接跨越 DocumentRoot 访问其他目录。</li>
+</ul>
+</li>
+<li><strong>AllowOverride</strong>（是否允许根目录下的 <code>.htaccess</code> 文件起到 <code>URL rewrite</code> 的作用）<ul>
+<li><strong>All</strong></li>
+<li><strong>None</strong></li>
+</ul>
+</li>
+<li><strong>LoadModule</strong>（加载模块）</li>
+<li><strong>Listen</strong>（Apache 默认监听端口）</li>
+<li><strong>ServerRoot</strong>：Apache 安装的基础目录</li>
+<li><strong>DocumentRoot</strong>：Apache 缺省文件根目录</li>
+<li><strong>DirectoryIndex</strong>：网站默认首页文件</li>
+<li><strong>LogLevel</strong>：日志级别设置</li>
+<li><strong>ErrorLog</strong>：错误日志存放路径</li>
+<li><strong>CustomLog</strong>：访问日志存放路径</li>
+<li><strong>VirutalHost</strong>（虚拟主机与配置参数）<ul>
+<li><strong>ServerName</strong>：虚拟域名</li>
+<li><strong>ServerAlias</strong>：虚拟域名的别名</li>
+<li><strong>ServerAdmin</strong>：服务器管理员邮箱</li>
+<li><strong>DocumentRoot</strong>：项目代码根目录</li>
+<li><strong>LogLevel</strong>：日志级别设置</li>
+<li><strong>ErrorLog</strong>：错误日志存放路径</li>
+<li><strong>CustomLog</strong>：访问日志存放路径</li>
+</ul>
+</li>
+<li><strong>MPM</strong>（工作模式/多处理模块）<ul>
+<li><strong>Prefork</strong><ul>
+<li><strong>StartServers</strong>：服务器启动时默认开启的进程数</li>
+<li><strong>MinSpareServers</strong>：最小的空闲进程数</li>
+<li><strong>MaxSpareServers</strong>：最大的空闲进程数</li>
+<li><strong>ServerLimit</strong>：在Apache的生命周期内，限制MaxClients的最大值</li>
+<li><strong>MaxClients</strong>：最大的并发请求数，最大值不能超过 ServerLimit 设置的值</li>
+<li><strong>MaxRequestsPerChild</strong>：一个进程可以处理的最多的请求数（进程复用），如请求超过该设置则杀死进程，0表示永不过期。</li>
+</ul>
+</li>
+<li><strong>Worker</strong><ul>
+<li><strong>StartServers</strong>: 服务器启动时默认开启的进程数</li>
+<li><strong>MaxClients</strong>: 最大的并发请求数</li>
+<li><strong>MinSpareThreads</strong>: 最小的线程空闲数</li>
+<li><strong>MaxSpareThreads</strong>: 最大的线程空闲数</li>
+<li><strong>ThreadsPerChild</strong>: 每一个进程可以产生的线程数</li>
+<li><strong>MaxRequestsPerChild</strong>: 一个线程可以处理的最多的请求数（线程复用），如请求超过该设置则杀死线程，0表示永不过期。</li>
+</ul>
+</li>
+<li><strong>Event</strong></li>
+</ul>
+</li>
+<li><strong>Order, Deny, Allow</strong>（认证，授权与访问控制）</li>
+<li><strong>HostnameLookups off</strong>（避免 DNS 查询）</li>
+<li><strong>Timeout</strong>（请求超时）</li>
+<li><strong>Include</strong>（文件包含）</li>
+<li><strong>Proxy、mod_proxy</strong>（代理）</li>
+<li><strong>Cache Guide</strong>（缓存）</li>
+</ul>
+<h4 id="Apache-配置示例"><a href="#Apache-配置示例" class="headerlink" title="Apache 配置示例"></a><a id="5.1.2">Apache 配置示例</a></h4><p>Laravel .htaccess 文件的 URL rewrite 示例配置<br><figure class="highlight apache"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="section">&lt;IfModule mod_rewrite.c&gt;</span></div><div class="line">    <span class="section">&lt;IfModule mod_negotiation.c&gt;</span></div><div class="line">        <span class="attribute"><span class="nomarkup">Options</span></span> -MultiViews</div><div class="line">    <span class="section">&lt;/IfModule&gt;</span></div><div class="line"></div><div class="line">    <span class="attribute"><span class="nomarkup">RewriteEngine</span></span> <span class="literal">On</span></div><div class="line"></div><div class="line">    <span class="comment"># Redirect Trailing Slashes If Not A Folder...</span></div><div class="line">    <span class="attribute"><span class="nomarkup">RewriteCond</span></span> <span class="variable">%&#123;REQUEST_FILENAME&#125;</span> !-d</div><div class="line">    <span class="attribute"><span class="nomarkup">RewriteRule</span></span> ^(.*)/$ /<span class="number">$1</span><span class="meta"> [L,R=301]</span></div><div class="line"></div><div class="line">    <span class="comment"># Handle Front Controller...</span></div><div class="line">    <span class="attribute"><span class="nomarkup">RewriteCond</span></span> <span class="variable">%&#123;REQUEST_FILENAME&#125;</span> !-d</div><div class="line">    <span class="attribute"><span class="nomarkup">RewriteCond</span></span> <span class="variable">%&#123;REQUEST_FILENAME&#125;</span> !-f</div><div class="line">    <span class="attribute"><span class="nomarkup">RewriteRule</span></span> ^ index.php<span class="meta"> [L]</span></div><div class="line"><span class="section">&lt;/IfModule&gt;</span></div></pre></td></tr></table></figure></p>
+<p>配置虚拟主机的 httpd-vhosts.conf 文件的示例配置<br><figure class="highlight apache"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="section">&lt;VirtualHost *:80&gt;</span></div><div class="line">    <span class="attribute"><span class="nomarkup">ServerName</span></span> cowcat.app</div><div class="line">    <span class="attribute">ServerAdmin</span> cowcat.app</div><div class="line">    <span class="attribute">ServerAlias</span> www.cowcat.app</div><div class="line">    <span class="attribute"><span class="nomarkup">DocumentRoot</span></span> <span class="string">"/Users/LuisEdware/Code/WorkSpace/CowCat/public"</span></div><div class="line">    <span class="attribute">ErrorLog</span> <span class="string">"/Users/LuisEdware/Code/Errors/cowcat.app-error_log"</span></div><div class="line">    <span class="attribute">CustomLog</span> <span class="string">"/Users/LuisEdware/Code/Errors/cowcat.app-access_log"</span> common</div><div class="line"><span class="section">&lt;/VirtualHost&gt;</span></div><div class="line"></div><div class="line"><span class="section">&lt;VirtualHost *:80&gt;</span></div><div class="line">   <span class="attribute"><span class="nomarkup">ServerName</span></span> frontend.dev</div><div class="line">   <span class="attribute"><span class="nomarkup">DocumentRoot</span></span> <span class="string">"/Users/LuisEdware/Code/yii2-advanced-api/frontend/web/"</span></div><div class="line"></div><div class="line">   <span class="section">&lt;Directory "/Users/LuisEdware/Code/yii2-advanced-api/frontend/web/"&gt;</span></div><div class="line">       <span class="comment"># use mod_rewrite for pretty URL support</span></div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteEngine</span></span> <span class="literal">on</span></div><div class="line">       <span class="comment"># If a directory or a file exists, use the request directly</span></div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteCond</span></span> <span class="variable">%&#123;REQUEST_FILENAME&#125;</span> !-f</div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteCond</span></span> <span class="variable">%&#123;REQUEST_FILENAME&#125;</span> !-d</div><div class="line">       <span class="comment"># Otherwise forward the request to index.php</span></div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteRule</span></span> . index.php</div><div class="line"></div><div class="line">       <span class="comment"># use index.php as index file</span></div><div class="line">       <span class="attribute">DirectoryIndex</span> index.php</div><div class="line"></div><div class="line">       <span class="comment"># ...other settings...</span></div><div class="line">       <span class="comment"># Apache 2.4</span></div><div class="line">       <span class="attribute">Require</span> <span class="literal">all</span> granted</div><div class="line"></div><div class="line">       <span class="comment">## Apache 2.2</span></div><div class="line">       <span class="comment"># Order allow,deny</span></div><div class="line">       <span class="comment"># Allow from all</span></div><div class="line">   <span class="section">&lt;/Directory&gt;</span></div><div class="line"><span class="section">&lt;/VirtualHost&gt;</span></div></pre></td></tr></table></figure></p>
+<h4 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a><a id="5.2">Nginx</a></h4><p>Nginx 是一款面向性能设计的HTTP服务器，相较于 Apache、lighttpd 具有占有内存少，稳定性高等优势。与旧版本（&lt;=2.2）的 Apache 不同，Nginx 不采用每客户机一线程的设计模型，而是充分使用异步逻辑，削减了上下文调度开销，所以并发服务能力更强。整体采用模块化设计，有丰富的模块库和第三方模块库，配置灵活。 在 Linux 操作系统下，Nginx 使用 epoll 事件模型，得益于此，Nginx 在 Linux 操作系统下效率相当高。</p>
+<h4 id="Nginx-常用命令"><a href="#Nginx-常用命令" class="headerlink" title="Nginx 常用命令"></a><a id="5.2.3">Nginx 常用命令</a></h4><figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">nginx</span>                       <span class="comment"># 启动 Nginx</span></div><div class="line">nginx -h                    <span class="comment"># 显示帮助</span></div><div class="line">nginx -c &lt;/path/to/config&gt;  <span class="comment"># 指定一个 Nginx 配置文件，以代替缺省的。</span></div><div class="line">nginx -t                    <span class="comment"># 不运行，仅仅测试配置文件语法的正确性。</span></div><div class="line">nginx -v                    <span class="comment"># 显示 Nginx 的版本。</span></div><div class="line">nginx -V                    <span class="comment"># 显示 Nginx 的版本，编译器版本和配置参数。</span></div><div class="line">nginx -s reload             <span class="comment"># 更改了配置后无需重启 Nginx，平滑重启。</span></div><div class="line">nginx -s stop               <span class="comment"># 停止 Nginx</span></div></pre></td></tr></table></figure>
+<h4 id="Nginx-常用的模块与配置指令"><a href="#Nginx-常用的模块与配置指令" class="headerlink" title="Nginx 常用的模块与配置指令"></a><a id="5.2.1">Nginx 常用的模块与配置指令</a></h4><p>Nginx 的模块从功能角度主要可以分为以下三类：</p>
+<ul>
+<li><strong>Handler</strong> 模块<blockquote>
+<p>主要负责处理客户端请求并产生待响应内容，比如 <code>ngx_http_static_module</code>模块，负责客户端的静态页面请求处理并将对应的磁盘文件准备为响应内容输出。</p>
+</blockquote>
+</li>
+<li><strong>Filter</strong> 模块<blockquote>
+<p>主要负责对输出的内容进行处理，可以对输出进行修改，如 <code>ngx_http_not_modified_filter_module</code>,<code>ngx_http_header_filter_module</code> 模块。</p>
+</blockquote>
+</li>
+<li><strong>Upstream</strong> 模块<blockquote>
+<p>实现反向代理的功能，将真正的请求转发到后端服务器上，如 <code>ngx_http_proxy_module</code>、<code>ngx_http_fastcgi_module</code> 模块。</p>
+</blockquote>
+</li>
+</ul>
+<p>Nginx 常见的配置指令如下：</p>
+<ul>
+<li><strong>main</strong>：Nginx 在运行时与具体业务功能无关的一些参数，比如工作进程数，运行的身份等<ul>
+<li><strong>user</strong>：定义用户和用户组</li>
+<li><strong>worker_processes</strong>：Nginx 进程数，建议设置为等于 CPU 总核心数</li>
+<li><strong>worker_cpu_affinity</strong>：为每个进程分配 CPU</li>
+<li><strong>error_log</strong>：全局错误日志定义类型</li>
+<li><strong>events</strong>：定义 Nginx 事件工作模式与连接数上限等参数</li>
+<li><strong>http</strong>：提供 HTTP Server 相关的一些配置参数，如是否使用 keepalive、是否使用 gzip 进行压缩等</li>
+<li><strong>mall</strong>：提供 Mail Server 相关的一些配置参数，如实现 email 相关的 SMTP/IMAP/POP3 代理</li>
+</ul>
+</li>
+<li><strong>events</strong><ul>
+<li><strong>use</strong>：参考事件模型</li>
+<li><strong>worker_connections</strong>：单个进程最大连接数</li>
+</ul>
+</li>
+<li><strong>http</strong><ul>
+<li><strong>server</strong>：http 服务上支持若干虚拟主机。每个虚拟主机一个对应的 server 配置项，配置项里面包含该虚拟主机相关的配置。在提供 mail 服务的代理时，也可以建立若干 server.每个 server 通过监听的地址来区分</li>
+</ul>
+</li>
+<li><strong>server</strong><ul>
+<li><strong>listen</strong>：监听端口</li>
+<li><strong>server_name</strong>：域名</li>
+<li><strong>access_log</strong>：访问日志</li>
+<li><strong>location</strong>：HTTP 服务中，某些特定的 URL 对应的一系列配置项</li>
+<li><strong>protocol</strong>：</li>
+<li><strong>proxy</strong>：正向代理与反向代理</li>
+</ul>
+</li>
+<li><strong>location</strong><ul>
+<li><strong>root</strong></li>
+<li><strong>index</strong></li>
+</ul>
+</li>
+<li><strong>mail</strong><ul>
+<li><strong>server</strong></li>
+</ul>
+</li>
+<li><strong>FastCGI 相关参数</strong><ul>
+<li><strong>fastcgi_connect_timeout</strong></li>
+<li><strong>fastcgi_send_timeout</strong></li>
+<li><strong>fastcgi_read_timeout</strong></li>
+<li><strong>fastcgi_buffer_size</strong></li>
+<li><strong>fastcgi_buffers</strong></li>
+<li><strong>fastcgi_busy_buffers_size</strong></li>
+<li><strong>fastcgi_temp_file_write_size</strong></li>
+</ul>
+</li>
+<li><strong>gzip 模块设置</strong><ul>
+<li><strong>gzip</strong>：开启 gzip 压缩输出</li>
+<li><strong>gzip_min_length</strong>：最小压缩文件大小</li>
+<li><strong>gzip_buffers</strong>：压缩缓冲区</li>
+<li><strong>gzip_http_version</strong>：压缩版本（默认1.1，前端如果是squid2.5请使用1.0）</li>
+<li><strong>gzip_comp_level</strong>：压缩等级</li>
+<li><strong>gzip_types</strong>：压缩类型</li>
+<li><strong>gzip_vary</strong>：根据客户端的 HTTP 头来判断是否需要压缩;</li>
+</ul>
+</li>
+</ul>
+<h4 id="Nginx-配置示例"><a href="#Nginx-配置示例" class="headerlink" title="Nginx 配置示例"></a><a id="5.2.2">Nginx 配置示例</a></h4><p>Laravel 5.1 项目的配置示例<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">server&#123;</div><div class="line">    listen 80;</div><div class="line">    server_name october.com www.october.com;</div><div class="line"></div><div class="line">    # 日志记录</div><div class="line">    acomess_log /var/log/nginx/october.com.acomess.log  main;</div><div class="line">    error_log /var/log/nginx/october.com.error.log;</div><div class="line"></div><div class="line">    location / &#123;</div><div class="line">        root /data/www/prod/october/public;</div><div class="line">        try_files $uri $uri/ /index.php?$query_string;</div><div class="line">        index index.php index.html index.htm;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # 错误页面</div><div class="line">    error_page 404              /404.html;</div><div class="line">    error_page 500 502 503 504  /50x.html;</div><div class="line">    location = /50x.html &#123;</div><div class="line">        root   /usr/share/nginx/html;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    #PHP 脚本请求全部转发到 FastCGI 处理. 使用 FastCGI 默认配置.</div><div class="line">    location ~ \.php$ &#123;</div><div class="line">        root /data/www/prod/october/public;</div><div class="line">        fastcgi_pass   127.0.0.1:9000;</div><div class="line">        fastcgi_index  index.php;</div><div class="line">        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;</div><div class="line">        include        fastcgi_params;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>反向代理<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="section">server</span> &#123;</div><div class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</div><div class="line">    <span class="attribute">server_name</span> gogs.october.com;</div><div class="line"></div><div class="line">    <span class="attribute">location</span> / &#123;</div><div class="line">        <span class="attribute">proxy_pass</span> http://localhost:3000;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2016/06/10/PHP Web Application 运行流程、概念术语、机制原理和代码实践/" data-id="cj4fc03nd001sem4brgw5bh25" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-使用Laravel构建内容管理框架（九）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -130,7 +560,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（九）/" data-id="cj4e9w9ea00530l4bek7joexi" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（九）/" data-id="cj4fc04c60053em4bkravmvlq" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -187,7 +617,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（七）/" data-id="cj4e9w9e4004t0l4bs7bdxka6" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（七）/" data-id="cj4fc04b6004sem4bfeg9uxki" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -247,7 +677,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（六）/" data-id="cj4e9w9ex005c0l4befxklo3z" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（六）/" data-id="cj4fc04fx005gem4b1ilez9o3" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -321,7 +751,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（五）/" data-id="cj4e9w9eu00590l4b1qgm4cme" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（五）/" data-id="cj4fc04dn0059em4b4133dqyl" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -383,7 +813,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（八）/" data-id="cj4e9w9ek00560l4bns4dyro7" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（八）/" data-id="cj4fc04f0005dem4bxoo15dym" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -446,7 +876,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（四）/" data-id="cj4e9w9f1005f0l4blu4sylg5" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（四）/" data-id="cj4fc04i8005pem4baxng9rvp" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -514,7 +944,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（三）/" data-id="cj4e9w9e6004w0l4bf6wykir0" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（三）/" data-id="cj4fc04bp004zem4b8e9pqnrl" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -580,7 +1010,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（二）/" data-id="cj4e9w9e800500l4b39kwgfnu" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（二）/" data-id="cj4fc04c90056em4bg7oxnc2b" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -989,7 +1419,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/03/13/使用-Sublime-Text-3-开发-PHP-的总结/" data-id="cj4e9w9ce004j0l4btyyuzswc" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/03/13/使用-Sublime-Text-3-开发-PHP-的总结/" data-id="cj4fc04b1004lem4bgp4wxuhr" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li></ul>
@@ -1001,67 +1431,10 @@
 
 
   
-    <article id="post-使用Laravel构建内容管理框架（一）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/03/09/使用Laravel构建内容管理框架（一）/" class="article-date">
-  <time datetime="2016-03-09T12:54:07.000Z" itemprop="datePublished">2016-03-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/09/使用Laravel构建内容管理框架（一）/">使用 Laravel 构建内容管理框架（一）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>为使用 Laravel 构建内容管理框架做好环境、代码和脚本的准备</p>
-<h1 id="安装Laravel"><a href="#安装Laravel" class="headerlink" title="安装Laravel"></a>安装Laravel</h1><hr>
-<p>在终端使用Composer安装Laravel<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo composer create-project laravel/laravel backend --prefer-dist 5.1.x</div></pre></td></tr></table></figure></p>
-<p>执行后，会在当前目录下新建一个文件夹，里面就是新建的Laravel项目</p>
-<h1 id="安装gulp、bower"><a href="#安装gulp、bower" class="headerlink" title="安装gulp、bower"></a>安装gulp、bower</h1><hr>
-<p>在终端使用npm安装gulp<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">sudo npm install -g gulp  #全局安装npm</div><div class="line">sudo npm install -g bower #全局安装bower</div><div class="line"></div><div class="line">cd backend</div><div class="line">sudo npm install gulp   #在项目本地安装gulp</div><div class="line">sudo npm install bower  #在项目本地安装bower</div><div class="line">sudp npm install        #安装项目Node依赖、Laravel Elixir</div></pre></td></tr></table></figure></p>
-<p>运行<code>gulp tdd</code>之后，会自动监控测试单元</p>
-<h1 id="使用bower集成前端依赖库"><a href="#使用bower集成前端依赖库" class="headerlink" title="使用bower集成前端依赖库"></a>使用bower集成前端依赖库</h1><hr>
-<p>在项目根目录新增文件<code>.bowerrc</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;directory&quot;: &quot;vendor/bower&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>上述配置告诉bower在<code>vendor/bower</code>存放下载文件<br>执行命令<code>bower init</code>创建文件<code>bower.json</code></p>
-<p>依赖安装所需前端资源<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo bower install admin-lte</div><div class="line">sudo bower install fontawesome</div><div class="line">sudo bower install ionicons</div></pre></td></tr></table></figure></p>
-<p>打开文件<code>gulpfile.js</code>，编辑如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div></pre></td><td class="code"><pre><div class="line">var gulp = require(&apos;gulp&apos;);</div><div class="line">var elixir = require(&apos;laravel-elixir&apos;);</div><div class="line"></div><div class="line">gulp.task(&apos;copy&apos;, function () &#123;</div><div class="line">    // jQuery</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;resources/assets/js/&quot;));</div><div class="line"></div><div class="line">    // bootstarp</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/bootstrap/css/bootstrap.min.css&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;resources/assets/css/&quot;));</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/bootstrap/js/bootstrap.min.js&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;resources/assets/js/&quot;));</div><div class="line"></div><div class="line">    // AdminLTE</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/dist/css/AdminLTE.min.css&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;resources/assets/css/&quot;));</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/dist/css/skins/skin-blue.min.css&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;resources/assets/css/&quot;));</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/dist/js/app.min.js&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;resources/assets/js/&quot;));</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/dist/img/*&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;public/assets/img/&quot;));</div><div class="line"></div><div class="line">    // Fontawesome</div><div class="line">    gulp.src(&quot;vendor/bower/font-awesome/css/font-awesome.min.css&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;resources/assets/css/&quot;));</div><div class="line">    gulp.src(&quot;vendor/bower/font-awesome/fonts/*&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;public/assets/fonts/&quot;));</div><div class="line"></div><div class="line">    // Ionicons</div><div class="line">    gulp.src(&quot;vendor/bower/Ionicons/css/ionicons.min.css&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;resources/assets/css/&quot;));</div><div class="line">    gulp.src(&quot;vendor/bower/Ionicons/fonts/*&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;public/assets/fonts/&quot;));</div><div class="line"></div><div class="line">    // slimScroll</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;resources/assets/js/&quot;));</div><div class="line"></div><div class="line">    // iCheck</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/plugins/iCheck/icheck.min.js&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;resources/assets/js/&quot;));</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/plugins/iCheck/square/blue.css&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;resources/assets/css/&quot;));</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/plugins/iCheck/square/blue.png&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;public/assets/css/&quot;));</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/plugins/iCheck/square/blue@2x.png&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;public/assets/css/&quot;));</div><div class="line"></div><div class="line">    // select2</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/plugins/select2/select2.full.min.js&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;resources/assets/js/&quot;));</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/plugins/select2/select2.min.js&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;resources/assets/js/&quot;));</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/plugins/select2/select2.min.css&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;resources/assets/css/&quot;));</div><div class="line"></div><div class="line">    // pace</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/plugins/pace/pace.min.css&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;resources/assets/css/&quot;));</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/plugins/pace/pace.min.js&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;resources/assets/js/&quot;));</div><div class="line">&#125;);</div><div class="line"></div><div class="line">elixir(function (mix) &#123;</div><div class="line">    // 合并javascript脚本</div><div class="line">    mix.scripts(</div><div class="line">        [</div><div class="line">            &apos;jQuery-2.1.4.min.js&apos;,</div><div class="line">            &apos;bootstrap.min.js&apos;,</div><div class="line">            &apos;app.min.js&apos;,</div><div class="line">            &apos;pace.min.js&apos;,</div><div class="line">            &apos;jquery.slimscroll.min.js&apos;,</div><div class="line">            &apos;icheck.min.js&apos;,</div><div class="line">            &apos;select2.full.min.js&apos;,</div><div class="line">            &apos;select2.min.js&apos;</div><div class="line">        ],</div><div class="line">        &apos;public/assets/js/app.js&apos;,</div><div class="line">        &apos;resources/assets/js/&apos;</div><div class="line">    );</div><div class="line"></div><div class="line">    // 合并css脚本</div><div class="line">    mix.styles(</div><div class="line">        [</div><div class="line">            &apos;bootstrap.min.css&apos;,</div><div class="line">            &apos;pace.min.css&apos;,</div><div class="line">            &apos;select2.min.css&apos;,</div><div class="line">            &apos;AdminLTE.min.css&apos;,</div><div class="line">            &apos;skin-blue.min.css&apos;,</div><div class="line">            &apos;font-awesome.min.css&apos;,</div><div class="line">            &apos;ionicons.min.css&apos;,</div><div class="line">            &apos;blue.css&apos;</div><div class="line">        ],</div><div class="line">        &apos;public/assets/css/app.css&apos;,</div><div class="line">        &apos;resources/assets/css/&apos;</div><div class="line">    );</div><div class="line"></div><div class="line">    // 运行单元测试</div><div class="line">    mix.phpUnit();</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>在终端执行命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">gulp copy</div><div class="line">gulp</div></pre></td></tr></table></figure></p>
-<p>上述操作将会在根目录文件夹<code>public/assets/</code>生成所需的前端资源，接下来就是在视图模板中使用。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/03/09/使用Laravel构建内容管理框架（一）/" data-id="cj4e9w9dq004m0l4bx304spfv" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/7/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span>
+    <a class="extend prev" rel="prev" href="/page/7/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/9/">__('next') &raquo;</a>
   </nav>
 </section>
         
@@ -1069,9 +1442,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Categorieën</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
   </div>
 
@@ -1079,9 +1452,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Labels</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
     </div>
   </div>
 
@@ -1091,14 +1464,14 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
+      <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
@@ -1108,9 +1481,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/06/27/使用-Vue-js-2-0-开发后台/">使用 Vue.js 2.0 开发后台</a>
+          </li>
         
           <li>
             <a href="/2017/06/05/LNMP-中常用的-Linux-命令/">LNMP 中常用的 Linux 命令</a>
@@ -1126,10 +1503,6 @@
         
           <li>
             <a href="/2017/05/31/学习-Swoole/">学习 Swoole</a>
-          </li>
-        
-          <li>
-            <a href="/2017/05/27/ApacheBench-的参数讲解与基础使用/">ApacheBench 参数讲解与基础使用</a>
           </li>
         
       </ul>
