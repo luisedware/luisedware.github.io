@@ -6,27 +6,27 @@
   <title>使用 Vue.js 2.0 开发后台 | 七月十五九月初七</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="目录
-安装 vue-cli
-使用 vue-cli 初始化项目
+vue-cli 安装与使用
 
-安装 vue-cli使用 vue-cli 初始化项目">
+vue-cli 安装与使用vue-cli 是 Vue.js 官方发布的 Vue.js 项目脚手架，使用 vue-cli 可以快速创建 Vue.js 项目，执行安装命令如下：1npm install -g vue-cli
+vue-cli 用法如下，其中 template-name 是模块打包器名称，project-name 是项目名称。12345678910111">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用 Vue.js 2.0 开发后台">
 <meta property="og:url" content="http://luisedware.github.io/2017/06/27/使用-Vue-js-2-0-开发后台/index.html">
 <meta property="og:site_name" content="七月十五九月初七">
 <meta property="og:description" content="目录
-安装 vue-cli
-使用 vue-cli 初始化项目
+vue-cli 安装与使用
 
-安装 vue-cli使用 vue-cli 初始化项目">
-<meta property="og:updated_time" content="2017-06-27T08:49:35.000Z">
+vue-cli 安装与使用vue-cli 是 Vue.js 官方发布的 Vue.js 项目脚手架，使用 vue-cli 可以快速创建 Vue.js 项目，执行安装命令如下：1npm install -g vue-cli
+vue-cli 用法如下，其中 template-name 是模块打包器名称，project-name 是项目名称。12345678910111">
+<meta property="og:updated_time" content="2017-06-29T03:54:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用 Vue.js 2.0 开发后台">
 <meta name="twitter:description" content="目录
-安装 vue-cli
-使用 vue-cli 初始化项目
+vue-cli 安装与使用
 
-安装 vue-cli使用 vue-cli 初始化项目">
+vue-cli 安装与使用vue-cli 是 Vue.js 官方发布的 Vue.js 项目脚手架，使用 vue-cli 可以快速创建 Vue.js 项目，执行安装命令如下：1npm install -g vue-cli
+vue-cli 用法如下，其中 template-name 是模块打包器名称，project-name 是项目名称。12345678910111">
   
     <link rel="alternate" href="/atom.xml" title="七月十五九月初七" type="application/atom+xml">
   
@@ -68,9 +68,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -106,14 +106,16 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
-<li>安装 vue-cli</li>
-<li>使用 vue-cli 初始化项目</li>
+<li>vue-cli 安装与使用</li>
 </ul>
-<h2 id="安装-vue-cli"><a href="#安装-vue-cli" class="headerlink" title="安装 vue-cli"></a>安装 vue-cli</h2><h2 id="使用-vue-cli-初始化项目"><a href="#使用-vue-cli-初始化项目" class="headerlink" title="使用 vue-cli 初始化项目"></a>使用 vue-cli 初始化项目</h2>
+<h2 id="vue-cli-安装与使用"><a href="#vue-cli-安装与使用" class="headerlink" title="vue-cli 安装与使用"></a>vue-cli 安装与使用</h2><p>vue-cli 是 Vue.js 官方发布的 Vue.js 项目脚手架，使用 vue-cli 可以快速创建 Vue.js 项目，执行安装命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g vue-cli</div></pre></td></tr></table></figure></p>
+<p>vue-cli 用法如下，其中 template-name 是模块打包器名称，project-name 是项目名称。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"># 语法</div><div class="line">vue init &lt;template-name&gt; &lt;project-name&gt;</div><div class="line"></div><div class="line"># 例子</div><div class="line">vue init webpack vue-element-website-backend</div><div class="line"></div><div class="line"># 初始化过程</div><div class="line">? Project name (vue-element-website-backend)</div><div class="line">? Project description (A Vue.js project)</div><div class="line">? Author luisedware &lt;XXXXXXXXXXX@qq.com&gt;</div><div class="line">? Vue build (Use arrow keys)</div><div class="line">? Vue build standalone</div><div class="line">? Install vue-router? Yes</div><div class="line">? Use ESLint to lint your code? Yes</div><div class="line">? Setup unit tests with Karma + Mocha? Yes</div><div class="line">? Setup e2e tests with Nightwatch? Yes</div><div class="line"></div><div class="line"># 执行命令完成安装</div><div class="line">cd vue-element-website-backend</div><div class="line">npm install</div><div class="line">npm run dev</div></pre></td></tr></table></figure></p>
+<p>安装完成后，在 Github 新建 repository，并把 Vue.js 项目 push 上去，执行命令如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git init</div><div class="line">git add README.md</div><div class="line">git commit -m &quot;first commit&quot;</div><div class="line">git remote add origin https://github.com/luisedware/vue-element-website-backend.git</div><div class="line">git push -u origin master</div></pre></td></tr></table></figure></p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/06/27/使用-Vue-js-2-0-开发后台/" data-id="cj4fc04af004aem4bvldpnq4e" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/06/27/使用-Vue-js-2-0-开发后台/" data-id="cj4i1olut004k0y4br18i7er8" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue-js/">Vue.js</a></li></ul>
@@ -124,9 +126,18 @@
     
 <nav id="article-nav">
   
+    <a href="/2017/06/29/「复盘」商品库-v1-0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          「复盘」商品库 v1.0
+        
+      </div>
+    </a>
+  
   
     <a href="/2017/06/05/LNMP-中常用的-Linux-命令/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ouder</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title">LNMP 中常用的 Linux 命令</div>
     </a>
   
@@ -141,7 +152,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categorieën</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -151,7 +162,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Labels</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
     </div>
@@ -161,7 +172,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
     </div>
@@ -170,7 +181,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archieven</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
@@ -180,9 +191,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/06/29/「复盘」商品库-v1-0/">「复盘」商品库 v1.0</a>
+          </li>
         
           <li>
             <a href="/2017/06/27/使用-Vue-js-2-0-开发后台/">使用 Vue.js 2.0 开发后台</a>
@@ -200,10 +215,6 @@
             <a href="/2017/06/01/XHprof-的安装配置与使用分析/">XHProf 的安装配置与使用分析</a>
           </li>
         
-          <li>
-            <a href="/2017/05/31/学习-Swoole/">学习 Swoole</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -217,7 +228,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Luis Edware<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
