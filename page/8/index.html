@@ -52,9 +52,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -64,6 +64,66 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-使用-PHPStorm-与-Xdebug-调试-Laravel-二" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/27/使用-PHPStorm-与-Xdebug-调试-Laravel-二/" class="article-date">
+  <time datetime="2016-06-27T13:36:54.000Z" itemprop="datePublished">2016-06-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Tooling/">Tooling</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/27/使用-PHPStorm-与-Xdebug-调试-Laravel-二/">使用 PHPStorm 与 Xdebug 调试 Laravel (二)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文的目的学会使用除了 <code>var_dump，echo，printf</code> 的调试方法</p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
+<li>系统版本：OSX 10.11.4</li>
+<li>PHP 版本：7.0.5</li>
+<li>Xdebug 版本：2.4.0</li>
+<li>Laravel 版本：5.1.31</li>
+<li>PHPStorm 版本：10.0.4</li>
+</ul>
+<p>根据上篇文章的配置，在工作时会发现，我们需要经常调整 <code>PHP Web Application</code> 的 URL 进行 Debug。</p>
+<p>举个例子，假如想要 <code>Debug</code> 菜单列表，我需要修改成 <code>/menu/</code>，如果想要 <code>Debug</code> 新增菜单页面，我需要修改成 <code>/menu/create</code>。<br><img src="http://o93kt6djh.bkt.clouddn.com/2-phpstorm-debug-web-applicationPHP%20Web%20Application.png" alt=""><br>这样进行 <code>Debug</code> 的过程十分烦琐，所以需要更加友好的操作方式，以便加快工作效率。</p>
+<h2 id="PHPStorm-配置"><a href="#PHPStorm-配置" class="headerlink" title="PHPStorm 配置"></a>PHPStorm 配置</h2><p>打开 PHPStorm，打开配置面板<br><code>Preferences =&gt; Language &amp; Frameworks -&gt; PHP -&gt; Debug</code>。</p>
+<p>点击蓝色链接 <code>Use debugger bookmarklets to initiate debugging from your favorite browser</code>。<br><img src="http://o93kt6djh.bkt.clouddn.com/2-phpstorm-debug-web-applicationPHP%20Debug%20Configuration.png" alt=""></p>
+<p>点击页面左下角的蓝色按钮，生成 PHPStorm Debug 的专属书签。<br><img src="http://o93kt6djh.bkt.clouddn.com/2-phpstorm-debug-web-applicationPHPStorm%20Debug%20Config.png" alt=""></p>
+<p>然后将生成好的 <code>DEBUG</code> 书签<code>Start debugger</code>、<code>Stop debugger</code>、<code>Debug this page</code> 拖动保存到浏览器的书签栏中，方便随时进行 <code>Debug</code>。<br><img src="http://o93kt6djh.bkt.clouddn.com/2-phpstorm-debug-web-applicationBookMark.png" alt=""></p>
+<p>监听浏览器的 <code>Debug</code> 操作，<code>Run -&gt; Start Listening for PHP Debug Connections</code></p>
+<p><img src="http://o93kt6djh.bkt.clouddn.com/2-phpstorm-debug-web-applicationListening%20PHP%20Debug.png" alt=""></p>
+<p>然后在浏览器输入想要进行 <code>Debug</code> 的页面，然后点击书签栏的 <code>Start debugger</code>，刷新页面，就能在 <code>PHPStorm</code> 里面看见 <code>Debug</code> 的控制台了。<br><img src="http://o93kt6djh.bkt.clouddn.com/2-phpstorm-debug-web-applicationDebug%20Page2.png" alt=""><br><img src="http://o93kt6djh.bkt.clouddn.com/2-phpstorm-debug-web-applicationDebug%20Page.png" alt=""></p>
+<p>PHPStorm 的 Debug 方式不仅仅局限于 Laravel 框架，同样适用于 ThinkPHP 与其他框架，也适用于原生的 PHP 代码。<br>学会使用这种方式之后，一般很少使用 <code>echo</code>，<code>var_dump</code>，<code>dd()</code>，<code>dump()</code>等原生或框架辅助函数进行 <code>Debug</code> 了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2016/06/27/使用-PHPStorm-与-Xdebug-调试-Laravel-二/" data-id="cj4s44j19004f0e4bx68zzrpt" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-使用-PHPStorm-与-Xdebug-调试-Laravel-一" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -143,7 +203,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/06/20/使用-PHPStorm-与-Xdebug-调试-Laravel-一/" data-id="cj4mvexqr004aay4bhrfhch86" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/06/20/使用-PHPStorm-与-Xdebug-调试-Laravel-一/" data-id="cj4s44j17004c0e4buehx7vmu" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li></ul>
@@ -573,7 +633,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/06/10/PHP Web Application 运行流程、概念术语、机制原理和代码实践/" data-id="cj4mvexnp001nay4budjz8pq6" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/06/10/PHP Web Application 运行流程、概念术语、机制原理和代码实践/" data-id="cj4s44izh001p0e4b0z9p9vzi" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -650,7 +710,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（九）/" data-id="cj4mvexsb005day4b41auwy5o" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（九）/" data-id="cj4s44j1p00570e4bw3nl5z5b" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -707,7 +767,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（七）/" data-id="cj4mvexrs0050ay4b9fu98yvq" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（七）/" data-id="cj4s44j1i004w0e4b5a72waed" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -767,7 +827,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（六）/" data-id="cj4mvexsh005hay4b3x076714" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（六）/" data-id="cj4s44j1t005h0e4b70awdmg3" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -841,7 +901,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（五）/" data-id="cj4mvexsj005kay4brmey2v7m" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（五）/" data-id="cj4s44j1q005a0e4bbt3e2dpg" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -903,7 +963,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（八）/" data-id="cj4mvexsp005qay4bfvb93mxf" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（八）/" data-id="cj4s44j1w005q0e4bueuk83sz" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -966,7 +1026,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（四）/" data-id="cj4mvext90065ay4bm574d33s" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（四）/" data-id="cj4s44j1z005t0e4b9rsazs1v" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -1034,73 +1094,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（三）/" data-id="cj4mvexs40057ay4bd23456jt" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-使用Laravel构建内容管理框架（二）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/04/04/使用Laravel构建内容管理框架（二）/" class="article-date">
-  <time datetime="2016-04-04T12:32:57.000Z" itemprop="datePublished">2016-04-04</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/04/使用Laravel构建内容管理框架（二）/">使用 Laravel 构建内容管理框架（二）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>初步搭建好后台管理功能的界面</p>
-<h1 id="新增控制器"><a href="#新增控制器" class="headerlink" title="新增控制器"></a>新增控制器</h1><hr>
-<p>在终端执行以下命令，在文件夹<code>app/Http/Controllers/Backend</code>下生成<code>IndexController</code>控制器。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan make:controller Backend/IndexController --plain</div></pre></td></tr></table></figure></p>
-<p>修改文件<code>IndexController.php</code>代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"></div><div class="line">namespace App\Http\Controllers\Backend;</div><div class="line"></div><div class="line">use App\Http\Requests;</div><div class="line">use App\Http\Controllers\Controller;</div><div class="line"></div><div class="line">class IndexController extends Controller</div><div class="line">&#123;</div><div class="line">    public function index()</div><div class="line">    &#123;</div><div class="line">        $tasks = [</div><div class="line">            [</div><div class="line">                &apos;name&apos; =&gt; &apos;Design New Dashboard&apos;,</div><div class="line">                &apos;progress&apos; =&gt; &apos;87&apos;,</div><div class="line">                &apos;color&apos; =&gt; &apos;danger&apos;</div><div class="line">            ],</div><div class="line">            [</div><div class="line">                &apos;name&apos; =&gt; &apos;Create Home Page&apos;,</div><div class="line">                &apos;progress&apos; =&gt; &apos;76&apos;,</div><div class="line">                &apos;color&apos; =&gt; &apos;warning&apos;</div><div class="line">            ],</div><div class="line">            [</div><div class="line">                &apos;name&apos; =&gt; &apos;Some Other Task&apos;,</div><div class="line">                &apos;progress&apos; =&gt; &apos;32&apos;,</div><div class="line">                &apos;color&apos; =&gt; &apos;success&apos;</div><div class="line">            ],</div><div class="line">            [</div><div class="line">                &apos;name&apos; =&gt; &apos;Start Building Website&apos;,</div><div class="line">                &apos;progress&apos; =&gt; &apos;56&apos;,</div><div class="line">                &apos;color&apos; =&gt; &apos;info&apos;</div><div class="line">            ],</div><div class="line">            [</div><div class="line">                &apos;name&apos; =&gt; &apos;Develop an Awesome Algorithm&apos;,</div><div class="line">                &apos;progress&apos; =&gt; &apos;10&apos;,</div><div class="line">                &apos;color&apos; =&gt; &apos;success&apos;</div><div class="line">            ]</div><div class="line">        ];</div><div class="line">        return view(&apos;backend.index.index&apos;,compact(&apos;tasks&apos;));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h1 id="新增路由"><a href="#新增路由" class="headerlink" title="新增路由"></a>新增路由</h1><hr>
-<p>打开文件<code>app\Http\routes.php</code>，修改代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Route::group([&apos;namespace&apos;=&gt;&apos;Backend&apos;],function()&#123;</div><div class="line">    Route::get(&apos;index&apos;,&apos;IndexController&apos;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<h1 id="新增视图"><a href="#新增视图" class="headerlink" title="新增视图"></a>新增视图</h1><hr>
-<p>在<code>resources/views/</code>下新建文件夹<code>backend</code>，在文件夹<code>backend</code>下新建文件夹<code>index</code>和<code>layout</code>。</p>
-<p>在文件夹<code>layout</code>新建文件如下：</p>
-<ul>
-<li>header.blade.php</li>
-<li>footer.blade.php</li>
-<li>main.blade.php</li>
-<li>sidebar.blade.php</li>
-</ul>
-<p>在文件夹<code>index</code>新建文件如下：</p>
-<ul>
-<li>index</li>
-</ul>
-<h2 id="header-blade-php"><a href="#header-blade-php" class="headerlink" title="header.blade.php"></a>header.blade.php</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div></pre></td><td class="code"><pre><div class="line">&lt;header class=&quot;main-header&quot;&gt;</div><div class="line">    &lt;a href=&quot;index2.html&quot; class=&quot;logo&quot;&gt;&lt;b&gt;Admin&lt;/b&gt;LTE&lt;/a&gt;</div><div class="line">    &lt;nav class=&quot;navbar navbar-static-top&quot; role=&quot;navigation&quot;&gt;</div><div class="line">        &lt;a href=&quot;#&quot; class=&quot;sidebar-toggle&quot; data-toggle=&quot;offcanvas&quot; role=&quot;button&quot;&gt;</div><div class="line">            &lt;span class=&quot;sr-only&quot;&gt;Toggle navigation&lt;/span&gt;</div><div class="line">        &lt;/a&gt;</div><div class="line">        &lt;div class=&quot;navbar-custom-menu&quot;&gt;</div><div class="line">            &lt;ul class=&quot;nav navbar-nav&quot;&gt;</div><div class="line">                &lt;li class=&quot;dropdown messages-menu&quot;&gt;</div><div class="line">                    &lt;a href=&quot;#&quot; class=&quot;dropdown-toggle&quot; data-toggle=&quot;dropdown&quot;&gt;</div><div class="line">                        &lt;i class=&quot;fa fa-envelope-o&quot;&gt;&lt;/i&gt;</div><div class="line">                        &lt;span class=&quot;label label-success&quot;&gt;4&lt;/span&gt;</div><div class="line">                    &lt;/a&gt;</div><div class="line">                    &lt;ul class=&quot;dropdown-menu&quot;&gt;</div><div class="line">                        &lt;li class=&quot;header&quot;&gt;You have 4 messages&lt;/li&gt;</div><div class="line">                        &lt;li&gt;</div><div class="line">                            &lt;ul class=&quot;menu&quot;&gt;</div><div class="line">                                &lt;li&gt;</div><div class="line">                                    &lt;a href=&quot;#&quot;&gt;</div><div class="line">                                        &lt;div class=&quot;pull-left&quot;&gt;</div><div class="line">                                            &lt;img src=&quot;&#123;&#123; asset(&quot;/assets/img/user2-160x160.jpg&quot;) &#125;&#125;&quot; class=&quot;img-circle&quot; alt=&quot;User Image&quot;/&gt;</div><div class="line">                                        &lt;/div&gt;</div><div class="line">                                        &lt;h4&gt;</div><div class="line">                                            Support Team</div><div class="line">                                            &lt;small&gt;&lt;i class=&quot;fa fa-clock-o&quot;&gt;&lt;/i&gt; 5 mins&lt;/small&gt;</div><div class="line">                                        &lt;/h4&gt;</div><div class="line">                                        &lt;p&gt;Why not buy a new awesome theme?&lt;/p&gt;</div><div class="line">                                    &lt;/a&gt;</div><div class="line">                                &lt;/li&gt;</div><div class="line">                            &lt;/ul&gt;</div><div class="line">                        &lt;/li&gt;</div><div class="line">                        &lt;li class=&quot;footer&quot;&gt;&lt;a href=&quot;#&quot;&gt;See All Messages&lt;/a&gt;&lt;/li&gt;</div><div class="line">                    &lt;/ul&gt;</div><div class="line">                &lt;/li&gt;</div><div class="line">                &lt;li class=&quot;dropdown notifications-menu&quot;&gt;</div><div class="line">                    &lt;a href=&quot;#&quot; class=&quot;dropdown-toggle&quot; data-toggle=&quot;dropdown&quot;&gt;</div><div class="line">                        &lt;i class=&quot;fa fa-bell-o&quot;&gt;&lt;/i&gt;</div><div class="line">                        &lt;span class=&quot;label label-warning&quot;&gt;10&lt;/span&gt;</div><div class="line">                    &lt;/a&gt;</div><div class="line">                    &lt;ul class=&quot;dropdown-menu&quot;&gt;</div><div class="line">                        &lt;li class=&quot;header&quot;&gt;You have 10 notifications&lt;/li&gt;</div><div class="line">                        &lt;li&gt;</div><div class="line">                            &lt;ul class=&quot;menu&quot;&gt;</div><div class="line">                                &lt;li&gt;</div><div class="line">                                    &lt;a href=&quot;#&quot;&gt;</div><div class="line">                                        &lt;i class=&quot;fa fa-users text-aqua&quot;&gt;&lt;/i&gt; 5 new members joined today</div><div class="line">                                    &lt;/a&gt;</div><div class="line">                                &lt;/li&gt;</div><div class="line">                            &lt;/ul&gt;</div><div class="line">                        &lt;/li&gt;</div><div class="line">                        &lt;li class=&quot;footer&quot;&gt;&lt;a href=&quot;#&quot;&gt;View all&lt;/a&gt;&lt;/li&gt;</div><div class="line">                    &lt;/ul&gt;</div><div class="line">                &lt;/li&gt;</div><div class="line">                &lt;li class=&quot;dropdown tasks-menu&quot;&gt;</div><div class="line">                    &lt;a href=&quot;#&quot; class=&quot;dropdown-toggle&quot; data-toggle=&quot;dropdown&quot;&gt;</div><div class="line">                        &lt;i class=&quot;fa fa-flag-o&quot;&gt;&lt;/i&gt;</div><div class="line">                        &lt;span class=&quot;label label-danger&quot;&gt;9&lt;/span&gt;</div><div class="line">                    &lt;/a&gt;</div><div class="line">                    &lt;ul class=&quot;dropdown-menu&quot;&gt;</div><div class="line">                        &lt;li class=&quot;header&quot;&gt;You have 9 tasks&lt;/li&gt;</div><div class="line">                        &lt;li&gt;</div><div class="line">                            &lt;ul class=&quot;menu&quot;&gt;</div><div class="line">                                &lt;li&gt;</div><div class="line">                                    &lt;a href=&quot;#&quot;&gt;</div><div class="line">                                        &lt;h3&gt;</div><div class="line">                                            Design some buttons</div><div class="line">                                            &lt;small class=&quot;pull-right&quot;&gt;20%&lt;/small&gt;</div><div class="line">                                        &lt;/h3&gt;</div><div class="line">                                        &lt;div class=&quot;progress xs&quot;&gt;</div><div class="line">                                            &lt;div class=&quot;progress-bar progress-bar-aqua&quot; style=&quot;width: 20%&quot; role=&quot;progressbar&quot; aria-valuenow=&quot;20&quot; aria-valuemin=&quot;0&quot; aria-valuemax=&quot;100&quot;&gt;</div><div class="line">                                                &lt;span class=&quot;sr-only&quot;&gt;20% Complete&lt;/span&gt;</div><div class="line">                                            &lt;/div&gt;</div><div class="line">                                        &lt;/div&gt;</div><div class="line">                                    &lt;/a&gt;</div><div class="line">                                &lt;/li&gt;</div><div class="line">                            &lt;/ul&gt;</div><div class="line">                        &lt;/li&gt;</div><div class="line">                        &lt;li class=&quot;footer&quot;&gt;</div><div class="line">                            &lt;a href=&quot;#&quot;&gt;View all tasks&lt;/a&gt;</div><div class="line">                        &lt;/li&gt;</div><div class="line">                    &lt;/ul&gt;</div><div class="line">                &lt;/li&gt;</div><div class="line">                &lt;li class=&quot;dropdown user user-menu&quot;&gt;</div><div class="line">                    &lt;a href=&quot;#&quot; class=&quot;dropdown-toggle&quot; data-toggle=&quot;dropdown&quot;&gt;</div><div class="line">                        &lt;img src=&quot;&#123;&#123; asset(&quot;/assets/img/user2-160x160.jpg&quot;) &#125;&#125;&quot; class=&quot;user-image&quot; alt=&quot;User Image&quot;/&gt;</div><div class="line">                        &lt;span class=&quot;hidden-xs&quot;&gt;Alexander Pierce&lt;/span&gt;</div><div class="line">                    &lt;/a&gt;</div><div class="line">                    &lt;ul class=&quot;dropdown-menu&quot;&gt;</div><div class="line">                        &lt;li class=&quot;user-header&quot;&gt;</div><div class="line">                            &lt;img src=&quot;&#123;&#123; asset(&quot;/assets/img/user2-160x160.jpg&quot;) &#125;&#125;&quot; class=&quot;img-circle&quot; alt=&quot;User Image&quot;/&gt;</div><div class="line">                            &lt;p&gt;</div><div class="line">                                Alexander Pierce - Web Developer</div><div class="line">                                &lt;small&gt;Member since Nov. 2012&lt;/small&gt;</div><div class="line">                            &lt;/p&gt;</div><div class="line">                        &lt;/li&gt;</div><div class="line">                        &lt;li class=&quot;user-body&quot;&gt;</div><div class="line">                            &lt;div class=&quot;col-xs-4 text-center&quot;&gt;</div><div class="line">                                &lt;a href=&quot;#&quot;&gt;Followers&lt;/a&gt;</div><div class="line">                            &lt;/div&gt;</div><div class="line">                            &lt;div class=&quot;col-xs-4 text-center&quot;&gt;</div><div class="line">                                &lt;a href=&quot;#&quot;&gt;Sales&lt;/a&gt;</div><div class="line">                            &lt;/div&gt;</div><div class="line">                            &lt;div class=&quot;col-xs-4 text-center&quot;&gt;</div><div class="line">                                &lt;a href=&quot;#&quot;&gt;Friends&lt;/a&gt;</div><div class="line">                            &lt;/div&gt;</div><div class="line">                        &lt;/li&gt;</div><div class="line">                        &lt;li class=&quot;user-footer&quot;&gt;</div><div class="line">                            &lt;div class=&quot;pull-left&quot;&gt;</div><div class="line">                                &lt;a href=&quot;#&quot; class=&quot;btn btn-default btn-flat&quot;&gt;Profile&lt;/a&gt;</div><div class="line">                            &lt;/div&gt;</div><div class="line">                            &lt;div class=&quot;pull-right&quot;&gt;</div><div class="line">                                &lt;a href=&quot;#&quot; class=&quot;btn btn-default btn-flat&quot;&gt;Sign out&lt;/a&gt;</div><div class="line">                            &lt;/div&gt;</div><div class="line">                        &lt;/li&gt;</div><div class="line">                    &lt;/ul&gt;</div><div class="line">                &lt;/li&gt;</div><div class="line">            &lt;/ul&gt;</div><div class="line">        &lt;/div&gt;</div><div class="line">    &lt;/nav&gt;</div><div class="line">&lt;/header&gt;</div></pre></td></tr></table></figure>
-<h2 id="footer-blade-php"><a href="#footer-blade-php" class="headerlink" title="footer.blade.php"></a>footer.blade.php</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;footer class=&quot;main-footer&quot;&gt;</div><div class="line">    &lt;div class=&quot;pull-right hidden-xs&quot;&gt;</div><div class="line">        Anything you want</div><div class="line">    &lt;/div&gt;</div><div class="line">    &lt;strong&gt;Copyright © &#123;&#123;date(&apos;Y&apos;)&#125;&#125; &lt;a href=&quot;#&quot;&gt;Company&lt;/a&gt;.&lt;/strong&gt; All rights reserved.</div><div class="line">&lt;/footer&gt;</div></pre></td></tr></table></figure>
-<h2 id="main-blade-php"><a href="#main-blade-php" class="headerlink" title="main.blade.php"></a>main.blade.php</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang=&quot;zh&quot;&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</div><div class="line">    &lt;meta content=&apos;width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no&apos; name=&apos;viewport&apos;&gt;</div><div class="line">    &lt;title&gt;&#123;&#123; $page_title or &quot;AdminLTE Dashboard&quot; &#125;&#125;&lt;/title&gt;</div><div class="line">    &lt;link rel=&quot;stylesheet&quot; href=&quot;&#123;&#123;asset(&apos;/assets/css/app.css&apos;)&#125;&#125;&quot;&gt;</div><div class="line">    @yield(&apos;style&apos;)</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body class=&quot;skin-blue&quot;&gt;</div><div class="line">&lt;div class=&quot;wrapper&quot;&gt;</div><div class="line">    @include(&apos;backend.layout.header&apos;)</div><div class="line">    @include(&apos;backend.layout.sidebar&apos;)</div><div class="line">    &lt;div class=&quot;content-wrapper&quot;&gt;</div><div class="line">        &lt;section class=&quot;content-header&quot;&gt;</div><div class="line">            &lt;h1&gt;</div><div class="line">                &#123;&#123; $page_title or &quot;Page Title&quot; &#125;&#125;</div><div class="line">                &lt;small&gt;&#123;&#123; $page_description or null &#125;&#125;&lt;/small&gt;</div><div class="line">            &lt;/h1&gt;</div><div class="line">            &lt;ol class=&quot;breadcrumb&quot;&gt;</div><div class="line">                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;fa fa-dashboard&quot;&gt;&lt;/i&gt; Level&lt;/a&gt;&lt;/li&gt;</div><div class="line">                &lt;li class=&quot;active&quot;&gt;Here&lt;/li&gt;</div><div class="line">            &lt;/ol&gt;</div><div class="line">        &lt;/section&gt;</div><div class="line">        &lt;section class=&quot;content&quot;&gt;</div><div class="line">            @yield(&apos;content&apos;)</div><div class="line">        &lt;/section&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">    @include(&apos;backend.layout.footer&apos;)</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;script src=&quot;&#123;&#123; asset (&quot;/assets/js/app.js&quot;) &#125;&#125;&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</div><div class="line">@yield(&apos;script&apos;)</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
-<h2 id="sidebar-blade-php"><a href="#sidebar-blade-php" class="headerlink" title="sidebar.blade.php"></a>sidebar.blade.php</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">&lt;aside class=&quot;main-sidebar&quot;&gt;</div><div class="line">    &lt;section class=&quot;sidebar&quot;&gt;</div><div class="line">        &lt;div class=&quot;user-panel&quot;&gt;</div><div class="line">            &lt;div class=&quot;pull-left image&quot;&gt;</div><div class="line">                &lt;img src=&quot;&#123;&#123; asset(&quot;/assets/img/user2-160x160.jpg&quot;) &#125;&#125;&quot; class=&quot;img-circle&quot; alt=&quot;User Image&quot;/&gt;</div><div class="line">            &lt;/div&gt;</div><div class="line">            &lt;div class=&quot;pull-left info&quot;&gt;</div><div class="line">                &lt;p&gt;Alexander Pierce&lt;/p&gt;</div><div class="line">                &lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;fa fa-circle text-success&quot;&gt;&lt;/i&gt; Online&lt;/a&gt;</div><div class="line">            &lt;/div&gt;</div><div class="line">        &lt;/div&gt;</div><div class="line">        &lt;form action=&quot;#&quot; method=&quot;get&quot; class=&quot;sidebar-form&quot;&gt;</div><div class="line">            &lt;div class=&quot;input-group&quot;&gt;</div><div class="line">                &lt;input type=&quot;text&quot; name=&quot;q&quot; class=&quot;form-control&quot; placeholder=&quot;Search...&quot;/&gt;</div><div class="line">                &lt;span class=&quot;input-group-btn&quot;&gt;</div><div class="line">                  &lt;button type=&apos;submit&apos; name=&apos;search&apos; id=&apos;search-btn&apos; class=&quot;btn btn-flat&quot;&gt;&lt;i class=&quot;fa fa-search&quot;&gt;&lt;/i&gt;</div><div class="line">                  &lt;/button&gt;</div><div class="line">                &lt;/span&gt;</div><div class="line">            &lt;/div&gt;</div><div class="line">        &lt;/form&gt;</div><div class="line">        &lt;ul class=&quot;sidebar-menu&quot;&gt;</div><div class="line">            &lt;li class=&quot;header&quot;&gt;HEADER&lt;/li&gt;</div><div class="line">            &lt;li class=&quot;active&quot;&gt;&lt;a href=&quot;#&quot;&gt;&lt;span&gt;Link&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;</div><div class="line">            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;span&gt;Another Link&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;</div><div class="line">            &lt;li class=&quot;treeview&quot;&gt;</div><div class="line">                &lt;a href=&quot;#&quot;&gt;&lt;span&gt;Multilevel&lt;/span&gt; &lt;i class=&quot;fa fa-angle-left pull-right&quot;&gt;&lt;/i&gt;&lt;/a&gt;</div><div class="line">                &lt;ul class=&quot;treeview-menu&quot;&gt;</div><div class="line">                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Link in level 2&lt;/a&gt;&lt;/li&gt;</div><div class="line">                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Link in level 2&lt;/a&gt;&lt;/li&gt;</div><div class="line">                &lt;/ul&gt;</div><div class="line">            &lt;/li&gt;</div><div class="line">        &lt;/ul&gt;</div><div class="line">    &lt;/section&gt;</div><div class="line">&lt;/aside&gt;</div></pre></td></tr></table></figure>
-<h2 id="index-blade-php"><a href="#index-blade-php" class="headerlink" title="index.blade.php"></a>index.blade.php</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">@extends(&quot;backend.layout.main&quot;)</div><div class="line"></div><div class="line">@section(&quot;content&quot;)</div><div class="line">    &lt;div class=&quot;row&quot;&gt;</div><div class="line">        &lt;div class=&quot;col-md-6&quot;&gt;</div><div class="line">            &lt;div class=&quot;box box-primary&quot;&gt;</div><div class="line">                &lt;div class=&quot;box-header with-border&quot;&gt;</div><div class="line">                    &lt;h3 class=&quot;box-title&quot;&gt;Randomly Generated Tasks&lt;/h3&gt;</div><div class="line">                    &lt;div class=&quot;box-tools pull-right&quot;&gt;</div><div class="line">                        &lt;button class=&quot;btn btn-box-tool&quot; data-widget=&quot;collapse&quot; data-toggle=&quot;tooltip&quot; title=&quot;Collapse&quot;&gt;</div><div class="line">                            &lt;i class=&quot;fa fa-minus&quot;&gt;&lt;/i&gt;</div><div class="line">                        &lt;/button&gt;</div><div class="line">                        &lt;button class=&quot;btn btn-box-tool&quot; data-widget=&quot;remove&quot; data-toggle=&quot;tooltip&quot; title=&quot;Remove&quot;&gt;</div><div class="line">                            &lt;i class=&quot;fa fa-times&quot;&gt;&lt;/i&gt;</div><div class="line">                        &lt;/button&gt;</div><div class="line">                    &lt;/div&gt;</div><div class="line">                &lt;/div&gt;</div><div class="line">                &lt;div class=&quot;box-body&quot;&gt;</div><div class="line">                    @foreach($tasks as $task)</div><div class="line">                        &lt;h5&gt;</div><div class="line">                            &#123;&#123; $task[&apos;name&apos;] &#125;&#125;</div><div class="line">                            &lt;small class=&quot;label label-&#123;&#123;$task[&apos;color&apos;]&#125;&#125; pull-right&quot;&gt;&#123;&#123;$task[&apos;progress&apos;]&#125;&#125;%&lt;/small&gt;</div><div class="line">                        &lt;/h5&gt;</div><div class="line">                        &lt;div class=&quot;progress progress-xxs&quot;&gt;</div><div class="line">                            &lt;div class=&quot;progress-bar progress-bar-&#123;&#123;$task[&apos;color&apos;]&#125;&#125;&quot; style=&quot;width: &#123;&#123;$task[&apos;progress&apos;]&#125;&#125;%&quot;&gt;&lt;/div&gt;</div><div class="line">                        &lt;/div&gt;</div><div class="line">                    @endforeach</div><div class="line">                &lt;/div&gt;</div><div class="line">                &lt;div class=&quot;box-footer&quot;&gt;</div><div class="line">                    &lt;form action=&quot;#&quot;&gt;</div><div class="line">                        &lt;input type=&quot;text&quot; placeholder=&quot;New task&quot; class=&quot;form-control input-sm&quot;/&gt;</div><div class="line">                    &lt;/form&gt;</div><div class="line">                &lt;/div&gt;</div><div class="line">            &lt;/div&gt;</div><div class="line">        &lt;/div&gt;</div><div class="line">        &lt;div class=&quot;col-md-6&quot;&gt;</div><div class="line">            &lt;div class=&quot;box box-primary&quot;&gt;</div><div class="line">                &lt;div class=&quot;box-header with-border&quot;&gt;</div><div class="line">                    &lt;h3 class=&quot;box-title&quot;&gt;Second Box&lt;/h3&gt;</div><div class="line">                    &lt;div class=&quot;box-tools pull-right&quot;&gt;</div><div class="line">                        &lt;button class=&quot;btn btn-box-tool&quot; data-widget=&quot;collapse&quot; data-toggle=&quot;tooltip&quot; title=&quot;Collapse&quot;&gt;</div><div class="line">                            &lt;i class=&quot;fa fa-minus&quot;&gt;&lt;/i&gt;</div><div class="line">                        &lt;/button&gt;</div><div class="line">                        &lt;button class=&quot;btn btn-box-tool&quot; data-widget=&quot;remove&quot; data-toggle=&quot;tooltip&quot; title=&quot;Remove&quot;&gt;</div><div class="line">                            &lt;i class=&quot;fa fa-times&quot;&gt;&lt;/i&gt;</div><div class="line">                        &lt;/button&gt;</div><div class="line">                    &lt;/div&gt;</div><div class="line">                &lt;/div&gt;</div><div class="line">                &lt;div class=&quot;box-body&quot;&gt;</div><div class="line">                    A separate section to add any kind of widget. Feel free</div><div class="line">                    to explore all of AdminLTE widgets by visiting the demo page</div><div class="line">                    on &lt;a href=&quot;https://almsaeedstudio.com&quot;&gt;Almsaeed Studio&lt;/a&gt;.</div><div class="line">                &lt;/div&gt;</div><div class="line">            &lt;/div&gt;</div><div class="line">        &lt;/div&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">@endsection</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（二）/" data-id="cj4mvexsa005aay4by0c7qhn5" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（三）/" data-id="cj4s44j1l00530e4bdxxnt2t5" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -1123,7 +1117,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -1133,7 +1127,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
     </div>
@@ -1143,7 +1137,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
     </div>
@@ -1154,7 +1148,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
   </div>
 
@@ -1162,9 +1156,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/07/06/「复盘」Yii-RESTful-API-脚手架/">「复盘」Yii RESTful API 脚手架</a>
+          </li>
         
           <li>
             <a href="/2017/06/29/「复盘」商品库-v1-0/">「复盘」商品库 v1.0</a>
@@ -1182,10 +1180,6 @@
             <a href="/2017/06/02/mysqldumpslow-参数讲解与基础使用/">mysqldumpslow 参数讲解与基础使用</a>
           </li>
         
-          <li>
-            <a href="/2017/06/01/XHprof-的安装配置与使用分析/">XHProf 的安装配置与使用分析</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1199,7 +1193,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Luis Edware<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

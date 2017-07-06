@@ -52,9 +52,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -64,6 +64,80 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-MySQL-5-7-版本新特性" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/12/MySQL-5-7-版本新特性/" class="article-date">
+  <time datetime="2016-09-12T13:12:40.000Z" itemprop="datePublished">2016-09-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/12/MySQL-5-7-版本新特性/">MySQL 5.7 版本新特性</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="第-1-章-MySQL-服务功能增强"><a href="#第-1-章-MySQL-服务功能增强" class="headerlink" title="第 1 章 MySQL 服务功能增强"></a>第 1 章 MySQL 服务功能增强</h2><h3 id="1-1-初始化方式变更"><a href="#1-1-初始化方式变更" class="headerlink" title="1-1 初始化方式变更"></a>1-1 初始化方式变更</h3><p>MySQL 5.7 之前<br><code>scripts/mysql_install_db \
+    --datadir=/data/sql_data \
+    --user=mysql --basedir=/home/mysql</code></p>
+<p>MySQL 5.7 之后<br><code>bin/mysql --initialize --user = mysql \
+    --basedir=/home/mysql \
+    --datadir=/home/mysql/data</code></p>
+<h3 id="1-3-旧版本支持为表增加计算列演练"><a href="#1-3-旧版本支持为表增加计算列演练" class="headerlink" title="1-3 旧版本支持为表增加计算列演练"></a>1-3 旧版本支持为表增加计算列演练</h3><p>MySQL 5.7 之前，需要增加一个插入触发器和更新触发器来实现计算列的功能，或者是一个视图来实现计算列的功能</p>
+<p>MySQL 5.7 之后，在 <code>CREATE TABLE</code> 及 <code>ALTER TABLE</code> 语句中支持增加计算列的方式<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">col_name data_type [GENERATED ALWAYS] AS (expression)</div><div class="line">[VIRTUAL | STORED] [UNIQUE [KEY]] [<span class="keyword">COMMENT</span> <span class="keyword">comment</span>]</div><div class="line">[[<span class="keyword">NOT</span>] <span class="literal">NULL</span>] [[PRIMARY] <span class="keyword">KEY</span>]</div></pre></td></tr></table></figure></p>
+<h3 id="1-4-MySQL5-7支持为表增加计算列实际演练"><a href="#1-4-MySQL5-7支持为表增加计算列实际演练" class="headerlink" title="1-4 MySQL5.7支持为表增加计算列实际演练"></a>1-4 MySQL5.7支持为表增加计算列实际演练</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> t(<span class="keyword">id</span> <span class="built_in">int</span> AUTO_INCREMENT <span class="keyword">not</span> <span class="literal">null</span>,c1 <span class="built_in">int</span>,c2 <span class="built_in">int</span>,c3 <span class="built_in">int</span> <span class="keyword">as</span> (c1+c2),PRIMARY <span class="keyword">KEY</span> (<span class="keyword">id</span>));</div><div class="line"></div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> t(c1,c2) <span class="keyword">VALUES</span>(<span class="number">1</span>,<span class="number">2</span>);</div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> t;</div><div class="line"></div><div class="line"><span class="keyword">UPDATE</span> t <span class="keyword">set</span> c1 = <span class="number">5</span> <span class="keyword">WHERE</span> <span class="keyword">id</span> = <span class="number">1</span>;</div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> t;</div></pre></td></tr></table></figure>
+<h3 id="1-5-引入JSON列类型及相关函数"><a href="#1-5-引入JSON列类型及相关函数" class="headerlink" title="1-5 引入JSON列类型及相关函数"></a>1-5 引入JSON列类型及相关函数</h3><p>MySQL 5.7 之前</p>
+<p>只能在 varchar 或是 text 等字符类型的列中存储 JSON 类型的字符串，并通过程序解析使用 JSON 字符串。</p>
+<p>MySQL 5.7 之后</p>
+<p>增加了 JSON 列类型及以 JSON 开头的相关处理函数，如 JSON_TYPE(),JSON_OBJECT()，JSON_MERGE() 等。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SELECT JSON_ARRAY(1,2,3,now());</div><div class="line">SELECT JSON_OBJECT(&apos;keyA&apos;,1,&apos;keyB&apos;,2);</div></pre></td></tr></table></figure></p>
+<h2 id="第-2-章-Replication-相关增强"><a href="#第-2-章-Replication-相关增强" class="headerlink" title="第 2 章 Replication 相关增强"></a>第 2 章 Replication 相关增强</h2><h3 id="2-1-支持多源复制"><a href="#2-1-支持多源复制" class="headerlink" title="2-1 支持多源复制"></a>2-1 支持多源复制</h3><p>略</p>
+<h3 id="2-2-基于库或是逻辑锁的多线程复制"><a href="#2-2-基于库或是逻辑锁的多线程复制" class="headerlink" title="2-2 基于库或是逻辑锁的多线程复制"></a>2-2 基于库或是逻辑锁的多线程复制</h3><p>MySQL 5.7 之前</p>
+<p>从 MySQL 5.6 开始支持多线程复制，只不过是对于每一个库一个复制线程。</p>
+<p>MySQL 5.7 之后</p>
+<p>MySQL 5.7 后对多线程复制功能进行了加强，增加了 <code>slave_paraller_type</code> 参数可以控制并发同步是基于 <code>database</code> 还是 <code>logical_clock</code></p>
+<h3 id="2-3-在线变更复制方式"><a href="#2-3-在线变更复制方式" class="headerlink" title="2-3 在线变更复制方式"></a>2-3 在线变更复制方式</h3><p>MySQL 5.7 之前</p>
+<p>要把基于日志点的复制方式变为基于 gtid 的复制方式或是把基于 gtid 的复制方式变成基于日志点的复制方式必须要重启 master 的服务器</p>
+<p>MySQL 5.7 之后</p>
+<p>允许在线变列复制的方式，而不用重启 master 服务器</p>
+<h2 id="第-3-章-InnoDB-引擎增强"><a href="#第-3-章-InnoDB-引擎增强" class="headerlink" title="第 3 章 InnoDB 引擎增强"></a>第 3 章 InnoDB 引擎增强</h2><h3 id="3-1-支持缓冲池大小在线变更"><a href="#3-1-支持缓冲池大小在线变更" class="headerlink" title="3-1 支持缓冲池大小在线变更"></a>3-1 支持缓冲池大小在线变更</h3><p>MySQL 5.7 之前</p>
+<p>要变更 <code>innodb_buffer_pool</code> 大小必须更改 <code>my.cnf</code> 文件后重启数据库服务器</p>
+<p>MySQL 5.7 之后</p>
+<p><code>innodb_buffer_pool_size</code> 参数变为动态参数，可以在线调整 <code>innodb</code> 缓存池的大小</p>
+<h3 id="3-2-增加-innodb-buffer-pool-导入导出功能"><a href="#3-2-增加-innodb-buffer-pool-导入导出功能" class="headerlink" title="3-2 增加 innodb_buffer_pool 导入导出功能"></a>3-2 增加 <code>innodb_buffer_pool</code> 导入导出功能</h3><p>MySQL 5.7 之后，新增以下参数控制 <code>innodb_buffer_pool</code> 的导入导出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">innodb_buffer_pool_dump_pct</div><div class="line">innodb_buffer_pool_dump_now</div><div class="line">innodb_buffer_pool_dump_at_shutdown</div><div class="line">innodb_buffer_pool_load_at_startup</div><div class="line">innodb_buffer_pool_load_now</div></pre></td></tr></table></figure></p>
+<h3 id="3-3-支持为-innodb-表建立表空间"><a href="#3-3-支持为-innodb-表建立表空间" class="headerlink" title="3-3 支持为 innodb 表建立表空间"></a>3-3 支持为 <code>innodb</code> 表建立表空间</h3><p>MySQL 5.7 之前</p>
+<p>具有系统表空间及可以为每个表建立一个独立的表空间</p>
+<p>MySQL 5.7 之后</p>
+<p>支持 <code>CREATE TABLESPACE</code> 语法为一个表或多个表建立共用的表空间</p>
+<h2 id="第-4-章-安全及管理方面增强"><a href="#第-4-章-安全及管理方面增强" class="headerlink" title="第 4 章 安全及管理方面增强"></a>第 4 章 安全及管理方面增强</h2><h3 id="4-1-不再支持old-password认证"><a href="#4-1-不再支持old-password认证" class="headerlink" title="4-1 不再支持old_password认证"></a>4-1 不再支持old_password认证</h3><h3 id="4-2-增加账号默认过期时间"><a href="#4-2-增加账号默认过期时间" class="headerlink" title="4-2 增加账号默认过期时间"></a>4-2 增加账号默认过期时间</h3><p><code>show variables like &#39;default_password_lifetime&#39;;</code></p>
+<h3 id="4-3-加强了对账号的管理功能"><a href="#4-3-加强了对账号的管理功能" class="headerlink" title="4-3 加强了对账号的管理功能"></a>4-3 加强了对账号的管理功能</h3><h3 id="4-4-增加了-sys-管理数据库"><a href="#4-4-增加了-sys-管理数据库" class="headerlink" title="4-4 增加了 sys 管理数据库"></a>4-4 增加了 sys 管理数据库</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2016/09/12/MySQL-5-7-版本新特性/" data-id="cj4s44izc001g0e4b9likrjx4" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-与-MySQL-的零距离接触（二）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -524,7 +598,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/09/与-MySQL-的零距离接触（二）/" data-id="cj4mvexq60040ay4b3nf2nch5" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/09/与-MySQL-的零距离接触（二）/" data-id="cj4s44j0y003s0e4buqaulvx3" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -1172,7 +1246,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/07/与-MySQL-的零距离接触（一）/" data-id="cj4mvexpe003qay4bsis3ecaa" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/07/与-MySQL-的零距离接触（一）/" data-id="cj4s44j0s003k0e4bxyjflccv" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -1288,7 +1362,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/04/复习使用-MySQL（三）/" data-id="cj4mvexte006bay4bvo0viak2" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/04/复习使用-MySQL（三）/" data-id="cj4s44j2600680e4bcehhzxge" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -1501,7 +1575,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/04/复习使用-MySQL（二）/" data-id="cj4mvextv006eay4bo13zo00x" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/04/复习使用-MySQL（二）/" data-id="cj4s44j27006b0e4bqsv5fq7g" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -1740,7 +1814,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/02/复习使用-MySQL（一）/" data-id="cj4mvext70062ay4bs5zmmhjv" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/02/复习使用-MySQL（一）/" data-id="cj4s44j2300620e4boyvegabm" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -1826,7 +1900,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/01/查看-Eloquent-模型关联时执行的-SQL-语句/" data-id="cj4mvexuf0073ay4bzrkkud58" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/01/查看-Eloquent-模型关联时执行的-SQL-语句/" data-id="cj4s44j2h006x0e4b6y4qb467" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -1959,7 +2033,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/08/31/使用阿里云从零开始部署-Laravel/" data-id="cj4mvexsr005tay4b7uzwtz2k" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/08/31/使用阿里云从零开始部署-Laravel/" data-id="cj4s44j1u005n0e4bsj3atfgq" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AliCloud/">AliCloud</a></li></ul>
@@ -2020,7 +2094,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/08/25/使用-Laravel-编写自定义命令/" data-id="cj4mvexqm0043ay4bc1wpwb3a" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/08/25/使用-Laravel-编写自定义命令/" data-id="cj4s44j1200420e4bm27ewvt2" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -2084,70 +2158,10 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/08/08/使用-Laravel-基于-SMTP-驱动实现发送邮件/" data-id="cj4mvexr1004hay4bv91ev46w" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/08/08/使用-Laravel-基于-SMTP-驱动实现发送邮件/" data-id="cj4s44j1300460e4bql28zybj" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-使用-PHPStorm-与-Xdebug-调试-Laravel-二" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/27/使用-PHPStorm-与-Xdebug-调试-Laravel-二/" class="article-date">
-  <time datetime="2016-06-27T13:36:54.000Z" itemprop="datePublished">2016-06-27</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Tooling/">Tooling</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/27/使用-PHPStorm-与-Xdebug-调试-Laravel-二/">使用 PHPStorm 与 Xdebug 调试 Laravel (二)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本文的目的学会使用除了 <code>var_dump，echo，printf</code> 的调试方法</p>
-<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
-<li>系统版本：OSX 10.11.4</li>
-<li>PHP 版本：7.0.5</li>
-<li>Xdebug 版本：2.4.0</li>
-<li>Laravel 版本：5.1.31</li>
-<li>PHPStorm 版本：10.0.4</li>
-</ul>
-<p>根据上篇文章的配置，在工作时会发现，我们需要经常调整 <code>PHP Web Application</code> 的 URL 进行 Debug。</p>
-<p>举个例子，假如想要 <code>Debug</code> 菜单列表，我需要修改成 <code>/menu/</code>，如果想要 <code>Debug</code> 新增菜单页面，我需要修改成 <code>/menu/create</code>。<br><img src="http://o93kt6djh.bkt.clouddn.com/2-phpstorm-debug-web-applicationPHP%20Web%20Application.png" alt=""><br>这样进行 <code>Debug</code> 的过程十分烦琐，所以需要更加友好的操作方式，以便加快工作效率。</p>
-<h2 id="PHPStorm-配置"><a href="#PHPStorm-配置" class="headerlink" title="PHPStorm 配置"></a>PHPStorm 配置</h2><p>打开 PHPStorm，打开配置面板<br><code>Preferences =&gt; Language &amp; Frameworks -&gt; PHP -&gt; Debug</code>。</p>
-<p>点击蓝色链接 <code>Use debugger bookmarklets to initiate debugging from your favorite browser</code>。<br><img src="http://o93kt6djh.bkt.clouddn.com/2-phpstorm-debug-web-applicationPHP%20Debug%20Configuration.png" alt=""></p>
-<p>点击页面左下角的蓝色按钮，生成 PHPStorm Debug 的专属书签。<br><img src="http://o93kt6djh.bkt.clouddn.com/2-phpstorm-debug-web-applicationPHPStorm%20Debug%20Config.png" alt=""></p>
-<p>然后将生成好的 <code>DEBUG</code> 书签<code>Start debugger</code>、<code>Stop debugger</code>、<code>Debug this page</code> 拖动保存到浏览器的书签栏中，方便随时进行 <code>Debug</code>。<br><img src="http://o93kt6djh.bkt.clouddn.com/2-phpstorm-debug-web-applicationBookMark.png" alt=""></p>
-<p>监听浏览器的 <code>Debug</code> 操作，<code>Run -&gt; Start Listening for PHP Debug Connections</code></p>
-<p><img src="http://o93kt6djh.bkt.clouddn.com/2-phpstorm-debug-web-applicationListening%20PHP%20Debug.png" alt=""></p>
-<p>然后在浏览器输入想要进行 <code>Debug</code> 的页面，然后点击书签栏的 <code>Start debugger</code>，刷新页面，就能在 <code>PHPStorm</code> 里面看见 <code>Debug</code> 的控制台了。<br><img src="http://o93kt6djh.bkt.clouddn.com/2-phpstorm-debug-web-applicationDebug%20Page2.png" alt=""><br><img src="http://o93kt6djh.bkt.clouddn.com/2-phpstorm-debug-web-applicationDebug%20Page.png" alt=""></p>
-<p>PHPStorm 的 Debug 方式不仅仅局限于 Laravel 框架，同样适用于 ThinkPHP 与其他框架，也适用于原生的 PHP 代码。<br>学会使用这种方式之后，一般很少使用 <code>echo</code>，<code>var_dump</code>，<code>dd()</code>，<code>dump()</code>等原生或框架辅助函数进行 <code>Debug</code> 了。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/06/27/使用-PHPStorm-与-Xdebug-调试-Laravel-二/" data-id="cj4mvexqx004eay4bs0rwpcck" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li></ul>
 
     </footer>
   </div>
@@ -2167,7 +2181,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -2177,7 +2191,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
     </div>
@@ -2187,7 +2201,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
     </div>
@@ -2198,7 +2212,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
   </div>
 
@@ -2206,9 +2220,13 @@ insert test(username) values(username); return last_insert_id(); end //</code></
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/07/06/「复盘」Yii-RESTful-API-脚手架/">「复盘」Yii RESTful API 脚手架</a>
+          </li>
         
           <li>
             <a href="/2017/06/29/「复盘」商品库-v1-0/">「复盘」商品库 v1.0</a>
@@ -2226,10 +2244,6 @@ insert test(username) values(username); return last_insert_id(); end //</code></
             <a href="/2017/06/02/mysqldumpslow-参数讲解与基础使用/">mysqldumpslow 参数讲解与基础使用</a>
           </li>
         
-          <li>
-            <a href="/2017/06/01/XHprof-的安装配置与使用分析/">XHProf 的安装配置与使用分析</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -2243,7 +2257,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Luis Edware<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

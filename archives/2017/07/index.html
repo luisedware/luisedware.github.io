@@ -3,27 +3,14 @@
 <head>
   <meta charset="utf-8">
   
-  <title>关于 PHP 函数 array_walk 的一些想法 | 七月十五九月初七</title>
+  <title>Archives: 2017/7 | 七月十五九月初七</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="array_walk(PHP 4, PHP 5, PHP 7)array_walk — 使用用户自定义函数对数组中的每个元素做回调处理
-说明bool array_walk ( array &amp;amp;$array , callable $callback [, mixed $userdata = NULL ] )
-将用户自定义函数 funcname 应用到 array 数组中的每个单元。
-array">
-<meta property="og:type" content="article">
-<meta property="og:title" content="关于 PHP 函数 array_walk 的一些想法">
-<meta property="og:url" content="http://luisedware.github.io/2016/11/22/关于-PHP-函数-array-walk-的一些想法/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="七月十五九月初七">
+<meta property="og:url" content="http://luisedware.github.io/archives/2017/07/index.html">
 <meta property="og:site_name" content="七月十五九月初七">
-<meta property="og:description" content="array_walk(PHP 4, PHP 5, PHP 7)array_walk — 使用用户自定义函数对数组中的每个元素做回调处理
-说明bool array_walk ( array &amp;amp;$array , callable $callback [, mixed $userdata = NULL ] )
-将用户自定义函数 funcname 应用到 array 数组中的每个单元。
-array">
-<meta property="og:updated_time" content="2016-11-30T07:11:21.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于 PHP 函数 array_walk 的一些想法">
-<meta name="twitter:description" content="array_walk(PHP 4, PHP 5, PHP 7)array_walk — 使用用户自定义函数对数组中的每个元素做回调处理
-说明bool array_walk ( array &amp;amp;$array , callable $callback [, mixed $userdata = NULL ] )
-将用户自定义函数 funcname 应用到 array 数组中的每个单元。
-array">
+<meta name="twitter:title" content="七月十五九月初七">
   
     <link rel="alternate" href="/atom.xml" title="七月十五九月初七" type="application/atom+xml">
   
@@ -76,94 +63,39 @@ array">
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-关于-PHP-函数-array-walk-的一些想法" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/11/22/关于-PHP-函数-array-walk-的一些想法/" class="article-date">
-  <time datetime="2016-11-22T03:21:28.000Z" itemprop="datePublished">2016-11-22</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      关于 PHP 函数 array_walk 的一些想法
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/07/06/「复盘」Yii-RESTful-API-脚手架/" class="archive-article-date">
+  <time datetime="2017-07-06T07:30:24.000Z" itemprop="datePublished">Jul 6</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/07/06/「复盘」Yii-RESTful-API-脚手架/">「复盘」Yii RESTful API 脚手架</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="array-walk"><a href="#array-walk" class="headerlink" title="array_walk"></a>array_walk</h2><p>(PHP 4, PHP 5, PHP 7)<br>array_walk — 使用用户自定义函数对数组中的每个元素做回调处理</p>
-<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p><code>bool array_walk ( array &amp;$array , callable $callback [, mixed $userdata = NULL ] )</code></p>
-<p>将用户自定义函数 funcname 应用到 array 数组中的每个单元。</p>
-<p>array_walk() 不会受到 array 内部数组指针的影响。array_walk() 会遍历整个数组而不管指针的位置。</p>
-<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><ul>
-<li>array<ul>
-<li>输入的数组。</li>
-</ul>
-</li>
-<li>callback<ul>
-<li>典型情况下 callback 接受两个参数。array 参数的值作为第一个，键名作为第二个。</li>
-</ul>
-</li>
-<li>Note:<ul>
-<li>如果 callback 需要直接作用于数组中的值，则给 callback 的第一个参数指定为引用。这样任何对这些单元的改变也将会改变原始数组本身。</li>
-</ul>
-</li>
-<li>Note:<ul>
-<li>参数数量超过预期，传入内置函数 (例如 strtolower())， 将抛出警告，所以不适合当做 funcname。<br>只有 array 的值才可以被改变，用户不应在回调函数中改变该数组本身的结构。例如增加/删除单元，unset 单元等等。如果 array_walk() 作用的数组改变了，则此函数的的行为未经定义，且不可预期。</li>
-</ul>
-</li>
-<li>userdata<ul>
-<li>如果提供了可选参数 userdata，将被作为第三个参数传递给 callback funcname。</li>
-</ul>
-</li>
-</ul>
-<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><p>成功时返回 TRUE， 或者在失败时返回 FALSE。</p>
-<h2 id="范例"><a href="#范例" class="headerlink" title="范例"></a>范例</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$graphics_card = [</div><div class="line">    [</div><div class="line">        <span class="string">'brand'</span>=&gt;<span class="string">'华硕'</span>,</div><div class="line">        <span class="string">'model'</span>=&gt;<span class="string">'GTX980(Ti)'</span>,</div><div class="line">        <span class="string">'status'</span>=&gt;<span class="number">1</span>,</div><div class="line">    ],</div><div class="line">    [</div><div class="line">        <span class="string">'brand'</span>=&gt;<span class="string">'技嘉'</span>,</div><div class="line">        <span class="string">'model'</span>=&gt;<span class="string">'GTX970'</span>,</div><div class="line">        <span class="string">'status'</span>=&gt;<span class="number">0</span>,</div><div class="line">    ],</div><div class="line">    [</div><div class="line">        <span class="string">'brand'</span>=&gt;<span class="string">'微星'</span>,</div><div class="line">        <span class="string">'model'</span>=&gt;<span class="string">'GTX960'</span>,</div><div class="line">        <span class="string">'status'</span>=&gt;<span class="number">1</span>,</div><div class="line">    ],</div><div class="line">    [</div><div class="line">        <span class="string">'brand'</span>=&gt;<span class="string">'七彩虹'</span>,</div><div class="line">        <span class="string">'model'</span>=&gt;<span class="string">'GTX950'</span>,</div><div class="line">        <span class="string">'status'</span>=&gt;<span class="number">0</span>,</div><div class="line">    ],</div><div class="line">];</div><div class="line"></div><div class="line">array_walk($graphics_card, <span class="function"><span class="keyword">function</span><span class="params">(&amp;$item)</span></span>&#123;</div><div class="line">    $item[<span class="string">'brand'</span>] = <span class="string">'按摩店'</span>;</div><div class="line">    $item[<span class="string">'model'</span>] = <span class="string">'1080'</span>;</div><div class="line">&#125;);</div><div class="line">var_dump($graphics_card);</div><div class="line"></div><div class="line">array_map(<span class="function"><span class="keyword">function</span><span class="params">($key)</span> <span class="title">use</span> <span class="params">(&amp;$graphics_card)</span> </span>&#123;</div><div class="line">    $graphics_card[$key][<span class="string">'brand'</span>] = <span class="string">'英伟达'</span>;</div><div class="line">    $graphics_card[$key][<span class="string">'model'</span>] = <span class="string">'泰坦'</span>;</div><div class="line">&#125;, array_keys($graphics_card));</div><div class="line">var_dump($graphics_card);</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/11/22/关于-PHP-函数-array-walk-的一些想法/" data-id="cj4s44j22005z0e4bmgokqblo" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
-
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2016/12/02/Yii2-Working-with-Databases/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
-      <div class="article-nav-title">
-        
-          Yii2 Working with Databases
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2016/11/21/关于-PHP-函数-array-filter-的一些想法/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
-      <div class="article-nav-title">关于 PHP 函数 array_filter 的一些想法</div>
-    </a>
-  
-</nav>
-
-  
 </article>
+  
+  
+    </div></section>
+  
 
 </section>
         
