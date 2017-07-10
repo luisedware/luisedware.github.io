@@ -6,42 +6,81 @@
   <title>「复盘」商品库 v1.0 | 七月十五九月初七</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="数据建模
-beehive_area
-areaCode
-areaName
-areaInfo
-areaLevel
+location - 区域
+locationId
+locationCode
+locationName
+locationInfo
+locationLevel
 
 
+category - 分类
+categoryId
+parentId
+categoryName
 
-已确认需求完成，接口返回数据格式如下：">
+
+supplier 供货商
+supplierId
+supplierName
+
+
+brand - 品牌
+brandId
+brandNam">
 <meta property="og:type" content="article">
 <meta property="og:title" content="「复盘」商品库 v1.0">
 <meta property="og:url" content="http://luisedware.github.io/2017/06/29/「复盘」商品库-v1-0/index.html">
 <meta property="og:site_name" content="七月十五九月初七">
 <meta property="og:description" content="数据建模
-beehive_area
-areaCode
-areaName
-areaInfo
-areaLevel
+location - 区域
+locationId
+locationCode
+locationName
+locationInfo
+locationLevel
 
 
+category - 分类
+categoryId
+parentId
+categoryName
 
-已确认需求完成，接口返回数据格式如下：">
-<meta property="og:updated_time" content="2017-07-04T02:47:23.000Z">
+
+supplier 供货商
+supplierId
+supplierName
+
+
+brand - 品牌
+brandId
+brandNam">
+<meta property="og:updated_time" content="2017-07-07T02:57:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「复盘」商品库 v1.0">
 <meta name="twitter:description" content="数据建模
-beehive_area
-areaCode
-areaName
-areaInfo
-areaLevel
+location - 区域
+locationId
+locationCode
+locationName
+locationInfo
+locationLevel
 
 
+category - 分类
+categoryId
+parentId
+categoryName
 
-已确认需求完成，接口返回数据格式如下：">
+
+supplier 供货商
+supplierId
+supplierName
+
+
+brand - 品牌
+brandId
+brandNam">
   
     <link rel="alternate" href="/atom.xml" title="七月十五九月初七" type="application/atom+xml">
   
@@ -83,9 +122,9 @@ areaLevel
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -117,20 +156,84 @@ areaLevel
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="数据建模"><a href="#数据建模" class="headerlink" title="数据建模"></a>数据建模</h2><ul>
-<li>beehive_area<ul>
-<li>areaCode</li>
-<li>areaName</li>
-<li>areaInfo</li>
-<li>areaLevel</li>
+<li>location - 区域<ul>
+<li>locationId</li>
+<li>locationCode</li>
+<li>locationName</li>
+<li>locationInfo</li>
+<li>locationLevel</li>
+</ul>
+</li>
+<li>category - 分类<ul>
+<li>categoryId</li>
+<li>parentId</li>
+<li>categoryName</li>
+</ul>
+</li>
+<li>supplier 供货商<ul>
+<li>supplierId</li>
+<li>supplierName</li>
+</ul>
+</li>
+<li>brand - 品牌<ul>
+<li>brandId</li>
+<li>brandName</li>
+</ul>
+</li>
+<li>supplier_brand_relation<ul>
+<li>supplierId</li>
+<li>brandId</li>
+</ul>
+</li>
+<li>unit - 单位<ul>
+<li>unitId</li>
+<li>unitName</li>
+</ul>
+</li>
+<li>category_brand_relation 分类品牌关联<ul>
+<li>categoryId</li>
+<li>brandId</li>
+</ul>
+</li>
+<li>category_unit_relation 分类单位管理<ul>
+<li>categoryId</li>
+<li>unitId</li>
+</ul>
+</li>
+<li>attribute_type 属性类型<ul>
+<li>attributesTypeId</li>
+<li>attributesTypeName</li>
+</ul>
+</li>
+<li>attribute_value 属性数值<ul>
+<li>attributeValueId</li>
+<li>attributeValueName</li>
+</ul>
+</li>
+<li>attribute_type_value_relation<ul>
+<li>attributeTypeId</li>
+<li>attributeValueId</li>
+</ul>
+</li>
+<li>category_attributes_type_relation<ul>
+<li>categoryId</li>
+<li>attributeTypesId</li>
+</ul>
+</li>
+<li>product 产品 SPU<ul>
+<li>productId</li>
+</ul>
+</li>
+<li>product_sku 产品 SKU<ul>
+<li>productSkuId</li>
 </ul>
 </li>
 </ul>
-<p>已确认需求完成，接口返回数据格式如下：</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/06/29/「复盘」商品库-v1-0/" data-id="cj4s44j0q003e0e4bhva118r8" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/06/29/「复盘」商品库-v1-0/" data-id="cj4y85hfj003jhi4b2kaonrkm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -140,7 +243,7 @@ areaLevel
 <nav id="article-nav">
   
     <a href="/2017/07/06/「复盘」Yii-RESTful-API-脚手架/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
+      <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
           「复盘」Yii RESTful API 脚手架
@@ -150,7 +253,7 @@ areaLevel
   
   
     <a href="/2017/06/27/使用-Vue-js-2-0-开发后台/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">使用 Vue.js 2.0 开发后台</div>
     </a>
   
@@ -165,7 +268,7 @@ areaLevel
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -175,7 +278,7 @@ areaLevel
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
     </div>
@@ -185,7 +288,7 @@ areaLevel
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
     </div>
@@ -204,7 +307,7 @@ areaLevel
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -241,7 +344,7 @@ areaLevel
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Luis Edware<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
