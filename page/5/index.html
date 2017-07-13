@@ -54,7 +54,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -64,6 +64,67 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-关于-PHP-函数-array-map-的一些想法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/21/关于-PHP-函数-array-map-的一些想法/" class="article-date">
+  <time datetime="2016-11-21T06:42:50.000Z" itemprop="datePublished">2016-11-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/21/关于-PHP-函数-array-map-的一些想法/">关于 PHP 函数 array_map 的一些想法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="array-map"><a href="#array-map" class="headerlink" title="array_map"></a>array_map</h2><p>array_map - 为数组的每个元素应用回调函数</p>
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p><code>array array_map(callable $callback, array $array1[, array $...])</code></p>
+<p>array_map()：返回数组，是为 array1 每个元素应用 callback函数之后的数组。 callback 函数形参的数量和传给 array_map() 数组数量，两者必须一样。</p>
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><ul>
+<li>callback<ul>
+<li>回调函数，应用到每个数组里的元素</li>
+</ul>
+</li>
+<li>array1<ul>
+<li>数组，遍历运行 callback 函数</li>
+</ul>
+</li>
+<li>…<ul>
+<li>数据列表，每个都遍历运行 callback 函数</li>
+</ul>
+</li>
+</ul>
+<h2 id="范例"><a href="#范例" class="headerlink" title="范例"></a>范例</h2><h3 id="array-map-实现-foreach-的效果"><a href="#array-map-实现-foreach-的效果" class="headerlink" title="array_map 实现 foreach 的效果"></a>array_map 实现 foreach 的效果</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">GraphicsCard</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> $brand;</div><div class="line">    <span class="keyword">public</span> $model;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($brand, $model)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;brand = $brand;</div><div class="line">        <span class="keyword">$this</span>-&gt;model = $model;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$graphics_card = [</div><div class="line">    [</div><div class="line">        <span class="string">'brand'</span>=&gt;<span class="string">'华硕'</span>,</div><div class="line">        <span class="string">'model'</span>=&gt;<span class="string">'GTX980(Ti)'</span>,</div><div class="line">        <span class="string">'status'</span>=&gt;<span class="number">1</span>,</div><div class="line">    ],</div><div class="line">    [</div><div class="line">        <span class="string">'brand'</span>=&gt;<span class="string">'技嘉'</span>,</div><div class="line">        <span class="string">'model'</span>=&gt;<span class="string">'GTX970'</span>,</div><div class="line">        <span class="string">'status'</span>=&gt;<span class="number">0</span>,</div><div class="line">    ],</div><div class="line">    [</div><div class="line">        <span class="string">'brand'</span>=&gt;<span class="string">'微星'</span>,</div><div class="line">        <span class="string">'model'</span>=&gt;<span class="string">'GTX960'</span>,</div><div class="line">        <span class="string">'status'</span>=&gt;<span class="number">1</span>,</div><div class="line">    ],</div><div class="line">    [</div><div class="line">        <span class="string">'brand'</span>=&gt;<span class="string">'七彩虹'</span>,</div><div class="line">        <span class="string">'model'</span>=&gt;<span class="string">'GTX950'</span>,</div><div class="line">        <span class="string">'status'</span>=&gt;<span class="number">0</span>,</div><div class="line">    ],</div><div class="line">];</div><div class="line"></div><div class="line"></div><div class="line">$graphics_card2 = [];</div><div class="line"><span class="keyword">foreach</span> ($graphics_card <span class="keyword">as</span> $value) &#123;</div><div class="line">    $graphics_card2[] = <span class="keyword">new</span> GraphicsCard($value[<span class="string">'brand'</span>], $value[<span class="string">'model'</span>]);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// Demo 1</span></div><div class="line">$demoA1 = $graphics_card;</div><div class="line">$demoA2 = $graphics_card2;</div><div class="line"><span class="keyword">foreach</span> ($demoA1 <span class="keyword">as</span> $key =&gt; $value) &#123;</div><div class="line">    $demoA1[$key][<span class="string">'model'</span>] = <span class="string">'1080'</span>;</div><div class="line">    $demoA1[$key][<span class="string">'brand'</span>] = <span class="string">'按摩店'</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">foreach</span> ($demoA2 <span class="keyword">as</span> $key =&gt; $item) &#123;</div><div class="line">    $demoA2[$key]-&gt;brand = <span class="string">'按摩店'</span>;</div><div class="line">    $demoA2[$key]-&gt;model = <span class="string">'1080'</span>;</div><div class="line">&#125;</div><div class="line">var_dump($demoA1);</div><div class="line">var_dump($demoA2);</div><div class="line"></div><div class="line"><span class="comment">// Demo 2</span></div><div class="line">$demoB1 = $graphics_card;</div><div class="line">$demoB2 = $graphics_card2;</div><div class="line">$demoB1 = array_map(<span class="function"><span class="keyword">function</span> <span class="params">($value)</span> </span>&#123;</div><div class="line">    $value[<span class="string">'brand'</span>] = <span class="string">'按摩店'</span>;</div><div class="line">    $value[<span class="string">'model'</span>] = <span class="string">'1080'</span>;</div><div class="line">    <span class="keyword">return</span> $value;</div><div class="line">&#125;, $demoB1);</div><div class="line">array_map(<span class="function"><span class="keyword">function</span> <span class="params">($value)</span> </span>&#123;</div><div class="line">    $value-&gt;brand = <span class="string">'按摩店'</span>;</div><div class="line">    $value-&gt;model = <span class="string">'1080'</span>;</div><div class="line">&#125;, $demoB2);</div><div class="line">var_dump($demoB1);</div><div class="line">var_dump($demoB2);</div><div class="line"></div><div class="line"><span class="comment">// Demo 3</span></div><div class="line">$demoC1 = $graphics_card;</div><div class="line">$demoC2 = $graphics_card2;</div><div class="line">array_map(<span class="function"><span class="keyword">function</span> <span class="params">($key, $value)</span> <span class="title">use</span> <span class="params">(&amp;$demoC1)</span> </span>&#123;</div><div class="line">    $demoC1[$key][<span class="string">'brand'</span>] = <span class="string">'按摩店'</span>;</div><div class="line">    $demoC1[$key][<span class="string">'model'</span>] = <span class="string">'1080'</span>;</div><div class="line">&#125;, array_keys($demoC1), $demoC1);</div><div class="line">array_map(<span class="function"><span class="keyword">function</span> <span class="params">($key, $value)</span> <span class="title">use</span> <span class="params">($demoC2)</span> </span>&#123;</div><div class="line">    $demoC2[$key]-&gt;brand = <span class="string">'按摩店'</span>;</div><div class="line">    $demoC2[$key]-&gt;model = <span class="string">'1080'</span>;</div><div class="line">&#125;, array_keys($demoC2), $demoC2);</div><div class="line">var_dump($demoC1);</div><div class="line">var_dump($demoC2);</div><div class="line"></div><div class="line"><span class="comment">// Demo 4</span></div><div class="line">$brands = [];</div><div class="line">$models = [];</div><div class="line"><span class="keyword">foreach</span> ($graphics_card <span class="keyword">as</span> $item) &#123;</div><div class="line">    $brands[] = $item[<span class="string">'brand'</span>];</div><div class="line">&#125;</div><div class="line"></div><div class="line">$models = array_map(<span class="function"><span class="keyword">function</span> <span class="params">($value)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> $value[<span class="string">'model'</span>];</div><div class="line">&#125;, $graphics_card);</div><div class="line"></div><div class="line">var_dump($brands);</div><div class="line">var_dump($models);</div><div class="line"><span class="comment">// 也可以使用 array_column 来实现 Demo 4 的效果</span></div><div class="line">var_dump(array_column($graphics_card, <span class="string">'brand'</span>));</div><div class="line">var_dump(array_column($graphics_card, <span class="string">'model'</span>));</div><div class="line"></div><div class="line"><span class="comment">// Demo5</span></div><div class="line">$items = [</div><div class="line">    <span class="string">'item1'</span>=&gt;<span class="string">'Hello'</span>,</div><div class="line">    <span class="string">'item2'</span>=&gt;<span class="string">'World'</span>,</div><div class="line">    <span class="string">'item3'</span>=&gt;<span class="string">'Luis'</span>,</div><div class="line">    <span class="string">'item4'</span>=&gt;<span class="string">'Edware'</span>,</div><div class="line">    <span class="string">'item5'</span>=&gt;<span class="string">'Ann'</span>,</div><div class="line">    <span class="string">'item6'</span>=&gt;<span class="string">'Eason'</span>,</div><div class="line">];</div><div class="line"></div><div class="line"><span class="keyword">foreach</span>($items <span class="keyword">as</span> $key =&gt; $value)&#123;</div><div class="line">	<span class="keyword">if</span>($key === <span class="string">'item1'</span>)&#123;</div><div class="line">		$items[$key] = <span class="string">'World'</span>;</div><div class="line">	&#125;<span class="keyword">elseif</span>($key === <span class="string">'item3'</span>)&#123;</div><div class="line">		$items[$key] = <span class="string">'Edware'</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">var_dump($items);</div><div class="line"></div><div class="line">$items_to_modify = [<span class="string">'item1'</span>=&gt;<span class="string">'Hello'</span>,<span class="string">'item3'</span>=&gt;<span class="string">'Luis'</span>];</div><div class="line">array_map(<span class="function"><span class="keyword">function</span><span class="params">($key,$value)</span> <span class="title">use</span><span class="params">(&amp;$items)</span> </span>&#123;</div><div class="line">    $items[$key] = $value;</div><div class="line">&#125;,array_keys($items_to_modify),$items_to_modify);</div><div class="line">var_dump($items);</div></pre></td></tr></table></figure>
+<h2 id="使用-array-map-实现-array-column-的效果"><a href="#使用-array-map-实现-array-column-的效果" class="headerlink" title="使用 array_map 实现 array_column 的效果"></a>使用 array_map 实现 array_column 的效果</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">array_pluck</span><span class="params">($key, $input)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (is_array($key) || !is_array($input)) <span class="keyword">return</span> <span class="keyword">array</span>();</div><div class="line">    $array = array_map(<span class="function"><span class="keyword">function</span><span class="params">($value)</span> <span class="title">use</span><span class="params">($key)</span></span>&#123;</div><div class="line">       <span class="keyword">if</span>(array_key_exists($key, $value)) <span class="keyword">return</span> $value[$key];</div><div class="line">    &#125;,$input);</div><div class="line">    <span class="keyword">return</span> $array;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var_dump(array_pluck(<span class="string">'brand'</span>,$graphics_card));</div><div class="line">var_dump(array_column($graphics_card,<span class="string">'brand'</span>));</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2016/11/21/关于-PHP-函数-array-map-的一些想法/" data-id="cj51rufgf00638z4bd24gbsja" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-使用-PHPStorm-的-Live-Templates-封装常用代码" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -102,7 +163,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/11/19/使用-PHPStorm-的-Live-Templates-封装常用代码/" data-id="cj505udz4004nl34bk0z1wm63" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/11/19/使用-PHPStorm-的-Live-Templates-封装常用代码/" data-id="cj51ruffr004p8z4b9egpee5t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -142,7 +203,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/11/03/Yii-框架之工具篇/" data-id="cj505udxb002ll34buxr7ctj7" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/11/03/Yii-框架之工具篇/" data-id="cj51rufe9002p8z4b5unipo9w" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -212,7 +273,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/29/Yii-框架之安全篇/" data-id="cj505udxe002sl34b9wbhg8j4" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/29/Yii-框架之安全篇/" data-id="cj51rufe5002i8z4bey2q4700" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -270,7 +331,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/29/Yii-框架之扩展篇/" data-id="cj505udxa002il34blm8rhn41" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/29/Yii-框架之扩展篇/" data-id="cj51rufed002s8z4bq8rf2bfh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -542,7 +603,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/25/Yii-框架之基础篇/" data-id="cj505udxd002ol34bqyepmr9f" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/25/Yii-框架之基础篇/" data-id="cj51rufe7002l8z4bw9cvizd9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -645,7 +706,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/25/Yii-框架之高效篇/" data-id="cj505udxh002vl34b5nno1ir8" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/25/Yii-框架之高效篇/" data-id="cj51rufej002z8z4bg6ypjo5h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -838,7 +899,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/20/打造扛得住的-MySQL-数据库架构/" data-id="cj505ue0q006wl34bg6hcil9z" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/20/打造扛得住的-MySQL-数据库架构/" data-id="cj51rufh2006z8z4blvcnwlql" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -1090,7 +1151,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/13/LNMP-性能优化之-MySQL-性能优化/" data-id="cj505udug0005l34bg60ik2gb" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/13/LNMP-性能优化之-MySQL-性能优化/" data-id="cj51rufc100058z4bdeioyqf0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -1344,121 +1405,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之条件判断语句/" data-id="cj505uduj0006l34b2b29xy7a" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Linux-Shell-基础之运算符" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/10/04/Linux-Shell-基础之运算符/" class="article-date">
-  <time datetime="2016-10-04T02:53:55.000Z" itemprop="datePublished">2016-10-04</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/04/Linux-Shell-基础之运算符/">Linux Shell 基础之运算符</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Shell-运算符"><a href="#Shell-运算符" class="headerlink" title="Shell 运算符"></a>Shell 运算符</h2><ul>
-<li>declare 声明变量<ul>
-<li><code>declare [+/-][选项] 变量名</code><ul>
-<li>- 给变量设定类型属性<ul>
-<li>-a 将变量声明为数组型</li>
-<li>-i 将变量声明为整数型</li>
-<li>-x 将变量声明为环境变量</li>
-<li>-r 将变量声明为只读变量</li>
-<li>-p 显示指定变量的被声明的类型</li>
-</ul>
-</li>
-<li>+ 取消变量的类型属性</li>
-</ul>
-</li>
-<li><code>declare -x test=123</code> 声明环境变量</li>
-</ul>
-</li>
-<li>declare -p 查询变量的属性<ul>
-<li><code>declare -p</code> 查询所有变量的属性</li>
-<li><code>declare -p 变量名</code> 查询指定变量的属性</li>
-</ul>
-</li>
-<li>expr 或 let 数值运算工具</li>
-</ul>
-<h2 id="Shell-运算符-例子"><a href="#Shell-运算符-例子" class="headerlink" title="Shell 运算符 例子"></a>Shell 运算符 例子</h2><h3 id="Shell-declare-例子"><a href="#Shell-declare-例子" class="headerlink" title="Shell declare 例子"></a>Shell declare 例子</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># 给变量 aa 和 bb 赋值</div><div class="line">aa=11</div><div class="line">bb=22</div><div class="line"></div><div class="line"># 声明变量 cc 的类型是整数型，它的值是 aa 和 bb 的和</div><div class="line">declare -i cc=$aa+$bb</div></pre></td></tr></table></figure>
-<h3 id="声明数组变量例子"><a href="#声明数组变量例子" class="headerlink" title="声明数组变量例子"></a>声明数组变量例子</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"># 定义数组</div><div class="line">movie[0]=zp</div><div class="line">movie[1]=tp</div><div class="line">declare -a movie[2]=live</div><div class="line"></div><div class="line"># 查看数组</div><div class="line">echo $&#123;movie&#125;</div><div class="line">echo $&#123;movie[2]&#125;</div><div class="line">echo $&#123;movie[*]&#125;</div></pre></td></tr></table></figure>
-<h2 id="Shell-环境变量配置文件"><a href="#Shell-环境变量配置文件" class="headerlink" title="Shell 环境变量配置文件"></a>Shell 环境变量配置文件</h2><p>环境变量配置文件中主要是定义对系统操作环境生效的系统默认环境变量，如 PATH 等</p>
-<ul>
-<li>source 命令<ul>
-<li><code>source 配置文件</code></li>
-<li><code>. 配置文件</code></li>
-</ul>
-</li>
-<li>常用的环境变量配置文件<ul>
-<li>/etc/profile<ul>
-<li>USER 变量</li>
-<li>LOGNAME 变量</li>
-<li>MAIL 变量</li>
-<li>PATH 变量</li>
-<li>HOSTNAME 变量</li>
-<li>HISTSIZE 变量</li>
-<li>umask 查看系统默认权限<ul>
-<li>文件最高权限为 666</li>
-<li>目录最高权限为 777</li>
-<li>权限不能使用数字进行换算，而必须使用字母</li>
-<li>umask 定义的权限，是系统默认权限中准备丢弃的权限</li>
-</ul>
-</li>
-<li>调用 /etc/profile.d/*sh 文件</li>
-</ul>
-</li>
-<li>/etc/profile.d/*sh</li>
-<li>~/.bash_profile</li>
-<li>~/.bashrc</li>
-<li>/etc/bashrc</li>
-</ul>
-</li>
-<li>其他配置文件<ul>
-<li><code>~/.bash_logout</code> 注销时生效的环境变量配置文件</li>
-</ul>
-</li>
-<li>Shell 登录信息<ul>
-<li><code>cat /etc/issue</code> 本地终端欢迎信息</li>
-<li><code>cat /etc/issue.net</code> 远程终端欢迎信息<ul>
-<li>转义符在 <code>/etc/issue.net</code> 文件中不能使用</li>
-<li>是否显示此欢迎信息，由 SSH 的配置文件 <code>/etc/ssh/sshd_config</code> 决定，加入 “Banner /etc/issue.net” 行才能显示（需要重启 SSH 服务）</li>
-</ul>
-</li>
-<li><code>/etc/motd</code> 登陆后欢迎信息，不管是本地登录，还是远程登录，都可以显示此欢迎信息</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之运算符/" data-id="cj505udv7000ll34bgq2vy6zl" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之条件判断语句/" data-id="cj51rufcb000c8z4bp5f97xzv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1481,7 +1428,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Kategorier</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -1493,7 +1440,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
     </div>
   </div>
 
@@ -1503,14 +1450,14 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
+      <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Arkiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
@@ -1520,9 +1467,13 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Siste innlegg</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/07/12/TypeScript-入门/">TypeScript 入门</a>
+          </li>
         
           <li>
             <a href="/2017/07/06/「复盘」Yii-RESTful-API-脚手架/">「复盘」Yii RESTful API 脚手架</a>
@@ -1538,10 +1489,6 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
         
           <li>
             <a href="/2017/06/05/LNMP-中常用的-Linux-命令/">LNMP 中常用的 Linux 命令</a>
-          </li>
-        
-          <li>
-            <a href="/2017/06/02/mysqldumpslow-参数讲解与基础使用/">mysqldumpslow 参数讲解与基础使用</a>
           </li>
         
       </ul>
