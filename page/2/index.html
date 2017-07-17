@@ -54,7 +54,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -64,6 +64,120 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-高性能的-PHP-日志系统" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/25/高性能的-PHP-日志系统/" class="article-date">
+  <time datetime="2017-05-24T22:47:01.000Z" itemprop="datePublished">2017-05-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/25/高性能的-PHP-日志系统/">高性能的 PHP 日志系统</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="课程目的"><a href="#课程目的" class="headerlink" title="课程目的"></a>课程目的</h2><ol>
+<li>了解为什么需要日志功能</li>
+<li>学会使用高性能的 SeasLog</li>
+<li>如何在实际的项目中使用 SeasLog</li>
+</ol>
+<h2 id="什么是日志系统"><a href="#什么是日志系统" class="headerlink" title="什么是日志系统"></a>什么是日志系统</h2><p>专门记录系统运行时的信息的系统</p>
+<p>日志的分类：</p>
+<ul>
+<li>系统日志：硬件或系统内核奔溃了</li>
+<li>服务日志：MySQL 服务或 PHP-FPM 服务奔溃了</li>
+<li>安全日志：MySQL 或 Linux 服务器受到了入侵，需要记录相关信息</li>
+<li>应用日志：队列发送消息或邮件成功时记录相关信息</li>
+</ul>
+<p>然后日志系统的功能不能影响到其他正常功能的使用。</p>
+<h2 id="为什么需要日志功能"><a href="#为什么需要日志功能" class="headerlink" title="为什么需要日志功能"></a>为什么需要日志功能</h2><ol>
+<li>了解系统运行情况</li>
+<li>记录用户操作信息</li>
+<li>收集程序各项数据</li>
+</ol>
+<h2 id="为什么使用-SeasLog"><a href="#为什么使用-SeasLog" class="headerlink" title="为什么使用 SeasLog"></a>为什么使用 SeasLog</h2><ol>
+<li>高性能；SeasLog 是采用 C 语言编写的，而且它自带缓冲池的功能,先写入内存，再一次性写入文件</li>
+<li>无需配置</li>
+<li>功能完善，使用简单，自带分类模块，统计功能。</li>
+</ol>
+<h2 id="如何安装-SeasLog-扩展"><a href="#如何安装-SeasLog-扩展" class="headerlink" title="如何安装 SeasLog 扩展"></a>如何安装 SeasLog 扩展</h2><ul>
+<li>tar 解压</li>
+<li>phpize</li>
+<li>./config || ./config –with-php-config=PHP-CLI-PATH</li>
+<li>make &amp;&amp; make install</li>
+<li>返回 seaslog.so 扩展安装地址</li>
+<li>打开 php.ini 文件，将安装地址写入 php.ini</li>
+<li>重启 PHP-FPM 和 Web Server</li>
+</ul>
+<h2 id="SeasLog-配置项"><a href="#SeasLog-配置项" class="headerlink" title="SeasLog 配置项"></a>SeasLog 配置项</h2><ul>
+<li>seaslog.default_basepath：默认 log 根目录</li>
+<li>seaslog.default_logger：默认 logger 目录</li>
+<li>seaslog.disting_type：是否以 type 分文件</li>
+<li>seaslog.disting_by_hour：是否每小时划分一个文件</li>
+<li>seaslog.use_buffer：是否启用 use_buffer</li>
+<li>seaslog.buffer_size：buffer 中缓冲数量</li>
+<li>seaslog.level：记录日志级别</li>
+<li>seaslog.trace_error：自动记录错误</li>
+<li>seaslog.trace_exception：自动记录异常信息</li>
+</ul>
+<h2 id="Seaslog-常用方法"><a href="#Seaslog-常用方法" class="headerlink" title="Seaslog 常用方法"></a>Seaslog 常用方法</h2><ul>
+<li>配置方法<ul>
+<li>setBasePath 设置存放路径</li>
+<li>getBasePath 获取存放路径</li>
+<li>setLogger 配置模块</li>
+<li>getLastLogger 获取模块</li>
+</ul>
+</li>
+<li>写日志方法<ul>
+<li>log</li>
+<li>info</li>
+<li>notice</li>
+<li>debug</li>
+<li>warning</li>
+<li>error</li>
+</ul>
+</li>
+<li>读日志方法<ul>
+<li>analyzerCount</li>
+<li>analyzerDetail</li>
+</ul>
+</li>
+</ul>
+<h2 id="Seaslog-集成与-PHP-框架中"><a href="#Seaslog-集成与-PHP-框架中" class="headerlink" title="Seaslog 集成与 PHP 框架中"></a>Seaslog 集成与 PHP 框架中</h2><p>查看框架代码，使用适配器模式</p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ul>
+<li>不要在虚拟主机中使用 SeasLog，它需要安装配置 PHP 扩展，确保对虚拟主机有足够的权限再操作</li>
+<li>不要在集群服务中使用 SeasLog，它职责更多是本地日志存储，集群服务需要支持网络日志存储的服务</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2017/05/25/高性能的-PHP-日志系统/" data-id="cj58p2yyy007rwn4bnrh4y1sv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-LNMP-性能优化之-PHP-性能优化" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -228,7 +342,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/05/24/LNMP-性能优化之-PHP-性能优化/" data-id="cj583xgwq0006jl4bylfcq0p0" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/05/24/LNMP-性能优化之-PHP-性能优化/" data-id="cj58p2yuh0006wn4b3f7gpdvp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -397,7 +511,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/05/23/PHP-的性能优化/" data-id="cj583xgzz0023jl4bnfobe0ek" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/05/23/PHP-的性能优化/" data-id="cj58p2yw8002ewn4bx0qgy0rt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -463,7 +577,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/04/24/设计模式之抽象工厂模式/" data-id="cj583xh4f006wjl4bq6s0wdsp" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/04/24/设计模式之抽象工厂模式/" data-id="cj58p2yyx007nwn4ba8f83mqw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pattern/">Pattern</a></li></ul>
@@ -548,7 +662,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/04/21/设计模式之工厂方法模式/" data-id="cj583xh4h0074jl4bapiv64hj" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/04/21/设计模式之工厂方法模式/" data-id="cj58p2yyu007fwn4bql9ssrod" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pattern/">Pattern</a></li></ul>
@@ -651,7 +765,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/04/20/设计模式之简单工厂模式/" data-id="cj583xh4j0079jl4b4vy8vi67" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/04/20/设计模式之简单工厂模式/" data-id="cj58p2yyw007kwn4bd26ee3xv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pattern/">Pattern</a></li></ul>
@@ -715,7 +829,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/04/05/使用-Laravel-5-3-Vue-js-2-1-开发知乎/" data-id="cj583xh2d003ujl4btxmov2kk" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/04/05/使用-Laravel-5-3-Vue-js-2-1-开发知乎/" data-id="cj58p2yx70046wn4bs2wtn3t6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -757,7 +871,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/23/学习-Javascript-之类型/" data-id="cj583xh42006ijl4btktj7c37" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/03/23/学习-Javascript-之类型/" data-id="cj58p2yyi006lwn4byci23n0r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
@@ -841,7 +955,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/23/学习-Javascript-之变量/" data-id="cj583xh40006ajl4bhk68x28x" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/03/23/学习-Javascript-之变量/" data-id="cj58p2yyl006own4btf4o4tss" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
@@ -929,53 +1043,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/20/Head-First-Design-Patterns/" data-id="cj583xgvo0000jl4bgs3tsx8c" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/03/20/Head-First-Design-Patterns/" data-id="cj58p2yu00001wn4bdf0cjuf9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Learning/">Learning</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-「Tips」Yii2-前端请求的参数字段映射数据模型的属性" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/03/15/「Tips」Yii2-前端请求的参数字段映射数据模型的属性/" class="article-date">
-  <time datetime="2017-03-15T09:18:34.000Z" itemprop="datePublished">2017-03-15</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/15/「Tips」Yii2-前端请求的参数字段映射数据模型的属性/">「Tips」Yii2 前端请求的参数字段映射数据模型的属性</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>使用 Yii 2 构建 RESTFul API 项目时，需要实现一个功能。这个功能可以将 HTTP 请求的参数和后端数据模型相映射，让前端的请求参数命名和后端数据的模型属性不需要保持一致，并在指定场景中实现数据验证。实现代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">/*</span></div><div class="line"> * 前端传递 JSON 数据进来，格式是&#123;"name":"admin","pwd":"123456"&#125;</div><div class="line"> * 需要对数据在指定场景下验证，并对应到模型的 username 属性和 password_hash 属性</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="comment">// 模型代码</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SignInForm</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">public</span> $name;</div><div class="line">	<span class="keyword">public</span> $pwd;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">rules</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        $rules = [</div><div class="line">            [</div><div class="line">                [</div><div class="line">                    <span class="string">'name'</span>,</div><div class="line">                    <span class="string">'pwd'</span>,</div><div class="line">                ],</div><div class="line">                <span class="string">'required'</span>,</div><div class="line">                <span class="string">'on'</span> =&gt; <span class="string">'signIn'</span>,</div><div class="line">            ],</div><div class="line">            [</div><div class="line">                [<span class="string">'name'</span>],</div><div class="line">                <span class="string">'default'</span>,</div><div class="line">                <span class="string">'value'</span> =&gt; <span class="keyword">$this</span>-&gt;username,</div><div class="line">                <span class="string">'on'</span> =&gt; <span class="string">'signIn'</span>,</div><div class="line">            ],</div><div class="line">            [</div><div class="line">                [<span class="string">'pwd'</span>],</div><div class="line">                <span class="string">'default'</span>,</div><div class="line">                <span class="string">'value'</span> =&gt; <span class="keyword">$this</span>-&gt;password_hash,</div><div class="line">                <span class="string">'on'</span> =&gt; <span class="string">'signIn'</span>,</div><div class="line">            ],</div><div class="line">        ];</div><div class="line"></div><div class="line">        <span class="keyword">return</span> $rules;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 控制器代码</span></div><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">Yii</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">workerbee</span>\<span class="title">api</span>\<span class="title">controllers</span>\<span class="title">BaseController</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserController</span> <span class="keyword">extends</span> <span class="title">BaseController</span></span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">actionSignIn</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        $data[<span class="string">'SignInForm'</span>] = Yii::$app-&gt;request-&gt;post();</div><div class="line">        $signInModel = <span class="keyword">new</span> SignInForm([<span class="string">'scenario'</span> =&gt; <span class="string">'signIn'</span>]);</div><div class="line"></div><div class="line">        <span class="keyword">if</span> ($signInModel-&gt;load($data) &amp;&amp; $signInModel-&gt;validate()) &#123;</div><div class="line">            $user = SignInForm::findByUsername($signInModel-&gt;username);</div><div class="line">            $validator = Yii::$app-&gt;getSecurity()-&gt;validatePassword($signInModel-&gt;pwd, $user-&gt;password_hash);</div><div class="line">            <span class="keyword">if</span> ($user !== <span class="keyword">null</span> &amp;&amp; $validator) &#123;</div><div class="line">                $user-&gt;access_token = $signInModel-&gt;getNewAccessToken();</div><div class="line">                <span class="keyword">if</span> ($user-&gt;save()) &#123;</div><div class="line">                    <span class="keyword">return</span> $user;</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> ServerErrorHttpException(<span class="string">'登陆失败.'</span>);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> BadRequestHttpException(<span class="string">'账号名或密码错误.'</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnprocessableEntityHttpException(<span class="string">'数据验证失败.'</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」Yii2-前端请求的参数字段映射数据模型的属性/" data-id="cj583xh1o003djl4bhwf3s56q" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
 
     </footer>
   </div>
@@ -995,7 +1066,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Kategorier</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -1024,7 +1095,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Arkiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
@@ -1034,9 +1105,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Siste innlegg</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/07/18/学习数据建模/">学习数据建模</a>
+          </li>
         
           <li>
             <a href="/2017/07/12/TypeScript-入门/">TypeScript 入门</a>
@@ -1052,10 +1127,6 @@
         
           <li>
             <a href="/2017/06/27/使用-Vue-js-2-0-开发后台/">使用 Vue.js 2.0 开发后台</a>
-          </li>
-        
-          <li>
-            <a href="/2017/06/05/LNMP-中常用的-Linux-命令/">LNMP 中常用的 Linux 命令</a>
           </li>
         
       </ul>

@@ -54,7 +54,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -64,6 +64,260 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Linux-Shell-基础之条件判断语句" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/04/Linux-Shell-基础之条件判断语句/" class="article-date">
+  <time datetime="2016-10-04T02:56:05.000Z" itemprop="datePublished">2016-10-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/04/Linux-Shell-基础之条件判断语句/">Linux Shell 基础之条件判断语句</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Shell-条件判断式语句"><a href="#Shell-条件判断式语句" class="headerlink" title="Shell 条件判断式语句"></a>Shell 条件判断式语句</h2><h3 id="按文件类型判断"><a href="#按文件类型判断" class="headerlink" title="按文件类型判断"></a>按文件类型判断</h3><table>
+<thead>
+<tr>
+<th>测试选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-b 文件</td>
+<td>判断该文件是否存在，并且是否为块设备文件</td>
+</tr>
+<tr>
+<td>-c 文件</td>
+<td>判断该文件是否存在，并且是否为字符设备文件</td>
+</tr>
+<tr>
+<td>-d 文件</td>
+<td>判断该文件是否存在，并且是否为目录文件</td>
+</tr>
+<tr>
+<td>-e 文件</td>
+<td>判断该文件是否存在（存在为真）</td>
+</tr>
+<tr>
+<td>-f 文件</td>
+<td>判断该文件是否存在，并且是否为普通文件</td>
+</tr>
+<tr>
+<td>-L 文件</td>
+<td>判断该文件是否存在，并且是否为符号链接文件</td>
+</tr>
+<tr>
+<td>-p 文件</td>
+<td>判断该文件是否存在，并且是否为管道文件</td>
+</tr>
+<tr>
+<td>-s 文件</td>
+<td>判断该文件是否存在，并且是否为非空</td>
+</tr>
+<tr>
+<td>-S 文件</td>
+<td>判断该文件是否存在，并且是否为套接字文件</td>
+</tr>
+</tbody>
+</table>
+<p>两种判断格式</p>
+<ul>
+<li><code>test -e /root/install.log</code></li>
+<li><code>[ -e /root/install.log ]</code></li>
+<li><code>[ -e /root/install.log ] &amp;&amp; echo yes || echo no</code></li>
+</ul>
+<h3 id="按文件权限判断"><a href="#按文件权限判断" class="headerlink" title="按文件权限判断"></a>按文件权限判断</h3><table>
+<thead>
+<tr>
+<th>测试选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-r 文件</td>
+<td>判断该文件是否存在，并且是否该文件拥有读权限</td>
+</tr>
+<tr>
+<td>-w 文件</td>
+<td>判断该文件是否存在，并且是否该文件拥有写权限</td>
+</tr>
+<tr>
+<td>-x 文件</td>
+<td>判断该文件是否存在，并且是否该文件拥有执行权限</td>
+</tr>
+<tr>
+<td>-u 文件</td>
+<td>判断该文件是否存在，并且是否该文件拥有 SUID 权限</td>
+</tr>
+<tr>
+<td>-g 文件</td>
+<td>判断该文件是否存在，并且是否该文件拥有 SGID 权限</td>
+</tr>
+<tr>
+<td>-k 文件</td>
+<td>判断该文件是否存在，并且是否该文件拥有 SBit 权限</td>
+</tr>
+</tbody>
+</table>
+<h3 id="两个文件之间的比较"><a href="#两个文件之间的比较" class="headerlink" title="两个文件之间的比较"></a>两个文件之间的比较</h3><table>
+<thead>
+<tr>
+<th>测试选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>文件1 -nt 文件2</td>
+<td>判断文件 1 的修改时间是否比文件 2 的新</td>
+</tr>
+<tr>
+<td>文件1 -ot 文件2</td>
+<td>判断文件 1 的修改时间是否比文件 2 的旧</td>
+</tr>
+<tr>
+<td>文件1 -ef 文件2</td>
+<td>判断文件 1 是否和文件 2 的 Inode 号一致，可以理解为两个文件是否为同一个文件，这个判断用于硬链接判断是很好的方法</td>
+</tr>
+</tbody>
+</table>
+<p>例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># 创建一个硬链接</div><div class="line">ln /root/student.txt/tmp/stu.txt</div><div class="line"></div><div class="line"># 测试</div><div class="line">[/root/student.txt -ef /tmp/stu.txt] &amp;&amp; echo &quot;yes&quot; || echo &quot;no&quot;</div></pre></td></tr></table></figure></p>
+<h3 id="两个整数之间的比较"><a href="#两个整数之间的比较" class="headerlink" title="两个整数之间的比较"></a>两个整数之间的比较</h3><table>
+<thead>
+<tr>
+<th>测试选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>整数1 -eq 整数2</td>
+<td>判断整数 1 是否和整数 2 相等</td>
+</tr>
+<tr>
+<td>整数1 -ne 整数2</td>
+<td>判断整数 1 是否和整数 2 不相等</td>
+</tr>
+<tr>
+<td>整数1 -gt 整数2</td>
+<td>判断整数 1 是否大于整数 2</td>
+</tr>
+<tr>
+<td>整数1 -lt 整数2</td>
+<td>判断整数 1 是否小于整数 2</td>
+</tr>
+<tr>
+<td>整数1 -ge 整数2</td>
+<td>判断整数 1 是否大于等于整数 2</td>
+</tr>
+<tr>
+<td>整数1 -le 整数2</td>
+<td>判断整数 1 是否小于等于整数 2</td>
+</tr>
+</tbody>
+</table>
+<p>例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[ 23 -ge 22 ] &amp;&amp; echo &quot;yes&quot; || echo &quot;no&quot;</div><div class="line">[ 23 -le 22 ] &amp;&amp; echo &quot;yes&quot; || echo &quot;no&quot;</div></pre></td></tr></table></figure>
+<h3 id="字符串的判断"><a href="#字符串的判断" class="headerlink" title="字符串的判断"></a>字符串的判断</h3><table>
+<thead>
+<tr>
+<th>测试选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-z</td>
+<td>判断字符串是否为空</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>判断字符串是否为非空</td>
+</tr>
+<tr>
+<td>字符串1==字符串2</td>
+<td>判断字符串 1 是否和字符串 2 相等</td>
+</tr>
+<tr>
+<td>字符串1!=字符串2</td>
+<td>判断字符串 1 是否和字符串 2 不相等</td>
+</tr>
+</tbody>
+</table>
+<p>例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"># 给 name 变量赋值</div><div class="line">name=fengj</div><div class="line"></div><div class="line"># 判断 name 变量是否为空</div><div class="line">[ -z &quot;$name&quot; ] &amp;&amp; echo &quot;yes&quot; || echo &quot;no&quot;</div><div class="line"></div><div class="line"># 给变量 aa 和变量 bb 赋值</div><div class="line">aa=11</div><div class="line">bb=22</div><div class="line"></div><div class="line"># 判断两个变量的值是否相等</div><div class="line">[ &quot;$aa&quot; == &quot;$bb&quot; ] &amp;&amp; echo yes || echo no</div></pre></td></tr></table></figure></p>
+<h3 id="多重条件判断"><a href="#多重条件判断" class="headerlink" title="多重条件判断"></a>多重条件判断</h3><table>
+<thead>
+<tr>
+<th>测试选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>判断1 -a 判断2</td>
+<td>逻辑与，判断 1 和判断 2 都成立，最终的结果才为真</td>
+</tr>
+<tr>
+<td>判断1 -o 判断2</td>
+<td>逻辑或，判断 1 和判断 2 有一个成立，最终的结果就为真</td>
+</tr>
+<tr>
+<td>! 判断</td>
+<td>逻辑非，使原始的判断式取反</td>
+</tr>
+</tbody>
+</table>
+<p>例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># 给变量 aa 赋值</div><div class="line">aa=11</div><div class="line"></div><div class="line"># 判断变量 aa 是否有值，同时判断变量 aa 是否大于 23</div><div class="line">[ -n &quot;$aa&quot; -a &quot;$aa&quot; -gt 23 ] &amp;&amp; echo &quot;yes&quot; || echo &quot;no&quot;</div></pre></td></tr></table></figure></p>
+<h2 id="Shell-单分支if语句"><a href="#Shell-单分支if语句" class="headerlink" title="Shell 单分支if语句"></a>Shell 单分支if语句</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>如何 “背” 程序</p>
+<ol>
+<li>抄写目标程序并能正确运行</li>
+<li>为目标程序补全注释</li>
+<li>删掉注释，为代码重新加注释</li>
+<li>删除代码，看注释写代码</li>
+<li>删除注释和代码，从头开始写</li>
+</ol>
+<h3 id="单分支-if-语句"><a href="#单分支-if-语句" class="headerlink" title="单分支 if 语句"></a>单分支 if 语句</h3><p>语法支持<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">if [ 条件判断式 ];then</div><div class="line">	程序</div><div class="line">fi</div><div class="line"></div><div class="line">if [ 条件判断式 ]</div><div class="line">	then</div><div class="line">	程序</div><div class="line">fi</div></pre></td></tr></table></figure></p>
+<p>例子1：判断登录的用户是否为 root<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">test=$(env|grep &quot;USER&quot; |cut -d &quot;=&quot; -f2)</div><div class="line"></div><div class="line">if [ &quot;$test&quot; == root ]</div><div class="line">	then</div><div class="line">	echo &quot;Current user is root.&quot;</div><div class="line">fi</div></pre></td></tr></table></figure></p>
+<h3 id="单分支-if-语句例子：判断分区使用率"><a href="#单分支-if-语句例子：判断分区使用率" class="headerlink" title="单分支 if 语句例子：判断分区使用率"></a>单分支 if 语句例子：判断分区使用率</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line"># 统计根分区使用率，把根分区使用率作为变量值赋予变量 rate</div><div class="line">rate=$(df -h | grep &quot;/dev/disk1&quot; | awk &apos;&#123;print $5&#125;&apos; | cut -d &quot;%&quot; -f 1)</div><div class="line"></div><div class="line">if [ $rate -ge 70 ]</div><div class="line">then</div><div class="line">	echo &quot;Warning! /dev/disk1 is full!!&quot;</div><div class="line">fi</div></pre></td></tr></table></figure>
+<h2 id="Shell-双分支if语句"><a href="#Shell-双分支if语句" class="headerlink" title="Shell 双分支if语句"></a>Shell 双分支if语句</h2><p>语法支持<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">if [ 条件判断式 ]</div><div class="line">	then</div><div class="line">		条件成立时，执行的程序</div><div class="line">	else</div><div class="line">		条件不成立时，执行的另一个程序</div><div class="line">fi</div></pre></td></tr></table></figure></p>
+<h3 id="双分支-if-语句例子：判断输入的是否是一个目录"><a href="#双分支-if-语句例子：判断输入的是否是一个目录" class="headerlink" title="双分支 if 语句例子：判断输入的是否是一个目录"></a>双分支 if 语句例子：判断输入的是否是一个目录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">read -t 30 -p &quot;Please input a dir:&quot; dir</div><div class="line"></div><div class="line">if [ -d &quot;$dir&quot; ]</div><div class="line">then</div><div class="line">    echo &quot;is a Dir&quot;</div><div class="line">else</div><div class="line">    echo &quot;is not a Dir&quot;</div><div class="line">fi</div></pre></td></tr></table></figure>
+<h3 id="双分支-if-语句例子：判断Apache服务是否启动"><a href="#双分支-if-语句例子：判断Apache服务是否启动" class="headerlink" title="双分支 if 语句例子：判断Apache服务是否启动"></a>双分支 if 语句例子：判断Apache服务是否启动</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line"># 列出所有进程，选取 httpd 进程，反选 grep</div><div class="line">test=$(ps aux | grep httpd | grep -v grep)</div><div class="line"></div><div class="line">if [ -n &quot;$test&quot; ]</div><div class="line">	then</div><div class="line">		echo &quot;$(date) httpd is ok!&quot; &gt;&gt; /tmp/autostart-acc.log</div><div class="line">	else</div><div class="line">		sudo apachectl restart  &amp;&gt; /dev/null</div><div class="line">		echo &quot;$(date) restart httpd !!&quot; &gt;&gt; /tmp/autostart-err.log</div><div class="line">fi</div></pre></td></tr></table></figure>
+<h2 id="Shell-多分支-if-语句"><a href="#Shell-多分支-if-语句" class="headerlink" title="Shell 多分支 if 语句"></a>Shell 多分支 if 语句</h2><p>语言支持：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">if [ 条件判断式 1 ]</div><div class="line">	then</div><div class="line">		条件成立 1 时，执行的程序</div><div class="line">elif [ 条件判断式 2 ]</div><div class="line">	then</div><div class="line">		条件成立 2 时，执行的程序</div><div class="line">else</div><div class="line">		条件不成立时，执行的另一个程序</div><div class="line">fi</div></pre></td></tr></table></figure></p>
+<h3 id="多分支-if-语句例子：判断用户输入的是什么文件"><a href="#多分支-if-语句例子：判断用户输入的是什么文件" class="headerlink" title="多分支 if 语句例子：判断用户输入的是什么文件"></a>多分支 if 语句例子：判断用户输入的是什么文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"># 判断用户输出的是什么文件</div><div class="line"></div><div class="line"># 接受键盘的输入，并赋予变量file</div><div class="line">read -p &quot;Please input a filename:&quot; file</div><div class="line"></div><div class="line"># 判断变量是否为空</div><div class="line">if [ -z &quot;$file&quot; ]</div><div class="line">then</div><div class="line">	echo &quot;Error,Please input a filename&quot;</div><div class="line">	exit 1</div><div class="line"># 判断 file 的值是否存在</div><div class="line">elif [ ! -e &quot;$file&quot; ]</div><div class="line">then</div><div class="line">	echo &quot;Your input is not a file!&quot;</div><div class="line">	exit 2</div><div class="line"># 判断 file 的值是否为普通文件</div><div class="line">elif [ -f &quot;$file&quot; ]</div><div class="line">then</div><div class="line">	echo &quot;$file is a regulare file!&quot;</div><div class="line"># 判断 file 的值是否为目录文件</div><div class="line">then</div><div class="line">	echo &quot;$file is a directory!&quot;</div><div class="line">else</div><div class="line">	echo &quot;$file is an other file!&quot;</div></pre></td></tr></table></figure>
+<h2 id="Shell-多分支case语句"><a href="#Shell-多分支case语句" class="headerlink" title="Shell 多分支case语句"></a>Shell 多分支case语句</h2><p>语法支持<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">case $变量名 in</div><div class="line">	&quot;值1&quot;)</div><div class="line">		如果变量的值等于值 1，则执行程序1</div><div class="line">	;;</div><div class="line">	&quot;值2&quot;)</div><div class="line">		如果变量的值等于值 2，则执行程序2</div><div class="line">	;;</div><div class="line">	*)</div><div class="line">		如果变量的值都不是以上的值，则执行此程序</div><div class="line">	;;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之条件判断语句/" data-id="cj58p2yun000cwn4bgg5rtr4p" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-Linux-Shell-基础之运算符" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -167,7 +421,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之运算符/" data-id="cj583xgxv000ljl4bi3ikxmzt" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之运算符/" data-id="cj58p2yuv000lwn4boz044egl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -355,7 +609,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之变量/" data-id="cj583xgwi0005jl4bt1y6i83f" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之变量/" data-id="cj58p2yuk000awn4barqwwf4r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -400,7 +654,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/03/Linux-Shell-实战/" data-id="cj583xgxp000fjl4bi9wsdl42" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/10/03/Linux-Shell-实战/" data-id="cj58p2yut000hwn4b5xdqkb28" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -559,7 +813,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/30/Linux-权限管理/" data-id="cj583xgy7000yjl4bl1xpx49v" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/30/Linux-权限管理/" data-id="cj58p2yux000nwn4bdlhde0z5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -798,7 +1052,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/27/Linux-软件安装/" data-id="cj583xgys0016jl4bm5l49u4y" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/27/Linux-软件安装/" data-id="cj58p2yvb0016wn4bxr45kea1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1051,7 +1305,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/26/Linux-定时任务/" data-id="cj583xgy6000vjl4bttq2i0ft" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/26/Linux-定时任务/" data-id="cj58p2yv3000ywn4bttue95m5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1432,7 +1686,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/24/Linux-系统管理/" data-id="cj583xgyk0013jl4bjmr76uts" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/24/Linux-系统管理/" data-id="cj58p2yv90013wn4bf90pewqr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1601,7 +1855,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/23/Linux-服务管理/" data-id="cj583xgy4000sjl4bz295n419" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/23/Linux-服务管理/" data-id="cj58p2yv2000vwn4bgy2eu85n" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1840,386 +2094,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/22/Linux-Shell-基础之正则表达式/" data-id="cj583xgxs000hjl4b3f6mn58e" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Linux-网络基础" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/20/Linux-网络基础/" class="article-date">
-  <time datetime="2016-09-20T12:33:54.000Z" itemprop="datePublished">2016-09-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/20/Linux-网络基础/">Linux 网络基础</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="网络基础"><a href="#网络基础" class="headerlink" title="网络基础"></a>网络基础</h2><h3 id="ISO-OSI-七层模型简介"><a href="#ISO-OSI-七层模型简介" class="headerlink" title="ISO / OSI 七层模型简介"></a>ISO / OSI 七层模型简介</h3><ul>
-<li>ISO：国际标准化组织</li>
-<li>OSI：开放系统互联模型<ul>
-<li>OSI 的七层模型<ul>
-<li>应用层 - APDU<ul>
-<li>APDU 是应用协议数据单元</li>
-</ul>
-</li>
-<li>表示层 - PPDU<ul>
-<li>PPDU 是表示层协议数据单元</li>
-</ul>
-</li>
-<li>会话层 - SPDU<ul>
-<li>SPDU 是会话协议数据单元</li>
-</ul>
-</li>
-<li>传输层 - TPDU<ul>
-<li>TPDU 是传输协议数据单元</li>
-</ul>
-</li>
-<li>网络层 - 报文<ul>
-<li>IP 地址负责外网通信</li>
-</ul>
-</li>
-<li>数据链路层 - 帧<ul>
-<li>MAC 地址负责局域网通信</li>
-</ul>
-</li>
-<li>物理层 - 比特</li>
-</ul>
-</li>
-<li>数据发送时候，从上层向下层传递；数据接收时候，从下层向上层传递。</li>
-</ul>
-</li>
-</ul>
-<h3 id="ISO-OSI-七层模型详解"><a href="#ISO-OSI-七层模型详解" class="headerlink" title="ISO / OSI 七层模型详解"></a>ISO / OSI 七层模型详解</h3><ul>
-<li>应用层 - APDU<ul>
-<li>用户接口</li>
-</ul>
-</li>
-<li>表示层 - PPDU<ul>
-<li>数据的表现形式、特定功能的实现如-加密</li>
-</ul>
-</li>
-<li>会话层 - SPDU<ul>
-<li>对应用会话的管理、同步</li>
-</ul>
-</li>
-<li>传输层 - TPDU<ul>
-<li>可靠与不可靠的传输、传输前的错误检测、流控</li>
-</ul>
-</li>
-<li>网络层 - 报文<ul>
-<li>提供逻辑地址、选路</li>
-</ul>
-</li>
-<li>数据链路层 - 帧<ul>
-<li>城帧、用 MAC 地址访问媒介、错误检测与修正</li>
-</ul>
-</li>
-<li>物理层 - 比特<ul>
-<li>设备之间的比特流的传输、物理接口、电器特征等</li>
-</ul>
-</li>
-</ul>
-<h3 id="TCP-IP-四层模型"><a href="#TCP-IP-四层模型" class="headerlink" title="TCP / IP 四层模型"></a>TCP / IP 四层模型</h3><ul>
-<li>TCP / IP 四层模型<ul>
-<li>应用层 （对应 OSI 模型的应用层、表示层、会话层）<ul>
-<li>应用层对应于 OSI 参考模型的应用层、表示层、会话层，为用户提供所需要的各种服务，例如：FTP、Telnet、DNS、SMTP 等</li>
-</ul>
-</li>
-<li>传输层 （对应 OSI 模型的传输层）<ul>
-<li>传输层对应于 OSI 模型的传输层，为应用层实体提供端到端的通信功能，保证了数据包的顺序传送及数据的完整性。该层定义了两个主要的协议：传输控制协议（TCP）和用户数据协议（UDP）</li>
-</ul>
-</li>
-<li>网际互联层（对应 OSI 模型的网络层）<ul>
-<li>网际互联对应于 OSI 模型的网络层，主要解决主机到主机的通信问题。它所包含的协议涉及数据包在整个网络上的逻辑传输。该层有三个主要协议：网际协议（IP）、互联网组管理协议（IGMP）和互联网控制报文协议（ICMP）。</li>
-</ul>
-</li>
-<li>网络接口层（对应 OSI 模型的数据链路层、物理层）<ul>
-<li>网络接口层与 OSI 模型中的物理层和数据链路层相对应。它负责监视数据在主机和网络之间的交换。事实上，TCP /IP 本身并未定义该层的协议，而由参与互连的各网络使用自己的物理层和数据链路层协议，然后与 TCP / IP 的网络接口层进行连接。地址解析协议（ARP）工作在此层，即 OSI 参考模型的数据链路层。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>TCP / IP 三次握手（两军问题）</p>
-<p>数据封装过程</p>
-<table>
-<thead>
-<tr>
-<th>应用数据</th>
-<th>字节流（数据）</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>应用层</td>
-<td>FTP + 数据</td>
-</tr>
-<tr>
-<td>传输层</td>
-<td>TCP 头 + FTP + 数据</td>
-</tr>
-<tr>
-<td>网络层</td>
-<td>IP 头 + TCP 头 + FTP + 数据</td>
-</tr>
-<tr>
-<td>数据链路层</td>
-<td>以太帧头 + (IP 头 + TCP 头 + FTP + 数据) = IP 数据报</td>
-</tr>
-<tr>
-<td>最后</td>
-<td>以太帧头 + 目的地址 + 源地址 + 包类型 + 包数据（IP 数据报） + CRC</td>
-</tr>
-</tbody>
-</table>
-<h3 id="IP地址详解"><a href="#IP地址详解" class="headerlink" title="IP地址详解"></a>IP地址详解</h3><ul>
-<li>IP 包头<ul>
-<li>第一行<ul>
-<li>版本（4）</li>
-<li>头部长度（4）</li>
-<li>优先级和服务类型（8）</li>
-<li>总长度（16）</li>
-</ul>
-</li>
-<li>第二行<ul>
-<li>标识（16）</li>
-<li>标志（3）</li>
-<li>片偏移（13）</li>
-</ul>
-</li>
-<li>第三行<ul>
-<li>生存时间（8）</li>
-<li>协议（8）</li>
-<li>头部校验和（16）</li>
-</ul>
-</li>
-<li>第四行<ul>
-<li>源 IP 地址（32）</li>
-</ul>
-</li>
-<li>第五行<ul>
-<li>目的 IP 地址（32）</li>
-</ul>
-</li>
-<li>第六行<ul>
-<li>选项</li>
-</ul>
-</li>
-<li>第七行<ul>
-<li>数据</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>IP 地址分类</p>
-<table>
-<thead>
-<tr>
-<th>网络类别</th>
-<th>最大网络数</th>
-<th>IP 地址范围</th>
-<th>最大主机数</th>
-<th>私有 IP 地址范围</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>A</td>
-<td>126</td>
-<td>1.0.0.0 – 126.255.255.255</td>
-<td>2^24-2</td>
-<td>10.0.0.0 – 10.255.255.255</td>
-</tr>
-<tr>
-<td>B</td>
-<td>16384</td>
-<td>128.0.0.0 – 191.255.255.255</td>
-<td>2^16-2</td>
-<td>172.16.0.0 – 172.31.255.255</td>
-</tr>
-<tr>
-<td>C</td>
-<td>2098152</td>
-<td>192.0.0.0 – 223.255.255.255</td>
-<td>2^8-2</td>
-<td>192.168.0.0 – 192.168.255.255</td>
-</tr>
-</tbody>
-</table>
-<h3 id="子网掩码"><a href="#子网掩码" class="headerlink" title="子网掩码"></a>子网掩码</h3><h3 id="网关作用"><a href="#网关作用" class="headerlink" title="网关作用"></a>网关作用</h3><ul>
-<li>网关（Gateway）又称为网间连接器、协议转换器</li>
-<li>网关在网络层以上实现网络互连，是最复杂的网络互连设备，仅用于两个高层协议不同的网络互连</li>
-<li>网关既可以用于广域网互连，也可以用于局域网互连</li>
-<li>网关是一种充当转换重任的服务器或路由器</li>
-</ul>
-<h3 id="端口作用"><a href="#端口作用" class="headerlink" title="端口作用"></a>端口作用</h3><ul>
-<li>TCP 协议包头<ul>
-<li>第一行<ul>
-<li>源端口（16）</li>
-<li>目的端口（16）</li>
-</ul>
-</li>
-<li>第二行<ul>
-<li>序列号（32）</li>
-</ul>
-</li>
-<li>第三行<ul>
-<li>确认号（32）</li>
-</ul>
-</li>
-<li>第四行<ul>
-<li>数据偏移（4）</li>
-<li>保留（6）</li>
-<li>标志（6）</li>
-<li>窗口（16）</li>
-</ul>
-</li>
-<li>第五行<ul>
-<li>校验和（16）</li>
-<li>紧急指针（16）</li>
-</ul>
-</li>
-<li>第六行<ul>
-<li>选项</li>
-</ul>
-</li>
-<li>第七行<ul>
-<li>数据</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>UDP 协议包头<ul>
-<li>第一行<ul>
-<li>源端口（16）</li>
-<li>目的端口（16）</li>
-</ul>
-</li>
-<li>第二行<ul>
-<li>长度（16）</li>
-<li>校验和（16）</li>
-</ul>
-</li>
-<li>第三行<ul>
-<li>数据</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>常见端口号</p>
-<ul>
-<li>FTP（文件传输协议）：20 21</li>
-<li>SSH（安全 Shell 协议）：22</li>
-<li>TELNET（远程登录协议）：23</li>
-<li>DNS（域名系统）：53</li>
-<li>HTTP（超文本传输协议）：80</li>
-<li>SMTP（简单邮件传输协议）：25</li>
-<li>POP3（邮局协议 3 代）：110</li>
-</ul>
-<p>查看本机启用的端口</p>
-<ul>
-<li>netstat -an<ul>
-<li>-a 查看所有连接和监听端口</li>
-<li>-n 显示 IP 地址和端口号，而不显示域名和服务名</li>
-</ul>
-</li>
-</ul>
-<h3 id="DNS-作用"><a href="#DNS-作用" class="headerlink" title="DNS 作用"></a>DNS 作用</h3><ul>
-<li>DNS 的作用：将域名解析为 IP 地址<ul>
-<li>客户机向 DNS 服务器发送域名查询请求</li>
-<li>DNS 服务器告知客户机 Web 服务器的 IP 地址</li>
-<li>客户机与 Web 服务器通信</li>
-</ul>
-</li>
-<li>DNS 的查询类型<ul>
-<li>从查询方式上分<ul>
-<li>递归查询<ul>
-<li>要么做出查询成功响应，要么做出查询失败的响应，一般客户机和服务器之间属于递归查询，即当客户机向 DNS 服务器发出请求后，若 DNS 服务器本身不能解析，则会向另外的 DNS 服务器发出查询请求，得到结果后转交给客户机。</li>
-</ul>
-</li>
-<li>迭代查询<ul>
-<li>服务器收到一次迭代查询回复一次结果，这个结果不一定是目标 IP 与域名的映射关系，也可以是其他 DNS 服务器的地址</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>从查询内容上分<ul>
-<li>正向查询由域名查找 IP 地址</li>
-<li>反向查询由 IP 地址查找域名</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="Linux-网络配置"><a href="#Linux-网络配置" class="headerlink" title="Linux 网络配置"></a>Linux 网络配置</h2><h3 id="IP-地址配置"><a href="#IP-地址配置" class="headerlink" title="IP 地址配置"></a>IP 地址配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># 查看与配置网络状态命令</div><div class="line">ifconfig</div><div class="line"></div><div class="line"># 临时设置 eth0 网卡的 IP 地址与子网掩码</div><div class="line">ifconfig eth0 192.168.0.200 netmask 255.255.255.0</div><div class="line"></div><div class="line"># setup 图形界面（红帽专用）</div><div class="line">setup</div></pre></td></tr></table></figure>
-<h3 id="使用文件配置-IP-地址"><a href="#使用文件配置-IP-地址" class="headerlink" title="使用文件配置 IP 地址"></a>使用文件配置 IP 地址</h3><p>网卡信息文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/sysconfig/network-scripts/ifcfg-eth0</div></pre></td></tr></table></figure></p>
-<p>主机名文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/sysconfig/network</div></pre></td></tr></table></figure></p>
-<h2 id="Linux-网络命令"><a href="#Linux-网络命令" class="headerlink" title="Linux 网络命令"></a>Linux 网络命令</h2><h3 id="网络环境查看命令"><a href="#网络环境查看命令" class="headerlink" title="网络环境查看命令"></a>网络环境查看命令</h3><ul>
-<li><code>ifconfig</code> 查看与配置网络状态命令<ul>
-<li>只能看到 IP 和子网掩码，看不到网关和 DNS</li>
-</ul>
-</li>
-<li><code>ifdown 网卡设备名称</code> 禁用指定网卡设备</li>
-<li><code>ifup 网卡设置名称</code> 启用指定网卡设备</li>
-<li><code>netstat 选项</code><ul>
-<li>-t 列出 TCP 协议端口</li>
-<li>-u 列出 UDP 协议端口</li>
-<li>-n 不使用域名与服务名，而是用 IP 地址和端口号</li>
-<li>-l 仅列出在监听状态网络服务</li>
-<li>-a 列出所有的网络连接</li>
-</ul>
-</li>
-<li><code>route -n</code> 查看路由列表</li>
-<li><code>route add default gw 192.168.1.1</code> 临时设定网关</li>
-<li><code>nslookup [主机名或 IP]</code> 进行域名与 IP 地址解析</li>
-<li><code>nslookup &gt;server</code> 查看本机 DNS 服务器</li>
-</ul>
-<h3 id="网络测试命令"><a href="#网络测试命令" class="headerlink" title="网络测试命令"></a>网络测试命令</h3><ul>
-<li><code>ping [选项] [IP 或域名]</code> 探测指定 IP 或域名的网络状况<ul>
-<li>-c 次数 指定 ping 包的次数</li>
-</ul>
-</li>
-<li><code>telnet [域名或 IP] [端口]</code> 远程管理与端口探测命令</li>
-<li><code>wget URL</code> 下载命令</li>
-<li><code>tcpdump -i eth0 -nnX port 21</code><ul>
-<li>-i 指定网卡接口</li>
-<li>-X 以十六进制和 ASCII 码显示数据包内容</li>
-<li>-nn 将数据包中的域名与服务转为 IP 和端口</li>
-<li>port 指定监听的端口</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/20/Linux-网络基础/" data-id="cj583xgyy001bjl4bm6sse0gc" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/22/Linux-Shell-基础之正则表达式/" data-id="cj58p2yus000fwn4bi9lvnnii" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -2242,7 +2117,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Kategorier</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -2271,7 +2146,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Arkiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
@@ -2281,9 +2156,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Siste innlegg</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/07/18/学习数据建模/">学习数据建模</a>
+          </li>
         
           <li>
             <a href="/2017/07/12/TypeScript-入门/">TypeScript 入门</a>
@@ -2299,10 +2178,6 @@
         
           <li>
             <a href="/2017/06/27/使用-Vue-js-2-0-开发后台/">使用 Vue.js 2.0 开发后台</a>
-          </li>
-        
-          <li>
-            <a href="/2017/06/05/LNMP-中常用的-Linux-命令/">LNMP 中常用的 Linux 命令</a>
           </li>
         
       </ul>
