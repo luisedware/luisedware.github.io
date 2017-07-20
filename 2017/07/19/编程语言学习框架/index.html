@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>编程语言学习框架 | 七月十五九月初七</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="入门概述（Introduction）版本迭代（Version Iteration）注释与代码分割（Comments &amp;amp; Split）构建与依赖管理（Builder &amp;amp; Dependence Manager）语法基础（Syntax）表达式（Expression）变量（Variable）
+变量与常量声明（Variable Declaration）
+变量提升（Variable Hoist">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编程语言学习框架">
+<meta property="og:url" content="http://luisedware.github.io/2017/07/19/编程语言学习框架/index.html">
+<meta property="og:site_name" content="七月十五九月初七">
+<meta property="og:description" content="入门概述（Introduction）版本迭代（Version Iteration）注释与代码分割（Comments &amp;amp; Split）构建与依赖管理（Builder &amp;amp; Dependence Manager）语法基础（Syntax）表达式（Expression）变量（Variable）
+变量与常量声明（Variable Declaration）
+变量提升（Variable Hoist">
+<meta property="og:updated_time" content="2017-07-19T03:59:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="编程语言学习框架">
+<meta name="twitter:description" content="入门概述（Introduction）版本迭代（Version Iteration）注释与代码分割（Comments &amp;amp; Split）构建与依赖管理（Builder &amp;amp; Dependence Manager）语法基础（Syntax）表达式（Expression）变量（Variable）
+变量与常量声明（Variable Declaration）
+变量提升（Variable Hoist">
+  
+    <link rel="alternate" href="/atom.xml" title="七月十五九月初七" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">七月十五九月初七</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一两祝你手边多银财，二两祝你方寸永不乱</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-编程语言学习框架" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/19/编程语言学习框架/" class="article-date">
+  <time datetime="2017-07-19T01:48:27.000Z" itemprop="datePublished">2017-07-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Tooling/">Tooling</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      编程语言学习框架
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="入门概述（Introduction）"><a href="#入门概述（Introduction）" class="headerlink" title="入门概述（Introduction）"></a>入门概述（Introduction）</h2><h4 id="版本迭代（Version-Iteration）"><a href="#版本迭代（Version-Iteration）" class="headerlink" title="版本迭代（Version Iteration）"></a>版本迭代（Version Iteration）</h4><h4 id="注释与代码分割（Comments-amp-Split）"><a href="#注释与代码分割（Comments-amp-Split）" class="headerlink" title="注释与代码分割（Comments &amp; Split）"></a>注释与代码分割（Comments &amp; Split）</h4><h4 id="构建与依赖管理（Builder-amp-Dependence-Manager）"><a href="#构建与依赖管理（Builder-amp-Dependence-Manager）" class="headerlink" title="构建与依赖管理（Builder &amp; Dependence Manager）"></a>构建与依赖管理（Builder &amp; Dependence Manager）</h4><h2 id="语法基础（Syntax）"><a href="#语法基础（Syntax）" class="headerlink" title="语法基础（Syntax）"></a>语法基础（Syntax）</h2><h4 id="表达式（Expression）"><a href="#表达式（Expression）" class="headerlink" title="表达式（Expression）"></a>表达式（Expression）</h4><h6 id="变量（Variable）"><a href="#变量（Variable）" class="headerlink" title="变量（Variable）"></a>变量（Variable）</h6><ul>
+<li>变量与常量声明（Variable Declaration）</li>
+<li>变量提升（Variable Hoisting）</li>
+</ul>
+<h6 id="变量赋值（Assignment）"><a href="#变量赋值（Assignment）" class="headerlink" title="变量赋值（Assignment）"></a>变量赋值（Assignment）</h6><ul>
+<li>传值与传引用（Pass-by-Value &amp; Pass-by-Reference）</li>
+<li>连续赋值（Continuous Assignment）</li>
+<li>解构赋值（Destructuring Assignment）</li>
+<li>复合类型拷贝（Copy Composite DataTypes）</li>
+</ul>
+<h6 id="运算符（Operator）"><a href="#运算符（Operator）" class="headerlink" title="运算符（Operator）"></a>运算符（Operator）</h6><ul>
+<li>基本运算符（Basic）</li>
+<li>位运算符（Bit Operator）</li>
+<li>运算符重载（Operator Overloading）</li>
+</ul>
+<h6 id="作用域与闭包（Scope-amp-Closure）"><a href="#作用域与闭包（Scope-amp-Closure）" class="headerlink" title="作用域与闭包（Scope &amp; Closure）"></a>作用域与闭包（Scope &amp; Closure）</h6><h6 id="惰性求值（Lazy-Evaluation）"><a href="#惰性求值（Lazy-Evaluation）" class="headerlink" title="惰性求值（Lazy Evaluation）"></a>惰性求值（Lazy Evaluation）</h6><h4 id="流程控制和异常处理（ControlFlow）"><a href="#流程控制和异常处理（ControlFlow）" class="headerlink" title="流程控制和异常处理（ControlFlow）"></a>流程控制和异常处理（ControlFlow）</h4><h6 id="分支选择（Branch）"><a href="#分支选择（Branch）" class="headerlink" title="分支选择（Branch）"></a>分支选择（Branch）</h6><ul>
+<li>if</li>
+<li>switch</li>
+</ul>
+<h6 id="循环（Loop）"><a href="#循环（Loop）" class="headerlink" title="循环（Loop）"></a>循环（Loop）</h6><ul>
+<li>for<ul>
+<li>for-in</li>
+<li>for-of</li>
+<li>forEach</li>
+</ul>
+</li>
+<li>while</li>
+<li>break / continue</li>
+</ul>
+<h6 id="错误处理（ErrorHandling）"><a href="#错误处理（ErrorHandling）" class="headerlink" title="错误处理（ErrorHandling）"></a>错误处理（ErrorHandling）</h6><ul>
+<li>异常定义与类型（Error）</li>
+<li>异常抛出（Throw）</li>
+<li>异常捕获（Try-Catch-Finally）</li>
+</ul>
+<h4 id="函数（Function）"><a href="#函数（Function）" class="headerlink" title="函数（Function）"></a>函数（Function）</h4><h6 id="函数定义（Function-Definition）"><a href="#函数定义（Function-Definition）" class="headerlink" title="函数定义（Function Definition）"></a>函数定义（Function Definition）</h6><ul>
+<li>匿名函数</li>
+<li>Lambda</li>
+</ul>
+<h6 id="函数参数（Function-Args）"><a href="#函数参数（Function-Args）" class="headerlink" title="函数参数（Function Args）"></a>函数参数（Function Args）</h6><ul>
+<li>默认参数（Default Args）</li>
+<li>必要参数（Required Args）</li>
+<li>外部参数（External Args）</li>
+<li>不定参数</li>
+</ul>
+<h6 id="函数调用（Function-Call）"><a href="#函数调用（Function-Call）" class="headerlink" title="函数调用（Function Call）"></a>函数调用（Function Call）</h6><h6 id="装饰器（Decorator）"><a href="#装饰器（Decorator）" class="headerlink" title="装饰器（Decorator）"></a>装饰器（Decorator）</h6><h6 id="迭代器与生成器（Iterator-amp-Generator）"><a href="#迭代器与生成器（Iterator-amp-Generator）" class="headerlink" title="迭代器与生成器（Iterator &amp; Generator）"></a>迭代器与生成器（Iterator &amp; Generator）</h6><h4 id="类与对象（Class-amp-Object）"><a href="#类与对象（Class-amp-Object）" class="headerlink" title="类与对象（Class &amp; Object）"></a>类与对象（Class &amp; Object）</h4><h6 id="类定义（Class-Definition）"><a href="#类定义（Class-Definition）" class="headerlink" title="类定义（Class Definition）"></a>类定义（Class Definition）</h6><ul>
+<li>类属性定义（Class Property Definition）</li>
+<li>类方法定义（Class Methods Definition）<ul>
+<li>构造函数（Constructor Function）</li>
+<li>析构函数（Destructor Function）</li>
+<li>Getter / Setter</li>
+</ul>
+</li>
+<li>访问控制（Access Control)<ul>
+<li>访问修饰符（Access Modifiers）</li>
+<li>私有数据（Private）</li>
+</ul>
+</li>
+</ul>
+<h6 id="对象（Object）"><a href="#对象（Object）" class="headerlink" title="对象（Object）"></a>对象（Object）</h6><ul>
+<li>实例化（Instantiation）</li>
+<li>单例模式（Singleton Pattern）</li>
+<li>this</li>
+</ul>
+<h6 id="类继承（Inheritance）"><a href="#类继承（Inheritance）" class="headerlink" title="类继承（Inheritance）"></a>类继承（Inheritance）</h6><h6 id="内部类（Inner-Class）"><a href="#内部类（Inner-Class）" class="headerlink" title="内部类（Inner Class）"></a>内部类（Inner Class）</h6><h6 id="反射-自省-Reflect"><a href="#反射-自省-Reflect" class="headerlink" title="反射/自省(Reflect)"></a>反射/自省(Reflect)</h6><h4 id="输入输出流（IOStream）"><a href="#输入输出流（IOStream）" class="headerlink" title="输入输出流（IOStream）"></a>输入输出流（IOStream）</h4><h4 id="模块（Modularity）"><a href="#模块（Modularity）" class="headerlink" title="模块（Modularity）"></a>模块（Modularity）</h4><h2 id="数据结构（DataStructure）"><a href="#数据结构（DataStructure）" class="headerlink" title="数据结构（DataStructure）"></a>数据结构（DataStructure）</h2><h4 id="类型与值判断（Type-Judgement）"><a href="#类型与值判断（Type-Judgement）" class="headerlink" title="类型与值判断（Type Judgement）"></a>类型与值判断（Type Judgement）</h4><h6 id="引用或值相等（Reference-Value-Equality）"><a href="#引用或值相等（Reference-Value-Equality）" class="headerlink" title="引用或值相等（Reference/Value Equality）"></a>引用或值相等（Reference/Value Equality）</h6><h6 id="动态类型检查（Runtime-Type-Checking）"><a href="#动态类型检查（Runtime-Type-Checking）" class="headerlink" title="动态类型检查（Runtime Type Checking）"></a>动态类型检查（Runtime Type Checking）</h6><h6 id="常用属性判断（Property-Checking）"><a href="#常用属性判断（Property-Checking）" class="headerlink" title="常用属性判断（Property Checking）"></a>常用属性判断（Property Checking）</h6><ul>
+<li>空间占用（Size / Length）</li>
+<li>存在性（Existing）</li>
+</ul>
+<h4 id="基本类型（Basic）"><a href="#基本类型（Basic）" class="headerlink" title="基本类型（Basic）"></a>基本类型（Basic）</h4><h6 id="数值类型（Numeric）"><a href="#数值类型（Numeric）" class="headerlink" title="数值类型（Numeric）"></a>数值类型（Numeric）</h6><ul>
+<li>随机数（Random）</li>
+<li>科学计算（Scientific Computing）</li>
+<li>类型转换（Type Conversion）</li>
+</ul>
+<h6 id="空类型（Nullable）"><a href="#空类型（Nullable）" class="headerlink" title="空类型（Nullable）"></a>空类型（Nullable）</h6><h6 id="布尔类型（Bool）"><a href="#布尔类型（Bool）" class="headerlink" title="布尔类型（Bool）"></a>布尔类型（Bool）</h6><h6 id="可选类型（Optional）"><a href="#可选类型（Optional）" class="headerlink" title="可选类型（Optional）"></a>可选类型（Optional）</h6><h6 id="枚举类型（Enum）"><a href="#枚举类型（Enum）" class="headerlink" title="枚举类型（Enum）"></a>枚举类型（Enum）</h6><h4 id="字符串类型（String）"><a href="#字符串类型（String）" class="headerlink" title="字符串类型（String）"></a>字符串类型（String）</h4><h6 id="增删复替（Manipulation）"><a href="#增删复替（Manipulation）" class="headerlink" title="增删复替（Manipulation）"></a>增删复替（Manipulation）</h6><ul>
+<li>格式化字符串（Format）</li>
+</ul>
+<h6 id="索引遍历（Index-amp-Traversal）"><a href="#索引遍历（Index-amp-Traversal）" class="headerlink" title="索引遍历（Index &amp; Traversal）"></a>索引遍历（Index &amp; Traversal）</h6><h6 id="类型编码（type-amp-encode）"><a href="#类型编码（type-amp-encode）" class="headerlink" title="类型编码（type &amp; encode）*"></a>类型编码（type &amp; encode）*</h6><ul>
+<li>字符集</li>
+<li>URL/HTML</li>
+<li>拼音</li>
+</ul>
+<h6 id="模式匹配（Pattern-Match）"><a href="#模式匹配（Pattern-Match）" class="headerlink" title="模式匹配（Pattern Match）"></a>模式匹配（Pattern Match）</h6><ul>
+<li>正则表达式（RegEx）</li>
+<li>字符串校验（Valid）</li>
+<li>模糊搜索（Fuzzy Search）</li>
+</ul>
+<h4 id="时间与日期"><a href="#时间与日期" class="headerlink" title="时间与日期"></a>时间与日期</h4><h6 id="时间解析（Parse）"><a href="#时间解析（Parse）" class="headerlink" title="时间解析（Parse）"></a>时间解析（Parse）</h6>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2017/07/19/编程语言学习框架/" data-id="cj5c4p440007wc34by5kco96r" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ProgrammingLanguage/">ProgrammingLanguage</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/07/18/学习数据建模/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">学习数据建模</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Catégories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ProgrammingLanguage/">ProgrammingLanguage</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/ProgrammingLanguage/" style="font-size: 10px;">ProgrammingLanguage</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/07/19/编程语言学习框架/">编程语言学习框架</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/18/学习数据建模/">学习数据建模</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/12/TypeScript-入门/">TypeScript 入门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/06/「复盘」Yii-RESTful-API-脚手架/">「复盘」Yii RESTful API 脚手架</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/29/「复盘」商品库-v1-0/">「复盘」商品库 v1.0</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Luis Edware<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -52,9 +52,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -64,6 +64,245 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Linux-Shell-基础之正则表达式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/22/Linux-Shell-基础之正则表达式/" class="article-date">
+  <time datetime="2016-09-22T12:56:54.000Z" itemprop="datePublished">2016-09-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/22/Linux-Shell-基础之正则表达式/">Linux-Shell-基础之正则表达式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="第1章-正则表达式"><a href="#第1章-正则表达式" class="headerlink" title="第1章 正则表达式"></a>第1章 正则表达式</h2><h3 id="1-1-什么是正则表达式"><a href="#1-1-什么是正则表达式" class="headerlink" title="1-1 什么是正则表达式"></a>1-1 什么是正则表达式</h3><p>正则表达式是用于描述字符排列和匹配模式的一种语法规则。它主要用于字符串的模式分割、匹配、查找及替换操作。</p>
+<h3 id="1-2-正则表达式与通配符"><a href="#1-2-正则表达式与通配符" class="headerlink" title="1-2 正则表达式与通配符"></a>1-2 正则表达式与通配符</h3><ul>
+<li>正则表达式用来在文件中匹配符合条件的字符串，正则是包含匹配。grep、awk、sed 等命令可以支持正则表达式（字符串）</li>
+<li>通配符用来匹配符合条件的文件名，通配符是完全匹配。ls、find、cp 这些命令不支持正则表达式，所以只能使用 Shell 自己的通配符来进行匹配了。（文件）<ul>
+<li>* 匹配任意内容</li>
+<li>? 匹配任意一个内容</li>
+<li>[] 匹配括号中的一个字符</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-3-基础正则表达式"><a href="#1-3-基础正则表达式" class="headerlink" title="1-3 基础正则表达式"></a>1-3 基础正则表达式</h3><table>
+<thead>
+<tr>
+<th>元字符</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*</td>
+<td>前一个字符匹配 0 次或任意多次</td>
+</tr>
+<tr>
+<td>.</td>
+<td>匹配除了换行符外任意一个字符</td>
+</tr>
+<tr>
+<td>^</td>
+<td>匹配行首，例如：^hello 会匹配以 hello 开头的行</td>
+</tr>
+<tr>
+<td>$</td>
+<td>匹配行尾，例如：hello&amp; 会匹配以 hello 结尾的行</td>
+</tr>
+<tr>
+<td>[]</td>
+<td>匹配中括号中指定的任意一个字符，只匹配一个字符。</td>
+</tr>
+<tr>
+<td>[^]</td>
+<td>匹配除中括号的字符以外的任意一个字符</td>
+</tr>
+<tr>
+<td>\</td>
+<td>转义符，用于取消讲特殊符号的含义取消</td>
+</tr>
+<tr>
+<td>\{n\}</td>
+<td>表示其前面的字符恰好出现 n 次</td>
+</tr>
+<tr>
+<td>\{n,\}</td>
+<td>表示其前面的字符出现不小于 n 次</td>
+</tr>
+<tr>
+<td>\{n,m\}</td>
+<td>表示其前面的字符至少出现 n 次，最多出现 m 次</td>
+</tr>
+</tbody>
+</table>
+<h2 id="第2章-字符截取命令"><a href="#第2章-字符截取命令" class="headerlink" title="第2章 字符截取命令"></a>第2章 字符截取命令</h2><ul>
+<li>cut 列提取字符串<ul>
+<li><code>cut [选项] 文件名</code><ul>
+<li>-f 列号：提取第几列<ul>
+<li><code>cut -f 2 student.txt</code> 截取第二列</li>
+<li><code>cut -f 2,4 student.txt</code> 截取第二、第四列</li>
+</ul>
+</li>
+<li>-d 分隔符：按照指定分隔符分割列<ul>
+<li><code>grep &quot;/bin/bash&quot; /etc/passwd |grep -v &quot;root&quot; | cut -f 1 -d &quot;:&quot;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>printf 格式化输出命令<ul>
+<li><code>printf &#39;输出类型输出格式&#39; 输出内容</code><ul>
+<li>输出类型<ul>
+<li>%ns 输出字符串。n 是数字指代输出几个字符</li>
+<li>%ni 输出整数。n 是数字指代输出几个数字</li>
+<li>%m.nf 输出浮点数。m 和 n 是数字，指代输出的整数位数和小数位数。如 %8.2f 代表共输出 8 位数，其中 2 位是小数，6 位是整数。</li>
+</ul>
+</li>
+<li>输出格式<ul>
+<li>\a 输出警告声音</li>
+<li>\b 输出退格键</li>
+<li>\f 清除屏幕</li>
+<li>\n 换行</li>
+<li>\r 回车</li>
+<li>\t 水平输出 Tab 键</li>
+<li>\v 垂直输出 Tab 键</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>在 <code>awk</code> 命令的输出中支持 <code>print</code> 和 <code>printf</code> 命令</li>
+</ul>
+</li>
+<li>awk 字符截取命令<ul>
+<li><code>awk &#39;条件1{动作1}条件2{动作2}...&#39; 文件名</code></li>
+<li>条件<ul>
+<li>一般使用关系表达式作为条件</li>
+<li>x&gt;10 判断变量 x 是否大于 10</li>
+<li>x&gt;=10 大于等于</li>
+<li>x&lt;=10 小于等于</li>
+</ul>
+</li>
+<li>动作<ul>
+<li>格式化输出</li>
+<li>流程控制语句</li>
+</ul>
+</li>
+<li>例子<ul>
+<li><code>awk &#39;{printf $2 &quot;\t&quot; $4 &quot;\n&quot;}&#39; student.txt</code></li>
+<li><code>awk &#39;{print $2 &quot;\t&quot; $4 }&#39; student.txt</code></li>
+<li><code>df -h | awk &#39;{print $1 &quot;\t&quot; $3}&#39;</code><ul>
+<li><code>akw &#39;BEGIN{printf &quot;This is a transcript \n&quot;}{printf $2 &quot;\t&quot; $4 &quot;\n&quot;}&#39; student.txt</code></li>
+<li><code>cat /etc/passwd |grep &quot;/bin/bash&quot; | awk &#39;BEGIN{FS=&quot;:&quot;}{printf $1 &quot;\t&quot; $3 &quot;\n&quot;}&#39;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>sed 字符替换命令<ul>
+<li>sed 是一个几乎包括在所有 UNIX 平台（包括 Linux）的轻量级编辑器。sed 主要是用来将数据进行选取、替换、删除、新增的命令</li>
+<li><code>sed [选项] &#39;[动作]&#39; 文件名</code><ul>
+<li>选项<ul>
+<li>-n 一般 sed 命令会把所有数据都输出到屏幕，如果加入此选择则只会把经过 sed 命令处理的行输出到屏幕</li>
+<li>-e 允许对输入数据应用多条 sed 命令编辑</li>
+<li>-i 用 sed 的修改结果直接修改读取数据的文件，而不是由屏幕输出</li>
+</ul>
+</li>
+<li>动作<ul>
+<li>a 追加，在当前行后添加一行或多行</li>
+<li>c 行替换，用 c 后面的字符串替换原数据行</li>
+<li>i 插入，在当期行前插入一行或多行</li>
+<li>d 删除，删除指定行</li>
+<li>p 打印，输出指定的行</li>
+<li>s 字符串替换，用一个字符串替换另外一个字符串，格式为 “行范围s/旧字符串g”</li>
+</ul>
+</li>
+<li>例子<ul>
+<li><code>sed &#39;2p&#39; student.txt</code> 查看文件的第二行</li>
+<li><code>sed &#39;2,4d&#39; student.txt</code> 表示删除【第2-4行】，但是不改变文件本身</li>
+<li><code>sed &#39;2a piaoliangdecxiaoguniang&#39; student.txt</code> 在第2行之后添加字符串，但是不改变字符串本身</li>
+<li><code>sed &#39;4c xxwmpg&#39; student.txt</code> 将第二行的整行替换为xxwmpg</li>
+<li><code>sed &#39;6s/70/100/g&#39; student.txt</code> 将第7行的所有70全部替换为100，如果不指定行的话会替换所有的指定字符串</li>
+<li><code>sed -e &#39;s/fengj//g&#39;;s/cang//g&#39; student.txt</code> 同时把fengj和cang替换为空</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="第3章-字符处理命令"><a href="#第3章-字符处理命令" class="headerlink" title="第3章 字符处理命令"></a>第3章 字符处理命令</h2><ul>
+<li>sort 排序命令<ul>
+<li><code>sort [选项] 文件名</code><ul>
+<li>选项<ul>
+<li>-f 忽略大小写</li>
+<li>-n 以数值型进行排序，默认使用字符串型排序</li>
+<li>-r 反向排序</li>
+<li>-t 指定分隔符，默认的分隔符是制表符</li>
+<li>-k n[,m] 按照指定的字段范围排序。从第 n 字段开始，m 字段结束（默认到行尾）</li>
+</ul>
+</li>
+<li>用法<ul>
+<li><code>sort /etc/passwd</code> 用户信息正向排序</li>
+<li><code>sort -r /etc/passwd</code> 用户信息反向排序</li>
+<li><code>sort -t &quot;:&quot; -k 3,3 /etc/passwd</code> 指定分隔符是 “:”，用第三字段开头，第三字段结尾排序，就是只用第三字段排序</li>
+<li><code>sort -n -t &quot;:&quot; -k 3,3 /etc/passwd</code> 作用同上，但把指定字符串排序改为数字排序</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>wc 统计命令<ul>
+<li><code>wc [选项] 文件名</code><ul>
+<li>选项：<ul>
+<li>-l 只统计行数</li>
+<li>-w 只统计单词数</li>
+<li>-m 只统计字符数</li>
+</ul>
+</li>
+<li>用法：<ul>
+<li><code>wc /etc/passwd</code></li>
+<li><code>wc -l /etc/passwd</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2016/09/22/Linux-Shell-基础之正则表达式/" data-id="cj5c4p3z6000lc34bzg0fzjyy" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-Linux-网络基础" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -432,7 +671,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/20/Linux-网络基础/" data-id="cj5a6jh2d00180h4b9lq63tyr" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/20/Linux-网络基础/" data-id="cj5c4p3zq0017c34b8zf0um6v" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1270,7 +1509,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/19/Linux-命令基础/" data-id="cj5a6jh1z000x0h4brv8jtjjf" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/19/Linux-命令基础/" data-id="cj5c4p3zc000vc34byd7vpm1q" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1344,7 +1583,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/12/MySQL-5-7-版本新特性/" data-id="cj5a6jh2k001j0h4bij3t3dlr" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/12/MySQL-5-7-版本新特性/" data-id="cj5c4p3zs001ac34b8k13hvfp" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -1815,7 +2054,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/09/与-MySQL-的零距离接触（二）/" data-id="cj5a6jh5f003v0h4bwd2duuni" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/09/与-MySQL-的零距离接触（二）/" data-id="cj5c4p41o003yc34bvf3jvzyi" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -2463,7 +2702,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/07/与-MySQL-的零距离接触（一）/" data-id="cj5a6jh5a003s0h4bw4t7zism" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/07/与-MySQL-的零距离接触（一）/" data-id="cj5c4p41k003vc34bg745m376" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -2579,7 +2818,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/04/复习使用-MySQL（三）/" data-id="cj5a6jh70006f0h4bvgcl40ib" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/04/复习使用-MySQL（三）/" data-id="cj5c4p4370069c34bc02ewamw" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -2792,7 +3031,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/04/复习使用-MySQL（二）/" data-id="cj5a6jh71006i0h4bgopc5p40" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/04/复习使用-MySQL（二）/" data-id="cj5c4p439006cc34b1a5jtc6m" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -3031,7 +3270,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/02/复习使用-MySQL（一）/" data-id="cj5a6jh6z006c0h4bxxyyqpu5" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/02/复习使用-MySQL（一）/" data-id="cj5c4p4340063c34bwl6lk7ih" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -3117,143 +3356,10 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/01/查看-Eloquent-模型关联时执行的-SQL-语句/" data-id="cj5a6jh7f007b0h4bl92s416d" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/01/查看-Eloquent-模型关联时执行的-SQL-语句/" data-id="cj5c4p43s0079c34b0hsl9k7s" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-使用阿里云从零开始部署-Laravel" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/31/使用阿里云从零开始部署-Laravel/" class="article-date">
-  <time datetime="2016-08-31T12:03:03.000Z" itemprop="datePublished">2016-08-31</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Tooling/">Tooling</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/31/使用阿里云从零开始部署-Laravel/">使用阿里云从零开始部署 Laravel</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="阿里云-ECS-选购"><a href="#阿里云-ECS-选购" class="headerlink" title="阿里云 ECS 选购"></a>阿里云 ECS 选购</h2><ul>
-<li>地域<ul>
-<li>地域：华南 1</li>
-<li>可用区：华南 1 可用区 A</li>
-</ul>
-</li>
-<li>网络<ul>
-<li>网络类型：经典网络</li>
-</ul>
-</li>
-<li>实例<ul>
-<li>实例系列：系列 I</li>
-<li>实力规格：1 核 1GB</li>
-</ul>
-</li>
-<li>带宽：<ul>
-<li>公网带宽：按固定带宽</li>
-<li>带宽：1 Mbps</li>
-</ul>
-</li>
-<li>镜像：<ul>
-<li>镜像类型：公共镜像</li>
-<li>公共镜像：CentOS 6.5 32位</li>
-</ul>
-</li>
-<li>存储<ul>
-<li>系统盘：40 GB</li>
-</ul>
-</li>
-<li>收费模式<ul>
-<li>包年包月</li>
-<li>每月 68 元</li>
-</ul>
-</li>
-</ul>
-<h2 id="阿里云域名选购解析"><a href="#阿里云域名选购解析" class="headerlink" title="阿里云域名选购解析"></a>阿里云域名选购解析</h2><ul>
-<li>国际域名.cc<ul>
-<li>名称：cowcat.cc</li>
-<li>价格：16 元一年</li>
-</ul>
-</li>
-<li>实名认证：<ul>
-<li>输入身份证号码</li>
-<li>提交身份证正面照片</li>
-</ul>
-</li>
-<li>域名解析：<ul>
-<li>输入阿里云 ECS 公网 IP 地址</li>
-</ul>
-</li>
-</ul>
-<h2 id="CentOS-6-5-搭建-LNMP"><a href="#CentOS-6-5-搭建-LNMP" class="headerlink" title="CentOS 6.5 搭建 LNMP"></a>CentOS 6.5 搭建 LNMP</h2><h3 id="搭建准备"><a href="#搭建准备" class="headerlink" title="搭建准备"></a>搭建准备</h3><p>查看 <code>CentOS</code> 版本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /etc/centos-release</div></pre></td></tr></table></figure></p>
-<p>安装 <code>epel</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y epel-release</div></pre></td></tr></table></figure></p>
-<p>安装 <code>vim</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y vim</div></pre></td></tr></table></figure>
-<p>安装 <code>htop</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y htop</div></pre></td></tr></table></figure></p>
-<p>安装 <code>git</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y git</div></pre></td></tr></table></figure></p>
-<h3 id="安装-Nginx"><a href="#安装-Nginx" class="headerlink" title="安装 Nginx"></a>安装 Nginx</h3><p>修改 yum 源：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"># 进入 `/etc/yum.repos.d` 目录</div><div class="line">cd /etc/yum.repos.d/</div><div class="line"></div><div class="line"># 创建一个 `nginx.repo` 文件</div><div class="line">vim nginx.repo</div><div class="line"></div><div class="line"># 写入内容如下</div><div class="line">[nginx]</div><div class="line">name=nginx repo</div><div class="line">baseurl=http://nginx.org/packages/centos/$releasever/$basearch/</div><div class="line">gpgcheck=0</div><div class="line">enabled=1</div></pre></td></tr></table></figure></p>
-<p>更新 yum 源<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum update</div></pre></td></tr></table></figure></p>
-<p>安装 Nginx<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install nginx</div></pre></td></tr></table></figure></p>
-<p>查看 Nginx 版本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># nginx version: nginx/1.10.1</div><div class="line">nginx -v</div></pre></td></tr></table></figure></p>
-<p>启动 Nginx<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service nginx start</div></pre></td></tr></table></figure></p>
-<p>开机启动 Nginx<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chkconfig nginx on</div></pre></td></tr></table></figure></p>
-<h3 id="安装-MySQL"><a href="#安装-MySQL" class="headerlink" title="安装 MySQL"></a>安装 MySQL</h3><p>官网下载源码包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://dev.mysql.com/get/mysql57-community-release-el6-7.noarch.rpm</div></pre></td></tr></table></figure></p>
-<p>安装 MySQL 的 yum 源<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm -Uvh mysql57-community-release-el6-7.noarch.rpm</div></pre></td></tr></table></figure></p>
-<p>打开 mysql-community.repo 看关于mysql的内容，确定 mysql57 的 enable 是打开的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/yum.repos.d/mysql-community.repo</div></pre></td></tr></table></figure></p>
-<p>安装 MySQL<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install mysql-community-server</div></pre></td></tr></table></figure></p>
-<p>启动 MySQL<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service mysqld start</div></pre></td></tr></table></figure></p>
-<p>启动 MySQL 后，查看自动生成的密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grep &quot;password&quot; /var/log/mysqld.log</div></pre></td></tr></table></figure></p>
-<p>修改 MySQL初始化密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql_secure_installation</div></pre></td></tr></table></figure></p>
-<p>MySQL 登录验证<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql -uroot -p</div></pre></td></tr></table></figure></p>
-<p>MySQL 的配制文件默认在 <code>/etc/my.cnf</code></p>
-<p>开机启动 MySQL<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chkconfig mysqld on</div></pre></td></tr></table></figure></p>
-<h3 id="安装-PHP"><a href="#安装-PHP" class="headerlink" title="安装 PHP"></a>安装 PHP</h3><p>删除之前的 PHP<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum remove php* php-common</div></pre></td></tr></table></figure></p>
-<p>更新 yum 源<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm</div><div class="line">wget http://rpms.remirepo.net/enterprise/remi-release-6.rpm</div><div class="line">rpm -Uvh https://mirror.webtatic.com/yum/el6/latest.rpm</div></pre></td></tr></table></figure></p>
-<p>安装 PHP 7<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install php70w php70w-fpm php70w-cli php70w-mysql php70w-pdo php70w-mbstring php70w-mcrypt php70w-pear php70w-opcache php70w-bcmath php70w-xml php70w-pecl-redis</div></pre></td></tr></table></figure></p>
-<p>查看 PHP 7 的版本与扩展<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">php -v</div><div class="line">php -m</div></pre></td></tr></table></figure></p>
-<p>简单修改一些配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"># 打开 PHP 配置文件</div><div class="line">vim /etc/php.ini</div><div class="line"></div><div class="line"># 修改 PHP 配置参数</div><div class="line">date.timezone = Asia/Shanghai</div><div class="line">upload_max_filesize = 20M</div><div class="line">post_max_size = 20M</div><div class="line">display_errors = Off</div><div class="line">expose_php = Off</div></pre></td></tr></table></figure></p>
-<p>重启 PHP 7<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service php-fpm restart</div></pre></td></tr></table></figure></p>
-<p>开机启动 PHP 7<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chkconfig php-fpm on</div></pre></td></tr></table></figure></p>
-<h3 id="安装-Composer"><a href="#安装-Composer" class="headerlink" title="安装 Composer"></a>安装 Composer</h3><p>安装 Composer<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">php -r &quot;copy(&apos;https://getcomposer.org/installer&apos;, &apos;composer-setup.php&apos;);&quot;</div><div class="line"></div><div class="line">php -r &quot;if (hash_file(&apos;SHA384&apos;, &apos;composer-setup.php&apos;) === &apos;e115a8dc7871f15d853148a7fbac7da27d6c0030b848d9b3dc09e2a0388afed865e6a3d6b3c0fad45c48e2b5fc1196ae&apos;) &#123; echo &apos;Installer verified&apos;; &#125; else &#123; echo &apos;Installer corrupt&apos;; unlink(&apos;composer-setup.php&apos;); &#125; echo PHP_EOL;&quot;</div><div class="line"></div><div class="line">php composer-setup.php --install-dir=/usr/bin --filename=composer</div><div class="line"></div><div class="line">php -r &quot;unlink(&apos;composer-setup.php&apos;);&quot;</div></pre></td></tr></table></figure></p>
-<p>查看 Composer 版本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">composer -v</div></pre></td></tr></table></figure></p>
-<p>全局设置国内镜像<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">composer config -g repo.packagist composer https://packagist.phpcomposer.com</div></pre></td></tr></table></figure></p>
-<h3 id="安装-Node-js-4-5-LTS"><a href="#安装-Node-js-4-5-LTS" class="headerlink" title="安装 Node.js (4.5 LTS)"></a>安装 Node.js (4.5 LTS)</h3><p>编译安装 Node.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">wget https://nodejs.org/dist/v4.5.0/node-v4.5.0.tar.gz</div><div class="line">tar zxf node-v4.5.0.tar.gz</div><div class="line">cd node-v4.5.0</div><div class="line">./configure</div><div class="line">make</div><div class="line">make install</div></pre></td></tr></table></figure></p>
-<p>如果提示 gcc 版本过低，需要进行升级，执行命令如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo rpm --import http://ftp.scientificlinux.org/linux/scientific/5x/x86_64/RPM-GPG-KEYs/RPM-GPG-KEY-cern</div><div class="line">wget -O /etc/yum.repos.d/slc6-devtoolset.repo http://linuxsoft.cern.ch/cern/devtoolset/slc6-devtoolset.repo</div><div class="line">sudo yum install devtoolset-2</div><div class="line">scl enable devtoolset-2 bash</div></pre></td></tr></table></figure></p>
-<p>然后查看版本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">gcc --version</div><div class="line">g++ --version</div><div class="line">gfortran --version</div></pre></td></tr></table></figure></p>
-<h3 id="安装-Redis"><a href="#安装-Redis" class="headerlink" title="安装 Redis"></a>安装 Redis</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm</div><div class="line">yum --enablerepo=remi,remi-test install redis</div></pre></td></tr></table></figure>
-<p>开启 Redis<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">chkconfig --add redis</div><div class="line">chkconfig --level 345 redis on</div><div class="line">service redis start</div></pre></td></tr></table></figure></p>
-<h3 id="配置-Nginx-与-PHP-7"><a href="#配置-Nginx-与-PHP-7" class="headerlink" title="配置 Nginx 与 PHP 7"></a>配置 Nginx 与 PHP 7</h3><p>Nginx 安装完毕之后，默认的网站根目录是在 <code>/usr/share/nginx/html/</code></p>
-<p>虚拟主机的配置在 <code>/etc/nginx/conf.d</code>，如果要配置新的域名在这里就可以了。</p>
-<p>默认有一个 <code>default.conf</code> 的配置，可以在里面配置以下参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">server&#123;</div><div class="line">    listen 80;</div><div class="line">    server_name www.cowcat.cc;</div><div class="line"></div><div class="line">    # 日志记录</div><div class="line">    access_log  /var/log/nginx/cowcat.cc.access.log  main;</div><div class="line">    error_log /var/log/nginx/cowcat.cc.error.log;</div><div class="line"></div><div class="line">    location / &#123;</div><div class="line">        root /data/www/cowcat/public;</div><div class="line">        try_files $uri $uri/ /index.php?$query_string;</div><div class="line">        index index.php index.html index.htm;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # 错误页面</div><div class="line">    error_page 404              /404.html;</div><div class="line">    error_page 500 502 503 504  /50x.html;</div><div class="line">    location = /50x.html &#123;</div><div class="line">        root   /usr/share/nginx/html;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    #PHP 脚本请求全部转发到 FastCGI 处理. 使用 FastCGI 默认配置.</div><div class="line">    location ~ \.php$ &#123;</div><div class="line">        root /data/www/cowcat/public;</div><div class="line">        fastcgi_pass   127.0.0.1:9000;</div><div class="line">        fastcgi_index  index.php;</div><div class="line">        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;</div><div class="line">        include        fastcgi_params;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/08/31/使用阿里云从零开始部署-Laravel/" data-id="cj5a6jh6s005x0h4b857jwx5j" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AliCloud/">AliCloud</a></li></ul>
 
     </footer>
   </div>
@@ -3273,7 +3379,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -3283,9 +3389,9 @@ insert test(username) values(username); return last_insert_id(); end //</code></
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ProgrammingLanguage/">ProgrammingLanguage</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
     </div>
   </div>
 
@@ -3293,9 +3399,9 @@ insert test(username) values(username); return last_insert_id(); end //</code></
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
+      <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/ProgrammingLanguage/" style="font-size: 10px;">ProgrammingLanguage</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
     </div>
   </div>
 
@@ -3312,9 +3418,13 @@ insert test(username) values(username); return last_insert_id(); end //</code></
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/07/19/编程语言学习框架/">编程语言学习框架</a>
+          </li>
         
           <li>
             <a href="/2017/07/18/学习数据建模/">学习数据建模</a>
@@ -3332,10 +3442,6 @@ insert test(username) values(username); return last_insert_id(); end //</code></
             <a href="/2017/06/29/「复盘」商品库-v1-0/">「复盘」商品库 v1.0</a>
           </li>
         
-          <li>
-            <a href="/2017/06/27/使用-Vue-js-2-0-开发后台/">使用 Vue.js 2.0 开发后台</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -3349,7 +3455,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Luis Edware<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

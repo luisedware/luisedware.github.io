@@ -52,9 +52,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -64,6 +64,315 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-ApacheBench-的参数讲解与基础使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/27/ApacheBench-的参数讲解与基础使用/" class="article-date">
+  <time datetime="2017-05-26T23:00:01.000Z" itemprop="datePublished">2017-05-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Apache/">Apache</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/27/ApacheBench-的参数讲解与基础使用/">ApacheBench 参数讲解与基础使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li><a href="#1">认识 Apache Bench</a></li>
+<li><a href="#2">Apache Bench 的命令参数</a></li>
+<li><a href="#3">Apache Bench 的结果参数</a></li>
+</ul>
+<h2 id="认识-Apache-Bench"><a href="#认识-Apache-Bench" class="headerlink" title="认识 Apache Bench"></a><a id="1">认识 Apache Bench</a></h2><p>Apache Bench 是 Apache 自带的一个命令式程序。它可以创建并发访问线程，同时模拟多个并发请求对某一个 URL 地址进行访问。它的测试目标是基于 URL 的。因此，Apache Bench 即可测试 Apache 的负载压力，也能测试 Nginx、LigntHttp、Tomcat、IIS 等其他 Web Server 的压力。</p>
+<p>Apache Bench 命令对发出负载的计算机要求很低，既不会占用很高 CPU，也不会占用很多内存，但却会给目标服务器造成巨大的负载，其原理类似 CC 攻击。在测试使用也须注意，否则一次上太多的负载，可能造成目标服务器因资源耗完，严重时甚至导致死机。</p>
+<h2 id="Apache-Bench-的命令参数"><a href="#Apache-Bench-的命令参数" class="headerlink" title="Apache Bench 的命令参数"></a><a id="2">Apache Bench 的命令参数</a></h2><p>参数说明：</p>
+<ul>
+<li><p>-n requests [Number of requests to perform]</p>
+<blockquote>
+<p>执行请求的数量</p>
+</blockquote>
+</li>
+<li><p>-c concurrency [Number of multiple requests to make at a time]</p>
+<blockquote>
+<p>一次并发请求的数量</p>
+</blockquote>
+</li>
+<li><p>-t timelimit [Seconds to max. to spend on benchmarking]</p>
+<blockquote>
+<p>测试进行的最大秒数</p>
+</blockquote>
+</li>
+<li><p>-s timeout [Seconds to max. wait for each response,Default is 30 seconds]</p>
+<blockquote>
+<p>响应等待的最大秒数</p>
+</blockquote>
+</li>
+<li><p>-b windowsize [Size of TCP send/receive buffer, in bytes]</p>
+<blockquote>
+<p>TCP 发送/接受缓冲区的大小，以字节为单位</p>
+</blockquote>
+</li>
+<li><p>-p postfile [File containing data to POST. Remember also to set -T]</p>
+<blockquote>
+<p>包含了需要 POST 的数据的文件，需要设置 -T 参数</p>
+</blockquote>
+</li>
+<li><p>-u putfile [File containing data to PUT. Remember also to set -T]</p>
+<blockquote>
+<p>包含了需要 PUT 的数据的问题，需要设置 -T 参数</p>
+</blockquote>
+</li>
+<li><p>-T content-type [Content-type header to use for POST/PUT data, eg.’application/x-www-form-urlencoded’，Default is ‘text/plain’]</p>
+<blockquote>
+<p>POST/PUT 数据时需要使用的 Content-type 请求头部</p>
+</blockquote>
+</li>
+<li><p>-v verbosity    [How much troubleshooting info to print]</p>
+<blockquote>
+<p>打印什么级别的故障排除信息</p>
+</blockquote>
+</li>
+<li><p>-w              [Print out results in HTML tables]</p>
+<blockquote>
+<p>以 HTML 表格的格式打印出执行结果</p>
+</blockquote>
+</li>
+<li><p>-i              [Use HEAD instead of GET]</p>
+<blockquote>
+<p>使用 HEAD 请求方法代替 GET 请求方法</p>
+</blockquote>
+</li>
+<li><p>-x attributes   [String to insert as table attributes]</p>
+<blockquote>
+<p>字符串作为 table 元素的属性插入</p>
+</blockquote>
+</li>
+<li><p>-y attributes   [String to insert as tr attributes]</p>
+<blockquote>
+<p>字符串作为 tr 元素的属性插入</p>
+</blockquote>
+</li>
+<li><p>-z attributes   [String to insert as td or th attributes]</p>
+<blockquote>
+<p>字符串作为 td 元素的属性插入</p>
+</blockquote>
+</li>
+<li><p>-C attribute    [Add cookie, eg. ‘Apache=1234’. (repeatable)]</p>
+<blockquote>
+<p>添加一个 Cookie</p>
+</blockquote>
+</li>
+<li><p>-H attribute    [Add Arbitrary header line, eg. ‘Accept-Encoding: gzip’,Inserted after all normal header lines. (repeatable)]</p>
+<blockquote>
+<p>添加任意的 HTTP 头部属性</p>
+</blockquote>
+</li>
+<li><p>-A attribute    [Add Basic WWW Authentication, the attributes,are a colon separated username and password.]</p>
+<blockquote>
+<p>添加基础的 HTTP WWW 认证</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p>-P attribute    [Add Basic Proxy Authentication, the attributes,are a colon separated username and password.]</p>
+<blockquote>
+<p>添加基础代理身份验证</p>
+</blockquote>
+</li>
+<li><p>-X proxy:port   [Proxyserver and port number to use]</p>
+<blockquote>
+<p>代理服务器的端口号</p>
+</blockquote>
+</li>
+<li><p>-V              [Print version number and exit]</p>
+<blockquote>
+<p>打印 ApacheBench 的版本号并退出 ApacheBench</p>
+</blockquote>
+</li>
+<li><p>-k              [Use HTTP KeepAlive feature]</p>
+<blockquote>
+<p>使用 HTTP KeepAlive 长连接</p>
+</blockquote>
+</li>
+<li><p>-d              [Do not show percentiles served table.]</p>
+<blockquote>
+<p>不要显示服务表的百分比</p>
+</blockquote>
+</li>
+<li><p>-S              [Do not show confidence estimators and warnings.]</p>
+<blockquote>
+<p>不要显示信息评估和警告</p>
+</blockquote>
+</li>
+<li><p>-q              [Do not show progress when doing more than 150 requests]</p>
+<blockquote>
+<p>当超过 150 个请求时，不显示进度</p>
+</blockquote>
+</li>
+<li><p>-l              [Accept variable document length (use this for dynamic pages)]</p>
+<blockquote>
+<p>接受可变文档长度（用于动态页面）</p>
+</blockquote>
+</li>
+<li><p>-g filename     [Output collected data to gnuplot format file.]</p>
+<blockquote>
+<p>将收集到的数据输出到格式为 gnuplot 的文件</p>
+</blockquote>
+</li>
+<li><p>-e filename     [Output CSV file with percentages served]</p>
+<blockquote>
+<p>将执行过程百分比的数据输出到格式为 csv 的文件</p>
+</blockquote>
+</li>
+<li><p>-r              [Don’t exit on socket receive errors.]</p>
+<blockquote>
+<p>当接收到套接字错误时不要退出执行</p>
+</blockquote>
+</li>
+<li><p>-m method       [Method name]</p>
+<blockquote>
+<p>执行请求时所使用的 HTTP 请求方法</p>
+</blockquote>
+</li>
+<li><p>-h              [Display usage information (this message)]</p>
+<blockquote>
+<p>显示 ApacheBench 使用参数信息</p>
+</blockquote>
+</li>
+<li><p>-I              [Disable TLS Server Name Indication (SNI) extension]</p>
+<blockquote>
+<p>禁用 TLS 服务器名称指示扩展名</p>
+</blockquote>
+</li>
+<li><p>-Z ciphersuite  [Specify SSL/TLS cipher suite (See openssl ciphers)]</p>
+<blockquote>
+<p>指定 SSL/TLS 密码套件</p>
+</blockquote>
+</li>
+<li><p>-f protocol     [Specify SSL/TLS protocol(SSL3, TLS1, TLS1.1, TLS1.2 or ALL)]</p>
+<blockquote>
+<p>指定 SSL/TLS 协议</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="Apache-Bench-的结果参数"><a href="#Apache-Bench-的结果参数" class="headerlink" title="Apache Bench 的结果参数"></a><a id="3">Apache Bench 的结果参数</a></h2><ul>
+<li><p>Server Software</p>
+<blockquote>
+<p>服务器软件与版本</p>
+</blockquote>
+</li>
+<li><p>Server Hostname</p>
+<blockquote>
+<p>服务器域名或地址</p>
+</blockquote>
+</li>
+<li><p>Server Port</p>
+<blockquote>
+<p>服务器端口号</p>
+</blockquote>
+</li>
+<li><p>Document Path</p>
+<blockquote>
+<p>请求文件的路径</p>
+</blockquote>
+</li>
+<li><p>Document Length</p>
+<blockquote>
+<p>请求文件的大小</p>
+</blockquote>
+</li>
+<li><p>Concurrency Level</p>
+<blockquote>
+<p>每次并发数</p>
+</blockquote>
+</li>
+<li><p>Time taken for tests</p>
+<blockquote>
+<p>测试总时间</p>
+</blockquote>
+</li>
+<li><p>Complete requests</p>
+<blockquote>
+<p>处理请求成功的次数</p>
+</blockquote>
+</li>
+<li><p>Failed requests</p>
+<blockquote>
+<p>处理请求失败的次数</p>
+</blockquote>
+</li>
+<li><p>Total transferred</p>
+<blockquote>
+<p>测试过程传输字节数</p>
+</blockquote>
+</li>
+<li><p>HTML transferred</p>
+<blockquote>
+<p>HTML 内容传输字节数</p>
+</blockquote>
+</li>
+<li><p>Requests per second</p>
+<blockquote>
+<p>每秒处理的请求数 - 吞吐率 - 平均返回数据时间，相当于 Complete requests / Time taken for tests</p>
+</blockquote>
+</li>
+<li><p>Time per request</p>
+<blockquote>
+<p>用户等待响应的平均时间，相当于 Time taken for tests /（Complete requests / Concurrency Level）</p>
+</blockquote>
+</li>
+<li><p>Time per request (mean, across all concurrent requests)</p>
+<blockquote>
+<p>服务器处理并发请求的平均时间，相当于 Time taken for tests / Complete requests</p>
+</blockquote>
+</li>
+<li><p>Transfer rate</p>
+<blockquote>
+<p>请求在单位时间内从服务器获取的数据长度，相当于 Total transferred / Time taken for tests</p>
+</blockquote>
+</li>
+<li><p>Connection Times (ms)</p>
+<ul>
+<li>Connect：连接服务器的时间</li>
+<li>Processing：进程处理完成请求的时间</li>
+<li>Waiting：客户端等待结果返回的时间</li>
+<li>Total：页面完成渲染的时间</li>
+</ul>
+</li>
+<li><p>Percentage of the requests served within a certain time (ms)</p>
+<blockquote>
+<p>所有请求的平均速度，如在测试过程中进度到50%时平均响应时间为10148ms，到66%时<br>平均响应时间为11054ms。</p>
+</blockquote>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2017/05/27/ApacheBench-的参数讲解与基础使用/" data-id="cj5c4p3y70000c34bsxh817gg" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Apache/">Apache</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-高性能的-PHP-日志系统" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -167,7 +476,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/05/25/高性能的-PHP-日志系统/" data-id="cj5a6jh7l007q0h4bkv12asv6" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/05/25/高性能的-PHP-日志系统/" data-id="cj5c4p43y007pc34bjw68e3sf" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -342,7 +651,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/05/24/LNMP-性能优化之-PHP-性能优化/" data-id="cj5a6jh1a00050h4b4b4pexrs" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/05/24/LNMP-性能优化之-PHP-性能优化/" data-id="cj5c4p3yh0005c34bk88tj6jj" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -511,7 +820,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/05/23/PHP-的性能优化/" data-id="cj5a6jh3j00240h4br3jtulpn" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/05/23/PHP-的性能优化/" data-id="cj5c4p40i0026c34bx4a0fqu4" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -577,7 +886,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/04/24/设计模式之抽象工厂模式/" data-id="cj5a6jh7j007j0h4bfhyyip90" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/04/24/设计模式之抽象工厂模式/" data-id="cj5c4p43v007hc34b716ives0" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pattern/">Pattern</a></li></ul>
@@ -662,7 +971,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/04/21/设计模式之工厂方法模式/" data-id="cj5a6jh7h007e0h4b8psis2x2" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/04/21/设计模式之工厂方法模式/" data-id="cj5c4p4420081c34b9o4shqxt" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pattern/">Pattern</a></li></ul>
@@ -765,7 +1074,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/04/20/设计模式之简单工厂模式/" data-id="cj5a6jh7k007m0h4bu6qnj1us" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/04/20/设计模式之简单工厂模式/" data-id="cj5c4p43x007lc34bj4229dp2" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pattern/">Pattern</a></li></ul>
@@ -829,7 +1138,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/04/05/使用-Laravel-5-3-Vue-js-2-1-开发知乎/" data-id="cj5a6jh5g003y0h4b4sa4o6jm" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/04/05/使用-Laravel-5-3-Vue-js-2-1-开发知乎/" data-id="cj5c4p41s0044c34brkg8qswv" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -871,7 +1180,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/23/学习-Javascript-之类型/" data-id="cj5a6jh74006o0h4bfg6mywdc" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/03/23/学习-Javascript-之类型/" data-id="cj5c4p43a006ic34b1bubsiyz" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
@@ -955,98 +1264,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/23/学习-Javascript-之变量/" data-id="cj5a6jh72006l0h4b7u9vc9at" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/03/23/学习-Javascript-之变量/" data-id="cj5c4p439006fc34bx8i15bvs" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Head-First-Design-Patterns" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/03/20/Head-First-Design-Patterns/" class="article-date">
-  <time datetime="2017-03-20T02:46:53.000Z" itemprop="datePublished">2017-03-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Design-Patterns/">Design Patterns</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/20/Head-First-Design-Patterns/">Head First Design Patterns</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>如何定义模式</p>
-<p>模式是某种情景下，针对某问题的某种解决方案。</p>
-<ul>
-<li>情景<ul>
-<li>应用某个模式的情况，应该是会不断出现的情况</li>
-</ul>
-</li>
-<li>问题<ul>
-<li>想在某个情景下达到的目标，但也可以是某情景下的约束</li>
-</ul>
-</li>
-<li>解决方案<ul>
-<li>一个通用的设计，用来解决约束、达到目标</li>
-</ul>
-</li>
-</ul>
-<p>帮助记忆上述概念的方法</p>
-<p>如果你发现自己处于某个情境下，面对着所欲达到的目标被一群约束影响着的问题，然而，你能够应用某个设计，克服这些约束并达到该目标，将你领向某个解决方案。</p>
-<p>比如</p>
-<ul>
-<li>问题：我要如何准时上班</li>
-<li>情景：我的钥匙锁在车里了 | 搭地铁肯定要迟早了</li>
-<li>解决方案：打破窗户、进入车内、启动引擎，开车上班 | 打开手机、呼叫滴滴、上出租车，打车上班。</li>
-</ul>
-<p>更多定义的细节：</p>
-<ul>
-<li>意图</li>
-<li>动机</li>
-<li>对比</li>
-<li>适用性</li>
-<li>举一反三</li>
-</ul>
-<p>如何更加详细去定义和学习一个设计模式</p>
-<ul>
-<li>名称：用于学习与分享时共享词汇，概括性描述一个设计模式的作用</li>
-<li>分类：用于归纳设计模式的用途</li>
-<li>动机：给出了问题以及如何解决这个问题的具体场景</li>
-<li>结构：提供了图示，显示出参与此模式的类之间的关系</li>
-<li>参与者：描述在此设计中所涉及到的类和对象在模式中的责任和角色</li>
-<li>结果：描述采用此模式之后产生的效果：好与不好</li>
-<li>协作：告诉我们参与者如何在此模式中合作</li>
-<li>实现：提供了你在实现该模式时需要使用的技巧，以及应该小心面对的问题</li>
-<li>代码：提供实现的代码，对如何实现有所帮助</li>
-<li>已知应用：用来描述已经在真实系统中发现的模式例子</li>
-<li>相关模式：描述了此模式和其他模式之间的关系</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/20/Head-First-Design-Patterns/" data-id="cj5a6jh0y00010h4ba5rhq0yg" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Learning/">Learning</a></li></ul>
 
     </footer>
   </div>
@@ -1066,7 +1287,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -1076,9 +1297,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ProgrammingLanguage/">ProgrammingLanguage</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
     </div>
   </div>
 
@@ -1086,9 +1307,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
+      <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/ProgrammingLanguage/" style="font-size: 10px;">ProgrammingLanguage</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
     </div>
   </div>
 
@@ -1105,9 +1326,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/07/19/编程语言学习框架/">编程语言学习框架</a>
+          </li>
         
           <li>
             <a href="/2017/07/18/学习数据建模/">学习数据建模</a>
@@ -1125,10 +1350,6 @@
             <a href="/2017/06/29/「复盘」商品库-v1-0/">「复盘」商品库 v1.0</a>
           </li>
         
-          <li>
-            <a href="/2017/06/27/使用-Vue-js-2-0-开发后台/">使用 Vue.js 2.0 开发后台</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1142,7 +1363,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Luis Edware<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
