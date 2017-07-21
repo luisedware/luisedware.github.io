@@ -15,7 +15,7 @@
 <meta property="og:description" content="入门概述（Introduction）版本迭代（Version Iteration）注释与代码分割（Comments &amp;amp; Split）构建与依赖管理（Builder &amp;amp; Dependence Manager）语法基础（Syntax）表达式（Expression）变量（Variable）
 变量与常量声明（Variable Declaration）
 变量提升（Variable Hoist">
-<meta property="og:updated_time" content="2017-07-19T03:59:30.000Z">
+<meta property="og:updated_time" content="2017-07-21T09:50:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="编程语言学习框架">
 <meta name="twitter:description" content="入门概述（Introduction）版本迭代（Version Iteration）注释与代码分割（Comments &amp;amp; Split）构建与依赖管理（Builder &amp;amp; Dependence Manager）语法基础（Syntax）表达式（Expression）变量（Variable）
@@ -62,9 +62,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -184,11 +184,94 @@
 <li>字符串校验（Valid）</li>
 <li>模糊搜索（Fuzzy Search）</li>
 </ul>
-<h4 id="时间与日期"><a href="#时间与日期" class="headerlink" title="时间与日期"></a>时间与日期</h4><h6 id="时间解析（Parse）"><a href="#时间解析（Parse）" class="headerlink" title="时间解析（Parse）"></a>时间解析（Parse）</h6>
+<h4 id="时间与日期（DateTime）"><a href="#时间与日期（DateTime）" class="headerlink" title="时间与日期（DateTime）"></a>时间与日期（DateTime）</h4><h6 id="时间解析（Parse）"><a href="#时间解析（Parse）" class="headerlink" title="时间解析（Parse）"></a>时间解析（Parse）</h6><ul>
+<li>时间戳（TimeStamp）</li>
+<li>时间日期字符串（DateTimeString）</li>
+<li>时区转换（TimeZone）</li>
+<li>时间比较（Comparison）</li>
+</ul>
+<h6 id="时间展示（Display）"><a href="#时间展示（Display）" class="headerlink" title="时间展示（Display）"></a>时间展示（Display）</h6><ul>
+<li>格式化（Format）</li>
+<li>相对格式（Relative Format）</li>
+<li>时长（Duration）</li>
+<li>i18n（国际化）</li>
+</ul>
+<h6 id="时间操作（Manipulation）"><a href="#时间操作（Manipulation）" class="headerlink" title="时间操作（Manipulation）"></a>时间操作（Manipulation）</h6><ul>
+<li>读取与设置（Get &amp; Set）</li>
+<li>时间增减（Add &amp; Subtract）</li>
+<li>时间偏移计算（Diff）</li>
+</ul>
+<h6 id="日历（Calendar）"><a href="#日历（Calendar）" class="headerlink" title="日历（Calendar）"></a>日历（Calendar）</h6><h4 id="序列类型（IndexedCollection）"><a href="#序列类型（IndexedCollection）" class="headerlink" title="序列类型（IndexedCollection）"></a>序列类型（IndexedCollection）</h4><h6 id="数组（Array）"><a href="#数组（Array）" class="headerlink" title="数组（Array）"></a>数组（Array）</h6><ul>
+<li>增删复替（Manipulation）</li>
+<li>索引遍历（Index &amp; Traversal）</li>
+<li>转换（Transform）<ul>
+<li>map/flatMap</li>
+<li>reduce</li>
+<li>filter</li>
+<li>sort</li>
+</ul>
+</li>
+</ul>
+<h6 id="集合（Set）"><a href="#集合（Set）" class="headerlink" title="集合（Set）"></a>集合（Set）</h6><h4 id="索引类型（KeyedCollection）"><a href="#索引类型（KeyedCollection）" class="headerlink" title="索引类型（KeyedCollection）"></a>索引类型（KeyedCollection）</h4><h6 id="映射"><a href="#映射" class="headerlink" title="映射"></a>映射</h6><ul>
+<li>增删复替（Manipulation）</li>
+<li>索引遍历（Index &amp; Traversal)</li>
+</ul>
+<h4 id="不可变对象（Immutable）"><a href="#不可变对象（Immutable）" class="headerlink" title="不可变对象（Immutable）"></a>不可变对象（Immutable）</h4><h4 id="流（Stream）"><a href="#流（Stream）" class="headerlink" title="流（Stream）"></a>流（Stream）</h4><h4 id="序列化与反序列化（Serialization）"><a href="#序列化与反序列化（Serialization）" class="headerlink" title="序列化与反序列化（Serialization）"></a>序列化与反序列化（Serialization）</h4><ul>
+<li>Json</li>
+<li>XML</li>
+<li>CSV</li>
+</ul>
+<h2 id="功能（Functionality）"><a href="#功能（Functionality）" class="headerlink" title="功能（Functionality）"></a>功能（Functionality）</h2><h4 id="存储（Storage）"><a href="#存储（Storage）" class="headerlink" title="存储（Storage）"></a>存储（Storage）</h4><h6 id="缓存（Cache）"><a href="#缓存（Cache）" class="headerlink" title="缓存（Cache）"></a>缓存（Cache）</h6><h6 id="数据库（DataBase）"><a href="#数据库（DataBase）" class="headerlink" title="数据库（DataBase）"></a>数据库（DataBase）</h6><ul>
+<li>MySQL</li>
+<li>Redis</li>
+<li>MongoDB</li>
+</ul>
+<h6 id="文件系统（FileSystem）"><a href="#文件系统（FileSystem）" class="headerlink" title="文件系统（FileSystem）"></a>文件系统（FileSystem）</h6><ul>
+<li>FilePath（文件寻址）</li>
+<li>Monitor（文件监控）</li>
+</ul>
+<h4 id="网络（Network）"><a href="#网络（Network）" class="headerlink" title="网络（Network）"></a>网络（Network）</h4><h6 id="网络管理（Network-Management）"><a href="#网络管理（Network-Management）" class="headerlink" title="网络管理（Network Management）"></a>网络管理（Network Management）</h6><h6 id="套接字（Socket）"><a href="#套接字（Socket）" class="headerlink" title="套接字（Socket）"></a>套接字（Socket）</h6><h6 id="HTTP-访问（HTTP-Client）"><a href="#HTTP-访问（HTTP-Client）" class="headerlink" title="HTTP 访问（HTTP Client）"></a>HTTP 访问（HTTP Client）</h6><ul>
+<li>URI 处理工具集（URI Handler）</li>
+<li>请求构造（Request Generator）</li>
+<li>请求执行（Request Executor）</li>
+<li>响应解析（Responsive）</li>
+<li>复杂请求管理（Advanced Request）</li>
+</ul>
+<h6 id="WebSocket"><a href="#WebSocket" class="headerlink" title="WebSocket"></a>WebSocket</h6><h6 id="远程调用（RPC）"><a href="#远程调用（RPC）" class="headerlink" title="远程调用（RPC）"></a>远程调用（RPC）</h6><h4 id="系统进程（SysProc）"><a href="#系统进程（SysProc）" class="headerlink" title="系统进程（SysProc）"></a>系统进程（SysProc）</h4><h6 id="切面编程（AOP）"><a href="#切面编程（AOP）" class="headerlink" title="切面编程（AOP）"></a>切面编程（AOP）</h6><h6 id="并发编程（ConcurrentProgramming）"><a href="#并发编程（ConcurrentProgramming）" class="headerlink" title="并发编程（ConcurrentProgramming）"></a>并发编程（ConcurrentProgramming）</h6><ul>
+<li>线程（Thread）<ul>
+<li>线程池（ThreadPool）</li>
+<li>协程（Coroutines）</li>
+</ul>
+</li>
+<li>并发控制（ConcurrencyControl）<ul>
+<li>锁（Lock）</li>
+<li>锁与事务（Atomic &amp; Transaction）</li>
+<li>数据一致性（Consistency）</li>
+</ul>
+</li>
+<li>异步模式（AsynchronousPattern）<ul>
+<li>回调（Callback）</li>
+<li>Promise / Future /Defer</li>
+<li>Generator</li>
+<li>Async / Await</li>
+</ul>
+</li>
+</ul>
+<h6 id="系统调用（System）"><a href="#系统调用（System）" class="headerlink" title="系统调用（System）"></a>系统调用（System）</h6><h6 id="响应式编程（Reactive）"><a href="#响应式编程（Reactive）" class="headerlink" title="响应式编程（Reactive）"></a>响应式编程（Reactive）</h6><ul>
+<li>RxExtension</li>
+<li>Actor</li>
+<li>流逝 API（StreamAPI）</li>
+</ul>
+<h2 id="工程实践（Engineering-Practices）"><a href="#工程实践（Engineering-Practices）" class="headerlink" title="工程实践（Engineering Practices）"></a>工程实践（Engineering Practices）</h2><h4 id="测试与发布（Test-amp-Release）"><a href="#测试与发布（Test-amp-Release）" class="headerlink" title="测试与发布（Test &amp; Release）"></a>测试与发布（Test &amp; Release）</h4><h6 id="调试（Debug）"><a href="#调试（Debug）" class="headerlink" title="调试（Debug）"></a>调试（Debug）</h6><h6 id="Test（测试）"><a href="#Test（测试）" class="headerlink" title="Test（测试）"></a>Test（测试）</h6><ul>
+<li>断言（Assert）</li>
+<li>Mock &amp; Stub</li>
+<li>TestRunner</li>
+</ul>
+<h6 id="发布（Release）"><a href="#发布（Release）" class="headerlink" title="发布（Release）"></a>发布（Release）</h6><h6 id="日志（Log）"><a href="#日志（Log）" class="headerlink" title="日志（Log）"></a>日志（Log）</h6>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/19/编程语言学习框架/" data-id="cj5c4p440007wc34by5kco96r" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/07/19/编程语言学习框架/" data-id="cj5dosucs007h5y4bvdfe3ukc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ProgrammingLanguage/">ProgrammingLanguage</a></li></ul>
@@ -201,7 +284,7 @@
   
   
     <a href="/2017/07/18/学习数据建模/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">学习数据建模</div>
     </a>
   
@@ -216,7 +299,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -226,7 +309,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ProgrammingLanguage/">ProgrammingLanguage</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
     </div>
@@ -236,7 +319,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/ProgrammingLanguage/" style="font-size: 10px;">ProgrammingLanguage</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
     </div>
@@ -255,7 +338,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -292,7 +375,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Luis Edware<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
