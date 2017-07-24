@@ -25,7 +25,7 @@
 简介的交流媒介：显示各个类型，并用简单有效的符号表达它们之间的相互作用。
 
 数据模型的价值数据建模是构建应用程序的必要组成部分。数据模型之所以如此">
-<meta property="og:updated_time" content="2017-07-18T23:08:40.000Z">
+<meta property="og:updated_time" content="2017-07-24T14:13:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习数据建模">
 <meta name="twitter:description" content="数据模型简介数据模型的概念数据模型是一组由符号、文本组成的集合，用以准确表达信息景观，达到有效交流、沟通的目的。
@@ -184,11 +184,49 @@
 <li>数据模型的交流性更强。</li>
 <li>使得新建模型、维护现有模型变得更有效率。</li>
 </ul>
-<h4 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h4><h6 id="关系的概念"><a href="#关系的概念" class="headerlink" title="关系的概念"></a>关系的概念</h6><h6 id="关系的类型"><a href="#关系的类型" class="headerlink" title="关系的类型"></a>关系的类型</h6>
+<h4 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h4><h6 id="关系的概念"><a href="#关系的概念" class="headerlink" title="关系的概念"></a>关系的概念</h6><p>数据模型中的规则即为关系，关系被表示成一条连接两个实体的线段，用来说明实体间的规则或导航路径。</p>
+<h6 id="关系的类型"><a href="#关系的类型" class="headerlink" title="关系的类型"></a>关系的类型</h6><p>规则可以是数据规则，也可以是行为规则。数据规则指示数据间如何关联，行为规则指示当属性包含有某特定值时，需要采取什么操作。</p>
+<ul>
+<li>数据规则<ul>
+<li>结构完整型（基数规则）- SI<ul>
+<li>基数概念：基数指定了一种可以被实施的数据规则。</li>
+</ul>
+</li>
+<li>参照完整型 - RI</li>
+</ul>
+</li>
+<li>行为规则</li>
+</ul>
+<p>标签是出现在关系线上的动词。标签应该在可能的情况下尽量详细，来确保数据模型的准确度。</p>
+<p>使用子类型可以将一些类似的属性或将一些相似且有关系的实体的关系进行分组。</p>
+<h4 id="键"><a href="#键" class="headerlink" title="键"></a>键</h4><h6 id="键的概念"><a href="#键的概念" class="headerlink" title="键的概念"></a>键的概念</h6><p>键由一个或多个属性构成，其目的在于实施规则，有效检索数据，而且允许从一个实体导航至另一个实体。</p>
+<h6 id="键的类型"><a href="#键的类型" class="headerlink" title="键的类型"></a>键的类型</h6><ul>
+<li>候选键</li>
+<li>代理键</li>
+<li>主键</li>
+<li>备用键</li>
+<li>外键</li>
+<li>辅助键</li>
+<li>组合键</li>
+</ul>
+<p>候选键是一个或多个可以唯一标识实体实例的属性。其具备以下 4 个基本特征：</p>
+<ul>
+<li>唯一性</li>
+<li>强制性</li>
+<li>非异变性</li>
+<li>最小化</li>
+</ul>
+<p>代理键是数据表的唯一标识符，它通常由一个固定大小的、无人工干预的、系统自动产生的计数器生成，代理键不具备任务业务含义。</p>
+<p>主键是在众多候选键中首选出来唯一标识实体的选项。</p>
+<p>备用键也同样是候选键，具备唯一性、稳定性和强制性和最小化，即使有些备用键没有被选择充当主键，但它仍然可以被使用，以检索特定的实体实例。</p>
+<p>外键是可以与其他实体产生关联的一个或多个属性。（或者在递归关系中，连接同一个实体的情况下，有可能存在来自同一个实体的两个实例相互关联）</p>
+<p>辅助键是经常被访问的，或者需要被快速检索到的一个或多个属性。辅助键又被称为非唯一性索引或倒排入口。辅助键无需是唯一的、稳定的，而且也不要求必须拥有值。</p>
+<p>由多个属性组成的键称为组合键。</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/18/学习数据建模/" data-id="cj5hhr0ew0070ag4brbyw7qmi" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/07/18/学习数据建模/" data-id="cj5i8gu9x006w0q4bpkfxor4z" class="article-share-link">Share</a>
       
       
     </footer>
