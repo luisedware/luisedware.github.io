@@ -65,6 +65,90 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-学习-Javascript-之变量" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/23/学习-Javascript-之变量/" class="article-date">
+  <time datetime="2017-03-23T02:16:35.000Z" itemprop="datePublished">2017-03-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Javascript/">Javascript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/23/学习-Javascript-之变量/">学习 Javascript 之变量</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="变量的声明"><a href="#变量的声明" class="headerlink" title="变量的声明"></a>变量的声明</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* 声明变量 */</span></div><div class="line"><span class="keyword">var</span> x = <span class="number">3.14</span>;</div><div class="line"><span class="keyword">var</span> y;</div><div class="line"><span class="keyword">var</span> z = x + y;</div><div class="line"></div><div class="line"><span class="keyword">var</span> a = <span class="number">1</span>, b = <span class="number">2</span>, c = <span class="literal">true</span>;</div><div class="line"><span class="keyword">var</span> foo = <span class="string">"Hello"</span> + <span class="string">"World"</span>;</div><div class="line"><span class="keyword">var</span> bar = <span class="number">2</span> &gt; <span class="number">1</span> ? <span class="number">2</span> != <span class="number">1</span> : <span class="number">1</span> &gt; <span class="number">2</span> ;</div><div class="line"></div><div class="line"><span class="comment">/* 声明常量 */</span></div><div class="line"><span class="keyword">const</span> PI = <span class="number">3.1415</span>;</div><div class="line"></div><div class="line"><span class="comment">/* ES6 - 声明变量 */</span></div><div class="line"><span class="keyword">let</span> a = <span class="number">10</span>;</div><div class="line"><span class="keyword">let</span> [a, b, c] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</div></pre></td></tr></table></figure>
+<h2 id="变量的声明作用域"><a href="#变量的声明作用域" class="headerlink" title="变量的声明作用域"></a>变量的声明作用域</h2><ul>
+<li>var<ul>
+<li>在全局作用域内有效</li>
+</ul>
+</li>
+<li>let<ul>
+<li>只在声明所在的块级作用域内有效</li>
+</ul>
+</li>
+<li>const<ul>
+<li>只在声明所在的块级作用域内有效</li>
+</ul>
+</li>
+</ul>
+<h2 id="变量的声明陷阱"><a href="#变量的声明陷阱" class="headerlink" title="变量的声明陷阱"></a>变量的声明陷阱</h2><ul>
+<li>变量提升<ul>
+<li>变量无法在 let 命令声明之前使用，否则报错</li>
+<li>变量可以在 var 命令声明之前使用，值为 undefined</li>
+</ul>
+</li>
+<li>暂时性死区<ul>
+<li>在代码块内，使用 let 命令声明变量之前，该变量都是不可用的</li>
+</ul>
+</li>
+<li>重复声明<ul>
+<li>var 命令允许在相同作用域内，重复声明一个变量</li>
+<li>let 命令不允许在相同作用域内，重复声明一个变量</li>
+</ul>
+</li>
+</ul>
+<h2 id="解构赋值"><a href="#解构赋值" class="headerlink" title="解构赋值"></a>解构赋值</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* 数组的解构赋值 */</span></div><div class="line"><span class="keyword">let</span> [foo, [[bar], baz]] = [<span class="number">1</span>, [[<span class="number">2</span>], <span class="number">3</span>]];</div><div class="line"></div><div class="line"><span class="comment">/* 对象的解构赋值 */</span></div><div class="line"><span class="keyword">let</span> &#123; foo, bar &#125; = &#123; <span class="attr">foo</span>: <span class="string">"aaa"</span>, <span class="attr">bar</span>: <span class="string">"bbb"</span> &#125;;</div><div class="line"></div><div class="line"><span class="comment">/* 字符串的解构赋值 */</span></div><div class="line"><span class="keyword">const</span> [a, b, c, d, e] = <span class="string">'hello'</span>;</div><div class="line"></div><div class="line"><span class="comment">/* 函数的解构赋值 */</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">[x, y]</span>)</span>&#123;</div><div class="line">  <span class="keyword">return</span> x + y;</div><div class="line">&#125;</div><div class="line">add([<span class="number">1</span>, <span class="number">2</span>]); <span class="comment">// 3</span></div></pre></td></tr></table></figure>
+<p>变量的解构赋值用途如下：</p>
+<ul>
+<li>交换变量的值</li>
+<li>从函数返回多个值</li>
+<li>函数参数的定义</li>
+<li>提取 JSON 数据</li>
+<li>函数参数的默认值</li>
+<li>遍历 Map 结构</li>
+<li>输入模块的指定方法</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2017/03/23/学习-Javascript-之变量/" data-id="cj5qv2xac006kq64bwcn6axcq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Head-First-Design-Patterns" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/03/20/Head-First-Design-Patterns/" class="article-date">
@@ -141,7 +225,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/20/Head-First-Design-Patterns/" data-id="cj5m65cdl0000fa4b1wcdym3p" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/03/20/Head-First-Design-Patterns/" data-id="cj5qv2x600001q64b96c1r3t3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Learning/">Learning</a></li></ul>
@@ -184,7 +268,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」Yii2-前端请求的参数字段映射数据模型的属性/" data-id="cj5m65cgp003hfa4b5gsm8uwd" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」Yii2-前端请求的参数字段映射数据模型的属性/" data-id="cj5qv2x8l003hq64bdnuaeep5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -228,7 +312,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」-htaccess-配置-HTTP-Header/" data-id="cj5m65cge0033fa4bdnwovm5m" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」-htaccess-配置-HTTP-Header/" data-id="cj5qv2x8d0033q64b689vzsmn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -271,7 +355,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」PHP-7-1-命名空间的新特性和使用方法/" data-id="cj5m65cgm003efa4bzosn3rcs" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」PHP-7-1-命名空间的新特性和使用方法/" data-id="cj5qv2x8f0036q64bjzwcwjvf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -395,7 +479,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/02/Swagger-PHP-基础使用/" data-id="cj5m65cfu002bfa4b2yei3q27" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/03/02/Swagger-PHP-基础使用/" data-id="cj5qv2x83002fq64bs2s8yrzb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swagger/">Swagger</a></li></ul>
@@ -615,7 +699,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/28/使用-Yii2-构建-RESTFul-API/" data-id="cj5m65chh0057fa4bs6or7sgt" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/28/使用-Yii2-构建-RESTFul-API/" data-id="cj5qv2x9d0053q64b4y9f0mza" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
@@ -760,7 +844,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/23/「复习」使用阿里云从零开始部署-Laravel/" data-id="cj5m65cgr003lfa4bru3b54mg" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/23/「复习」使用阿里云从零开始部署-Laravel/" data-id="cj5qv2x8m003kq64br4c9whuk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AliCloud/">AliCloud</a></li></ul>
@@ -827,7 +911,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/17/学习-UML（二）/" data-id="cj5m65ciq0071fa4b612yercw" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/17/学习-UML（二）/" data-id="cj5qv2xai006yq64bnlvdfyox" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UML/">UML</a></li></ul>
@@ -931,102 +1015,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/14/在-Yii-2-中使用-CodeCeption/" data-id="cj5m65cj30080fa4b338czo3m" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/14/在-Yii-2-中使用-CodeCeption/" data-id="cj5qv2xa8006eq64bumlfewiq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/02/11/LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）/" class="article-date">
-  <time datetime="2017-02-11T08:23:06.000Z" itemprop="datePublished">2017-02-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/11/LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）/">LuisEdware 版 PHP 编程规范（遵循 PSR-1/PSR-2）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ol>
-<li><a href="#1">八荣八耻</a></li>
-<li><a href="#2">代码风格</a></li>
-<li><a href="#3">目录与文件</a></li>
-<li><a href="#4">函数、成员属性、成员方法</a></li>
-<li><a href="#5">数据表和字段</a></li>
-<li><a href="#6">常量和配置</a></li>
-<li><a href="#7">示例代码</a></li>
-<li><a href="#8">参考链接</a></li>
-</ol>
-<h2 id="八荣八耻"><a href="#八荣八耻" class="headerlink" title="八荣八耻"></a><a id="1">八荣八耻</a></h2><ul>
-<li>以「<b>动手实践</b>」为荣, 以「<b>只看不练</b>」为耻;</li>
-<li>以「<b>打印日志</b>」为荣, 以「<b>单步跟踪</b>」为耻;</li>
-<li>以「<b>空格缩进</b>」为荣, 以「<b>制表缩进</b>」为耻;</li>
-<li>以「<b>单元测试</b>」为荣, 以「<b>人工测试</b>」为耻;</li>
-<li>以「<b>模块复用</b>」为荣, 以「<b>复制粘贴</b>」为耻;</li>
-<li>以「<b>多态应用</b>」为荣, 以「<b>分支判断</b>」为耻;</li>
-<li>以「<b>优雅高效</b>」为荣, 以「<b>冗余拖沓</b>」为耻;</li>
-<li>以「<b>总结分享</b>」为荣, 以「<b>跪求其解</b>」为耻。</li>
-</ul>
-<h2 id="代码风格"><a href="#代码风格" class="headerlink" title="代码风格"></a><a id="2">代码风格</a></h2><p>编程开发时，需要遵循 PSR 规范如下：</p>
-<ul>
-<li>PSR 2（编码风格规范）：<a href="https://laravel-china.org/topics/2079" target="_blank" rel="external">https://laravel-china.org/topics/2079</a></li>
-<li>PSR 4（自动加载规范）：<a href="https://laravel-china.org/topics/2081" target="_blank" rel="external">https://laravel-china.org/topics/2081</a></li>
-</ul>
-<h2 id="目录与文件"><a href="#目录与文件" class="headerlink" title="目录与文件"></a><a id="3">目录与文件</a></h2><ul>
-<li>目录使用小写加下划线；</li>
-<li>类库、函数文件统一以 <code>.php</code> 为后缀；</li>
-<li>类的文件名均以命名空间定义，并且命名空间的路径和类库文件所在路径一致；</li>
-<li>类文件采用驼峰法命名（首字母大写），其它文件采用小写+下划线命名；</li>
-<li>类名和类文件名保持一致，统一采用首字母大写的驼峰法命名；</li>
-</ul>
-<h2 id="函数、成员属性、成员方法"><a href="#函数、成员属性、成员方法" class="headerlink" title="函数、成员属性、成员方法"></a><a id="4">函数、成员属性、成员方法</a></h2><ul>
-<li>函数的命名使用小写字母和下划线的方式</li>
-<li>成员属性的命名使用首字母小写的驼峰法</li>
-<li>成员方法的命名使用首字母小写的驼峰法</li>
-</ul>
-<h2 id="数据表和字段"><a href="#数据表和字段" class="headerlink" title="数据表和字段"></a><a id="5">数据表和字段</a></h2><ul>
-<li>数据表采用小写加下划线方式命名</li>
-<li>字段采用首字母小写的驼峰法命名</li>
-</ul>
-<h2 id="常量和配置"><a href="#常量和配置" class="headerlink" title="常量和配置"></a><a id="6">常量和配置</a></h2><ul>
-<li>常量以大写字母和下划线命名</li>
-<li>配置以小写字母和下划线命名</li>
-</ul>
-<h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a><a id="7">示例代码</a></h2><p>函数声明示例如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 符合 RSR-1,RSR-2 的编程实例</div><div class="line"> *</div><div class="line"> * <span class="doctag">@Date</span>      2017/02/17 18:00</div><div class="line"> * <span class="doctag">@Author</span>    七月十五九月初七</div><div class="line"> * <span class="doctag">@License</span>   广东七月十五九月初七科技有限公司</div><div class="line"> * <span class="doctag">@Copyright</span> Copyright (c) 2017 PSR-1.PSR-2 Ltd</div><div class="line"> */</div><div class="line"><span class="keyword">namespace</span> <span class="title">PSR</span>; <span class="comment">// 顶部命名空间</span></div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">Yii</span>; <span class="comment">// 空一行 use 引入类</span></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 类描述</div><div class="line"> * 类名必须大写开头驼峰.</div><div class="line"> */</div><div class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleClass</span> // </span>&#123;&#125;必须换行</div><div class="line">&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 常量描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@var</span> string</div><div class="line">     */</div><div class="line">    <span class="keyword">const</span> THIS_IS_A_CONST = <span class="string">''</span>; <span class="comment">// 常量全部大写下划线分割</span></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 属性描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@var</span> string</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> $nameTest = <span class="string">''</span>; <span class="comment">// 属性名称建议开头小写驼峰,成员属性必须添加public（不能省略）， private, protected修饰符</span></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 属性描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@var</span> string</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> $_privateNameTest = <span class="string">''</span>; <span class="comment">// 类私有成员属性，【个人建议】下划线小写开头驼峰</span></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 构造函数</div><div class="line">     *</div><div class="line">     * 构造函数描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span>  string $value 形参名称/描述</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($value = <span class="string">''</span>)</span>// 成员方法必须添加<span class="title">public</span>（不能省略）， <span class="title">private</span>, <span class="title">protected</span>修饰符</span></div><div class="line">    &#123;<span class="comment">// &#123;&#125;必须换行</span></div><div class="line">        <span class="keyword">$this</span>-&gt;nameTest = <span class="keyword">new</span> TestClass();</div><div class="line">        <span class="comment">// 链式操作</span></div><div class="line">        <span class="keyword">$this</span>-&gt;nameTest-&gt;functionOne()-&gt;functionTwo()-&gt;functionThree();</div><div class="line">        <span class="comment">// 一段代码逻辑执行完毕 换行</span></div><div class="line">        <span class="comment">// code...</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 成员方法名称</div><div class="line">     *</div><div class="line">     * 成员方法描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span>  string $value 形参名称/描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span> 返回值类型 返回值描述</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">staticFunction</span><span class="params">($value = <span class="string">''</span>)</span>// <span class="title">static</span>位于修饰符之后</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// code...</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 成员方法名称</div><div class="line">     *</div><div class="line">     * 成员方法描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span>  string $value 形参名称/描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span> 返回值类型 返回值描述</div><div class="line">     * 返回值类型：string，array，object，mixed（多种，不确定的），void（无返回值）</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testFunction</span><span class="params">($value = <span class="string">''</span>)</span>// 成员方法必须小写开头驼峰</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// code...</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 成员方法名称</div><div class="line">     *</div><div class="line">     * 成员方法描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span>  string $value 形参名称/描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span> 返回值类型 返回值描述</div><div class="line">     */</div><div class="line">    <span class="keyword">abstract</span> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">abstractFunction</span><span class="params">($value = <span class="string">''</span>)</span></span>;</div><div class="line">    <span class="comment">// abstract 位于修饰符之前</span></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 成员方法名称.</div><div class="line">     * 成员方法描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span>  string $value 形参名称/描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span> 返回值类型 返回值描述</div><div class="line">     */</div><div class="line">    <span class="keyword">final</span> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">finalFunction</span><span class="params">($value = <span class="string">''</span>)</span>// <span class="title">final</span> 位于修饰符之前</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// code...</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 成员方法名称</div><div class="line">     *</div><div class="line">     * 成员方法描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span>  string $paramOne   形参名称/描述</div><div class="line">     * <span class="doctag">@param</span>  string $paramTwo   形参名称/描述</div><div class="line">     * <span class="doctag">@param</span>  string $paramThree 形参名称/描述</div><div class="line">     * <span class="doctag">@param</span>  string $paramFour  形参名称/描述</div><div class="line">     * <span class="doctag">@param</span>  string $paramFive  形参名称/描述</div><div class="line">     * <span class="doctag">@param</span>  string $paramSix   形参名称/描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span> 返回值类型 返回值描述</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">tooLangFunction</span><span class="params">(</span></span></div><div class="line">        $paramOne = <span class="string">''</span>, // 变量命名可小写开头驼峰或者下划线命名</div><div class="line">        $paramTwo = <span class="string">''</span>,</div><div class="line">        $paramThree = <span class="string">''</span>,</div><div class="line">        $paramFour = <span class="string">''</span>,</div><div class="line">        $paramFive = <span class="string">''</span>,</div><div class="line">        $paramSix = <span class="string">''</span></div><div class="line">    )// 参数过多换行</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> ($paramOne === $paramTwo) &#123;<span class="comment">// 控制结构=&gt;后加空格,同&#123;一行，（右边和)左边不加空格</span></div><div class="line">            <span class="comment">// code...</span></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> ($paramTwo === $paramThree) &#123;</div><div class="line"></div><div class="line">        &#125; <span class="keyword">elseif</span> ($paramFour === $paramFive) &#123;</div><div class="line"></div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">switch</span> ($paramThree) &#123;</div><div class="line">            <span class="keyword">case</span> <span class="string">'three'</span>:</div><div class="line">                <span class="comment">// code...</span></div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">case</span> <span class="string">'one'</span>:</div><div class="line">            <span class="keyword">case</span> <span class="string">'two'</span>:</div><div class="line">            <span class="keyword">case</span> <span class="string">'four'</span>:</div><div class="line">            <span class="keyword">case</span> <span class="string">'five'</span>:</div><div class="line">                <span class="comment">// code...</span></div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">default</span>:</div><div class="line">                <span class="comment">// code...</span></div><div class="line">                <span class="keyword">break</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">do</span> &#123;</div><div class="line">            <span class="comment">// code...</span></div><div class="line">        &#125; <span class="keyword">while</span> ($paramFour &lt;= <span class="number">10</span>);</div><div class="line"></div><div class="line">        <span class="keyword">while</span> ($paramFive &lt;= <span class="number">10</span>) &#123;</div><div class="line">            <span class="comment">// code...</span></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">for</span> ($i = <span class="number">0</span>; $i &lt; $paramSix; $i++) &#123;</div><div class="line">            <span class="comment">// code...</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 成员方法名称</div><div class="line">     *</div><div class="line">     * 成员方法描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span>  string $value 形参名称/描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span> 返回值类型 返回值描述</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">_privateTestFunction</span><span class="params">($value = <span class="string">''</span>)</span>// 私有成员方法【个人建议】下划线小写开头驼峰</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// code...</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a><a id="8">参考链接</a></h2><ul>
-<li><a href="https://github.com/TIGERB/easy-tips" target="_blank" rel="external">PHP Easy Tips</a></li>
-<li><a href="http://www.kancloud.cn/thinkphp/thinkphp5-guide/90124" target="_blank" rel="external">ThinkPHP 5 命名规范</a></li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/11/LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）/" data-id="cj5m65cex001afa4b8kmpiu2a" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
 
     </footer>
   </div>
@@ -1058,7 +1050,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ProgrammingLanguage/">ProgrammingLanguage</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
     </div>
   </div>
 
@@ -1068,7 +1060,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/ProgrammingLanguage/" style="font-size: 10px;">ProgrammingLanguage</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
+      <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Programming-Language/" style="font-size: 11.43px;">Programming Language</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
     </div>
   </div>
 
@@ -1094,6 +1086,10 @@
           </li>
         
           <li>
+            <a href="/2017/07/19/学习-PHP/">PHP 学习框架</a>
+          </li>
+        
+          <li>
             <a href="/2017/07/18/学习数据建模/">学习数据建模</a>
           </li>
         
@@ -1103,10 +1099,6 @@
         
           <li>
             <a href="/2017/07/06/「复盘」Yii-RESTful-API-脚手架/">「复盘」Yii RESTful API 脚手架</a>
-          </li>
-        
-          <li>
-            <a href="/2017/06/29/「复盘」商品库-v1-0/">「复盘」商品库 v1.0</a>
           </li>
         
       </ul>
