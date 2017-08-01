@@ -15,7 +15,7 @@
 <meta property="og:description" content="入门概述（Introduction）PHP 是一种被广泛应用的开放源代码的多用途脚本语言，它可嵌入到 HTML中，尤其适合 web 开发。
 版本迭代（Version Iteration）当前最新稳定版本是 PHP 7.1.X，相比 PHP 5.X 版本增加了不少新特性。PHP 引擎也大部分被重写，PHP 的运行速度也提到了极大的提升。建议使用 PHP 7.1.X 作为开发和生产的环境。
 注释与代码">
-<meta property="og:updated_time" content="2017-08-01T13:14:38.000Z">
+<meta property="og:updated_time" content="2017-08-01T23:42:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP 学习框架">
 <meta name="twitter:description" content="入门概述（Introduction）PHP 是一种被广泛应用的开放源代码的多用途脚本语言，它可嵌入到 HTML中，尤其适合 web 开发。
@@ -484,7 +484,61 @@
 </table>
 <p>1.9.对象类型运算符（Object Type Operator）</p>
 <p>instanceof 用于确定一个 PHP 变量是否属于某一类 class 的实例：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ParentClass</span></span></div><div class="line">&#123;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> <span class="keyword">extends</span> <span class="title">ParentClass</span></span></div><div class="line">&#123;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$a = <span class="keyword">new</span> MyClass;</div><div class="line"></div><div class="line">var_dump($a <span class="keyword">instanceof</span> MyClass);</div><div class="line">var_dump($a <span class="keyword">instanceof</span> ParentClass);</div></pre></td></tr></table></figure></p>
-<h6 id="作用域与闭包（Scope-amp-Closure）"><a href="#作用域与闭包（Scope-amp-Closure）" class="headerlink" title="作用域与闭包（Scope &amp; Closure）"></a>作用域与闭包（Scope &amp; Closure）</h6><h6 id="惰性求值（Lazy-Evaluation）"><a href="#惰性求值（Lazy-Evaluation）" class="headerlink" title="惰性求值（Lazy Evaluation）"></a>惰性求值（Lazy Evaluation）</h6><h4 id="流程控制和异常处理（ControlFlow）"><a href="#流程控制和异常处理（ControlFlow）" class="headerlink" title="流程控制和异常处理（ControlFlow）"></a>流程控制和异常处理（ControlFlow）</h4><h6 id="分支选择（Branch）"><a href="#分支选择（Branch）" class="headerlink" title="分支选择（Branch）"></a>分支选择（Branch）</h6><ul>
+<p>2.位运算符（Bit Operator）</p>
+<table>
+<thead>
+<tr>
+<th>例子</th>
+<th>名称</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$a &amp; $b</td>
+<td>And（按位与）</td>
+<td>将把 $a 和 $b 中都为 1 的位设为 1。</td>
+</tr>
+<tr>
+<td>$a</td>
+<td>$b</td>
+<td>Or（按位或）</td>
+<td>将把 $a 和 $b 中任何一个为 1 的位设为 1。</td>
+</tr>
+<tr>
+<td>$a ^ $b</td>
+<td>Xor（按位异或）</td>
+<td>将把 $a 和 $b 中一个为 1 另一个为 0 的位设为 1。</td>
+</tr>
+<tr>
+<td>~ $a</td>
+<td>Not（按位取反）</td>
+<td>将 $a 中为 0 的位设为 1，反之亦然。</td>
+</tr>
+<tr>
+<td>$a &lt;&lt; $b</td>
+<td>Shift left（左移）</td>
+<td>将 $a 中的位向左移动 $b 次（每一次移动都表示“乘以 2”）。</td>
+</tr>
+<tr>
+<td>$a &gt;&gt; $b</td>
+<td>Shift right（右移）</td>
+<td>将 $a 中的位向右移动 $b 次（每一次移动都表示“除以 2”）。</td>
+</tr>
+</tbody>
+</table>
+<p>3.运算符重载（Operator Overloading）</p>
+<p>在计算机程序设计中，运算符重载是多态的一种。这里，运算符被当作多态函数，他们的行为随着其参数类型的不同而不同。<br>简而言之，运算符重载使程序员能够根据运算子类型的不同来决定运算符功能的不同。PHP 支持运算符重载。</p>
+<p>PHP 5.6 之后，GMP 支持运算符重载，并且造型成数值类型，这使得使用 GMP 的代码更加直观。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">$a = gmp_init(42);</div><div class="line">$b = gmp_init(17);</div><div class="line"></div><div class="line">if (version_compare(PHP_VERSION, &apos;5.6&apos;, &apos;&lt;&apos;)) &#123;</div><div class="line">    echo gmp_intval(gmp_add($a, $b)), PHP_EOL;</div><div class="line">    echo gmp_intval(gmp_add($a, 17)), PHP_EOL;</div><div class="line">    echo gmp_intval(gmp_add(42, $b)), PHP_EOL;</div><div class="line">&#125; else &#123;</div><div class="line">    echo $a + $b, PHP_EOL;</div><div class="line">    echo $a + 17, PHP_EOL;</div><div class="line">    echo 42 + $b, PHP_EOL;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h6 id="匿名函数与闭包（Anonymous-functions-amp-Closure）"><a href="#匿名函数与闭包（Anonymous-functions-amp-Closure）" class="headerlink" title="匿名函数与闭包（Anonymous functions &amp; Closure）"></a>匿名函数与闭包（Anonymous functions &amp; Closure）</h6><ul>
+<li>闭包和匿名函数在 PHP 5.3 中被引入。</li>
+<li>闭包是指在创建时封装函数周围状态的函数，即使闭包所在的环境不存在了，闭包封装的状态依然存在。</li>
+<li>匿名函数其实就是没有名称的函数，匿名函数可以赋值给变量，还能像其他任何 PHP 对象那样传递。最经常用作回调函数参数的值。</li>
+<li>匿名函数和闭包目前是通过 Closure 类来实现的。</li>
+</ul>
+<p>创建简单的闭包<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$closure = <span class="function"><span class="keyword">function</span><span class="params">($name)</span></span>&#123;</div><div class="line">	<span class="keyword">return</span> sprintf(<span class="string">'hello %s'</span>, $name);</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">echo</span> $closure(<span class="string">"Luis Edware"</span>);</div></pre></td></tr></table></figure></p>
+<p>之所以能够调用 $closure 变量，是因为这个变量的值是一个闭包，而且闭包对象实现了 <strong>invoke() 魔术方法。<br>只要变量名后有()，PHP 就会查找并调用 </strong>invoke() 方法。</p>
+<h6 id="惰性求值（Lazy-Evaluation）"><a href="#惰性求值（Lazy-Evaluation）" class="headerlink" title="惰性求值（Lazy Evaluation）"></a>惰性求值（Lazy Evaluation）</h6><h4 id="流程控制和异常处理（ControlFlow）"><a href="#流程控制和异常处理（ControlFlow）" class="headerlink" title="流程控制和异常处理（ControlFlow）"></a>流程控制和异常处理（ControlFlow）</h4><h6 id="分支选择（Branch）"><a href="#分支选择（Branch）" class="headerlink" title="分支选择（Branch）"></a>分支选择（Branch）</h6><ul>
 <li>if</li>
 <li>switch</li>
 </ul>
@@ -503,11 +557,7 @@
 <li>异常抛出（Throw）</li>
 <li>异常捕获（Try-Catch-Finally）</li>
 </ul>
-<h4 id="函数（Function）"><a href="#函数（Function）" class="headerlink" title="函数（Function）"></a>函数（Function）</h4><h6 id="函数定义（Function-Definition）"><a href="#函数定义（Function-Definition）" class="headerlink" title="函数定义（Function Definition）"></a>函数定义（Function Definition）</h6><ul>
-<li>匿名函数</li>
-<li>Lambda</li>
-</ul>
-<h6 id="函数参数（Function-Args）"><a href="#函数参数（Function-Args）" class="headerlink" title="函数参数（Function Args）"></a>函数参数（Function Args）</h6><ul>
+<h4 id="函数（Function）"><a href="#函数（Function）" class="headerlink" title="函数（Function）"></a>函数（Function）</h4><h6 id="函数定义（Function-Definition）"><a href="#函数定义（Function-Definition）" class="headerlink" title="函数定义（Function Definition）"></a>函数定义（Function Definition）</h6><h6 id="函数参数（Function-Args）"><a href="#函数参数（Function-Args）" class="headerlink" title="函数参数（Function Args）"></a>函数参数（Function Args）</h6><ul>
 <li>默认参数（Default Args）</li>
 <li>必要参数（Required Args）</li>
 <li>外部参数（External Args）</li>
@@ -654,7 +704,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/19/学习-PHP/" data-id="cj5u5fstj0072o74bs8as2hai" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/07/19/学习-PHP/" data-id="cj5u8an1r006y9h4bh746znfl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li></ul>
@@ -665,10 +715,19 @@
     
 <nav id="article-nav">
   
+    <a href="/2017/07/19/编程语言学习框架/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          编程语言学习框架
+        
+      </div>
+    </a>
   
-    <a href="/2017/07/19/编程语言学习框架/" id="article-nav-older" class="article-nav-link-wrap">
+  
+    <a href="/2017/07/18/学习数据建模/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">编程语言学习框架</div>
+      <div class="article-nav-title">学习数据建模</div>
     </a>
   
 </nav>
@@ -726,11 +785,11 @@
       <ul>
         
           <li>
-            <a href="/2017/07/19/学习-PHP/">PHP 学习框架</a>
+            <a href="/2017/07/19/编程语言学习框架/">编程语言学习框架</a>
           </li>
         
           <li>
-            <a href="/2017/07/19/编程语言学习框架/">编程语言学习框架</a>
+            <a href="/2017/07/19/学习-PHP/">PHP 学习框架</a>
           </li>
         
           <li>
