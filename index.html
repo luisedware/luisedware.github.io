@@ -65,6 +65,337 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-学习-PHP" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/19/学习-PHP/" class="article-date">
+  <time datetime="2017-07-19T01:48:27.000Z" itemprop="datePublished">2017-07-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Tooling/">Tooling</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/19/学习-PHP/">PHP 学习框架</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="入门概述（Introduction）"><a href="#入门概述（Introduction）" class="headerlink" title="入门概述（Introduction）"></a>入门概述（Introduction）</h2><p>PHP 是一种被广泛应用的开放源代码的多用途脚本语言，它可嵌入到 HTML中，尤其适合 web 开发。</p>
+<h4 id="版本迭代（Version-Iteration）"><a href="#版本迭代（Version-Iteration）" class="headerlink" title="版本迭代（Version Iteration）"></a>版本迭代（Version Iteration）</h4><p>当前最新稳定版本是 PHP 7.1.X，相比 PHP 5.X 版本增加了不少新特性。PHP 引擎也大部分被重写，PHP 的运行速度也提到了极大的提升。建议使用 PHP 7.1.X 作为开发和生产的环境。</p>
+<h4 id="注释与代码分割（Comments-amp-Split）"><a href="#注释与代码分割（Comments-amp-Split）" class="headerlink" title="注释与代码分割（Comments &amp; Split）"></a>注释与代码分割（Comments &amp; Split）</h4><p>注释的代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// 注释方式一</span></div><div class="line"></div><div class="line"><span class="comment">/* 注释方式二 */</span></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 注释方式三</div><div class="line"> *</div><div class="line"> * <span class="doctag">@param</span> string name</div><div class="line"> *</div><div class="line"> * <span class="doctag">@return</span> string</div><div class="line"> */</div></pre></td></tr></table></figure></p>
+<p>代码分割的代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">require</span>(<span class="string">"../path/file.php"</span>);</div><div class="line"><span class="keyword">require_once</span>(<span class="string">"../path/file.php"</span>);</div><div class="line"><span class="keyword">include</span>(<span class="string">"../path/file.php"</span>);</div><div class="line"><span class="keyword">include_once</span>(<span class="string">"../path/file.php"</span>);</div></pre></td></tr></table></figure></p>
+<p><strong>require()、require_once()、include()、include_once() 的异同：</strong></p>
+<ul>
+<li>运行时<ul>
+<li><code>require()</code> 和 <code>require_once()</code>、<code>include()</code> 和 <code>include_once()</code> 的区别是带 once 后缀的会判断在这个文件之前是否已经加载过了文件，避免重复加载。</li>
+<li><code>require()</code> 和 <code>require_once()</code> 加载文件时，如果出错，将会产生一个 <strong>E_COMPILE_ERROR</strong> 级别的错误，脚本将会终止运行。</li>
+<li><code>include()</code> 和 <code>include_once()</code> 加载文件时，如果出错，只会产生一个 <strong>E_WARNING</strong> 级别的警告，脚本将会继续运行。</li>
+</ul>
+</li>
+<li>性能上<ul>
+<li><code>include()</code>、<code>include_once()</code> 执行时，文件每次都要进行读取和评估。</li>
+<li><code>require()</code>、<code>require_once()</code> 执行时，文件只处理一次。</li>
+<li><code>include_once()</code>、<code>require_once()</code> 是在 <code>include()</code> 和 <code>require()</code> 的基础上进步一步封装。</li>
+</ul>
+</li>
+<li>返回值<ul>
+<li>如果加载文件内使用 return 返回，那么 <code>require()``、require_once()</code> 加载文件成功会有该文件 return 值的返回，失败会产生致命错误。</li>
+<li>如果加载文件内使用 return 返回，那么 <code>include()</code>、<code>include_once()</code> 加载文件成功会有该文件 return 值的返回，失败会抛出一个警告并返回 <code>boolean(false)</code>。</li>
+<li>如果加载文件内没有使用 return 返回，那么 <code>require()``、require_once()</code>、<code>include()</code>、<code>include_once()</code> 加载文件成功会返回 <code>int(1)</code>，失败分别会产生致命错误和抛出警告并返回 <code>boolead(false)</code>。</li>
+</ul>
+</li>
+</ul>
+<h4 id="构建与依赖管理（Builder-amp-Dependence-Manager）"><a href="#构建与依赖管理（Builder-amp-Dependence-Manager）" class="headerlink" title="构建与依赖管理（Builder &amp; Dependence Manager）"></a>构建与依赖管理（Builder &amp; Dependence Manager）</h4><h6 id="PEAR"><a href="#PEAR" class="headerlink" title="PEAR"></a>PEAR</h6><p>PEAR 是一个常用的依赖包管理器。PEAR 需要扩展包有专属的结构, 开发者在开发扩展包的时候要提前考虑为 PEAR 定制, 否则后面将无法使用 PEAR。</p>
+<p>PEAR 安装扩展包的时候, 是全局安装的, 意味着一旦安装了某个扩展包, 同一台服务器上的所有项目都能用上, 当然, 好处是当多个项目共同使用同一个扩展包的同一个版本, 坏处是如果你需要使用不同版本的话, 就会产生冲突.</p>
+<ul>
+<li><a href="https://pear.php.net" target="_blank" rel="external">PHP 官方 PEAR</a></li>
+<li><a href="http://laravel-china.github.io/php-the-right-way/#pear" target="_blank" rel="external">PHP 之道 PEAR</a></li>
+</ul>
+<h6 id="Composer-与-Packagist"><a href="#Composer-与-Packagist" class="headerlink" title="Composer 与 Packagist"></a>Composer 与 Packagist</h6><p>Composer 是另一个常用的依赖包管理器。在 composer.json 文件中列出你项目所需的依赖包，加上一点简单的命令，Composer 将会自动帮你下载并设置你的项目依赖。Composer 有点类似于 Node.js 里的 NPM，或者 Ruby 世界里的 Bundler。</p>
+<p>Packagist 是一个 Composer 官方的依赖包仓库，可以在 Packagist 上寻找想要的 PHP 依赖包。</p>
+<ul>
+<li><a href="https://getcomposer.org/" target="_blank" rel="external">Composer 官方网站</a></li>
+<li><a href="http://laravel-china.github.io/php-the-right-way/#composer_and_packagist" target="_blank" rel="external">PHP 之道 Composer</a></li>
+<li><a href="https://packagist.org/" target="_blank" rel="external">Packagist 官方网站</a></li>
+</ul>
+<h2 id="语法基础（Syntax）"><a href="#语法基础（Syntax）" class="headerlink" title="语法基础（Syntax）"></a>语法基础（Syntax）</h2><h4 id="表达式（Expression）"><a href="#表达式（Expression）" class="headerlink" title="表达式（Expression）"></a>表达式（Expression）</h4><h6 id="变量（Variable）"><a href="#变量（Variable）" class="headerlink" title="变量（Variable）"></a>变量（Variable）</h6><ul>
+<li>变量声明（Variable Declaration）<ul>
+<li>基础变量</li>
+<li>预定义变量</li>
+<li>变量范围</li>
+<li>可变变量</li>
+<li>来自 PHP 之外的变量</li>
+</ul>
+</li>
+<li>变量提升（Variable Hoisting）</li>
+<li>常量声明（Constants Declaration）<ul>
+<li>语法</li>
+<li>魔术常量</li>
+</ul>
+</li>
+</ul>
+<p><strong><em>变量与常量声明（Variable Declaration）</em></strong></p>
+<p>1.基础变量</p>
+<p>PHP 中的变量用一个美元符号后面跟变量名来表示。变量名是区分大小写的。<br>变量名与 PHP 中其它的标签一样遵循相同的规则。一个有效的变量名由字母或者下划线开头，后面跟上任意数量的字母，数字，或者下划线。按照正常的正则表达式，它将被表述为：<strong>‘[a-zA-Z<em>\x7f-\xff][a-zA-Z0-9</em>\x7f-\xff]*’</strong>。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$username = <span class="string">"Luis Edware"</span>;			<span class="comment">// 通过</span></div><div class="line">$_username = <span class="string">"Luis Edware"</span>;			<span class="comment">// 通过</span></div><div class="line">$username1 = <span class="string">"a1"</span>;					<span class="comment">// 通过</span></div><div class="line">$user.name = <span class="string">"LuisEdware"</span>;			<span class="comment">// 报错</span></div><div class="line">$用户名称 = <span class="string">"七月十五九月初七"</span>;			<span class="comment">// 通过</span></div><div class="line">$UserName = <span class="string">"Ann Eason"</span>;			<span class="comment">// 通过</span></div><div class="line">$userName = <span class="string">"Leon"</span>;					<span class="comment">// 通过</span></div><div class="line">$user_name = <span class="string">"Cissy"</span>;				<span class="comment">// 通过</span></div><div class="line">$<span class="number">1</span> = <span class="number">100</span>;							<span class="comment">// 报错</span></div><div class="line">$_100 = <span class="number">100</span>;						<span class="comment">// 通过</span></div></pre></td></tr></table></figure></p>
+<p>2.预定义变量</p>
+<p>PHP 提供了大量的预定义变量。由于许多变量依赖于运行的服务器的版本和设置，及其它因素，所以并没有详细的说明文档。一些预定义变量在 PHP 以命令行形式运行时并不生效。PHP 中的许多预定义变量都是“超全局”，这意味它们在一个脚本的全部作用域中都可用。</p>
+<ul>
+<li>$GLOBALS</li>
+<li>$_SERVER</li>
+<li>$_GET</li>
+<li>$_POST</li>
+<li>$_FILES</li>
+<li>$_COOKIE</li>
+<li>$_SESSION</li>
+<li>$_REQUEST</li>
+<li>$_ENV</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">foreach</span>($_SERVER <span class="keyword">as</span> $key =&gt; $server)&#123;</div><div class="line">  <span class="keyword">echo</span> $key.<span class="string">"\n"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>3.变量范围</p>
+<p>变量的范围即它定义的上下文背景（也就是它的生效范围）。大部分的 PHP 变量只有一个单独的范围。可以使用 global 关键字声明全局变量。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$a = <span class="number">1</span>;</div><div class="line">$b = <span class="number">2</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Sum</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">  <span class="keyword">global</span> $a, $b;</div><div class="line"></div><div class="line">  $b = $a + $b;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Sum();</div><div class="line"><span class="keyword">echo</span> $b;</div><div class="line"><span class="meta">?&gt;</span></div><div class="line"></div><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$a = <span class="number">1</span>;</div><div class="line">$b = <span class="number">2</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Sum</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="comment">// $GLOBALS 是一个关联数组，每一个变量为一个元素，键名对应变量名，值对应变量的内容</span></div><div class="line">    $GLOBALS[<span class="string">'b'</span>] = $GLOBALS[<span class="string">'a'</span>] + $GLOBALS[<span class="string">'b'</span>];</div><div class="line">&#125;</div><div class="line"></div><div class="line">Sum();</div><div class="line"><span class="keyword">echo</span> $b;</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure></p>
+<p>也可以使用 static 关键字在声明静态变量。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span><span class="params">()</span></span>&#123;</div><div class="line">  <span class="keyword">static</span> $a = <span class="number">0</span>;</div><div class="line">  <span class="keyword">echo</span> $a;</div><div class="line">  $a++;</div><div class="line">&#125;</div><div class="line"></div><div class="line">test();</div><div class="line">test();</div><div class="line">test();</div><div class="line">test();		<span class="comment">// 输出结果为：0123</span></div></pre></td></tr></table></figure></p>
+<p>4.可变变量</p>
+<p>有时候使用可变变量名是很方便的。就是说，一个变量的变量名可以动态的设置和使用。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$Bar = <span class="string">"a"</span>;</div><div class="line">$Foo = <span class="string">"Bar"</span>;</div><div class="line">$World = <span class="string">"Foo"</span>;</div><div class="line">$Hello = <span class="string">"World"</span>;</div><div class="line">$a = <span class="string">"Hello"</span>;</div><div class="line"></div><div class="line">$a; <span class="comment">//Returns Hello</span></div><div class="line">$$a; <span class="comment">//Returns World</span></div><div class="line">$$$a; <span class="comment">//Returns Foo</span></div><div class="line">$$$$a; <span class="comment">//Returns Bar</span></div><div class="line">$$$$$a; <span class="comment">//Returns a</span></div><div class="line">$$$$$$a; <span class="comment">//Returns Hello</span></div><div class="line">$$$$$$$a; <span class="comment">//Returns World</span></div></pre></td></tr></table></figure></p>
+<p>5.来自 PHP 之外的变量</p>
+<ul>
+<li>HTML 表单（GET 和 POST）<ul>
+<li>通过预定义变量 <code>$_GET</code> 和 <code>$_POST</code> 获取。</li>
+<li>变量名中的点和空格被转换成下划线。例如 <code>&lt;input name=&quot;a.b&quot; /&gt;</code> 变成了 <code>$_REQUEST[&quot;a_b&quot;]</code>。</li>
+</ul>
+</li>
+<li>HTTP Cookies<ul>
+<li>如果要将多个值赋给一个 cookie 变量，必须将其赋成数组。</li>
+</ul>
+</li>
+</ul>
+<p><strong><em>变量提升（Variable Hoisting）</em></strong></p>
+<p>因为 PHP 区别全局作用域、函数作用域和块级作用域，PHP 不存在变量提升这个特性。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$name = <span class="number">10</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span><span class="params">()</span></span>&#123;</div><div class="line">  <span class="keyword">echo</span> $params;</div><div class="line">  $params = <span class="string">"Luis Edware"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">test($name);</div></pre></td></tr></table></figure></p>
+<p>常量声明（Constants Declaration）</p>
+<p>1.语法</p>
+<p>可以用 define() 函数来定义常量，在 PHP 5.3.0 以后，可以使用 const 关键字在类定义之外定义常量。一个常量一旦被定义，就不能再改变或者取消定义。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">define(<span class="string">"LUIS"</span>, <span class="string">"luis"</span>);</div><div class="line"><span class="keyword">const</span> EDWARE = <span class="string">"edware"</span>;</div><div class="line"></div><div class="line"><span class="keyword">echo</span> LUIS.EDWARE;</div><div class="line"></div><div class="line"><span class="keyword">const</span> ARR = [<span class="string">'luis'</span>, <span class="string">'edware'</span>];</div><div class="line">var_dump(ARR);</div></pre></td></tr></table></figure></p>
+<p>2.魔术常量</p>
+<ul>
+<li><code>__LINE__</code>：文件中的当前行号。</li>
+<li><code>__FILE__</code>：文件的完整路径和文件名。</li>
+<li><code>__DIR__</code>：文件所在的目录。</li>
+<li><code>__FUNCTION__</code>：返回函数被定义时的名字（区分大小写）。</li>
+<li><code>__CLASS__</code>：返回该类被定义时的名字（区分大小写）。</li>
+<li><code>__TRAIT__</code>：返回 trait 被定义时的名字（区分大小写）。</li>
+<li><code>__METHOD__</code>：返回该方法被定义时的名字（区分大小写）。</li>
+<li><code>__NAMESPACE__</code>：当前命名空间的名称（区分大小写）。</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">namespace</span> <span class="title">LuisEdware</span>\<span class="title">Code</span>;</div><div class="line"></div><div class="line">$line = <span class="keyword">__LINE__</span>.<span class="string">"\n"</span>;</div><div class="line">$filePath = <span class="keyword">__FILE__</span>.<span class="string">"\n"</span>;</div><div class="line">$dirPath = <span class="keyword">__DIR__</span>.<span class="string">"\n"</span>;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">testFunc</span><span class="params">()</span></span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">__FUNCTION__</span>.<span class="string">"\n"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">trait</span> TestTrait</div><div class="line">&#123;</div><div class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testTrait</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> __TRAIT__.<span class="string">"\n"</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestClass</span></span></div><div class="line">&#123;</div><div class="line"></div><div class="line">  <span class="keyword">use</span> <span class="title">TestTrait</span>;</div><div class="line"></div><div class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">__CLASS__</span>.<span class="string">"\n"</span>;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testMethod</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">__METHOD__</span>.<span class="string">"\n"</span>;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testNameSpace</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">__NAMESPACE__</span>.<span class="string">"\n"</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">echo</span> $line;</div><div class="line"><span class="keyword">echo</span> $filePath;</div><div class="line"><span class="keyword">echo</span> $dirPath;</div><div class="line"><span class="keyword">echo</span> testFunc();</div><div class="line">$class = <span class="keyword">new</span> TestClass;</div><div class="line"><span class="keyword">echo</span> $class-&gt;testMethod();</div><div class="line"><span class="keyword">echo</span> $class-&gt;testTrait();</div><div class="line"><span class="keyword">echo</span> $class-&gt;testNameSpace();</div></pre></td></tr></table></figure>
+<h6 id="变量赋值（Assignment）"><a href="#变量赋值（Assignment）" class="headerlink" title="变量赋值（Assignment）"></a>变量赋值（Assignment）</h6><ul>
+<li>传值与传引用（Pass-by-Value &amp; Pass-by-Reference）</li>
+<li>连续赋值（Continuous Assignment）</li>
+<li>解构赋值（Destructuring Assignment）</li>
+<li>复合类型拷贝（Copy Composite DataTypes）</li>
+</ul>
+<p>1.传值与传引用（Pass-by-Value &amp; Pass-by-Reference）</p>
+<p>PHP 支持四种标量值（标量值不能拆分为更小的单元）：整型值（integer）、浮点数值（float）、字符串值（string）和布尔值（boolean）。PHP 也支持两种复合类型：数组和对象。</p>
+<p>PHP 变量默认总是传值赋值。那也就是说，当将一个表达式的值赋予一个变量时，整个原始表达式的值被赋值到目标变量。这意味着，例如，当一个变量的值赋予另外一个变量时，改变其中一个变量的值，将不会影响到另外一个变量。PHP 也提供了另外一种方式给变量赋值：引用赋值。这意味着新的变量简单的引用了原始变量。改动新的变量将影响到原始变量，反之亦然。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$foo = <span class="string">'Bob'</span>;</div><div class="line">$bar = &amp;$foo;</div><div class="line">$bar = <span class="string">"My name is $bar"</span>;</div><div class="line"><span class="keyword">echo</span> $bar,$foo;</div><div class="line"></div><div class="line"><span class="comment">// 非法的引用赋值；引用没有名字的表达式</span></div><div class="line">$bar = &amp;(<span class="number">24</span> * <span class="number">7</span>);</div><div class="line"></div><div class="line"><span class="comment">// 非法的引用赋值；只有有名字的变量才可以引用赋值</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">return</span> <span class="number">25</span>;</div><div class="line">&#125;</div><div class="line">$bar = &amp;test();</div></pre></td></tr></table></figure></p>
+<p>2.连续赋值（Continuous Assignment）<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$a = $b = $c = <span class="number">200</span>;</div><div class="line">var_dump($a);</div><div class="line">var_dump($b);</div><div class="line">var_dump($c);</div><div class="line"></div><div class="line">$foo = $bar = $baz = <span class="string">"LuisEdware\n"</span>;</div><div class="line"><span class="keyword">echo</span> $foo, $bar, $baz;</div><div class="line"></div><div class="line">$arr1 = $arr2 = $arr3 = [<span class="string">'apple'</span>,<span class="string">'baidu'</span>,<span class="string">'coding'</span>];</div><div class="line">var_dump($arr1);</div><div class="line">var_dump($arr2);</div><div class="line">var_dump($arr3);</div><div class="line"></div><div class="line"><span class="comment">// 可以通过 () 来改变运算符的优先级</span></div><div class="line">$a = ($b = <span class="number">4</span>) + <span class="number">5</span>;</div><div class="line"><span class="keyword">echo</span> $a.<span class="string">"\n"</span>;</div><div class="line"></div><div class="line"><span class="comment">// 组合赋值</span></div><div class="line">$a .= $b .= <span class="string">"foo"</span>;</div><div class="line"><span class="keyword">echo</span> $a.<span class="string">"\n"</span>;</div><div class="line"></div><div class="line"><span class="comment">// 不用第三个变量，交换两个变量的值</span></div><div class="line">$a = <span class="number">666</span>;</div><div class="line">$b = <span class="number">233</span>;</div><div class="line">$a ^= $b ^= $a ^= $b;</div><div class="line"><span class="keyword">echo</span> $a.<span class="string">"\n"</span>,$b;</div></pre></td></tr></table></figure></p>
+<p>3.解构赋值（Destructuring Assignment）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure></p>
+<p>4.复合类型拷贝（Copy Composite DataTypes）</p>
+<pre><code>
+</code></pre><h6 id="运算符（Operator）"><a href="#运算符（Operator）" class="headerlink" title="运算符（Operator）"></a>运算符（Operator）</h6><ul>
+<li>基本运算符（Basic）</li>
+<li>位运算符（Bit Operator）</li>
+<li>运算符重载（Operator Overloading）</li>
+</ul>
+<h6 id="作用域与闭包（Scope-amp-Closure）"><a href="#作用域与闭包（Scope-amp-Closure）" class="headerlink" title="作用域与闭包（Scope &amp; Closure）"></a>作用域与闭包（Scope &amp; Closure）</h6><h6 id="惰性求值（Lazy-Evaluation）"><a href="#惰性求值（Lazy-Evaluation）" class="headerlink" title="惰性求值（Lazy Evaluation）"></a>惰性求值（Lazy Evaluation）</h6><h4 id="流程控制和异常处理（ControlFlow）"><a href="#流程控制和异常处理（ControlFlow）" class="headerlink" title="流程控制和异常处理（ControlFlow）"></a>流程控制和异常处理（ControlFlow）</h4><h6 id="分支选择（Branch）"><a href="#分支选择（Branch）" class="headerlink" title="分支选择（Branch）"></a>分支选择（Branch）</h6><ul>
+<li>if</li>
+<li>switch</li>
+</ul>
+<h6 id="循环（Loop）"><a href="#循环（Loop）" class="headerlink" title="循环（Loop）"></a>循环（Loop）</h6><ul>
+<li>for<ul>
+<li>for-in</li>
+<li>for-of</li>
+<li>forEach</li>
+</ul>
+</li>
+<li>while</li>
+<li>break / continue</li>
+</ul>
+<h6 id="错误处理（ErrorHandling）"><a href="#错误处理（ErrorHandling）" class="headerlink" title="错误处理（ErrorHandling）"></a>错误处理（ErrorHandling）</h6><ul>
+<li>异常定义与类型（Error）</li>
+<li>异常抛出（Throw）</li>
+<li>异常捕获（Try-Catch-Finally）</li>
+</ul>
+<h4 id="函数（Function）"><a href="#函数（Function）" class="headerlink" title="函数（Function）"></a>函数（Function）</h4><h6 id="函数定义（Function-Definition）"><a href="#函数定义（Function-Definition）" class="headerlink" title="函数定义（Function Definition）"></a>函数定义（Function Definition）</h6><ul>
+<li>匿名函数</li>
+<li>Lambda</li>
+</ul>
+<h6 id="函数参数（Function-Args）"><a href="#函数参数（Function-Args）" class="headerlink" title="函数参数（Function Args）"></a>函数参数（Function Args）</h6><ul>
+<li>默认参数（Default Args）</li>
+<li>必要参数（Required Args）</li>
+<li>外部参数（External Args）</li>
+<li>不定参数</li>
+</ul>
+<h6 id="函数调用（Function-Call）"><a href="#函数调用（Function-Call）" class="headerlink" title="函数调用（Function Call）"></a>函数调用（Function Call）</h6><h6 id="装饰器（Decorator）"><a href="#装饰器（Decorator）" class="headerlink" title="装饰器（Decorator）"></a>装饰器（Decorator）</h6><h6 id="迭代器与生成器（Iterator-amp-Generator）"><a href="#迭代器与生成器（Iterator-amp-Generator）" class="headerlink" title="迭代器与生成器（Iterator &amp; Generator）"></a>迭代器与生成器（Iterator &amp; Generator）</h6><h4 id="类与对象（Class-amp-Object）"><a href="#类与对象（Class-amp-Object）" class="headerlink" title="类与对象（Class &amp; Object）"></a>类与对象（Class &amp; Object）</h4><h6 id="类定义（Class-Definition）"><a href="#类定义（Class-Definition）" class="headerlink" title="类定义（Class Definition）"></a>类定义（Class Definition）</h6><ul>
+<li>类属性定义（Class Property Definition）</li>
+<li>类方法定义（Class Methods Definition）<ul>
+<li>构造函数（Constructor Function）</li>
+<li>析构函数（Destructor Function）</li>
+<li>Getter / Setter</li>
+</ul>
+</li>
+<li>访问控制（Access Control)<ul>
+<li>访问修饰符（Access Modifiers）</li>
+<li>私有数据（Private）</li>
+</ul>
+</li>
+</ul>
+<h6 id="对象（Object）"><a href="#对象（Object）" class="headerlink" title="对象（Object）"></a>对象（Object）</h6><ul>
+<li>实例化（Instantiation）</li>
+<li>单例模式（Singleton Pattern）</li>
+<li>this</li>
+</ul>
+<h6 id="类继承（Inheritance）"><a href="#类继承（Inheritance）" class="headerlink" title="类继承（Inheritance）"></a>类继承（Inheritance）</h6><h6 id="内部类（Inner-Class）"><a href="#内部类（Inner-Class）" class="headerlink" title="内部类（Inner Class）"></a>内部类（Inner Class）</h6><h6 id="反射-自省-Reflect"><a href="#反射-自省-Reflect" class="headerlink" title="反射/自省(Reflect)"></a>反射/自省(Reflect)</h6><h4 id="输入输出流（IOStream）"><a href="#输入输出流（IOStream）" class="headerlink" title="输入输出流（IOStream）"></a>输入输出流（IOStream）</h4><h4 id="模块（Modularity）"><a href="#模块（Modularity）" class="headerlink" title="模块（Modularity）"></a>模块（Modularity）</h4><h2 id="数据结构（DataStructure）"><a href="#数据结构（DataStructure）" class="headerlink" title="数据结构（DataStructure）"></a>数据结构（DataStructure）</h2><h4 id="类型与值判断（Type-Judgement）"><a href="#类型与值判断（Type-Judgement）" class="headerlink" title="类型与值判断（Type Judgement）"></a>类型与值判断（Type Judgement）</h4><h6 id="引用或值相等（Reference-Value-Equality）"><a href="#引用或值相等（Reference-Value-Equality）" class="headerlink" title="引用或值相等（Reference/Value Equality）"></a>引用或值相等（Reference/Value Equality）</h6><h6 id="动态类型检查（Runtime-Type-Checking）"><a href="#动态类型检查（Runtime-Type-Checking）" class="headerlink" title="动态类型检查（Runtime Type Checking）"></a>动态类型检查（Runtime Type Checking）</h6><h6 id="常用属性判断（Property-Checking）"><a href="#常用属性判断（Property-Checking）" class="headerlink" title="常用属性判断（Property Checking）"></a>常用属性判断（Property Checking）</h6><ul>
+<li>空间占用（Size / Length）</li>
+<li>存在性（Existing）</li>
+</ul>
+<h4 id="基本类型（Basic）"><a href="#基本类型（Basic）" class="headerlink" title="基本类型（Basic）"></a>基本类型（Basic）</h4><h6 id="数值类型（Numeric）"><a href="#数值类型（Numeric）" class="headerlink" title="数值类型（Numeric）"></a>数值类型（Numeric）</h6><ul>
+<li>随机数（Random）</li>
+<li>科学计算（Scientific Computing）</li>
+<li>类型转换（Type Conversion）</li>
+</ul>
+<h6 id="空类型（Nullable）"><a href="#空类型（Nullable）" class="headerlink" title="空类型（Nullable）"></a>空类型（Nullable）</h6><h6 id="布尔类型（Bool）"><a href="#布尔类型（Bool）" class="headerlink" title="布尔类型（Bool）"></a>布尔类型（Bool）</h6><h6 id="可选类型（Optional）"><a href="#可选类型（Optional）" class="headerlink" title="可选类型（Optional）"></a>可选类型（Optional）</h6><h6 id="枚举类型（Enum）"><a href="#枚举类型（Enum）" class="headerlink" title="枚举类型（Enum）"></a>枚举类型（Enum）</h6><h4 id="字符串类型（String）"><a href="#字符串类型（String）" class="headerlink" title="字符串类型（String）"></a>字符串类型（String）</h4><h6 id="增删复替（Manipulation）"><a href="#增删复替（Manipulation）" class="headerlink" title="增删复替（Manipulation）"></a>增删复替（Manipulation）</h6><ul>
+<li>格式化字符串（Format）</li>
+</ul>
+<h6 id="索引遍历（Index-amp-Traversal）"><a href="#索引遍历（Index-amp-Traversal）" class="headerlink" title="索引遍历（Index &amp; Traversal）"></a>索引遍历（Index &amp; Traversal）</h6><h6 id="类型编码（type-amp-encode）"><a href="#类型编码（type-amp-encode）" class="headerlink" title="类型编码（type &amp; encode）*"></a>类型编码（type &amp; encode）*</h6><ul>
+<li>字符集</li>
+<li>URL/HTML</li>
+<li>拼音</li>
+</ul>
+<h6 id="模式匹配（Pattern-Match）"><a href="#模式匹配（Pattern-Match）" class="headerlink" title="模式匹配（Pattern Match）"></a>模式匹配（Pattern Match）</h6><ul>
+<li>正则表达式（RegEx）</li>
+<li>字符串校验（Valid）</li>
+<li>模糊搜索（Fuzzy Search）</li>
+</ul>
+<h4 id="时间与日期（DateTime）"><a href="#时间与日期（DateTime）" class="headerlink" title="时间与日期（DateTime）"></a>时间与日期（DateTime）</h4><h6 id="时间解析（Parse）"><a href="#时间解析（Parse）" class="headerlink" title="时间解析（Parse）"></a>时间解析（Parse）</h6><ul>
+<li>时间戳（TimeStamp）</li>
+<li>时间日期字符串（DateTimeString）</li>
+<li>时区转换（TimeZone）</li>
+<li>时间比较（Comparison）</li>
+</ul>
+<h6 id="时间展示（Display）"><a href="#时间展示（Display）" class="headerlink" title="时间展示（Display）"></a>时间展示（Display）</h6><ul>
+<li>格式化（Format）</li>
+<li>相对格式（Relative Format）</li>
+<li>时长（Duration）</li>
+<li>i18n（国际化）</li>
+</ul>
+<h6 id="时间操作（Manipulation）"><a href="#时间操作（Manipulation）" class="headerlink" title="时间操作（Manipulation）"></a>时间操作（Manipulation）</h6><ul>
+<li>读取与设置（Get &amp; Set）</li>
+<li>时间增减（Add &amp; Subtract）</li>
+<li>时间偏移计算（Diff）</li>
+</ul>
+<h6 id="日历（Calendar）"><a href="#日历（Calendar）" class="headerlink" title="日历（Calendar）"></a>日历（Calendar）</h6><h4 id="序列类型（IndexedCollection）"><a href="#序列类型（IndexedCollection）" class="headerlink" title="序列类型（IndexedCollection）"></a>序列类型（IndexedCollection）</h4><h6 id="数组（Array）"><a href="#数组（Array）" class="headerlink" title="数组（Array）"></a>数组（Array）</h6><ul>
+<li>增删复替（Manipulation）</li>
+<li>索引遍历（Index &amp; Traversal）</li>
+<li>转换（Transform）<ul>
+<li>map/flatMap</li>
+<li>reduce</li>
+<li>filter</li>
+<li>sort</li>
+</ul>
+</li>
+</ul>
+<h6 id="集合（Set）"><a href="#集合（Set）" class="headerlink" title="集合（Set）"></a>集合（Set）</h6><h4 id="索引类型（KeyedCollection）"><a href="#索引类型（KeyedCollection）" class="headerlink" title="索引类型（KeyedCollection）"></a>索引类型（KeyedCollection）</h4><h6 id="映射"><a href="#映射" class="headerlink" title="映射"></a>映射</h6><ul>
+<li>增删复替（Manipulation）</li>
+<li>索引遍历（Index &amp; Traversal)</li>
+</ul>
+<h4 id="不可变对象（Immutable）"><a href="#不可变对象（Immutable）" class="headerlink" title="不可变对象（Immutable）"></a>不可变对象（Immutable）</h4><h4 id="流（Stream）"><a href="#流（Stream）" class="headerlink" title="流（Stream）"></a>流（Stream）</h4><h4 id="序列化与反序列化（Serialization）"><a href="#序列化与反序列化（Serialization）" class="headerlink" title="序列化与反序列化（Serialization）"></a>序列化与反序列化（Serialization）</h4><ul>
+<li>Json</li>
+<li>XML</li>
+<li>CSV</li>
+</ul>
+<h2 id="功能（Functionality）"><a href="#功能（Functionality）" class="headerlink" title="功能（Functionality）"></a>功能（Functionality）</h2><h4 id="存储（Storage）"><a href="#存储（Storage）" class="headerlink" title="存储（Storage）"></a>存储（Storage）</h4><h6 id="缓存（Cache）"><a href="#缓存（Cache）" class="headerlink" title="缓存（Cache）"></a>缓存（Cache）</h6><h6 id="数据库（DataBase）"><a href="#数据库（DataBase）" class="headerlink" title="数据库（DataBase）"></a>数据库（DataBase）</h6><ul>
+<li>MySQL</li>
+<li>Redis</li>
+<li>MongoDB</li>
+</ul>
+<h6 id="文件系统（FileSystem）"><a href="#文件系统（FileSystem）" class="headerlink" title="文件系统（FileSystem）"></a>文件系统（FileSystem）</h6><ul>
+<li>FilePath（文件寻址）</li>
+<li>Monitor（文件监控）</li>
+</ul>
+<h4 id="网络（Network）"><a href="#网络（Network）" class="headerlink" title="网络（Network）"></a>网络（Network）</h4><h6 id="网络管理（Network-Management）"><a href="#网络管理（Network-Management）" class="headerlink" title="网络管理（Network Management）"></a>网络管理（Network Management）</h6><h6 id="套接字（Socket）"><a href="#套接字（Socket）" class="headerlink" title="套接字（Socket）"></a>套接字（Socket）</h6><h6 id="HTTP-访问（HTTP-Client）"><a href="#HTTP-访问（HTTP-Client）" class="headerlink" title="HTTP 访问（HTTP Client）"></a>HTTP 访问（HTTP Client）</h6><ul>
+<li>URI 处理工具集（URI Handler）</li>
+<li>请求构造（Request Generator）</li>
+<li>请求执行（Request Executor）</li>
+<li>响应解析（Responsive）</li>
+<li>复杂请求管理（Advanced Request）</li>
+</ul>
+<h6 id="WebSocket"><a href="#WebSocket" class="headerlink" title="WebSocket"></a>WebSocket</h6><h6 id="远程调用（RPC）"><a href="#远程调用（RPC）" class="headerlink" title="远程调用（RPC）"></a>远程调用（RPC）</h6><h4 id="系统进程（SysProc）"><a href="#系统进程（SysProc）" class="headerlink" title="系统进程（SysProc）"></a>系统进程（SysProc）</h4><h6 id="切面编程（AOP）"><a href="#切面编程（AOP）" class="headerlink" title="切面编程（AOP）"></a>切面编程（AOP）</h6><h6 id="并发编程（ConcurrentProgramming）"><a href="#并发编程（ConcurrentProgramming）" class="headerlink" title="并发编程（ConcurrentProgramming）"></a>并发编程（ConcurrentProgramming）</h6><ul>
+<li>线程（Thread）<ul>
+<li>线程池（ThreadPool）</li>
+<li>协程（Coroutines）</li>
+</ul>
+</li>
+<li>并发控制（ConcurrencyControl）<ul>
+<li>锁（Lock）</li>
+<li>锁与事务（Atomic &amp; Transaction）</li>
+<li>数据一致性（Consistency）</li>
+</ul>
+</li>
+<li>异步模式（AsynchronousPattern）<ul>
+<li>回调（Callback）</li>
+<li>Promise / Future /Defer</li>
+<li>Generator</li>
+<li>Async / Await</li>
+</ul>
+</li>
+</ul>
+<h6 id="系统调用（System）"><a href="#系统调用（System）" class="headerlink" title="系统调用（System）"></a>系统调用（System）</h6><h6 id="响应式编程（Reactive）"><a href="#响应式编程（Reactive）" class="headerlink" title="响应式编程（Reactive）"></a>响应式编程（Reactive）</h6><ul>
+<li>RxExtension</li>
+<li>Actor</li>
+<li>流逝 API（StreamAPI）</li>
+</ul>
+<h2 id="工程实践（Engineering-Practices）"><a href="#工程实践（Engineering-Practices）" class="headerlink" title="工程实践（Engineering Practices）"></a>工程实践（Engineering Practices）</h2><h4 id="样式指南（StyleGuide）"><a href="#样式指南（StyleGuide）" class="headerlink" title="样式指南（StyleGuide）"></a>样式指南（StyleGuide）</h4><ul>
+<li>代码风格与约定（CodeStyle）<ul>
+<li>命名约定（NamingConventions）</li>
+<li>文档与注释（Documentation/Comments）</li>
+</ul>
+</li>
+<li>项目/模块架构（Architecture）</li>
+<li>语法检查（Lint）</li>
+</ul>
+<h4 id="设计模式（DesignPattern）"><a href="#设计模式（DesignPattern）" class="headerlink" title="设计模式（DesignPattern）"></a>设计模式（DesignPattern）</h4><ul>
+<li>SOLID</li>
+<li>Observable</li>
+</ul>
+<h4 id="性能优化-amp-代码优化（Performance-amp-CodeEfficiency）"><a href="#性能优化-amp-代码优化（Performance-amp-CodeEfficiency）" class="headerlink" title="性能优化&amp;代码优化（Performance &amp; CodeEfficiency）"></a>性能优化&amp;代码优化（Performance &amp; CodeEfficiency）</h4><h4 id="测试与发布（Test-amp-Release）"><a href="#测试与发布（Test-amp-Release）" class="headerlink" title="测试与发布（Test &amp; Release）"></a>测试与发布（Test &amp; Release）</h4><h6 id="调试（Debug）"><a href="#调试（Debug）" class="headerlink" title="调试（Debug）"></a>调试（Debug）</h6><h6 id="Test（测试）"><a href="#Test（测试）" class="headerlink" title="Test（测试）"></a>Test（测试）</h6><ul>
+<li>断言（Assert）</li>
+<li>Mock &amp; Stub</li>
+<li>TestRunner</li>
+</ul>
+<h6 id="发布（Release）"><a href="#发布（Release）" class="headerlink" title="发布（Release）"></a>发布（Release）</h6><h6 id="日志（Log）"><a href="#日志（Log）" class="headerlink" title="日志（Log）"></a>日志（Log）</h6><h2 id="进阶（Advanced）"><a href="#进阶（Advanced）" class="headerlink" title="进阶（Advanced）"></a>进阶（Advanced）</h2><h4 id="泛型编程（Generics）"><a href="#泛型编程（Generics）" class="headerlink" title="泛型编程（Generics）"></a>泛型编程（Generics）</h4><h4 id="元编程（Meta-Programming）"><a href="#元编程（Meta-Programming）" class="headerlink" title="元编程（Meta Programming）"></a>元编程（Meta Programming）</h4><h6 id="反射与代理（Reflection-amp-Proxy）"><a href="#反射与代理（Reflection-amp-Proxy）" class="headerlink" title="反射与代理（Reflection &amp; Proxy）"></a>反射与代理（Reflection &amp; Proxy）</h6><h6 id="代码生成（Code-Generation）"><a href="#代码生成（Code-Generation）" class="headerlink" title="代码生成（Code Generation）"></a>代码生成（Code Generation）</h6><h6 id="依赖注入-控制反转（DI-IOP）"><a href="#依赖注入-控制反转（DI-IOP）" class="headerlink" title="依赖注入/控制反转（DI/IOP）"></a>依赖注入/控制反转（DI/IOP）</h6><h4 id="函数式编程（Functional-Programming）"><a href="#函数式编程（Functional-Programming）" class="headerlink" title="函数式编程（Functional Programming）"></a>函数式编程（Functional Programming）</h4><h4 id="响应式编程（Reactive-Programming）"><a href="#响应式编程（Reactive-Programming）" class="headerlink" title="响应式编程（Reactive Programming）"></a>响应式编程（Reactive Programming）</h4><h6 id="EventStream"><a href="#EventStream" class="headerlink" title="EventStream"></a>EventStream</h6><h6 id="TFRP"><a href="#TFRP" class="headerlink" title="TFRP"></a>TFRP</h6><h6 id="RxExtension"><a href="#RxExtension" class="headerlink" title="RxExtension"></a>RxExtension</h6><h6 id="Actor"><a href="#Actor" class="headerlink" title="Actor"></a>Actor</h6><h4 id="内存管理（Memory-Management）"><a href="#内存管理（Memory-Management）" class="headerlink" title="内存管理（Memory Management）"></a>内存管理（Memory Management）</h4><h6 id="内存结构（Memory-Structure）"><a href="#内存结构（Memory-Structure）" class="headerlink" title="内存结构（Memory Structure）"></a>内存结构（Memory Structure）</h6><h6 id="内存分配（Memory-Allocation）"><a href="#内存分配（Memory-Allocation）" class="headerlink" title="内存分配（Memory Allocation）"></a>内存分配（Memory Allocation）</h6><h6 id="垃圾回收（Garbage-Collection）"><a href="#垃圾回收（Garbage-Collection）" class="headerlink" title="垃圾回收（Garbage Collection）"></a>垃圾回收（Garbage Collection）</h6><h4 id="数据结构与算法（Algo-Data-Structure）"><a href="#数据结构与算法（Algo-Data-Structure）" class="headerlink" title="数据结构与算法（Algo Data Structure）"></a>数据结构与算法（Algo Data Structure）</h4>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2017/07/19/学习-PHP/" data-id="cj5szktf7006v9a4bpza43shu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-编程语言学习框架" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/07/19/编程语言学习框架/" class="article-date">
@@ -276,332 +607,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/19/编程语言学习框架/" data-id="cj5qv2xao007hq64b9ynm06sn" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-学习-PHP" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/07/19/学习-PHP/" class="article-date">
-  <time datetime="2017-07-19T01:48:27.000Z" itemprop="datePublished">2017-07-19</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Tooling/">Tooling</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/19/学习-PHP/">PHP 学习框架</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="入门概述（Introduction）"><a href="#入门概述（Introduction）" class="headerlink" title="入门概述（Introduction）"></a>入门概述（Introduction）</h2><p>PHP 是一种被广泛应用的开放源代码的多用途脚本语言，它可嵌入到 HTML中，尤其适合 web 开发。</p>
-<h4 id="版本迭代（Version-Iteration）"><a href="#版本迭代（Version-Iteration）" class="headerlink" title="版本迭代（Version Iteration）"></a>版本迭代（Version Iteration）</h4><p>当前最新稳定版本是 PHP 7.1.X，相比 PHP 5.X 版本增加了不少新特性。PHP 引擎也大部分被重写，PHP 的运行速度也提到了极大的提升。建议使用 PHP 7.1.X 作为开发和生产的环境。</p>
-<h4 id="注释与代码分割（Comments-amp-Split）"><a href="#注释与代码分割（Comments-amp-Split）" class="headerlink" title="注释与代码分割（Comments &amp; Split）"></a>注释与代码分割（Comments &amp; Split）</h4><p>注释的代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// 注释方式一</span></div><div class="line"></div><div class="line"><span class="comment">/* 注释方式二 */</span></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 注释方式三</div><div class="line"> *</div><div class="line"> * <span class="doctag">@param</span> string name</div><div class="line"> *</div><div class="line"> * <span class="doctag">@return</span> string</div><div class="line"> */</div></pre></td></tr></table></figure></p>
-<p>代码分割的代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">require</span>(<span class="string">"../path/file.php"</span>);</div><div class="line"><span class="keyword">require_once</span>(<span class="string">"../path/file.php"</span>);</div><div class="line"><span class="keyword">include</span>(<span class="string">"../path/file.php"</span>);</div><div class="line"><span class="keyword">include_once</span>(<span class="string">"../path/file.php"</span>);</div></pre></td></tr></table></figure></p>
-<p><strong>require()、require_once()、include()、include_once() 的异同：</strong></p>
-<ul>
-<li>运行时<ul>
-<li><code>require()</code> 和 <code>require_once()</code>、<code>include()</code> 和 <code>include_once()</code> 的区别是带 once 后缀的会判断在这个文件之前是否已经加载过了文件，避免重复加载。</li>
-<li><code>require()</code> 和 <code>require_once()</code> 加载文件时，如果出错，将会产生一个 <strong>E_COMPILE_ERROR</strong> 级别的错误，脚本将会终止运行。</li>
-<li><code>include()</code> 和 <code>include_once()</code> 加载文件时，如果出错，只会产生一个 <strong>E_WARNING</strong> 级别的警告，脚本将会继续运行。</li>
-</ul>
-</li>
-<li>性能上<ul>
-<li><code>include()</code>、<code>include_once()</code> 执行时，文件每次都要进行读取和评估。</li>
-<li><code>require()</code>、<code>require_once()</code> 执行时，文件只处理一次。</li>
-<li><code>include_once()</code>、<code>require_once()</code> 是在 <code>include()</code> 和 <code>require()</code> 的基础上进步一步封装。</li>
-</ul>
-</li>
-<li>返回值<ul>
-<li>如果加载文件内使用 return 返回，那么 <code>require()``、require_once()</code> 加载文件成功会有该文件 return 值的返回，失败会产生致命错误。</li>
-<li>如果加载文件内使用 return 返回，那么 <code>include()</code>、<code>include_once()</code> 加载文件成功会有该文件 return 值的返回，失败会抛出一个警告并返回 <code>boolean(false)</code>。</li>
-<li>如果加载文件内没有使用 return 返回，那么 <code>require()``、require_once()</code>、<code>include()</code>、<code>include_once()</code> 加载文件成功会返回 <code>int(1)</code>，失败分别会产生致命错误和抛出警告并返回 <code>boolead(false)</code>。</li>
-</ul>
-</li>
-</ul>
-<h4 id="构建与依赖管理（Builder-amp-Dependence-Manager）"><a href="#构建与依赖管理（Builder-amp-Dependence-Manager）" class="headerlink" title="构建与依赖管理（Builder &amp; Dependence Manager）"></a>构建与依赖管理（Builder &amp; Dependence Manager）</h4><h6 id="PEAR"><a href="#PEAR" class="headerlink" title="PEAR"></a>PEAR</h6><p>PEAR 是一个常用的依赖包管理器。PEAR 需要扩展包有专属的结构, 开发者在开发扩展包的时候要提前考虑为 PEAR 定制, 否则后面将无法使用 PEAR。</p>
-<p>PEAR 安装扩展包的时候, 是全局安装的, 意味着一旦安装了某个扩展包, 同一台服务器上的所有项目都能用上, 当然, 好处是当多个项目共同使用同一个扩展包的同一个版本, 坏处是如果你需要使用不同版本的话, 就会产生冲突.</p>
-<ul>
-<li><a href="https://pear.php.net" target="_blank" rel="external">PHP 官方 PEAR</a></li>
-<li><a href="http://laravel-china.github.io/php-the-right-way/#pear" target="_blank" rel="external">PHP 之道 PEAR</a></li>
-</ul>
-<h6 id="Composer-与-Packagist"><a href="#Composer-与-Packagist" class="headerlink" title="Composer 与 Packagist"></a>Composer 与 Packagist</h6><p>Composer 是另一个常用的依赖包管理器。在 composer.json 文件中列出你项目所需的依赖包，加上一点简单的命令，Composer 将会自动帮你下载并设置你的项目依赖。Composer 有点类似于 Node.js 里的 NPM，或者 Ruby 世界里的 Bundler。</p>
-<p>Packagist 是一个 Composer 官方的依赖包仓库，可以在 Packagist 上寻找想要的 PHP 依赖包。</p>
-<ul>
-<li><a href="https://getcomposer.org/" target="_blank" rel="external">Composer 官方网站</a></li>
-<li><a href="http://laravel-china.github.io/php-the-right-way/#composer_and_packagist" target="_blank" rel="external">PHP 之道 Composer</a></li>
-<li><a href="https://packagist.org/" target="_blank" rel="external">Packagist 官方网站</a></li>
-</ul>
-<hr>
-<h2 id="语法基础（Syntax）"><a href="#语法基础（Syntax）" class="headerlink" title="语法基础（Syntax）"></a>语法基础（Syntax）</h2><h4 id="表达式（Expression）"><a href="#表达式（Expression）" class="headerlink" title="表达式（Expression）"></a>表达式（Expression）</h4><h6 id="变量（Variable）"><a href="#变量（Variable）" class="headerlink" title="变量（Variable）"></a>变量（Variable）</h6><ul>
-<li>变量声明（Variable Declaration）<ul>
-<li>基础变量</li>
-<li>预定义变量</li>
-<li>变量范围</li>
-<li>可变变量</li>
-<li>来自 PHP 之外的变量</li>
-</ul>
-</li>
-<li>变量提升（Variable Hoisting）</li>
-<li>常量声明（Constants Declaration）<ul>
-<li>语法</li>
-<li>魔术常量</li>
-</ul>
-</li>
-</ul>
-<p><strong><em>变量与常量声明（Variable Declaration）</em></strong></p>
-<p>1.基础变量</p>
-<p>PHP 中的变量用一个美元符号后面跟变量名来表示。变量名是区分大小写的。<br>变量名与 PHP 中其它的标签一样遵循相同的规则。一个有效的变量名由字母或者下划线开头，后面跟上任意数量的字母，数字，或者下划线。按照正常的正则表达式，它将被表述为：<strong>‘[a-zA-Z<em>\x7f-\xff][a-zA-Z0-9</em>\x7f-\xff]*’</strong>。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$username = <span class="string">"Luis Edware"</span>;			<span class="comment">// 通过</span></div><div class="line">$_username = <span class="string">"Luis Edware"</span>;			<span class="comment">// 通过</span></div><div class="line">$username1 = <span class="string">"a1"</span>;					<span class="comment">// 通过</span></div><div class="line">$user.name = <span class="string">"LuisEdware"</span>;			<span class="comment">// 报错</span></div><div class="line">$用户名称 = <span class="string">"七月十五九月初七"</span>;			<span class="comment">// 通过</span></div><div class="line">$UserName = <span class="string">"Ann Eason"</span>;			<span class="comment">// 通过</span></div><div class="line">$userName = <span class="string">"Leon"</span>;					<span class="comment">// 通过</span></div><div class="line">$user_name = <span class="string">"Cissy"</span>;				<span class="comment">// 通过</span></div><div class="line">$<span class="number">1</span> = <span class="number">100</span>;							<span class="comment">// 报错</span></div><div class="line">$_100 = <span class="number">100</span>;						<span class="comment">// 通过</span></div></pre></td></tr></table></figure></p>
-<p>2.预定义变量</p>
-<p>PHP 提供了大量的预定义变量。由于许多变量依赖于运行的服务器的版本和设置，及其它因素，所以并没有详细的说明文档。一些预定义变量在 PHP 以命令行形式运行时并不生效。PHP 中的许多预定义变量都是“超全局”，这意味它们在一个脚本的全部作用域中都可用。</p>
-<ul>
-<li>$GLOBALS</li>
-<li>$_SERVER</li>
-<li>$_GET</li>
-<li>$_POST</li>
-<li>$_FILES</li>
-<li>$_COOKIE</li>
-<li>$_SESSION</li>
-<li>$_REQUEST</li>
-<li>$_ENV</li>
-</ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">foreach</span>($_SERVER <span class="keyword">as</span> $key =&gt; $server)&#123;</div><div class="line">  <span class="keyword">echo</span> $key.<span class="string">"\n"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>3.变量范围</p>
-<p>变量的范围即它定义的上下文背景（也就是它的生效范围）。大部分的 PHP 变量只有一个单独的范围。可以使用 global 关键字声明全局变量。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$a = <span class="number">1</span>;</div><div class="line">$b = <span class="number">2</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Sum</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">  <span class="keyword">global</span> $a, $b;</div><div class="line"></div><div class="line">  $b = $a + $b;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Sum();</div><div class="line"><span class="keyword">echo</span> $b;</div><div class="line"><span class="meta">?&gt;</span></div><div class="line"></div><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$a = <span class="number">1</span>;</div><div class="line">$b = <span class="number">2</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Sum</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="comment">// $GLOBALS 是一个关联数组，每一个变量为一个元素，键名对应变量名，值对应变量的内容</span></div><div class="line">    $GLOBALS[<span class="string">'b'</span>] = $GLOBALS[<span class="string">'a'</span>] + $GLOBALS[<span class="string">'b'</span>];</div><div class="line">&#125;</div><div class="line"></div><div class="line">Sum();</div><div class="line"><span class="keyword">echo</span> $b;</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure></p>
-<p>也可以使用 static 关键字在声明静态变量。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span><span class="params">()</span></span>&#123;</div><div class="line">  <span class="keyword">static</span> $a = <span class="number">0</span>;</div><div class="line">  <span class="keyword">echo</span> $a;</div><div class="line">  $a++;</div><div class="line">&#125;</div><div class="line"></div><div class="line">test();</div><div class="line">test();</div><div class="line">test();</div><div class="line">test();		<span class="comment">// 输出结果为：0123</span></div></pre></td></tr></table></figure></p>
-<p>4.可变变量</p>
-<p>有时候使用可变变量名是很方便的。就是说，一个变量的变量名可以动态的设置和使用。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$Bar = <span class="string">"a"</span>;</div><div class="line">$Foo = <span class="string">"Bar"</span>;</div><div class="line">$World = <span class="string">"Foo"</span>;</div><div class="line">$Hello = <span class="string">"World"</span>;</div><div class="line">$a = <span class="string">"Hello"</span>;</div><div class="line"></div><div class="line">$a; <span class="comment">//Returns Hello</span></div><div class="line">$$a; <span class="comment">//Returns World</span></div><div class="line">$$$a; <span class="comment">//Returns Foo</span></div><div class="line">$$$$a; <span class="comment">//Returns Bar</span></div><div class="line">$$$$$a; <span class="comment">//Returns a</span></div><div class="line">$$$$$$a; <span class="comment">//Returns Hello</span></div><div class="line">$$$$$$$a; <span class="comment">//Returns World</span></div></pre></td></tr></table></figure></p>
-<p>5.来自 PHP 之外的变量</p>
-<ul>
-<li>HTML 表单（GET 和 POST）<ul>
-<li>通过预定义变量 <code>$_GET</code> 和 <code>$_POST</code> 获取。</li>
-<li>变量名中的点和空格被转换成下划线。例如 <code>&lt;input name=&quot;a.b&quot; /&gt;</code> 变成了 <code>$_REQUEST[&quot;a_b&quot;]</code>。</li>
-</ul>
-</li>
-<li>HTTP Cookies<ul>
-<li>如果要将多个值赋给一个 cookie 变量，必须将其赋成数组。</li>
-</ul>
-</li>
-</ul>
-<p><strong><em>变量提升（Variable Hoisting）</em></strong></p>
-<p>因为 PHP 区别全局作用域、函数作用域和块级作用域，PHP 不存在变量提升这个特性。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$name = <span class="number">10</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span><span class="params">()</span></span>&#123;</div><div class="line">  <span class="keyword">echo</span> $params;</div><div class="line">  $params = <span class="string">"Luis Edware"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">test($name);</div></pre></td></tr></table></figure></p>
-<p>常量声明（Constants Declaration）</p>
-<p>1.语法</p>
-<p>可以用 define() 函数来定义常量，在 PHP 5.3.0 以后，可以使用 const 关键字在类定义之外定义常量。一个常量一旦被定义，就不能再改变或者取消定义。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">define(<span class="string">"LUIS"</span>, <span class="string">"luis"</span>);</div><div class="line"><span class="keyword">const</span> EDWARE = <span class="string">"edware"</span>;</div><div class="line"></div><div class="line"><span class="keyword">echo</span> LUIS.EDWARE;</div><div class="line"></div><div class="line"><span class="keyword">const</span> ARR = [<span class="string">'luis'</span>, <span class="string">'edware'</span>];</div><div class="line">var_dump(ARR);</div></pre></td></tr></table></figure></p>
-<p>2.魔术常量</p>
-<ul>
-<li><code>__LINE__</code>：文件中的当前行号。</li>
-<li><code>__FILE__</code>：文件的完整路径和文件名。</li>
-<li><code>__DIR__</code>：文件所在的目录。</li>
-<li><code>__FUNCTION__</code>：返回函数被定义时的名字（区分大小写）。</li>
-<li><code>__CLASS__</code>：返回该类被定义时的名字（区分大小写）。</li>
-<li><code>__TRAIT__</code>：返回 trait 被定义时的名字（区分大小写）。</li>
-<li><code>__METHOD__</code>：返回该方法被定义时的名字（区分大小写）。</li>
-<li><code>__NAMESPACE__</code>：当前命名空间的名称（区分大小写）。</li>
-</ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">namespace</span> <span class="title">LuisEdware</span>\<span class="title">Code</span>;</div><div class="line"></div><div class="line">$line = <span class="keyword">__LINE__</span>.<span class="string">"\n"</span>;</div><div class="line">$filePath = <span class="keyword">__FILE__</span>.<span class="string">"\n"</span>;</div><div class="line">$dirPath = <span class="keyword">__DIR__</span>.<span class="string">"\n"</span>;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">testFunc</span><span class="params">()</span></span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">__FUNCTION__</span>.<span class="string">"\n"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">trait</span> TestTrait</div><div class="line">&#123;</div><div class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testTrait</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> __TRAIT__.<span class="string">"\n"</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestClass</span></span></div><div class="line">&#123;</div><div class="line"></div><div class="line">  <span class="keyword">use</span> <span class="title">TestTrait</span>;</div><div class="line"></div><div class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">__CLASS__</span>.<span class="string">"\n"</span>;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testMethod</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">__METHOD__</span>.<span class="string">"\n"</span>;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testNameSpace</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">__NAMESPACE__</span>.<span class="string">"\n"</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">echo</span> $line;</div><div class="line"><span class="keyword">echo</span> $filePath;</div><div class="line"><span class="keyword">echo</span> $dirPath;</div><div class="line"><span class="keyword">echo</span> testFunc();</div><div class="line">$class = <span class="keyword">new</span> TestClass;</div><div class="line"><span class="keyword">echo</span> $class-&gt;testMethod();</div><div class="line"><span class="keyword">echo</span> $class-&gt;testTrait();</div><div class="line"><span class="keyword">echo</span> $class-&gt;testNameSpace();</div></pre></td></tr></table></figure>
-<h6 id="变量赋值（Assignment）"><a href="#变量赋值（Assignment）" class="headerlink" title="变量赋值（Assignment）"></a>变量赋值（Assignment）</h6><ul>
-<li>传值与传引用（Pass-by-Value &amp; Pass-by-Reference）</li>
-<li>连续赋值（Continuous Assignment）</li>
-<li>解构赋值（Destructuring Assignment）</li>
-<li>复合类型拷贝（Copy Composite DataTypes）</li>
-</ul>
-<h6 id="运算符（Operator）"><a href="#运算符（Operator）" class="headerlink" title="运算符（Operator）"></a>运算符（Operator）</h6><ul>
-<li>基本运算符（Basic）</li>
-<li>位运算符（Bit Operator）</li>
-<li>运算符重载（Operator Overloading）</li>
-</ul>
-<h6 id="作用域与闭包（Scope-amp-Closure）"><a href="#作用域与闭包（Scope-amp-Closure）" class="headerlink" title="作用域与闭包（Scope &amp; Closure）"></a>作用域与闭包（Scope &amp; Closure）</h6><h6 id="惰性求值（Lazy-Evaluation）"><a href="#惰性求值（Lazy-Evaluation）" class="headerlink" title="惰性求值（Lazy Evaluation）"></a>惰性求值（Lazy Evaluation）</h6><h4 id="流程控制和异常处理（ControlFlow）"><a href="#流程控制和异常处理（ControlFlow）" class="headerlink" title="流程控制和异常处理（ControlFlow）"></a>流程控制和异常处理（ControlFlow）</h4><h6 id="分支选择（Branch）"><a href="#分支选择（Branch）" class="headerlink" title="分支选择（Branch）"></a>分支选择（Branch）</h6><ul>
-<li>if</li>
-<li>switch</li>
-</ul>
-<h6 id="循环（Loop）"><a href="#循环（Loop）" class="headerlink" title="循环（Loop）"></a>循环（Loop）</h6><ul>
-<li>for<ul>
-<li>for-in</li>
-<li>for-of</li>
-<li>forEach</li>
-</ul>
-</li>
-<li>while</li>
-<li>break / continue</li>
-</ul>
-<h6 id="错误处理（ErrorHandling）"><a href="#错误处理（ErrorHandling）" class="headerlink" title="错误处理（ErrorHandling）"></a>错误处理（ErrorHandling）</h6><ul>
-<li>异常定义与类型（Error）</li>
-<li>异常抛出（Throw）</li>
-<li>异常捕获（Try-Catch-Finally）</li>
-</ul>
-<h4 id="函数（Function）"><a href="#函数（Function）" class="headerlink" title="函数（Function）"></a>函数（Function）</h4><h6 id="函数定义（Function-Definition）"><a href="#函数定义（Function-Definition）" class="headerlink" title="函数定义（Function Definition）"></a>函数定义（Function Definition）</h6><ul>
-<li>匿名函数</li>
-<li>Lambda</li>
-</ul>
-<h6 id="函数参数（Function-Args）"><a href="#函数参数（Function-Args）" class="headerlink" title="函数参数（Function Args）"></a>函数参数（Function Args）</h6><ul>
-<li>默认参数（Default Args）</li>
-<li>必要参数（Required Args）</li>
-<li>外部参数（External Args）</li>
-<li>不定参数</li>
-</ul>
-<h6 id="函数调用（Function-Call）"><a href="#函数调用（Function-Call）" class="headerlink" title="函数调用（Function Call）"></a>函数调用（Function Call）</h6><h6 id="装饰器（Decorator）"><a href="#装饰器（Decorator）" class="headerlink" title="装饰器（Decorator）"></a>装饰器（Decorator）</h6><h6 id="迭代器与生成器（Iterator-amp-Generator）"><a href="#迭代器与生成器（Iterator-amp-Generator）" class="headerlink" title="迭代器与生成器（Iterator &amp; Generator）"></a>迭代器与生成器（Iterator &amp; Generator）</h6><h4 id="类与对象（Class-amp-Object）"><a href="#类与对象（Class-amp-Object）" class="headerlink" title="类与对象（Class &amp; Object）"></a>类与对象（Class &amp; Object）</h4><h6 id="类定义（Class-Definition）"><a href="#类定义（Class-Definition）" class="headerlink" title="类定义（Class Definition）"></a>类定义（Class Definition）</h6><ul>
-<li>类属性定义（Class Property Definition）</li>
-<li>类方法定义（Class Methods Definition）<ul>
-<li>构造函数（Constructor Function）</li>
-<li>析构函数（Destructor Function）</li>
-<li>Getter / Setter</li>
-</ul>
-</li>
-<li>访问控制（Access Control)<ul>
-<li>访问修饰符（Access Modifiers）</li>
-<li>私有数据（Private）</li>
-</ul>
-</li>
-</ul>
-<h6 id="对象（Object）"><a href="#对象（Object）" class="headerlink" title="对象（Object）"></a>对象（Object）</h6><ul>
-<li>实例化（Instantiation）</li>
-<li>单例模式（Singleton Pattern）</li>
-<li>this</li>
-</ul>
-<h6 id="类继承（Inheritance）"><a href="#类继承（Inheritance）" class="headerlink" title="类继承（Inheritance）"></a>类继承（Inheritance）</h6><h6 id="内部类（Inner-Class）"><a href="#内部类（Inner-Class）" class="headerlink" title="内部类（Inner Class）"></a>内部类（Inner Class）</h6><h6 id="反射-自省-Reflect"><a href="#反射-自省-Reflect" class="headerlink" title="反射/自省(Reflect)"></a>反射/自省(Reflect)</h6><h4 id="输入输出流（IOStream）"><a href="#输入输出流（IOStream）" class="headerlink" title="输入输出流（IOStream）"></a>输入输出流（IOStream）</h4><h4 id="模块（Modularity）"><a href="#模块（Modularity）" class="headerlink" title="模块（Modularity）"></a>模块（Modularity）</h4><h2 id="数据结构（DataStructure）"><a href="#数据结构（DataStructure）" class="headerlink" title="数据结构（DataStructure）"></a>数据结构（DataStructure）</h2><h4 id="类型与值判断（Type-Judgement）"><a href="#类型与值判断（Type-Judgement）" class="headerlink" title="类型与值判断（Type Judgement）"></a>类型与值判断（Type Judgement）</h4><h6 id="引用或值相等（Reference-Value-Equality）"><a href="#引用或值相等（Reference-Value-Equality）" class="headerlink" title="引用或值相等（Reference/Value Equality）"></a>引用或值相等（Reference/Value Equality）</h6><h6 id="动态类型检查（Runtime-Type-Checking）"><a href="#动态类型检查（Runtime-Type-Checking）" class="headerlink" title="动态类型检查（Runtime Type Checking）"></a>动态类型检查（Runtime Type Checking）</h6><h6 id="常用属性判断（Property-Checking）"><a href="#常用属性判断（Property-Checking）" class="headerlink" title="常用属性判断（Property Checking）"></a>常用属性判断（Property Checking）</h6><ul>
-<li>空间占用（Size / Length）</li>
-<li>存在性（Existing）</li>
-</ul>
-<h4 id="基本类型（Basic）"><a href="#基本类型（Basic）" class="headerlink" title="基本类型（Basic）"></a>基本类型（Basic）</h4><h6 id="数值类型（Numeric）"><a href="#数值类型（Numeric）" class="headerlink" title="数值类型（Numeric）"></a>数值类型（Numeric）</h6><ul>
-<li>随机数（Random）</li>
-<li>科学计算（Scientific Computing）</li>
-<li>类型转换（Type Conversion）</li>
-</ul>
-<h6 id="空类型（Nullable）"><a href="#空类型（Nullable）" class="headerlink" title="空类型（Nullable）"></a>空类型（Nullable）</h6><h6 id="布尔类型（Bool）"><a href="#布尔类型（Bool）" class="headerlink" title="布尔类型（Bool）"></a>布尔类型（Bool）</h6><h6 id="可选类型（Optional）"><a href="#可选类型（Optional）" class="headerlink" title="可选类型（Optional）"></a>可选类型（Optional）</h6><h6 id="枚举类型（Enum）"><a href="#枚举类型（Enum）" class="headerlink" title="枚举类型（Enum）"></a>枚举类型（Enum）</h6><h4 id="字符串类型（String）"><a href="#字符串类型（String）" class="headerlink" title="字符串类型（String）"></a>字符串类型（String）</h4><h6 id="增删复替（Manipulation）"><a href="#增删复替（Manipulation）" class="headerlink" title="增删复替（Manipulation）"></a>增删复替（Manipulation）</h6><ul>
-<li>格式化字符串（Format）</li>
-</ul>
-<h6 id="索引遍历（Index-amp-Traversal）"><a href="#索引遍历（Index-amp-Traversal）" class="headerlink" title="索引遍历（Index &amp; Traversal）"></a>索引遍历（Index &amp; Traversal）</h6><h6 id="类型编码（type-amp-encode）"><a href="#类型编码（type-amp-encode）" class="headerlink" title="类型编码（type &amp; encode）*"></a>类型编码（type &amp; encode）*</h6><ul>
-<li>字符集</li>
-<li>URL/HTML</li>
-<li>拼音</li>
-</ul>
-<h6 id="模式匹配（Pattern-Match）"><a href="#模式匹配（Pattern-Match）" class="headerlink" title="模式匹配（Pattern Match）"></a>模式匹配（Pattern Match）</h6><ul>
-<li>正则表达式（RegEx）</li>
-<li>字符串校验（Valid）</li>
-<li>模糊搜索（Fuzzy Search）</li>
-</ul>
-<h4 id="时间与日期（DateTime）"><a href="#时间与日期（DateTime）" class="headerlink" title="时间与日期（DateTime）"></a>时间与日期（DateTime）</h4><h6 id="时间解析（Parse）"><a href="#时间解析（Parse）" class="headerlink" title="时间解析（Parse）"></a>时间解析（Parse）</h6><ul>
-<li>时间戳（TimeStamp）</li>
-<li>时间日期字符串（DateTimeString）</li>
-<li>时区转换（TimeZone）</li>
-<li>时间比较（Comparison）</li>
-</ul>
-<h6 id="时间展示（Display）"><a href="#时间展示（Display）" class="headerlink" title="时间展示（Display）"></a>时间展示（Display）</h6><ul>
-<li>格式化（Format）</li>
-<li>相对格式（Relative Format）</li>
-<li>时长（Duration）</li>
-<li>i18n（国际化）</li>
-</ul>
-<h6 id="时间操作（Manipulation）"><a href="#时间操作（Manipulation）" class="headerlink" title="时间操作（Manipulation）"></a>时间操作（Manipulation）</h6><ul>
-<li>读取与设置（Get &amp; Set）</li>
-<li>时间增减（Add &amp; Subtract）</li>
-<li>时间偏移计算（Diff）</li>
-</ul>
-<h6 id="日历（Calendar）"><a href="#日历（Calendar）" class="headerlink" title="日历（Calendar）"></a>日历（Calendar）</h6><h4 id="序列类型（IndexedCollection）"><a href="#序列类型（IndexedCollection）" class="headerlink" title="序列类型（IndexedCollection）"></a>序列类型（IndexedCollection）</h4><h6 id="数组（Array）"><a href="#数组（Array）" class="headerlink" title="数组（Array）"></a>数组（Array）</h6><ul>
-<li>增删复替（Manipulation）</li>
-<li>索引遍历（Index &amp; Traversal）</li>
-<li>转换（Transform）<ul>
-<li>map/flatMap</li>
-<li>reduce</li>
-<li>filter</li>
-<li>sort</li>
-</ul>
-</li>
-</ul>
-<h6 id="集合（Set）"><a href="#集合（Set）" class="headerlink" title="集合（Set）"></a>集合（Set）</h6><h4 id="索引类型（KeyedCollection）"><a href="#索引类型（KeyedCollection）" class="headerlink" title="索引类型（KeyedCollection）"></a>索引类型（KeyedCollection）</h4><h6 id="映射"><a href="#映射" class="headerlink" title="映射"></a>映射</h6><ul>
-<li>增删复替（Manipulation）</li>
-<li>索引遍历（Index &amp; Traversal)</li>
-</ul>
-<h4 id="不可变对象（Immutable）"><a href="#不可变对象（Immutable）" class="headerlink" title="不可变对象（Immutable）"></a>不可变对象（Immutable）</h4><h4 id="流（Stream）"><a href="#流（Stream）" class="headerlink" title="流（Stream）"></a>流（Stream）</h4><h4 id="序列化与反序列化（Serialization）"><a href="#序列化与反序列化（Serialization）" class="headerlink" title="序列化与反序列化（Serialization）"></a>序列化与反序列化（Serialization）</h4><ul>
-<li>Json</li>
-<li>XML</li>
-<li>CSV</li>
-</ul>
-<h2 id="功能（Functionality）"><a href="#功能（Functionality）" class="headerlink" title="功能（Functionality）"></a>功能（Functionality）</h2><h4 id="存储（Storage）"><a href="#存储（Storage）" class="headerlink" title="存储（Storage）"></a>存储（Storage）</h4><h6 id="缓存（Cache）"><a href="#缓存（Cache）" class="headerlink" title="缓存（Cache）"></a>缓存（Cache）</h6><h6 id="数据库（DataBase）"><a href="#数据库（DataBase）" class="headerlink" title="数据库（DataBase）"></a>数据库（DataBase）</h6><ul>
-<li>MySQL</li>
-<li>Redis</li>
-<li>MongoDB</li>
-</ul>
-<h6 id="文件系统（FileSystem）"><a href="#文件系统（FileSystem）" class="headerlink" title="文件系统（FileSystem）"></a>文件系统（FileSystem）</h6><ul>
-<li>FilePath（文件寻址）</li>
-<li>Monitor（文件监控）</li>
-</ul>
-<h4 id="网络（Network）"><a href="#网络（Network）" class="headerlink" title="网络（Network）"></a>网络（Network）</h4><h6 id="网络管理（Network-Management）"><a href="#网络管理（Network-Management）" class="headerlink" title="网络管理（Network Management）"></a>网络管理（Network Management）</h6><h6 id="套接字（Socket）"><a href="#套接字（Socket）" class="headerlink" title="套接字（Socket）"></a>套接字（Socket）</h6><h6 id="HTTP-访问（HTTP-Client）"><a href="#HTTP-访问（HTTP-Client）" class="headerlink" title="HTTP 访问（HTTP Client）"></a>HTTP 访问（HTTP Client）</h6><ul>
-<li>URI 处理工具集（URI Handler）</li>
-<li>请求构造（Request Generator）</li>
-<li>请求执行（Request Executor）</li>
-<li>响应解析（Responsive）</li>
-<li>复杂请求管理（Advanced Request）</li>
-</ul>
-<h6 id="WebSocket"><a href="#WebSocket" class="headerlink" title="WebSocket"></a>WebSocket</h6><h6 id="远程调用（RPC）"><a href="#远程调用（RPC）" class="headerlink" title="远程调用（RPC）"></a>远程调用（RPC）</h6><h4 id="系统进程（SysProc）"><a href="#系统进程（SysProc）" class="headerlink" title="系统进程（SysProc）"></a>系统进程（SysProc）</h4><h6 id="切面编程（AOP）"><a href="#切面编程（AOP）" class="headerlink" title="切面编程（AOP）"></a>切面编程（AOP）</h6><h6 id="并发编程（ConcurrentProgramming）"><a href="#并发编程（ConcurrentProgramming）" class="headerlink" title="并发编程（ConcurrentProgramming）"></a>并发编程（ConcurrentProgramming）</h6><ul>
-<li>线程（Thread）<ul>
-<li>线程池（ThreadPool）</li>
-<li>协程（Coroutines）</li>
-</ul>
-</li>
-<li>并发控制（ConcurrencyControl）<ul>
-<li>锁（Lock）</li>
-<li>锁与事务（Atomic &amp; Transaction）</li>
-<li>数据一致性（Consistency）</li>
-</ul>
-</li>
-<li>异步模式（AsynchronousPattern）<ul>
-<li>回调（Callback）</li>
-<li>Promise / Future /Defer</li>
-<li>Generator</li>
-<li>Async / Await</li>
-</ul>
-</li>
-</ul>
-<h6 id="系统调用（System）"><a href="#系统调用（System）" class="headerlink" title="系统调用（System）"></a>系统调用（System）</h6><h6 id="响应式编程（Reactive）"><a href="#响应式编程（Reactive）" class="headerlink" title="响应式编程（Reactive）"></a>响应式编程（Reactive）</h6><ul>
-<li>RxExtension</li>
-<li>Actor</li>
-<li>流逝 API（StreamAPI）</li>
-</ul>
-<h2 id="工程实践（Engineering-Practices）"><a href="#工程实践（Engineering-Practices）" class="headerlink" title="工程实践（Engineering Practices）"></a>工程实践（Engineering Practices）</h2><h4 id="样式指南（StyleGuide）"><a href="#样式指南（StyleGuide）" class="headerlink" title="样式指南（StyleGuide）"></a>样式指南（StyleGuide）</h4><ul>
-<li>代码风格与约定（CodeStyle）<ul>
-<li>命名约定（NamingConventions）</li>
-<li>文档与注释（Documentation/Comments）</li>
-</ul>
-</li>
-<li>项目/模块架构（Architecture）</li>
-<li>语法检查（Lint）</li>
-</ul>
-<h4 id="设计模式（DesignPattern）"><a href="#设计模式（DesignPattern）" class="headerlink" title="设计模式（DesignPattern）"></a>设计模式（DesignPattern）</h4><ul>
-<li>SOLID</li>
-<li>Observable</li>
-</ul>
-<h4 id="性能优化-amp-代码优化（Performance-amp-CodeEfficiency）"><a href="#性能优化-amp-代码优化（Performance-amp-CodeEfficiency）" class="headerlink" title="性能优化&amp;代码优化（Performance &amp; CodeEfficiency）"></a>性能优化&amp;代码优化（Performance &amp; CodeEfficiency）</h4><h4 id="测试与发布（Test-amp-Release）"><a href="#测试与发布（Test-amp-Release）" class="headerlink" title="测试与发布（Test &amp; Release）"></a>测试与发布（Test &amp; Release）</h4><h6 id="调试（Debug）"><a href="#调试（Debug）" class="headerlink" title="调试（Debug）"></a>调试（Debug）</h6><h6 id="Test（测试）"><a href="#Test（测试）" class="headerlink" title="Test（测试）"></a>Test（测试）</h6><ul>
-<li>断言（Assert）</li>
-<li>Mock &amp; Stub</li>
-<li>TestRunner</li>
-</ul>
-<h6 id="发布（Release）"><a href="#发布（Release）" class="headerlink" title="发布（Release）"></a>发布（Release）</h6><h6 id="日志（Log）"><a href="#日志（Log）" class="headerlink" title="日志（Log）"></a>日志（Log）</h6><h2 id="进阶（Advanced）"><a href="#进阶（Advanced）" class="headerlink" title="进阶（Advanced）"></a>进阶（Advanced）</h2><h4 id="泛型编程（Generics）"><a href="#泛型编程（Generics）" class="headerlink" title="泛型编程（Generics）"></a>泛型编程（Generics）</h4><h4 id="元编程（Meta-Programming）"><a href="#元编程（Meta-Programming）" class="headerlink" title="元编程（Meta Programming）"></a>元编程（Meta Programming）</h4><h6 id="反射与代理（Reflection-amp-Proxy）"><a href="#反射与代理（Reflection-amp-Proxy）" class="headerlink" title="反射与代理（Reflection &amp; Proxy）"></a>反射与代理（Reflection &amp; Proxy）</h6><h6 id="代码生成（Code-Generation）"><a href="#代码生成（Code-Generation）" class="headerlink" title="代码生成（Code Generation）"></a>代码生成（Code Generation）</h6><h6 id="依赖注入-控制反转（DI-IOP）"><a href="#依赖注入-控制反转（DI-IOP）" class="headerlink" title="依赖注入/控制反转（DI/IOP）"></a>依赖注入/控制反转（DI/IOP）</h6><h4 id="函数式编程（Functional-Programming）"><a href="#函数式编程（Functional-Programming）" class="headerlink" title="函数式编程（Functional Programming）"></a>函数式编程（Functional Programming）</h4><h4 id="响应式编程（Reactive-Programming）"><a href="#响应式编程（Reactive-Programming）" class="headerlink" title="响应式编程（Reactive Programming）"></a>响应式编程（Reactive Programming）</h4><h6 id="EventStream"><a href="#EventStream" class="headerlink" title="EventStream"></a>EventStream</h6><h6 id="TFRP"><a href="#TFRP" class="headerlink" title="TFRP"></a>TFRP</h6><h6 id="RxExtension"><a href="#RxExtension" class="headerlink" title="RxExtension"></a>RxExtension</h6><h6 id="Actor"><a href="#Actor" class="headerlink" title="Actor"></a>Actor</h6><h4 id="内存管理（Memory-Management）"><a href="#内存管理（Memory-Management）" class="headerlink" title="内存管理（Memory Management）"></a>内存管理（Memory Management）</h4><h6 id="内存结构（Memory-Structure）"><a href="#内存结构（Memory-Structure）" class="headerlink" title="内存结构（Memory Structure）"></a>内存结构（Memory Structure）</h6><h6 id="内存分配（Memory-Allocation）"><a href="#内存分配（Memory-Allocation）" class="headerlink" title="内存分配（Memory Allocation）"></a>内存分配（Memory Allocation）</h6><h6 id="垃圾回收（Garbage-Collection）"><a href="#垃圾回收（Garbage-Collection）" class="headerlink" title="垃圾回收（Garbage Collection）"></a>垃圾回收（Garbage Collection）</h6><h4 id="数据结构与算法（Algo-Data-Structure）"><a href="#数据结构与算法（Algo-Data-Structure）" class="headerlink" title="数据结构与算法（Algo Data Structure）"></a>数据结构与算法（Algo Data Structure）</h4>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/19/学习-PHP/" data-id="cj5qv2xag006sq64b5smqbjoz" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/07/19/编程语言学习框架/" data-id="cj5szktfh007m9a4b9t43wbe9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li></ul>
@@ -751,7 +757,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/18/学习数据建模/" data-id="cj5qv2xam007aq64bju1nm7ex" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/07/18/学习数据建模/" data-id="cj5szktff007j9a4bv4gzyfqa" class="article-share-link">Share</a>
       
       
     </footer>
@@ -832,7 +838,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/12/TypeScript-入门/" data-id="cj5qv2x7w0024q64bkzi63lqs" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/07/12/TypeScript-入门/" data-id="cj5szktd8002v9a4bd80noryq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TypeScript/">TypeScript</a></li></ul>
@@ -912,7 +918,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/06/「复盘」Yii-RESTful-API-脚手架/" data-id="cj5qv2x8n003nq64buizyx8j4" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/07/06/「复盘」Yii-RESTful-API-脚手架/" data-id="cj5szktdv003z9a4bwds4cc9k" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -1024,7 +1030,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/06/29/「复盘」商品库-v1-0/" data-id="cj5qv2x8j003dq64bjuw17o7z" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/06/29/「复盘」商品库-v1-0/" data-id="cj5szktdw00449a4bpqvaso7a" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1070,7 +1076,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/06/27/使用-Vue-js-2-0-开发后台/" data-id="cj5qv2x9a004sq64b9nj09l8j" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/06/27/使用-Vue-js-2-0-开发后台/" data-id="cj5szkteh00589a4bx0hz370p" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue-js/">Vue.js</a></li></ul>
@@ -1229,7 +1235,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/06/05/LNMP-中常用的-Linux-命令/" data-id="cj5qv2x6d0004q64buihw5hrb" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/06/05/LNMP-中常用的-Linux-命令/" data-id="cj5szktbe000l9a4bxxzq1vv4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1376,7 +1382,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/06/02/mysqldumpslow-参数讲解与基础使用/" data-id="cj5qv2x8h003aq64byir32nz4" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/06/02/mysqldumpslow-参数讲解与基础使用/" data-id="cj5szktdp003n9a4b8ho051ec" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -1444,7 +1450,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/06/01/XHprof-的安装配置与使用分析/" data-id="cj5qv2x7y002cq64b86yx9nou" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/06/01/XHprof-的安装配置与使用分析/" data-id="cj5szktdb002y9a4bur98hkwx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -1511,11 +1517,11 @@
       <ul>
         
           <li>
-            <a href="/2017/07/19/编程语言学习框架/">编程语言学习框架</a>
+            <a href="/2017/07/19/学习-PHP/">PHP 学习框架</a>
           </li>
         
           <li>
-            <a href="/2017/07/19/学习-PHP/">PHP 学习框架</a>
+            <a href="/2017/07/19/编程语言学习框架/">编程语言学习框架</a>
           </li>
         
           <li>
