@@ -52,9 +52,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -275,7 +275,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/19/编程语言学习框架/" data-id="cj5uoxl5h007k0a4b9wsy7bmj" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/07/19/编程语言学习框架/" data-id="cj5vujhrg007cia4b344fzkuv" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li></ul>
@@ -803,17 +803,39 @@
 <p>goto 操作符可以用来跳转到程序中的另一位置。该目标位置可以用目标名称加上冒号来标记，而跳转指令是 goto 之后接上目标位置的标记。PHP 中的 goto 有一定限制，目标位置只能位于同一个文件和作用域，也就是说无法跳出一个函数或类方法，也无法跳入到另一个函数。也无法跳入到任何循环或者 switch 结构中。</p>
 <p>goto 的实例代码如下:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// Example 1</span></div><div class="line"><span class="keyword">goto</span> a;</div><div class="line"><span class="keyword">echo</span> <span class="string">'Foo'</span>;</div><div class="line"></div><div class="line">a:</div><div class="line"><span class="keyword">echo</span> <span class="string">'Bar'</span>;</div><div class="line"></div><div class="line"><span class="comment">// Example 2</span></div><div class="line"><span class="keyword">for</span>($i=<span class="number">0</span>,$j=<span class="number">50</span>; $i&lt;<span class="number">100</span>; $i++) &#123;</div><div class="line">  <span class="keyword">while</span>($j--) &#123;</div><div class="line">    <span class="keyword">if</span>($j==<span class="number">17</span>) <span class="keyword">goto</span> end;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">echo</span> <span class="string">"i = $i"</span>;</div><div class="line">end:</div><div class="line"><span class="keyword">echo</span> <span class="string">'j hit 17'</span>;</div></pre></td></tr></table></figure></p>
 <h6 id="错误处理（ErrorHandling）"><a href="#错误处理（ErrorHandling）" class="headerlink" title="错误处理（ErrorHandling）"></a>错误处理（ErrorHandling）</h6><ul>
-<li>异常定义与类型（Error）</li>
-<li>异常抛出（Throw）</li>
-<li>异常捕获（Try-Catch-Finally）</li>
+<li>错误和异常定义与类型（Error &amp; Exception）</li>
+<li>错误和异常抛出（Throw）</li>
+<li>错误和异常捕获（Try-Catch-Finally）</li>
+<li>错误和异常的部署配置(Deploy &amp; Configuration)</li>
 </ul>
-<h4 id="函数（Function）"><a href="#函数（Function）" class="headerlink" title="函数（Function）"></a>函数（Function）</h4><h6 id="函数定义（Function-Definition）"><a href="#函数定义（Function-Definition）" class="headerlink" title="函数定义（Function Definition）"></a>函数定义（Function Definition）</h6><h6 id="函数参数（Function-Args）"><a href="#函数参数（Function-Args）" class="headerlink" title="函数参数（Function Args）"></a>函数参数（Function Args）</h6><ul>
-<li>默认参数（Default Args）</li>
-<li>必要参数（Required Args）</li>
-<li>外部参数（External Args）</li>
-<li>不定参数</li>
+<p>1.错误和异常定义与类型（Error &amp; Exception）</p>
+<p>PHP 7 改变了大多数错误的报告方式。不同于传统（PHP 5）的错误报告机制，现在大多数错误被作为 <code>Error</code> 异常抛出。而异常是 <code>Exception</code> 类的对象，<br>在遇到无法修复的状况时抛出。例如，远程 API 无响应，数据库查询失败，或者无法满足前置条件。这些状况被归纳为异常状况。出现问题时，异常常用于主动出击，委托职责，异常还可以用于防守，预测潜在的问题，减轻其影响。</p>
+<p>这种 <code>Error</code> 异常可以像 <code>Exception</code> 异常一样被第一个匹配的 <code>try / catch</code> 块所捕获。如果没有匹配的 <code>catch</code> 块，<br>则调用异常处理函数（事先通过 <code>set_exception_handler()</code> 注册）进行处理。<br>如果尚未注册异常处理函数，则按照传统方式处理：被报告为一个致命错误（Fatal Error）。</p>
+<p><code>Error</code> 类并非继承自 <code>Exception</code> 类，所以不能用 <code>catch (Exception $e) { ... }</code> 来捕获 <code>Error</code>。在 PHP 7 以后，可以使用 <code>Throwable</code> 类来捕获 <code>Error</code>，或者<br>你也可以用 <code>catch (Error $e) { ... }</code>，或者通过注册异常处理函数（ <code>set_exception_handler()</code>）来捕获 <code>Error</code>。</p>
+<p>2.错误和异常抛出（Throw）</p>
+<p>错误和异常实例化时可以赋值给变量，不过一定要把错误或异常抛出。抛出错误或异常后代码会立即停止执行，<br>后续的 PHP 代码都不会运行。抛出错误或异常的方式是使用 throw 关键字，后面要跟着要抛出的 Throwable 实例<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// Throwable 能够捕获 Exception 和 Error</span></div><div class="line"><span class="keyword">throw</span> <span class="keyword">new</span> Throwable(<span class="string">"Something went wrong. Time for lunch!"</span>);</div><div class="line"><span class="comment">// Exception 能够捕获 Exception，不能捕获 Error</span></div><div class="line"><span class="keyword">throw</span> <span class="keyword">new</span> <span class="keyword">Exception</span>(<span class="string">"Something went wrong. Time for dinner!"</span>);</div><div class="line"><span class="comment">// Error 能够捕获 Error，不能捕获 Exception</span></div><div class="line"><span class="keyword">throw</span> <span class="keyword">new</span> Error(<span class="string">"Something went wrong. Time for Sleep!"</span>);</div></pre></td></tr></table></figure></p>
+<p>3.错误和异常捕获（Try-Catch-Finally）</p>
+<p>拦截并处理潜在错误或异常的方式是，把可能抛出异常的代码放在 <code>try / catch</code> 块中，示例代码如下:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// Example 1</span></div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    $pdo = <span class="keyword">new</span> PDO(<span class="string">'mysql://host=wrong_host;dbname=wrong_name'</span>);</div><div class="line">&#125; <span class="keyword">catch</span> (PDOException $e) &#123;</div><div class="line">    $code = $e-&gt;getCode();</div><div class="line">    $message = $e-&gt;getMessage();</div><div class="line">    <span class="keyword">echo</span> <span class="string">'Something went wrong.Check back soon, please'</span>;</div><div class="line">    <span class="keyword">exit</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// Example 2</span></div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="keyword">Exception</span>(<span class="string">"Not a PDO exception\n"</span>);</div><div class="line">  $pdo = <span class="keyword">new</span> PDO(<span class="string">'mysql://host=wrong_host;dbname=wrong_name'</span>);</div><div class="line">&#125; <span class="keyword">catch</span> (PDOException $e) &#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">'Caught PDO exception'</span>;</div><div class="line">&#125; <span class="keyword">catch</span> (Throwable $t) &#123;</div><div class="line">    <span class="comment">//处理其他异常</span></div><div class="line">    <span class="keyword">echo</span> $t-&gt;getMessage();</div><div class="line">&#125; <span class="keyword">finally</span> &#123;</div><div class="line">    <span class="comment">//这里的代码始终都会执行</span></div><div class="line">    <span class="keyword">echo</span> <span class="string">'Always do this'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>4.错误和异常的部署配置(Deploy &amp; Configuration)</p>
+<p>// TODO</p>
+<h4 id="函数（Function）"><a href="#函数（Function）" class="headerlink" title="函数（Function）"></a>函数（Function）</h4><h6 id="函数定义（Function-Definition）"><a href="#函数定义（Function-Definition）" class="headerlink" title="函数定义（Function Definition）"></a>函数定义（Function Definition）</h6><p>任何有效的 PHP 代码都有可能出现在函数内部，甚至包括其它函数和类定义。</p>
+<p>函数名和 PHP 中的其它标识符命名规则相同。有效的函数名以字母或下划线打头，后面跟字母，数字或下划线。可以用正则表达式表示为：<strong>[a-zA-Z<em>\x7f-\xff][a-zA-Z0-9</em>\x7f-\xff]*</strong>。</p>
+<p>PHP 中的所有函数和类都具有全局作用域，可以定义在一个函数之内而在之外调用，反之亦然。</p>
+<p>PHP 不支持函数重载，也不可能取消定义或者重定义已声明的函数。</p>
+<p>PHP 函数示例代码如下:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// Example #1 函数中的函数</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">bar</span><span class="params">()</span></span></div><div class="line">  &#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">"I don't exist until foo() is called.\n"</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/* 现在还不能调用bar()函数，因为它还不存在 */</span></div><div class="line"></div><div class="line">foo();</div><div class="line"></div><div class="line"><span class="comment">/* 现在可以调用bar()函数了，因为foo()函数</span></div><div class="line">   的执行使得bar()函数变为已定义的函数 */</div><div class="line"></div><div class="line">bar();</div><div class="line"></div><div class="line"><span class="comment">// Example #2 递归函数</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">recursion</span><span class="params">($a)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>($a &lt; <span class="number">20</span>)&#123;</div><div class="line">		<span class="keyword">echo</span> <span class="string">"$a\n"</span>;</div><div class="line">		recursion(++$a);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/* 要避免递归函数 / 方法调用超过 100 - 200 层，因为可能</span></div><div class="line">   会使堆栈崩溃从而使当前脚本终止。无限递归可视为编程错误 */</div></pre></td></tr></table></figure></p>
+<h6 id="函数参数（Function-Args）"><a href="#函数参数（Function-Args）" class="headerlink" title="函数参数（Function Args）"></a>函数参数（Function Args）</h6><ul>
+<li>默认参数（Default Arguments）</li>
+<li>必要参数（Required Arguments）</li>
+<li>可变参数（Variable Arguments）</li>
 </ul>
-<h6 id="函数调用（Function-Call）"><a href="#函数调用（Function-Call）" class="headerlink" title="函数调用（Function Call）"></a>函数调用（Function Call）</h6><h6 id="装饰器（Decorator）"><a href="#装饰器（Decorator）" class="headerlink" title="装饰器（Decorator）"></a>装饰器（Decorator）</h6><h6 id="迭代器与生成器（Iterator-amp-Generator）"><a href="#迭代器与生成器（Iterator-amp-Generator）" class="headerlink" title="迭代器与生成器（Iterator &amp; Generator）"></a>迭代器与生成器（Iterator &amp; Generator）</h6><h4 id="类与对象（Class-amp-Object）"><a href="#类与对象（Class-amp-Object）" class="headerlink" title="类与对象（Class &amp; Object）"></a>类与对象（Class &amp; Object）</h4><h6 id="类定义（Class-Definition）"><a href="#类定义（Class-Definition）" class="headerlink" title="类定义（Class Definition）"></a>类定义（Class Definition）</h6><ul>
+<p>1.默认参数</p>
+<p>函数可以定义 C++ 风格的标量参数默认值，默认值必须是常量表达式，<br>不能是诸如变量，类成员，或者函数调用等，如下所示：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// Example #1 标量类型默认参数</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">makecoffee</span><span class="params">($type = <span class="string">"cappuccino"</span>)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">"Making a cup of $type.\n"</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">echo</span> makecoffee();				<span class="comment">// 输出 Making a cup of cappuccino.</span></div><div class="line"><span class="keyword">echo</span> makecoffee(<span class="keyword">null</span>);			<span class="comment">// 输出 Making a cup of .</span></div><div class="line"><span class="keyword">echo</span> makecoffee(<span class="string">"espresso"</span>);	<span class="comment">// 输出 Making a cup of espresso.</span></div><div class="line"></div><div class="line"><span class="comment">// Example #2 非标量类型作为默认参数</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">makecoffee</span><span class="params">($types = [<span class="string">"cappuccino"</span>], $coffeeMaker = NULL)</span></span></div><div class="line">&#123;</div><div class="line">  $device = is_null($coffeeMaker) ? <span class="string">"hands"</span> : $coffeeMaker;</div><div class="line">  <span class="keyword">return</span> <span class="string">"Making a cup of "</span>.join(<span class="string">", "</span>, $types).<span class="string">" with $device.\n"</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">echo</span> makecoffee();</div><div class="line"><span class="keyword">echo</span> makecoffee([<span class="string">"cappuccino"</span>, <span class="string">"lavazza"</span>], <span class="string">"teapot"</span>);</div><div class="line"></div><div class="line"><span class="comment">// Example #3 默认参数类型严格模式</span></div><div class="line"><span class="keyword">declare</span>(strict_types=<span class="number">1</span>);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span><span class="params">(int $a, int $b)</span> </span>&#123;</div><div class="line">  <span class="keyword">return</span> $a + $b;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">   	var_dump(sum(<span class="number">1</span>, <span class="number">2</span>));		<span class="comment">// 通过</span></div><div class="line">	var_dump(sum(<span class="number">1.5</span>, <span class="number">2.5</span>));	<span class="comment">// 报错</span></div><div class="line">&#125; <span class="keyword">catch</span> (TypeError $e) &#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">'Error: '</span>.$e-&gt;getMessage();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>2.必要参数</p>
+<p>PHP 函数的必要参数示例代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// 使用该函数时，必须传递两个参数</span></div><div class="line">$a = <span class="string">"Luis"</span>;</div><div class="line">$b = <span class="string">" Edward"</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">requireArgs</span><span class="params">($a, $b)</span></span></div><div class="line">&#123;</div><div class="line">  <span class="keyword">return</span> $a.$b;</div><div class="line">&#125;</div><div class="line"><span class="keyword">echo</span> requireArgs($a, $b);</div></pre></td></tr></table></figure></p>
+<p>3.可变参数</p>
+<p>PHP 在用户自定义函数中支持可变数量的参数列表。在 PHP 5.6 及以上的版本中，由 <code>...</code> 语法实现；在 PHP 5.5 及更早版本中，使用函数 <code>func_num_args()</code>，<code>func_get_arg()</code>，和 <code>func_get_args()</code> 来实现，代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// Example #1 使用 ... 访问函数参数</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span><span class="params">(...$numbers)</span> </span>&#123;</div><div class="line">    $acc = <span class="number">0</span>;</div><div class="line">    <span class="keyword">foreach</span> ($numbers <span class="keyword">as</span> $n) &#123;</div><div class="line">        $acc += $n;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> $acc;</div><div class="line">&#125;</div><div class="line"><span class="keyword">echo</span> sum(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>);</div><div class="line"></div><div class="line"><span class="comment">//  使用 func_get_args() 访问函数参数</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span><span class="params">()</span> </span>&#123;</div><div class="line">    $acc = <span class="number">0</span>;</div><div class="line">    <span class="keyword">foreach</span> (func_get_args() <span class="keyword">as</span> $n) &#123;</div><div class="line">        $acc += $n;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> $acc;</div><div class="line">&#125;</div><div class="line"><span class="keyword">echo</span> sum(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>);</div><div class="line"></div><div class="line"><span class="comment">// Example #2 使用 ... 提供函数参数</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span><span class="params">($a, $b)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> $a + $b;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">echo</span> add(...[<span class="number">1</span>, <span class="number">2</span>]).<span class="string">"\n"</span>;</div><div class="line"></div><div class="line">$a = [<span class="number">1</span>, <span class="number">2</span>];</div><div class="line"><span class="keyword">echo</span> add(...$a);</div><div class="line"></div><div class="line"><span class="comment">// Example #3 类型声明可变参数</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">total_intervals</span><span class="params">($unit, DateInterval ...$intervals)</span> </span>&#123;</div><div class="line">  $time = <span class="number">0</span>;</div><div class="line">  <span class="keyword">foreach</span> ($intervals <span class="keyword">as</span> $interval) &#123;</div><div class="line">    $time += $interval-&gt;$unit;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> $time;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$a = <span class="keyword">new</span> DateInterval(<span class="string">'P1D'</span>);</div><div class="line">$b = <span class="keyword">new</span> DateInterval(<span class="string">'P2D'</span>);</div><div class="line"><span class="keyword">echo</span> total_intervals(<span class="string">'d'</span>, $a, $b).<span class="string">' days'</span>;</div><div class="line"></div><div class="line"><span class="comment">// 报错</span></div><div class="line"><span class="keyword">echo</span> total_intervals(<span class="string">'d'</span>, <span class="keyword">null</span>);</div></pre></td></tr></table></figure></p>
+<h6 id="函数调用（Function-Call）"><a href="#函数调用（Function-Call）" class="headerlink" title="函数调用（Function Call）"></a>函数调用（Function Call）</h6><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// 普通函数调用</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test_normal_function</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">&#125;</div><div class="line">test_normal_function();</div><div class="line"></div><div class="line"><span class="comment">// 匿名函数调用</span></div><div class="line">$closure = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">&#125;;</div><div class="line">$closure();</div></pre></td></tr></table></figure>
+<h6 id="装饰器（Decorator）"><a href="#装饰器（Decorator）" class="headerlink" title="装饰器（Decorator）"></a>装饰器（Decorator）</h6><h6 id="迭代器与生成器（Iterator-amp-Generator）"><a href="#迭代器与生成器（Iterator-amp-Generator）" class="headerlink" title="迭代器与生成器（Iterator &amp; Generator）"></a>迭代器与生成器（Iterator &amp; Generator）</h6><h4 id="类与对象（Class-amp-Object）"><a href="#类与对象（Class-amp-Object）" class="headerlink" title="类与对象（Class &amp; Object）"></a>类与对象（Class &amp; Object）</h4><h6 id="类定义（Class-Definition）"><a href="#类定义（Class-Definition）" class="headerlink" title="类定义（Class Definition）"></a>类定义（Class Definition）</h6><ul>
 <li>类属性定义（Class Property Definition）</li>
 <li>类方法定义（Class Methods Definition）<ul>
 <li>构造函数（Constructor Function）</li>
@@ -954,7 +976,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/19/学习-PHP/" data-id="cj5uoxl55006r0a4be7z0vu8i" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/07/19/学习-PHP/" data-id="cj5vujhr6006mia4bak6fvg72" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li></ul>
@@ -1104,7 +1126,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/18/学习数据建模/" data-id="cj5uoxl5d007a0a4b96x6grwk" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/07/18/学习数据建模/" data-id="cj5vujhrf0079ia4bcdg1wolo" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -1185,7 +1207,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/12/TypeScript-入门/" data-id="cj5uoxl2d00290a4bs8i3vko8" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/07/12/TypeScript-入门/" data-id="cj5vujhp6002nia4b863swg56" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TypeScript/">TypeScript</a></li></ul>
@@ -1265,7 +1287,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/06/「复盘」Yii-RESTful-API-脚手架/" data-id="cj5uoxl3o003y0a4b8erx96by" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/07/06/「复盘」Yii-RESTful-API-脚手架/" data-id="cj5vujhpu003oia4b2umbb9uv" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -1377,7 +1399,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/06/29/「复盘」商品库-v1-0/" data-id="cj5uoxl3p00410a4bgfslioeo" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/06/29/「复盘」商品库-v1-0/" data-id="cj5vujhps003kia4bkika37jn" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -1423,7 +1445,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/06/27/使用-Vue-js-2-0-开发后台/" data-id="cj5uoxl4a004w0a4b8yzydtbe" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/06/27/使用-Vue-js-2-0-开发后台/" data-id="cj5vujhqi004tia4bldxer9rm" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue-js/">Vue.js</a></li></ul>
@@ -1582,7 +1604,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/06/05/LNMP-中常用的-Linux-命令/" data-id="cj5uoxl0t00050a4behcug98l" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/06/05/LNMP-中常用的-Linux-命令/" data-id="cj5vujhmg0004ia4bqgllwii6" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1729,7 +1751,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/06/02/mysqldumpslow-参数讲解与基础使用/" data-id="cj5uoxl3200390a4b5wsw6qt9" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/06/02/mysqldumpslow-参数讲解与基础使用/" data-id="cj5vujhpl003aia4bqjaqdyl5" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -1797,7 +1819,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/06/01/XHprof-的安装配置与使用分析/" data-id="cj5uoxl2k002h0a4bl82lw3bm" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/06/01/XHprof-的安装配置与使用分析/" data-id="cj5vujhp0002hia4b9eswfg5s" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -1820,7 +1842,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categorieën</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -1830,7 +1852,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Labels</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
     </div>
@@ -1840,7 +1862,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Programming-Language/" style="font-size: 11.43px;">Programming Language</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a>
     </div>
@@ -1849,7 +1871,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archieven</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
@@ -1859,7 +1881,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -1896,7 +1918,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Luis Edware<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
