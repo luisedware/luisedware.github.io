@@ -99,6 +99,7 @@
 <li><a href="#5">数据表和字段</a></li>
 <li><a href="#6">常量和配置</a></li>
 <li><a href="#7">示例代码</a></li>
+<li><a href="#9">其他约定</a></li>
 <li><a href="#8">参考链接</a></li>
 </ol>
 <h2 id="八荣八耻"><a href="#八荣八耻" class="headerlink" title="八荣八耻"></a><a id="1">八荣八耻</a></h2><ul>
@@ -137,6 +138,33 @@
 <li>配置以小写字母和下划线命名</li>
 </ul>
 <h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a><a id="7">示例代码</a></h2><p>函数声明示例如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 符合 RSR-1,RSR-2 的编程实例</div><div class="line"> *</div><div class="line"> * <span class="doctag">@Date</span>      2017/02/17 18:00</div><div class="line"> * <span class="doctag">@Author</span>    七月十五九月初七</div><div class="line"> * <span class="doctag">@License</span>   广东七月十五九月初七科技有限公司</div><div class="line"> * <span class="doctag">@Copyright</span> Copyright (c) 2017 PSR-1.PSR-2 Ltd</div><div class="line"> */</div><div class="line"><span class="keyword">namespace</span> <span class="title">PSR</span>; <span class="comment">// 顶部命名空间</span></div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">Yii</span>; <span class="comment">// 空一行 use 引入类</span></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 类描述</div><div class="line"> * 类名必须大写开头驼峰.</div><div class="line"> */</div><div class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleClass</span> // </span>&#123;&#125;必须换行</div><div class="line">&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 常量描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@var</span> string</div><div class="line">     */</div><div class="line">    <span class="keyword">const</span> THIS_IS_A_CONST = <span class="string">''</span>; <span class="comment">// 常量全部大写下划线分割</span></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 属性描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@var</span> string</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> $nameTest = <span class="string">''</span>; <span class="comment">// 属性名称建议开头小写驼峰,成员属性必须添加public（不能省略）， private, protected修饰符</span></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 属性描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@var</span> string</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> $_privateNameTest = <span class="string">''</span>; <span class="comment">// 类私有成员属性，【个人建议】下划线小写开头驼峰</span></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 构造函数</div><div class="line">     *</div><div class="line">     * 构造函数描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span>  string $value 形参名称/描述</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($value = <span class="string">''</span>)</span>// 成员方法必须添加<span class="title">public</span>（不能省略）， <span class="title">private</span>, <span class="title">protected</span>修饰符</span></div><div class="line">    &#123;<span class="comment">// &#123;&#125;必须换行</span></div><div class="line">        <span class="keyword">$this</span>-&gt;nameTest = <span class="keyword">new</span> TestClass();</div><div class="line">        <span class="comment">// 链式操作</span></div><div class="line">        <span class="keyword">$this</span>-&gt;nameTest-&gt;functionOne()-&gt;functionTwo()-&gt;functionThree();</div><div class="line">        <span class="comment">// 一段代码逻辑执行完毕 换行</span></div><div class="line">        <span class="comment">// code...</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 成员方法名称</div><div class="line">     *</div><div class="line">     * 成员方法描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span>  string $value 形参名称/描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span> 返回值类型 返回值描述</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">staticFunction</span><span class="params">($value = <span class="string">''</span>)</span>// <span class="title">static</span>位于修饰符之后</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// code...</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 成员方法名称</div><div class="line">     *</div><div class="line">     * 成员方法描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span>  string $value 形参名称/描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span> 返回值类型 返回值描述</div><div class="line">     * 返回值类型：string，array，object，mixed（多种，不确定的），void（无返回值）</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testFunction</span><span class="params">($value = <span class="string">''</span>)</span>// 成员方法必须小写开头驼峰</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// code...</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 成员方法名称</div><div class="line">     *</div><div class="line">     * 成员方法描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span>  string $value 形参名称/描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span> 返回值类型 返回值描述</div><div class="line">     */</div><div class="line">    <span class="keyword">abstract</span> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">abstractFunction</span><span class="params">($value = <span class="string">''</span>)</span></span>;</div><div class="line">    <span class="comment">// abstract 位于修饰符之前</span></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 成员方法名称.</div><div class="line">     * 成员方法描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span>  string $value 形参名称/描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span> 返回值类型 返回值描述</div><div class="line">     */</div><div class="line">    <span class="keyword">final</span> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">finalFunction</span><span class="params">($value = <span class="string">''</span>)</span>// <span class="title">final</span> 位于修饰符之前</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// code...</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 成员方法名称</div><div class="line">     *</div><div class="line">     * 成员方法描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span>  string $paramOne   形参名称/描述</div><div class="line">     * <span class="doctag">@param</span>  string $paramTwo   形参名称/描述</div><div class="line">     * <span class="doctag">@param</span>  string $paramThree 形参名称/描述</div><div class="line">     * <span class="doctag">@param</span>  string $paramFour  形参名称/描述</div><div class="line">     * <span class="doctag">@param</span>  string $paramFive  形参名称/描述</div><div class="line">     * <span class="doctag">@param</span>  string $paramSix   形参名称/描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span> 返回值类型 返回值描述</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">tooLangFunction</span><span class="params">(</span></span></div><div class="line">        $paramOne = <span class="string">''</span>, // 变量命名可小写开头驼峰或者下划线命名</div><div class="line">        $paramTwo = <span class="string">''</span>,</div><div class="line">        $paramThree = <span class="string">''</span>,</div><div class="line">        $paramFour = <span class="string">''</span>,</div><div class="line">        $paramFive = <span class="string">''</span>,</div><div class="line">        $paramSix = <span class="string">''</span></div><div class="line">    )// 参数过多换行</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> ($paramOne === $paramTwo) &#123;<span class="comment">// 控制结构=&gt;后加空格,同&#123;一行，（右边和)左边不加空格</span></div><div class="line">            <span class="comment">// code...</span></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> ($paramTwo === $paramThree) &#123;</div><div class="line"></div><div class="line">        &#125; <span class="keyword">elseif</span> ($paramFour === $paramFive) &#123;</div><div class="line"></div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">switch</span> ($paramThree) &#123;</div><div class="line">            <span class="keyword">case</span> <span class="string">'three'</span>:</div><div class="line">                <span class="comment">// code...</span></div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">case</span> <span class="string">'one'</span>:</div><div class="line">            <span class="keyword">case</span> <span class="string">'two'</span>:</div><div class="line">            <span class="keyword">case</span> <span class="string">'four'</span>:</div><div class="line">            <span class="keyword">case</span> <span class="string">'five'</span>:</div><div class="line">                <span class="comment">// code...</span></div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">default</span>:</div><div class="line">                <span class="comment">// code...</span></div><div class="line">                <span class="keyword">break</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">do</span> &#123;</div><div class="line">            <span class="comment">// code...</span></div><div class="line">        &#125; <span class="keyword">while</span> ($paramFour &lt;= <span class="number">10</span>);</div><div class="line"></div><div class="line">        <span class="keyword">while</span> ($paramFive &lt;= <span class="number">10</span>) &#123;</div><div class="line">            <span class="comment">// code...</span></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">for</span> ($i = <span class="number">0</span>; $i &lt; $paramSix; $i++) &#123;</div><div class="line">            <span class="comment">// code...</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 成员方法名称</div><div class="line">     *</div><div class="line">     * 成员方法描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span>  string $value 形参名称/描述</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span> 返回值类型 返回值描述</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">_privateTestFunction</span><span class="params">($value = <span class="string">''</span>)</span>// 私有成员方法【个人建议】下划线小写开头驼峰</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// code...</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="其他约定"><a href="#其他约定" class="headerlink" title="其他约定"></a><a id="9">其他约定</a></h2><p>团队约定：</p>
+<ul>
+<li>统一在 MacOS 下使用 PHPStorm 项目开发</li>
+<li>使用相同版本的 Homestead 进行开发环境部署</li>
+<li>使用相同版本的 PHPStorm</li>
+<li>使用统一设置的 PHPStorm 快捷键</li>
+<li>使用相同设置的 PHPStorm 忽略文件列表</li>
+<li>_ide_helper.php 加入版本库</li>
+<li>使用统一规范的代码格式化配置</li>
+<li>使用统一标准的命名方式</li>
+</ul>
+<p>执行目标：</p>
+<ul>
+<li>减少沟通成本</li>
+<li>减少代码冲突</li>
+<li>新人快速培训</li>
+<li>快速稳定完成任务</li>
+<li>无惊无险又到六点</li>
+</ul>
+<p>使用 PHPStorm 的优点</p>
+<ul>
+<li>丰富易配的调试</li>
+<li>快捷安全的重构</li>
+<li>明确可控的跳转</li>
+<li>丰富稳定的工具</li>
+<li>健壮的语言支持</li>
+</ul>
 <h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a><a id="8">参考链接</a></h2><ul>
 <li><a href="https://github.com/TIGERB/easy-tips" target="_blank" rel="external">PHP Easy Tips</a></li>
 <li><a href="http://www.kancloud.cn/thinkphp/thinkphp5-guide/90124" target="_blank" rel="external">ThinkPHP 5 命名规范</a></li>
@@ -145,7 +173,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/11/LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）/" data-id="cj63qc4360018wa4b4whn8twe" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/11/LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）/" data-id="cj64wnon6001g7k4byejpcvus" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -197,7 +225,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-九/" data-id="cj63qc43h001pwa4bvcet1ihl" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-九/" data-id="cj64wnonn001s7k4b0jodhwhi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -251,7 +279,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-六/" data-id="cj63qc43o001ywa4b4kjsjkjl" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-六/" data-id="cj64wnonq001y7k4b5j76e813" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -331,7 +359,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-四/" data-id="cj63qc43r0024wa4b951a9gi3" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-四/" data-id="cj64wnons00217k4btcaks81g" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -389,7 +417,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-二/" data-id="cj63qc43k001swa4bqfl4ack7" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-二/" data-id="cj64wnonp001v7k4b97ehgdk2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -453,7 +481,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-一/" data-id="cj63qc43c001jwa4br8rdh40e" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-一/" data-id="cj64wnong001p7k4bkuaozsqq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -498,7 +526,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（三）/" data-id="cj63qc4510042wa4bpvd4oez3" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（三）/" data-id="cj64wnoox00427k4bxyvf2sg3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -550,7 +578,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（二）/" data-id="cj63qc4530048wa4bpja1m1ne" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（二）/" data-id="cj64wnooy00457k4bo6vwgr7n" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -640,7 +668,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/15/使用-Laravel-与-Vue.js-进行微信开发（一）/" data-id="cj63qc4520045wa4be7kc33mm" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/15/使用-Laravel-与-Vue.js-进行微信开发（一）/" data-id="cj64wnooz00487k4bcck5byg0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -749,7 +777,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/12/08/学习-UML（一）/" data-id="cj63qc46o006xwa4bj8zekef4" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/12/08/学习-UML（一）/" data-id="cj64wnoqj006v7k4b2107fcxy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UML/">UML</a></li></ul>
