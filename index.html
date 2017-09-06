@@ -92,11 +92,14 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="项目脚手架"><a href="#项目脚手架" class="headerlink" title="项目脚手架"></a>项目脚手架</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">vue init webpack vue-music</div><div class="line"></div><div class="line">? Project name vue-music</div><div class="line">? Project description Music Player</div><div class="line">? Author luisedware &lt;luisedware@qq.com&gt;</div><div class="line">? Vue build runtime</div><div class="line">? Install vue-router? Yes</div><div class="line">? Use ESLint to lint your code? Yes</div><div class="line">? Pick an ESLint preset Standard</div><div class="line">? Setup unit tests with Karma + Mocha? No</div><div class="line">? Setup e2e tests with Nightwatch? No</div><div class="line"></div><div class="line">cd vue-music</div><div class="line">npm install</div><div class="line">npm run dev</div></pre></td></tr></table></figure>
+<h2 id="stylus"><a href="#stylus" class="headerlink" title="stylus"></a>stylus</h2><p>Stylus - 富有表现力的、动态的、健壮的CSS，安装 Stylus<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm install --save-dev stylus</div><div class="line">npm install --save-dev stylus-loader</div></pre></td></tr></table></figure></p>
+<h1 id="重写-import-路径别名"><a href="#重写-import-路径别名" class="headerlink" title="重写 import 路径别名"></a>重写 import 路径别名</h1><p>在 <code>build/webpack.base.conf.js</code> 文件下的 <code>resolve</code> 数组中，可以重写目录路径别名:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line">...,</div><div class="line">	<span class="attr">resolve</span>: &#123;</div><div class="line">		<span class="attr">extensions</span>: [<span class="string">'.js'</span>, <span class="string">'.vue'</span>, <span class="string">'.json'</span>],</div><div class="line">		<span class="attr">alias</span>: &#123;</div><div class="line">		  <span class="string">'@'</span>: resolve(<span class="string">'src'</span>),</div><div class="line">		  <span class="string">'src'</span>: resolve(<span class="string">'src'</span>),</div><div class="line">		  <span class="string">'assets'</span>: resolve(<span class="string">'src/assets'</span>)</div><div class="line">		&#125;,</div><div class="line">		<span class="attr">symlinks</span>: <span class="literal">false</span></div><div class="line">	&#125;,</div><div class="line">...</div></pre></td></tr></table></figure></p>
+<p>配置完成后需要重新运行 <code>npm run dev</code></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/09/04/Vue-js-2-X-实践/" data-id="cj77s1t8f002k474bcidnjyk8" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/09/04/Vue-js-2-X-实践/" data-id="cj792bu0m002ews4bn58w7t8c" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
@@ -318,7 +321,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/19/编程语言学习框架/" data-id="cj77s1tf0007w474bvsdzbmqm" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/07/19/编程语言学习框架/" data-id="cj792bu2u007ows4bco4lmcdt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li></ul>
@@ -1069,7 +1072,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/19/学习-PHP/" data-id="cj77s1teq007k474bwrzdatm4" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/07/19/学习-PHP/" data-id="cj792bu2n0072ws4b469z51zt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li></ul>
@@ -1219,7 +1222,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/18/学习数据建模/" data-id="cj77s1te9007c474bwnubctr7" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/07/18/学习数据建模/" data-id="cj792bu2q007cws4bhzp32pey" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1300,7 +1303,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/12/TypeScript-入门/" data-id="cj77s1t850029474bgm6ajswv" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/07/12/TypeScript-入门/" data-id="cj792bu0k002aws4bl9q18ttg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TypeScript/">TypeScript</a></li></ul>
@@ -1380,7 +1383,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/06/「复盘」Yii-RESTful-API-脚手架/" data-id="cj77s1t95003u474bvmzekbg4" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/07/06/「复盘」Yii-RESTful-API-脚手架/" data-id="cj792bu19003lws4bln98t58r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -1492,7 +1495,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/06/29/「复盘」商品库-v1-0/" data-id="cj77s1t93003q474blu6c8kgk" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/06/29/「复盘」商品库-v1-0/" data-id="cj792bu1b003pws4b4457cwsh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1538,7 +1541,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/06/27/使用-Vue-js-2-0-开发后台/" data-id="cj77s1t9r004v474br0gra4i5" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/06/27/使用-Vue-js-2-0-开发后台/" data-id="cj792bu1s004vws4br2iev6qy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue-js/">Vue.js</a></li></ul>
@@ -1697,7 +1700,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/06/05/LNMP-中常用的-Linux-命令/" data-id="cj77s1t5z0005474bfogepf49" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/06/05/LNMP-中常用的-Linux-命令/" data-id="cj792btza000aws4bzf52urp8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1844,7 +1847,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/06/02/mysqldumpslow-参数讲解与基础使用/" data-id="cj77s1t8v003c474b1vmcx5j9" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/06/02/mysqldumpslow-参数讲解与基础使用/" data-id="cj792bu17003ews4bgc6l1hnx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
