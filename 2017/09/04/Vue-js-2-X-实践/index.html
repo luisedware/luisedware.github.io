@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://luisedware.github.io/2017/09/04/Vue-js-2-X-实践/index.html">
 <meta property="og:site_name" content="七月十五九月初七">
 <meta property="og:description" content="项目脚手架123456789101112131415vue init webpack vue-music? Project name vue-music? Project description Music Player? Author luisedware &amp;lt;luisedware@qq.com&amp;gt;? Vue build runtime? Install vue-router? Yes?">
-<meta property="og:updated_time" content="2017-09-07T15:24:37.000Z">
+<meta property="og:updated_time" content="2017-09-09T12:24:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue.js 2.X 实践">
 <meta name="twitter:description" content="项目脚手架123456789101112131415vue init webpack vue-music? Project name vue-music? Project description Music Player? Author luisedware &amp;lt;luisedware@qq.com&amp;gt;? Vue build runtime? Install vue-router? Yes?">
@@ -103,11 +103,16 @@
 <h2 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h2><p>jsonp 一般用于跨域<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install jsonp --save</div></pre></td></tr></table></figure></p>
 <h2 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h2><p>详解：<a href="https://developers.google.com/web/fundamentals/getting-started/primers/promises?hl=zh-cn" target="_blank" rel="external">https://developers.google.com/web/fundamentals/getting-started/primers/promises?hl=zh-cn</a><br>encodeURIComponent?</p>
 <h2 id="URL-拼接示例代码"><a href="#URL-拼接示例代码" class="headerlink" title="URL 拼接示例代码"></a>URL 拼接示例代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">/* 拼接 URL 参数 */</div><div class="line">function param (data) &#123;</div><div class="line">  let url = &apos;&apos;</div><div class="line">  for (let key in data) &#123;</div><div class="line">    let value = data[key] !== undefined ? data[key] : &apos;&apos;</div><div class="line">    url += `&amp;$&#123;key&#125;=$&#123;encodeURIComponent(value)&#125;`</div><div class="line">  &#125;</div><div class="line">  return url ? url.substring(1) : &apos;&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="Object-assign"><a href="#Object-assign" class="headerlink" title="Object.assign"></a>Object.assign</h2>
+<h2 id="Object-assign"><a href="#Object-assign" class="headerlink" title="Object.assign"></a>Object.assign</h2><h2 id="Vue-js-slot"><a href="#Vue-js-slot" class="headerlink" title="Vue.js slot"></a>Vue.js slot</h2><h2 id="better-scroll"><a href="#better-scroll" class="headerlink" title="better-scroll"></a>better-scroll</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm instal better-scroll --save</div></pre></td></tr></table></figure>
+<h2 id="mounted"><a href="#mounted" class="headerlink" title="mounted"></a>mounted</h2><h2 id="vue-ref-引用"><a href="#vue-ref-引用" class="headerlink" title="vue ref 引用"></a>vue ref 引用</h2><p><div class="test" ref="HelloWorld"><br>this.$refs.HelloWorld</div></p>
+<h2 id="判断是否存在-className，添加-className"><a href="#判断是否存在-className，添加-className" class="headerlink" title="判断是否存在 className，添加 className"></a>判断是否存在 className，添加 className</h2><h2 id="Vue-js-keep-alive-标签"><a href="#Vue-js-keep-alive-标签" class="headerlink" title="Vue.js keep-alive 标签"></a>Vue.js keep-alive 标签</h2><h2 id="axios-使用与架设服务器"><a href="#axios-使用与架设服务器" class="headerlink" title="axios 使用与架设服务器"></a>axios 使用与架设服务器</h2><p>npm install axios –save</p>
+<h2 id="vue-js-watch-数据监听和更新-DOM"><a href="#vue-js-watch-数据监听和更新-DOM" class="headerlink" title="vue.js watch 数据监听和更新 DOM"></a>vue.js watch 数据监听和更新 DOM</h2><h2 id="Vue-Lazyload"><a href="#Vue-Lazyload" class="headerlink" title="Vue-Lazyload"></a>Vue-Lazyload</h2><p>npm install vue-lazyload –save<br><img v-lazy="imgUrl"></p>
+<h2 id="loading-基础组件的开发"><a href="#loading-基础组件的开发" class="headerlink" title="loading 基础组件的开发"></a>loading 基础组件的开发</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">.loading-container</div><div class="line">        position: absolute</div><div class="line">        width: 100%</div><div class="line">        top: 50%</div><div class="line">        transform: translateY(-50%)</div></pre></td></tr></table></figure>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/09/04/Vue-js-2-X-实践/" data-id="cj7byu74k0028h54bj3ujoymd" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/09/04/Vue-js-2-X-实践/" data-id="cj7en4oc6002dpm4bimfg85gp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
@@ -119,9 +124,9 @@
 <nav id="article-nav">
   
   
-    <a href="/2017/07/19/学习-PHP/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/07/19/编程语言学习框架/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">PHP 学习框架</div>
+      <div class="article-nav-title">编程语言学习框架</div>
     </a>
   
 </nav>
@@ -183,11 +188,11 @@
           </li>
         
           <li>
-            <a href="/2017/07/19/学习-PHP/">PHP 学习框架</a>
+            <a href="/2017/07/19/编程语言学习框架/">编程语言学习框架</a>
           </li>
         
           <li>
-            <a href="/2017/07/19/编程语言学习框架/">编程语言学习框架</a>
+            <a href="/2017/07/19/学习-PHP/">PHP 学习框架</a>
           </li>
         
           <li>
