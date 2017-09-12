@@ -54,7 +54,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -110,232 +110,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/09/04/Vue-js-2-X-实践/" data-id="cj7gaxtkm0024wq4bf8r4wlkt" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/09/04/Vue-js-2-X-实践/" data-id="cj7hoot3p0027ot4b5ij1lqew" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-编程语言学习框架" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/07/19/编程语言学习框架/" class="article-date">
-  <time datetime="2017-07-19T01:48:27.000Z" itemprop="datePublished">2017-07-19</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Tooling/">Tooling</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/19/编程语言学习框架/">编程语言学习框架</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="入门概述（Introduction）"><a href="#入门概述（Introduction）" class="headerlink" title="入门概述（Introduction）"></a>入门概述（Introduction）</h2><h4 id="版本迭代（Version-Iteration）"><a href="#版本迭代（Version-Iteration）" class="headerlink" title="版本迭代（Version Iteration）"></a>版本迭代（Version Iteration）</h4><h4 id="注释与代码分割（Comments-amp-Split）"><a href="#注释与代码分割（Comments-amp-Split）" class="headerlink" title="注释与代码分割（Comments &amp; Split）"></a>注释与代码分割（Comments &amp; Split）</h4><h4 id="构建与依赖管理（Builder-amp-Dependence-Manager）"><a href="#构建与依赖管理（Builder-amp-Dependence-Manager）" class="headerlink" title="构建与依赖管理（Builder &amp; Dependence Manager）"></a>构建与依赖管理（Builder &amp; Dependence Manager）</h4><h2 id="语法基础（Syntax）"><a href="#语法基础（Syntax）" class="headerlink" title="语法基础（Syntax）"></a>语法基础（Syntax）</h2><h4 id="表达式（Expression）"><a href="#表达式（Expression）" class="headerlink" title="表达式（Expression）"></a>表达式（Expression）</h4><h6 id="变量（Variable）"><a href="#变量（Variable）" class="headerlink" title="变量（Variable）"></a>变量（Variable）</h6><ul>
-<li>变量与常量声明（Variable Declaration）</li>
-<li>变量提升（Variable Hoisting）</li>
-</ul>
-<h6 id="变量赋值（Assignment）"><a href="#变量赋值（Assignment）" class="headerlink" title="变量赋值（Assignment）"></a>变量赋值（Assignment）</h6><ul>
-<li>传值与传引用（Pass-by-Value &amp; Pass-by-Reference）</li>
-<li>连续赋值（Continuous Assignment）</li>
-<li>解构赋值（Destructuring Assignment）</li>
-<li>复合类型拷贝（Copy Composite DataTypes）</li>
-</ul>
-<h6 id="运算符（Operator）"><a href="#运算符（Operator）" class="headerlink" title="运算符（Operator）"></a>运算符（Operator）</h6><ul>
-<li>基本运算符（Basic）</li>
-<li>位运算符（Bit Operator）</li>
-<li>运算符重载（Operator Overloading）</li>
-</ul>
-<h6 id="作用域与闭包（Scope-amp-Closure）"><a href="#作用域与闭包（Scope-amp-Closure）" class="headerlink" title="作用域与闭包（Scope &amp; Closure）"></a>作用域与闭包（Scope &amp; Closure）</h6><h6 id="惰性求值（Lazy-Evaluation）"><a href="#惰性求值（Lazy-Evaluation）" class="headerlink" title="惰性求值（Lazy Evaluation）"></a>惰性求值（Lazy Evaluation）</h6><h4 id="流程控制和异常处理（ControlFlow）"><a href="#流程控制和异常处理（ControlFlow）" class="headerlink" title="流程控制和异常处理（ControlFlow）"></a>流程控制和异常处理（ControlFlow）</h4><h6 id="分支选择（Branch）"><a href="#分支选择（Branch）" class="headerlink" title="分支选择（Branch）"></a>分支选择（Branch）</h6><ul>
-<li>if</li>
-<li>switch</li>
-</ul>
-<h6 id="循环（Loop）"><a href="#循环（Loop）" class="headerlink" title="循环（Loop）"></a>循环（Loop）</h6><ul>
-<li>for<ul>
-<li>for-in</li>
-<li>for-of</li>
-<li>forEach</li>
-</ul>
-</li>
-<li>while</li>
-<li>break / continue</li>
-</ul>
-<h6 id="错误处理（ErrorHandling）"><a href="#错误处理（ErrorHandling）" class="headerlink" title="错误处理（ErrorHandling）"></a>错误处理（ErrorHandling）</h6><ul>
-<li>异常定义与类型（Error）</li>
-<li>异常抛出（Throw）</li>
-<li>异常捕获（Try-Catch-Finally）</li>
-</ul>
-<h4 id="函数（Function）"><a href="#函数（Function）" class="headerlink" title="函数（Function）"></a>函数（Function）</h4><h6 id="函数定义（Function-Definition）"><a href="#函数定义（Function-Definition）" class="headerlink" title="函数定义（Function Definition）"></a>函数定义（Function Definition）</h6><ul>
-<li>匿名函数（Lambda Function）</li>
-</ul>
-<h6 id="函数参数（Function-Args）"><a href="#函数参数（Function-Args）" class="headerlink" title="函数参数（Function Args）"></a>函数参数（Function Args）</h6><ul>
-<li>默认参数（Default Args）</li>
-<li>必要参数（Required Args）</li>
-<li>外部参数（External Args）</li>
-<li>不定参数</li>
-</ul>
-<h6 id="函数调用（Function-Call）"><a href="#函数调用（Function-Call）" class="headerlink" title="函数调用（Function Call）"></a>函数调用（Function Call）</h6><h6 id="装饰器（Decorator）"><a href="#装饰器（Decorator）" class="headerlink" title="装饰器（Decorator）"></a>装饰器（Decorator）</h6><h6 id="迭代器与生成器（Iterator-amp-Generator）"><a href="#迭代器与生成器（Iterator-amp-Generator）" class="headerlink" title="迭代器与生成器（Iterator &amp; Generator）"></a>迭代器与生成器（Iterator &amp; Generator）</h6><h4 id="类与对象（Class-amp-Object）"><a href="#类与对象（Class-amp-Object）" class="headerlink" title="类与对象（Class &amp; Object）"></a>类与对象（Class &amp; Object）</h4><h6 id="类定义（Class-Definition）"><a href="#类定义（Class-Definition）" class="headerlink" title="类定义（Class Definition）"></a>类定义（Class Definition）</h6><ul>
-<li>类属性定义（Class Property Definition）</li>
-<li>类方法定义（Class Methods Definition）<ul>
-<li>构造函数（Constructor Function）</li>
-<li>析构函数（Destructor Function）</li>
-<li>Getter / Setter</li>
-</ul>
-</li>
-<li>访问控制（Access Control)<ul>
-<li>访问修饰符（Access Modifiers）</li>
-<li>私有数据（Private）</li>
-</ul>
-</li>
-</ul>
-<h6 id="对象（Object）"><a href="#对象（Object）" class="headerlink" title="对象（Object）"></a>对象（Object）</h6><ul>
-<li>实例化（Instantiation）</li>
-<li>单例模式（Singleton Pattern）</li>
-<li>this</li>
-</ul>
-<h6 id="类继承（Inheritance）"><a href="#类继承（Inheritance）" class="headerlink" title="类继承（Inheritance）"></a>类继承（Inheritance）</h6><h6 id="内部类（Inner-Class）"><a href="#内部类（Inner-Class）" class="headerlink" title="内部类（Inner Class）"></a>内部类（Inner Class）</h6><h6 id="反射-自省-Reflect"><a href="#反射-自省-Reflect" class="headerlink" title="反射/自省(Reflect)"></a>反射/自省(Reflect)</h6><h4 id="输入输出流（IOStream）"><a href="#输入输出流（IOStream）" class="headerlink" title="输入输出流（IOStream）"></a>输入输出流（IOStream）</h4><h4 id="模块（Modularity）"><a href="#模块（Modularity）" class="headerlink" title="模块（Modularity）"></a>模块（Modularity）</h4><h2 id="数据结构（DataStructure）"><a href="#数据结构（DataStructure）" class="headerlink" title="数据结构（DataStructure）"></a>数据结构（DataStructure）</h2><h4 id="类型与值判断（Type-Judgement）"><a href="#类型与值判断（Type-Judgement）" class="headerlink" title="类型与值判断（Type Judgement）"></a>类型与值判断（Type Judgement）</h4><h6 id="引用或值相等（Reference-Value-Equality）"><a href="#引用或值相等（Reference-Value-Equality）" class="headerlink" title="引用或值相等（Reference/Value Equality）"></a>引用或值相等（Reference/Value Equality）</h6><h6 id="动态类型检查（Runtime-Type-Checking）"><a href="#动态类型检查（Runtime-Type-Checking）" class="headerlink" title="动态类型检查（Runtime Type Checking）"></a>动态类型检查（Runtime Type Checking）</h6><h6 id="常用属性判断（Property-Checking）"><a href="#常用属性判断（Property-Checking）" class="headerlink" title="常用属性判断（Property Checking）"></a>常用属性判断（Property Checking）</h6><ul>
-<li>空间占用（Size / Length）</li>
-<li>存在性（Existing）</li>
-</ul>
-<h4 id="基本类型（Basic）"><a href="#基本类型（Basic）" class="headerlink" title="基本类型（Basic）"></a>基本类型（Basic）</h4><h6 id="数值类型（Numeric）"><a href="#数值类型（Numeric）" class="headerlink" title="数值类型（Numeric）"></a>数值类型（Numeric）</h6><ul>
-<li>随机数（Random）</li>
-<li>科学计算（Scientific Computing）</li>
-<li>类型转换（Type Conversion）</li>
-</ul>
-<h6 id="空类型（Nullable）"><a href="#空类型（Nullable）" class="headerlink" title="空类型（Nullable）"></a>空类型（Nullable）</h6><h6 id="布尔类型（Bool）"><a href="#布尔类型（Bool）" class="headerlink" title="布尔类型（Bool）"></a>布尔类型（Bool）</h6><h6 id="可选类型（Optional）"><a href="#可选类型（Optional）" class="headerlink" title="可选类型（Optional）"></a>可选类型（Optional）</h6><h6 id="枚举类型（Enum）"><a href="#枚举类型（Enum）" class="headerlink" title="枚举类型（Enum）"></a>枚举类型（Enum）</h6><h4 id="字符串类型（String）"><a href="#字符串类型（String）" class="headerlink" title="字符串类型（String）"></a>字符串类型（String）</h4><h6 id="增删复替（Manipulation）"><a href="#增删复替（Manipulation）" class="headerlink" title="增删复替（Manipulation）"></a>增删复替（Manipulation）</h6><ul>
-<li>格式化字符串（Format）</li>
-</ul>
-<h6 id="索引遍历（Index-amp-Traversal）"><a href="#索引遍历（Index-amp-Traversal）" class="headerlink" title="索引遍历（Index &amp; Traversal）"></a>索引遍历（Index &amp; Traversal）</h6><h6 id="类型编码（type-amp-encode）"><a href="#类型编码（type-amp-encode）" class="headerlink" title="类型编码（type &amp; encode）*"></a>类型编码（type &amp; encode）*</h6><ul>
-<li>字符集</li>
-<li>URL/HTML</li>
-<li>拼音</li>
-</ul>
-<h6 id="模式匹配（Pattern-Match）"><a href="#模式匹配（Pattern-Match）" class="headerlink" title="模式匹配（Pattern Match）"></a>模式匹配（Pattern Match）</h6><ul>
-<li>正则表达式（RegEx）</li>
-<li>字符串校验（Valid）</li>
-<li>模糊搜索（Fuzzy Search）</li>
-</ul>
-<h4 id="时间与日期（DateTime）"><a href="#时间与日期（DateTime）" class="headerlink" title="时间与日期（DateTime）"></a>时间与日期（DateTime）</h4><h6 id="时间解析（Parse）"><a href="#时间解析（Parse）" class="headerlink" title="时间解析（Parse）"></a>时间解析（Parse）</h6><ul>
-<li>时间戳（TimeStamp）</li>
-<li>时间日期字符串（DateTimeString）</li>
-<li>时区转换（TimeZone）</li>
-<li>时间比较（Comparison）</li>
-</ul>
-<h6 id="时间展示（Display）"><a href="#时间展示（Display）" class="headerlink" title="时间展示（Display）"></a>时间展示（Display）</h6><ul>
-<li>格式化（Format）</li>
-<li>相对格式（Relative Format）</li>
-<li>时长（Duration）</li>
-<li>i18n（国际化）</li>
-</ul>
-<h6 id="时间操作（Manipulation）"><a href="#时间操作（Manipulation）" class="headerlink" title="时间操作（Manipulation）"></a>时间操作（Manipulation）</h6><ul>
-<li>读取与设置（Get &amp; Set）</li>
-<li>时间增减（Add &amp; Subtract）</li>
-<li>时间偏移计算（Diff）</li>
-</ul>
-<h6 id="日历（Calendar）"><a href="#日历（Calendar）" class="headerlink" title="日历（Calendar）"></a>日历（Calendar）</h6><h4 id="序列类型（IndexedCollection）"><a href="#序列类型（IndexedCollection）" class="headerlink" title="序列类型（IndexedCollection）"></a>序列类型（IndexedCollection）</h4><h6 id="数组（Array）"><a href="#数组（Array）" class="headerlink" title="数组（Array）"></a>数组（Array）</h6><ul>
-<li>增删复替（Manipulation）</li>
-<li>索引遍历（Index &amp; Traversal）</li>
-<li>转换（Transform）<ul>
-<li>map/flatMap</li>
-<li>reduce</li>
-<li>filter</li>
-<li>sort</li>
-</ul>
-</li>
-</ul>
-<h6 id="集合（Set）"><a href="#集合（Set）" class="headerlink" title="集合（Set）"></a>集合（Set）</h6><h4 id="索引类型（KeyedCollection）"><a href="#索引类型（KeyedCollection）" class="headerlink" title="索引类型（KeyedCollection）"></a>索引类型（KeyedCollection）</h4><h6 id="映射"><a href="#映射" class="headerlink" title="映射"></a>映射</h6><ul>
-<li>增删复替（Manipulation）</li>
-<li>索引遍历（Index &amp; Traversal)</li>
-</ul>
-<h4 id="不可变对象（Immutable）"><a href="#不可变对象（Immutable）" class="headerlink" title="不可变对象（Immutable）"></a>不可变对象（Immutable）</h4><h4 id="流（Stream）"><a href="#流（Stream）" class="headerlink" title="流（Stream）"></a>流（Stream）</h4><h4 id="序列化与反序列化（Serialization）"><a href="#序列化与反序列化（Serialization）" class="headerlink" title="序列化与反序列化（Serialization）"></a>序列化与反序列化（Serialization）</h4><ul>
-<li>Json</li>
-<li>XML</li>
-<li>CSV</li>
-</ul>
-<h2 id="功能（Functionality）"><a href="#功能（Functionality）" class="headerlink" title="功能（Functionality）"></a>功能（Functionality）</h2><h4 id="存储（Storage）"><a href="#存储（Storage）" class="headerlink" title="存储（Storage）"></a>存储（Storage）</h4><h6 id="缓存（Cache）"><a href="#缓存（Cache）" class="headerlink" title="缓存（Cache）"></a>缓存（Cache）</h6><h6 id="数据库（DataBase）"><a href="#数据库（DataBase）" class="headerlink" title="数据库（DataBase）"></a>数据库（DataBase）</h6><ul>
-<li>MySQL</li>
-<li>Redis</li>
-<li>MongoDB</li>
-</ul>
-<h6 id="文件系统（FileSystem）"><a href="#文件系统（FileSystem）" class="headerlink" title="文件系统（FileSystem）"></a>文件系统（FileSystem）</h6><ul>
-<li>FilePath（文件寻址）</li>
-<li>Monitor（文件监控）</li>
-</ul>
-<h4 id="网络（Network）"><a href="#网络（Network）" class="headerlink" title="网络（Network）"></a>网络（Network）</h4><h6 id="网络管理（Network-Management）"><a href="#网络管理（Network-Management）" class="headerlink" title="网络管理（Network Management）"></a>网络管理（Network Management）</h6><h6 id="套接字（Socket）"><a href="#套接字（Socket）" class="headerlink" title="套接字（Socket）"></a>套接字（Socket）</h6><h6 id="HTTP-访问（HTTP-Client）"><a href="#HTTP-访问（HTTP-Client）" class="headerlink" title="HTTP 访问（HTTP Client）"></a>HTTP 访问（HTTP Client）</h6><ul>
-<li>URI 处理工具集（URI Handler）</li>
-<li>请求构造（Request Generator）</li>
-<li>请求执行（Request Executor）</li>
-<li>响应解析（Responsive）</li>
-<li>复杂请求管理（Advanced Request）</li>
-</ul>
-<h6 id="WebSocket"><a href="#WebSocket" class="headerlink" title="WebSocket"></a>WebSocket</h6><h6 id="远程调用（RPC）"><a href="#远程调用（RPC）" class="headerlink" title="远程调用（RPC）"></a>远程调用（RPC）</h6><h4 id="系统进程（SysProc）"><a href="#系统进程（SysProc）" class="headerlink" title="系统进程（SysProc）"></a>系统进程（SysProc）</h4><h6 id="切面编程（AOP）"><a href="#切面编程（AOP）" class="headerlink" title="切面编程（AOP）"></a>切面编程（AOP）</h6><h6 id="并发编程（ConcurrentProgramming）"><a href="#并发编程（ConcurrentProgramming）" class="headerlink" title="并发编程（ConcurrentProgramming）"></a>并发编程（ConcurrentProgramming）</h6><ul>
-<li>线程（Thread）<ul>
-<li>线程池（ThreadPool）</li>
-<li>协程（Coroutines）</li>
-</ul>
-</li>
-<li>并发控制（ConcurrencyControl）<ul>
-<li>锁（Lock）</li>
-<li>锁与事务（Atomic &amp; Transaction）</li>
-<li>数据一致性（Consistency）</li>
-</ul>
-</li>
-<li>异步模式（AsynchronousPattern）<ul>
-<li>回调（Callback）</li>
-<li>Promise / Future /Defer</li>
-<li>Generator</li>
-<li>Async / Await</li>
-</ul>
-</li>
-</ul>
-<h6 id="系统调用（System）"><a href="#系统调用（System）" class="headerlink" title="系统调用（System）"></a>系统调用（System）</h6><h6 id="响应式编程（Reactive）"><a href="#响应式编程（Reactive）" class="headerlink" title="响应式编程（Reactive）"></a>响应式编程（Reactive）</h6><ul>
-<li>RxExtension</li>
-<li>Actor</li>
-<li>流逝 API（StreamAPI）</li>
-</ul>
-<h2 id="工程实践（Engineering-Practices）"><a href="#工程实践（Engineering-Practices）" class="headerlink" title="工程实践（Engineering Practices）"></a>工程实践（Engineering Practices）</h2><h4 id="样式指南（StyleGuide）"><a href="#样式指南（StyleGuide）" class="headerlink" title="样式指南（StyleGuide）"></a>样式指南（StyleGuide）</h4><ul>
-<li>代码风格与约定（CodeStyle）<ul>
-<li>命名约定（NamingConventions）</li>
-<li>文档与注释（Documentation/Comments）</li>
-</ul>
-</li>
-<li>项目/模块架构（Architecture）</li>
-<li>语法检查（Lint）</li>
-</ul>
-<h4 id="设计模式（DesignPattern）"><a href="#设计模式（DesignPattern）" class="headerlink" title="设计模式（DesignPattern）"></a>设计模式（DesignPattern）</h4><ul>
-<li>SOLID</li>
-<li>Observable</li>
-</ul>
-<h4 id="性能优化-amp-代码优化（Performance-amp-CodeEfficiency）"><a href="#性能优化-amp-代码优化（Performance-amp-CodeEfficiency）" class="headerlink" title="性能优化&amp;代码优化（Performance &amp; CodeEfficiency）"></a>性能优化&amp;代码优化（Performance &amp; CodeEfficiency）</h4><h4 id="测试与发布（Test-amp-Release）"><a href="#测试与发布（Test-amp-Release）" class="headerlink" title="测试与发布（Test &amp; Release）"></a>测试与发布（Test &amp; Release）</h4><h6 id="调试（Debug）"><a href="#调试（Debug）" class="headerlink" title="调试（Debug）"></a>调试（Debug）</h6><h6 id="Test（测试）"><a href="#Test（测试）" class="headerlink" title="Test（测试）"></a>Test（测试）</h6><ul>
-<li>断言（Assert）</li>
-<li>Mock &amp; Stub</li>
-<li>TestRunner</li>
-</ul>
-<h6 id="发布（Release）"><a href="#发布（Release）" class="headerlink" title="发布（Release）"></a>发布（Release）</h6><h6 id="日志（Log）"><a href="#日志（Log）" class="headerlink" title="日志（Log）"></a>日志（Log）</h6><h2 id="进阶（Advanced）"><a href="#进阶（Advanced）" class="headerlink" title="进阶（Advanced）"></a>进阶（Advanced）</h2><h4 id="泛型编程（Generics）"><a href="#泛型编程（Generics）" class="headerlink" title="泛型编程（Generics）"></a>泛型编程（Generics）</h4><h4 id="元编程（Meta-Programming）"><a href="#元编程（Meta-Programming）" class="headerlink" title="元编程（Meta Programming）"></a>元编程（Meta Programming）</h4><h6 id="反射与代理（Reflection-amp-Proxy）"><a href="#反射与代理（Reflection-amp-Proxy）" class="headerlink" title="反射与代理（Reflection &amp; Proxy）"></a>反射与代理（Reflection &amp; Proxy）</h6><h6 id="代码生成（Code-Generation）"><a href="#代码生成（Code-Generation）" class="headerlink" title="代码生成（Code Generation）"></a>代码生成（Code Generation）</h6><h6 id="依赖注入-控制反转（DI-IOP）"><a href="#依赖注入-控制反转（DI-IOP）" class="headerlink" title="依赖注入/控制反转（DI/IOP）"></a>依赖注入/控制反转（DI/IOP）</h6><h4 id="函数式编程（Functional-Programming）"><a href="#函数式编程（Functional-Programming）" class="headerlink" title="函数式编程（Functional Programming）"></a>函数式编程（Functional Programming）</h4><h4 id="响应式编程（Reactive-Programming）"><a href="#响应式编程（Reactive-Programming）" class="headerlink" title="响应式编程（Reactive Programming）"></a>响应式编程（Reactive Programming）</h4><h6 id="EventStream"><a href="#EventStream" class="headerlink" title="EventStream"></a>EventStream</h6><h6 id="TFRP"><a href="#TFRP" class="headerlink" title="TFRP"></a>TFRP</h6><h6 id="RxExtension"><a href="#RxExtension" class="headerlink" title="RxExtension"></a>RxExtension</h6><h6 id="Actor"><a href="#Actor" class="headerlink" title="Actor"></a>Actor</h6><h4 id="内存管理（Memory-Management）"><a href="#内存管理（Memory-Management）" class="headerlink" title="内存管理（Memory Management）"></a>内存管理（Memory Management）</h4><h6 id="内存结构（Memory-Structure）"><a href="#内存结构（Memory-Structure）" class="headerlink" title="内存结构（Memory Structure）"></a>内存结构（Memory Structure）</h6><h6 id="内存分配（Memory-Allocation）"><a href="#内存分配（Memory-Allocation）" class="headerlink" title="内存分配（Memory Allocation）"></a>内存分配（Memory Allocation）</h6><h6 id="垃圾回收（Garbage-Collection）"><a href="#垃圾回收（Garbage-Collection）" class="headerlink" title="垃圾回收（Garbage Collection）"></a>垃圾回收（Garbage Collection）</h6><h4 id="数据结构与算法（Algo-Data-Structure）"><a href="#数据结构与算法（Algo-Data-Structure）" class="headerlink" title="数据结构与算法（Algo Data Structure）"></a>数据结构与算法（Algo Data Structure）</h4>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/19/编程语言学习框架/" data-id="cj7gaxtno007nwq4b03wac62c" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li></ul>
 
     </footer>
   </div>
@@ -1083,7 +861,229 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/19/学习-PHP/" data-id="cj7gaxtne006ywq4bvkclqudj" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/07/19/学习-PHP/" data-id="cj7hoot6a0076ot4btlhl885n" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程语言学习框架" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/19/编程语言学习框架/" class="article-date">
+  <time datetime="2017-07-19T01:48:27.000Z" itemprop="datePublished">2017-07-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Tooling/">Tooling</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/19/编程语言学习框架/">编程语言学习框架</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="入门概述（Introduction）"><a href="#入门概述（Introduction）" class="headerlink" title="入门概述（Introduction）"></a>入门概述（Introduction）</h2><h4 id="版本迭代（Version-Iteration）"><a href="#版本迭代（Version-Iteration）" class="headerlink" title="版本迭代（Version Iteration）"></a>版本迭代（Version Iteration）</h4><h4 id="注释与代码分割（Comments-amp-Split）"><a href="#注释与代码分割（Comments-amp-Split）" class="headerlink" title="注释与代码分割（Comments &amp; Split）"></a>注释与代码分割（Comments &amp; Split）</h4><h4 id="构建与依赖管理（Builder-amp-Dependence-Manager）"><a href="#构建与依赖管理（Builder-amp-Dependence-Manager）" class="headerlink" title="构建与依赖管理（Builder &amp; Dependence Manager）"></a>构建与依赖管理（Builder &amp; Dependence Manager）</h4><h2 id="语法基础（Syntax）"><a href="#语法基础（Syntax）" class="headerlink" title="语法基础（Syntax）"></a>语法基础（Syntax）</h2><h4 id="表达式（Expression）"><a href="#表达式（Expression）" class="headerlink" title="表达式（Expression）"></a>表达式（Expression）</h4><h6 id="变量（Variable）"><a href="#变量（Variable）" class="headerlink" title="变量（Variable）"></a>变量（Variable）</h6><ul>
+<li>变量与常量声明（Variable Declaration）</li>
+<li>变量提升（Variable Hoisting）</li>
+</ul>
+<h6 id="变量赋值（Assignment）"><a href="#变量赋值（Assignment）" class="headerlink" title="变量赋值（Assignment）"></a>变量赋值（Assignment）</h6><ul>
+<li>传值与传引用（Pass-by-Value &amp; Pass-by-Reference）</li>
+<li>连续赋值（Continuous Assignment）</li>
+<li>解构赋值（Destructuring Assignment）</li>
+<li>复合类型拷贝（Copy Composite DataTypes）</li>
+</ul>
+<h6 id="运算符（Operator）"><a href="#运算符（Operator）" class="headerlink" title="运算符（Operator）"></a>运算符（Operator）</h6><ul>
+<li>基本运算符（Basic）</li>
+<li>位运算符（Bit Operator）</li>
+<li>运算符重载（Operator Overloading）</li>
+</ul>
+<h6 id="作用域与闭包（Scope-amp-Closure）"><a href="#作用域与闭包（Scope-amp-Closure）" class="headerlink" title="作用域与闭包（Scope &amp; Closure）"></a>作用域与闭包（Scope &amp; Closure）</h6><h6 id="惰性求值（Lazy-Evaluation）"><a href="#惰性求值（Lazy-Evaluation）" class="headerlink" title="惰性求值（Lazy Evaluation）"></a>惰性求值（Lazy Evaluation）</h6><h4 id="流程控制和异常处理（ControlFlow）"><a href="#流程控制和异常处理（ControlFlow）" class="headerlink" title="流程控制和异常处理（ControlFlow）"></a>流程控制和异常处理（ControlFlow）</h4><h6 id="分支选择（Branch）"><a href="#分支选择（Branch）" class="headerlink" title="分支选择（Branch）"></a>分支选择（Branch）</h6><ul>
+<li>if</li>
+<li>switch</li>
+</ul>
+<h6 id="循环（Loop）"><a href="#循环（Loop）" class="headerlink" title="循环（Loop）"></a>循环（Loop）</h6><ul>
+<li>for<ul>
+<li>for-in</li>
+<li>for-of</li>
+<li>forEach</li>
+</ul>
+</li>
+<li>while</li>
+<li>break / continue</li>
+</ul>
+<h6 id="错误处理（ErrorHandling）"><a href="#错误处理（ErrorHandling）" class="headerlink" title="错误处理（ErrorHandling）"></a>错误处理（ErrorHandling）</h6><ul>
+<li>异常定义与类型（Error）</li>
+<li>异常抛出（Throw）</li>
+<li>异常捕获（Try-Catch-Finally）</li>
+</ul>
+<h4 id="函数（Function）"><a href="#函数（Function）" class="headerlink" title="函数（Function）"></a>函数（Function）</h4><h6 id="函数定义（Function-Definition）"><a href="#函数定义（Function-Definition）" class="headerlink" title="函数定义（Function Definition）"></a>函数定义（Function Definition）</h6><ul>
+<li>匿名函数（Lambda Function）</li>
+</ul>
+<h6 id="函数参数（Function-Args）"><a href="#函数参数（Function-Args）" class="headerlink" title="函数参数（Function Args）"></a>函数参数（Function Args）</h6><ul>
+<li>默认参数（Default Args）</li>
+<li>必要参数（Required Args）</li>
+<li>外部参数（External Args）</li>
+<li>不定参数</li>
+</ul>
+<h6 id="函数调用（Function-Call）"><a href="#函数调用（Function-Call）" class="headerlink" title="函数调用（Function Call）"></a>函数调用（Function Call）</h6><h6 id="装饰器（Decorator）"><a href="#装饰器（Decorator）" class="headerlink" title="装饰器（Decorator）"></a>装饰器（Decorator）</h6><h6 id="迭代器与生成器（Iterator-amp-Generator）"><a href="#迭代器与生成器（Iterator-amp-Generator）" class="headerlink" title="迭代器与生成器（Iterator &amp; Generator）"></a>迭代器与生成器（Iterator &amp; Generator）</h6><h4 id="类与对象（Class-amp-Object）"><a href="#类与对象（Class-amp-Object）" class="headerlink" title="类与对象（Class &amp; Object）"></a>类与对象（Class &amp; Object）</h4><h6 id="类定义（Class-Definition）"><a href="#类定义（Class-Definition）" class="headerlink" title="类定义（Class Definition）"></a>类定义（Class Definition）</h6><ul>
+<li>类属性定义（Class Property Definition）</li>
+<li>类方法定义（Class Methods Definition）<ul>
+<li>构造函数（Constructor Function）</li>
+<li>析构函数（Destructor Function）</li>
+<li>Getter / Setter</li>
+</ul>
+</li>
+<li>访问控制（Access Control)<ul>
+<li>访问修饰符（Access Modifiers）</li>
+<li>私有数据（Private）</li>
+</ul>
+</li>
+</ul>
+<h6 id="对象（Object）"><a href="#对象（Object）" class="headerlink" title="对象（Object）"></a>对象（Object）</h6><ul>
+<li>实例化（Instantiation）</li>
+<li>单例模式（Singleton Pattern）</li>
+<li>this</li>
+</ul>
+<h6 id="类继承（Inheritance）"><a href="#类继承（Inheritance）" class="headerlink" title="类继承（Inheritance）"></a>类继承（Inheritance）</h6><h6 id="内部类（Inner-Class）"><a href="#内部类（Inner-Class）" class="headerlink" title="内部类（Inner Class）"></a>内部类（Inner Class）</h6><h6 id="反射-自省-Reflect"><a href="#反射-自省-Reflect" class="headerlink" title="反射/自省(Reflect)"></a>反射/自省(Reflect)</h6><h4 id="输入输出流（IOStream）"><a href="#输入输出流（IOStream）" class="headerlink" title="输入输出流（IOStream）"></a>输入输出流（IOStream）</h4><h4 id="模块（Modularity）"><a href="#模块（Modularity）" class="headerlink" title="模块（Modularity）"></a>模块（Modularity）</h4><h2 id="数据结构（DataStructure）"><a href="#数据结构（DataStructure）" class="headerlink" title="数据结构（DataStructure）"></a>数据结构（DataStructure）</h2><h4 id="类型与值判断（Type-Judgement）"><a href="#类型与值判断（Type-Judgement）" class="headerlink" title="类型与值判断（Type Judgement）"></a>类型与值判断（Type Judgement）</h4><h6 id="引用或值相等（Reference-Value-Equality）"><a href="#引用或值相等（Reference-Value-Equality）" class="headerlink" title="引用或值相等（Reference/Value Equality）"></a>引用或值相等（Reference/Value Equality）</h6><h6 id="动态类型检查（Runtime-Type-Checking）"><a href="#动态类型检查（Runtime-Type-Checking）" class="headerlink" title="动态类型检查（Runtime Type Checking）"></a>动态类型检查（Runtime Type Checking）</h6><h6 id="常用属性判断（Property-Checking）"><a href="#常用属性判断（Property-Checking）" class="headerlink" title="常用属性判断（Property Checking）"></a>常用属性判断（Property Checking）</h6><ul>
+<li>空间占用（Size / Length）</li>
+<li>存在性（Existing）</li>
+</ul>
+<h4 id="基本类型（Basic）"><a href="#基本类型（Basic）" class="headerlink" title="基本类型（Basic）"></a>基本类型（Basic）</h4><h6 id="数值类型（Numeric）"><a href="#数值类型（Numeric）" class="headerlink" title="数值类型（Numeric）"></a>数值类型（Numeric）</h6><ul>
+<li>随机数（Random）</li>
+<li>科学计算（Scientific Computing）</li>
+<li>类型转换（Type Conversion）</li>
+</ul>
+<h6 id="空类型（Nullable）"><a href="#空类型（Nullable）" class="headerlink" title="空类型（Nullable）"></a>空类型（Nullable）</h6><h6 id="布尔类型（Bool）"><a href="#布尔类型（Bool）" class="headerlink" title="布尔类型（Bool）"></a>布尔类型（Bool）</h6><h6 id="可选类型（Optional）"><a href="#可选类型（Optional）" class="headerlink" title="可选类型（Optional）"></a>可选类型（Optional）</h6><h6 id="枚举类型（Enum）"><a href="#枚举类型（Enum）" class="headerlink" title="枚举类型（Enum）"></a>枚举类型（Enum）</h6><h4 id="字符串类型（String）"><a href="#字符串类型（String）" class="headerlink" title="字符串类型（String）"></a>字符串类型（String）</h4><h6 id="增删复替（Manipulation）"><a href="#增删复替（Manipulation）" class="headerlink" title="增删复替（Manipulation）"></a>增删复替（Manipulation）</h6><ul>
+<li>格式化字符串（Format）</li>
+</ul>
+<h6 id="索引遍历（Index-amp-Traversal）"><a href="#索引遍历（Index-amp-Traversal）" class="headerlink" title="索引遍历（Index &amp; Traversal）"></a>索引遍历（Index &amp; Traversal）</h6><h6 id="类型编码（type-amp-encode）"><a href="#类型编码（type-amp-encode）" class="headerlink" title="类型编码（type &amp; encode）*"></a>类型编码（type &amp; encode）*</h6><ul>
+<li>字符集</li>
+<li>URL/HTML</li>
+<li>拼音</li>
+</ul>
+<h6 id="模式匹配（Pattern-Match）"><a href="#模式匹配（Pattern-Match）" class="headerlink" title="模式匹配（Pattern Match）"></a>模式匹配（Pattern Match）</h6><ul>
+<li>正则表达式（RegEx）</li>
+<li>字符串校验（Valid）</li>
+<li>模糊搜索（Fuzzy Search）</li>
+</ul>
+<h4 id="时间与日期（DateTime）"><a href="#时间与日期（DateTime）" class="headerlink" title="时间与日期（DateTime）"></a>时间与日期（DateTime）</h4><h6 id="时间解析（Parse）"><a href="#时间解析（Parse）" class="headerlink" title="时间解析（Parse）"></a>时间解析（Parse）</h6><ul>
+<li>时间戳（TimeStamp）</li>
+<li>时间日期字符串（DateTimeString）</li>
+<li>时区转换（TimeZone）</li>
+<li>时间比较（Comparison）</li>
+</ul>
+<h6 id="时间展示（Display）"><a href="#时间展示（Display）" class="headerlink" title="时间展示（Display）"></a>时间展示（Display）</h6><ul>
+<li>格式化（Format）</li>
+<li>相对格式（Relative Format）</li>
+<li>时长（Duration）</li>
+<li>i18n（国际化）</li>
+</ul>
+<h6 id="时间操作（Manipulation）"><a href="#时间操作（Manipulation）" class="headerlink" title="时间操作（Manipulation）"></a>时间操作（Manipulation）</h6><ul>
+<li>读取与设置（Get &amp; Set）</li>
+<li>时间增减（Add &amp; Subtract）</li>
+<li>时间偏移计算（Diff）</li>
+</ul>
+<h6 id="日历（Calendar）"><a href="#日历（Calendar）" class="headerlink" title="日历（Calendar）"></a>日历（Calendar）</h6><h4 id="序列类型（IndexedCollection）"><a href="#序列类型（IndexedCollection）" class="headerlink" title="序列类型（IndexedCollection）"></a>序列类型（IndexedCollection）</h4><h6 id="数组（Array）"><a href="#数组（Array）" class="headerlink" title="数组（Array）"></a>数组（Array）</h6><ul>
+<li>增删复替（Manipulation）</li>
+<li>索引遍历（Index &amp; Traversal）</li>
+<li>转换（Transform）<ul>
+<li>map/flatMap</li>
+<li>reduce</li>
+<li>filter</li>
+<li>sort</li>
+</ul>
+</li>
+</ul>
+<h6 id="集合（Set）"><a href="#集合（Set）" class="headerlink" title="集合（Set）"></a>集合（Set）</h6><h4 id="索引类型（KeyedCollection）"><a href="#索引类型（KeyedCollection）" class="headerlink" title="索引类型（KeyedCollection）"></a>索引类型（KeyedCollection）</h4><h6 id="映射"><a href="#映射" class="headerlink" title="映射"></a>映射</h6><ul>
+<li>增删复替（Manipulation）</li>
+<li>索引遍历（Index &amp; Traversal)</li>
+</ul>
+<h4 id="不可变对象（Immutable）"><a href="#不可变对象（Immutable）" class="headerlink" title="不可变对象（Immutable）"></a>不可变对象（Immutable）</h4><h4 id="流（Stream）"><a href="#流（Stream）" class="headerlink" title="流（Stream）"></a>流（Stream）</h4><h4 id="序列化与反序列化（Serialization）"><a href="#序列化与反序列化（Serialization）" class="headerlink" title="序列化与反序列化（Serialization）"></a>序列化与反序列化（Serialization）</h4><ul>
+<li>Json</li>
+<li>XML</li>
+<li>CSV</li>
+</ul>
+<h2 id="功能（Functionality）"><a href="#功能（Functionality）" class="headerlink" title="功能（Functionality）"></a>功能（Functionality）</h2><h4 id="存储（Storage）"><a href="#存储（Storage）" class="headerlink" title="存储（Storage）"></a>存储（Storage）</h4><h6 id="缓存（Cache）"><a href="#缓存（Cache）" class="headerlink" title="缓存（Cache）"></a>缓存（Cache）</h6><h6 id="数据库（DataBase）"><a href="#数据库（DataBase）" class="headerlink" title="数据库（DataBase）"></a>数据库（DataBase）</h6><ul>
+<li>MySQL</li>
+<li>Redis</li>
+<li>MongoDB</li>
+</ul>
+<h6 id="文件系统（FileSystem）"><a href="#文件系统（FileSystem）" class="headerlink" title="文件系统（FileSystem）"></a>文件系统（FileSystem）</h6><ul>
+<li>FilePath（文件寻址）</li>
+<li>Monitor（文件监控）</li>
+</ul>
+<h4 id="网络（Network）"><a href="#网络（Network）" class="headerlink" title="网络（Network）"></a>网络（Network）</h4><h6 id="网络管理（Network-Management）"><a href="#网络管理（Network-Management）" class="headerlink" title="网络管理（Network Management）"></a>网络管理（Network Management）</h6><h6 id="套接字（Socket）"><a href="#套接字（Socket）" class="headerlink" title="套接字（Socket）"></a>套接字（Socket）</h6><h6 id="HTTP-访问（HTTP-Client）"><a href="#HTTP-访问（HTTP-Client）" class="headerlink" title="HTTP 访问（HTTP Client）"></a>HTTP 访问（HTTP Client）</h6><ul>
+<li>URI 处理工具集（URI Handler）</li>
+<li>请求构造（Request Generator）</li>
+<li>请求执行（Request Executor）</li>
+<li>响应解析（Responsive）</li>
+<li>复杂请求管理（Advanced Request）</li>
+</ul>
+<h6 id="WebSocket"><a href="#WebSocket" class="headerlink" title="WebSocket"></a>WebSocket</h6><h6 id="远程调用（RPC）"><a href="#远程调用（RPC）" class="headerlink" title="远程调用（RPC）"></a>远程调用（RPC）</h6><h4 id="系统进程（SysProc）"><a href="#系统进程（SysProc）" class="headerlink" title="系统进程（SysProc）"></a>系统进程（SysProc）</h4><h6 id="切面编程（AOP）"><a href="#切面编程（AOP）" class="headerlink" title="切面编程（AOP）"></a>切面编程（AOP）</h6><h6 id="并发编程（ConcurrentProgramming）"><a href="#并发编程（ConcurrentProgramming）" class="headerlink" title="并发编程（ConcurrentProgramming）"></a>并发编程（ConcurrentProgramming）</h6><ul>
+<li>线程（Thread）<ul>
+<li>线程池（ThreadPool）</li>
+<li>协程（Coroutines）</li>
+</ul>
+</li>
+<li>并发控制（ConcurrencyControl）<ul>
+<li>锁（Lock）</li>
+<li>锁与事务（Atomic &amp; Transaction）</li>
+<li>数据一致性（Consistency）</li>
+</ul>
+</li>
+<li>异步模式（AsynchronousPattern）<ul>
+<li>回调（Callback）</li>
+<li>Promise / Future /Defer</li>
+<li>Generator</li>
+<li>Async / Await</li>
+</ul>
+</li>
+</ul>
+<h6 id="系统调用（System）"><a href="#系统调用（System）" class="headerlink" title="系统调用（System）"></a>系统调用（System）</h6><h6 id="响应式编程（Reactive）"><a href="#响应式编程（Reactive）" class="headerlink" title="响应式编程（Reactive）"></a>响应式编程（Reactive）</h6><ul>
+<li>RxExtension</li>
+<li>Actor</li>
+<li>流逝 API（StreamAPI）</li>
+</ul>
+<h2 id="工程实践（Engineering-Practices）"><a href="#工程实践（Engineering-Practices）" class="headerlink" title="工程实践（Engineering Practices）"></a>工程实践（Engineering Practices）</h2><h4 id="样式指南（StyleGuide）"><a href="#样式指南（StyleGuide）" class="headerlink" title="样式指南（StyleGuide）"></a>样式指南（StyleGuide）</h4><ul>
+<li>代码风格与约定（CodeStyle）<ul>
+<li>命名约定（NamingConventions）</li>
+<li>文档与注释（Documentation/Comments）</li>
+</ul>
+</li>
+<li>项目/模块架构（Architecture）</li>
+<li>语法检查（Lint）</li>
+</ul>
+<h4 id="设计模式（DesignPattern）"><a href="#设计模式（DesignPattern）" class="headerlink" title="设计模式（DesignPattern）"></a>设计模式（DesignPattern）</h4><ul>
+<li>SOLID</li>
+<li>Observable</li>
+</ul>
+<h4 id="性能优化-amp-代码优化（Performance-amp-CodeEfficiency）"><a href="#性能优化-amp-代码优化（Performance-amp-CodeEfficiency）" class="headerlink" title="性能优化&amp;代码优化（Performance &amp; CodeEfficiency）"></a>性能优化&amp;代码优化（Performance &amp; CodeEfficiency）</h4><h4 id="测试与发布（Test-amp-Release）"><a href="#测试与发布（Test-amp-Release）" class="headerlink" title="测试与发布（Test &amp; Release）"></a>测试与发布（Test &amp; Release）</h4><h6 id="调试（Debug）"><a href="#调试（Debug）" class="headerlink" title="调试（Debug）"></a>调试（Debug）</h6><h6 id="Test（测试）"><a href="#Test（测试）" class="headerlink" title="Test（测试）"></a>Test（测试）</h6><ul>
+<li>断言（Assert）</li>
+<li>Mock &amp; Stub</li>
+<li>TestRunner</li>
+</ul>
+<h6 id="发布（Release）"><a href="#发布（Release）" class="headerlink" title="发布（Release）"></a>发布（Release）</h6><h6 id="日志（Log）"><a href="#日志（Log）" class="headerlink" title="日志（Log）"></a>日志（Log）</h6><h2 id="进阶（Advanced）"><a href="#进阶（Advanced）" class="headerlink" title="进阶（Advanced）"></a>进阶（Advanced）</h2><h4 id="泛型编程（Generics）"><a href="#泛型编程（Generics）" class="headerlink" title="泛型编程（Generics）"></a>泛型编程（Generics）</h4><h4 id="元编程（Meta-Programming）"><a href="#元编程（Meta-Programming）" class="headerlink" title="元编程（Meta Programming）"></a>元编程（Meta Programming）</h4><h6 id="反射与代理（Reflection-amp-Proxy）"><a href="#反射与代理（Reflection-amp-Proxy）" class="headerlink" title="反射与代理（Reflection &amp; Proxy）"></a>反射与代理（Reflection &amp; Proxy）</h6><h6 id="代码生成（Code-Generation）"><a href="#代码生成（Code-Generation）" class="headerlink" title="代码生成（Code Generation）"></a>代码生成（Code Generation）</h6><h6 id="依赖注入-控制反转（DI-IOP）"><a href="#依赖注入-控制反转（DI-IOP）" class="headerlink" title="依赖注入/控制反转（DI/IOP）"></a>依赖注入/控制反转（DI/IOP）</h6><h4 id="函数式编程（Functional-Programming）"><a href="#函数式编程（Functional-Programming）" class="headerlink" title="函数式编程（Functional Programming）"></a>函数式编程（Functional Programming）</h4><h4 id="响应式编程（Reactive-Programming）"><a href="#响应式编程（Reactive-Programming）" class="headerlink" title="响应式编程（Reactive Programming）"></a>响应式编程（Reactive Programming）</h4><h6 id="EventStream"><a href="#EventStream" class="headerlink" title="EventStream"></a>EventStream</h6><h6 id="TFRP"><a href="#TFRP" class="headerlink" title="TFRP"></a>TFRP</h6><h6 id="RxExtension"><a href="#RxExtension" class="headerlink" title="RxExtension"></a>RxExtension</h6><h6 id="Actor"><a href="#Actor" class="headerlink" title="Actor"></a>Actor</h6><h4 id="内存管理（Memory-Management）"><a href="#内存管理（Memory-Management）" class="headerlink" title="内存管理（Memory Management）"></a>内存管理（Memory Management）</h4><h6 id="内存结构（Memory-Structure）"><a href="#内存结构（Memory-Structure）" class="headerlink" title="内存结构（Memory Structure）"></a>内存结构（Memory Structure）</h6><h6 id="内存分配（Memory-Allocation）"><a href="#内存分配（Memory-Allocation）" class="headerlink" title="内存分配（Memory Allocation）"></a>内存分配（Memory Allocation）</h6><h6 id="垃圾回收（Garbage-Collection）"><a href="#垃圾回收（Garbage-Collection）" class="headerlink" title="垃圾回收（Garbage Collection）"></a>垃圾回收（Garbage Collection）</h6><h4 id="数据结构与算法（Algo-Data-Structure）"><a href="#数据结构与算法（Algo-Data-Structure）" class="headerlink" title="数据结构与算法（Algo Data Structure）"></a>数据结构与算法（Algo Data Structure）</h4>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2017/07/19/编程语言学习框架/" data-id="cj7hoot6c007dot4bqsrxvflg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li></ul>
@@ -1233,7 +1233,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/18/学习数据建模/" data-id="cj7gaxtni007bwq4bnrrsvocl" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/07/18/学习数据建模/" data-id="cj7hoot6d007iot4bp1kmp05n" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1314,7 +1314,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/12/TypeScript-入门/" data-id="cj7gaxtkx002iwq4bhcgengk8" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/07/12/TypeScript-入门/" data-id="cj7hoot3r002aot4bsfoof578" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TypeScript/">TypeScript</a></li></ul>
@@ -1394,7 +1394,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/06/「复盘」Yii-RESTful-API-脚手架/" data-id="cj7gaxtli003owq4b9c19xnfe" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/07/06/「复盘」Yii-RESTful-API-脚手架/" data-id="cj7hoot4h003lot4byi4wlj6f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -1506,7 +1506,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/06/29/「复盘」商品库-v1-0/" data-id="cj7gaxtlj003swq4btbj37a9z" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/06/29/「复盘」商品库-v1-0/" data-id="cj7hoot4l003rot4b8j7ouaa9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1552,7 +1552,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/06/27/使用-Vue-js-2-0-开发后台/" data-id="cj7gaxtm6004ywq4beoz4kv2f" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/06/27/使用-Vue-js-2-0-开发后台/" data-id="cj7hoot58004wot4bgnbyyhsp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue-js/">Vue.js</a></li></ul>
@@ -1711,7 +1711,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/06/05/LNMP-中常用的-Linux-命令/" data-id="cj7gaxtj30004wq4bmdlshtdf" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/06/05/LNMP-中常用的-Linux-命令/" data-id="cj7hoot270004ot4ba77tfsgl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1858,7 +1858,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/06/02/mysqldumpslow-参数讲解与基础使用/" data-id="cj7gaxtlc003awq4b1l64ompy" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/06/02/mysqldumpslow-参数讲解与基础使用/" data-id="cj7hoot460030ot4btjzjyuw7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -1881,7 +1881,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Kategorier</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -1910,7 +1910,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Arkiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
@@ -1920,7 +1920,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Siste innlegg</h3>
     <div class="widget">
       <ul>
         
@@ -1929,11 +1929,11 @@
           </li>
         
           <li>
-            <a href="/2017/07/19/编程语言学习框架/">编程语言学习框架</a>
+            <a href="/2017/07/19/学习-PHP/">PHP 学习框架</a>
           </li>
         
           <li>
-            <a href="/2017/07/19/学习-PHP/">PHP 学习框架</a>
+            <a href="/2017/07/19/编程语言学习框架/">编程语言学习框架</a>
           </li>
         
           <li>
