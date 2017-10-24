@@ -54,7 +54,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -64,6 +64,73 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-学习-UML（二）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/17/学习-UML（二）/" class="article-date">
+  <time datetime="2017-02-17T09:36:39.000Z" itemprop="datePublished">2017-02-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UML/">UML</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/17/学习-UML（二）/">学习 UML（二）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h2><p>类图（class diagram）只是 UML 的一部分，但它们可能是最常用的，因为类图在描述面向对象关系时非常有用。</p>
+<h4 id="类、抽象类、接口"><a href="#类、抽象类、接口" class="headerlink" title="类、抽象类、接口"></a>类、抽象类、接口</h4><p>类是类图的主要部分。类用带有类名的方框来描述，如下图所示：</p>
+<p><img src="http://olnw31eni.bkt.clouddn.com/uml%E7%B1%BB.png" alt=""></p>
+<p>抽象类通常使用斜体的类名，或者增加 <code>{abstract}</code> 到类名下来表示，如下图所示：</p>
+<p><img src="http://olnw31eni.bkt.clouddn.com/uml%E6%8A%BD%E8%B1%A1%E7%B1%BB.png" alt=""></p>
+<p>接口的定义方式和类相同，但接口必须增加 <code>&lt;&lt;interface&gt;&gt;</code> 到类名上来表示，如下图所示：</p>
+<p><img src="http://olnw31eni.bkt.clouddn.com/uml%E6%8E%A5%E5%8F%A3.png" alt=""></p>
+<h4 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h4><p>属性用于描述一个类的属性，属性直接列在类名下面的格子中。属性使用符号来表示类属性的可见性，其中 <code>+</code> 对应 <code>public</code> 、<code>-</code> 对应 <code>private</code>、<code>#</code> 对应 <code>protected</code>，如下图所示：</p>
+<p><img src="http://olnw31eni.bkt.clouddn.com/uml%E5%B1%9E%E6%80%A7.png" alt=""></p>
+<h4 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h4><p>操作用于描述类方法，操作表示类方法可见性的办法与属性一致。类方法有参数，则包含在括号之中；类方法有返回类型，则用冒号来描述，如下图所示：</p>
+<p><img src="http://olnw31eni.bkt.clouddn.com/uml%E6%93%8D%E4%BD%9C.png" alt=""></p>
+<h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><p>UML 一般用「泛化」来描述继承关系。这个关系用从子类到父类的一条线来标识，线的顶端有一个空心闭合箭头，如下图所示：</p>
+<p><img src="http://olnw31eni.bkt.clouddn.com/uml%E7%BB%A7%E6%89%BF.png" alt=""></p>
+<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><p>UML 用「实现」来描述接口和实现接口的类之间的关系。这个关系用从实现接口的类到接口的一条虚线来标识，线的顶端有一个空心闭合箭头，如下图所示：</p>
+<p><img src="http://olnw31eni.bkt.clouddn.com/uml%E5%AE%9E%E7%8E%B0.png" alt=""></p>
+<h4 id="关联"><a href="#关联" class="headerlink" title="关联"></a>关联</h4><p>当一个类的属性保存了对另一个类的一个实例或多个实例的引用时，就产生了关联。类之间的关联有单向关联、双向关联和多个引用关联，如下图所示：</p>
+<p><img src="http://olnw31eni.bkt.clouddn.com/uml%E5%85%B3%E8%81%94.png" alt=""></p>
+<h4 id="聚合和组合"><a href="#聚合和组合" class="headerlink" title="聚合和组合"></a>聚合和组合</h4><p>聚合和组合都描述了一个类长期持有其他类的一个或多个实例的情况。通过聚合或组合，被引用的对象实例成为引用对象的一部分。</p>
+<p>聚合的情况下，被包含对象是容器的一个核心部分，但是它们也可以同时被其他对象所包含。聚合关系用一条空心菱形开头的线来说明。</p>
+<p>组合则是一个更强的关系。在组合中，被包含对象只能被它的容器所引用。当容器被删除时，它也应该被删除。组合关系可以用类聚合关系的方式描述，但是菱形必须是实心的。</p>
+<p><img src="http://olnw31eni.bkt.clouddn.com/uml%E8%81%9A%E5%90%88.png" alt=""><br><img src="http://olnw31eni.bkt.clouddn.com/uml%E7%BB%84%E5%90%88.png" alt=""></p>
+<h4 id="描述使用"><a href="#描述使用" class="headerlink" title="描述使用"></a>描述使用</h4><p>一个对象使用另一个对象的关系在 UML 中被描述为一个依赖关系。一个被使用的类可以作为类方法的参数传递或者作为方法调用的结果得到。</p>
+<p><img src="http://olnw31eni.bkt.clouddn.com/uml%E6%8F%8F%E8%BF%B0%E4%BD%BF%E7%94%A8.png" alt=""></p>
+<h4 id="使用注解"><a href="#使用注解" class="headerlink" title="使用注解"></a>使用注解</h4><p>类图可以捕捉到系统的结构，但类图并不能解释类处理任务的过程，可以通过使用注解来补充说明。注解由一个折角的方框组成。它通常包含伪代码片段。注解使类图变得易于理解。</p>
+<p><img src="http://olnw31eni.bkt.clouddn.com/uml%E6%B3%A8%E9%87%8A.png" alt=""></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2017/02/17/学习-UML（二）/" data-id="cj9515pkx0075034biutfddwz" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UML/">UML</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-在-Yii-2-中使用-CodeCeption" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -157,7 +224,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/14/在-Yii-2-中使用-CodeCeption/" data-id="cj88bkmsu006kk84bds3ms7sw" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/14/在-Yii-2-中使用-CodeCeption/" data-id="cj9515pko006i034bs0o8kihy" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -277,7 +344,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/11/LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）/" data-id="cj88bkmq0001ek84bmtgn51c2" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/02/11/LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）/" data-id="cj9515pgm0018034b7o5ler19" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -329,7 +396,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-九/" data-id="cj88bkmq7001mk84byukjakos" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-九/" data-id="cj9515pgx001j034by5eui300" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -383,7 +450,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-六/" data-id="cj88bkmqe001xk84bpw1vfyfg" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-六/" data-id="cj9515phh001v034bau2p3srv" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -463,7 +530,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-四/" data-id="cj88bkmqj0023k84bmlztsnlz" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-四/" data-id="cj9515phq0024034b0h497pp6" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -521,7 +588,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-二/" data-id="cj88bkmqh0020k84bshjc1vgd" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-二/" data-id="cj9515phk001y034bqixl14cl" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -585,7 +652,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-一/" data-id="cj88bkmq9001rk84bzatprqb5" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-一/" data-id="cj9515ph1001m034btpg9ofsh" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -630,7 +697,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（三）/" data-id="cj88bkmrq0042k84brxo5p5p9" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（三）/" data-id="cj9515pjd0047034b8v5vx5a5" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -682,97 +749,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（二）/" data-id="cj88bkmrv004ck84b3c1jp2zn" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-使用-Laravel-与-Vue.js-进行微信开发（一）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/01/15/使用-Laravel-与-Vue.js-进行微信开发（一）/" class="article-date">
-  <time datetime="2017-01-15T01:11:57.000Z" itemprop="datePublished">2017-01-15</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/15/使用-Laravel-与-Vue.js-进行微信开发（一）/">使用 Laravel 与 Vue.js 进行微信开发（一）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>本文的目标是实现与微信服务器的通信。</p>
-<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
-<li>MacOS</li>
-<li>Laravel 5.1</li>
-<li>Vue.js 2.1</li>
-<li>EasyWeChat</li>
-</ul>
-<h2 id="安装-EasyWechat"><a href="#安装-EasyWechat" class="headerlink" title="安装 EasyWechat"></a>安装 EasyWechat</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">composer require &quot;overtrue/laravel-wechat:~3.0&quot;</div></pre></td></tr></table></figure>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ul>
-<li>注册 ServiceProvider:<ul>
-<li>Overtrue\LaravelWechat\ServiceProvider::class,</li>
-</ul>
-</li>
-<li>创建配置文件<ul>
-<li>php artisan vendor:publish</li>
-</ul>
-</li>
-<li>修改 config/wechat.php<ul>
-<li>app_id：微信测试号 appID</li>
-<li>secret：微信测试号 appsecret</li>
-<li>token：自定义，要与微信测试号填写的 Token 保持一致</li>
-<li>aes_key：加密信息用的，本文采用明文的方式，暂不填写</li>
-</ul>
-</li>
-</ul>
-<h2 id="创建微信分组路由"><a href="#创建微信分组路由" class="headerlink" title="创建微信分组路由"></a>创建微信分组路由</h2><p>修改文件 app/Http/routes.php，代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Route::group([</div><div class="line">    <span class="string">'prefix'</span> =&gt; <span class="string">'wechat'</span>,</div><div class="line">    <span class="string">'namespace'</span> =&gt; <span class="string">'WeChat'</span>,</div><div class="line">    <span class="string">'middleware'</span> =&gt; [],</div><div class="line">], <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">require_once</span> <span class="keyword">__DIR__</span> . <span class="string">'/Routes/wechat.php'</span>;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>新增文件 app/Http/Routes/wechat.php，代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Route::any(<span class="string">'/request-handler'</span>, <span class="string">'WeChatServerController@requestHandler'</span>);</div></pre></td></tr></table></figure></p>
-<h2 id="关闭路由-CSRF"><a href="#关闭路由-CSRF" class="headerlink" title="关闭路由 CSRF"></a>关闭路由 CSRF</h2><p>修改文件 app/Http/Middleware/VerifyCSsrfToken.php，代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">protected</span> $except = [</div><div class="line">	<span class="string">'/wechat/request-handler'</span></div><div class="line">];</div></pre></td></tr></table></figure></p>
-<h2 id="创建控制器"><a href="#创建控制器" class="headerlink" title="创建控制器"></a>创建控制器</h2><p>新增文件 app/Http/Controllers/WeChat/WeChatServerController.php，代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>\<span class="title">WeChat</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Http</span>\<span class="title">Request</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>\<span class="title">Controller</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">EasyWeChat</span>\<span class="title">Foundation</span>\<span class="title">Application</span> <span class="title">as</span> <span class="title">WeChat</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">WeChatServerController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 处理微信的请求消息</div><div class="line">     * <span class="doctag">@return</span> string</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">requestHandler</span><span class="params">(WeChat $weChat)</span></span></div><div class="line">    &#123;</div><div class="line">        $weChat-&gt;server-&gt;setMessageHandler(<span class="function"><span class="keyword">function</span><span class="params">($message)</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">"欢迎关注 &#123;$message&#125;!"</span>;</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        <span class="keyword">return</span> $weChat-&gt;server-&gt;serve();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><ul>
-<li>配置微信公众平台测试号<ul>
-<li>接口配置信息<ul>
-<li>URL：域名/wechat</li>
-<li>Token：自定义，要与 wechat.php 文件的 token 一致</li>
-</ul>
-</li>
-<li>JS 接口安全域名<ul>
-<li>填写域名，例如 baidu.com ，不需要写 www 和 http[s]://</li>
-</ul>
-</li>
-<li>测试号二维码<ul>
-<li>添加测试用户</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>URL 和 Token 通过验证之后，关注微信公众平台测试号，并发送测试消息，成功的话，如下图：<br><img src="http://o93kt6djh.bkt.clouddn.com/yanzhengwechatmessage.jpeg" alt=""></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/15/使用-Laravel-与-Vue.js-进行微信开发（一）/" data-id="cj88bkmrw004gk84bgai82xky" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/01/16/使用-Laravel-与-Vue-js-进行微信开发（二）/" data-id="cj9515pjm004l034bhyy9eddx" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -795,7 +772,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Categorieën</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -805,7 +782,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Labels</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
     </div>
@@ -824,9 +801,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
   </div>
 
@@ -834,9 +811,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/10/24/高性能的-PHP-API-接口开发/">高性能的 PHP API 接口开发</a>
+          </li>
         
           <li>
             <a href="/2017/09/04/Vue-js-2-X-实践/">Vue.js 2.X 实践</a>
@@ -852,10 +833,6 @@
         
           <li>
             <a href="/2017/07/18/学习数据建模/">学习数据建模</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/12/TypeScript-入门/">TypeScript 入门</a>
           </li>
         
       </ul>
