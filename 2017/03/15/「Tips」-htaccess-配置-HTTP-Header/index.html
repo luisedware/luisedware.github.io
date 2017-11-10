@@ -5,19 +5,18 @@
   
   <title>「Tips」.htaccess 配置 HTTP Header | 七月十五九月初七</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="使用 Yii 2 做 RESTFul API 项目时，发现在前端发起一个请求时，会出现以下错误：1Request header field access-token is not allowed by Access-Control-Allow-Headers in preflight response.
-排查问题进行了很久，最后才发现在 Yii 2 的 web 目录下，有个文件 .htaccess">
+  <meta name="description" content="使用 Yii 2 做 RESTFul API 项目时，发现在前端发起一个请求时，会出现以下错误：1Request header field access-token is not allowed by Access-Control-Allow-Headers in preflight response. 排查问题进行了很久，最后才发现在 Yii 2 的 web 目录下，有个文件 .htaccess">
+<meta name="keywords" content="PHP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="「Tips」.htaccess 配置 HTTP Header">
 <meta property="og:url" content="http://luisedware.github.io/2017/03/15/「Tips」-htaccess-配置-HTTP-Header/index.html">
 <meta property="og:site_name" content="七月十五九月初七">
-<meta property="og:description" content="使用 Yii 2 做 RESTFul API 项目时，发现在前端发起一个请求时，会出现以下错误：1Request header field access-token is not allowed by Access-Control-Allow-Headers in preflight response.
-排查问题进行了很久，最后才发现在 Yii 2 的 web 目录下，有个文件 .htaccess">
+<meta property="og:description" content="使用 Yii 2 做 RESTFul API 项目时，发现在前端发起一个请求时，会出现以下错误：1Request header field access-token is not allowed by Access-Control-Allow-Headers in preflight response. 排查问题进行了很久，最后才发现在 Yii 2 的 web 目录下，有个文件 .htaccess">
+<meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2017-03-15T09:52:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「Tips」.htaccess 配置 HTTP Header">
-<meta name="twitter:description" content="使用 Yii 2 做 RESTFul API 项目时，发现在前端发起一个请求时，会出现以下错误：1Request header field access-token is not allowed by Access-Control-Allow-Headers in preflight response.
-排查问题进行了很久，最后才发现在 Yii 2 的 web 目录下，有个文件 .htaccess">
+<meta name="twitter:description" content="使用 Yii 2 做 RESTFul API 项目时，发现在前端发起一个请求时，会出现以下错误：1Request header field access-token is not allowed by Access-Control-Allow-Headers in preflight response. 排查问题进行了很久，最后才发现在 Yii 2 的 web 目录下，有个文件 .htaccess">
   
     <link rel="alternate" href="/atom.xml" title="七月十五九月初七" type="application/atom+xml">
   
@@ -59,12 +58,12 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
       </div>
     </div>
   </div>
@@ -96,13 +95,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>使用 Yii 2 做 RESTFul API 项目时，发现在前端发起一个请求时，会出现以下错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Request header field access-token is not allowed by Access-Control-Allow-Headers in preflight response.</div></pre></td></tr></table></figure></p>
+        <p>使用 Yii 2 做 RESTFul API 项目时，发现在前端发起一个请求时，会出现以下错误：<br><figure class="highlight console"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Request header field access-token is not allowed by Access-Control-Allow-Headers in preflight response.</div></pre></td></tr></table></figure></p>
 <p>排查问题进行了很久，最后才发现在 Yii 2 的 <code>web</code> 目录下，有个文件 <code>.htaccess</code>，是可以配置 <code>Apache</code> 服务器接受 HTTP 请求的头部信息的，在特定选项加入 <code>access-token</code> 即刻不再报错，因为本次项目使用 <code>HTTP Header</code> 传递 <code>access-token</code> 的，没有加入 <code>access-token</code> 就意味 <code>Apache</code> 服务器不接受头部带有 <code>access-token</code> 的 HTTP 请求 。文件配置代码如下：<br><figure class="highlight apache"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="attribute"><span class="nomarkup">Header</span></span> always set Access-Control-Allow-Origin <span class="string">"*"</span></div><div class="line"><span class="attribute"><span class="nomarkup">Header</span></span> always set Access-Control-Allow-Methods <span class="string">"POST, GET, OPTIONS, DELETE, PUT"</span></div><div class="line"><span class="attribute"><span class="nomarkup">Header</span></span> always set Access-Control-Max-Age <span class="string">"1000"</span></div><div class="line"><span class="attribute"><span class="nomarkup">Header</span></span> always set Access-Control-Allow-Headers <span class="string">"x-requested-with, Content-Type, origin, authorization, accept, client-security-token, access-token"</span></div><div class="line"></div><div class="line"><span class="attribute"><span class="nomarkup">RewriteEngine</span></span> <span class="literal">on</span></div><div class="line"></div><div class="line"><span class="attribute"><span class="nomarkup">RewriteCond</span></span> <span class="variable">%&#123;REQUEST_METHOD&#125;</span> OPTIONS</div><div class="line"><span class="attribute"><span class="nomarkup">RewriteRule</span></span> ^(.*)$ <span class="number">$1</span><span class="meta"> [R=200,L]</span></div><div class="line"></div><div class="line"><span class="attribute"><span class="nomarkup">RewriteCond</span></span> <span class="variable">%&#123;REQUEST_FILENAME&#125;</span> !-f</div><div class="line"><span class="attribute"><span class="nomarkup">RewriteCond</span></span> <span class="variable">%&#123;REQUEST_FILENAME&#125;</span> !-d</div><div class="line"><span class="attribute"><span class="nomarkup">RewriteRule</span></span> . index.php</div></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」-htaccess-配置-HTTP-Header/" data-id="cj9515pir0037034bntl3yp89" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」-htaccess-配置-HTTP-Header/" data-id="cj9t8tyjb003hi24b642xky06" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -114,7 +113,7 @@
 <nav id="article-nav">
   
     <a href="/2017/03/15/「Tips」Yii2-前端请求的参数字段映射数据模型的属性/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Nieuwer</strong>
+      <strong class="article-nav-caption">Récent</strong>
       <div class="article-nav-title">
         
           「Tips」Yii2 前端请求的参数字段映射数据模型的属性
@@ -124,7 +123,7 @@
   
   
     <a href="/2017/03/15/「Tips」PHP-7-1-命名空间的新特性和使用方法/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ouder</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title">「Tips」PHP 7.1 命名空间的新特性和使用方法</div>
     </a>
   
@@ -139,7 +138,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categorieën</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -149,7 +148,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Labels</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
     </div>
@@ -159,7 +158,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Programming-Language/" style="font-size: 11.43px;">Programming Language</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a> <a href="/tags/vue-js/" style="font-size: 10px;">vue.js</a>
     </div>
@@ -168,9 +167,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archieven</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
   </div>
 
@@ -178,9 +177,21 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/11/09/Web-API-的设计与开发/">Web API 的设计与开发</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/05/日常开发常用命令/">日常开发常用命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/01/刻意练习/">刻意练习</a>
+          </li>
         
           <li>
             <a href="/2017/10/24/高性能的-PHP-API-接口开发/">高性能的 PHP API 接口开发</a>
@@ -188,18 +199,6 @@
         
           <li>
             <a href="/2017/09/04/Vue-js-2-X-实践/">Vue.js 2.X 实践</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/19/编程语言学习框架/">编程语言学习框架</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/19/学习-PHP/">PHP 学习框架</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/18/学习数据建模/">学习数据建模</a>
           </li>
         
       </ul>
@@ -215,7 +214,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Luis Edware<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

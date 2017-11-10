@@ -5,58 +5,18 @@
   
   <title>Linux Shell 基础之变量 | 七月十五九月初七</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Shell 变量概述Shell 与其他语言的对比
-
-PHP 和 JAVA 主要实现功能
-Shell 简化管理操作
-
-什么是变量
-
-变量是计算机内存的单元，其中存放的值可以改变
-变量让你能够把程序中准备使用的每一段数据都赋给一个简短、易于记忆的名字，因此它们十分有用
-
-变量命名规则
-
-变量名必须以字母或下划线开头，名字中间只能由字母、数字和下划线组成
-变量名的长度不得超过 255 个字符
-变量名在有">
+  <meta name="description" content="Shell 变量概述Shell 与其他语言的对比  PHP 和 JAVA 主要实现功能 Shell 简化管理操作  什么是变量  变量是计算机内存的单元，其中存放的值可以改变 变量让你能够把程序中准备使用的每一段数据都赋给一个简短、易于记忆的名字，因此它们十分有用  变量命名规则  变量名必须以字母或下划线开头，名字中间只能由字母、数字和下划线组成 变量名的长度不得超过 255 个字符 变量名在有">
+<meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux Shell 基础之变量">
 <meta property="og:url" content="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之变量/index.html">
 <meta property="og:site_name" content="七月十五九月初七">
-<meta property="og:description" content="Shell 变量概述Shell 与其他语言的对比
-
-PHP 和 JAVA 主要实现功能
-Shell 简化管理操作
-
-什么是变量
-
-变量是计算机内存的单元，其中存放的值可以改变
-变量让你能够把程序中准备使用的每一段数据都赋给一个简短、易于记忆的名字，因此它们十分有用
-
-变量命名规则
-
-变量名必须以字母或下划线开头，名字中间只能由字母、数字和下划线组成
-变量名的长度不得超过 255 个字符
-变量名在有">
+<meta property="og:description" content="Shell 变量概述Shell 与其他语言的对比  PHP 和 JAVA 主要实现功能 Shell 简化管理操作  什么是变量  变量是计算机内存的单元，其中存放的值可以改变 变量让你能够把程序中准备使用的每一段数据都赋给一个简短、易于记忆的名字，因此它们十分有用  变量命名规则  变量名必须以字母或下划线开头，名字中间只能由字母、数字和下划线组成 变量名的长度不得超过 255 个字符 变量名在有">
+<meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2016-10-04T02:53:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux Shell 基础之变量">
-<meta name="twitter:description" content="Shell 变量概述Shell 与其他语言的对比
-
-PHP 和 JAVA 主要实现功能
-Shell 简化管理操作
-
-什么是变量
-
-变量是计算机内存的单元，其中存放的值可以改变
-变量让你能够把程序中准备使用的每一段数据都赋给一个简短、易于记忆的名字，因此它们十分有用
-
-变量命名规则
-
-变量名必须以字母或下划线开头，名字中间只能由字母、数字和下划线组成
-变量名的长度不得超过 255 个字符
-变量名在有">
+<meta name="twitter:description" content="Shell 变量概述Shell 与其他语言的对比  PHP 和 JAVA 主要实现功能 Shell 简化管理操作  什么是变量  变量是计算机内存的单元，其中存放的值可以改变 变量让你能够把程序中准备使用的每一段数据都赋给一个简短、易于记忆的名字，因此它们十分有用  变量命名规则  变量名必须以字母或下划线开头，名字中间只能由字母、数字和下划线组成 变量名的长度不得超过 255 个字符 变量名在有">
   
     <link rel="alternate" href="/atom.xml" title="七月十五九月初七" type="application/atom+xml">
   
@@ -98,12 +58,12 @@ Shell 简化管理操作
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
       </div>
     </div>
   </div>
@@ -277,15 +237,15 @@ Shell 简化管理操作
 </li>
 </ul>
 <h2 id="Shell-变量例子"><a href="#Shell-变量例子" class="headerlink" title="Shell 变量例子"></a>Shell 变量例子</h2><p>位置参数例子 1</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">num1=$1</div><div class="line">num2=$2</div><div class="line"></div><div class="line"># 变量 sum 的和是 num1 加 num2</div><div class="line">sum=$(($num1+$num2))</div><div class="line"></div><div class="line"># 打印变量 sum 的值</div><div class="line">echo $sum</div></pre></td></tr></table></figure>
-<p>位置参数例子 2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line"># 使用 $# 代表所有参数的个数</div><div class="line">echo &quot;A total of $# parameters&quot;</div><div class="line"></div><div class="line"># 使用 $* 代表所有的参数</div><div class="line">echo &quot;The parameters is:$*&quot;</div><div class="line"></div><div class="line"># 使用 $@ 也代表所有参数</div><div class="line">echo &quot;The parameters is:$@&quot;</div></pre></td></tr></table></figure></p>
-<p>位置参数例子 3（$* 与 $@ 的区别）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">for i in &quot;$*&quot;</div><div class="line"># $* 中的所有参数看成是一个整体，所以这个 for 循环只会循环一次</div><div class="line">do</div><div class="line">	echo &quot;The parameters is: $i&quot;</div><div class="line">done</div><div class="line"></div><div class="line">for y in &quot;$@&quot;</div><div class="line"># $@ 中的每个参数都看成是独立的，所以 &quot;$@&quot; 中有几个参数，就会循环几次</div><div class="line">do</div><div class="line">	echo &quot;Parameter:$y&quot;</div><div class="line">done</div></pre></td></tr></table></figure></p>
-<p>接收键盘输入例子 1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">read -p &quot;Please input your name: &quot; -t 30 name</div><div class="line">echo $name</div><div class="line"></div><div class="line">read -p &quot;Please input your passwd: &quot; -s passed</div><div class="line">echo -e &quot;\n&quot;</div><div class="line">echo $passwd</div><div class="line"></div><div class="line">read -p &quot;Please input your sex [M/F]: &quot; -n 1 sex</div><div class="line">echo -e &quot;\n&quot;</div><div class="line">echo $sex</div></pre></td></tr></table></figure></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>!/bin/bash</div><div class="line">num1=$1</div><div class="line">num2=$2</div><div class="line"></div><div class="line"><span class="meta">#</span> 变量 sum 的和是 num1 加 num2</div><div class="line">sum=$(($num1+$num2))</div><div class="line"></div><div class="line"><span class="meta">#</span> 打印变量 sum 的值</div><div class="line">echo $sum</div></pre></td></tr></table></figure>
+<p>位置参数例子 2<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>!/bin/bash</div><div class="line"></div><div class="line"><span class="meta">#</span> 使用 $# 代表所有参数的个数</div><div class="line">echo "A total of $# parameters"</div><div class="line"></div><div class="line"><span class="meta">#</span> 使用 $* 代表所有的参数</div><div class="line">echo "The parameters is:$*"</div><div class="line"></div><div class="line"><span class="meta">#</span> 使用 $@ 也代表所有参数</div><div class="line">echo "The parameters is:$@"</div></pre></td></tr></table></figure></p>
+<p>位置参数例子 3（$* 与 $@ 的区别）<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>!/bin/bash</div><div class="line"></div><div class="line">for i in "$*"</div><div class="line"><span class="meta">#</span> $* 中的所有参数看成是一个整体，所以这个 for 循环只会循环一次</div><div class="line">do</div><div class="line">	echo "The parameters is: $i"</div><div class="line">done</div><div class="line"></div><div class="line">for y in "$@"</div><div class="line"><span class="meta">#</span> $@ 中的每个参数都看成是独立的，所以 "$@" 中有几个参数，就会循环几次</div><div class="line">do</div><div class="line">	echo "Parameter:$y"</div><div class="line">done</div></pre></td></tr></table></figure></p>
+<p>接收键盘输入例子 1<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>!/bin/bash</div><div class="line"></div><div class="line">read -p "Please input your name: " -t 30 name</div><div class="line">echo $name</div><div class="line"></div><div class="line">read -p "Please input your passwd: " -s passed</div><div class="line">echo -e "\n"</div><div class="line">echo $passwd</div><div class="line"></div><div class="line">read -p "Please input your sex [M/F]: " -n 1 sex</div><div class="line">echo -e "\n"</div><div class="line">echo $sex</div></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之变量/" data-id="cj9515pfo000a034bbg9657ga" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之变量/" data-id="cj9t8tyh9000ai24bqx2v78e9" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -297,7 +257,7 @@ Shell 简化管理操作
 <nav id="article-nav">
   
     <a href="/2016/10/04/Linux-Shell-基础之运算符/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Nieuwer</strong>
+      <strong class="article-nav-caption">Récent</strong>
       <div class="article-nav-title">
         
           Linux Shell 基础之运算符
@@ -307,7 +267,7 @@ Shell 简化管理操作
   
   
     <a href="/2016/10/03/Linux-Shell-实战/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ouder</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title">Linux Shell 实战</div>
     </a>
   
@@ -322,7 +282,7 @@ Shell 简化管理操作
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categorieën</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -332,7 +292,7 @@ Shell 简化管理操作
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Labels</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
     </div>
@@ -342,7 +302,7 @@ Shell 简化管理操作
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Programming-Language/" style="font-size: 11.43px;">Programming Language</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a> <a href="/tags/vue-js/" style="font-size: 10px;">vue.js</a>
     </div>
@@ -351,9 +311,9 @@ Shell 简化管理操作
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archieven</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
   </div>
 
@@ -361,9 +321,21 @@ Shell 简化管理操作
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/11/09/Web-API-的设计与开发/">Web API 的设计与开发</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/05/日常开发常用命令/">日常开发常用命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/01/刻意练习/">刻意练习</a>
+          </li>
         
           <li>
             <a href="/2017/10/24/高性能的-PHP-API-接口开发/">高性能的 PHP API 接口开发</a>
@@ -371,18 +343,6 @@ Shell 简化管理操作
         
           <li>
             <a href="/2017/09/04/Vue-js-2-X-实践/">Vue.js 2.X 实践</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/19/编程语言学习框架/">编程语言学习框架</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/19/学习-PHP/">PHP 学习框架</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/18/学习数据建模/">学习数据建模</a>
           </li>
         
       </ul>
@@ -398,7 +358,7 @@ Shell 简化管理操作
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Luis Edware<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

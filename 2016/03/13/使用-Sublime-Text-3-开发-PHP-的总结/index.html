@@ -5,37 +5,18 @@
   
   <title>使用 Sublime Text 3 开发 PHP 的心得 | 七月十五九月初七</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="PHPStorm 不卡之日，SublimeText 舍弃之时
-环境
-系统：OSX Yosemite 10.10.5
-版本：Sublime Text 3 Build 3103
-
-安装使用 Homebrew 安装 Sublime Text 31brew install Caskroom/cask/sublime-text
-终端配置执行以下代码，即可在终端使用 Sublime Text 3
-12345/">
+  <meta name="description" content="PHPStorm 不卡之日，SublimeText 舍弃之时 环境 系统：OSX Yosemite 10.10.5 版本：Sublime Text 3 Build 3103  安装使用 Homebrew 安装 Sublime Text 31brew install Caskroom/cask/sublime-text 终端配置执行以下代码，即可在终端使用 Sublime Text 3 12345/">
+<meta name="keywords" content="Sublime Text 3">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用 Sublime Text 3 开发 PHP 的心得">
 <meta property="og:url" content="http://luisedware.github.io/2016/03/13/使用-Sublime-Text-3-开发-PHP-的总结/index.html">
 <meta property="og:site_name" content="七月十五九月初七">
-<meta property="og:description" content="PHPStorm 不卡之日，SublimeText 舍弃之时
-环境
-系统：OSX Yosemite 10.10.5
-版本：Sublime Text 3 Build 3103
-
-安装使用 Homebrew 安装 Sublime Text 31brew install Caskroom/cask/sublime-text
-终端配置执行以下代码，即可在终端使用 Sublime Text 3
-12345/">
+<meta property="og:description" content="PHPStorm 不卡之日，SublimeText 舍弃之时 环境 系统：OSX Yosemite 10.10.5 版本：Sublime Text 3 Build 3103  安装使用 Homebrew 安装 Sublime Text 31brew install Caskroom/cask/sublime-text 终端配置执行以下代码，即可在终端使用 Sublime Text 3 12345/">
+<meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2016-04-15T02:02:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用 Sublime Text 3 开发 PHP 的心得">
-<meta name="twitter:description" content="PHPStorm 不卡之日，SublimeText 舍弃之时
-环境
-系统：OSX Yosemite 10.10.5
-版本：Sublime Text 3 Build 3103
-
-安装使用 Homebrew 安装 Sublime Text 31brew install Caskroom/cask/sublime-text
-终端配置执行以下代码，即可在终端使用 Sublime Text 3
-12345/">
+<meta name="twitter:description" content="PHPStorm 不卡之日，SublimeText 舍弃之时 环境 系统：OSX Yosemite 10.10.5 版本：Sublime Text 3 Build 3103  安装使用 Homebrew 安装 Sublime Text 31brew install Caskroom/cask/sublime-text 终端配置执行以下代码，即可在终端使用 Sublime Text 3 12345/">
   
     <link rel="alternate" href="/atom.xml" title="七月十五九月初七" type="application/atom+xml">
   
@@ -77,12 +58,12 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
       </div>
     </div>
   </div>
@@ -119,7 +100,7 @@
 <li>系统：OSX Yosemite 10.10.5</li>
 <li>版本：Sublime Text 3 Build 3103</li>
 </ul>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>使用 Homebrew 安装 Sublime Text 3<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install Caskroom/cask/sublime-text</div></pre></td></tr></table></figure></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>使用 Homebrew 安装 Sublime Text 3<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install Caskroom/cask/sublime-text</div></pre></td></tr></table></figure></p>
 <h2 id="终端配置"><a href="#终端配置" class="headerlink" title="终端配置"></a>终端配置</h2><p>执行以下代码，即可在终端使用 <code>Sublime Text 3</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 创建程序链接</div><div class="line">ln -s  &quot;/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl&quot; /usr/local/bin/subl</div><div class="line"></div><div class="line">// 查看使用帮助</div><div class="line">subl -h</div></pre></td></tr></table></figure>
 <h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><h3 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h3><table>
@@ -475,7 +456,7 @@
 <h2 id="代码片段"><a href="#代码片段" class="headerlink" title="代码片段"></a>代码片段</h2><p><code>Sublime Text</code> 可以创建自定义的代码片段</p>
 <p>点击菜单栏 <code>Tools</code> -&gt; <code>New Snippet</code> ，创建文件 <code>PHP Public Method.sublime-snippet</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;snippet&gt;</div><div class="line">	&lt;content&gt;&lt;![CDATA[</div><div class="line">public function $&#123;1:function_name&#125;($&#123;2:param&#125;)&#123;</div><div class="line">	$&#123;3:return result&#125;</div><div class="line">&#125;</div><div class="line">]]&gt;&lt;/content&gt;</div><div class="line">	&lt;!-- Optional: Set a tabTrigger to define how to trigger the snippet --&gt;</div><div class="line">	&lt;tabTrigger&gt;pubf&lt;/tabTrigger&gt;</div><div class="line">	&lt;!-- Optional: Set a scope to limit where the snippet will trigger --&gt;</div><div class="line">	&lt;scope&gt;source.php&lt;/scope&gt;</div><div class="line">&lt;/snippet&gt;</div></pre></td></tr></table></figure></p>
 <p>当在PHP文件写代码时，输入 <code>pubf</code> 并按下 <code>Tab</code> 键，会生成相对应的代码片段<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public function function_name(param)&#123;</div><div class="line">	return true</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="格式化代码"><a href="#格式化代码" class="headerlink" title="格式化代码"></a>格式化代码</h2><p>在终端执行以下命令安装 <code>php-cs-fix</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install php-cs-fixer</div></pre></td></tr></table></figure></p>
+<h2 id="格式化代码"><a href="#格式化代码" class="headerlink" title="格式化代码"></a>格式化代码</h2><p>在终端执行以下命令安装 <code>php-cs-fix</code><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install php-cs-fixer</div></pre></td></tr></table></figure></p>
 <p>假如要对某个 PHP 文件进行格式化操作，运行以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd dir</div><div class="line">php-cs-fixer fix fileName.php --level=&quot;psr2&quot;</div></pre></td></tr></table></figure></p>
 <p>使用 <code>Sublime Text 3</code> 的 <code>Build System</code> 格式化代码<br>点击 <code>Tools</code> -&gt; <code>Build System</code> -&gt; <code>New Bulid System ...</code>，打开代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;shell_cmd&quot;:&quot;make&quot;</div></pre></td></tr></table></figure></p>
 <p>修改上述代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	&quot;shell_cmd&quot;: &quot;php-cs-fixer fix $file --level=psr2&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -485,7 +466,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/03/13/使用-Sublime-Text-3-开发-PHP-的总结/" data-id="cj9515pju0052034bhxzzodmj" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2016/03/13/使用-Sublime-Text-3-开发-PHP-的总结/" data-id="cj9t8tyl1004zi24bx7pmx9te" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li></ul>
@@ -497,7 +478,7 @@
 <nav id="article-nav">
   
     <a href="/2016/04/04/使用Laravel构建内容管理框架（二）/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Nieuwer</strong>
+      <strong class="article-nav-caption">Récent</strong>
       <div class="article-nav-title">
         
           使用 Laravel 构建内容管理框架（二）
@@ -507,7 +488,7 @@
   
   
     <a href="/2016/03/09/使用Laravel构建内容管理框架（一）/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ouder</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title">使用 Laravel 构建内容管理框架（一）</div>
     </a>
   
@@ -522,7 +503,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categorieën</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -532,7 +513,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Labels</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
     </div>
@@ -542,7 +523,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Programming-Language/" style="font-size: 11.43px;">Programming Language</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a> <a href="/tags/vue-js/" style="font-size: 10px;">vue.js</a>
     </div>
@@ -551,9 +532,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archieven</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
   </div>
 
@@ -561,9 +542,21 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/11/09/Web-API-的设计与开发/">Web API 的设计与开发</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/05/日常开发常用命令/">日常开发常用命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/01/刻意练习/">刻意练习</a>
+          </li>
         
           <li>
             <a href="/2017/10/24/高性能的-PHP-API-接口开发/">高性能的 PHP API 接口开发</a>
@@ -571,18 +564,6 @@
         
           <li>
             <a href="/2017/09/04/Vue-js-2-X-实践/">Vue.js 2.X 实践</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/19/编程语言学习框架/">编程语言学习框架</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/19/学习-PHP/">PHP 学习框架</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/18/学习数据建模/">学习数据建模</a>
           </li>
         
       </ul>
@@ -598,7 +579,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Luis Edware<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

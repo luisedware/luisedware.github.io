@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>七月十五九月初七</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="七月十五九月初七">
+<meta property="og:url" content="http://luisedware.github.io/page/10/index.html">
+<meta property="og:site_name" content="七月十五九月初七">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="七月十五九月初七">
+  
+    <link rel="alternate" href="/atom.xml" title="七月十五九月初七" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">七月十五九月初七</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一两祝你手边多银财，二两祝你方寸永不乱</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-使用-Sublime-Text-3-开发-PHP-的总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/13/使用-Sublime-Text-3-开发-PHP-的总结/" class="article-date">
+  <time datetime="2016-03-13T14:34:20.000Z" itemprop="datePublished">2016-03-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Tooling/">Tooling</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/13/使用-Sublime-Text-3-开发-PHP-的总结/">使用 Sublime Text 3 开发 PHP 的心得</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>PHPStorm 不卡之日，SublimeText 舍弃之时</p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
+<li>系统：OSX Yosemite 10.10.5</li>
+<li>版本：Sublime Text 3 Build 3103</li>
+</ul>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>使用 Homebrew 安装 Sublime Text 3<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install Caskroom/cask/sublime-text</div></pre></td></tr></table></figure></p>
+<h2 id="终端配置"><a href="#终端配置" class="headerlink" title="终端配置"></a>终端配置</h2><p>执行以下代码，即可在终端使用 <code>Sublime Text 3</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 创建程序链接</div><div class="line">ln -s  &quot;/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl&quot; /usr/local/bin/subl</div><div class="line"></div><div class="line">// 查看使用帮助</div><div class="line">subl -h</div></pre></td></tr></table></figure>
+<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><h3 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h3><table>
+<thead>
+<tr>
+<th>按键</th>
+<th>命令</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>⌘ + C</td>
+<td>复制</td>
+</tr>
+<tr>
+<td>⌘ + ⇧ + D</td>
+<td>复制粘贴</td>
+</tr>
+<tr>
+<td>⌘ + X</td>
+<td>剪切</td>
+</tr>
+<tr>
+<td>⌘ + V</td>
+<td>粘贴</td>
+</tr>
+<tr>
+<td>⌘ + ⇧ + V</td>
+<td>保持缩进粘贴</td>
+</tr>
+<tr>
+<td>⌘ + ⌥ + V</td>
+<td>打开粘贴面板</td>
+</tr>
+<tr>
+<td>⌘ + F</td>
+<td>查找</td>
+</tr>
+<tr>
+<td>⌘ + /</td>
+<td>注释行</td>
+</tr>
+<tr>
+<td>⌘ + ⌥ + /</td>
+<td>生成注释</td>
+</tr>
+<tr>
+<td>⌘ + ⇧ + F</td>
+<td>全局查找、替换</td>
+</tr>
+<tr>
+<td>⌘ + ↩</td>
+<td>在光标下插入行</td>
+</tr>
+<tr>
+<td>⌘ + ⇧ + ↩</td>
+<td>在光标上插入行</td>
+</tr>
+<tr>
+<td>⌘ + ⇧ + t</td>
+<td>打开关闭的标签页</td>
+</tr>
+<tr>
+<td>⌘ + [NUM]</td>
+<td>选取对应数字的标签页</td>
+</tr>
+<tr>
+<td>⌘ + ⇧ + [</td>
+<td>上一个标签页</td>
+</tr>
+<tr>
+<td>⌘ + ⇧ + ]</td>
+<td>下一个标签页</td>
+</tr>
+<tr>
+<td>⌃ + ⇧ + ↑</td>
+<td>向上扩展光标</td>
+</tr>
+<tr>
+<td>⌃ + ⇧ + ↓</td>
+<td>向下扩展光标</td>
+</tr>
+</tbody>
+</table>
+<h3 id="书签"><a href="#书签" class="headerlink" title="书签"></a>书签</h3><table>
+<thead>
+<tr>
+<th>按键</th>
+<th>命令</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>⌘ + F2</td>
+<td>生成或撤销书签</td>
+</tr>
+<tr>
+<td>⇧ + F2</td>
+<td>上一个书签</td>
+</tr>
+<tr>
+<td>F2</td>
+<td>下一个书签</td>
+</tr>
+</tbody>
+</table>
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><table>
+<thead>
+<tr>
+<th>按键</th>
+<th>命令</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>⌃ + ⇧ + K</td>
+<td>删除当前行</td>
+</tr>
+<tr>
+<td>⌘ + K + ⌫</td>
+<td>删除光标之后的内容</td>
+</tr>
+<tr>
+<td>⌘ + K + ⌘ + K</td>
+<td>删除光标之后的内容</td>
+</tr>
+</tbody>
+</table>
+<h3 id="跳转"><a href="#跳转" class="headerlink" title="跳转"></a>跳转</h3><table>
+<thead>
+<tr>
+<th>按键</th>
+<th>命令</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>⌘ + P , ⌘ + T</td>
+<td>跳转到文件</td>
+</tr>
+<tr>
+<td>⌘ + R</td>
+<td>跳转到方法</td>
+</tr>
+<tr>
+<td>⌃ + G</td>
+<td>跳转到行数</td>
+</tr>
+<tr>
+<td>⌃ + ⇧ + P</td>
+<td>切换工作空间</td>
+</tr>
+<tr>
+<td>⌘ + ⇧ + P</td>
+<td>打开命令面板</td>
+</tr>
+<tr>
+<td>⌃ + -</td>
+<td>向后跳转至修改处</td>
+</tr>
+<tr>
+<td>⌃ + ⇧ + -</td>
+<td>向前跳转至修改处</td>
+</tr>
+</tbody>
+</table>
+<h3 id="光标移动"><a href="#光标移动" class="headerlink" title="光标移动"></a>光标移动</h3><table>
+<thead>
+<tr>
+<th>按键</th>
+<th>命令</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>⌃ + P</td>
+<td>光标向上移动</td>
+</tr>
+<tr>
+<td>⌃ + N</td>
+<td>光标向下移动</td>
+</tr>
+<tr>
+<td>⌃ + B</td>
+<td>光标向左移动</td>
+</tr>
+<tr>
+<td>⌃ + F</td>
+<td>光标向右移动</td>
+</tr>
+<tr>
+<td>⌃ + A , ⌘ + ←</td>
+<td>光标移动到行最左</td>
+</tr>
+<tr>
+<td>⌃ + E , ⌘ + →</td>
+<td>光标移动到行最右</td>
+</tr>
+<tr>
+<td>⌃ + M</td>
+<td>光标在括号里闭合跳转</td>
+</tr>
+<tr>
+<td>⌘ + ⌃ + ↑</td>
+<td>向上移动选中行</td>
+</tr>
+<tr>
+<td>⌘ + ⌃ + ↓</td>
+<td>向下移动选中行</td>
+</tr>
+</tbody>
+</table>
+<h3 id="选取"><a href="#选取" class="headerlink" title="选取"></a>选取</h3><table>
+<thead>
+<tr>
+<th>按键</th>
+<th>命令</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>⌘ + L</td>
+<td>选取行</td>
+</tr>
+<tr>
+<td>⌘ + D</td>
+<td>选取一个相同的文本</td>
+</tr>
+<tr>
+<td>⌃ + ⇧ + G</td>
+<td>选取所有相同的文本</td>
+</tr>
+<tr>
+<td>⌘ + A</td>
+<td>选取所有内容</td>
+</tr>
+<tr>
+<td>⌘ + ⇧ + ↑</td>
+<td>向上选取所有内容</td>
+</tr>
+<tr>
+<td>⌘ + ⇧ + ↓</td>
+<td>向下选取所有内容</td>
+</tr>
+<tr>
+<td>⌘ + ⇧ + K</td>
+<td>选取当前行HTML标签</td>
+</tr>
+<tr>
+<td>⌘ + ⇧ + A</td>
+<td>选取HTML标签闭合内容</td>
+</tr>
+<tr>
+<td>⌘ + ⇧ + J</td>
+<td>选取块闭合内容（可以折叠的内容为块）</td>
+</tr>
+<tr>
+<td>⌃ + ⇧ + M</td>
+<td>选取括号内容</td>
+</tr>
+<tr>
+<td>⌃ + ⇧ + A</td>
+<td>选取光标之前内容</td>
+</tr>
+<tr>
+<td>⌃ + ⇧ + E</td>
+<td>选取光标之后内容</td>
+</tr>
+</tbody>
+</table>
+<h3 id="窗口"><a href="#窗口" class="headerlink" title="窗口"></a>窗口</h3><table>
+<thead>
+<tr>
+<th>按键</th>
+<th>命令</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>⌘ + K + ⌘ + B</td>
+<td>显示左侧栏</td>
+</tr>
+<tr>
+<td>⌃ + `</td>
+<td>显示控制台</td>
+</tr>
+<tr>
+<td>⌘ + B</td>
+<td>执行编译</td>
+</tr>
+<tr>
+<td>⌃ + ⌘ + F</td>
+<td>全屏模式</td>
+</tr>
+<tr>
+<td>⌃ + ⇧ + ⌘ + F</td>
+<td>无干扰全屏模式</td>
+</tr>
+<tr>
+<td>⌃ + ⇧ + 2</td>
+<td>进行左右分屏</td>
+</tr>
+<tr>
+<td>⌃ + ⇧ + 5</td>
+<td>进行上下分屏</td>
+</tr>
+<tr>
+<td>⌃ + ⇧ + 1</td>
+<td>取消所有分屏</td>
+</tr>
+<tr>
+<td>⌃ + Num</td>
+<td>根据数字跳转至对应分屏</td>
+</tr>
+</tbody>
+</table>
+<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><h3 id="PackageControl-插件"><a href="#PackageControl-插件" class="headerlink" title="PackageControl 插件"></a>PackageControl 插件</h3><p>按下 <code>⌃ + ~</code> 打开控制台，复制粘贴以下代码并按下 <code>↩</code>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">import urllib.request,os; pf = &apos;Package Control.sublime-package&apos;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), &apos;wb&apos;).write(urllib.request.urlopen( &apos;http://sublime.wbond.net/&apos; + pf.replace(&apos; &apos;,&apos;%20&apos;)).read())</div></pre></td></tr></table></figure></p>
+<h3 id="Material-Theme-插件"><a href="#Material-Theme-插件" class="headerlink" title="Material Theme 插件"></a>Material Theme 插件</h3><p><code>Material Theme</code> 是一款编辑器主题插件</p>
+<p>可以使用 <code>Package Control</code> 插件安装 <code>Material-Theme</code> 插件</p>
+<p><code>Material-Theme</code> 插件可提供三种外观样式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">//default</div><div class="line">&quot;theme&quot;: &quot;Material-Theme.sublime-theme&quot;,</div><div class="line">&quot;color_scheme&quot;: &quot;Packages/Material Theme/schemes/Material-Theme.tmTheme&quot;,</div><div class="line"></div><div class="line">//Darker</div><div class="line">&quot;theme&quot;: &quot;Material-Theme-Darker.sublime-theme&quot;,</div><div class="line">&quot;color_scheme&quot;: &quot;Packages/Material Theme/schemes/Material-Theme-Darker.tmTheme&quot;,</div><div class="line"></div><div class="line">//Lighter</div><div class="line">&quot;theme&quot;: &quot;Material-Theme-Lighter.sublime-theme&quot;,</div><div class="line">&quot;color_scheme&quot;: &quot;Packages/Material Theme/schemes/Material-Theme-Lighter.tmTheme&quot;,</div></pre></td></tr></table></figure></p>
+<h3 id="AdvanceNewFile-插件"><a href="#AdvanceNewFile-插件" class="headerlink" title="AdvanceNewFile 插件"></a>AdvanceNewFile 插件</h3><p><code>AdvanceNewFile</code> 是一款快速操作文件的插件</p>
+<p>可以使用 <code>Package Control</code> 安装 <code>AdvanceNewFile</code> 插件</p>
+<p>安装完毕之后，可以按下 <code>⌘ + ⇧ + P</code> 调出命令面板，执行以下命令对文件进行操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">//新增</div><div class="line">ANF:New File</div><div class="line"></div><div class="line">//删除</div><div class="line">ANF:Delete File</div><div class="line"></div><div class="line">//重命名</div><div class="line">ANF:Rename File</div><div class="line"></div><div class="line">//复制当前文件</div><div class="line">ANF:Copy Current File</div><div class="line"></div><div class="line">//删除当前文件</div><div class="line">ANF:Delete Current File</div></pre></td></tr></table></figure>
+<p>亦可使用快捷键 <code>⌘ + ⌥ + N</code> 快速新建文件</p>
+<h3 id="PHP-Getters-and-Setters-插件"><a href="#PHP-Getters-and-Setters-插件" class="headerlink" title="PHP Getters and Setters 插件"></a>PHP Getters and Setters 插件</h3><p><code>PHP Getters and Setters</code> 是一款根据类文件的成员属性，快速生成 Getter 方法和 Setter 方法的插件</p>
+<p>可以使用 <code>Package Control</code> 安装 <code>PHP Getters and Setters</code> 插件</p>
+<p>执行以下命令快速生成 Getter 和 Setter 的代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// 生成 Getter 方法</div><div class="line">PHP:Generate Getters</div><div class="line">// 生成 Setter 方法</div><div class="line">PHP:Generate Setters</div><div class="line"></div><div class="line">// 同时生成 Getter 和 Setter</div><div class="line">PHP:Generate Getters and Setters</div></pre></td></tr></table></figure></p>
+<h3 id="PHP-Companion-插件"><a href="#PHP-Companion-插件" class="headerlink" title="PHP Companion 插件"></a>PHP Companion 插件</h3><p><code>PHP Companion</code> 插件提供以下功能</p>
+<ul>
+<li><p><code>find_use</code><br>生成所选类的use声明</p>
+</li>
+<li><p><code>expand_fqcn</code><br>生成所选类的引用路径</p>
+</li>
+<li><p><code>import_namespace</code><br>生成所选文件的命名空间</p>
+</li>
+<li><p><code>goto_definition_scope</code><br>寻找所选代码的定义源头</p>
+</li>
+<li><p><code>insert_php_constructor_property</code><br>生成当前类的构造方法</p>
+</li>
+</ul>
+<p>在 <code>Preferences</code> -&gt; <code>Key Bindings - User</code> 新增以下快捷键调用上述插件命令<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//PHP Companion</div><div class="line">&#123;"keys":["f9"],"command":"find_use"&#125;,</div><div class="line">&#123;"keys":["f10"],"command":"expand_fqcn"&#125;,</div><div class="line">&#123;"keys":["f11"],"command":"goto_definition_scope"&#125;,</div><div class="line">&#123;"keys":["f12"],"command":"insert_php_constructor_property"&#125;,</div></pre></td></tr></table></figure></p>
+<h3 id="Laravel-Artisan-插件"><a href="#Laravel-Artisan-插件" class="headerlink" title="Laravel Artisan 插件"></a>Laravel Artisan 插件</h3><p><code>Laravel Artisan</code> 是一款让开发可以不使用终端就能运行 <code>Artisan CLI</code> 的插件</p>
+<p>命令与在终端使用 <code>php artisan</code> 基本一致，可以按下 <code>⌘ + ⇧ + P</code> 打开命令面板，执行以下命令：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// 生成控制器</div><div class="line">Laravel Artisan5:Make:Controller</div><div class="line"></div><div class="line">// 生成请求</div><div class="line">Laravel Artisan5:Make:Request</div><div class="line"></div><div class="line">// 生成服务提供者</div><div class="line">Laravel Artisan5:Make:Provider</div><div class="line"></div><div class="line">// 生成数据迁移文件</div><div class="line">Laravel Artisan5:Make:Mrgiation</div></pre></td></tr></table></figure>
+<h3 id="DocBlockr-插件"><a href="#DocBlockr-插件" class="headerlink" title="DocBlockr 插件"></a>DocBlockr 插件</h3><p><code>DocBlockr</code> 是一款根据代码自动生成注释的插件</p>
+<h3 id="All-Autocomplete-插件"><a href="#All-Autocomplete-插件" class="headerlink" title="All Autocomplete 插件"></a>All Autocomplete 插件</h3><p><code>All Autocomplete</code> 是一款自动补全的插件，它会查找你打开的所有文件的代码，然后进行代码补全</p>
+<h3 id="SublimeLinter-php-插件"><a href="#SublimeLinter-php-插件" class="headerlink" title="SublimeLinter-php 插件"></a>SublimeLinter-php 插件</h3><p><code>SublimeLinter</code> 是一款检查PHP语言错误的插件</p>
+<p>使用 <code>Package Control</code> 安装 <code>SublimeLinter</code> 插件<br>使用 <code>Package Control</code> 安装 <code>SublimeLinter-php</code> 插件</p>
+<p>在 <code>Preferences</code> -&gt; <code>Package Settings</code> -&gt; <code>SublimeLinter</code> -&gt; <code>Settings - User</code> 新增以下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;show_errors_on_save&quot;: true,</div></pre></td></tr></table></figure>
+<p>上述操作会让编辑器在保存文件的时候，提示错误信息</p>
+<h2 id="代码片段"><a href="#代码片段" class="headerlink" title="代码片段"></a>代码片段</h2><p><code>Sublime Text</code> 可以创建自定义的代码片段</p>
+<p>点击菜单栏 <code>Tools</code> -&gt; <code>New Snippet</code> ，创建文件 <code>PHP Public Method.sublime-snippet</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;snippet&gt;</div><div class="line">	&lt;content&gt;&lt;![CDATA[</div><div class="line">public function $&#123;1:function_name&#125;($&#123;2:param&#125;)&#123;</div><div class="line">	$&#123;3:return result&#125;</div><div class="line">&#125;</div><div class="line">]]&gt;&lt;/content&gt;</div><div class="line">	&lt;!-- Optional: Set a tabTrigger to define how to trigger the snippet --&gt;</div><div class="line">	&lt;tabTrigger&gt;pubf&lt;/tabTrigger&gt;</div><div class="line">	&lt;!-- Optional: Set a scope to limit where the snippet will trigger --&gt;</div><div class="line">	&lt;scope&gt;source.php&lt;/scope&gt;</div><div class="line">&lt;/snippet&gt;</div></pre></td></tr></table></figure></p>
+<p>当在PHP文件写代码时，输入 <code>pubf</code> 并按下 <code>Tab</code> 键，会生成相对应的代码片段<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public function function_name(param)&#123;</div><div class="line">	return true</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="格式化代码"><a href="#格式化代码" class="headerlink" title="格式化代码"></a>格式化代码</h2><p>在终端执行以下命令安装 <code>php-cs-fix</code><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install php-cs-fixer</div></pre></td></tr></table></figure></p>
+<p>假如要对某个 PHP 文件进行格式化操作，运行以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd dir</div><div class="line">php-cs-fixer fix fileName.php --level=&quot;psr2&quot;</div></pre></td></tr></table></figure></p>
+<p>使用 <code>Sublime Text 3</code> 的 <code>Build System</code> 格式化代码<br>点击 <code>Tools</code> -&gt; <code>Build System</code> -&gt; <code>New Bulid System ...</code>，打开代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;shell_cmd&quot;:&quot;make&quot;</div></pre></td></tr></table></figure></p>
+<p>修改上述代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	&quot;shell_cmd&quot;: &quot;php-cs-fixer fix $file --level=psr2&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>保存之后，在 <code>Tools</code>-<code>Build System</code> 选择 <code>PSR-2</code>，按 <code>⌘ + B</code>对当前文件进行 <code>PSR-2</code> 格式化操作。</p>
+<p>觉得格式化提示信息麻烦，可以在<code>Preferences</code>-<code>Settings - User</code>添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;show_panel_on_build&quot;:false</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2016/03/13/使用-Sublime-Text-3-开发-PHP-的总结/" data-id="cj9t8tyl1004zi24bx7pmx9te" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-使用Laravel构建内容管理框架（一）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/09/使用Laravel构建内容管理框架（一）/" class="article-date">
+  <time datetime="2016-03-09T12:54:07.000Z" itemprop="datePublished">2016-03-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/09/使用Laravel构建内容管理框架（一）/">使用 Laravel 构建内容管理框架（一）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>为使用 Laravel 构建内容管理框架做好环境、代码和脚本的准备</p>
+<h1 id="安装Laravel"><a href="#安装Laravel" class="headerlink" title="安装Laravel"></a>安装Laravel</h1><hr>
+<p>在终端使用Composer安装Laravel<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo composer create-project laravel/laravel backend --prefer-dist 5.1.x</div></pre></td></tr></table></figure></p>
+<p>执行后，会在当前目录下新建一个文件夹，里面就是新建的Laravel项目</p>
+<h1 id="安装gulp、bower"><a href="#安装gulp、bower" class="headerlink" title="安装gulp、bower"></a>安装gulp、bower</h1><hr>
+<p>在终端使用npm安装gulp<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">sudo npm install -g gulp  #全局安装npm</div><div class="line">sudo npm install -g bower #全局安装bower</div><div class="line"></div><div class="line">cd backend</div><div class="line">sudo npm install gulp   #在项目本地安装gulp</div><div class="line">sudo npm install bower  #在项目本地安装bower</div><div class="line">sudp npm install        #安装项目Node依赖、Laravel Elixir</div></pre></td></tr></table></figure></p>
+<p>运行<code>gulp tdd</code>之后，会自动监控测试单元</p>
+<h1 id="使用bower集成前端依赖库"><a href="#使用bower集成前端依赖库" class="headerlink" title="使用bower集成前端依赖库"></a>使用bower集成前端依赖库</h1><hr>
+<p>在项目根目录新增文件<code>.bowerrc</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;directory&quot;: &quot;vendor/bower&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上述配置告诉bower在<code>vendor/bower</code>存放下载文件<br>执行命令<code>bower init</code>创建文件<code>bower.json</code></p>
+<p>依赖安装所需前端资源<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo bower install admin-lte</div><div class="line">sudo bower install fontawesome</div><div class="line">sudo bower install ionicons</div></pre></td></tr></table></figure></p>
+<p>打开文件<code>gulpfile.js</code>，编辑如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div></pre></td><td class="code"><pre><div class="line">var gulp = require(&apos;gulp&apos;);</div><div class="line">var elixir = require(&apos;laravel-elixir&apos;);</div><div class="line"></div><div class="line">gulp.task(&apos;copy&apos;, function () &#123;</div><div class="line">    // jQuery</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;resources/assets/js/&quot;));</div><div class="line"></div><div class="line">    // bootstarp</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/bootstrap/css/bootstrap.min.css&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;resources/assets/css/&quot;));</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/bootstrap/js/bootstrap.min.js&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;resources/assets/js/&quot;));</div><div class="line"></div><div class="line">    // AdminLTE</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/dist/css/AdminLTE.min.css&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;resources/assets/css/&quot;));</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/dist/css/skins/skin-blue.min.css&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;resources/assets/css/&quot;));</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/dist/js/app.min.js&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;resources/assets/js/&quot;));</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/dist/img/*&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;public/assets/img/&quot;));</div><div class="line"></div><div class="line">    // Fontawesome</div><div class="line">    gulp.src(&quot;vendor/bower/font-awesome/css/font-awesome.min.css&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;resources/assets/css/&quot;));</div><div class="line">    gulp.src(&quot;vendor/bower/font-awesome/fonts/*&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;public/assets/fonts/&quot;));</div><div class="line"></div><div class="line">    // Ionicons</div><div class="line">    gulp.src(&quot;vendor/bower/Ionicons/css/ionicons.min.css&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;resources/assets/css/&quot;));</div><div class="line">    gulp.src(&quot;vendor/bower/Ionicons/fonts/*&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;public/assets/fonts/&quot;));</div><div class="line"></div><div class="line">    // slimScroll</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;resources/assets/js/&quot;));</div><div class="line"></div><div class="line">    // iCheck</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/plugins/iCheck/icheck.min.js&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;resources/assets/js/&quot;));</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/plugins/iCheck/square/blue.css&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;resources/assets/css/&quot;));</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/plugins/iCheck/square/blue.png&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;public/assets/css/&quot;));</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/plugins/iCheck/square/blue@2x.png&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;public/assets/css/&quot;));</div><div class="line"></div><div class="line">    // select2</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/plugins/select2/select2.full.min.js&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;resources/assets/js/&quot;));</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/plugins/select2/select2.min.js&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;resources/assets/js/&quot;));</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/plugins/select2/select2.min.css&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;resources/assets/css/&quot;));</div><div class="line"></div><div class="line">    // pace</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/plugins/pace/pace.min.css&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;resources/assets/css/&quot;));</div><div class="line">    gulp.src(&quot;vendor/bower/AdminLTE/plugins/pace/pace.min.js&quot;)</div><div class="line">        .pipe(gulp.dest(&quot;resources/assets/js/&quot;));</div><div class="line">&#125;);</div><div class="line"></div><div class="line">elixir(function (mix) &#123;</div><div class="line">    // 合并javascript脚本</div><div class="line">    mix.scripts(</div><div class="line">        [</div><div class="line">            &apos;jQuery-2.1.4.min.js&apos;,</div><div class="line">            &apos;bootstrap.min.js&apos;,</div><div class="line">            &apos;app.min.js&apos;,</div><div class="line">            &apos;pace.min.js&apos;,</div><div class="line">            &apos;jquery.slimscroll.min.js&apos;,</div><div class="line">            &apos;icheck.min.js&apos;,</div><div class="line">            &apos;select2.full.min.js&apos;,</div><div class="line">            &apos;select2.min.js&apos;</div><div class="line">        ],</div><div class="line">        &apos;public/assets/js/app.js&apos;,</div><div class="line">        &apos;resources/assets/js/&apos;</div><div class="line">    );</div><div class="line"></div><div class="line">    // 合并css脚本</div><div class="line">    mix.styles(</div><div class="line">        [</div><div class="line">            &apos;bootstrap.min.css&apos;,</div><div class="line">            &apos;pace.min.css&apos;,</div><div class="line">            &apos;select2.min.css&apos;,</div><div class="line">            &apos;AdminLTE.min.css&apos;,</div><div class="line">            &apos;skin-blue.min.css&apos;,</div><div class="line">            &apos;font-awesome.min.css&apos;,</div><div class="line">            &apos;ionicons.min.css&apos;,</div><div class="line">            &apos;blue.css&apos;</div><div class="line">        ],</div><div class="line">        &apos;public/assets/css/app.css&apos;,</div><div class="line">        &apos;resources/assets/css/&apos;</div><div class="line">    );</div><div class="line"></div><div class="line">    // 运行单元测试</div><div class="line">    mix.phpUnit();</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>在终端执行命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">gulp copy</div><div class="line">gulp</div></pre></td></tr></table></figure></p>
+<p>上述操作将会在根目录文件夹<code>public/assets/</code>生成所需的前端资源，接下来就是在视图模板中使用。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2016/03/09/使用Laravel构建内容管理框架（一）/" data-id="cj9t8tyl20052i24brpwcymf5" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/page/9/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Catégories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Programming-Language/" style="font-size: 11.43px;">Programming Language</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a> <a href="/tags/vue-js/" style="font-size: 10px;">vue.js</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/11/09/Web-API-的设计与开发/">Web API 的设计与开发</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/05/日常开发常用命令/">日常开发常用命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/01/刻意练习/">刻意练习</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/24/高性能的-PHP-API-接口开发/">高性能的 PHP API 接口开发</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/04/Vue-js-2-X-实践/">Vue.js 2.X 实践</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Luis Edware<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

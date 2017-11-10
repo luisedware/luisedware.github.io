@@ -5,76 +5,18 @@
   
   <title>高性能的 PHP API 接口开发 | 七月十五九月初七</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="API 的工程化建设及 API 性能
-
-如何对 API 项目中的公共技术抽离，建立有层级的 PHP API 项目
-如何做好异常处理及监控，保障 API 高效稳定地提供服务
-如何进行 API 性能测试
-如何定位性能瓶颈
-如何解决接口 QPS TPS 问题
-
-
-PHP 常规实现的基本 API
-
-用户登录注册接口
-文章类别接口
-一些接口实现方法
-邮件接口
-
-
-第三方能力的整合系列接口
-
-短信发送
-Pu">
+  <meta name="description" content="学习与目标 API 的工程化建设及 API 性能  如何对 API 项目中的公共技术抽离，建立有层级的 PHP API 项目 如何做好异常处理及监控，保障 API 高效稳定地提供服务 如何进行 API 性能测试 如何定位性能瓶颈 如何解决接口 QPS TPS 问题   PHP 常规实现的基本 API  用户登录注册接口 文章类别接口 一些接口实现方法 邮件接口   第三方能力的整合系列接口  短信">
+<meta name="keywords" content="PHP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="高性能的 PHP API 接口开发">
 <meta property="og:url" content="http://luisedware.github.io/2017/10/24/高性能的-PHP-API-接口开发/index.html">
 <meta property="og:site_name" content="七月十五九月初七">
-<meta property="og:description" content="API 的工程化建设及 API 性能
-
-如何对 API 项目中的公共技术抽离，建立有层级的 PHP API 项目
-如何做好异常处理及监控，保障 API 高效稳定地提供服务
-如何进行 API 性能测试
-如何定位性能瓶颈
-如何解决接口 QPS TPS 问题
-
-
-PHP 常规实现的基本 API
-
-用户登录注册接口
-文章类别接口
-一些接口实现方法
-邮件接口
-
-
-第三方能力的整合系列接口
-
-短信发送
-Pu">
-<meta property="og:updated_time" content="2017-10-24T03:07:06.000Z">
+<meta property="og:description" content="学习与目标 API 的工程化建设及 API 性能  如何对 API 项目中的公共技术抽离，建立有层级的 PHP API 项目 如何做好异常处理及监控，保障 API 高效稳定地提供服务 如何进行 API 性能测试 如何定位性能瓶颈 如何解决接口 QPS TPS 问题   PHP 常规实现的基本 API  用户登录注册接口 文章类别接口 一些接口实现方法 邮件接口   第三方能力的整合系列接口  短信">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2017-10-27T13:09:51.510Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="高性能的 PHP API 接口开发">
-<meta name="twitter:description" content="API 的工程化建设及 API 性能
-
-如何对 API 项目中的公共技术抽离，建立有层级的 PHP API 项目
-如何做好异常处理及监控，保障 API 高效稳定地提供服务
-如何进行 API 性能测试
-如何定位性能瓶颈
-如何解决接口 QPS TPS 问题
-
-
-PHP 常规实现的基本 API
-
-用户登录注册接口
-文章类别接口
-一些接口实现方法
-邮件接口
-
-
-第三方能力的整合系列接口
-
-短信发送
-Pu">
+<meta name="twitter:description" content="学习与目标 API 的工程化建设及 API 性能  如何对 API 项目中的公共技术抽离，建立有层级的 PHP API 项目 如何做好异常处理及监控，保障 API 高效稳定地提供服务 如何进行 API 性能测试 如何定位性能瓶颈 如何解决接口 QPS TPS 问题   PHP 常规实现的基本 API  用户登录注册接口 文章类别接口 一些接口实现方法 邮件接口   第三方能力的整合系列接口  短信">
   
     <link rel="alternate" href="/atom.xml" title="七月十五九月初七" type="application/atom+xml">
   
@@ -116,12 +58,12 @@ Pu">
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
       </div>
     </div>
   </div>
@@ -153,7 +95,7 @@ Pu">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
+        <h2 id="学习与目标"><a href="#学习与目标" class="headerlink" title="学习与目标"></a>学习与目标</h2><ul>
 <li><p>API 的工程化建设及 API 性能</p>
 <ul>
 <li>如何对 API 项目中的公共技术抽离，建立有层级的 PHP API 项目</li>
@@ -200,11 +142,136 @@ Pu">
 </ul>
 </li>
 </ul>
+<h2 id="API-基础知识讲解"><a href="#API-基础知识讲解" class="headerlink" title="API 基础知识讲解"></a>API 基础知识讲解</h2><ul>
+<li>API 是无状态性的</li>
+<li>API 的有状态性的实现方法<ul>
+<li>Session Cookie 实现</li>
+<li>Json Web Token 实现</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>REST 与 SOAP、RPC 的区别<ul>
+<li>RPC 所谓的远程过程调用（面向方法）？</li>
+<li>SOAP 所谓的面向服务的架构（面向消息）？</li>
+<li>REST 所谓的面向资源?</li>
+</ul>
+</li>
+</ul>
+<h2 id="周边知识与工具"><a href="#周边知识与工具" class="headerlink" title="周边知识与工具"></a>周边知识与工具</h2><ul>
+<li>API 常用传输格式：JSON</li>
+<li>JSON 的可视化工具</li>
+<li>API 调试工具：Postman</li>
+</ul>
+<h2 id="Yaf-框架"><a href="#Yaf-框架" class="headerlink" title="Yaf 框架"></a>Yaf 框架</h2><ul>
+<li>Yaf 的安装<ul>
+<li>wget “安装地址”</li>
+<li>tar zxvf 安装包.tgz</li>
+<li>phpize</li>
+<li>./configure –with-php-config=php-config</li>
+<li>make</li>
+<li>make test</li>
+<li>make install</li>
+</ul>
+</li>
+</ul>
+<p>Yaf Codes Generator<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php yaf_cg Sample</div></pre></td></tr></table></figure></p>
+<h2 id="一些思考"><a href="#一些思考" class="headerlink" title="一些思考"></a>一些思考</h2><ul>
+<li>如何防止机器恶意注册与机器模拟用户登录<ul>
+<li>提交特殊参数</li>
+<li>实现网站验证码</li>
+</ul>
+</li>
+<li>如何实现密码找回功能</li>
+<li>如何实现数据分页效果</li>
+<li>如何收集发送出去的邮件的送达效果</li>
+<li>短信发送成功对账实现</li>
+<li>批量短信通知的场景如何高效发送</li>
+<li>在不能完全识别 IP 地址的时候如何做降级方案</li>
+</ul>
+<h2 id="文章类接口的实现"><a href="#文章类接口的实现" class="headerlink" title="文章类接口的实现"></a>文章类接口的实现</h2><ul>
+<li>文章信息的 CRUD</li>
+<li>让一个 API 接口做更多的事情</li>
+<li>文章类接口通用功能：分页功能的实现</li>
+</ul>
+<h2 id="Push-服务"><a href="#Push-服务" class="headerlink" title="Push 服务"></a>Push 服务</h2><ul>
+<li>小米 Push</li>
+<li>华为 Push</li>
+<li>个推</li>
+<li>极光推送</li>
+</ul>
+<h2 id="IP-地址转换接口"><a href="#IP-地址转换接口" class="headerlink" title="IP 地址转换接口"></a>IP 地址转换接口</h2><ul>
+<li>黑白名单</li>
+<li>访问来源统计</li>
+<li>小流量线上验证</li>
+</ul>
+<h2 id="API-接口的提炼"><a href="#API-接口的提炼" class="headerlink" title="API 接口的提炼"></a>API 接口的提炼</h2><ul>
+<li>API 自测脚本<ul>
+<li>作用<ul>
+<li>项目部署上线前，验证调成过的项目代码</li>
+<li>有利于新的团队成员快速去了解代码功能</li>
+</ul>
+</li>
+<li>安装<ul>
+<li>composer require curl/curl</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>API 公共 Lib 的抽离<ul>
+<li>SDK 抽离</li>
+<li>Composer 管理</li>
+</ul>
+</li>
+<li>建立数据操作层 DAO</li>
+<li>接口异常时的处理规范<ul>
+<li>统一的 API 接口返回 - 错误信息字典</li>
+<li>统一的 API 异常处理 - 容错与降级</li>
+</ul>
+</li>
+<li>API 功能的整合</li>
+<li>API 文档<ul>
+<li>PHPDocumentor</li>
+</ul>
+</li>
+</ul>
+<h2 id="API-接口的性能"><a href="#API-接口的性能" class="headerlink" title="API 接口的性能"></a>API 接口的性能</h2><ul>
+<li>接口性能信息收集<ul>
+<li>关注接口的整体时间开销<ul>
+<li>grep ‘log_format’ ./ -r</li>
+</ul>
+</li>
+<li>Xhprof 收集 API 接口开销</li>
+</ul>
+</li>
+<li>API 时间开销定位与分析</li>
+<li>API 上下游性能优化<ul>
+<li>MySQL 性能分析</li>
+<li>后端服务调优<ul>
+<li>短信</li>
+<li>邮件</li>
+<li>微信推送</li>
+</ul>
+</li>
+<li>API 返回调优</li>
+</ul>
+</li>
+<li>API 服务稳定性 SLA<ul>
+<li>服务监控<ul>
+<li>supervisor</li>
+<li>find / -name ‘supervisord.conf’</li>
+</ul>
+</li>
+<li>API 负载均衡</li>
+<li>服务报警</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/10/24/高性能的-PHP-API-接口开发/" data-id="cj9515pl3007r034bny69jqyo" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/10/24/高性能的-PHP-API-接口开发/" data-id="cj9t8tymw0081i24b9zdkqnyi" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -215,9 +282,18 @@ Pu">
     
 <nav id="article-nav">
   
+    <a href="/2017/11/01/刻意练习/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          刻意练习
+        
+      </div>
+    </a>
+  
   
     <a href="/2017/09/04/Vue-js-2-X-实践/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ouder</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title">Vue.js 2.X 实践</div>
     </a>
   
@@ -232,7 +308,7 @@ Pu">
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categorieën</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -242,7 +318,7 @@ Pu">
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Labels</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
     </div>
@@ -252,7 +328,7 @@ Pu">
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Programming-Language/" style="font-size: 11.43px;">Programming Language</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a> <a href="/tags/vue-js/" style="font-size: 10px;">vue.js</a>
     </div>
@@ -261,9 +337,9 @@ Pu">
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archieven</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
   </div>
 
@@ -271,9 +347,21 @@ Pu">
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/11/09/Web-API-的设计与开发/">Web API 的设计与开发</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/05/日常开发常用命令/">日常开发常用命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/01/刻意练习/">刻意练习</a>
+          </li>
         
           <li>
             <a href="/2017/10/24/高性能的-PHP-API-接口开发/">高性能的 PHP API 接口开发</a>
@@ -281,18 +369,6 @@ Pu">
         
           <li>
             <a href="/2017/09/04/Vue-js-2-X-实践/">Vue.js 2.X 实践</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/19/编程语言学习框架/">编程语言学习框架</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/19/学习-PHP/">PHP 学习框架</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/18/学习数据建模/">学习数据建模</a>
           </li>
         
       </ul>
@@ -308,7 +384,7 @@ Pu">
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Luis Edware<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

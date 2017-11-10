@@ -5,19 +5,18 @@
   
   <title>PHP Codebook(二) | 七月十五九月初七</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="2.1 检查变量是否包含一个合法数字问题希望确保变量包含一个数（即使变量的类型是字符串），或者希望检查变量不仅是一个数，而且要特别指定其类型是一个数字类型。
-实现12345678910111213141516171819202122232425&amp;lt;?php    foreach ([5,&apos;5&apos;,&apos;05&apos;,12.3,&apos;16.7&apos;,&apos;five&apos;,oxDECAFBAD,&apos;10e2000&apos;] as $">
+  <meta name="description" content="2.1 检查变量是否包含一个合法数字问题希望确保变量包含一个数（即使变量的类型是字符串），或者希望检查变量不仅是一个数，而且要特别指定其类型是一个数字类型。 实现12345678910111213141516171819202122232425&amp;lt;?php    foreach ([5,&apos;5&apos;,&apos;05&apos;,12.3,&apos;16.7&apos;,&apos;five&apos;,oxDECAFBAD,&apos;10e2000&apos;] as $">
+<meta name="keywords" content="PHP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PHP Codebook(二)">
 <meta property="og:url" content="http://luisedware.github.io/2017/01/22/PHP-Codebook-二/index.html">
 <meta property="og:site_name" content="七月十五九月初七">
-<meta property="og:description" content="2.1 检查变量是否包含一个合法数字问题希望确保变量包含一个数（即使变量的类型是字符串），或者希望检查变量不仅是一个数，而且要特别指定其类型是一个数字类型。
-实现12345678910111213141516171819202122232425&amp;lt;?php    foreach ([5,&apos;5&apos;,&apos;05&apos;,12.3,&apos;16.7&apos;,&apos;five&apos;,oxDECAFBAD,&apos;10e2000&apos;] as $">
+<meta property="og:description" content="2.1 检查变量是否包含一个合法数字问题希望确保变量包含一个数（即使变量的类型是字符串），或者希望检查变量不仅是一个数，而且要特别指定其类型是一个数字类型。 实现12345678910111213141516171819202122232425&amp;lt;?php    foreach ([5,&apos;5&apos;,&apos;05&apos;,12.3,&apos;16.7&apos;,&apos;five&apos;,oxDECAFBAD,&apos;10e2000&apos;] as $">
+<meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2017-01-22T05:48:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP Codebook(二)">
-<meta name="twitter:description" content="2.1 检查变量是否包含一个合法数字问题希望确保变量包含一个数（即使变量的类型是字符串），或者希望检查变量不仅是一个数，而且要特别指定其类型是一个数字类型。
-实现12345678910111213141516171819202122232425&amp;lt;?php    foreach ([5,&apos;5&apos;,&apos;05&apos;,12.3,&apos;16.7&apos;,&apos;five&apos;,oxDECAFBAD,&apos;10e2000&apos;] as $">
+<meta name="twitter:description" content="2.1 检查变量是否包含一个合法数字问题希望确保变量包含一个数（即使变量的类型是字符串），或者希望检查变量不仅是一个数，而且要特别指定其类型是一个数字类型。 实现12345678910111213141516171819202122232425&amp;lt;?php    foreach ([5,&apos;5&apos;,&apos;05&apos;,12.3,&apos;16.7&apos;,&apos;five&apos;,oxDECAFBAD,&apos;10e2000&apos;] as $">
   
     <link rel="alternate" href="/atom.xml" title="七月十五九月初七" type="application/atom+xml">
   
@@ -59,12 +58,12 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
       </div>
     </div>
   </div>
@@ -97,7 +96,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="2-1-检查变量是否包含一个合法数字"><a href="#2-1-检查变量是否包含一个合法数字" class="headerlink" title="2.1 检查变量是否包含一个合法数字"></a>2.1 检查变量是否包含一个合法数字</h2><h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>希望确保变量包含一个数（即使变量的类型是字符串），或者希望检查变量不仅是一个数，而且要特别指定其类型是一个数字类型。</p>
-<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">    <span class="keyword">foreach</span> ([<span class="number">5</span>,<span class="string">'5'</span>,<span class="string">'05'</span>,<span class="number">12.3</span>,<span class="string">'16.7'</span>,<span class="string">'five'</span>,oxDECAFBAD,<span class="string">'10e2000'</span>] <span class="keyword">as</span> $maybeNumber) &#123;</div><div class="line">        $isItNumeric = is_numeric($maybeNumber);</div><div class="line">        $actualType = gettype($maybeNumber);</div><div class="line">        $string = <span class="string">"Is the $actualType $maybeNumber numeric?"</span>;</div><div class="line"></div><div class="line">        <span class="keyword">if</span>(is_numeric($maybeNumber))&#123;</div><div class="line">            $answer = <span class="string">"yes"</span>;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            $answer = <span class="string">"no"</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">echo</span> pack(<span class="string">"A40A3"</span>,$string,$answer).<span class="string">"\n"</span>;</div><div class="line">    &#125;</div><div class="line"><span class="meta">?&gt;</span></div><div class="line"><span class="comment">/*</span></div><div class="line">Is the integer 5 numeric?               yes</div><div class="line">Is the string 5 numeric?                yes</div><div class="line">Is the string 05 numeric?               yes</div><div class="line">Is the double 12.3 numeric?             yes</div><div class="line">Is the string 16.7 numeric?             yes</div><div class="line">Is the string five numeric?             no</div><div class="line">Is the string oxDECAFBAD numeric?       no</div><div class="line">Is the string 10e2000 numeric?          yes</div><div class="line">*/</div></pre></td></tr></table></figure>
+<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">    <span class="keyword">foreach</span> ([<span class="number">5</span>,<span class="string">'5'</span>,<span class="string">'05'</span>,<span class="number">12.3</span>,<span class="string">'16.7'</span>,<span class="string">'five'</span>,oxDECAFBAD,<span class="string">'10e2000'</span>] <span class="keyword">as</span> $maybeNumber) &#123;</div><div class="line">        $isItNumeric = is_numeric($maybeNumber);</div><div class="line">        $actualType = gettype($maybeNumber);</div><div class="line">        $string = <span class="string">"Is the $actualType $maybeNumber numeric?"</span>;</div><div class="line"></div><div class="line">        <span class="keyword">if</span>(is_numeric($maybeNumber))&#123;</div><div class="line">            $answer = <span class="string">"yes"</span>;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            $answer = <span class="string">"no"</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">echo</span> pack(<span class="string">"A40A3"</span>,$string,$answer).<span class="string">"\n"</span>;</div><div class="line">    &#125;</div><div class="line"><span class="meta">?&gt;</span></div><div class="line"><span class="comment">/*</span></div><div class="line"><span class="comment">Is the integer 5 numeric?               yes</span></div><div class="line"><span class="comment">Is the string 5 numeric?                yes</span></div><div class="line"><span class="comment">Is the string 05 numeric?               yes</span></div><div class="line"><span class="comment">Is the double 12.3 numeric?             yes</span></div><div class="line"><span class="comment">Is the string 16.7 numeric?             yes</span></div><div class="line"><span class="comment">Is the string five numeric?             no</span></div><div class="line"><span class="comment">Is the string oxDECAFBAD numeric?       no</span></div><div class="line"><span class="comment">Is the string 10e2000 numeric?          yes</span></div><div class="line"><span class="comment">*/</span></div></pre></td></tr></table></figure>
 <h2 id="2-2-比较浮点数"><a href="#2-2-比较浮点数" class="headerlink" title="2.2 比较浮点数"></a>2.2 比较浮点数</h2><h4 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h4><p>希望检查两个浮点数是否相等</p>
 <h4 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$delta = <span class="number">0.00001</span>;</div><div class="line">$a = <span class="number">1.00000001</span>;</div><div class="line">$b = <span class="number">1.00000000</span>;</div><div class="line"></div><div class="line"><span class="keyword">if</span>(abs($a - $b) &lt; $delta)&#123;</div><div class="line">    <span class="keyword">print</span> <span class="string">"$a and $b are equal enough"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="2-3-浮点数舍入"><a href="#2-3-浮点数舍入" class="headerlink" title="2.3 浮点数舍入"></a>2.3 浮点数舍入</h2><h4 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h4><p>希望舍入一个浮点数，可能取整为一个整数，或者舍入为指定的小数位数</p>
@@ -107,7 +106,7 @@
 <h2 id="2-5-在指定范围内生成随机数"><a href="#2-5-在指定范围内生成随机数" class="headerlink" title="2.5 在指定范围内生成随机数"></a>2.5 在指定范围内生成随机数</h2><h4 id="问题-4"><a href="#问题-4" class="headerlink" title="问题"></a>问题</h4><p>希望在指定的数字范围内生成一个随机数</p>
 <h4 id="实现-4"><a href="#实现-4" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$lower = <span class="number">0</span>;</div><div class="line">$upper = <span class="number">1024</span>;</div><div class="line">$randNumber = mt_rand($lower, $upper);</div><div class="line"></div><div class="line"><span class="keyword">echo</span> $randNumber;</div></pre></td></tr></table></figure>
 <h2 id="2-6-生成可预测的随机数"><a href="#2-6-生成可预测的随机数" class="headerlink" title="2.6 生成可预测的随机数"></a>2.6 生成可预测的随机数</h2><h4 id="问题-5"><a href="#问题-5" class="headerlink" title="问题"></a>问题</h4><p>希望生成可预测的随机数，从而可以保证可重复的行为</p>
-<h4 id="实现-5"><a href="#实现-5" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">pick_color</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    $colors = [<span class="string">'red'</span>, <span class="string">'orange'</span>, <span class="string">'yellow'</span>, <span class="string">'blue'</span>, <span class="string">'green'</span>, <span class="string">'indigo'</span>, <span class="string">'violet'</span>];</div><div class="line">    $i = mt_rand(<span class="number">0</span>, count($colors) - <span class="number">1</span>);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> $colors[$i];</div><div class="line">&#125;</div><div class="line"></div><div class="line">mt_srand(<span class="number">34534</span>);</div><div class="line">$first = pick_color();</div><div class="line">$second = pick_color();</div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">"$first is red and $second is yellow"</span>;</div></pre></td></tr></table></figure>
+<h4 id="实现-5"><a href="#实现-5" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">pick_color</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    $colors = [<span class="string">'red'</span>, <span class="string">'orange'</span>, <span class="string">'yellow'</span>, <span class="string">'blue'</span>, <span class="string">'green'</span>, <span class="string">'indigo'</span>, <span class="string">'violet'</span>];</div><div class="line">    $i = mt_rand(<span class="number">0</span>, count($colors) - <span class="number">1</span>);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> $colors[$i];</div><div class="line">&#125;</div><div class="line"></div><div class="line">mt_srand(<span class="number">34534</span>);</div><div class="line">$first = pick_color();</div><div class="line">$second = pick_color();</div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">"$first is red and $second is yellow"</span>;</div></pre></td></tr></table></figure>
 <h2 id="2-10-格式化数字"><a href="#2-10-格式化数字" class="headerlink" title="2.10 格式化数字"></a>2.10 格式化数字</h2><h4 id="问题-6"><a href="#问题-6" class="headerlink" title="问题"></a>问题</h4><p>希望输出一个数，要包括千分位分隔符和小数点。</p>
 <h4 id="实现-6"><a href="#实现-6" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$number = <span class="number">1234.56</span>;</div><div class="line"><span class="comment">// 千位分隔符</span></div><div class="line"><span class="keyword">echo</span> number_format($number) . <span class="string">"\n"</span>;</div><div class="line"></div><div class="line"><span class="comment">// 第二个参数指定使用了小数位数</span></div><div class="line"><span class="keyword">echo</span> number_format($number, <span class="number">2</span>) . <span class="string">"\n"</span>;</div><div class="line"></div><div class="line"><span class="comment">// 第三个参数指定小数点字符，第四个参数指定千位分隔符</span></div><div class="line"><span class="keyword">echo</span> number_format($number, <span class="number">2</span>, <span class="string">"@"</span>, <span class="string">'#'</span>) . <span class="string">"\n"</span>;</div></pre></td></tr></table></figure>
 <h2 id="2-16-转换进制"><a href="#2-16-转换进制" class="headerlink" title="2.16 转换进制"></a>2.16 转换进制</h2><h4 id="问题-7"><a href="#问题-7" class="headerlink" title="问题"></a>问题</h4><p>需要将一个数从一个进制转换为另一个进制</p>
@@ -116,7 +115,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-二/" data-id="cj9515phk001y034bqixl14cl" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-二/" data-id="cj9t8tyi0001pi24bkzqja59c" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -128,7 +127,7 @@
 <nav id="article-nav">
   
     <a href="/2017/01/22/PHP-Codebook-四/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Nieuwer</strong>
+      <strong class="article-nav-caption">Récent</strong>
       <div class="article-nav-title">
         
           PHP Codebook(四)
@@ -138,7 +137,7 @@
   
   
     <a href="/2017/01/22/PHP-Codebook-一/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ouder</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title">PHP Codebook(一)</div>
     </a>
   
@@ -153,7 +152,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categorieën</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -163,7 +162,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Labels</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
     </div>
@@ -173,7 +172,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Programming-Language/" style="font-size: 11.43px;">Programming Language</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a> <a href="/tags/vue-js/" style="font-size: 10px;">vue.js</a>
     </div>
@@ -182,9 +181,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archieven</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
   </div>
 
@@ -192,9 +191,21 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/11/09/Web-API-的设计与开发/">Web API 的设计与开发</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/05/日常开发常用命令/">日常开发常用命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/01/刻意练习/">刻意练习</a>
+          </li>
         
           <li>
             <a href="/2017/10/24/高性能的-PHP-API-接口开发/">高性能的 PHP API 接口开发</a>
@@ -202,18 +213,6 @@
         
           <li>
             <a href="/2017/09/04/Vue-js-2-X-实践/">Vue.js 2.X 实践</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/19/编程语言学习框架/">编程语言学习框架</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/19/学习-PHP/">PHP 学习框架</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/18/学习数据建模/">学习数据建模</a>
           </li>
         
       </ul>
@@ -229,7 +228,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Luis Edware<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

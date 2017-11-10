@@ -5,25 +5,18 @@
   
   <title>使用 Laravel 5.3 + Vue.js 2.1 开发知乎 | 七月十五九月初七</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="项目配置创建 Laravel 项目，并使用 PHPStorm 打开项目，将 app 目录设置为 Sources Root1laravel new zhihu
-打开用户表迁移文件，新增字段代码如下：12
-发送邮件安装 Laravel-SendCloud1composer require naux/sendcloud
-添加服务提供者1Naux\Mail\SendCloudServiceProvider">
+  <meta name="description" content="项目配置创建 Laravel 项目，并使用 PHPStorm 打开项目，将 app 目录设置为 Sources Root1laravel new zhihu 打开用户表迁移文件，新增字段代码如下：12 发送邮件安装 Laravel-SendCloud1composer require naux/sendcloud 添加服务提供者1Naux\Mail\SendCloudServiceProvider">
+<meta name="keywords" content="Laravel">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用 Laravel 5.3 + Vue.js 2.1 开发知乎">
 <meta property="og:url" content="http://luisedware.github.io/2017/04/05/使用-Laravel-5-3-Vue-js-2-1-开发知乎/index.html">
 <meta property="og:site_name" content="七月十五九月初七">
-<meta property="og:description" content="项目配置创建 Laravel 项目，并使用 PHPStorm 打开项目，将 app 目录设置为 Sources Root1laravel new zhihu
-打开用户表迁移文件，新增字段代码如下：12
-发送邮件安装 Laravel-SendCloud1composer require naux/sendcloud
-添加服务提供者1Naux\Mail\SendCloudServiceProvider">
+<meta property="og:description" content="项目配置创建 Laravel 项目，并使用 PHPStorm 打开项目，将 app 目录设置为 Sources Root1laravel new zhihu 打开用户表迁移文件，新增字段代码如下：12 发送邮件安装 Laravel-SendCloud1composer require naux/sendcloud 添加服务提供者1Naux\Mail\SendCloudServiceProvider">
+<meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2017-04-18T04:35:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用 Laravel 5.3 + Vue.js 2.1 开发知乎">
-<meta name="twitter:description" content="项目配置创建 Laravel 项目，并使用 PHPStorm 打开项目，将 app 目录设置为 Sources Root1laravel new zhihu
-打开用户表迁移文件，新增字段代码如下：12
-发送邮件安装 Laravel-SendCloud1composer require naux/sendcloud
-添加服务提供者1Naux\Mail\SendCloudServiceProvider">
+<meta name="twitter:description" content="项目配置创建 Laravel 项目，并使用 PHPStorm 打开项目，将 app 目录设置为 Sources Root1laravel new zhihu 打开用户表迁移文件，新增字段代码如下：12 发送邮件安装 Laravel-SendCloud1composer require naux/sendcloud 添加服务提供者1Naux\Mail\SendCloudServiceProvider">
   
     <link rel="alternate" href="/atom.xml" title="七月十五九月初七" type="application/atom+xml">
   
@@ -65,12 +58,12 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
       </div>
     </div>
   </div>
@@ -108,8 +101,8 @@
 <p>添加服务提供者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Naux\Mail\SendCloudServiceProvider::class,</div></pre></td></tr></table></figure></p>
 <p>修改 .env 驱动和配置密钥<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">MAIL_DRIVER=sendcloud</div><div class="line">SEND_CLOUD_USER=   # 创建的 api_user</div><div class="line">SEND_CLOUD_KEY=    # 分配的 api_key</div></pre></td></tr></table></figure></p>
 <p>快速生成用户验证界面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan make:auth</div></pre></td></tr></table></figure></p>
-<p>快速生成控制器，并修改代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">php artisan make:controller EmailController</div><div class="line"></div><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">User</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Http</span>\<span class="title">Request</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Support</span>\<span class="title">Facades</span>\<span class="title">Auth</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">EmailController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">verify</span><span class="params">($token)</span></span></div><div class="line">    &#123;</div><div class="line">        $user = User::where(<span class="string">'confirmationToken'</span>, $token)-&gt;first();</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (is_null($user)) &#123;</div><div class="line">            <span class="keyword">return</span> redirect(<span class="string">'/'</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        $user-&gt;isActive = <span class="number">1</span>;</div><div class="line">        $user-&gt;confirmationToken = str_random(<span class="number">40</span>);</div><div class="line">        $user-&gt;save();</div><div class="line">        Auth::login($user);</div><div class="line"></div><div class="line">        <span class="keyword">return</span> redirect(<span class="string">'/home'</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>修改注册控制器代码<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Create a new user instance after a valid registration.</div><div class="line"> *</div><div class="line"> * <span class="doctag">@param</span>  array  $data</div><div class="line"> * <span class="doctag">@return</span> User</div><div class="line"> */</div><div class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">create</span><span class="params">(array $data)</span></span></div><div class="line">&#123;</div><div class="line">    $user = User::create([</div><div class="line">        <span class="string">'name'</span> =&gt; $data[<span class="string">'name'</span>],</div><div class="line">        <span class="string">'email'</span> =&gt; $data[<span class="string">'email'</span>],</div><div class="line">        <span class="string">'avatar'</span> =&gt; <span class="string">'/images/avatars/default.png'</span>,</div><div class="line">        <span class="string">'confirmationToken'</span> =&gt; str_random(<span class="number">40</span>),</div><div class="line">        <span class="string">'password'</span> =&gt; bcrypt($data[<span class="string">'password'</span>]),</div><div class="line">    ]);</div><div class="line">    <span class="keyword">$this</span>-&gt;sendVerifyEmailTo($user);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> $user;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 验证用户邮箱</div><div class="line"> *</div><div class="line"> * <span class="doctag">@param</span> $user</div><div class="line"> *</div><div class="line"> * <span class="doctag">@return</span> void</div><div class="line"> */</div><div class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">sendVerifyEmailTo</span><span class="params">($user)</span></span></div><div class="line">&#123;</div><div class="line">    $data = [</div><div class="line">        <span class="string">'url'</span> =&gt; route(<span class="string">'email.verify'</span>, [<span class="string">'token'</span> =&gt; $user-&gt;confirmationToken]),</div><div class="line">        <span class="string">'name'</span> =&gt; $user-&gt;name,</div><div class="line">    ];</div><div class="line">    $template = <span class="keyword">new</span> SendCloudTemplate(<span class="string">'zhihu_app_register'</span>, $data);</div><div class="line"></div><div class="line">    Mail::raw($template, <span class="function"><span class="keyword">function</span><span class="params">($message)</span> <span class="title">use</span><span class="params">($user)</span> </span>&#123;</div><div class="line">        $message-&gt;from(<span class="string">'luis@mail.cowcat.cc'</span>, <span class="string">'Laravel'</span>);</div><div class="line">        $message-&gt;to($user-&gt;email);</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>快速生成控制器，并修改代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">php artisan make:controller EmailController</div><div class="line"></div><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">User</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Http</span>\<span class="title">Request</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Support</span>\<span class="title">Facades</span>\<span class="title">Auth</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">EmailController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></div><div class="line"><span class="class"></span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">verify</span><span class="params">($token)</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        $user = User::where(<span class="string">'confirmationToken'</span>, $token)-&gt;first();</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (is_null($user)) &#123;</div><div class="line">            <span class="keyword">return</span> redirect(<span class="string">'/'</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        $user-&gt;isActive = <span class="number">1</span>;</div><div class="line">        $user-&gt;confirmationToken = str_random(<span class="number">40</span>);</div><div class="line">        $user-&gt;save();</div><div class="line">        Auth::login($user);</div><div class="line"></div><div class="line">        <span class="keyword">return</span> redirect(<span class="string">'/home'</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>修改注册控制器代码<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * Create a new user instance after a valid registration.</span></div><div class="line"><span class="comment"> *</span></div><div class="line"><span class="comment"> * <span class="doctag">@param</span>  array  $data</span></div><div class="line"><span class="comment"> * <span class="doctag">@return</span> User</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">create</span><span class="params">(array $data)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    $user = User::create([</div><div class="line">        <span class="string">'name'</span> =&gt; $data[<span class="string">'name'</span>],</div><div class="line">        <span class="string">'email'</span> =&gt; $data[<span class="string">'email'</span>],</div><div class="line">        <span class="string">'avatar'</span> =&gt; <span class="string">'/images/avatars/default.png'</span>,</div><div class="line">        <span class="string">'confirmationToken'</span> =&gt; str_random(<span class="number">40</span>),</div><div class="line">        <span class="string">'password'</span> =&gt; bcrypt($data[<span class="string">'password'</span>]),</div><div class="line">    ]);</div><div class="line">    <span class="keyword">$this</span>-&gt;sendVerifyEmailTo($user);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> $user;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 验证用户邮箱</span></div><div class="line"><span class="comment"> *</span></div><div class="line"><span class="comment"> * <span class="doctag">@param</span> $user</span></div><div class="line"><span class="comment"> *</span></div><div class="line"><span class="comment"> * <span class="doctag">@return</span> void</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">sendVerifyEmailTo</span><span class="params">($user)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    $data = [</div><div class="line">        <span class="string">'url'</span> =&gt; route(<span class="string">'email.verify'</span>, [<span class="string">'token'</span> =&gt; $user-&gt;confirmationToken]),</div><div class="line">        <span class="string">'name'</span> =&gt; $user-&gt;name,</div><div class="line">    ];</div><div class="line">    $template = <span class="keyword">new</span> SendCloudTemplate(<span class="string">'zhihu_app_register'</span>, $data);</div><div class="line"></div><div class="line">    Mail::raw($template, <span class="function"><span class="keyword">function</span><span class="params">($message)</span> <span class="title">use</span><span class="params">($user)</span> </span>&#123;</div><div class="line">        $message-&gt;from(<span class="string">'luis@mail.cowcat.cc'</span>, <span class="string">'Laravel'</span>);</div><div class="line">        $message-&gt;to($user-&gt;email);</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>新增路由<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Route::get(&apos;email/verify/&#123;token&#125;&apos;, [&apos;as&apos; =&gt; &apos;email.verify&apos;, &apos;uses&apos; =&gt; &apos;EmailController@verify&apos;]);</div></pre></td></tr></table></figure></p>
 <h2 id="Flash-消息提示"><a href="#Flash-消息提示" class="headerlink" title="Flash 消息提示"></a>Flash 消息提示</h2><p>安装 Laracasts Flash<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">composer require laracasts/flash</div></pre></td></tr></table></figure></p>
 <p>添加服务提供者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Laracasts\Flash\FlashServiceProvider::class,</div></pre></td></tr></table></figure></p>
@@ -128,7 +121,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/04/05/使用-Laravel-5-3-Vue-js-2-1-开发知乎/" data-id="cj9515pj9003x034bu7ciozyg" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/04/05/使用-Laravel-5-3-Vue-js-2-1-开发知乎/" data-id="cj9t8tyk70049i24bwjicm0wd" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -140,7 +133,7 @@
 <nav id="article-nav">
   
     <a href="/2017/04/20/设计模式之简单工厂模式/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Nieuwer</strong>
+      <strong class="article-nav-caption">Récent</strong>
       <div class="article-nav-title">
         
           设计模式之简单工厂模式
@@ -150,7 +143,7 @@
   
   
     <a href="/2017/03/23/学习-Javascript-之类型/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ouder</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title">学习 Javascript 之类型</div>
     </a>
   
@@ -165,7 +158,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categorieën</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -175,7 +168,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Labels</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
     </div>
@@ -185,7 +178,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Programming-Language/" style="font-size: 11.43px;">Programming Language</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a> <a href="/tags/vue-js/" style="font-size: 10px;">vue.js</a>
     </div>
@@ -194,9 +187,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archieven</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
   </div>
 
@@ -204,9 +197,21 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/11/09/Web-API-的设计与开发/">Web API 的设计与开发</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/05/日常开发常用命令/">日常开发常用命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/01/刻意练习/">刻意练习</a>
+          </li>
         
           <li>
             <a href="/2017/10/24/高性能的-PHP-API-接口开发/">高性能的 PHP API 接口开发</a>
@@ -214,18 +219,6 @@
         
           <li>
             <a href="/2017/09/04/Vue-js-2-X-实践/">Vue.js 2.X 实践</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/19/编程语言学习框架/">编程语言学习框架</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/19/学习-PHP/">PHP 学习框架</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/18/学习数据建模/">学习数据建模</a>
           </li>
         
       </ul>
@@ -241,7 +234,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Luis Edware<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
