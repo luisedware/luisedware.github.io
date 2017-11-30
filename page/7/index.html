@@ -53,9 +53,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -65,6 +65,308 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Linux-Shell-基础之运算符" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/04/Linux-Shell-基础之运算符/" class="article-date">
+  <time datetime="2016-10-04T02:53:55.000Z" itemprop="datePublished">2016-10-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/04/Linux-Shell-基础之运算符/">Linux Shell 基础之运算符</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Shell-运算符"><a href="#Shell-运算符" class="headerlink" title="Shell 运算符"></a>Shell 运算符</h2><ul>
+<li>declare 声明变量<ul>
+<li><code>declare [+/-][选项] 变量名</code><ul>
+<li>- 给变量设定类型属性<ul>
+<li>-a 将变量声明为数组型</li>
+<li>-i 将变量声明为整数型</li>
+<li>-x 将变量声明为环境变量</li>
+<li>-r 将变量声明为只读变量</li>
+<li>-p 显示指定变量的被声明的类型</li>
+</ul>
+</li>
+<li>+ 取消变量的类型属性</li>
+</ul>
+</li>
+<li><code>declare -x test=123</code> 声明环境变量</li>
+</ul>
+</li>
+<li>declare -p 查询变量的属性<ul>
+<li><code>declare -p</code> 查询所有变量的属性</li>
+<li><code>declare -p 变量名</code> 查询指定变量的属性</li>
+</ul>
+</li>
+<li>expr 或 let 数值运算工具</li>
+</ul>
+<h2 id="Shell-运算符-例子"><a href="#Shell-运算符-例子" class="headerlink" title="Shell 运算符 例子"></a>Shell 运算符 例子</h2><h3 id="Shell-declare-例子"><a href="#Shell-declare-例子" class="headerlink" title="Shell declare 例子"></a>Shell declare 例子</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> 给变量 aa 和 bb 赋值</div><div class="line">aa=11</div><div class="line">bb=22</div><div class="line"></div><div class="line"><span class="meta">#</span> 声明变量 cc 的类型是整数型，它的值是 aa 和 bb 的和</div><div class="line">declare -i cc=$aa+$bb</div></pre></td></tr></table></figure>
+<h3 id="声明数组变量例子"><a href="#声明数组变量例子" class="headerlink" title="声明数组变量例子"></a>声明数组变量例子</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> 定义数组</div><div class="line">movie[0]=zp</div><div class="line">movie[1]=tp</div><div class="line">declare -a movie[2]=live</div><div class="line"></div><div class="line"><span class="meta">#</span> 查看数组</div><div class="line">echo $&#123;movie&#125;</div><div class="line">echo $&#123;movie[2]&#125;</div><div class="line">echo $&#123;movie[*]&#125;</div></pre></td></tr></table></figure>
+<h2 id="Shell-环境变量配置文件"><a href="#Shell-环境变量配置文件" class="headerlink" title="Shell 环境变量配置文件"></a>Shell 环境变量配置文件</h2><p>环境变量配置文件中主要是定义对系统操作环境生效的系统默认环境变量，如 PATH 等</p>
+<ul>
+<li>source 命令<ul>
+<li><code>source 配置文件</code></li>
+<li><code>. 配置文件</code></li>
+</ul>
+</li>
+<li>常用的环境变量配置文件<ul>
+<li>/etc/profile<ul>
+<li>USER 变量</li>
+<li>LOGNAME 变量</li>
+<li>MAIL 变量</li>
+<li>PATH 变量</li>
+<li>HOSTNAME 变量</li>
+<li>HISTSIZE 变量</li>
+<li>umask 查看系统默认权限<ul>
+<li>文件最高权限为 666</li>
+<li>目录最高权限为 777</li>
+<li>权限不能使用数字进行换算，而必须使用字母</li>
+<li>umask 定义的权限，是系统默认权限中准备丢弃的权限</li>
+</ul>
+</li>
+<li>调用 /etc/profile.d/*sh 文件</li>
+</ul>
+</li>
+<li>/etc/profile.d/*sh</li>
+<li>~/.bash_profile</li>
+<li>~/.bashrc</li>
+<li>/etc/bashrc</li>
+</ul>
+</li>
+<li>其他配置文件<ul>
+<li><code>~/.bash_logout</code> 注销时生效的环境变量配置文件</li>
+</ul>
+</li>
+<li>Shell 登录信息<ul>
+<li><code>cat /etc/issue</code> 本地终端欢迎信息</li>
+<li><code>cat /etc/issue.net</code> 远程终端欢迎信息<ul>
+<li>转义符在 <code>/etc/issue.net</code> 文件中不能使用</li>
+<li>是否显示此欢迎信息，由 SSH 的配置文件 <code>/etc/ssh/sshd_config</code> 决定，加入 “Banner /etc/issue.net” 行才能显示（需要重启 SSH 服务）</li>
+</ul>
+</li>
+<li><code>/etc/motd</code> 登陆后欢迎信息，不管是本地登录，还是远程登录，都可以显示此欢迎信息</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之运算符/" data-id="cjamgspdv000fzy4buw6yjtg6" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Linux-Shell-基础之变量" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/04/Linux-Shell-基础之变量/" class="article-date">
+  <time datetime="2016-10-04T02:50:53.000Z" itemprop="datePublished">2016-10-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/04/Linux-Shell-基础之变量/">Linux Shell 基础之变量</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Shell-变量概述"><a href="#Shell-变量概述" class="headerlink" title="Shell 变量概述"></a>Shell 变量概述</h2><p>Shell 与其他语言的对比</p>
+<ul>
+<li>PHP 和 JAVA 主要实现功能</li>
+<li>Shell 简化管理操作</li>
+</ul>
+<p>什么是变量</p>
+<ul>
+<li>变量是计算机内存的单元，其中存放的值可以改变</li>
+<li>变量让你能够把程序中准备使用的每一段数据都赋给一个简短、易于记忆的名字，因此它们十分有用</li>
+</ul>
+<p>变量命名规则</p>
+<ul>
+<li>变量名必须以字母或下划线开头，名字中间只能由字母、数字和下划线组成</li>
+<li>变量名的长度不得超过 255 个字符</li>
+<li>变量名在有效的范围内必须是唯一的</li>
+<li>在 Bash 中，变量的默认类型都是字符串型</li>
+</ul>
+<p>变量存储类型</p>
+<ul>
+<li>整型</li>
+<li>浮点型</li>
+<li>日期型</li>
+<li>字符串型</li>
+</ul>
+<p>变量定义分类</p>
+<ul>
+<li>用户自定义变量：用户自定义的变量</li>
+<li>环境变量：这种变量中主要保存的是和系统操作环境相关的数据。变量可以自定义，但是对系统生效的环境变量名和变量作用是固定的。</li>
+<li>位置参数变量：这种变量主要是用来向脚本当中传递参数或数据的。变量名不能自定义，变量作用固定。</li>
+<li>预定义变量：是 Bash 中已经定义好的变量，变量名不能自定义，变量作用也是固定的。</li>
+</ul>
+<h2 id="Shell-变量与变量分类"><a href="#Shell-变量与变量分类" class="headerlink" title="Shell 变量与变量分类"></a>Shell 变量与变量分类</h2><ul>
+<li>用户自定义变量<ul>
+<li>变量定义<ul>
+<li><code>变量名=变量值</code><ul>
+<li><code>x=5</code></li>
+<li><code>name=&quot;Luis&quot;</code></li>
+</ul>
+</li>
+<li>变量赋值时候，变量名与变量值之间不能有空格</li>
+</ul>
+</li>
+<li>变量调用<ul>
+<li><code>echo $x</code></li>
+<li><code>echo $name</code></li>
+</ul>
+</li>
+<li>变量叠加<ul>
+<li>x=123</li>
+<li>x=”$x”456</li>
+<li>x=${x}789</li>
+</ul>
+</li>
+<li>变量查看<ul>
+<li>set<ul>
+<li>-u 如果设定此选项，调用未声明变量时会报错（默认无任何显示）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>变量删除<ul>
+<li><code>unset 变量名</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>环境变量<ul>
+<li>用户自定义环境变量<ul>
+<li>设置环境变量<ul>
+<li><code>export 变量名=变量值</code></li>
+<li><code>变量名=变量值;export 变量名</code></li>
+</ul>
+</li>
+<li>查看环境变量<ul>
+<li><code>set</code> 查看所有变量</li>
+<li><code>env</code> 查看环境变量</li>
+</ul>
+</li>
+<li>删除环境变量<ul>
+<li><code>unset 变量名</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>系统常用的环境变量<ul>
+<li>HOSTNAME 主机名</li>
+<li>SHELL 当前的 Shell</li>
+<li>TERM 终端环境</li>
+<li>HISTSIZE 历史命令条数</li>
+<li>SSH_CLIENT 当前操作环境是用 ssh 连接的，这里记录客户端 IP</li>
+<li>SSH_TTY ssh 连接的终端时 pts/1</li>
+<li>USER 当前登录的用户</li>
+<li>PATH 系统查找命令的路径<ul>
+<li><code>echo $PATH</code> 查看 PATH 环境变量</li>
+<li><code>PATH=&quot;$PATH&quot;:/root/sh</code> 增加 PATH 变量的值</li>
+</ul>
+</li>
+<li>PS1 变量 命令提示符设置<ul>
+<li>\d 显示日期，格式为”星期 月 日”</li>
+<li>\H 显示完整的主机名，如默认主机名 “localhost.localdomain”</li>
+<li>\t 显示 24 小时制时间，格式为 “HH:MM:SS”</li>
+<li>\A 显示 24 小时制时间，格式为 “HH:MM”</li>
+<li>\u 显示当前用户名</li>
+<li>\w 显示当前所在目录的完整名称</li>
+<li>\W 显示当前所在目录的最后一个目录</li>
+<li>\$ 提示符。如果是 root 用户会显示提示符为 “#”，如果是普通用户会显示提示符为 “$”</li>
+<li>例子 <code>PS1=&#39;[\u@\A \w]\$ &#39;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>语系变量<ul>
+<li><code>locale</code> 查询当前系统语系（<code>echo $LANG</code>）<ul>
+<li>LANG 定义系统主语系的变量</li>
+<li>LC_ALL 定义整体语系的变量</li>
+</ul>
+</li>
+<li><code>locale -a | more</code> 查看 Linux 支持的所有语系</li>
+<li><code>cat /etc/sysconfig/i18n</code> 查询系统默认语系（下次开机语系变量）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>位置参数变量</p>
+<p>  位置参数变量|作用<br>  —|—<br>  $n|n 为数字，$0 代表命令本身，$1-$9 代表第一到第九个参数，十以上的参数需要用大括号包含，如 ${10}<br>  $*|这个变量代表命令行中所有的参数，$* 把所有的参数看成一个整体<br>  $@|这个变量代表命令行中所有的参数，不过 $@ 把每个参数区分对待<br>  $#|这个变量代表命令行中所有参数的个数</p>
+</li>
+<li><p>预定义变量</p>
+<p>  预定义变量|作用<br>  —|—<br>  $? | 最后一次执行的命令的返回状态。如果这个变量的值为 0，证明上一个命令正确执行；如果这个变量的值为非 0(具体是哪个数，由命令自己决定，则证明上一个命令执行不正确)<br>  $$ | 当前进程的进程号<br>  $! | 后台运行的最后一个进程的进程号</p>
+</li>
+<li><p>接收键盘输入</p>
+<ul>
+<li><code>read [选项] [变量名]</code><ul>
+<li>-p 提示信息：在等待 read 输入时，输出提示信息</li>
+<li>-t 秒数：read 命令会一直等待用户输入，使用此选项可以指定等待时间</li>
+<li>-n 字符数：read 命令只接受指定的字符数，就会执行</li>
+<li>-s 隐藏输入的数据，适用于机密信息的输入</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Shell-变量例子"><a href="#Shell-变量例子" class="headerlink" title="Shell 变量例子"></a>Shell 变量例子</h2><p>位置参数例子 1</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>!/bin/bash</div><div class="line">num1=$1</div><div class="line">num2=$2</div><div class="line"></div><div class="line"><span class="meta">#</span> 变量 sum 的和是 num1 加 num2</div><div class="line">sum=$(($num1+$num2))</div><div class="line"></div><div class="line"><span class="meta">#</span> 打印变量 sum 的值</div><div class="line">echo $sum</div></pre></td></tr></table></figure>
+<p>位置参数例子 2<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>!/bin/bash</div><div class="line"></div><div class="line"><span class="meta">#</span> 使用 $# 代表所有参数的个数</div><div class="line">echo "A total of $# parameters"</div><div class="line"></div><div class="line"><span class="meta">#</span> 使用 $* 代表所有的参数</div><div class="line">echo "The parameters is:$*"</div><div class="line"></div><div class="line"><span class="meta">#</span> 使用 $@ 也代表所有参数</div><div class="line">echo "The parameters is:$@"</div></pre></td></tr></table></figure></p>
+<p>位置参数例子 3（$* 与 $@ 的区别）<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>!/bin/bash</div><div class="line"></div><div class="line">for i in "$*"</div><div class="line"><span class="meta">#</span> $* 中的所有参数看成是一个整体，所以这个 for 循环只会循环一次</div><div class="line">do</div><div class="line">	echo "The parameters is: $i"</div><div class="line">done</div><div class="line"></div><div class="line">for y in "$@"</div><div class="line"><span class="meta">#</span> $@ 中的每个参数都看成是独立的，所以 "$@" 中有几个参数，就会循环几次</div><div class="line">do</div><div class="line">	echo "Parameter:$y"</div><div class="line">done</div></pre></td></tr></table></figure></p>
+<p>接收键盘输入例子 1<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>!/bin/bash</div><div class="line"></div><div class="line">read -p "Please input your name: " -t 30 name</div><div class="line">echo $name</div><div class="line"></div><div class="line">read -p "Please input your passwd: " -s passed</div><div class="line">echo -e "\n"</div><div class="line">echo $passwd</div><div class="line"></div><div class="line">read -p "Please input your sex [M/F]: " -n 1 sex</div><div class="line">echo -e "\n"</div><div class="line">echo $sex</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之变量/" data-id="cjamgspds000azy4b1ixl3978" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-Linux-Shell-实战" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -99,7 +401,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/03/Linux-Shell-实战/" data-id="cj9t8tyhh000ni24budf06kb1" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/10/03/Linux-Shell-实战/" data-id="cjamgspdy000mzy4b9do1mnhw" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -258,7 +560,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/30/Linux-权限管理/" data-id="cj9t8tyhl000yi24bsyxj40go" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/30/Linux-权限管理/" data-id="cjamgspe1000tzy4bbh92io3o" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -497,7 +799,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/27/Linux-软件安装/" data-id="cj9t8tyhq0017i24bb5h0vplt" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/27/Linux-软件安装/" data-id="cjamgspe60014zy4b2cc1zuz0" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -750,7 +1052,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/26/Linux-定时任务/" data-id="cj9t8tyhi000qi24bnkb4wuxw" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/26/Linux-定时任务/" data-id="cjamgspe3000zzy4bhkzlqdrt" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1131,7 +1433,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/24/Linux-系统管理/" data-id="cj9t8tyhr001ai24b3h8leqi6" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/24/Linux-系统管理/" data-id="cjamgspe80017zy4bhu8rrj62" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1300,7 +1602,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/23/Linux-服务管理/" data-id="cj9t8tyhk000vi24b2hlcb1gh" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/23/Linux-服务管理/" data-id="cjamgspdz000ozy4b0gnwlgu1" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1539,7 +1841,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/22/Linux-Shell-基础之正则表达式/" data-id="cj9t8tyhe000ii24b8hs82qif" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/22/Linux-Shell-基础之正则表达式/" data-id="cjamgspdw000hzy4bx2vbp997" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1918,922 +2220,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/20/Linux-网络基础/" data-id="cj9t8tyho0014i24blftw7zsn" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/20/Linux-网络基础/" data-id="cjamgspeb001czy4b756ee3mm" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Linux-命令基础" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/19/Linux-命令基础/" class="article-date">
-  <time datetime="2016-09-19T12:34:56.000Z" itemprop="datePublished">2016-09-19</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/19/Linux-命令基础/">Linux 命令基础</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="命令基本格式及文件处理命令"><a href="#命令基本格式及文件处理命令" class="headerlink" title="命令基本格式及文件处理命令"></a>命令基本格式及文件处理命令</h2><h3 id="命令提示符"><a href="#命令提示符" class="headerlink" title="命令提示符"></a>命令提示符</h3><p>命令提示符例子：<code>[root@localhost ~]#</code>，参数意义如下：</p>
-<ul>
-<li>root：当前登录用户名称</li>
-<li>@：分隔用户名称和主机名称</li>
-<li>localhost：主机名称</li>
-<li>~：当前所在目录</li>
-<li>#：超级用户提示符，普通用户提示符是 $</li>
-</ul>
-<h3 id="命令格式"><a href="#命令格式" class="headerlink" title="命令格式"></a>命令格式</h3><blockquote>
-<p>命令 [选项] [参数]</p>
-</blockquote>
-<ul>
-<li>个别命令使用不遵循此格式</li>
-<li>当有多个选项时，可以写在一起</li>
-<li>简化选项与完整选项：-a 等于 –all</li>
-</ul>
-<h3 id="查询目录中内容：ls"><a href="#查询目录中内容：ls" class="headerlink" title="查询目录中内容：ls"></a>查询目录中内容：ls</h3><blockquote>
-<p>ls [选项] [文件或目录]</p>
-</blockquote>
-<p>选项：</p>
-<ul>
-<li>-a：显示所有文件，包括隐藏文件</li>
-<li>-l：显示详细信息</li>
-<li>-d：查看目录属性</li>
-<li>-h：人性化显示文件大小</li>
-<li>-i：显示 inode</li>
-</ul>
-<p>命令 <code>ls -l</code> 等于命令 <code>ll</code></p>
-<h3 id="目录处理命令"><a href="#目录处理命令" class="headerlink" title="目录处理命令"></a>目录处理命令</h3><ul>
-<li>新建目录：mkdir<ul>
-<li><code>mkdir -p [目录名称]</code></li>
-<li>-p 递归创建</li>
-<li>命令英文原意：make directories</li>
-</ul>
-</li>
-<li>切换所在目录：cd<ul>
-<li><code>cd [目录名称]</code><ul>
-<li>cd ~ ：进入当前用户的家目录</li>
-<li>cd - ：进入上次目录</li>
-<li>cd . ：进入当前目录</li>
-<li>cd .. ：进入上一级目录</li>
-</ul>
-</li>
-<li>命令英文原意：change directory</li>
-<li>相对路径：参照当前所在目录，进行查找</li>
-<li>绝对路径：从根目录开始制定，一级一级递归查找。在任何目录下，都能进入指定目录</li>
-</ul>
-</li>
-<li>查询所在目录位置：pwd<ul>
-<li><code>pwd</code></li>
-<li>命令英文原意：print working directory</li>
-</ul>
-</li>
-<li>删除空目录：rmdir<ul>
-<li><code>rmdir [目录名称]</code></li>
-<li>命令英文原意：remove empty directories</li>
-</ul>
-</li>
-<li>删除文件或目录：rm<ul>
-<li><code>rm -rf [文件或目录]</code><ul>
-<li>-r ：删除目录</li>
-<li>-f ：强制</li>
-</ul>
-</li>
-<li>命令英文原意：remove</li>
-</ul>
-</li>
-<li>复制命令：cp<ul>
-<li><code>cp [选项] [原文件或目录] [目标目录]</code><ul>
-<li>-r ：复制目录</li>
-<li>-p ：连带文件属性复制</li>
-<li>-d ：若源文件是链接文件，则复制链接属性</li>
-<li>-a ：相当于 -pdr</li>
-</ul>
-</li>
-<li>命令英文原意：copy</li>
-</ul>
-</li>
-<li>剪切或重命名命令：mv<ul>
-<li><code>mv [原文件或目录] [目标目录]</code></li>
-<li>命令英文原意：move</li>
-</ul>
-</li>
-</ul>
-<h3 id="常见目录作用"><a href="#常见目录作用" class="headerlink" title="常见目录作用"></a>常见目录作用</h3><ul>
-<li>/ ：根目录</li>
-<li>/bin ：命令保存目录</li>
-<li>/dev ：设备文件保存目录</li>
-<li>/etc ：配置文件保存目录</li>
-<li>/lib ：系统保存目录</li>
-<li>/mnt ：系统挂载目录</li>
-<li>/tmp ：临时目录</li>
-<li>/sys ：</li>
-<li>/var ：系统相关文档内容</li>
-<li>/usr ：系统软件资源目录<ul>
-<li>/usr/bin ：系统命令（普通用户）</li>
-<li>/usr/sbin ：系统命令（超级用户）</li>
-</ul>
-</li>
-<li>/boot ：启动目录，启动相关文件</li>
-<li>/home ：普通用户的家目录</li>
-<li>/root ：超级用户的家目录</li>
-<li>/sbin ：命令保存目录</li>
-<li>/proc ：直接写入内存的</li>
-<li>/media ： 挂载目录</li>
-</ul>
-<h3 id="链接命令"><a href="#链接命令" class="headerlink" title="链接命令"></a>链接命令</h3><ul>
-<li>链接命令：ln<ul>
-<li><code>ln [参数] [原文件] [目标文件]</code><ul>
-<li>-s ：创建软链接</li>
-<li>默认创建硬链接</li>
-</ul>
-</li>
-<li>命令英文原意：link</li>
-<li>功能描述：生成链接文件</li>
-</ul>
-</li>
-<li>硬链接特征：<ul>
-<li>拥有相同的 I 节点和存储 Block 块，可以看做是同一个文件</li>
-<li>可通过 I 节点识别</li>
-<li>不能跨分区</li>
-<li>不能针对目录使用</li>
-</ul>
-</li>
-<li>软连接特征：<ul>
-<li>类似 Windows 快捷方式</li>
-<li>软链接拥有自己的 I 节点和 Block 块，但是数据块中只保存原文件的文件名和 I 节点号，并没有实际的文件数据</li>
-<li>软连接文件权限都为：rwxrwxrwx</li>
-<li>修改任意文件，另一个都改变</li>
-<li>删除原文件，软链接不能使用</li>
-</ul>
-</li>
-</ul>
-<h2 id="文件搜索命令"><a href="#文件搜索命令" class="headerlink" title="文件搜索命令"></a>文件搜索命令</h2><h3 id="文件搜索命令-locate"><a href="#文件搜索命令-locate" class="headerlink" title="文件搜索命令 locate"></a>文件搜索命令 locate</h3><ul>
-<li><code>locate 文件名</code>（只能搜索文件名）<ul>
-<li>在后台数据库中按文件名搜索，搜索速度更快</li>
-</ul>
-</li>
-<li><code>/var/lib/mlocate</code><ul>
-<li>locate 命令所搜索的后台数据库</li>
-</ul>
-</li>
-<li><code>updatedb</code><ul>
-<li>更新数据库</li>
-</ul>
-</li>
-<li><code>/etc/updatedb.conf</code> 配置文件<ul>
-<li>PRUNE_BIND_MOUNTS = “yes” (开启搜索限制)</li>
-<li>PRUNEFS = （搜索时，不搜索的文件系统）</li>
-<li>PRUNENAMES = （搜索时，不搜索的文件类型）</li>
-<li>PRUNEPATHS = （搜索时，不搜索的路径）</li>
-</ul>
-</li>
-</ul>
-<h3 id="命令搜索命令-whereis-与-which"><a href="#命令搜索命令-whereis-与-which" class="headerlink" title="命令搜索命令 whereis 与 which"></a>命令搜索命令 whereis 与 which</h3><ul>
-<li>whereis<ul>
-<li>搜索命令所在路径及帮助文档所在位置</li>
-<li>选项<ul>
-<li>-b    只查找可执行文件</li>
-<li>-m    只查找帮助文件</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>which （能看到命令的别名，只能看到命令的所在位置）</li>
-</ul>
-<h3 id="文件搜索命令-find"><a href="#文件搜索命令-find" class="headerlink" title="文件搜索命令 find"></a>文件搜索命令 find</h3><ul>
-<li><code>find [搜索范围] [搜索条件]</code><ul>
-<li>搜索文件</li>
-</ul>
-</li>
-<li><code>find / -name install.log</code><ul>
-<li>避免大范围搜索，会非常耗费系统资源</li>
-<li>find 是在系统当中搜索符合条件的文件名。如果需要匹配，使用通配符匹配，通配符是完全匹配</li>
-<li>Linux 中的通配符<ul>
-<li><ul>
-<li>匹配任意内容</li>
-</ul>
-</li>
-<li>?  匹配任意一个字符</li>
-<li>[] 匹配任意一个中括号内的字符</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>find /root -iname install.log</code> 不区分大小写</li>
-<li><code>find /root -user root</code> 按照所有者搜索</li>
-<li><code>find /root -nouser</code> 查找没有所有者的文件</li>
-<li><code>find /var/log/ -mtime +10</code> 查找 10 天前修改的文件<ul>
-<li>10 10 天当天修改的文件</li>
-<li>-10 10 天内修改文件</li>
-<li>+10 10 天前修改的文件</li>
-<li>atime 文件访问时间</li>
-<li>ctime 改变文件属性</li>
-<li>mtime 修改文件内容</li>
-</ul>
-</li>
-<li><code>find . -size 25k</code> 查找文件大小是 25 KB 的文件<ul>
-<li>25K 等于 25 KB的文件</li>
-<li>-25K 小于 25 KB的文件</li>
-<li>+25K 大于 25KB 的文件</li>
-</ul>
-</li>
-<li><code>find . -inum 262422</code> 查找 i 节点是 262422 的文件</li>
-<li><code>find /etc -size +20k -a -size -50k</code> 查找 /etc/ 目录下，大于 20 KB 并且小于 50 KB 的文件<ul>
-<li>-a and 逻辑与，两个条件都满足</li>
-<li>-o or 逻辑或，两个条件满足一个即可</li>
-</ul>
-</li>
-<li><code>find /etc -size +20k -a -size -50k -exec ls -lh {} \;</code> 查找 /etc/，大于 20 KB 并且小于 50 KB 的文件，并显示详细信息，-exec/ -ok 命令 {}\; 对搜索结果执行操作</li>
-</ul>
-<h3 id="字符串搜索命令-grep"><a href="#字符串搜索命令-grep" class="headerlink" title="字符串搜索命令 grep"></a>字符串搜索命令 grep</h3><ul>
-<li><code>grep [选项] 字符串 文件名</code> 在文件当中匹配符合条件的字符串<ul>
-<li>-i 忽略大小写</li>
-<li>-v 排除指定字符串</li>
-</ul>
-</li>
-</ul>
-<h3 id="find-命令与-grep-命令的区别"><a href="#find-命令与-grep-命令的区别" class="headerlink" title="find 命令与 grep 命令的区别"></a>find 命令与 grep 命令的区别</h3><p>find 命令：在系统当中搜索符合条件的文件名，如果需要匹配，使用通配符匹配，通配符是完全匹配。</p>
-<p>grep 命令：在文件当中搜索符合条件的字符串，如果需要匹配，使用正则表达式进行匹配，正则表达式时包含匹配。</p>
-<h2 id="帮助命令"><a href="#帮助命令" class="headerlink" title="帮助命令"></a>帮助命令</h2><h3 id="帮助命令-man"><a href="#帮助命令-man" class="headerlink" title="帮助命令 man"></a>帮助命令 man</h3><ul>
-<li><code>man 命令</code>  获取指定命令的帮助</li>
-<li><code>man -f 命令</code> 相当于 <code>whatis 命令</code> 查看命令的帮助级别</li>
-<li><code>man -k 命令</code> 相当于 <code>apropos 命令</code> 查看和命令相关的所有帮助</li>
-<li>man 的级别<ul>
-<li>1 ： 查看命令的帮助</li>
-<li>2 ： 查看可被内核调用的函数的帮助</li>
-<li>3 ： 查看函数和函数库的帮助</li>
-<li>4 ： 查看特殊文件的帮助（主要是 /dev 目录下的文件）</li>
-<li>5 ： 查看配置文件的帮助</li>
-<li>6 ： 查看游戏的帮助</li>
-<li>7 ： 查看其他杂项的帮助</li>
-<li>8 ： 查看系统管理员可用命令的帮助</li>
-<li>9 ： 查看和内核相关文件的帮助</li>
-</ul>
-</li>
-</ul>
-<h3 id="其他帮助命令"><a href="#其他帮助命令" class="headerlink" title="其他帮助命令"></a>其他帮助命令</h3><ul>
-<li><code>命令 --help</code> 获取命令选项的帮助<ul>
-<li><code>ls --help</code></li>
-</ul>
-</li>
-<li><code>help shell 内部命令</code> 获取 shell 内部命令的帮助<ul>
-<li><code>whereis cd</code> 确定是否是 shell 内部命令</li>
-<li><code>help cd</code> 获取内部命令帮助</li>
-</ul>
-</li>
-<li><code>info 命令</code><ul>
-<li>回车 ： 进入子帮助页面</li>
-<li>u ： 进入上层页面</li>
-<li>n ： 进入下一个帮助小节</li>
-<li>p ： 进入上一个帮助小节</li>
-<li>q ： 退出</li>
-</ul>
-</li>
-</ul>
-<h2 id="压缩命令"><a href="#压缩命令" class="headerlink" title="压缩命令"></a>压缩命令</h2><ul>
-<li>常用的压缩格式：<ul>
-<li>.zip</li>
-<li>.gz</li>
-<li>.bz2</li>
-<li>.tar.gz</li>
-<li>.tar.bz2</li>
-</ul>
-</li>
-<li>.zip 格式<ul>
-<li><code>zip 压缩文件名 源文件</code> 压缩文件</li>
-<li><code>zip -r 压缩文件名 源目录</code> 压缩目录</li>
-<li><code>unzip 压缩文件</code> 解压 <code>.zip</code> 文件</li>
-</ul>
-</li>
-<li>.gz 格式<ul>
-<li><code>gzip 源文件</code> 压缩为 <code>.gz</code> 格式的压缩文件，源文件消失</li>
-<li><code>gzip -c 源文件 &gt; 压缩文件</code> 压缩为 <code>.gz</code> 格式的压缩文件，源文件保留</li>
-<li><code>gzip -r 目录</code> 压缩目录下所有的子文件，但是不能压缩目录</li>
-<li><code>gzip -d 压缩文件</code> 解压文件</li>
-<li><code>gunzip 压缩文件</code> 解压文件</li>
-</ul>
-</li>
-<li>.bz2<ul>
-<li><code>bzip2 源文件</code> 压缩为 <code>.bz2</code> 格式的压缩文件，不保留源文件</li>
-<li><code>bzip2 -k 源文件</code> 压缩为 <code>.bz2</code> 格式的压缩文件，保留源文件</li>
-<li><code>bzip2</code> 命令不能压缩目录</li>
-</ul>
-</li>
-<li>tar.gz<ul>
-<li><code>tar -cvf 打包文件名 源文件</code><ul>
-<li>选项<ul>
-<li>-c ： 打包</li>
-<li>-v ： 显示过程</li>
-<li>-f    ： 指定打包后的文件名</li>
-</ul>
-</li>
-<li>举例：<code>tar -cvf longzls.tar longzls</code></li>
-</ul>
-</li>
-<li><code>tar -xvf 打包文件名</code><ul>
-<li>选项<ul>
-<li>-x ： 解打包</li>
-</ul>
-</li>
-<li>举例：<code>tar -xvf longzls.tar</code></li>
-</ul>
-</li>
-<li><code>tar -zcvf 压缩包名.tar.gz 源文件</code> 压缩为 <code>.tar.gz</code> 格式的压缩文件</li>
-<li><code>tar -zxvf 压缩包名.tar.gz</code> 解压 <code>.tar.gz</code> 格式的文件</li>
-<li><code>tar -jcvf 压缩包名.tar.bz2 源文件</code> 压缩为 <code>.tar.bz2</code> 格式的压缩文件</li>
-<li><code>tar -jxvf 压缩包名.tar.bz2</code> 解压 <code>.tar.bz2</code> 格式的文件</li>
-</ul>
-</li>
-</ul>
-<h2 id="关机重启命令"><a href="#关机重启命令" class="headerlink" title="关机重启命令"></a>关机重启命令</h2><ul>
-<li>shutdown 命令<ul>
-<li><code>shutdown [选项] 时间</code></li>
-<li>选项<ul>
-<li>-c ：取消前一个关机命令</li>
-<li>-h ：关机（尽可能少用）</li>
-<li>-r ：重启</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>其他关机命令<ul>
-<li>halt</li>
-<li>poweroff</li>
-<li>init 0</li>
-</ul>
-</li>
-<li>其他重启命令<ul>
-<li>reboot</li>
-<li>init 6</li>
-</ul>
-</li>
-<li>系统运行级别<ul>
-<li>0 关机</li>
-<li>1 单用户</li>
-<li>2 不完全多用户，不含 NFS 服务</li>
-<li>3 完全多用户</li>
-<li>4 未分配</li>
-<li>5 图形界面</li>
-<li>6 重启</li>
-</ul>
-</li>
-<li><code>cat /etc/inittab</code> 可以修复系统默认运行级别</li>
-<li><code>runlevel</code> 查询系统运行级别</li>
-<li><code>logout</code> 退出登录命令</li>
-</ul>
-<h2 id="挂载命令"><a href="#挂载命令" class="headerlink" title="挂载命令"></a>挂载命令</h2><ul>
-<li>查询与自动挂载<ul>
-<li><code>mount [-t 文件系统] [-o 特殊选项] 设备 文件名 挂载点</code><ul>
-<li>-t 文件系统：加入文件系统类型来指定挂载的类型，可以 ext3、ext4、iso 9660 等文件系统</li>
-<li>-o 特殊选项：可以指定挂载的额外选项</li>
-</ul>
-</li>
-<li><code>mount</code> 查询系统中已经挂载的设备</li>
-<li><code>mount -a</code> 依据配置文件 /etc/fstab 的内容，自动挂载</li>
-</ul>
-</li>
-<li>光盘的挂载<ul>
-<li>挂载光盘<ul>
-<li><code>mkdir /mnt/cdrom/</code> 建立挂载点</li>
-<li><code>mount -t iso9660 /dev/cdrom /mnt/cdrom/</code> 挂载光盘</li>
-<li><code>mount /dev/sr0 /mnt/cdrom/</code></li>
-</ul>
-</li>
-<li>卸载命令<ul>
-<li><code>umount 设备文件名或挂载点</code></li>
-<li><code>umount /mnt/cdrom</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>U 盘的挂载<ul>
-<li><code>fdisk -l</code> 查看存储设备文件名</li>
-<li><code>mount -t vfat /dev/sdb1 /mnt/usb/</code></li>
-</ul>
-</li>
-</ul>
-<h2 id="用户登录查看命令"><a href="#用户登录查看命令" class="headerlink" title="用户登录查看命令"></a>用户登录查看命令</h2><ul>
-<li>w<ul>
-<li>USER ：登录的用户名</li>
-<li>TTY ：登录终端</li>
-<li>FROM ：从哪个 IP 地址登录</li>
-<li>LOGIN@ ：登录时间</li>
-<li>IDLE ：用户闲置时间</li>
-<li>JCPU ：指的是和该终端连接的所有进程占用的时间。这个时间里并不包括过去的后台作业时间，但却包括当前正在运行的后台作业所占用的时间；</li>
-<li>PCPU ：是指当前进程所占用的时间；</li>
-<li>WHAT ：当前正在运行的命令</li>
-</ul>
-</li>
-<li>who<ul>
-<li>用户名</li>
-<li>登录终端</li>
-<li>登录时间（登录来源 IP 地址）</li>
-</ul>
-</li>
-<li>last（查询当前登录和过去登录的用户信息）<ul>
-<li>last 命令默认是读取 /var/log/wtmp 文件数据</li>
-<li>命令输出<ul>
-<li>用户名</li>
-<li>登录终端</li>
-<li>登录 IP</li>
-<li>登录时间</li>
-<li>退出时间（在线时间）</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>lastlog（查看所有用户的最后一次登录时间）<ul>
-<li>lastlog 命令默认是读取 /var/log/lastlog 文件内容</li>
-<li>命令输出<ul>
-<li>用户名</li>
-<li>登录终端</li>
-<li>登录 IP</li>
-<li>最后一次登录时间</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="Shell-基础"><a href="#Shell-基础" class="headerlink" title="Shell 基础"></a>Shell 基础</h2><h3 id="Shell-概述"><a href="#Shell-概述" class="headerlink" title="Shell 概述"></a>Shell 概述</h3><p>Shell 是一个命令行解释器，它为用户提供了一个向 Linux 内核发送请求以便运行程序的界面系统级程序，<br>用户可以用 Shell 来启动、挂起、停止甚至是编写一些程序。</p>
-<p>Shell 还是一个功能相当强大的编程语言，易编写，易调试，灵活性比较强。<br>Shell 是解释执行的脚本语言，在 Shell 中可以直接调用 Linux 的系统命令</p>
-<p>Shell 的分类</p>
-<ul>
-<li>Bourne Shell<ul>
-<li>sh、ksh、Bash、psh、zsh</li>
-</ul>
-</li>
-<li>C Shell<ul>
-<li>csh、tcsh</li>
-</ul>
-</li>
-</ul>
-<h3 id="脚本执行方式"><a href="#脚本执行方式" class="headerlink" title="脚本执行方式"></a>脚本执行方式</h3><ul>
-<li>echo 输出命令<ul>
-<li><code>echo [选项] [输出内容]</code></li>
-<li>选项<ul>
-<li>-e ：支持反斜线控制的字符转换</li>
-</ul>
-</li>
-<li>字符转换<ul>
-<li>\a 输出警告音</li>
-<li>\b 退格键，也就是向左删除键</li>
-<li>\n 换行符</li>
-<li>\r 回车键</li>
-<li>\t 制表符</li>
-<li>\v 垂直制表符</li>
-<li>\0nnn 按照八进制 ASCII 码表输出字符。其中 0 为数字零，nnn 是三位八进制数</li>
-<li>\xhh 按照十六进制 ASCII 码表输出字符。其中 hh 是两位十六进制数</li>
-</ul>
-</li>
-<li>使用颜色<ul>
-<li>30m=黑色</li>
-<li>31m=红色</li>
-<li>32m=绿色</li>
-<li>33m=黄色</li>
-<li>34m=蓝色</li>
-<li>35m=洋红</li>
-<li>36m=青色</li>
-<li>37m=白色</li>
-<li>\e[1;31m \e[0m</li>
-</ul>
-</li>
-<li>例子<ul>
-<li><code>echo -e &quot;hell\bo&quot;;</code></li>
-<li><code>echo -e &quot;\x68\t\x65\t\x6c\n\x6c\t\x6f\t&quot;;</code></li>
-<li><code>echo -e &quot;\e[1;31mHello World \e[0m&quot;;</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="命令别名与快捷键"><a href="#命令别名与快捷键" class="headerlink" title="命令别名与快捷键"></a>命令别名与快捷键</h3><ul>
-<li><code>alias</code> 查看系统中所有的命令别名</li>
-<li><code>alias 别名=&#39;原命令&#39;</code> 设定命令别名<ul>
-<li>例子：<code>alias vi=&#39;vim&#39;</code></li>
-</ul>
-</li>
-<li><code>vi ~/.bashrc</code> 写入环境变量配置文件</li>
-<li><code>unalias 别名</code> 删除别名</li>
-<li>命令生效顺序<ul>
-<li>第一顺位执行用绝对路径或相对路径执行的命令</li>
-<li>第二顺位执行别名</li>
-<li>第三顺位执行 Bash 的内部命令</li>
-<li>第四顺位执行按照 $PATH 环境变量定义的目录查找顺序找到的第一个命令</li>
-</ul>
-</li>
-<li>常用快捷键<ul>
-<li><code>Ctrl + c</code> 强制终止当前命令</li>
-<li><code>Ctrl + l</code> 清屏</li>
-<li><code>Ctrl + a</code> 光标移动到命令行首</li>
-<li><code>Ctrl + e</code> 光标移动到命令行尾</li>
-<li><code>Ctrl + u</code> 从光标所在位置删除到行首</li>
-<li><code>Ctrl + z</code> 把命令放入后台</li>
-<li><code>Ctrl + r</code> 在历史命令中搜索</li>
-</ul>
-</li>
-</ul>
-<h3 id="历史命令"><a href="#历史命令" class="headerlink" title="历史命令"></a>历史命令</h3><ul>
-<li><code>history [选项] [历史命令保存文件]</code><ul>
-<li>选项<ul>
-<li>-c ：清空历史缓存</li>
-<li>-w ：把缓存中的历史命令写入历史命令保存文件 <code>~/.bash_history</code></li>
-</ul>
-</li>
-<li>历史命令默认会保存 1000 条，可以在环境变量配置文件 <code>/etc/profile</code> 中的 <code>HISTSIZE</code> 进行修改</li>
-<li>历史命令的调用<ul>
-<li>使用上、下箭头调用以前的历史命令</li>
-<li>使用 <code>!n</code> 重复执行第 n 条历史命令</li>
-<li>使用 <code>!!</code> 重复执行上一条命令</li>
-<li>使用 <code>!字符</code> 重复执行最后一条以该字符串开头的命令</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="输出重定向"><a href="#输出重定向" class="headerlink" title="输出重定向"></a>输出重定向</h3><p>1.标准输入输出</p>
-<table>
-<thead>
-<tr>
-<th>设备</th>
-<th>设备文件名</th>
-<th>文件描述符</th>
-<th>类型</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>键盘</td>
-<td>/dev/stdin</td>
-<td>0</td>
-<td>标准输入</td>
-</tr>
-<tr>
-<td>显示器</td>
-<td>/dev/sdtout</td>
-<td>1</td>
-<td>标准输入</td>
-</tr>
-<tr>
-<td>显示器</td>
-<td>/dev/sdterr</td>
-<td>2</td>
-<td>标准错误输出</td>
-</tr>
-</tbody>
-</table>
-<p>2.输出重定向</p>
-<table>
-<thead>
-<tr>
-<th>类型</th>
-<th>符号</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>标准输出重定向</td>
-<td>命令 &gt; 文件</td>
-<td>以覆盖的方式，把命令的正确输出，输出到指定的文件或设备中</td>
-</tr>
-<tr>
-<td>标准输出重定向</td>
-<td>命令 &gt;&gt; 文件</td>
-<td>以追加的方式，把命令的正确输出，输出到指定的文件或设备中</td>
-</tr>
-<tr>
-<td>标准错误输出重定向</td>
-<td>错误命令2&gt;文件</td>
-<td>以覆盖的方式，把命令的错误输出，输出到指定的文件或设备中</td>
-</tr>
-<tr>
-<td>标准错误输出重定向</td>
-<td>错误命令2&gt;&gt;文件</td>
-<td>以追加的方式，把命令的错误输出，输出到指定的文件或设备中</td>
-</tr>
-<tr>
-<td>正确输出和错误输出同时保存</td>
-<td>命令 &gt; 文件 2&gt;&amp;1</td>
-<td>以覆盖的方式，把正确输出和错误输出都保存到同一个文件当中</td>
-</tr>
-<tr>
-<td>正确输出和错误输出同时保存</td>
-<td>命令 &gt;&gt; 文件 2&gt;&amp;1</td>
-<td>以追加的方式，把正确输出和错误输出都保存到同一个文件当中</td>
-</tr>
-<tr>
-<td>正确输出和错误输出同时保存</td>
-<td>命令 &amp;&gt;文件</td>
-<td>以覆盖的方式，把正确输出和错误输出都保存都同一个文件当中</td>
-</tr>
-<tr>
-<td>正确输出和错误输出同时保存</td>
-<td>命令 &amp;&gt;&gt;文件</td>
-<td>以追加的方式，把正确输出和错误输出都保存到同一个文件当中</td>
-</tr>
-<tr>
-<td>正确输出和错误输出同时保存</td>
-<td>命令&gt;&gt;文件1 2&gt;&gt;文件2</td>
-<td>把正确的输出追加到文件 1 中，把错误的输出追加到文件 2 中</td>
-</tr>
-</tbody>
-</table>
-<p>3.输入重定向</p>
-<ul>
-<li><code>wc [选项] [文件名]</code> 输入重定向<ul>
-<li>选项<ul>
-<li>-c ：统计字节数</li>
-<li>-w ：统计单词数</li>
-<li>-i ：统计行数<h3 id="管道符"><a href="#管道符" class="headerlink" title="管道符"></a>管道符</h3></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>1.多命令顺序执行</p>
-<table>
-<thead>
-<tr>
-<th>多命令执行符</th>
-<th>格式</th>
-<th>作用</th>
-<th>例子</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>;</td>
-<td>命令1;命令2</td>
-<td>多个命令顺序执行，命令之间没有任何逻辑联系，即使报错也会往下执行</td>
-<td>date ; ls ; cd ~; history;</td>
-</tr>
-<tr>
-<td>&amp;&amp;</td>
-<td>命令1&amp;&amp;命令2</td>
-<td>逻辑与，当命令 1 正确执行，则命令 2 才会执行，当命令 1 执行不正确，则命令 2 不会执行</td>
-<td>ls &amp;&amp; echo yes</td>
-</tr>
-<tr>
-<td>II</td>
-<td>命令1 II 命令2</td>
-<td>逻辑或，当命令 1 执行不正确，则命令 2 才会执行，当命令 1 正确执行，则命令 2 不会执行</td>
-<td>lsls II echo no</td>
-</tr>
-</tbody>
-</table>
-<p>2.管道符</p>
-<ul>
-<li>格式：命令 1 | 命令 2</li>
-<li>作用：命令 1 的正确输出作为命令 2 的操作对象</li>
-</ul>
-<h3 id="通配符"><a href="#通配符" class="headerlink" title="通配符"></a>通配符</h3><p>1.通配符</p>
-<table>
-<thead>
-<tr>
-<th>通配符</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>?</td>
-<td>匹配一个任意字符</td>
-</tr>
-<tr>
-<td>*</td>
-<td>匹配 0 个或任意多个任意字符，也就是可以匹配任何内容</td>
-</tr>
-<tr>
-<td>[]</td>
-<td>匹配中括号中任意一个字符，例如：[abc] 代表一定匹配一个字符，或是 a,或是 b,或是 c</td>
-</tr>
-<tr>
-<td>[-]</td>
-<td>匹配中括号中任意一个字符，- 代表一个范围，例如：[a-z] 代表匹配一个小写字母</td>
-</tr>
-<tr>
-<td>[^]</td>
-<td>逻辑非，表示匹配不是中括号内的一个字符，例如：[^0-9] 代表匹配一个不是数字的字符</td>
-</tr>
-</tbody>
-</table>
-<p>通配符执行例子</p>
-<ul>
-<li>存在文件夹<code>dzp</code>,<code>dzp2</code>,<code>dzp3</code>,<code>dzp34</code>,<code>dzpa</code>，<code>dzpbols</code>,<code>dzpcang</code></li>
-<li>执行命令 <code>ls dzp</code>，显示文件夹 <code>dzp</code></li>
-<li>执行命令 <code>ls dzp?</code>，显示文件夹 <code>dzp2</code>，<code>dzp3</code></li>
-<li>执行命令 <code>ls dzp[0-9]</code>，显示文件夹 <code>dzp2</code>，<code>dzp3</code></li>
-<li>执行命令 <code>ls dzp[0-9][0-9]</code>，显示文件夹 <code>dzp34</code></li>
-<li>执行命令 <code>ls dzp[^0-9]</code>，显示文件夹 <code>dzpa</code></li>
-<li>执行命令 <code>ls dzp[^0-9]*</code>，显示文件夹 <code>dzpa</code>，<code>dzpbols</code>，<code>dzpcang</code></li>
-</ul>
-<p>2.Bash 中其他特殊符号</p>
-<table>
-<thead>
-<tr>
-<th>符号</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>‘’</td>
-<td>单引号。在单引号中所有特殊符号，如 $ 和 ` 都没有特殊含义。</td>
-</tr>
-<tr>
-<td>“”</td>
-<td>双引号。在双引号中特殊符号都没有特殊含义，但是 $ 、`、\ 是例外，拥有<em>调用变量值</em>，<em>引用命令</em>，<em>转义符</em>的特殊含义</td>
-</tr>
-<tr>
-<td>``</td>
-<td>反引号。反引号包括起来的内容是系统命令，在 Bash 中会先执行它。和 $() 作用一样，不过推荐使用 $()，因为反引号非常容易看错。</td>
-</tr>
-<tr>
-<td>$()</td>
-<td>和反引号作用一样，用来引用系统命令</td>
-</tr>
-<tr>
-<td>#</td>
-<td>在 Shell 脚本中，# 开头的行代表注释</td>
-</tr>
-<tr>
-<td>$</td>
-<td>用于调用变量的值，如需要调用变量 name 的值时，需要用 $name 的方式得到变量的值</td>
-</tr>
-<tr>
-<td>\</td>
-<td>转义符，跟在 \ 之后的</td>
-</tr>
-</tbody>
-</table>
-<h2 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h2><h3 id="用户和用户组的概念"><a href="#用户和用户组的概念" class="headerlink" title="用户和用户组的概念"></a>用户和用户组的概念</h3><ul>
-<li>用户：使用操作系统的人</li>
-<li>用户组：具有相同系统权限的一组用户</li>
-<li><code>/etc/group</code> 存储当前系统中所有用户组信息<ul>
-<li>Group:x:499:root,luis,daemon</li>
-<li>组名称：组密码占位符：组编号：组中用户名列表</li>
-</ul>
-</li>
-<li><code>/etc/gshadow</code> 存储当前系统中用户组的密码信息<ul>
-<li>Group:*:    :root,luis</li>
-<li>组名称：组密码：组管理者：组中用户名列表</li>
-</ul>
-</li>
-<li><code>/etc/passwd</code> 存储当前系统中所有用户的账号信息<ul>
-<li>root:x:0:0:root:/root:/bin/bash</li>
-<li>用户名：密码占位符：用户编号：用户组编号：用户注释信息：用户主目录：Shell 类型</li>
-</ul>
-</li>
-<li><code>/etc/shadow</code> 存储当前系统中所有用户的密码信息<ul>
-<li>root:$6$tBDREHKV$JfcEQ/hTxaOWI8QKoRPARviOq3etqaE.szqFoqW8/Uxh6nAkCvlQzp8nRhg4kRM4ySRjpsfyS7kxXfa5cOlLa.:17044:0:99999:7:::</li>
-<li>用户名:密码:::</li>
-</ul>
-</li>
-</ul>
-<h3 id="用户和用户组的基本命令"><a href="#用户和用户组的基本命令" class="headerlink" title="用户和用户组的基本命令"></a>用户和用户组的基本命令</h3><ul>
-<li>用户组基本命令<ul>
-<li>新增用户组：<code>groupadd 用户组名称</code></li>
-<li>新增用户组并指定编号：<code>groupadd -g 数字编号 用户组名称</code></li>
-<li>修改用户组名称：<code>groupmod -n 新名称 旧名称</code></li>
-<li>修改用户组编号：<code>groupmod -g 数字编号 用户组名称</code></li>
-<li>删除用户组：<code>groupdel 用户组名称</code></li>
-</ul>
-</li>
-<li>用户基本命令<ul>
-<li>删除用户：<code>userdel 用户名称</code></li>
-<li>删除用户并删除个人文件夹：<code>userdel -r 用户名称</code></li>
-<li>新增用户并指定用户组：<code>useradd -g 用户组名称 用户名称</code></li>
-<li>新增用户并指定用户个人文件夹：<code>useradd -d 目录路径 用户名称</code></li>
-<li>修改用户名称：<code>usermod -l 新名称 旧名称</code></li>
-<li>修改用户备注信息：<code>usermod -c 备注信息 用户名称</code></li>
-<li>修改用户的用户组信息：<code>usermod -g 用户组名称 用户名称</code></li>
-<li>指定用户新的个人文件夹：<code>usermod -d 目录路径 用户名称</code></li>
-</ul>
-</li>
-<li>其他命令<ul>
-<li>切换用户：<code>su</code></li>
-<li>锁定用户：<code>passwd -l 用户名称</code></li>
-<li>解锁用户：<code>passwd -u 用户名称</code></li>
-<li>无密码登录：<code>passwd -d 用户名称</code></li>
-<li>设置组密码：<code>gpasswd 用户组名称</code></li>
-<li>显示用户详情:<ul>
-<li>显示当前登录用户名：<code>whoami</code></li>
-<li>显示用户信息和组信息：<code>id 用户名称</code></li>
-<li>显示用户所在的所有组：<code>groups 用户名称</code></li>
-</ul>
-</li>
-<li>设置用户资料：<code>chfn 用户名称</code></li>
-<li>新增用户附属组：<code>gpasswd -a 用户名称 用户组名称</code>（在 Linux 当中，一个用户可以属于多个用户组，但只能有一个主要组，其余都是附属组）</li>
-<li>删除用户附属组：<code>gpasswd -d 用户名称</code></li>
-<li>切换用户附属组：<code>newgrp 用户组名称</code></li>
-<li>新增用户指定主要组和附属组：<code>useradd -g 主要组名称 -G 附属组名称</code></li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/19/Linux-命令基础/" data-id="cj9t8tyhn0011i24bhhzcex9m" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-MySQL-5-7-版本新特性" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/12/MySQL-5-7-版本新特性/" class="article-date">
-  <time datetime="2016-09-12T13:12:40.000Z" itemprop="datePublished">2016-09-12</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/12/MySQL-5-7-版本新特性/">MySQL 5.7 版本新特性</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="第-1-章-MySQL-服务功能增强"><a href="#第-1-章-MySQL-服务功能增强" class="headerlink" title="第 1 章 MySQL 服务功能增强"></a>第 1 章 MySQL 服务功能增强</h2><h3 id="1-1-初始化方式变更"><a href="#1-1-初始化方式变更" class="headerlink" title="1-1 初始化方式变更"></a>1-1 初始化方式变更</h3><p>MySQL 5.7 之前<br><code>scripts/mysql_install_db \
-    --datadir=/data/sql_data \
-    --user=mysql --basedir=/home/mysql</code></p>
-<p>MySQL 5.7 之后<br><code>bin/mysql --initialize --user = mysql \
-    --basedir=/home/mysql \
-    --datadir=/home/mysql/data</code></p>
-<h3 id="1-3-旧版本支持为表增加计算列演练"><a href="#1-3-旧版本支持为表增加计算列演练" class="headerlink" title="1-3 旧版本支持为表增加计算列演练"></a>1-3 旧版本支持为表增加计算列演练</h3><p>MySQL 5.7 之前，需要增加一个插入触发器和更新触发器来实现计算列的功能，或者是一个视图来实现计算列的功能</p>
-<p>MySQL 5.7 之后，在 <code>CREATE TABLE</code> 及 <code>ALTER TABLE</code> 语句中支持增加计算列的方式<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">col_name data_type [GENERATED ALWAYS] AS (expression)</div><div class="line">[VIRTUAL | STORED] [UNIQUE [KEY]] [<span class="keyword">COMMENT</span> <span class="keyword">comment</span>]</div><div class="line">[[<span class="keyword">NOT</span>] <span class="literal">NULL</span>] [[PRIMARY] <span class="keyword">KEY</span>]</div></pre></td></tr></table></figure></p>
-<h3 id="1-4-MySQL5-7支持为表增加计算列实际演练"><a href="#1-4-MySQL5-7支持为表增加计算列实际演练" class="headerlink" title="1-4 MySQL5.7支持为表增加计算列实际演练"></a>1-4 MySQL5.7支持为表增加计算列实际演练</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> t(<span class="keyword">id</span> <span class="built_in">int</span> AUTO_INCREMENT <span class="keyword">not</span> <span class="literal">null</span>,c1 <span class="built_in">int</span>,c2 <span class="built_in">int</span>,c3 <span class="built_in">int</span> <span class="keyword">as</span> (c1+c2),PRIMARY <span class="keyword">KEY</span> (<span class="keyword">id</span>));</div><div class="line"></div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> t(c1,c2) <span class="keyword">VALUES</span>(<span class="number">1</span>,<span class="number">2</span>);</div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> t;</div><div class="line"></div><div class="line"><span class="keyword">UPDATE</span> t <span class="keyword">set</span> c1 = <span class="number">5</span> <span class="keyword">WHERE</span> <span class="keyword">id</span> = <span class="number">1</span>;</div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> t;</div></pre></td></tr></table></figure>
-<h3 id="1-5-引入JSON列类型及相关函数"><a href="#1-5-引入JSON列类型及相关函数" class="headerlink" title="1-5 引入JSON列类型及相关函数"></a>1-5 引入JSON列类型及相关函数</h3><p>MySQL 5.7 之前</p>
-<p>只能在 varchar 或是 text 等字符类型的列中存储 JSON 类型的字符串，并通过程序解析使用 JSON 字符串。</p>
-<p>MySQL 5.7 之后</p>
-<p>增加了 JSON 列类型及以 JSON 开头的相关处理函数，如 JSON_TYPE(),JSON_OBJECT()，JSON_MERGE() 等。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SELECT JSON_ARRAY(1,2,3,now());</div><div class="line">SELECT JSON_OBJECT(&apos;keyA&apos;,1,&apos;keyB&apos;,2);</div></pre></td></tr></table></figure></p>
-<h2 id="第-2-章-Replication-相关增强"><a href="#第-2-章-Replication-相关增强" class="headerlink" title="第 2 章 Replication 相关增强"></a>第 2 章 Replication 相关增强</h2><h3 id="2-1-支持多源复制"><a href="#2-1-支持多源复制" class="headerlink" title="2-1 支持多源复制"></a>2-1 支持多源复制</h3><p>略</p>
-<h3 id="2-2-基于库或是逻辑锁的多线程复制"><a href="#2-2-基于库或是逻辑锁的多线程复制" class="headerlink" title="2-2 基于库或是逻辑锁的多线程复制"></a>2-2 基于库或是逻辑锁的多线程复制</h3><p>MySQL 5.7 之前</p>
-<p>从 MySQL 5.6 开始支持多线程复制，只不过是对于每一个库一个复制线程。</p>
-<p>MySQL 5.7 之后</p>
-<p>MySQL 5.7 后对多线程复制功能进行了加强，增加了 <code>slave_paraller_type</code> 参数可以控制并发同步是基于 <code>database</code> 还是 <code>logical_clock</code></p>
-<h3 id="2-3-在线变更复制方式"><a href="#2-3-在线变更复制方式" class="headerlink" title="2-3 在线变更复制方式"></a>2-3 在线变更复制方式</h3><p>MySQL 5.7 之前</p>
-<p>要把基于日志点的复制方式变为基于 gtid 的复制方式或是把基于 gtid 的复制方式变成基于日志点的复制方式必须要重启 master 的服务器</p>
-<p>MySQL 5.7 之后</p>
-<p>允许在线变列复制的方式，而不用重启 master 服务器</p>
-<h2 id="第-3-章-InnoDB-引擎增强"><a href="#第-3-章-InnoDB-引擎增强" class="headerlink" title="第 3 章 InnoDB 引擎增强"></a>第 3 章 InnoDB 引擎增强</h2><h3 id="3-1-支持缓冲池大小在线变更"><a href="#3-1-支持缓冲池大小在线变更" class="headerlink" title="3-1 支持缓冲池大小在线变更"></a>3-1 支持缓冲池大小在线变更</h3><p>MySQL 5.7 之前</p>
-<p>要变更 <code>innodb_buffer_pool</code> 大小必须更改 <code>my.cnf</code> 文件后重启数据库服务器</p>
-<p>MySQL 5.7 之后</p>
-<p><code>innodb_buffer_pool_size</code> 参数变为动态参数，可以在线调整 <code>innodb</code> 缓存池的大小</p>
-<h3 id="3-2-增加-innodb-buffer-pool-导入导出功能"><a href="#3-2-增加-innodb-buffer-pool-导入导出功能" class="headerlink" title="3-2 增加 innodb_buffer_pool 导入导出功能"></a>3-2 增加 <code>innodb_buffer_pool</code> 导入导出功能</h3><p>MySQL 5.7 之后，新增以下参数控制 <code>innodb_buffer_pool</code> 的导入导出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">innodb_buffer_pool_dump_pct</div><div class="line">innodb_buffer_pool_dump_now</div><div class="line">innodb_buffer_pool_dump_at_shutdown</div><div class="line">innodb_buffer_pool_load_at_startup</div><div class="line">innodb_buffer_pool_load_now</div></pre></td></tr></table></figure></p>
-<h3 id="3-3-支持为-innodb-表建立表空间"><a href="#3-3-支持为-innodb-表建立表空间" class="headerlink" title="3-3 支持为 innodb 表建立表空间"></a>3-3 支持为 <code>innodb</code> 表建立表空间</h3><p>MySQL 5.7 之前</p>
-<p>具有系统表空间及可以为每个表建立一个独立的表空间</p>
-<p>MySQL 5.7 之后</p>
-<p>支持 <code>CREATE TABLESPACE</code> 语法为一个表或多个表建立共用的表空间</p>
-<h2 id="第-4-章-安全及管理方面增强"><a href="#第-4-章-安全及管理方面增强" class="headerlink" title="第 4 章 安全及管理方面增强"></a>第 4 章 安全及管理方面增强</h2><h3 id="4-1-不再支持old-password认证"><a href="#4-1-不再支持old-password认证" class="headerlink" title="4-1 不再支持old_password认证"></a>4-1 不再支持old_password认证</h3><h3 id="4-2-增加账号默认过期时间"><a href="#4-2-增加账号默认过期时间" class="headerlink" title="4-2 增加账号默认过期时间"></a>4-2 增加账号默认过期时间</h3><p><code>show variables like &#39;default_password_lifetime&#39;;</code></p>
-<h3 id="4-3-加强了对账号的管理功能"><a href="#4-3-加强了对账号的管理功能" class="headerlink" title="4-3 加强了对账号的管理功能"></a>4-3 加强了对账号的管理功能</h3><h3 id="4-4-增加了-sys-管理数据库"><a href="#4-4-增加了-sys-管理数据库" class="headerlink" title="4-4 增加了 sys 管理数据库"></a>4-4 增加了 sys 管理数据库</h3>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/12/MySQL-5-7-版本新特性/" data-id="cj9t8tyhu001gi24bdtfbmrev" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
 
     </footer>
   </div>
@@ -2853,7 +2243,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categorieën</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -2863,7 +2253,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Labels</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
     </div>
@@ -2873,7 +2263,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Programming-Language/" style="font-size: 11.43px;">Programming Language</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a> <a href="/tags/vue-js/" style="font-size: 10px;">vue.js</a>
     </div>
@@ -2882,7 +2272,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
@@ -2892,9 +2282,17 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/11/16/PHP-秒杀系统/">PHP 秒杀系统</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/14/PHP-面试考点/">PHP 面试考察点</a>
+          </li>
         
           <li>
             <a href="/2017/11/09/Web-API-的设计与开发/">Web API 的设计与开发</a>
@@ -2906,14 +2304,6 @@
         
           <li>
             <a href="/2017/11/01/刻意练习/">刻意练习</a>
-          </li>
-        
-          <li>
-            <a href="/2017/10/24/高性能的-PHP-API-接口开发/">高性能的 PHP API 接口开发</a>
-          </li>
-        
-          <li>
-            <a href="/2017/09/04/Vue-js-2-X-实践/">Vue.js 2.X 实践</a>
           </li>
         
       </ul>
@@ -2929,7 +2319,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Luis Edware<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

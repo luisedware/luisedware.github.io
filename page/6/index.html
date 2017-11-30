@@ -53,9 +53,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -65,6 +65,114 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-关于-PHP-函数-array-map-的一些想法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/21/关于-PHP-函数-array-map-的一些想法/" class="article-date">
+  <time datetime="2016-11-21T06:42:50.000Z" itemprop="datePublished">2016-11-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/21/关于-PHP-函数-array-map-的一些想法/">关于 PHP 函数 array_map 的一些想法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="array-map"><a href="#array-map" class="headerlink" title="array_map"></a>array_map</h2><p>array_map - 为数组的每个元素应用回调函数</p>
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p><code>array array_map(callable $callback, array $array1[, array $...])</code></p>
+<p>array_map()：返回数组，是为 array1 每个元素应用 callback函数之后的数组。 callback 函数形参的数量和传给 array_map() 数组数量，两者必须一样。</p>
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><ul>
+<li>callback<ul>
+<li>回调函数，应用到每个数组里的元素</li>
+</ul>
+</li>
+<li>array1<ul>
+<li>数组，遍历运行 callback 函数</li>
+</ul>
+</li>
+<li>…<ul>
+<li>数据列表，每个都遍历运行 callback 函数</li>
+</ul>
+</li>
+</ul>
+<h2 id="范例"><a href="#范例" class="headerlink" title="范例"></a>范例</h2><h3 id="array-map-实现-foreach-的效果"><a href="#array-map-实现-foreach-的效果" class="headerlink" title="array_map 实现 foreach 的效果"></a>array_map 实现 foreach 的效果</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">GraphicsCard</span></span></div><div class="line"><span class="class"></span>&#123;</div><div class="line">    <span class="keyword">public</span> $brand;</div><div class="line">    <span class="keyword">public</span> $model;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($brand, $model)</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;brand = $brand;</div><div class="line">        <span class="keyword">$this</span>-&gt;model = $model;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$graphics_card = [</div><div class="line">    [</div><div class="line">        <span class="string">'brand'</span>=&gt;<span class="string">'华硕'</span>,</div><div class="line">        <span class="string">'model'</span>=&gt;<span class="string">'GTX980(Ti)'</span>,</div><div class="line">        <span class="string">'status'</span>=&gt;<span class="number">1</span>,</div><div class="line">    ],</div><div class="line">    [</div><div class="line">        <span class="string">'brand'</span>=&gt;<span class="string">'技嘉'</span>,</div><div class="line">        <span class="string">'model'</span>=&gt;<span class="string">'GTX970'</span>,</div><div class="line">        <span class="string">'status'</span>=&gt;<span class="number">0</span>,</div><div class="line">    ],</div><div class="line">    [</div><div class="line">        <span class="string">'brand'</span>=&gt;<span class="string">'微星'</span>,</div><div class="line">        <span class="string">'model'</span>=&gt;<span class="string">'GTX960'</span>,</div><div class="line">        <span class="string">'status'</span>=&gt;<span class="number">1</span>,</div><div class="line">    ],</div><div class="line">    [</div><div class="line">        <span class="string">'brand'</span>=&gt;<span class="string">'七彩虹'</span>,</div><div class="line">        <span class="string">'model'</span>=&gt;<span class="string">'GTX950'</span>,</div><div class="line">        <span class="string">'status'</span>=&gt;<span class="number">0</span>,</div><div class="line">    ],</div><div class="line">];</div><div class="line"></div><div class="line"></div><div class="line">$graphics_card2 = [];</div><div class="line"><span class="keyword">foreach</span> ($graphics_card <span class="keyword">as</span> $value) &#123;</div><div class="line">    $graphics_card2[] = <span class="keyword">new</span> GraphicsCard($value[<span class="string">'brand'</span>], $value[<span class="string">'model'</span>]);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// Demo 1</span></div><div class="line">$demoA1 = $graphics_card;</div><div class="line">$demoA2 = $graphics_card2;</div><div class="line"><span class="keyword">foreach</span> ($demoA1 <span class="keyword">as</span> $key =&gt; $value) &#123;</div><div class="line">    $demoA1[$key][<span class="string">'model'</span>] = <span class="string">'1080'</span>;</div><div class="line">    $demoA1[$key][<span class="string">'brand'</span>] = <span class="string">'按摩店'</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">foreach</span> ($demoA2 <span class="keyword">as</span> $key =&gt; $item) &#123;</div><div class="line">    $demoA2[$key]-&gt;brand = <span class="string">'按摩店'</span>;</div><div class="line">    $demoA2[$key]-&gt;model = <span class="string">'1080'</span>;</div><div class="line">&#125;</div><div class="line">var_dump($demoA1);</div><div class="line">var_dump($demoA2);</div><div class="line"></div><div class="line"><span class="comment">// Demo 2</span></div><div class="line">$demoB1 = $graphics_card;</div><div class="line">$demoB2 = $graphics_card2;</div><div class="line">$demoB1 = array_map(<span class="function"><span class="keyword">function</span> <span class="params">($value)</span> </span>&#123;</div><div class="line">    $value[<span class="string">'brand'</span>] = <span class="string">'按摩店'</span>;</div><div class="line">    $value[<span class="string">'model'</span>] = <span class="string">'1080'</span>;</div><div class="line">    <span class="keyword">return</span> $value;</div><div class="line">&#125;, $demoB1);</div><div class="line">array_map(<span class="function"><span class="keyword">function</span> <span class="params">($value)</span> </span>&#123;</div><div class="line">    $value-&gt;brand = <span class="string">'按摩店'</span>;</div><div class="line">    $value-&gt;model = <span class="string">'1080'</span>;</div><div class="line">&#125;, $demoB2);</div><div class="line">var_dump($demoB1);</div><div class="line">var_dump($demoB2);</div><div class="line"></div><div class="line"><span class="comment">// Demo 3</span></div><div class="line">$demoC1 = $graphics_card;</div><div class="line">$demoC2 = $graphics_card2;</div><div class="line">array_map(<span class="function"><span class="keyword">function</span> <span class="params">($key, $value)</span> <span class="title">use</span> <span class="params">(&amp;$demoC1)</span> </span>&#123;</div><div class="line">    $demoC1[$key][<span class="string">'brand'</span>] = <span class="string">'按摩店'</span>;</div><div class="line">    $demoC1[$key][<span class="string">'model'</span>] = <span class="string">'1080'</span>;</div><div class="line">&#125;, array_keys($demoC1), $demoC1);</div><div class="line">array_map(<span class="function"><span class="keyword">function</span> <span class="params">($key, $value)</span> <span class="title">use</span> <span class="params">($demoC2)</span> </span>&#123;</div><div class="line">    $demoC2[$key]-&gt;brand = <span class="string">'按摩店'</span>;</div><div class="line">    $demoC2[$key]-&gt;model = <span class="string">'1080'</span>;</div><div class="line">&#125;, array_keys($demoC2), $demoC2);</div><div class="line">var_dump($demoC1);</div><div class="line">var_dump($demoC2);</div><div class="line"></div><div class="line"><span class="comment">// Demo 4</span></div><div class="line">$brands = [];</div><div class="line">$models = [];</div><div class="line"><span class="keyword">foreach</span> ($graphics_card <span class="keyword">as</span> $item) &#123;</div><div class="line">    $brands[] = $item[<span class="string">'brand'</span>];</div><div class="line">&#125;</div><div class="line"></div><div class="line">$models = array_map(<span class="function"><span class="keyword">function</span> <span class="params">($value)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> $value[<span class="string">'model'</span>];</div><div class="line">&#125;, $graphics_card);</div><div class="line"></div><div class="line">var_dump($brands);</div><div class="line">var_dump($models);</div><div class="line"><span class="comment">// 也可以使用 array_column 来实现 Demo 4 的效果</span></div><div class="line">var_dump(array_column($graphics_card, <span class="string">'brand'</span>));</div><div class="line">var_dump(array_column($graphics_card, <span class="string">'model'</span>));</div><div class="line"></div><div class="line"><span class="comment">// Demo5</span></div><div class="line">$items = [</div><div class="line">    <span class="string">'item1'</span>=&gt;<span class="string">'Hello'</span>,</div><div class="line">    <span class="string">'item2'</span>=&gt;<span class="string">'World'</span>,</div><div class="line">    <span class="string">'item3'</span>=&gt;<span class="string">'Luis'</span>,</div><div class="line">    <span class="string">'item4'</span>=&gt;<span class="string">'Edware'</span>,</div><div class="line">    <span class="string">'item5'</span>=&gt;<span class="string">'Ann'</span>,</div><div class="line">    <span class="string">'item6'</span>=&gt;<span class="string">'Eason'</span>,</div><div class="line">];</div><div class="line"></div><div class="line"><span class="keyword">foreach</span>($items <span class="keyword">as</span> $key =&gt; $value)&#123;</div><div class="line">	<span class="keyword">if</span>($key === <span class="string">'item1'</span>)&#123;</div><div class="line">		$items[$key] = <span class="string">'World'</span>;</div><div class="line">	&#125;<span class="keyword">elseif</span>($key === <span class="string">'item3'</span>)&#123;</div><div class="line">		$items[$key] = <span class="string">'Edware'</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">var_dump($items);</div><div class="line"></div><div class="line">$items_to_modify = [<span class="string">'item1'</span>=&gt;<span class="string">'Hello'</span>,<span class="string">'item3'</span>=&gt;<span class="string">'Luis'</span>];</div><div class="line">array_map(<span class="function"><span class="keyword">function</span><span class="params">($key,$value)</span> <span class="title">use</span><span class="params">(&amp;$items)</span> </span>&#123;</div><div class="line">    $items[$key] = $value;</div><div class="line">&#125;,array_keys($items_to_modify),$items_to_modify);</div><div class="line">var_dump($items);</div></pre></td></tr></table></figure>
+<h2 id="使用-array-map-实现-array-column-的效果"><a href="#使用-array-map-实现-array-column-的效果" class="headerlink" title="使用 array_map 实现 array_column 的效果"></a>使用 array_map 实现 array_column 的效果</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">array_pluck</span><span class="params">($key, $input)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (is_array($key) || !is_array($input)) <span class="keyword">return</span> <span class="keyword">array</span>();</div><div class="line">    $array = array_map(<span class="function"><span class="keyword">function</span><span class="params">($value)</span> <span class="title">use</span><span class="params">($key)</span></span>&#123;</div><div class="line">       <span class="keyword">if</span>(array_key_exists($key, $value)) <span class="keyword">return</span> $value[$key];</div><div class="line">    &#125;,$input);</div><div class="line">    <span class="keyword">return</span> $array;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var_dump(array_pluck(<span class="string">'brand'</span>,$graphics_card));</div><div class="line">var_dump(array_column($graphics_card,<span class="string">'brand'</span>));</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2016/11/21/关于-PHP-函数-array-map-的一些想法/" data-id="cjamgsphj006azy4b1aaylexp" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-使用-PHPStorm-的-Live-Templates-封装常用代码" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/19/使用-PHPStorm-的-Live-Templates-封装常用代码/" class="article-date">
+  <time datetime="2016-11-19T07:11:46.000Z" itemprop="datePublished">2016-11-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/19/使用-PHPStorm-的-Live-Templates-封装常用代码/">使用 PHPStorm 的 Live Templates 封装常用代码</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="PHP-Template-Group"><a href="#PHP-Template-Group" class="headerlink" title="PHP Template Group"></a>PHP Template Group</h2><h3 id="fore"><a href="#fore" class="headerlink" title="fore"></a>fore</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">foreach ($ITERABLE$ as $VAR_VALUE$) &#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="forek"><a href="#forek" class="headerlink" title="forek"></a>forek</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">foreach ($ITERABLE$ as $VAR_KEY$ =&gt; $VAR_VALUE$) &#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="prif"><a href="#prif" class="headerlink" title="prif"></a>prif</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">private function $NAME$($PARAMETERS$)&#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="prisf"><a href="#prisf" class="headerlink" title="prisf"></a>prisf</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">private static function $NAME$($PARAMETERS$)&#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="prof"><a href="#prof" class="headerlink" title="prof"></a>prof</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">protected function $NAME$($PARAMETERS$)&#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="prosf"><a href="#prosf" class="headerlink" title="prosf"></a>prosf</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">protected static function $NAME$($PARAMETERS$)&#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="pubf"><a href="#pubf" class="headerlink" title="pubf"></a>pubf</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public function $NAME$($PARAMETERS$)&#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="pubsf"><a href="#pubsf" class="headerlink" title="pubsf"></a>pubsf</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public static function $NAME$($PARAMETERS$)&#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="thr"><a href="#thr" class="headerlink" title="thr"></a>thr</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">throw new $END$</div></pre></td></tr></table></figure>
+<h3 id="tryc"><a href="#tryc" class="headerlink" title="tryc"></a>tryc</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">try &#123;</div><div class="line">    $ITERABLE$</div><div class="line">&#125; catch (\$Exception$ $e) &#123;</div><div class="line">    $END$</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>##</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2016/11/19/使用-PHPStorm-的-Live-Templates-封装常用代码/" data-id="cjamgspgd004zzy4b61f0h297" class="article-share-link">Delen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-Yii-框架之工具篇" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -96,7 +204,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/11/03/Yii-框架之工具篇/" data-id="cj9t8tyip002pi24bzfiq1gpz" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/11/03/Yii-框架之工具篇/" data-id="cjamgspf80032zy4bszdcvu5i" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -166,7 +274,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/29/Yii-框架之安全篇/" data-id="cj9t8tyit002ui24bzsha4ol6" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/10/29/Yii-框架之安全篇/" data-id="cjamgspf4002rzy4bxdq3k5ip" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -224,7 +332,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/29/Yii-框架之扩展篇/" data-id="cj9t8tyiy002xi24bhvno664g" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/10/29/Yii-框架之扩展篇/" data-id="cjamgspf90036zy4bif5u1pau" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -496,7 +604,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/25/Yii-框架之基础篇/" data-id="cj9t8tyin002mi24bumru6wq7" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/10/25/Yii-框架之基础篇/" data-id="cjamgspf7002zzy4bzxyx8p9v" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -599,7 +707,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/25/Yii-框架之高效篇/" data-id="cj9t8tyj20030i24bno8ndpwz" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/10/25/Yii-框架之高效篇/" data-id="cjamgspfb0039zy4bk1ss5uis" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -792,7 +900,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/20/打造扛得住的-MySQL-数据库架构/" data-id="cj9t8tymn007di24bwugpjlzf" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/10/20/打造扛得住的-MySQL-数据库架构/" data-id="cjamgspim007rzy4bs9exn0gb" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -1044,7 +1152,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/13/LNMP-性能优化之-MySQL-性能优化/" data-id="cj9t8tygs0001i24b6xgohijb" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/10/13/LNMP-性能优化之-MySQL-性能优化/" data-id="cjamgspdr0006zy4b159wbvqs" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -1298,309 +1406,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之条件判断语句/" data-id="cj9t8tyhb000bi24blk807y1d" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Linux-Shell-基础之运算符" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/10/04/Linux-Shell-基础之运算符/" class="article-date">
-  <time datetime="2016-10-04T02:53:55.000Z" itemprop="datePublished">2016-10-04</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/04/Linux-Shell-基础之运算符/">Linux Shell 基础之运算符</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Shell-运算符"><a href="#Shell-运算符" class="headerlink" title="Shell 运算符"></a>Shell 运算符</h2><ul>
-<li>declare 声明变量<ul>
-<li><code>declare [+/-][选项] 变量名</code><ul>
-<li>- 给变量设定类型属性<ul>
-<li>-a 将变量声明为数组型</li>
-<li>-i 将变量声明为整数型</li>
-<li>-x 将变量声明为环境变量</li>
-<li>-r 将变量声明为只读变量</li>
-<li>-p 显示指定变量的被声明的类型</li>
-</ul>
-</li>
-<li>+ 取消变量的类型属性</li>
-</ul>
-</li>
-<li><code>declare -x test=123</code> 声明环境变量</li>
-</ul>
-</li>
-<li>declare -p 查询变量的属性<ul>
-<li><code>declare -p</code> 查询所有变量的属性</li>
-<li><code>declare -p 变量名</code> 查询指定变量的属性</li>
-</ul>
-</li>
-<li>expr 或 let 数值运算工具</li>
-</ul>
-<h2 id="Shell-运算符-例子"><a href="#Shell-运算符-例子" class="headerlink" title="Shell 运算符 例子"></a>Shell 运算符 例子</h2><h3 id="Shell-declare-例子"><a href="#Shell-declare-例子" class="headerlink" title="Shell declare 例子"></a>Shell declare 例子</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> 给变量 aa 和 bb 赋值</div><div class="line">aa=11</div><div class="line">bb=22</div><div class="line"></div><div class="line"><span class="meta">#</span> 声明变量 cc 的类型是整数型，它的值是 aa 和 bb 的和</div><div class="line">declare -i cc=$aa+$bb</div></pre></td></tr></table></figure>
-<h3 id="声明数组变量例子"><a href="#声明数组变量例子" class="headerlink" title="声明数组变量例子"></a>声明数组变量例子</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> 定义数组</div><div class="line">movie[0]=zp</div><div class="line">movie[1]=tp</div><div class="line">declare -a movie[2]=live</div><div class="line"></div><div class="line"><span class="meta">#</span> 查看数组</div><div class="line">echo $&#123;movie&#125;</div><div class="line">echo $&#123;movie[2]&#125;</div><div class="line">echo $&#123;movie[*]&#125;</div></pre></td></tr></table></figure>
-<h2 id="Shell-环境变量配置文件"><a href="#Shell-环境变量配置文件" class="headerlink" title="Shell 环境变量配置文件"></a>Shell 环境变量配置文件</h2><p>环境变量配置文件中主要是定义对系统操作环境生效的系统默认环境变量，如 PATH 等</p>
-<ul>
-<li>source 命令<ul>
-<li><code>source 配置文件</code></li>
-<li><code>. 配置文件</code></li>
-</ul>
-</li>
-<li>常用的环境变量配置文件<ul>
-<li>/etc/profile<ul>
-<li>USER 变量</li>
-<li>LOGNAME 变量</li>
-<li>MAIL 变量</li>
-<li>PATH 变量</li>
-<li>HOSTNAME 变量</li>
-<li>HISTSIZE 变量</li>
-<li>umask 查看系统默认权限<ul>
-<li>文件最高权限为 666</li>
-<li>目录最高权限为 777</li>
-<li>权限不能使用数字进行换算，而必须使用字母</li>
-<li>umask 定义的权限，是系统默认权限中准备丢弃的权限</li>
-</ul>
-</li>
-<li>调用 /etc/profile.d/*sh 文件</li>
-</ul>
-</li>
-<li>/etc/profile.d/*sh</li>
-<li>~/.bash_profile</li>
-<li>~/.bashrc</li>
-<li>/etc/bashrc</li>
-</ul>
-</li>
-<li>其他配置文件<ul>
-<li><code>~/.bash_logout</code> 注销时生效的环境变量配置文件</li>
-</ul>
-</li>
-<li>Shell 登录信息<ul>
-<li><code>cat /etc/issue</code> 本地终端欢迎信息</li>
-<li><code>cat /etc/issue.net</code> 远程终端欢迎信息<ul>
-<li>转义符在 <code>/etc/issue.net</code> 文件中不能使用</li>
-<li>是否显示此欢迎信息，由 SSH 的配置文件 <code>/etc/ssh/sshd_config</code> 决定，加入 “Banner /etc/issue.net” 行才能显示（需要重启 SSH 服务）</li>
-</ul>
-</li>
-<li><code>/etc/motd</code> 登陆后欢迎信息，不管是本地登录，还是远程登录，都可以显示此欢迎信息</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之运算符/" data-id="cj9t8tyhd000gi24b6uhfrtmq" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Linux-Shell-基础之变量" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/10/04/Linux-Shell-基础之变量/" class="article-date">
-  <time datetime="2016-10-04T02:50:53.000Z" itemprop="datePublished">2016-10-04</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/04/Linux-Shell-基础之变量/">Linux Shell 基础之变量</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Shell-变量概述"><a href="#Shell-变量概述" class="headerlink" title="Shell 变量概述"></a>Shell 变量概述</h2><p>Shell 与其他语言的对比</p>
-<ul>
-<li>PHP 和 JAVA 主要实现功能</li>
-<li>Shell 简化管理操作</li>
-</ul>
-<p>什么是变量</p>
-<ul>
-<li>变量是计算机内存的单元，其中存放的值可以改变</li>
-<li>变量让你能够把程序中准备使用的每一段数据都赋给一个简短、易于记忆的名字，因此它们十分有用</li>
-</ul>
-<p>变量命名规则</p>
-<ul>
-<li>变量名必须以字母或下划线开头，名字中间只能由字母、数字和下划线组成</li>
-<li>变量名的长度不得超过 255 个字符</li>
-<li>变量名在有效的范围内必须是唯一的</li>
-<li>在 Bash 中，变量的默认类型都是字符串型</li>
-</ul>
-<p>变量存储类型</p>
-<ul>
-<li>整型</li>
-<li>浮点型</li>
-<li>日期型</li>
-<li>字符串型</li>
-</ul>
-<p>变量定义分类</p>
-<ul>
-<li>用户自定义变量：用户自定义的变量</li>
-<li>环境变量：这种变量中主要保存的是和系统操作环境相关的数据。变量可以自定义，但是对系统生效的环境变量名和变量作用是固定的。</li>
-<li>位置参数变量：这种变量主要是用来向脚本当中传递参数或数据的。变量名不能自定义，变量作用固定。</li>
-<li>预定义变量：是 Bash 中已经定义好的变量，变量名不能自定义，变量作用也是固定的。</li>
-</ul>
-<h2 id="Shell-变量与变量分类"><a href="#Shell-变量与变量分类" class="headerlink" title="Shell 变量与变量分类"></a>Shell 变量与变量分类</h2><ul>
-<li>用户自定义变量<ul>
-<li>变量定义<ul>
-<li><code>变量名=变量值</code><ul>
-<li><code>x=5</code></li>
-<li><code>name=&quot;Luis&quot;</code></li>
-</ul>
-</li>
-<li>变量赋值时候，变量名与变量值之间不能有空格</li>
-</ul>
-</li>
-<li>变量调用<ul>
-<li><code>echo $x</code></li>
-<li><code>echo $name</code></li>
-</ul>
-</li>
-<li>变量叠加<ul>
-<li>x=123</li>
-<li>x=”$x”456</li>
-<li>x=${x}789</li>
-</ul>
-</li>
-<li>变量查看<ul>
-<li>set<ul>
-<li>-u 如果设定此选项，调用未声明变量时会报错（默认无任何显示）</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>变量删除<ul>
-<li><code>unset 变量名</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>环境变量<ul>
-<li>用户自定义环境变量<ul>
-<li>设置环境变量<ul>
-<li><code>export 变量名=变量值</code></li>
-<li><code>变量名=变量值;export 变量名</code></li>
-</ul>
-</li>
-<li>查看环境变量<ul>
-<li><code>set</code> 查看所有变量</li>
-<li><code>env</code> 查看环境变量</li>
-</ul>
-</li>
-<li>删除环境变量<ul>
-<li><code>unset 变量名</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>系统常用的环境变量<ul>
-<li>HOSTNAME 主机名</li>
-<li>SHELL 当前的 Shell</li>
-<li>TERM 终端环境</li>
-<li>HISTSIZE 历史命令条数</li>
-<li>SSH_CLIENT 当前操作环境是用 ssh 连接的，这里记录客户端 IP</li>
-<li>SSH_TTY ssh 连接的终端时 pts/1</li>
-<li>USER 当前登录的用户</li>
-<li>PATH 系统查找命令的路径<ul>
-<li><code>echo $PATH</code> 查看 PATH 环境变量</li>
-<li><code>PATH=&quot;$PATH&quot;:/root/sh</code> 增加 PATH 变量的值</li>
-</ul>
-</li>
-<li>PS1 变量 命令提示符设置<ul>
-<li>\d 显示日期，格式为”星期 月 日”</li>
-<li>\H 显示完整的主机名，如默认主机名 “localhost.localdomain”</li>
-<li>\t 显示 24 小时制时间，格式为 “HH:MM:SS”</li>
-<li>\A 显示 24 小时制时间，格式为 “HH:MM”</li>
-<li>\u 显示当前用户名</li>
-<li>\w 显示当前所在目录的完整名称</li>
-<li>\W 显示当前所在目录的最后一个目录</li>
-<li>\$ 提示符。如果是 root 用户会显示提示符为 “#”，如果是普通用户会显示提示符为 “$”</li>
-<li>例子 <code>PS1=&#39;[\u@\A \w]\$ &#39;</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>语系变量<ul>
-<li><code>locale</code> 查询当前系统语系（<code>echo $LANG</code>）<ul>
-<li>LANG 定义系统主语系的变量</li>
-<li>LC_ALL 定义整体语系的变量</li>
-</ul>
-</li>
-<li><code>locale -a | more</code> 查看 Linux 支持的所有语系</li>
-<li><code>cat /etc/sysconfig/i18n</code> 查询系统默认语系（下次开机语系变量）</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>位置参数变量</p>
-<p>  位置参数变量|作用<br>  —|—<br>  $n|n 为数字，$0 代表命令本身，$1-$9 代表第一到第九个参数，十以上的参数需要用大括号包含，如 ${10}<br>  $*|这个变量代表命令行中所有的参数，$* 把所有的参数看成一个整体<br>  $@|这个变量代表命令行中所有的参数，不过 $@ 把每个参数区分对待<br>  $#|这个变量代表命令行中所有参数的个数</p>
-</li>
-<li><p>预定义变量</p>
-<p>  预定义变量|作用<br>  —|—<br>  $? | 最后一次执行的命令的返回状态。如果这个变量的值为 0，证明上一个命令正确执行；如果这个变量的值为非 0(具体是哪个数，由命令自己决定，则证明上一个命令执行不正确)<br>  $$ | 当前进程的进程号<br>  $! | 后台运行的最后一个进程的进程号</p>
-</li>
-<li><p>接收键盘输入</p>
-<ul>
-<li><code>read [选项] [变量名]</code><ul>
-<li>-p 提示信息：在等待 read 输入时，输出提示信息</li>
-<li>-t 秒数：read 命令会一直等待用户输入，使用此选项可以指定等待时间</li>
-<li>-n 字符数：read 命令只接受指定的字符数，就会执行</li>
-<li>-s 隐藏输入的数据，适用于机密信息的输入</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="Shell-变量例子"><a href="#Shell-变量例子" class="headerlink" title="Shell 变量例子"></a>Shell 变量例子</h2><p>位置参数例子 1</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>!/bin/bash</div><div class="line">num1=$1</div><div class="line">num2=$2</div><div class="line"></div><div class="line"><span class="meta">#</span> 变量 sum 的和是 num1 加 num2</div><div class="line">sum=$(($num1+$num2))</div><div class="line"></div><div class="line"><span class="meta">#</span> 打印变量 sum 的值</div><div class="line">echo $sum</div></pre></td></tr></table></figure>
-<p>位置参数例子 2<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>!/bin/bash</div><div class="line"></div><div class="line"><span class="meta">#</span> 使用 $# 代表所有参数的个数</div><div class="line">echo "A total of $# parameters"</div><div class="line"></div><div class="line"><span class="meta">#</span> 使用 $* 代表所有的参数</div><div class="line">echo "The parameters is:$*"</div><div class="line"></div><div class="line"><span class="meta">#</span> 使用 $@ 也代表所有参数</div><div class="line">echo "The parameters is:$@"</div></pre></td></tr></table></figure></p>
-<p>位置参数例子 3（$* 与 $@ 的区别）<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>!/bin/bash</div><div class="line"></div><div class="line">for i in "$*"</div><div class="line"><span class="meta">#</span> $* 中的所有参数看成是一个整体，所以这个 for 循环只会循环一次</div><div class="line">do</div><div class="line">	echo "The parameters is: $i"</div><div class="line">done</div><div class="line"></div><div class="line">for y in "$@"</div><div class="line"><span class="meta">#</span> $@ 中的每个参数都看成是独立的，所以 "$@" 中有几个参数，就会循环几次</div><div class="line">do</div><div class="line">	echo "Parameter:$y"</div><div class="line">done</div></pre></td></tr></table></figure></p>
-<p>接收键盘输入例子 1<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>!/bin/bash</div><div class="line"></div><div class="line">read -p "Please input your name: " -t 30 name</div><div class="line">echo $name</div><div class="line"></div><div class="line">read -p "Please input your passwd: " -s passed</div><div class="line">echo -e "\n"</div><div class="line">echo $passwd</div><div class="line"></div><div class="line">read -p "Please input your sex [M/F]: " -n 1 sex</div><div class="line">echo -e "\n"</div><div class="line">echo $sex</div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之变量/" data-id="cj9t8tyh9000ai24bqx2v78e9" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之条件判断语句/" data-id="cjamgspdu000bzy4b11v7czri" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1623,7 +1429,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categorieën</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -1633,7 +1439,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Labels</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
     </div>
@@ -1643,7 +1449,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Programming-Language/" style="font-size: 11.43px;">Programming Language</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a> <a href="/tags/vue-js/" style="font-size: 10px;">vue.js</a>
     </div>
@@ -1652,7 +1458,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
@@ -1662,9 +1468,17 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/11/16/PHP-秒杀系统/">PHP 秒杀系统</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/14/PHP-面试考点/">PHP 面试考察点</a>
+          </li>
         
           <li>
             <a href="/2017/11/09/Web-API-的设计与开发/">Web API 的设计与开发</a>
@@ -1676,14 +1490,6 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
         
           <li>
             <a href="/2017/11/01/刻意练习/">刻意练习</a>
-          </li>
-        
-          <li>
-            <a href="/2017/10/24/高性能的-PHP-API-接口开发/">高性能的 PHP API 接口开发</a>
-          </li>
-        
-          <li>
-            <a href="/2017/09/04/Vue-js-2-X-实践/">Vue.js 2.X 实践</a>
           </li>
         
       </ul>
@@ -1699,7 +1505,7 @@ $cat-&gt;off(&apos;miao&apos;,[$dog,&apos;look&apos;]);//dog取消关注cat的mi
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Luis Edware<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

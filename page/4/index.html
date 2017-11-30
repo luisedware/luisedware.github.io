@@ -53,9 +53,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -65,6 +65,93 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-「Tips」-htaccess-配置-HTTP-Header" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/15/「Tips」-htaccess-配置-HTTP-Header/" class="article-date">
+  <time datetime="2017-03-15T09:18:21.000Z" itemprop="datePublished">2017-03-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/15/「Tips」-htaccess-配置-HTTP-Header/">「Tips」.htaccess 配置 HTTP Header</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>使用 Yii 2 做 RESTFul API 项目时，发现在前端发起一个请求时，会出现以下错误：<br><figure class="highlight console"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Request header field access-token is not allowed by Access-Control-Allow-Headers in preflight response.</div></pre></td></tr></table></figure></p>
+<p>排查问题进行了很久，最后才发现在 Yii 2 的 <code>web</code> 目录下，有个文件 <code>.htaccess</code>，是可以配置 <code>Apache</code> 服务器接受 HTTP 请求的头部信息的，在特定选项加入 <code>access-token</code> 即刻不再报错，因为本次项目使用 <code>HTTP Header</code> 传递 <code>access-token</code> 的，没有加入 <code>access-token</code> 就意味 <code>Apache</code> 服务器不接受头部带有 <code>access-token</code> 的 HTTP 请求 。文件配置代码如下：<br><figure class="highlight apache"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="attribute"><span class="nomarkup">Header</span></span> always set Access-Control-Allow-Origin <span class="string">"*"</span></div><div class="line"><span class="attribute"><span class="nomarkup">Header</span></span> always set Access-Control-Allow-Methods <span class="string">"POST, GET, OPTIONS, DELETE, PUT"</span></div><div class="line"><span class="attribute"><span class="nomarkup">Header</span></span> always set Access-Control-Max-Age <span class="string">"1000"</span></div><div class="line"><span class="attribute"><span class="nomarkup">Header</span></span> always set Access-Control-Allow-Headers <span class="string">"x-requested-with, Content-Type, origin, authorization, accept, client-security-token, access-token"</span></div><div class="line"></div><div class="line"><span class="attribute"><span class="nomarkup">RewriteEngine</span></span> <span class="literal">on</span></div><div class="line"></div><div class="line"><span class="attribute"><span class="nomarkup">RewriteCond</span></span> <span class="variable">%&#123;REQUEST_METHOD&#125;</span> OPTIONS</div><div class="line"><span class="attribute"><span class="nomarkup">RewriteRule</span></span> ^(.*)$ <span class="number">$1</span><span class="meta"> [R=200,L]</span></div><div class="line"></div><div class="line"><span class="attribute"><span class="nomarkup">RewriteCond</span></span> <span class="variable">%&#123;REQUEST_FILENAME&#125;</span> !-f</div><div class="line"><span class="attribute"><span class="nomarkup">RewriteCond</span></span> <span class="variable">%&#123;REQUEST_FILENAME&#125;</span> !-d</div><div class="line"><span class="attribute"><span class="nomarkup">RewriteRule</span></span> . index.php</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」-htaccess-配置-HTTP-Header/" data-id="cjamgspfu003kzy4bqwm9gotr" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-「Tips」PHP-7-1-命名空间的新特性和使用方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/15/「Tips」PHP-7-1-命名空间的新特性和使用方法/" class="article-date">
+  <time datetime="2017-03-15T09:16:02.000Z" itemprop="datePublished">2017-03-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/15/「Tips」PHP-7-1-命名空间的新特性和使用方法/">「Tips」PHP 7.1 命名空间的新特性和使用方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>新特性和使用方法如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="comment">// Pre PHP 7 code</span></div><div class="line"><span class="keyword">use</span> <span class="title">some</span>\<span class="title">namespace</span>\<span class="title">ClassA</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">some</span>\<span class="title">namespace</span>\<span class="title">ClassB</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">some</span>\<span class="title">namespace</span>\<span class="title">ClassC</span> <span class="title">as</span> <span class="title">C</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">function</span> <span class="title">some</span>\<span class="title">namespace</span>\<span class="title">fn_a</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">function</span> <span class="title">some</span>\<span class="title">namespace</span>\<span class="title">fn_b</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">function</span> <span class="title">some</span>\<span class="title">namespace</span>\<span class="title">fn_c</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">const</span> <span class="title">some</span>\<span class="title">namespace</span>\<span class="title">ConstA</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">const</span> <span class="title">some</span>\<span class="title">namespace</span>\<span class="title">ConstB</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">const</span> <span class="title">some</span>\<span class="title">namespace</span>\<span class="title">ConstC</span>;</div><div class="line"></div><div class="line"><span class="comment">// PHP 7+ code</span></div><div class="line"><span class="keyword">use</span> <span class="title">some</span>\<span class="title">namespace</span>\&#123;<span class="title">ClassA</span>, <span class="title">ClassB</span>, <span class="title">ClassC</span> <span class="title">as</span> <span class="title">C</span>&#125;;</div><div class="line"><span class="keyword">use</span> <span class="title">function</span> <span class="title">some</span>\<span class="title">namespace</span>\&#123;<span class="title">fn_a</span>, <span class="title">fn_b</span>, <span class="title">fn_c</span>&#125;;</div><div class="line"><span class="keyword">use</span> <span class="title">const</span> <span class="title">some</span>\<span class="title">namespace</span>\&#123;<span class="title">ConstA</span>, <span class="title">ConstB</span>, <span class="title">ConstC</span>&#125;;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2017/03/15/「Tips」PHP-7-1-命名空间的新特性和使用方法/" data-id="cjamgspfk003dzy4bq3tu5vhi" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-Swagger-PHP-基础使用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -178,7 +265,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/03/02/Swagger-PHP-基础使用/" data-id="cj9t8tyia0021i24bilmwti2f" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/03/02/Swagger-PHP-基础使用/" data-id="cjamgspey0029zy4bspneahey" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swagger/">Swagger</a></li></ul>
@@ -398,7 +485,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/28/使用-Yii2-构建-RESTFul-API/" data-id="cj9t8tyli005ei24bnu3wjyvs" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/02/28/使用-Yii2-构建-RESTFul-API/" data-id="cjamgspgl005gzy4bmmgb50oa" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii2/">Yii2</a></li></ul>
@@ -543,7 +630,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/23/「复习」使用阿里云从零开始部署-Laravel/" data-id="cj9t8tyjf003oi24boguj6ze6" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/02/23/「复习」使用阿里云从零开始部署-Laravel/" data-id="cjamgspfy003wzy4b0w5jr8f9" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AliCloud/">AliCloud</a></li></ul>
@@ -610,7 +697,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/17/学习-UML（二）/" data-id="cj9t8tymk0077i24bww74k1dw" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/02/17/学习-UML（二）/" data-id="cjamgspib007fzy4b6aijug2a" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UML/">UML</a></li></ul>
@@ -714,7 +801,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/14/在-Yii-2-中使用-CodeCeption/" data-id="cj9t8tyma006oi24blx36i8f4" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/02/14/在-Yii-2-中使用-CodeCeption/" data-id="cjamgspht006ozy4bz4h8ldet" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
@@ -834,7 +921,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/02/11/LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）/" data-id="cj9t8tyht001di24bzhreuocv" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/02/11/LuisEdware-版-PHP-编程规范（遵循-PSR-1-PSR-2）/" data-id="cjamgspef001fzy4b4on7vrjn" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -886,7 +973,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-九/" data-id="cj9t8tyhy001mi24bhk2s7gvx" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-九/" data-id="cjamgspek001lzy4bll3acn0q" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -940,145 +1027,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-六/" data-id="cj9t8tyi3001si24bat93q50k" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PHP-Codebook-四" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/01/22/PHP-Codebook-四/" class="article-date">
-  <time datetime="2017-01-22T06:56:46.000Z" itemprop="datePublished">2017-01-22</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/22/PHP-Codebook-四/">PHP Codebook(四)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="4-1-指定并非从元素-0-开始的数组"><a href="#4-1-指定并非从元素-0-开始的数组" class="headerlink" title="4.1 指定并非从元素 0 开始的数组"></a>4.1 指定并非从元素 0 开始的数组</h2><h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>希望一步为一个数组赋多个元素，不过不希望第一个元素的索引为0</p>
-<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$presidents = [<span class="number">1</span> =&gt; <span class="string">'Washington'</span>, <span class="string">'Adams'</span>, <span class="string">'Lincoln'</span>, <span class="string">'Jefferson'</span>];</div><div class="line">var_dump($presidents);</div><div class="line"></div><div class="line">$fruits[<span class="number">1</span>] = <span class="string">'apple'</span>;</div><div class="line">$fruits[] = <span class="string">'banana'</span>;</div><div class="line">var_dump($fruits);</div></pre></td></tr></table></figure>
-<h2 id="4-3-数组初始化为一个整数范围"><a href="#4-3-数组初始化为一个整数范围" class="headerlink" title="4.3 数组初始化为一个整数范围"></a>4.3 数组初始化为一个整数范围</h2><h4 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h4><p>希望将一系列连续的整数赋至一个数组</p>
-<h4 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$cards = range(<span class="number">1</span>,<span class="number">52</span>);</div></pre></td></tr></table></figure>
-<h2 id="4-4-迭代处理数组"><a href="#4-4-迭代处理数组" class="headerlink" title="4.4 迭代处理数组"></a>4.4 迭代处理数组</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$array = range(<span class="number">0</span>, <span class="number">12</span>);</div><div class="line"></div><div class="line"><span class="keyword">foreach</span> ($array <span class="keyword">as</span> $item) &#123;</div><div class="line">    <span class="keyword">echo</span> $item . <span class="string">"\n"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">foreach</span> ($array <span class="keyword">as</span> $key =&gt; $value) &#123;</div><div class="line">    <span class="keyword">echo</span> $value . <span class="string">"\n"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span> ($key = <span class="number">0</span>, $size = count($array); $key &lt; $size; $key++) &#123;</div><div class="line">    <span class="keyword">echo</span> $array[$key] . <span class="string">"\n"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 将内部指针重置为数组起始位置</span></div><div class="line">reset($array);</div><div class="line"><span class="keyword">while</span> (<span class="keyword">list</span>($key, $value) = each($array)) &#123;</div><div class="line">    <span class="keyword">echo</span> $value . <span class="string">"\n"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">array_map(<span class="function"><span class="keyword">function</span><span class="params">($value)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> $value;</div><div class="line">&#125;, $array);</div></pre></td></tr></table></figure>
-<h2 id="4-5-从数组删除元素"><a href="#4-5-从数组删除元素" class="headerlink" title="4.5 从数组删除元素"></a>4.5 从数组删除元素</h2><h4 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h4><p>希望从一个数组删除一个或多个数组</p>
-<h4 id="实现-2"><a href="#实现-2" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$array = range(<span class="number">0</span>, <span class="number">12</span>);</div><div class="line"></div><div class="line"><span class="comment">// 删除元素</span></div><div class="line"><span class="keyword">unset</span>($array[<span class="number">0</span>]);</div><div class="line"></div><div class="line"><span class="comment">// 删除多个连续的元素,array_splice 会自动对数组重新建立索引，避免留出空位。</span></div><div class="line">array_splice($array, <span class="number">1</span>, <span class="number">9</span>);</div><div class="line">var_dump($array);</div></pre></td></tr></table></figure>
-<h2 id="4-6-改变数组大小"><a href="#4-6-改变数组大小" class="headerlink" title="4.6 改变数组大小"></a>4.6 改变数组大小</h2><h4 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h4><p>希望改变一个数组的大小，使它大于或小于目前的大小</p>
-<h4 id="实现-3"><a href="#实现-3" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="comment">// array_pad() 第一个</span></div><div class="line">$array = [<span class="string">'apple'</span>, <span class="string">'banana'</span>, <span class="string">'cocount'</span>];</div><div class="line">$array = array_pad($array, <span class="number">4</span>, <span class="string">'dates'</span>);</div><div class="line">print_r($array);</div><div class="line"></div><div class="line">$array = array_pad($array, <span class="number">-10</span>, <span class="string">'zucchini'</span>);</div><div class="line">print_r($array);</div></pre></td></tr></table></figure>
-<h2 id="4-7-将数组追加到另一个数组"><a href="#4-7-将数组追加到另一个数组" class="headerlink" title="4.7 将数组追加到另一个数组"></a>4.7 将数组追加到另一个数组</h2><h4 id="问题-4"><a href="#问题-4" class="headerlink" title="问题"></a>问题</h4><p>希望把两个数组合并为一个数组</p>
-<h4 id="实现-4"><a href="#实现-4" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// 合并只使用数值键的数组时，数组将重新编号，以保证值不会丢失。</span></div><div class="line">$array1 = [<span class="string">'hello'</span>, <span class="string">'world'</span>];</div><div class="line">$array2 = [<span class="string">'luis'</span>, <span class="string">'edware'</span>, <span class="string">'hello'</span>, <span class="string">'world'</span>];</div><div class="line">$array3 = array_merge($array1, $array2);</div><div class="line">print_r($array3);</div><div class="line"></div><div class="line"><span class="comment">// + 操作符也可以用来合并数组</span></div><div class="line">print_r($array1 + $array2);</div><div class="line"></div><div class="line"><span class="comment">// 倘若两个数组有重复的键，第二数组会覆盖这些重复键的值</span></div><div class="line">$array1 = [<span class="string">'A'</span> =&gt; <span class="string">'apple'</span>, <span class="string">'B'</span> =&gt; <span class="string">'banana'</span>, <span class="string">'O'</span> =&gt; <span class="string">'orange'</span>];</div><div class="line">$array2 = [<span class="string">'A'</span> =&gt; <span class="string">'Luis'</span>, <span class="string">'C'</span> =&gt; <span class="string">'Imooc'</span>];</div><div class="line">print_r(array_merge($array1, $array2));</div></pre></td></tr></table></figure>
-<h2 id="4-8-将数组转换为字符串"><a href="#4-8-将数组转换为字符串" class="headerlink" title="4.8 将数组转换为字符串"></a>4.8 将数组转换为字符串</h2><h4 id="问题-5"><a href="#问题-5" class="headerlink" title="问题"></a>问题</h4><p>希望将一个数组转换为一个格式化的字符串</p>
-<h4 id="实现-5"><a href="#实现-5" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$array = range(<span class="number">0</span>, <span class="number">9</span>);</div><div class="line">$string1 = join(<span class="string">','</span>, $array);</div><div class="line">$string2 = implode(<span class="string">','</span>, $array);</div><div class="line">print_r($string1 . <span class="string">"\n"</span>);</div><div class="line">print_r($string2 . <span class="string">"\n"</span>);</div></pre></td></tr></table></figure>
-<h2 id="4-10-检查一个键是否存在数组中"><a href="#4-10-检查一个键是否存在数组中" class="headerlink" title="4.10 检查一个键是否存在数组中"></a>4.10 检查一个键是否存在数组中</h2><h4 id="问题-6"><a href="#问题-6" class="headerlink" title="问题"></a>问题</h4><p>想知道一个数组是否包含某个键</p>
-<h4 id="实现-6"><a href="#实现-6" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$array = [<span class="string">'a'</span> =&gt; <span class="string">'apple'</span>, <span class="string">'b'</span> =&gt; <span class="string">'banana'</span>, <span class="string">'c'</span> =&gt; <span class="string">'cao ni ma'</span>];</div><div class="line"><span class="keyword">if</span> (array_key_exists(<span class="string">'a'</span>, $array)) &#123;</div><div class="line">    <span class="keyword">echo</span> $array[<span class="string">'a'</span>] . <span class="string">"\n"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($array[<span class="string">'a'</span>])) &#123;</div><div class="line">    <span class="keyword">echo</span> $array[<span class="string">'c'</span>] . <span class="string">"\n"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="4-11-检查一个元素是否在数组中"><a href="#4-11-检查一个元素是否在数组中" class="headerlink" title="4.11 检查一个元素是否在数组中"></a>4.11 检查一个元素是否在数组中</h2><h4 id="问题-7"><a href="#问题-7" class="headerlink" title="问题"></a>问题</h4><p>希望知道一个数组是否包含某个值</p>
-<h4 id="实现-7"><a href="#实现-7" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$array = [<span class="string">'a'</span> =&gt; <span class="string">'apple'</span>, <span class="string">'b'</span> =&gt; <span class="string">'banana'</span>, <span class="string">'c'</span> =&gt; <span class="string">'cao ni ma'</span>];</div><div class="line"></div><div class="line"><span class="keyword">if</span> (in_array(<span class="string">'apple'</span>, $array)) &#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">'Own it'</span>;</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">'Need it'</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$array = [<span class="string">'Emma'</span>, <span class="string">'Pride and Prejudice'</span>, <span class="string">'Northhanger Abbey'</span>];</div><div class="line">$array = array_flip($array);</div><div class="line"><span class="keyword">if</span> (array_key_exists(<span class="string">'Emma'</span>, $array)) &#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">'Own it'</span>;</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">'Need it'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="4-12-查找一个值在数组中的位置"><a href="#4-12-查找一个值在数组中的位置" class="headerlink" title="4.12 查找一个值在数组中的位置"></a>4.12 查找一个值在数组中的位置</h2><h4 id="问题-8"><a href="#问题-8" class="headerlink" title="问题"></a>问题</h4><p>希望知道一个值是否在数组中。如果这个值确实在数组中，希望知道它的键。</p>
-<h4 id="实现-8"><a href="#实现-8" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="comment">// 如果一个值在数组中多次出现，array_serach() 只能保证返回其中一个实例，而不一定是第一个实例。</span></div><div class="line">$position = [<span class="string">'a'</span>=&gt;<span class="string">'apple'</span>,<span class="string">'banana'</span>,<span class="string">'orange'</span>,<span class="string">'b'</span>=&gt;<span class="string">'not bad'</span>];</div><div class="line"><span class="keyword">if</span>(($result = array_search(<span class="string">'123'</span>, $position)) !== <span class="keyword">false</span>)&#123;</div><div class="line">    <span class="keyword">echo</span> $result;</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">'false'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="4-13-查找通过某个测试的元素"><a href="#4-13-查找通过某个测试的元素" class="headerlink" title="4.13 查找通过某个测试的元素"></a>4.13 查找通过某个测试的元素</h2><h4 id="问题-9"><a href="#问题-9" class="headerlink" title="问题"></a>问题</h4><p>希望找出数组中满足某些需求的元素</p>
-<h4 id="实现-9"><a href="#实现-9" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">    $array = range(<span class="number">0</span>, <span class="number">20</span>,<span class="number">2</span>);</div><div class="line"></div><div class="line">    $result = array_filter($array,<span class="function"><span class="keyword">function</span><span class="params">($value)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span>($value%<span class="number">2</span> === <span class="number">0</span>)&#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125;<span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="4-14-查找数组中最大值或最小值元素"><a href="#4-14-查找数组中最大值或最小值元素" class="headerlink" title="4.14 查找数组中最大值或最小值元素"></a>4.14 查找数组中最大值或最小值元素</h2><h4 id="问题-10"><a href="#问题-10" class="headerlink" title="问题"></a>问题</h4><p>希望找出数组中有最大值或最小值的元素。</p>
-<h4 id="实现-10"><a href="#实现-10" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$array = range(<span class="number">1</span>, <span class="number">100</span>);</div><div class="line"></div><div class="line"><span class="keyword">echo</span> max($array) . <span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> min($array) . <span class="string">"\n"</span>;</div></pre></td></tr></table></figure>
-<h2 id="4-15-反转数组"><a href="#4-15-反转数组" class="headerlink" title="4.15 反转数组"></a>4.15 反转数组</h2><h4 id="问题-11"><a href="#问题-11" class="headerlink" title="问题"></a>问题</h4><p>希望反转数组中元素的顺序</p>
-<h4 id="实现-11"><a href="#实现-11" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$array = range(<span class="number">1</span>, <span class="number">100</span>);</div><div class="line">$array = array_reverse($array);</div><div class="line">print_r($array);</div><div class="line"></div><div class="line">$fruits = [<span class="string">'a'</span> =&gt; <span class="string">'Apple'</span>, <span class="string">'b'</span> =&gt; <span class="string">'Banana'</span>, <span class="string">'o'</span> =&gt; <span class="string">'orange'</span>];</div><div class="line">$fruits = array_reverse($fruits);</div><div class="line">print_r($fruits);</div></pre></td></tr></table></figure>
-<h2 id="4-18-多个数据的排序"><a href="#4-18-多个数据的排序" class="headerlink" title="4.18 多个数据的排序"></a>4.18 多个数据的排序</h2><h4 id="问题-12"><a href="#问题-12" class="headerlink" title="问题"></a>问题</h4><p>希望对多个数组或多位数组排序</p>
-<h4 id="实现-12"><a href="#实现-12" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$colors = [<span class="string">'Red'</span>, <span class="string">'White'</span>, <span class="string">'Blue'</span>];</div><div class="line">$cities = [<span class="string">'Boston'</span>, <span class="string">'New York'</span>, <span class="string">'Chicago'</span>];</div><div class="line">$stuff = [</div><div class="line">    <span class="string">'colors'</span> =&gt; $colors,</div><div class="line">    <span class="string">'cities'</span> =&gt; $cities,</div><div class="line">];</div><div class="line"></div><div class="line">array_multisort($colors, $cities);</div><div class="line">print_r($colors);</div><div class="line">print_r($cities);</div><div class="line"></div><div class="line"></div><div class="line">array_multisort($stuff[<span class="string">'colors'</span>], $stuff[<span class="string">'cities'</span>]);</div><div class="line">print_r($stuff);</div><div class="line"></div><div class="line"></div><div class="line">$numbers = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</div><div class="line">$letters = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>];</div><div class="line"></div><div class="line">array_multisort($numbers, SORT_NUMERIC, SORT_DESC, $letters, SORT_STRING, SORT_DESC);</div><div class="line">print_r($numbers);</div><div class="line">print_r($letters);</div></pre></td></tr></table></figure>
-<h2 id="4-20-随机调整数组"><a href="#4-20-随机调整数组" class="headerlink" title="4.20 随机调整数组"></a>4.20 随机调整数组</h2><h4 id="问题-13"><a href="#问题-13" class="headerlink" title="问题"></a>问题</h4><p>希望按一种随机的顺序重排数组中的元素</p>
-<h4 id="实现-13"><a href="#实现-13" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$name = [<span class="string">'Ann'</span>, <span class="string">'Eason'</span>, <span class="string">'Luis'</span>, <span class="string">'Edware'</span>];</div><div class="line">print_r($name);</div><div class="line"></div><div class="line">shuffle($name);</div><div class="line">print_r($name);</div></pre></td></tr></table></figure>
-<h2 id="4-21-删除数组中重复的元素"><a href="#4-21-删除数组中重复的元素" class="headerlink" title="4.21 删除数组中重复的元素"></a>4.21 删除数组中重复的元素</h2><h4 id="问题-14"><a href="#问题-14" class="headerlink" title="问题"></a>问题</h4><p>希望删除数组中重复的元素</p>
-<h4 id="实现-14"><a href="#实现-14" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$array = [<span class="string">'Ann'</span>, <span class="string">'Eason'</span>, <span class="string">'Luis'</span>, <span class="string">'Edware'</span>, <span class="string">'Ann'</span>, <span class="string">'Eason'</span>, <span class="string">'Luis'</span>, <span class="string">'Edware'</span>];</div><div class="line">print_r($array);</div><div class="line"></div><div class="line">$unique = array_unique($array);</div><div class="line">print_r($unique);</div><div class="line"></div><div class="line">$unique2 = [];</div><div class="line"><span class="keyword">foreach</span> ($array <span class="keyword">as</span> $item) &#123;</div><div class="line">    <span class="keyword">if</span> (!in_array($item, $unique2)) &#123;</div><div class="line">        $unique2[] = $item;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">print_r($unique2);</div></pre></td></tr></table></figure>
-<h2 id="4-22-对数组中的各个元素应用一个函数"><a href="#4-22-对数组中的各个元素应用一个函数" class="headerlink" title="4.22 对数组中的各个元素应用一个函数"></a>4.22 对数组中的各个元素应用一个函数</h2><h4 id="问题-15"><a href="#问题-15" class="headerlink" title="问题"></a>问题</h4><p>希望对数组中的各个元素应用一个函数或方法，这就允许一次转换所有输入数据</p>
-<h4 id="实现-15"><a href="#实现-15" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$names = [</div><div class="line">    <span class="string">'firstName'</span> =&gt; <span class="string">'Ann‘Eason'</span>,</div><div class="line">    <span class="string">'lastName'</span> =&gt; <span class="string">'Luis’Edware'</span>,</div><div class="line">];</div><div class="line"></div><div class="line"></div><div class="line">array_walk($names, <span class="function"><span class="keyword">function</span><span class="params">(&amp;$value, $key)</span> </span>&#123;</div><div class="line">    $value = htmlentities($value, ENT_QUOTES);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="keyword">foreach</span> ($names <span class="keyword">as</span> $name) &#123;</div><div class="line">    <span class="keyword">echo</span> $name . <span class="string">"\n"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">echo</span> <span class="string">'****************************************'</span> . <span class="string">"\n"</span>;</div><div class="line"></div><div class="line"><span class="comment">// 对于嵌套数据，可以使用 array_walk_recursive()</span></div><div class="line">$names = [</div><div class="line">    <span class="string">'firstName'</span> =&gt; [<span class="string">'Ann"'</span>, <span class="string">'Luis"'</span>],</div><div class="line">    <span class="string">'lastName'</span> =&gt; [<span class="string">'"Eason'</span>, <span class="string">'"Edware'</span>],</div><div class="line">];</div><div class="line"></div><div class="line">array_walk_recursive($names, <span class="function"><span class="keyword">function</span><span class="params">(&amp;$value, $key)</span> </span>&#123;</div><div class="line">    $value = htmlentities($value, ENT_QUOTES);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="keyword">foreach</span> ($names <span class="keyword">as</span> $name) &#123;</div><div class="line">    <span class="keyword">foreach</span> ($name <span class="keyword">as</span> $item) &#123;</div><div class="line">        <span class="keyword">echo</span> $item . <span class="string">"\n"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="4-23-查找两个数组的并集、交集或差集"><a href="#4-23-查找两个数组的并集、交集或差集" class="headerlink" title="4.23 查找两个数组的并集、交集或差集"></a>4.23 查找两个数组的并集、交集或差集</h2><h4 id="问题-16"><a href="#问题-16" class="headerlink" title="问题"></a>问题</h4><p>有两个数组，希望找出它们的并集、交集、差集和对称差集</p>
-<h4 id="实现-16"><a href="#实现-16" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$a = range(<span class="string">'a'</span>, <span class="string">'n'</span>);</div><div class="line">$b = range(<span class="string">'h'</span>, <span class="string">'t'</span>);</div><div class="line"><span class="comment">// 要计算并集</span></div><div class="line">$union = array_unique(array_merge($a, $b));</div><div class="line">print_r($union);</div><div class="line"></div><div class="line"><span class="comment">// 要计算交集</span></div><div class="line">$intersection = array_intersect($a, $b);</div><div class="line">print_r($intersection);</div><div class="line"></div><div class="line"><span class="comment">// 简单差集</span></div><div class="line">$difference1 = array_diff($a, $b);</div><div class="line">$difference2 = array_diff($b, $a);</div><div class="line">print_r($difference1);</div><div class="line">print_r($difference2);</div><div class="line"></div><div class="line"><span class="comment">// 对称差集</span></div><div class="line">$difference = array_merge(array_diff($a, $b), array_diff($b, $a));</div><div class="line">print_r($difference);</div></pre></td></tr></table></figure>
-<h2 id="4-24-高效迭代处理大型数据集"><a href="#4-24-高效迭代处理大型数据集" class="headerlink" title="4.24 高效迭代处理大型数据集"></a>4.24 高效迭代处理大型数据集</h2><h4 id="问题-17"><a href="#问题-17" class="headerlink" title="问题"></a>问题</h4><p>希望迭代处理一个元素列表，不过整个列表会占用大量内存，或者生成整个列表的速度非常慢。</p>
-<h4 id="实现-17"><a href="#实现-17" class="headerlink" title="实现"></a>实现</h4><h2 id="4-25-使用数组语法访问对象"><a href="#4-25-使用数组语法访问对象" class="headerlink" title="4.25 使用数组语法访问对象"></a>4.25 使用数组语法访问对象</h2><h4 id="问题-18"><a href="#问题-18" class="headerlink" title="问题"></a>问题</h4><p>有一个对象，不过希望它作为一个数组来读写数据。这样不仅可以得到面向对象设计的好处，还可以利用我们熟悉的数组接口</p>
-<h4 id="实现-18"><a href="#实现-18" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">FakeArray</span> <span class="keyword">implements</span> <span class="title">ArrayAccess</span></span></div><div class="line"><span class="class"></span>&#123;</div><div class="line">    <span class="keyword">private</span> $elements;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;elements = [];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">offsetExists</span><span class="params">($offset)</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;elements[$offset]);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">offsetGet</span><span class="params">($offset)</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;elements[$offset];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">offsetSet</span><span class="params">($offset, $value)</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;elements[$offset] = $value;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">offsetUnset</span><span class="params">($offset)</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="keyword">unset</span>(<span class="keyword">$this</span>-&gt;elements[$offset]);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$array = <span class="keyword">new</span> FakeArray;</div><div class="line">$array[<span class="string">'animal'</span>] = <span class="string">"wabbit"</span>;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($array[<span class="string">'animal'</span>]) &amp;&amp; $array[<span class="string">'animal'</span>] == <span class="string">'wabbit'</span>) &#123;</div><div class="line">    <span class="keyword">unset</span>($array[<span class="string">'animal'</span>]);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (!<span class="keyword">isset</span>($array[<span class="string">'animal'</span>])) &#123;</div><div class="line">    <span class="keyword">print</span> <span class="string">"Well,What did you expect in an"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-四/" data-id="cj9t8tyic0024i24bytnx7ja8" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PHP-Codebook-二" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/01/22/PHP-Codebook-二/" class="article-date">
-  <time datetime="2017-01-22T03:38:37.000Z" itemprop="datePublished">2017-01-22</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/22/PHP-Codebook-二/">PHP Codebook(二)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="2-1-检查变量是否包含一个合法数字"><a href="#2-1-检查变量是否包含一个合法数字" class="headerlink" title="2.1 检查变量是否包含一个合法数字"></a>2.1 检查变量是否包含一个合法数字</h2><h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>希望确保变量包含一个数（即使变量的类型是字符串），或者希望检查变量不仅是一个数，而且要特别指定其类型是一个数字类型。</p>
-<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">    <span class="keyword">foreach</span> ([<span class="number">5</span>,<span class="string">'5'</span>,<span class="string">'05'</span>,<span class="number">12.3</span>,<span class="string">'16.7'</span>,<span class="string">'five'</span>,oxDECAFBAD,<span class="string">'10e2000'</span>] <span class="keyword">as</span> $maybeNumber) &#123;</div><div class="line">        $isItNumeric = is_numeric($maybeNumber);</div><div class="line">        $actualType = gettype($maybeNumber);</div><div class="line">        $string = <span class="string">"Is the $actualType $maybeNumber numeric?"</span>;</div><div class="line"></div><div class="line">        <span class="keyword">if</span>(is_numeric($maybeNumber))&#123;</div><div class="line">            $answer = <span class="string">"yes"</span>;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            $answer = <span class="string">"no"</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">echo</span> pack(<span class="string">"A40A3"</span>,$string,$answer).<span class="string">"\n"</span>;</div><div class="line">    &#125;</div><div class="line"><span class="meta">?&gt;</span></div><div class="line"><span class="comment">/*</span></div><div class="line"><span class="comment">Is the integer 5 numeric?               yes</span></div><div class="line"><span class="comment">Is the string 5 numeric?                yes</span></div><div class="line"><span class="comment">Is the string 05 numeric?               yes</span></div><div class="line"><span class="comment">Is the double 12.3 numeric?             yes</span></div><div class="line"><span class="comment">Is the string 16.7 numeric?             yes</span></div><div class="line"><span class="comment">Is the string five numeric?             no</span></div><div class="line"><span class="comment">Is the string oxDECAFBAD numeric?       no</span></div><div class="line"><span class="comment">Is the string 10e2000 numeric?          yes</span></div><div class="line"><span class="comment">*/</span></div></pre></td></tr></table></figure>
-<h2 id="2-2-比较浮点数"><a href="#2-2-比较浮点数" class="headerlink" title="2.2 比较浮点数"></a>2.2 比较浮点数</h2><h4 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h4><p>希望检查两个浮点数是否相等</p>
-<h4 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$delta = <span class="number">0.00001</span>;</div><div class="line">$a = <span class="number">1.00000001</span>;</div><div class="line">$b = <span class="number">1.00000000</span>;</div><div class="line"></div><div class="line"><span class="keyword">if</span>(abs($a - $b) &lt; $delta)&#123;</div><div class="line">    <span class="keyword">print</span> <span class="string">"$a and $b are equal enough"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="2-3-浮点数舍入"><a href="#2-3-浮点数舍入" class="headerlink" title="2.3 浮点数舍入"></a>2.3 浮点数舍入</h2><h4 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h4><p>希望舍入一个浮点数，可能取整为一个整数，或者舍入为指定的小数位数</p>
-<h4 id="实现-2"><a href="#实现-2" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="comment">// 四舍五入 round()</span></div><div class="line"><span class="keyword">echo</span> round(<span class="number">2.4</span>) . <span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> round(<span class="number">2.5</span>) . <span class="string">"\n"</span>;</div><div class="line"></div><div class="line"><span class="comment">// 向上取整</span></div><div class="line"><span class="keyword">echo</span> ceil(<span class="number">2.4</span>) . <span class="string">"\n"</span>;</div><div class="line"></div><div class="line"><span class="comment">// 向下取整</span></div><div class="line"><span class="keyword">echo</span> floor(<span class="number">2.9</span>) . <span class="string">"\n"</span>;</div><div class="line"></div><div class="line"><span class="comment">// 一个数正好落在两个整数中间的位置，PHP 会向远离 0 的方向取整</span></div><div class="line"><span class="keyword">echo</span> round(<span class="number">2.5</span>) . <span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> round(<span class="number">-2.5</span>) . <span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> round(<span class="number">2.4</span>) . <span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> round(<span class="number">-2.4</span>) . <span class="string">"\n"</span>;</div><div class="line"></div><div class="line"><span class="keyword">echo</span> ceil(<span class="number">2.5</span>) . <span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> ceil(<span class="number">-2.5</span>) . <span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> ceil(<span class="number">2.4</span>) . <span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> ceil(<span class="number">-2.4</span>) . <span class="string">"\n"</span>;</div><div class="line"></div><div class="line"><span class="keyword">echo</span> floor(<span class="number">2.5</span>) . <span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> floor(<span class="number">-2.5</span>) . <span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> floor(<span class="number">2.4</span>) . <span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> floor(<span class="number">-2.4</span>) . <span class="string">"\n"</span>;</div></pre></td></tr></table></figure>
-<h2 id="2-4-处理一系列整数"><a href="#2-4-处理一系列整数" class="headerlink" title="2.4 处理一系列整数"></a>2.4 处理一系列整数</h2><h4 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h4><p>希望对一个整数范围应用一段代码</p>
-<h4 id="实现-3"><a href="#实现-3" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 使用 range() 函数实现</span></div><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">foreach</span> (range(<span class="number">0</span>, <span class="number">100</span>, <span class="number">5</span>) <span class="keyword">as</span> $number) &#123;</div><div class="line">    <span class="keyword">echo</span> $number . <span class="string">"\n"</span>;</div><div class="line">    printf(<span class="string">"%d squared is %d\n"</span>, $number, $number * $number);</div><div class="line">    printf(<span class="string">"%d cubed is %d\n"</span>, $number, $number * $number * $number);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="2-5-在指定范围内生成随机数"><a href="#2-5-在指定范围内生成随机数" class="headerlink" title="2.5 在指定范围内生成随机数"></a>2.5 在指定范围内生成随机数</h2><h4 id="问题-4"><a href="#问题-4" class="headerlink" title="问题"></a>问题</h4><p>希望在指定的数字范围内生成一个随机数</p>
-<h4 id="实现-4"><a href="#实现-4" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$lower = <span class="number">0</span>;</div><div class="line">$upper = <span class="number">1024</span>;</div><div class="line">$randNumber = mt_rand($lower, $upper);</div><div class="line"></div><div class="line"><span class="keyword">echo</span> $randNumber;</div></pre></td></tr></table></figure>
-<h2 id="2-6-生成可预测的随机数"><a href="#2-6-生成可预测的随机数" class="headerlink" title="2.6 生成可预测的随机数"></a>2.6 生成可预测的随机数</h2><h4 id="问题-5"><a href="#问题-5" class="headerlink" title="问题"></a>问题</h4><p>希望生成可预测的随机数，从而可以保证可重复的行为</p>
-<h4 id="实现-5"><a href="#实现-5" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">pick_color</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    $colors = [<span class="string">'red'</span>, <span class="string">'orange'</span>, <span class="string">'yellow'</span>, <span class="string">'blue'</span>, <span class="string">'green'</span>, <span class="string">'indigo'</span>, <span class="string">'violet'</span>];</div><div class="line">    $i = mt_rand(<span class="number">0</span>, count($colors) - <span class="number">1</span>);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> $colors[$i];</div><div class="line">&#125;</div><div class="line"></div><div class="line">mt_srand(<span class="number">34534</span>);</div><div class="line">$first = pick_color();</div><div class="line">$second = pick_color();</div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">"$first is red and $second is yellow"</span>;</div></pre></td></tr></table></figure>
-<h2 id="2-10-格式化数字"><a href="#2-10-格式化数字" class="headerlink" title="2.10 格式化数字"></a>2.10 格式化数字</h2><h4 id="问题-6"><a href="#问题-6" class="headerlink" title="问题"></a>问题</h4><p>希望输出一个数，要包括千分位分隔符和小数点。</p>
-<h4 id="实现-6"><a href="#实现-6" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$number = <span class="number">1234.56</span>;</div><div class="line"><span class="comment">// 千位分隔符</span></div><div class="line"><span class="keyword">echo</span> number_format($number) . <span class="string">"\n"</span>;</div><div class="line"></div><div class="line"><span class="comment">// 第二个参数指定使用了小数位数</span></div><div class="line"><span class="keyword">echo</span> number_format($number, <span class="number">2</span>) . <span class="string">"\n"</span>;</div><div class="line"></div><div class="line"><span class="comment">// 第三个参数指定小数点字符，第四个参数指定千位分隔符</span></div><div class="line"><span class="keyword">echo</span> number_format($number, <span class="number">2</span>, <span class="string">"@"</span>, <span class="string">'#'</span>) . <span class="string">"\n"</span>;</div></pre></td></tr></table></figure>
-<h2 id="2-16-转换进制"><a href="#2-16-转换进制" class="headerlink" title="2.16 转换进制"></a>2.16 转换进制</h2><h4 id="问题-7"><a href="#问题-7" class="headerlink" title="问题"></a>问题</h4><p>需要将一个数从一个进制转换为另一个进制</p>
-<h4 id="实现-7"><a href="#实现-7" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// 十六进制</span></div><div class="line">$hex = <span class="string">'a1'</span>;</div><div class="line"></div><div class="line"><span class="comment">// 从十六进制转换为十进制</span></div><div class="line">$decimal = base_convert($hex, <span class="number">16</span>, <span class="number">10</span>) . <span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> $decimal;</div><div class="line"></div><div class="line">$decimal = <span class="number">1024</span>;</div><div class="line"><span class="keyword">echo</span> base_convert($decimal, <span class="number">10</span>, <span class="number">2</span>) . <span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> base_convert($decimal, <span class="number">10</span>, <span class="number">8</span>) . <span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> base_convert($decimal, <span class="number">10</span>, <span class="number">16</span>);</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/01/22/PHP-Codebook-二/" data-id="cj9t8tyi0001pi24bkzqja59c" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/01/24/PHP-Codebook-六/" data-id="cjamgspep001xzy4bgjscyzry" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -1101,7 +1050,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categorieën</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -1111,7 +1060,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Labels</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
     </div>
@@ -1121,7 +1070,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Programming-Language/" style="font-size: 11.43px;">Programming Language</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a> <a href="/tags/vue-js/" style="font-size: 10px;">vue.js</a>
     </div>
@@ -1130,7 +1079,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
@@ -1140,9 +1089,17 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/11/16/PHP-秒杀系统/">PHP 秒杀系统</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/14/PHP-面试考点/">PHP 面试考察点</a>
+          </li>
         
           <li>
             <a href="/2017/11/09/Web-API-的设计与开发/">Web API 的设计与开发</a>
@@ -1154,14 +1111,6 @@
         
           <li>
             <a href="/2017/11/01/刻意练习/">刻意练习</a>
-          </li>
-        
-          <li>
-            <a href="/2017/10/24/高性能的-PHP-API-接口开发/">高性能的 PHP API 接口开发</a>
-          </li>
-        
-          <li>
-            <a href="/2017/09/04/Vue-js-2-X-实践/">Vue.js 2.X 实践</a>
           </li>
         
       </ul>
@@ -1177,7 +1126,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Luis Edware<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

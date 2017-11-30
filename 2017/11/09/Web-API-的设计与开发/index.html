@@ -6,13 +6,14 @@
   <title>Web API 的设计与开发 | 七月十五九月初七</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="什么是 Web API本文中的 Web API 是指「使用 HTTP 协议通过网络调用的 API」，简而言之，Web API 就是一个 Web 系统，通过访问 URI 可以与服务器完成信息交互，或者获得存放在服务器的数据信息等，这样调用者通过程序进行访问后即可机械地使用这些数据。 设计优美的 Web API 的重要性 设计优美的 Web API 易于使用 提升开发效率 减少开发周期   设计优美的">
+<meta name="keywords" content="PHP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Web API 的设计与开发">
 <meta property="og:url" content="http://luisedware.github.io/2017/11/09/Web-API-的设计与开发/index.html">
 <meta property="og:site_name" content="七月十五九月初七">
 <meta property="og:description" content="什么是 Web API本文中的 Web API 是指「使用 HTTP 协议通过网络调用的 API」，简而言之，Web API 就是一个 Web 系统，通过访问 URI 可以与服务器完成信息交互，或者获得存放在服务器的数据信息等，这样调用者通过程序进行访问后即可机械地使用这些数据。 设计优美的 Web API 的重要性 设计优美的 Web API 易于使用 提升开发效率 减少开发周期   设计优美的">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-11-10T01:48:11.564Z">
+<meta property="og:updated_time" content="2017-11-15T22:43:34.562Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Web API 的设计与开发">
 <meta name="twitter:description" content="什么是 Web API本文中的 Web API 是指「使用 HTTP 协议通过网络调用的 API」，简而言之，Web API 就是一个 Web 系统，通过访问 URI 可以与服务器完成信息交互，或者获得存放在服务器的数据信息等，这样调用者通过程序进行访问后即可机械地使用这些数据。 设计优美的 Web API 的重要性 设计优美的 Web API 易于使用 提升开发效率 减少开发周期   设计优美的">
@@ -57,9 +58,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -74,6 +75,10 @@
   <time datetime="2017-11-09T12:11:34.000Z" itemprop="datePublished">2017-11-09</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -461,22 +466,153 @@
 </tr>
 </tbody>
 </table>
+<h4 id="通过版本信息来管理-API"><a href="#通过版本信息来管理-API" class="headerlink" title="通过版本信息来管理 API"></a>通过版本信息来管理 API</h4><ul>
+<li>在 URI 中嵌入版本编号</li>
+<li>在查询字符串里加入版本信息</li>
+<li>使用媒体类型来指定版本信息</li>
+</ul>
+<h2 id="响应数据的设计"><a href="#响应数据的设计" class="headerlink" title="响应数据的设计"></a>响应数据的设计</h2><h4 id="响应数据的格式"><a href="#响应数据的格式" class="headerlink" title="响应数据的格式"></a>响应数据的格式</h4><p>关于这点不用谈论，选择 JSON 作为默认数据格式即可。</p>
+<h4 id="响应数据的指定方式"><a href="#响应数据的指定方式" class="headerlink" title="响应数据的指定方式"></a>响应数据的指定方式</h4><p>如果客户端需要支持其他的响应数据格式，有三种方法可以向服务端传达这一信息</p>
+<ul>
+<li>使用查询参数的方法<ul>
+<li><a href="https://api.example.com/v1/users?format=xml" target="_blank" rel="external">https://api.example.com/v1/users?format=xml</a></li>
+</ul>
+</li>
+<li>使用扩展名的方法<ul>
+<li><a href="https://api.example.com/v1/users.json" target="_blank" rel="external">https://api.example.com/v1/users.json</a></li>
+</ul>
+</li>
+<li>使用在请求首部指定媒体类型的方法<ul>
+<li>在 HTTP Header 加入 Accept: application/json</li>
+</ul>
+</li>
+</ul>
+<p>推荐使用在请求首部指定媒体类型的方法</p>
+<h4 id="使用-JSONP"><a href="#使用-JSONP" class="headerlink" title="使用 JSONP"></a>使用 JSONP</h4><h4 id="数据内部结构的思考方法"><a href="#数据内部结构的思考方法" class="headerlink" title="数据内部结构的思考方法"></a>数据内部结构的思考方法</h4><ul>
+<li>让用户来选择响应的内容</li>
+<li>封装是否必要</li>
+<li>数据是否应该扁平化</li>
+<li>序列与格式</li>
+</ul>
+<h4 id="响应数据的设计-1"><a href="#响应数据的设计-1" class="headerlink" title="响应数据的设计"></a>响应数据的设计</h4><p>1.出错信息的表示</p>
+<p>1.1通过状态码来表示出错信息</p>
+<p>在返回出错信息之前，首先必须选择合适的状态码。</p>
+<ul>
+<li>1 字头：消息</li>
+<li>2 字头：成功</li>
+<li>3 字头：重定向</li>
+<li>4 字头：客户端原因引起的错误</li>
+<li>5 字头：服务器端原因引起的错误</li>
+</ul>
+<p>1.2向客户端返回详细的出错信息</p>
+<p>返回出错信息的方法有两种：一种是将详细信息放入 HTTP 响应消息首部，另一种则是通过响应消息体返回。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">X-MYNAME-ERROR-CODE: 2017</div><div class="line">X-MYNAME-ERROR-MESSAGE: Hello world</div><div class="line">X-MYNAME-ERROR-INFO: &quot;...&quot;</div><div class="line"></div><div class="line"></div><div class="line">&#123;</div><div class="line">	&quot;error&quot;: &#123;</div><div class="line">		&quot;code&quot;: 2013,</div><div class="line">		&quot;message&quot;: &quot;Bad authentication token&quot;,</div><div class="line">		&quot;info&quot;: &quot;...&quot;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>1.3 发生错误时防止返回 HTML</p>
+<p>某些 API 在发生错误时会将 HTML 信息写入信息体，但虽说发生了错误，但客户端依然在访问 API，所以仍然期待服务器返回 JSON 或 XML 等数据格式。</p>
+<p>1.4 维护与状态码</p>
+<p>当停止 API 来进行维护工作时，不仅仅要使用 503 状态码来告知用户当前服务已经停止，还要使用 Retry-After 这一 HTTP 首部来告知用户维护结束的时间。</p>
+<h2 id="最大程度地利用-HTTP-协议规范"><a href="#最大程度地利用-HTTP-协议规范" class="headerlink" title="最大程度地利用 HTTP 协议规范"></a>最大程度地利用 HTTP 协议规范</h2><h4 id="正确使用状态码"><a href="#正确使用状态码" class="headerlink" title="正确使用状态码"></a>正确使用状态码</h4><h4 id="使用-HTTP-缓存"><a href="#使用-HTTP-缓存" class="headerlink" title="使用 HTTP 缓存"></a>使用 HTTP 缓存</h4><p>HTTP 缓存机制分为两类，过期模型和验证模型。过期模型是指预先决定响应数据的保存期限，当到达期限后就会再次访问服务器来重新获取所需的数据；<br>而验证模型则会轮询当前保存的缓存数据是否为最新数据，并只在服务器端进行数据更新时，才重新获取新的数据。</p>
+<p>在 HTTP 协议中，缓存处于可用的状态时成为 fresh 状态，而处于不可用的状态时则成为 stale 状态</p>
+<p>过期模型可以通过在服务器的响应消息里包含何时过期的信息来实现。HTTP 1.1 中定义了两种实现方法：一个方法是用 Cache-Control 响应消息首部，<br>另一个方法是用 Expires 响应消息首部，分别如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Expires: Fri, 01 Jan 2016 00:00:00 GMT</div><div class="line">Cache-Control: max-age=3600</div></pre></td></tr></table></figure></p>
+<p>当 Expires 和 Cache-Control 同时使用时，Cache-Control 优先。另外 HTTP 时间格式必须遵循 RFC 1123 的规范，而且只能使用 GMT 作为时区。</p>
+<p>验证模型采用了询问服务器的方式来判断当前所保存的缓存是否有效。和到期之前不会发生网络访问的过期模型不同，验证模型会在检查缓存的过程中会不时地去访问网络。<br>在执行验证模型时，需要应用程序支持附带条件的请求。要进行附带条件的请求，就必须向服务器传达「客户端当前保存的信息的状态」，为此需要用到最后更新日期或<br>实体标签作为指标。最后更新时间表示当前数据最后一次更新的日期；而实体标签则是表示某个特定资源版本的标识符。最后更新日期和实体标签会被分别填充在<br>「Last-Modified」 和 「ETag」 响应信息首部返回给客户端。</p>
+<p>HTTP 1.1 还存在「启发式过期」，当服务端没有给出明确的过期时间时，客户端可以决定大约需要将缓存数据保存多久。这时客户端就要根据服务器端的更新频率、<br>具体状况等信息，自行决定缓存的过期时间。</p>
+<p>不希望实施缓存的情况，可以使用「Cache-Control」首部实现，或者在「Expires」使用过去的日期或不正确的日期也能到达到同样的效果。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 先用验证模型确认返回的资源是否发生了变化，然后根据令牌来确认是否更新缓存</div><div class="line">Cache-Control: no-cache</div><div class="line">// 直接禁止浏览器以及中间缓存存储任何版本的返回响应。每次请求都要求返回完整的响应</div><div class="line">Cache-Control: no-store</div></pre></td></tr></table></figure></p>
+<h4 id="媒体类型的指定"><a href="#媒体类型的指定" class="headerlink" title="媒体类型的指定"></a>媒体类型的指定</h4><p>HTTP 协议中必须指定媒体类型来描述请求信息和响应信息里所承载的数据形式。媒体类型简而言之就是数据格式。</p>
+<ul>
+<li>使用 Content-Type 指定请求或响应的媒体类型</li>
+<li>使用 Accept 指定请求或响应的媒体类型</li>
+<li>使用 x- 的媒体类型</li>
+<li>使用自定义的媒体类型<ul>
+<li>无前缀</li>
+<li>vnd. 前缀</li>
+<li>prs. 前缀</li>
+<li>x. 前缀</li>
+</ul>
+</li>
+</ul>
+<h4 id="同源策略和跨域资源共享"><a href="#同源策略和跨域资源共享" class="headerlink" title="同源策略和跨域资源共享"></a>同源策略和跨域资源共享</h4><p>通过 XHTTPRequest 对不同的域进行访问将无法获取响应数据，这一原则成为同源策略(Same Origin Policy)。同源策源主要是出于安全方面的考虑，<br>它只允许从相同的源来读取数据，并通过 URI 里的 schema(http，https)，主机(api.example.com)，端口号的组合来判断是否同源。</p>
+<ul>
+<li><a href="http://www.example.com" target="_blank" rel="external">http://www.example.com</a></li>
+<li><a href="http://api.example.com" target="_blank" rel="external">http://api.example.com</a></li>
+<li><a href="https://www.example.com" target="_blank" rel="external">https://www.example.com</a></li>
+<li><a href="https://www.example.com:8888" target="_blank" rel="external">https://www.example.com:8888</a></li>
+</ul>
+<p>上述 URI 皆不同源。</p>
+<p>CORS（Cross-Origin Resource Sharing)跨域资源访问可以解决同源策略带来的问题。实施 CORS 时，客户端需要使用 Origin 请求首部。然后服务端会检查其中的源<br>是否能够允许被访问。并使用 Allow-Origin 响应首部来返回允许访问的源。</p>
+<p>CORS 在特定场景下会先行查询请求是否能被接收。使用 OPTION 方法发送请求。然后服务端会响应这样的请求，并返回三个首部<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Access-Control-Allow-Origin: 允许源清单</div><div class="line">Access-Control-Allow-Methods: 允许请求方法清单</div><div class="line">Access-Control-Allow-Headers: 允许请求头部清单</div><div class="line">Access-Control-Allow-Max-Age: 允许事先请求的信息在缓存中保存的时间</div></pre></td></tr></table></figure></p>
+<h4 id="定义私有的-HTTP-首部"><a href="#定义私有的-HTTP-首部" class="headerlink" title="定义私有的 HTTP 首部"></a>定义私有的 HTTP 首部</h4><p>如果将 HTTP 首部作为存放元信息的场所，当需要发送无法找到合适首部的元数据时，可以自定义私有的 HTTP 首部，如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">X-AppName-PixelRatio: 2.0</div></pre></td></tr></table></figure></p>
+<h4 id="开发牢固的-Web-API"><a href="#开发牢固的-Web-API" class="headerlink" title="开发牢固的 Web API"></a>开发牢固的 Web API</h4><p>Web API  一般存在安全问题如下所示：</p>
+<ul>
+<li>非法获取服务器端和客户端之间的信息<ul>
+<li>数据分组嗅探(PacketSniffing)</li>
+<li>会话劫持(SessionJacking)</li>
+</ul>
+</li>
+<li>利用服务器端的安全漏洞非法获取和篡改信息<ul>
+<li>中间人攻击(Man-In-The-Middle-Attack, MITM 攻击)</li>
+<li>篡改参数</li>
+<li>请求再次发送</li>
+</ul>
+</li>
+<li>预设通过浏览器访问的 API 中的问题<ul>
+<li>XSS(Cross Site Scripting 跨站脚本攻击)</li>
+<li>CSRF(Cross Site Request Forgery 跨站请求伪造)</li>
+<li>JSON 劫持</li>
+</ul>
+</li>
+</ul>
+<h6 id="与安全相关的-HTTP-首部"><a href="#与安全相关的-HTTP-首部" class="headerlink" title="与安全相关的 HTTP 首部"></a>与安全相关的 HTTP 首部</h6><ul>
+<li>X-Content-Type-Options</li>
+<li>X-XSS-Protection</li>
+<li>X-Frame-Options</li>
+<li>Content-Security-Policy</li>
+<li>Strict-Transport-Security</li>
+<li>Public-Key-Pins</li>
+<li>Set-Cookie</li>
+</ul>
+<h6 id="应对大规模访问的对策"><a href="#应对大规模访问的对策" class="headerlink" title="应对大规模访问的对策"></a>应对大规模访问的对策</h6><ul>
+<li>限制每个用户的访问<ul>
+<li>用什么样的机制来识别用户</li>
+<li>如何确定限速的数值</li>
+<li>以什么单位来设置限速的数值</li>
+<li>在什么时候重置限速的数值</li>
+</ul>
+</li>
+<li>应对超出上限值的情况</li>
+<li>向用户告知限速的信息<ul>
+<li>X-RateLimit-Limit: 单位时间的访问上限</li>
+<li>X-RateLimit-Remaining: 剩余的访问次数</li>
+<li>X-RateLimit-Reset: 访问次数重置的时间</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/09/Web-API-的设计与开发/" data-id="cj9t8tyie0028i24bk9w9ein0" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/11/09/Web-API-的设计与开发/" data-id="cjamgspf5002uzy4bizgqi8fk" class="article-share-link">Delen</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
+
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
+    <a href="/2017/11/14/PHP-面试考点/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Nieuwer</strong>
+      <div class="article-nav-title">
+        
+          PHP 面试考察点
+        
+      </div>
+    </a>
+  
   
     <a href="/2017/11/05/日常开发常用命令/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Ouder</strong>
       <div class="article-nav-title">日常开发常用命令</div>
     </a>
   
@@ -491,7 +627,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categorieën</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -501,7 +637,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Labels</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
     </div>
@@ -511,7 +647,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Programming-Language/" style="font-size: 11.43px;">Programming Language</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a> <a href="/tags/vue-js/" style="font-size: 10px;">vue.js</a>
     </div>
@@ -520,7 +656,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
@@ -530,9 +666,17 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/11/16/PHP-秒杀系统/">PHP 秒杀系统</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/14/PHP-面试考点/">PHP 面试考察点</a>
+          </li>
         
           <li>
             <a href="/2017/11/09/Web-API-的设计与开发/">Web API 的设计与开发</a>
@@ -544,14 +688,6 @@
         
           <li>
             <a href="/2017/11/01/刻意练习/">刻意练习</a>
-          </li>
-        
-          <li>
-            <a href="/2017/10/24/高性能的-PHP-API-接口开发/">高性能的 PHP API 接口开发</a>
-          </li>
-        
-          <li>
-            <a href="/2017/09/04/Vue-js-2-X-实践/">Vue.js 2.X 实践</a>
           </li>
         
       </ul>
@@ -567,7 +703,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Luis Edware<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

@@ -53,9 +53,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -65,6 +65,169 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-TypeScript-入门" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/12/TypeScript-入门/" class="article-date">
+  <time datetime="2017-07-11T22:41:34.000Z" itemprop="datePublished">2017-07-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/12/TypeScript-入门/">TypeScript 入门</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="学习-TypeScript-的优势"><a href="#学习-TypeScript-的优势" class="headerlink" title="学习 TypeScript 的优势"></a>学习 TypeScript 的优势</h2><ul>
+<li>支持 ES6 规范</li>
+<li>强大的 IDE 支持：WebStorm</li>
+<li>Angular 2~4 的开发语言</li>
+</ul>
+<h2 id="安装-TypeScript-的开发环境"><a href="#安装-TypeScript-的开发环境" class="headerlink" title="安装 TypeScript 的开发环境"></a>安装 TypeScript 的开发环境</h2><ul>
+<li>什么是 compiler?<ul>
+<li>编译器</li>
+</ul>
+</li>
+<li>为什么需要 compiler?<ul>
+<li>需要将 TypeScript 转化为 JavaScript 运行</li>
+</ul>
+</li>
+<li>TypeScript 在线 compiler<ul>
+<li><a href="https://www.typescriptlang.org/play/index.html" target="_blank" rel="external">TypeScript Playground</a></li>
+</ul>
+</li>
+<li>TypeScript 本地 compiler<ul>
+<li>npm install -g typescript</li>
+<li>tsc –version</li>
+</ul>
+</li>
+</ul>
+<h2 id="TypeScript-概念、语法和特性介绍"><a href="#TypeScript-概念、语法和特性介绍" class="headerlink" title="TypeScript 概念、语法和特性介绍"></a>TypeScript 概念、语法和特性介绍</h2><h4 id="字符串新特性"><a href="#字符串新特性" class="headerlink" title="字符串新特性"></a>字符串新特性</h4><p>多行字符串<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// TypeScript</span></div><div class="line"><span class="keyword">var</span> string = <span class="string">`aaa</span></div><div class="line"><span class="string">bbb</span></div><div class="line"><span class="string">ccc`</span>;</div><div class="line"></div><div class="line"><span class="comment">// JavaScript</span></div><div class="line"><span class="keyword">var</span> string = <span class="string">"aaa\n"</span>+<span class="string">"bbb\n"</span>+<span class="string">"ccc\n"</span>;</div></pre></td></tr></table></figure></p>
+<p>字符串模板<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// TypeScript</span></div><div class="line"><span class="keyword">var</span> name = <span class="string">"LuisEdware"</span>;</div><div class="line"></div><div class="line"><span class="keyword">var</span> getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">"LuisEdware"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(<span class="string">`Hello <span class="subst">$&#123;name&#125;</span>`</span>);</div><div class="line"><span class="built_in">console</span>.log(<span class="string">`Hello <span class="subst">$&#123;getName()&#125;</span>`</span>);</div><div class="line"><span class="built_in">console</span>.log(<span class="string">`&lt;div&gt;</span></div><div class="line"><span class="string">&lt;span&gt;<span class="subst">$&#123;name&#125;</span>&lt;/span&gt;</span></div><div class="line"><span class="string">&lt;span&gt;<span class="subst">$&#123;getName()&#125;</span>&lt;/span&gt;</span></div><div class="line"><span class="string">&lt;/div&gt;</span></div><div class="line"><span class="string">`</span>);</div><div class="line"></div><div class="line"><span class="comment">// JavaScript</span></div><div class="line"><span class="keyword">var</span> name = <span class="string">"LuisEdware"</span>;</div><div class="line"><span class="keyword">var</span> getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">"LuisEdware"</span>;</div><div class="line">&#125;;</div><div class="line"><span class="built_in">console</span>.log(<span class="string">"Hello "</span> + name);</div><div class="line"><span class="built_in">console</span>.log(<span class="string">"Hello "</span> + getName());</div><div class="line"><span class="built_in">console</span>.log(<span class="string">"&lt;div&gt;\n&lt;span&gt;"</span> + name + <span class="string">"&lt;/span&gt;\n&lt;span&gt;"</span> + getName() + <span class="string">"&lt;/span&gt;\n&lt;/div&gt;\n"</span>);</div></pre></td></tr></table></figure></p>
+<p>自动拆分字符串<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// TypeScript</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">template, name, age</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(template);</div><div class="line">    <span class="built_in">console</span>.log(name);</div><div class="line">    <span class="built_in">console</span>.log(age);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> name = <span class="string">"AnnEason"</span>;</div><div class="line"><span class="keyword">var</span> getAge = <span class="string">""</span>;</div><div class="line">test<span class="string">`hello my name is <span class="subst">$&#123;name&#125;</span>, i'm <span class="subst">$&#123;getAge&#125;</span>`</span>;</div><div class="line"></div><div class="line"><span class="comment">// JavaScript</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">template, name, age</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(template);</div><div class="line">    <span class="built_in">console</span>.log(name);</div><div class="line">    <span class="built_in">console</span>.log(age);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> name = <span class="string">"AnnEason"</span>;</div><div class="line"><span class="keyword">var</span> getAge = <span class="string">""</span>;</div><div class="line">(_a = [<span class="string">"hello my name is "</span>, <span class="string">", i'm "</span>, <span class="string">""</span>], _a.raw = [<span class="string">"hello my name is "</span>, <span class="string">", i'm "</span>, <span class="string">""</span>], test(_a, name, getAge));</div><div class="line"><span class="keyword">var</span> _a;</div></pre></td></tr></table></figure></p>
+<h4 id="参数新特性"><a href="#参数新特性" class="headerlink" title="参数新特性"></a>参数新特性</h4><p>参数类型，在参数名称后面使用冒号来指定参数类型<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> username: string = <span class="string">"Luis Edware"</span>;</div><div class="line"># 编译报错、JavaScript 执行正常</div><div class="line">username = <span class="number">13</span>;</div><div class="line"></div><div class="line"><span class="keyword">var</span> age: number = <span class="number">13</span>;</div><div class="line"></div><div class="line"> <span class="keyword">var</span> man: boolean = <span class="literal">true</span>;</div><div class="line"></div><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">name: string</span>): <span class="title">string</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">""</span>;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> test(username);</div><div class="line"></div><div class="line"># 编译报错，需要提供字符串类型的参数</div><div class="line"> test(age);</div></pre></td></tr></table></figure></p>
+<p>默认参数，在参数声明后面使用等号来指定参数的默认值<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">a: string, b: string, c:string = <span class="string">"jojo"</span></span>)</span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(a);</div><div class="line">    <span class="built_in">console</span>.log(b);</div><div class="line">    <span class="built_in">console</span>.log(c);</div><div class="line">&#125;</div><div class="line">test(<span class="string">'xxx'</span>,<span class="string">'yyy'</span>,<span class="string">'zzz'</span>);</div><div class="line">test(<span class="string">'xxx'</span>,<span class="string">'yyy'</span>);</div></pre></td></tr></table></figure></p>
+<p>可选参数，在方法的参数声明后面使用问好来标明此参数为可选参数<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">a: string, b?: string, c:string = <span class="string">'jojo'</span></span>)</span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(a);</div><div class="line">    <span class="built_in">console</span>.log(b.length);</div><div class="line">    <span class="built_in">console</span>.log(c);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="函数新特性"><a href="#函数新特性" class="headerlink" title="函数新特性"></a>函数新特性</h4><p>Rest and Spread 操作符，用来声明任意数量的方法参数<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">func1</span>(<span class="params">...args</span>)</span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    args.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">arg</span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(arg);</div><div class="line">    &#125;)</div><div class="line">&#125;</div><div class="line">func1(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);</div><div class="line">func1(<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">11</span>);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">func2</span>(<span class="params">a,b,c</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(a);</div><div class="line">    <span class="built_in">console</span>.log(b);</div><div class="line">    <span class="built_in">console</span>.log(c);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> args = [<span class="number">1</span>,<span class="number">2</span>];</div><div class="line">func2(...args);</div><div class="line"></div><div class="line"><span class="keyword">var</span> args2 = [<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">11</span>];</div><div class="line">func2(...args2);</div></pre></td></tr></table></figure></p>
+<p>generator 函数，控制函数的执行过程，手工暂停和回复代码执行<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>* <span class="title">getStockPrice</span>(<span class="params">stock</span>)</span>&#123;</div><div class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</div><div class="line">        <span class="keyword">yield</span> <span class="built_in">Math</span>.random()*<span class="number">100</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> priceGenerator = getStockPrice(<span class="string">"IBM"</span>)；</div><div class="line"><span class="keyword">var</span> limitPrice = <span class="number">15</span>;</div><div class="line"><span class="keyword">var</span> price = <span class="number">100</span>;</div><div class="line"></div><div class="line"><span class="keyword">while</span>(price &gt; limitPrice)&#123;</div><div class="line">    price = priceGenerator.next().value;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">`the generator return <span class="subst">$&#123;price&#125;</span>`</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(<span class="string">`buying at <span class="subst">$&#123;price&#125;</span>`</span>);</div></pre></td></tr></table></figure></p>
+<p>destructuring 析构表达式，通过表达式将对象或数组斋戒成任意数量的变量<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getStock</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        code: <span class="string">"IBM"</span>,</div><div class="line">        price: <span class="number">1000</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// ES5</span></div><div class="line"><span class="keyword">var</span> stock = getStock();</div><div class="line"><span class="keyword">var</span> code = stock.code;</div><div class="line"><span class="keyword">var</span> price = stock.price;</div><div class="line"></div><div class="line"><span class="comment">// TypeScript</span></div><div class="line"><span class="keyword">var</span> &#123;code,price&#125; = getStock();</div><div class="line"><span class="built_in">console</span>.log(code);</div><div class="line"><span class="built_in">console</span>.log(price);</div><div class="line"></div><div class="line"><span class="keyword">var</span> &#123;<span class="attr">code</span>: codex, price&#125; = getStock();</div><div class="line"><span class="built_in">console</span>.log(codex);</div><div class="line"><span class="built_in">console</span>.log(price);</div><div class="line"></div><div class="line"><span class="comment">// TypeScript 获取对象中对象的值</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getStock2</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        code: <span class="string">"IBM"</span>,</div><div class="line">        price: &#123;</div><div class="line">            price1: <span class="number">100</span>,</div><div class="line">            price2: <span class="number">200</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> &#123;code, <span class="attr">price</span>: &#123;price2&#125;&#125; = getStock();</div><div class="line"><span class="built_in">console</span>.log(codex);</div><div class="line"><span class="built_in">console</span>.log(price);</div><div class="line"></div><div class="line"><span class="comment">// 数组析构表达式</span></div><div class="line"><span class="keyword">var</span> array1 = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</div><div class="line"><span class="keyword">var</span> [number1, number2] = array1;</div><div class="line"><span class="keyword">var</span> [,,number3,number4] = array1;</div><div class="line"><span class="built_in">console</span>.log(number1);</div><div class="line"><span class="built_in">console</span>.log(number2);</div><div class="line"><span class="built_in">console</span>.log(number3);</div><div class="line"><span class="built_in">console</span>.log(number4);</div><div class="line"></div><div class="line"><span class="keyword">var</span> [number1,number2, ...others] = array1;</div><div class="line"><span class="built_in">console</span>.log(number1);</div><div class="line"><span class="built_in">console</span>.log(number2);</div><div class="line"><span class="built_in">console</span>.log(others);</div><div class="line"></div><div class="line"><span class="comment">// 方法析构表达式</span></div><div class="line"><span class="keyword">var</span> array1 = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params">[number1,number2, ...others]</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(number1);</div><div class="line">    <span class="built_in">console</span>.log(number2);</div><div class="line">    <span class="built_in">console</span>.log(others);</div><div class="line">&#125;</div><div class="line">doSomething(array1);</div></pre></td></tr></table></figure></p>
+<h4 id="表达式和循环"><a href="#表达式和循环" class="headerlink" title="表达式和循环"></a>表达式和循环</h4><p>箭头表达式：用来声明匿名函数，消除传统命名函数的 this 指针问题<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 一行不要写大括号</span></div><div class="line"><span class="keyword">var</span> sum = <span class="function">(<span class="params">arg1, arg2</span>) =&gt;</span> arg1 + arg2;</div><div class="line"></div><div class="line"><span class="comment">// 多行需要写大括号</span></div><div class="line"><span class="keyword">var</span> sum2 = <span class="function">(<span class="params">arg1, arg2</span>) =&gt;</span> &#123;</div><div class="line">    <span class="keyword">return</span> arg1 + arg2;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// example - 1</span></div><div class="line"><span class="keyword">var</span> myArray = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</div><div class="line"><span class="built_in">console</span>.log(myArray.filter(<span class="function"><span class="params">value</span> =&gt;</span> value % <span class="number">2</span> == <span class="number">0</span>));</div><div class="line"></div><div class="line"><span class="comment">// example - 2</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getStock</span>(<span class="params">name: string</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name;</div><div class="line">    <span class="keyword">var</span> that = <span class="keyword">this</span>;</div><div class="line"></div><div class="line">    setInterval(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="comment">// this 指向 setInterval 作用域,this.name 无效</span></div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"name is :"</span> + that.name);</div><div class="line">    &#125;,<span class="number">1000</span>);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> stock1 = <span class="keyword">new</span> getStock(<span class="string">"Hello"</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getStock2</span>(<span class="params">name: string</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name;</div><div class="line">    setInterval(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"name is :"</span> + <span class="keyword">this</span>.name);</div><div class="line">    &#125;, <span class="number">1000</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> stock2 = <span class="keyword">new</span> getStock2(<span class="string">"World"</span>);</div></pre></td></tr></table></figure></p>
+<p>循环，forEach(), for in 和 for of<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">var myArray = [1, 2, 3, 4];</div><div class="line">myArray.desc = &quot;for number&quot;;</div><div class="line"></div><div class="line">// 循环数组，会把 desc 属性忽略掉</div><div class="line">myArray.forEach(value =&gt; console.log(value));</div><div class="line"></div><div class="line">// 循环 key</div><div class="line">for (let key in myArray) &#123;</div><div class="line">    console.log(key);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">// 循环 value</div><div class="line">for (let value of myArray) &#123;</div><div class="line">    console.log(value);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="面向对象特性"><a href="#面向对象特性" class="headerlink" title="面向对象特性"></a>面向对象特性</h4><p>类，类是 TypeScript 的核心，使用 TypeScript 开发时，大部分代码都是写在类里面的。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</div><div class="line"></div><div class="line">    public name;</div><div class="line"></div><div class="line">    private fish;</div><div class="line"></div><div class="line">    <span class="comment">// 构造函数</span></div><div class="line">    <span class="keyword">constructor</span>(public food:string) &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'Hello'</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 修饰符</span></div><div class="line">    public eat() &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">`My name is <span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span>,I am eating <span class="subst">$&#123;<span class="keyword">this</span>.food&#125;</span>.`</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> p1 = <span class="keyword">new</span> Person(<span class="string">"egg"</span>);</div><div class="line">p1.name = <span class="string">"Luis Edware"</span>;</div><div class="line">p1.eat();</div><div class="line"></div><div class="line"><span class="comment">// 继承</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Employee</span> <span class="keyword">extends</span> <span class="title">Person</span></span>&#123;</div><div class="line"></div><div class="line">    public code: string;</div><div class="line"></div><div class="line">    public <span class="keyword">constructor</span>(public food: string, code:string) &#123;</div><div class="line">        <span class="keyword">super</span>(food);</div><div class="line">        <span class="keyword">this</span>.code = code;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public work() &#123;</div><div class="line">        <span class="keyword">super</span>.eat();</div><div class="line">        <span class="keyword">this</span>.doWork();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private doWork() &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">`I am Working with <span class="subst">$&#123;<span class="keyword">this</span>.code&#125;</span>`</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> e1 = <span class="keyword">new</span> Employee(<span class="string">"apple"</span>, <span class="string">"Hello World"</span>);</div><div class="line">e1.name = <span class="string">"Ann Eason"</span>;</div><div class="line">e1.work();</div></pre></td></tr></table></figure></p>
+<p>泛型，参数化的类型，一般用来限制集合的内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var workers: Array&lt;Person&gt; = [];</div><div class="line">workers[0] = new Person(&quot;zhangsan&quot;);</div><div class="line">workers[1] = new Employee(&quot;lisi&quot;, &quot;hell world&quot;);</div><div class="line">// 报错，只能放入对象为 Person 类型的数据</div><div class="line">workers[2] = 3;</div></pre></td></tr></table></figure></p>
+<p>接口，用来建立某种代码约定，使得其它开发者在调用某个方法或创建新的类时必须遵循接口所定义的代码约定。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">interface IPerson&#123;</div><div class="line">    name: string;</div><div class="line">    age: number;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</div><div class="line">    <span class="keyword">constructor</span>(public config: IPerson) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> p1 = <span class="keyword">new</span> Person(&#123; <span class="attr">name</span>: <span class="string">"hello"</span>, <span class="attr">age</span>: <span class="number">123</span> &#125;);</div><div class="line"></div><div class="line">interface Animal&#123;</div><div class="line">    eat();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 实现接口，必须实现它所声明的函数</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sheep</span> <span class="title">implements</span> <span class="title">Animal</span> </span>&#123;</div><div class="line">    eat() &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"I am eating something"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>模块，模块可以帮助开发者将代码分割为可重用的单元。开发者可以自己决定将模块中的哪些资源（类、方法、变量）暴露出去供外部使用，哪些资源只在模块内使用。在 TypeScript 中，一个文件就是一个模块。export 和 import 关键字支撑模块的使用。export 对外暴露，import 对内导入。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">import</span> &#123;Person&#125; <span class="keyword">from</span> <span class="string">'./person.tc'</span>;</div></pre></td></tr></table></figure></p>
+<p>注解，注解为程序的元素（类，方法，变量）加上更直观更明了的说明，这些说明信息与程序的业务逻辑无关，而是供指定的工具或框架使用的。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123;Component&#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</div><div class="line"></div><div class="line">@Component(&#123;</div><div class="line">    selector: <span class="string">'app-root'</span>,</div><div class="line">    templateUrl: <span class="string">'./app.component.html'</span>,</div><div class="line">    styleUrls: [<span class="string">'./app.component.css'</span>]</div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="comment">// 当实例化 AppComponent 的时候，Angular 框架应该去加载 templateUrl 属性所指的页面和 styleUrls 属性所指的层叠样式表。</span></div><div class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">AppComponent</span> </span>&#123;</div><div class="line">    title = <span class="string">'app works!'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>类型定义文件（*.d.ts)，用来帮助开发者在 TypeScript 中使用已有的 JavaScript 的工具包，如：jQuery，常用的类型文件可以从 Github 项目的 DefinitelyTyped/DefinitelyTyped 获取。或者使用工具 typings/typings。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2017/07/12/TypeScript-入门/" data-id="cjamgspf1002jzy4bytxrgqrx" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TypeScript/">TypeScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-「复盘」Yii-RESTful-API-脚手架" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/06/「复盘」Yii-RESTful-API-脚手架/" class="article-date">
+  <time datetime="2017-07-06T07:30:24.000Z" itemprop="datePublished">2017-07-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/06/「复盘」Yii-RESTful-API-脚手架/">「复盘」Yii RESTful API 脚手架</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="安装-Yii-高级模板"><a href="#安装-Yii-高级模板" class="headerlink" title="安装 Yii 高级模板"></a>安装 Yii 高级模板</h2><p><a href="http://www.yiichina.com/doc/guide/2.0/start-installation" target="_blank" rel="external">Yii 安装文档</a><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">composer global require "fxp/composer-asset-plugin:^1.2.0"</div><div class="line">composer create-project --prefer-dist yiisoft/yii2-app-advanced Yii2-RESTful-API-Scaffolding</div></pre></td></tr></table></figure></p>
+<h2 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h2><p>在项目目录执行命令如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd Yii2-RESTful-API-Scaffolding</div><div class="line">php init</div></pre></td></tr></table></figure></p>
+<h2 id="构建-RESTful-API-项目目录"><a href="#构建-RESTful-API-项目目录" class="headerlink" title="构建 RESTful API 项目目录"></a>构建 RESTful API 项目目录</h2><p>构建 RESTful API 项目目录，执行命令如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> 复制目录 frontend 为 api</div><div class="line">cp -rf frontend api</div><div class="line"></div><div class="line"><span class="meta">#</span> 复制目录 environments/dev/frontend 为 environments/dev/api</div><div class="line">cp -rf environments/dev/frontend environments/dev/api</div><div class="line"></div><div class="line"><span class="meta">#</span> 复制目录 environments/prod/frontend 为 environments/prod/api</div><div class="line">cp -rf environments/prod/frontend environments/prod/api</div><div class="line"></div><div class="line"><span class="meta">#</span> 给 api/runtime 和 api/web/assets 目录赋予读写权限</div><div class="line">sudo chmod -R 777 api/runtime api/web/assets</div></pre></td></tr></table></figure></p>
+<p>接着将所有命名空间为 <code>namespace frontend\</code> 替换为 <code>namespace api\</code>，将所有加载引用 <code>use frontend\</code> 替换为 <code>use api\</code></p>
+<p>然后打开文件 <code>common/config/bootstrap.php</code> 并增删代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// 增加代码</span></div><div class="line">Yii::setAlias(<span class="string">'api'</span>, dirname(dirname(<span class="keyword">__DIR__</span>)) . <span class="string">'/api'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 删除代码</span></div><div class="line">Yii::setAlias(<span class="string">'@frontend'</span>, dirname(dirname(<span class="keyword">__DIR__</span>)) . <span class="string">'/frontend'</span>);</div><div class="line">Yii::setAlias(<span class="string">'@backend'</span>, dirname(dirname(<span class="keyword">__DIR__</span>)) . <span class="string">'/backend'</span>);</div></pre></td></tr></table></figure></p>
+<p>清理 RESTful API 项目，执行命令如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">rm -rf backend</div><div class="line">rm -rf frontend</div><div class="line">rm -rf api/views</div><div class="line">rm -rf api/assets</div><div class="line">rm -rf api/web/css</div><div class="line">rm -rf api/models/*</div><div class="line">rm -rf api/controllers/SiteController.php</div></pre></td></tr></table></figure></p>
+<h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><p>打开文件 <code>api/config/main.php</code>，把文本 <code>frontend</code> 替换为 <code>api</code>，并添加配置如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="string">'components'</span> =&gt; [</div><div class="line">	<span class="string">'request'</span> =&gt; [</div><div class="line">	    <span class="string">'parsers'</span> =&gt; [</div><div class="line">	        <span class="string">'application/json'</span> =&gt; <span class="string">'yii\web\JsonParser'</span>,</div><div class="line">	    ]</div><div class="line">	],</div><div class="line">	<span class="string">'urlManager'</span> =&gt; [</div><div class="line">	    <span class="string">'enablePrettyUrl'</span> =&gt; <span class="keyword">true</span>,</div><div class="line">	    <span class="string">'enableStrictParsing'</span> =&gt; <span class="keyword">true</span>,</div><div class="line">	    <span class="string">'showScriptName'</span> =&gt; <span class="keyword">false</span>,</div><div class="line">	    <span class="string">'rules'</span> =&gt; [</div><div class="line">	        [</div><div class="line">	            <span class="string">'class'</span> =&gt; <span class="string">'yii\rest\UrlRule'</span>,</div><div class="line">	            <span class="string">'controller'</span> =&gt; <span class="string">'users'</span> ,</div><div class="line">	            <span class="string">'pluralize'</span> =&gt; <span class="keyword">false</span></div><div class="line">	        ],</div><div class="line">	    ],</div><div class="line">	]</div><div class="line">]</div></pre></td></tr></table></figure></p>
+<p>打开文件 <code>common/config/main-local.php</code>，添加配置如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">return</span> [</div><div class="line">    <span class="string">'components'</span> =&gt; [</div><div class="line">    	...,</div><div class="line">        <span class="string">'db'</span> =&gt; [</div><div class="line">            <span class="string">'class'</span> =&gt; <span class="string">'yii\db\Connection'</span>,</div><div class="line">            <span class="string">'dsn'</span> =&gt; <span class="string">'mysql:host=localhost;dbname=api'</span>,</div><div class="line">            <span class="string">'username'</span> =&gt; <span class="string">'root'</span>,</div><div class="line">            <span class="string">'password'</span> =&gt; <span class="string">'123456'</span>,</div><div class="line">            <span class="string">'charset'</span> =&gt; <span class="string">'utf8'</span>,</div><div class="line">        ],</div><div class="line">        <span class="string">'mailer'</span> =&gt; [</div><div class="line">            <span class="string">'class'</span> =&gt; <span class="string">'yii\swiftmailer\Mailer'</span>,</div><div class="line">            <span class="string">'viewPath'</span> =&gt; <span class="string">'@common/mail'</span>,</div><div class="line">            <span class="comment">// send all mails to a file by default. You have to set</span></div><div class="line">            <span class="comment">// 'useFileTransport' to false and configure a transport</span></div><div class="line">            <span class="comment">// for the mailer to send real emails.</span></div><div class="line">            <span class="string">'useFileTransport'</span> =&gt; <span class="keyword">true</span>,</div><div class="line">        ],</div><div class="line">    ],</div><div class="line">];</div></pre></td></tr></table></figure></p>
+<h2 id="访问域名"><a href="#访问域名" class="headerlink" title="访问域名"></a>访问域名</h2><p>配置虚拟主机，并在本机 hosts 文件加入文本 <code>127.0.0.1 yii2-restful-api-scaffolding.app</code>。之后重启 Apache 并访问域名 <code>yii2-restful-api-scaffolding.app/gii</code><br><figure class="highlight apache"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="section">&lt;VirtualHost *:80&gt;</span></div><div class="line">   <span class="attribute"><span class="nomarkup">ServerName</span></span> yii2-restful-api-scaffolding.app</div><div class="line">   <span class="attribute"><span class="nomarkup">DocumentRoot</span></span> <span class="string">"/Users/LuisEdware/Git/Yii2-RESTful-API-Scaffolding/api/web/"</span></div><div class="line"></div><div class="line">   <span class="section">&lt;Directory "/Users/LuisEdware/Git/Yii2-RESTful-API-Scaffolding/api/web/"&gt;</span></div><div class="line">       <span class="comment"># use mod_rewrite for pretty URL support</span></div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteEngine</span></span> <span class="literal">on</span></div><div class="line">       <span class="comment"># If a directory or a file exists, use the request directly</span></div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteCond</span></span> <span class="variable">%&#123;REQUEST_FILENAME&#125;</span> !-f</div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteCond</span></span> <span class="variable">%&#123;REQUEST_FILENAME&#125;</span> !-d</div><div class="line">       <span class="comment"># Otherwise forward the request to index.php</span></div><div class="line">       <span class="attribute"><span class="nomarkup">RewriteRule</span></span> . index.php</div><div class="line"></div><div class="line">       <span class="comment"># use index.php as index file</span></div><div class="line">       <span class="attribute">DirectoryIndex</span> index.php</div><div class="line"></div><div class="line">       <span class="comment"># ...other settings...</span></div><div class="line">       <span class="comment"># Apache 2.4</span></div><div class="line">       <span class="attribute">Require</span> <span class="literal">all</span> granted</div><div class="line"></div><div class="line">       <span class="comment">## Apache 2.2</span></div><div class="line">       <span class="comment"># Order allow,deny</span></div><div class="line">       <span class="comment"># Allow from all</span></div><div class="line">   <span class="section">&lt;/Directory&gt;</span></div><div class="line"><span class="section">&lt;/VirtualHost&gt;</span></div></pre></td></tr></table></figure></p>
+<h2 id="新增数据库迁移文件"><a href="#新增数据库迁移文件" class="headerlink" title="新增数据库迁移文件"></a>新增数据库迁移文件</h2><p>执行命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">php yii migrate/create create_goods_table</div><div class="line">php yii migrate/create insert_goods_table</div><div class="line">php yii migrate/create create_goods_class_table</div><div class="line">php yii migrate/create insert_goods_class_table</div></pre></td></tr></table></figure></p>
+<p>create_goods_table 迁移文件代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">yii</span>\<span class="title">db</span>\<span class="title">Migration</span>;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * Handles the creation of table `goods`.</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">m170710_231631_create_goods_table</span> <span class="keyword">extends</span> <span class="title">Migration</span></span></div><div class="line"><span class="class"></span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * <span class="doctag">@inheritdoc</span></span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">up</span><span class="params">()</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;createTable(<span class="string">'goods'</span>, [</div><div class="line">            <span class="string">'goodsId'</span> =&gt; <span class="keyword">$this</span>-&gt;primaryKey(),</div><div class="line">            <span class="string">'goodsName'</span> =&gt; <span class="keyword">$this</span>-&gt;string()-&gt;notNull(),</div><div class="line">            <span class="string">'goodsPrice'</span> =&gt; <span class="keyword">$this</span>-&gt;float()-&gt;notNull(),</div><div class="line">            <span class="string">'classId'</span> =&gt; <span class="keyword">$this</span>-&gt;integer()-&gt;notNull(),</div><div class="line">        ]);</div><div class="line"></div><div class="line">        <span class="keyword">echo</span> <span class="string">"m170710_231631_create_goods_table create table success.\n"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * <span class="doctag">@inheritdoc</span></span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">down</span><span class="params">()</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;dropTable(<span class="string">'goods'</span>);</div><div class="line">        <span class="keyword">echo</span> <span class="string">"m170710_231631_create_goods_table drop table success.\n"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>create_goods_class_talbe 迁移文件代码如下:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">yii</span>\<span class="title">db</span>\<span class="title">Migration</span>;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * Handles the creation of table `goods_class`.</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">m170711_011146_create_goods_class_table</span> <span class="keyword">extends</span> <span class="title">Migration</span></span></div><div class="line"><span class="class"></span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * <span class="doctag">@inheritdoc</span></span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">up</span><span class="params">()</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;createTable(<span class="string">'goods_class'</span>, [</div><div class="line">            <span class="string">'goodsClassId'</span> =&gt; <span class="keyword">$this</span>-&gt;primaryKey(),</div><div class="line">            <span class="string">'goodsClassName'</span> =&gt; <span class="keyword">$this</span>-&gt;string()</div><div class="line">        ]);</div><div class="line"></div><div class="line">        <span class="keyword">echo</span> <span class="string">"m170711_011146_create_goods_class_table create table success.\n"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * <span class="doctag">@inheritdoc</span></span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">down</span><span class="params">()</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;dropTable(<span class="string">'goods_class'</span>);</div><div class="line">        <span class="keyword">echo</span> <span class="string">"m170711_011146_create_goods_class_table drop table success.\n"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>insert_goods_table 迁移文件代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">yii</span>\<span class="title">db</span>\<span class="title">Migration</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">m170711_011318_insert_data_to_goods_table</span> <span class="keyword">extends</span> <span class="title">Migration</span></span></div><div class="line"><span class="class"></span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">up</span><span class="params">()</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="keyword">for</span> ($i=<span class="number">1</span>; $i &lt; <span class="number">6</span>; $i++) &#123;</div><div class="line">            $faker = Faker\Factory::create();</div><div class="line">            <span class="keyword">$this</span>-&gt;insert(<span class="string">'goods'</span>, [</div><div class="line">                <span class="string">'goodsId'</span> =&gt; $i,</div><div class="line">                <span class="string">'goodsName'</span> =&gt; $faker-&gt;name,</div><div class="line">                <span class="string">'goodsPrice'</span> =&gt; $faker-&gt;randomFloat(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1000</span>),</div><div class="line">                <span class="string">'classId'</span> =&gt; $i</div><div class="line">            ]);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">echo</span> <span class="string">"m170711_011318_insert_data_to_goods_table insert data success.\n"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">down</span><span class="params">()</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;truncateTable(<span class="string">'goods'</span>);</div><div class="line">        <span class="keyword">echo</span> <span class="string">"m170711_011318_insert_data_to_goods_table cannot be reverted.\n"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>insert_goods_class_talbe 迁移文件代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">yii</span>\<span class="title">db</span>\<span class="title">Migration</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">m170711_011335_insert_data_to_goods_class_talbe</span> <span class="keyword">extends</span> <span class="title">Migration</span></span></div><div class="line"><span class="class"></span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">up</span><span class="params">()</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">    	<span class="keyword">for</span> ($i=<span class="number">1</span>; $i &lt; <span class="number">6</span>; $i++) &#123;</div><div class="line">            $faker = Faker\Factory::create();</div><div class="line">            <span class="keyword">$this</span>-&gt;insert(<span class="string">'goods_class'</span>, [</div><div class="line">                <span class="string">'goodsClassId'</span> =&gt; $i,</div><div class="line">                <span class="string">'goodsClassName'</span> =&gt; $faker-&gt;name,</div><div class="line">            ]);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">echo</span> <span class="string">"m170711_011335_insert_data_to_goods_class_talbe insert data success.\n"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">down</span><span class="params">()</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;truncateTable(<span class="string">'goods_class'</span>);</div><div class="line">        <span class="keyword">echo</span> <span class="string">"m170711_011335_insert_data_to_goods_class_talbe had remove all rows.\n"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>接着在执行 <code>php yii migrate</code>，生成数据表并填充数据。</p>
+<h2 id="新增模块"><a href="#新增模块" class="headerlink" title="新增模块"></a>新增模块</h2><p>打开域名 <code>http://yii2-restful-api-scaffolding.app/gii/module</code>，新增模块信息如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"># 给 api/modules 目录赋予读写权限</div><div class="line">sudo chmod -R 777 api/modules</div><div class="line"></div><div class="line"># Module Class</div><div class="line">api\modules\v1\ApiModule</div><div class="line"></div><div class="line"># Module ID</div><div class="line">v1</div><div class="line"></div><div class="line"># 勾选生成文件</div><div class="line">modules/v1/ApiModule.php</div><div class="line"></div><div class="line"># 在 api/config/main.php 配置文件加入配置项如下</div><div class="line">&apos;modules&apos; =&gt; [</div><div class="line">    &apos;v1&apos; =&gt; [</div><div class="line">        &apos;class&apos; =&gt; &apos;api\modules\v1\ApiModule&apos;,</div><div class="line">    ],</div><div class="line">],</div></pre></td></tr></table></figure></p>
+<h2 id="新增基础控制器"><a href="#新增基础控制器" class="headerlink" title="新增基础控制器"></a>新增基础控制器</h2><p>打开域名 <code>http://yii2-restful-api-scaffolding.app/gii/controller</code>，新增控制器信息如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"># 给 api/controllers 目录赋予读写权限</div><div class="line">sudo chmod -R 777 api/controllers</div><div class="line"></div><div class="line"># Controller Class</div><div class="line">api\controllers\BaseController</div><div class="line"></div><div class="line"># Action IDs</div><div class="line">清空</div><div class="line"></div><div class="line"># View Path</div><div class="line">清空</div><div class="line"></div><div class="line"># Base Class</div><div class="line">yii\rest\ActiveController</div><div class="line"></div><div class="line"># Code Template</div><div class="line">默认</div></pre></td></tr></table></figure></p>
+<p>新增 <code>api/modules/v1/controllers</code> 目录，并新增控制器如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">mkdir api/modules/v1/controllers</div><div class="line">sudo chmod -R 777 api/modules/v1/controllers</div><div class="line"></div><div class="line"># Controller Class，依次新增</div><div class="line">api\modules\v1\controllers\GoodsController</div><div class="line">api\modules\v1\controllers\GoodsClassController</div><div class="line"></div><div class="line"># Action IDs</div><div class="line">清空</div><div class="line"></div><div class="line"># View Path</div><div class="line">清空</div><div class="line"></div><div class="line"># Base Class</div><div class="line">yii\rest\ActiveController</div><div class="line"></div><div class="line"># Code Template</div><div class="line">默认</div></pre></td></tr></table></figure></p>
+<h2 id="新增模型"><a href="#新增模型" class="headerlink" title="新增模型"></a>新增模型</h2><p>打开域名 <code>http://yii2-restful-api-scaffolding.app/gii/models</code>，新增模型信息如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"># 给 api/models 赋予读写权限</div><div class="line">sudo chmod -R 777 api/models</div><div class="line"></div><div class="line"># Table Name</div><div class="line">goods</div><div class="line">goods_class</div><div class="line"></div><div class="line"># Class Name</div><div class="line">Goods</div><div class="line">GoodsClass</div><div class="line"></div><div class="line"># 其余选项默认</div></pre></td></tr></table></figure></p>
+<h2 id="注册-ApiModule-启动引导"><a href="#注册-ApiModule-启动引导" class="headerlink" title="注册 ApiModule 启动引导"></a>注册 ApiModule 启动引导</h2><p>打开文件 <code>api/config/main.php</code>，在数组索引为 <code>bootstrap</code> 新增 <code>v1</code> 模块组件，修改文件 <code>api/modules/v1/ApiModule.php</code> 代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">api</span>\<span class="title">modules</span>\<span class="title">v1</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">yii</span>\<span class="title">base</span>\<span class="title">Module</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">yii</span>\<span class="title">base</span>\<span class="title">BootstrapInterface</span>;</div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * v1 module definition class</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ApiModule</span> <span class="keyword">extends</span> <span class="title">Module</span> <span class="keyword">implements</span> <span class="title">BootstrapInterface</span></span></div><div class="line"><span class="class"></span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * <span class="doctag">@inheritdoc</span></span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="keyword">public</span> $controllerNamespace = <span class="string">'api\modules\v1\controllers'</span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * <span class="doctag">@inheritdoc</span></span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">init</span><span class="params">()</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="keyword">parent</span>::init();</div><div class="line"></div><div class="line">        <span class="comment">// custom initialization code goes here</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">bootstrap</span><span class="params">($app)</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">    	<span class="comment">// 定义 RESTful API 路由</span></div><div class="line">        $app-&gt;getUrlManager()-&gt;addRules([</div><div class="line">            [</div><div class="line">                <span class="string">'class'</span> =&gt; <span class="string">'yii\rest\UrlRule'</span>,</div><div class="line">                <span class="string">'controller'</span> =&gt; <span class="string">'v1/goods'</span></div><div class="line">            ],</div><div class="line">            [</div><div class="line">                <span class="string">'class'</span> =&gt; <span class="string">'yii\rest\UrlRule'</span>,</div><div class="line">                <span class="string">'controller'</span> =&gt; <span class="string">'v1/goods-class'</span>,</div><div class="line">                <span class="string">'extraPatterns'</span> =&gt; [</div><div class="line">                    <span class="string">'GET &lt;id:\d+&gt;/goods'</span> =&gt; <span class="string">'get-goods-by-goods-id'</span></div><div class="line">                ]</div><div class="line">            ],</div><div class="line">        ]);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>访问路由 <code>http://yii2-restful-api-scaffolding.app/v1/goods</code> 就可以看到接口返回数据</p>
+<h2 id="编写接口测试文档（一）"><a href="#编写接口测试文档（一）" class="headerlink" title="编写接口测试文档（一）"></a>编写接口测试文档（一）</h2><p>首先执行 <code>composer require --prefer-dist light/yii2-swagger &quot;~1.0.4&quot; --dev</code>，安装文档生成 Package。</p>
+<p>然后使用 Gii    生成 swagger 模块组件</p>
+<ul>
+<li>Module Class：api\modules\swagger\SwaggerModule</li>
+<li>Module ID：swagger</li>
+<li>Code File<ul>
+<li>modules/swagger/SwaggerModule.php</li>
+<li>modules/swagger/controllers/DefaultController.php</li>
+</ul>
+</li>
+</ul>
+<p>然后在配置文件 <code>api/config/main.php</code> 的引导启动配置项加入 swagger 模块组件的 id 和模块组件配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&apos;modules&apos; =&gt; [</div><div class="line">    &apos;v1&apos; =&gt; [</div><div class="line">        &apos;class&apos; =&gt; &apos;api\modules\v1\Module&apos;,</div><div class="line">    ],</div><div class="line">    &apos;swagger&apos; =&gt; [</div><div class="line">        &apos;class&apos; =&gt; &apos;api\modules\swagger\SwaggerModule&apos;,</div><div class="line">    ],</div><div class="line">],</div></pre></td></tr></table></figure></p>
+<p>打开文件 <code>api/modules/swagger/SwaggerModule.php</code>，修改代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">api</span>\<span class="title">modules</span>\<span class="title">swagger</span>;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * swagger module definition class</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SwaggerModule</span> <span class="keyword">extends</span> \<span class="title">yii</span>\<span class="title">base</span>\<span class="title">Module</span> <span class="keyword">implements</span> \<span class="title">yii</span>\<span class="title">base</span>\<span class="title">BootstrapInterface</span></span></div><div class="line"><span class="class"></span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * <span class="doctag">@inheritdoc</span></span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="keyword">public</span> $controllerNamespace = <span class="string">'api\modules\swagger\controllers'</span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * <span class="doctag">@inheritdoc</span></span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">init</span><span class="params">()</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="keyword">parent</span>::init();</div><div class="line"></div><div class="line">        <span class="comment">// custom initialization code goes here</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">bootstrap</span><span class="params">($app)</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="comment">// 定义路由</span></div><div class="line">        $app-&gt;getUrlManager()-&gt;addRules([</div><div class="line">            [</div><div class="line">                <span class="string">'class'</span> =&gt; <span class="string">'yii\web\UrlRule'</span>,</div><div class="line">                <span class="string">'pattern'</span> =&gt; <span class="keyword">$this</span>-&gt;id,</div><div class="line">                <span class="string">'route'</span> =&gt; <span class="keyword">$this</span>-&gt;id . <span class="string">'/default/doc'</span>,</div><div class="line">            ],</div><div class="line">            [</div><div class="line">                <span class="string">'class'</span> =&gt; <span class="string">'yii\web\UrlRule'</span>,</div><div class="line">                <span class="string">'pattern'</span> =&gt; <span class="keyword">$this</span>-&gt;id . <span class="string">'/&lt;action:\w+&gt;'</span>,</div><div class="line">                <span class="string">'route'</span> =&gt; <span class="keyword">$this</span>-&gt;id . <span class="string">'/default/&lt;action&gt;'</span>,</div><div class="line">            ],</div><div class="line">        ]);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>打开文件 <code>api/modules/swagger/controllers/DefaultController.php</code>，修改代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">api</span>\<span class="title">modules</span>\<span class="title">swagger</span>\<span class="title">controllers</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">Yii</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">yii</span>\<span class="title">helpers</span>\<span class="title">Url</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">yii</span>\<span class="title">web</span>\<span class="title">Controller</span>;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * Default controller for the `swagger` module</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DefaultController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></div><div class="line"><span class="class"></span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">actions</span><span class="params">()</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="keyword">return</span> [</div><div class="line">            <span class="comment">//文档预览地址</span></div><div class="line">            <span class="string">'doc'</span> =&gt; [</div><div class="line">                <span class="string">'class'</span> =&gt; <span class="string">'light\swagger\SwaggerAction'</span>,</div><div class="line">                <span class="string">'restUrl'</span> =&gt; Url::to([<span class="string">'api'</span>], <span class="keyword">true</span>),</div><div class="line">            ],</div><div class="line">            <span class="comment">//看到上面配置的*restUrl*了么，没错, 它就是指向这个地址</span></div><div class="line">            <span class="string">'api'</span> =&gt; [</div><div class="line">                <span class="string">'class'</span> =&gt; <span class="string">'light\swagger\SwaggerApiAction'</span>,</div><div class="line">                <span class="comment">//这里配置需要扫描的目录,不支持 yii 的 alias,所以需要这里直接获取到真实地址</span></div><div class="line">                <span class="string">'scanDir'</span> =&gt; [</div><div class="line">                    Yii::getAlias(<span class="string">'@api/modules/v1/documents/'</span>),</div><div class="line">                ],</div><div class="line">                <span class="comment">// 'api_key' =&gt; '',</span></div><div class="line">            ],</div><div class="line">        ];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>新建目录 <code>api/modules/v1/documents/controllers</code>，新增文档注释文件 <code>controllers/BaseControllerDocument.php</code> 和 <code>controllers/GoodsControllerDocument.php</code>，代码如下：</p>
+<p>BaseControllerDocument.php<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">/**</div><div class="line"> * @SWG\Swagger(</div><div class="line"> *   swagger=&quot;2.0&quot;,</div><div class="line"> *   @SWG\Info(</div><div class="line"> *      title=&quot;Yii RESTful API(标题)&quot;,</div><div class="line"> *      description=&quot;Yii RESTful API(描述)&quot;,</div><div class="line"> *      termsOfService=&quot;七月十五九月初七&quot;,</div><div class="line"> *      version=&quot;1.0.0(版本号)&quot;,</div><div class="line"> *      @SWG\Contact(</div><div class="line"> *          email=&quot;luisedware@gmail.com(邮件)&quot;,</div><div class="line"> *      ),</div><div class="line"> *      @SWG\License(</div><div class="line"> *          name=&quot;MIT&quot;,</div><div class="line"> *          url=&quot;http://github.com/gruntjs/grunt/blob/master/LICENSE-MIT&quot;</div><div class="line"> *      ),</div><div class="line"> *  ),</div><div class="line"> *  host=&quot;yii2-restful-api-scaffolding.app/&quot;,</div><div class="line"> *  basePath=&quot;v1/&quot;,</div><div class="line"> *  schemes=&#123;&quot;http&quot;&#125;,</div><div class="line"> *  produces=&#123;&quot;application/json&quot;&#125;,</div><div class="line"> *  consumes=&#123;&quot;application/json&quot;&#125;,</div><div class="line"> * )</div><div class="line"> */</div></pre></td></tr></table></figure></p>
+<p>GoodsControllerDocument.php<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">/**</div><div class="line"> * @SWG\Get(</div><div class="line"> *     tags=&#123;&quot;GoodsController「商品管理」&quot;&#125;,</div><div class="line"> *     path=&quot;/goods&quot;,</div><div class="line"> *     summary=&quot;列出所有商品&quot;,</div><div class="line"> *     operationId=&quot;index&quot;,</div><div class="line"> *     description=&quot;列出所有商品&quot;,</div><div class="line"> *     @SWG\Response(</div><div class="line"> *         response=200,</div><div class="line"> *         description=&quot;Successful Operation&quot;,</div><div class="line"> *     )</div><div class="line"> * )</div><div class="line"> */</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2017/07/06/「复盘」Yii-RESTful-API-脚手架/" data-id="cjamgspgg0055zy4bbl39phfs" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yii/">Yii</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-「复盘」商品库-v1-0" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -166,7 +329,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/06/29/「复盘」商品库-v1-0/" data-id="cj9t8tyjh003ri24b8tix47d8" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/06/29/「复盘」商品库-v1-0/" data-id="cjamgspfw003qzy4bo02u17he" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -212,7 +375,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/06/27/使用-Vue-js-2-0-开发后台/" data-id="cj9t8tyl60055i24bf3or0pfb" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/06/27/使用-Vue-js-2-0-开发后台/" data-id="cjamgspgf0052zy4b3bqd6tqn" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue-js/">Vue.js</a></li></ul>
@@ -371,7 +534,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/06/05/LNMP-中常用的-Linux-命令/" data-id="cj9t8tygo0000i24bdn9wl7cy" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/06/05/LNMP-中常用的-Linux-命令/" data-id="cjamgspdp0004zy4bowjjt0tl" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -518,7 +681,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/06/02/mysqldumpslow-参数讲解与基础使用/" data-id="cj9t8tyj40033i24bu2s2d6y8" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/06/02/mysqldumpslow-参数讲解与基础使用/" data-id="cjamgspfo003gzy4b8yrz0psf" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -586,7 +749,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/06/01/XHprof-的安装配置与使用分析/" data-id="cj9t8tyim002ji24b5hypl5cv" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/06/01/XHprof-的安装配置与使用分析/" data-id="cjamgspf3002nzy4brm5wbkzw" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -639,7 +802,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/05/31/学习-Swoole/" data-id="cj9t8tymi0072i24bu7ql1n8t" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/05/31/学习-Swoole/" data-id="cjamgspi2007azy4bnvnr8jrp" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swoole/">Swoole</a></li></ul>
@@ -948,7 +1111,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/05/27/ApacheBench-的参数讲解与基础使用/" data-id="cj9t8tygw0004i24b9rk0ijgt" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/05/27/ApacheBench-的参数讲解与基础使用/" data-id="cjamgspdi0000zy4bq9v2orlq" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Apache/">Apache</a></li></ul>
@@ -1062,351 +1225,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/05/25/高性能的-PHP-日志系统/" data-id="cj9t8tymx0084i24bp8mg0ruh" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LNMP-性能优化之-PHP-性能优化" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/05/24/LNMP-性能优化之-PHP-性能优化/" class="article-date">
-  <time datetime="2017-05-24T09:33:16.000Z" itemprop="datePublished">2017-05-24</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/24/LNMP-性能优化之-PHP-性能优化/">LNMP 性能优化之 PHP 性能优化</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
-<li><a href="#1">PHP 性能优化初探</a><ul>
-<li><a href="#1.1">使用 PHP 其语法不恰当</a></li>
-<li><a href="#1.2">使用 PHP 做其不擅长的事</a></li>
-<li><a href="#1.3">使用 PHP 连接的服务不稳定</a></li>
-<li><a href="#1.4">使用 PHP 但尚未排查出来的问题</a></li>
-</ul>
-</li>
-<li><a href="#2">PHP 性能问题简析</a><ul>
-<li><a href="#2.1">PHP 运行流程</a></li>
-<li><a href="#2.2">PHP 开销和速度排序</a></li>
-</ul>
-</li>
-<li><a href="#3">PHP 语言级性能优化</a><ul>
-<li><a href="#3.1">尽可能地使用内置函数来完成任务</a></li>
-<li><a href="#3.2">尽可能地使用高性能的内置函数来完成任务</a></li>
-<li><a href="#3.3">尽可能避免使用魔法方法来完成任务</a></li>
-<li><a href="#3.4">尽可能避免使用错误抑制符来完成任务</a></li>
-<li><a href="#3.5">尽可能避免使用正则表达式来完成任务</a></li>
-<li><a href="#3.6">尽可能避免在遍历或循环内做各种运算</a></li>
-<li><a href="#3.7">尽可能避免在计算密集型的业务中使用</a></li>
-</ul>
-</li>
-<li><a href="#4">PHP 周边级性能优化</a><ul>
-<li><a href="#4.1">Server 服务器</a></li>
-<li><a href="#4.2">Network 网络</a></li>
-<li><a href="#4.3">Database 数据库</a></li>
-<li><a href="#4.4">Cache 缓存</a></li>
-<li><a href="#4.5">File 文件</a></li>
-</ul>
-</li>
-<li><a href="#5">PHP 瓶颈级性能优化</a><ul>
-<li><a href="#5.3">Opcode 优化</a></li>
-<li><a href="#5.4">Runtime 优化</a></li>
-<li><a href="#5.1">PHP 扩展编写</a></li>
-</ul>
-</li>
-<li><a href="#6">PHP 性能分析工具</a><ul>
-<li><a href="#6.1">ApacheBench 的功能讲解与实践使用</a></li>
-<li><a href="#6.2">Vld Opcache 的功能讲解与实践使用</a></li>
-<li><a href="#6.3">XHprof 的安装配置与使用分析</a></li>
-</ul>
-</li>
-</ul>
-<h2 id="PHP-性能优化初探"><a href="#PHP-性能优化初探" class="headerlink" title="PHP 性能优化初探"></a><a id="1">PHP 性能优化初探</a></h2><h4 id="使用-PHP-其语法不恰当"><a href="#使用-PHP-其语法不恰当" class="headerlink" title="使用 PHP 其语法不恰当"></a><a id="1.1">使用 PHP 其语法不恰当</a></h4><p>PHP 做一门弱类型动态语言，在上手容易和开发快速同时，也会导致一些新手写出不规范的代码。比如在递归当中连接数据库读取数据；一次性从文件中读取大量的数据，处理完后却不主动释放内存；在遍历和循环中重复计算某个变量等等；数组的键没有加引号导致先查找常量集，都会导致 PHP 程序性能下降。</p>
-<h4 id="使用-PHP-做其不擅长的事"><a href="#使用-PHP-做其不擅长的事" class="headerlink" title="使用 PHP 做其不擅长的事"></a><a id="1.2">使用 PHP 做其不擅长的事</a></h4><p>PHP 作为一门 Web 后端脚本语言，好处是能够快速实现 Web Application 所需功能，而且容易部署。缺点就是相对于强类型静态语言如 Java/C/C++ 来说，PHP 的性能较差，在实现计算密集型的业务时没有任何优势。同时也由于 PHP 是同步阻塞的 IO 模型，在高并发请求的场景下容易遇到瓶颈，需要通过 PHP 相关扩展来解决相关技术难题。</p>
-<h4 id="使用-PHP-连接的服务不稳定"><a href="#使用-PHP-连接的服务不稳定" class="headerlink" title="使用 PHP 连接的服务不稳定"></a><a id="1.3">使用 PHP 连接的服务不稳定</a></h4><p>PHP 作为一门胶水语言,势必会连接各种各样服务。常见的服务如：MySQL、Redis、MongoDB 等数据库，C/C++、GO、Java 等语言编写的后端服务。倘若 PHP 所连接服务不稳定，势必也会对 PHP 造成一定的性能影响。</p>
-<h4 id="使用-PHP-但尚未排查出来的问题"><a href="#使用-PHP-但尚未排查出来的问题" class="headerlink" title="使用 PHP 但尚未排查出来的问题"></a><a id="1.4">使用 PHP 但尚未排查出来的问题</a></h4><p>在某些情况，某个 PHP 程序或某段 PHP 代码莫名其妙地出现相当耗时的情况，不知道是 PHP 本身出现了问题，还是所用的框架出现了问题，亦或是 PHP 周边甚至是硬件的问题。这个时候就需要通过工具进行排查。常用的工具有：PHP-Xhprof、PHP-XDebug。</p>
-<h2 id="PHP-性能问题简析"><a href="#PHP-性能问题简析" class="headerlink" title="PHP 性能问题简析"></a><a id="2">PHP 性能问题简析</a></h2><p>PHP 的底层是由 C 语言组成的。每次运行 PHP 的程序，都是需要经过 C 语言遍写的 Zend 引擎来解析 PHP 文件，将其编译成为 Opcodes 后再去执行。就这样一来一回就消耗了不少时间和硬件性能。</p>
-<h4 id="PHP-运行流程"><a href="#PHP-运行流程" class="headerlink" title="PHP 运行流程"></a><a id="2.1">PHP 运行流程</a></h4><ol>
-<li>Scanning（Lexing），将 PHP 代码转换为语言片段（Tokens）。</li>
-<li>Parsing，将 Tokens 转换成简单而有意义的表达式（Expression）。</li>
-<li>Compilation，将表达式编译成 Opocdes。</li>
-<li>Execution，顺次执行 Opcodes，每次一条，从而实现 PHP 脚本的功能。</li>
-</ol>
-<p><code>(*.php) -&gt; scanner -&gt; (Tokens) -&gt; Parser -&gt; (Expression) -&gt; Compilation -&gt; (Opcodes) -&gt; Execution -&gt; (Output)</code></p>
-<h4 id="PHP-开销和速度排序"><a href="#PHP-开销和速度排序" class="headerlink" title="PHP 开销和速度排序"></a><a id="2.2">PHP 开销和速度排序</a></h4><p>在日常使用中，PHP 各项性能开销和运行速度如下：</p>
-<ul>
-<li>性能开销（从大到小）<ul>
-<li>硬盘 I/O</li>
-<li>数据库 I/O</li>
-<li>内存 I/O</li>
-<li>网络 I/O</li>
-</ul>
-</li>
-<li>运行速度（从快到慢）<ul>
-<li>内存 I/O</li>
-<li>数据库 I/O</li>
-<li>硬盘 I/O</li>
-<li>网络 I/O</li>
-</ul>
-</li>
-</ul>
-<p>读写网络数据本质也是硬盘操作，而且网络都是有延迟的，这也带了隐性的时间浪费，事实上 Web Application 感觉运行速度低下的原因，一般也都是网络 I/O 和 硬盘 I/O 引起的问题。</p>
-<h2 id="PHP-语言级性能优化"><a href="#PHP-语言级性能优化" class="headerlink" title="PHP 语言级性能优化"></a><a id="3">PHP 语言级性能优化</a></h2><h4 id="尽可能地使用内置函数来完成任务"><a href="#尽可能地使用内置函数来完成任务" class="headerlink" title="尽可能地使用内置函数来完成任务"></a><a id="3.1">尽可能地使用内置函数来完成任务</a></h4><p>能使用 PHP 内置方法解决的问题，就不要自己手写代码，一是手写代码一般冗余较多，可读性不佳。二是手写代码需要解析编译为底层代码再执行，没有 PHP 内置函数的性能高。</p>
-<p>for &amp; range() 实现同一功能<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> ($i = <span class="number">0</span>; $i &lt;<span class="number">1000</span>; $i++) &#123;</div><div class="line">	$array1[$i] = $i+<span class="number">1000</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">range(<span class="number">1000</span>,<span class="number">1999</span>);</div></pre></td></tr></table></figure></p>
-<p>以 foreach、in_array 和 array_merge 实现同一功能对比说明：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">arrayMerged = [];</div><div class="line"><span class="keyword">foreach</span> ($array1 <span class="keyword">as</span> $value) &#123;</div><div class="line">	$arrayMerged[] = $value;</div><div class="line">&#125;</div><div class="line"><span class="keyword">foreach</span> ($array2 <span class="keyword">as</span> $value) &#123;</div><div class="line">	<span class="keyword">if</span>(!in_array($value, $arrayMerged))&#123;</div><div class="line">		$arrayMerged[] = $value;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">array_merge($array1,$array2);</div></pre></td></tr></table></figure></p>
-<p>以 foreach 和 array_column() 实现同一功能对比说明：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$usernames = [];</div><div class="line"><span class="keyword">foreach</span> ($array <span class="keyword">as</span> $key =&gt; $value) &#123;</div><div class="line">	<span class="keyword">if</span>(<span class="keyword">isset</span>($value[<span class="string">'username'</span>]) &amp;&amp; !<span class="keyword">empty</span>($value[<span class="string">'username'</span>]))&#123;</div><div class="line">		$usernames[$value[<span class="string">'id'</span>]] = $value;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">array_column($array, <span class="string">'username'</span>,<span class="string">'id'</span>);</div></pre></td></tr></table></figure></p>
-<p>以 foreach 和 array_filter() 实现同一功能对比说明：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$arr = [<span class="string">'a'</span> =&gt; <span class="number">1</span>, <span class="string">'b'</span> =&gt; <span class="number">2</span>, <span class="string">'c'</span> =&gt; <span class="number">3</span>, <span class="string">'d'</span> =&gt; <span class="number">4</span>];</div><div class="line"><span class="keyword">foreach</span> ($arr <span class="keyword">as</span> $key =&gt; $value) &#123;</div><div class="line">	<span class="keyword">if</span>($key === <span class="string">'b'</span>)&#123;</div><div class="line">		$result[$key] = $value;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span>($value === <span class="number">4</span>)&#123;</div><div class="line">		$result[$key] = $value;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">array_filter($arr, <span class="function"><span class="keyword">function</span><span class="params">($v, $k)</span> </span>&#123;</div><div class="line">	<span class="keyword">return</span> $k == <span class="string">'b'</span> || $v == <span class="number">4</span>;</div><div class="line">&#125;, ARRAY_FILTER_USE_BOTH)</div></pre></td></tr></table></figure></p>
-<h4 id="尽可能地使用高性能的内置函数来完成任务"><a href="#尽可能地使用高性能的内置函数来完成任务" class="headerlink" title="尽可能地使用高性能的内置函数来完成任务"></a><a id="3.2">尽可能地使用高性能的内置函数来完成任务</a></h4><p>在 PHP 内置的函数之间，实现同一个功能时，也会存在着性能的差距。这是因为 PHP 内置函数的时间复杂度各不相同，了解各个 PHP 内置函数的时间复杂度，也有利于从代码层优化 PHP 项目。</p>
-<p>以 isset() 和 array_key_exists() 对比说明：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">current_unix_time</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="keyword">list</span>($usec,$sec) = explode(<span class="string">" "</span>, microtime());</div><div class="line">	<span class="keyword">return</span> ((float)$usec + (float)$sec);</div><div class="line">&#125;</div><div class="line"></div><div class="line">$time = -current_unix_time();</div><div class="line">$i = <span class="number">0</span>;</div><div class="line">$array = range(<span class="number">1</span>, <span class="number">1000000</span>);</div><div class="line"><span class="keyword">while</span> ($i &lt; <span class="number">1000000</span>) &#123;</div><div class="line">	<span class="keyword">if</span>(array_key_exists($i, $array))&#123;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">	$i++;</div><div class="line">&#125;</div><div class="line">$time += current_unix_time();</div><div class="line"><span class="keyword">echo</span> $time.<span class="string">"\n"</span>;</div><div class="line"></div><div class="line">$time2 = -current_unix_time();</div><div class="line">$i = <span class="number">0</span>;</div><div class="line">$array = range(<span class="number">1</span>, <span class="number">1000000</span>);</div><div class="line"><span class="keyword">while</span> ($i &lt; <span class="number">1000000</span>) &#123;</div><div class="line">	<span class="keyword">if</span>(<span class="keyword">isset</span>($array[$i]))&#123;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">	$i++;</div><div class="line">&#125;</div><div class="line">$time2 += current_unix_time();</div><div class="line"><span class="keyword">echo</span> $time2;</div><div class="line"></div><div class="line"><span class="comment">// array_key_exists：0.080096006393433</span></div><div class="line"><span class="comment">// isset：0.041244029998779</span></div></pre></td></tr></table></figure></p>
-<h4 id="尽可能避免使用魔法方法来完成任务"><a href="#尽可能避免使用魔法方法来完成任务" class="headerlink" title="尽可能避免使用魔法方法来完成任务"></a><a id="3.3">尽可能避免使用魔法方法来完成任务</a></h4><h4 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h4><h4 id="尽可能避免使用错误抑制符来完成任务"><a href="#尽可能避免使用错误抑制符来完成任务" class="headerlink" title="尽可能避免使用错误抑制符来完成任务"></a><a id="3.4">尽可能避免使用错误抑制符来完成任务</a></h4><h4 id="TODO-1"><a href="#TODO-1" class="headerlink" title="TODO"></a>TODO</h4><h4 id="尽可能避免使用正则表达式来完成任务"><a href="#尽可能避免使用正则表达式来完成任务" class="headerlink" title="尽可能避免使用正则表达式来完成任务"></a><a id="3.5">尽可能避免使用正则表达式来完成任务</a></h4><p>正则表达式在 PHP 里算是一把双刃剑；它的优势就是使用起来简单。它的劣势就是性能低下。因为正则表达式需要回溯，而回溯的性能开销比较大，需要去优化。但优化正则表达式是需要一定的技术水平的。在常见的业务场景中，不妨使用字符串处理函数或 filter_var() 函数来实现功能。</p>
-<h4 id="尽可能避免在遍历或循环内做各种运算"><a href="#尽可能避免在遍历或循环内做各种运算" class="headerlink" title="尽可能避免在遍历或循环内做各种运算"></a><a id="3.6">尽可能避免在遍历或循环内做各种运算</a></h4><p>使用 for、while 循环的时候，循环内的计算式将会被重复计算，这样就造成了一些可避免的不必要性能开销。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="comment">// 修改前</span></div><div class="line"><span class="keyword">for</span>($i = <span class="number">0</span>; $i &lt; strlen(<span class="string">"hello world"</span>); $i++)&#123;</div><div class="line">	<span class="comment">//do something</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 修改后</span></div><div class="line">$str = <span class="string">"hello world"</span>;</div><div class="line">$strlen = strlen($str);</div><div class="line"><span class="keyword">for</span>($i = <span class="number">0</span>; $i &lt; $strlen; $i++)&#123;</div><div class="line">	<span class="comment">//do something</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h4 id="尽可能避免在计算密集型的业务中使用"><a href="#尽可能避免在计算密集型的业务中使用" class="headerlink" title="尽可能避免在计算密集型的业务中使用"></a><a id="3.7">尽可能避免在计算密集型的业务中使用</a></h4><p>什么是计算密集型的业务？一般来说是大批量的日志分析、大批量的数据运算。PHP 的语言特性决定了 PHP 不适合做大数据量的运算。因为 PHP 是由 C 语言编写的，<br>PHP 的代码最终还是要转换成 C 语言去执行，这就需要一部分的性能开销。再加上 PHP 自身环境和语言特性缘故，PHP 做运算相比于 C 语言来说，不仅性能开销大，运算速度也慢，所以 PHP 不是适合做计算密集型的业务。PHP 的语言特性决定了它比较适合衔接后端服务或渲染页面。</p>
-<h2 id="PHP-周边级性能优化"><a href="#PHP-周边级性能优化" class="headerlink" title="PHP 周边级性能优化"></a><a id="4">PHP 周边级性能优化</a></h2><h4 id="Server-服务器"><a href="#Server-服务器" class="headerlink" title="Server 服务器"></a><a id="4.1">Server 服务器</a></h4><p>从服务器方面进行优化，可以选择将服务器不安装其他后端服务软件，仅仅安装 PHP 以及其必要扩展。使单机的性能全部向 PHP 倾斜。同时也对 PHP 的相关参数进行优化，将 PHP 单机服务器性能最大化。在大数据、高并发的场景下，可以尝试将 PHP 服务器集群化，通过负载均衡，将网络请求分配至不同的 PHP 单机服务器处理。</p>
-<h4 id="Network-网络"><a href="#Network-网络" class="headerlink" title="Network 网络"></a><a id="4.2">Network 网络</a></h4><p>从网络方面进行优化时的需要注意的两点：</p>
-<ul>
-<li>对接接口是否稳定</li>
-<li>连接网络是否稳定</li>
-</ul>
-<p>如何优化网络：</p>
-<ul>
-<li>使用更好的网卡：使用千兆以上的网卡</li>
-<li>选择更好的套餐：更多的流量，更高的带宽</li>
-<li>设置超时时间：<ul>
-<li>连接超时：200 ms</li>
-<li>读取超时：800 ms</li>
-<li>写入超时：500 ms</li>
-<li>可以根据实际情况进行自由调整</li>
-</ul>
-</li>
-<li>将串行的网络连接并行化<ul>
-<li>使用 curl<em>multi</em>*() 系列函数</li>
-<li>使用 Swoole 扩展或 Wokerman</li>
-</ul>
-</li>
-<li>压缩网络请求数据<ul>
-<li>启用 Server 的 Gzip 相关功能，最好是网络传输的数据大于 100 KB 的时候再使用，否则压缩包比源数据还大就徒劳了。</li>
-<li>压缩优势是减少客户端获取数据速度；劣势是由于 Server 需要压缩数据，会产生额外的 CPU 开销；而 Client 需要解压数据，客户端也会产生额外的 CPU 开销。</li>
-</ul>
-</li>
-</ul>
-<h4 id="Database-数据库"><a href="#Database-数据库" class="headerlink" title="Database 数据库"></a><a id="4.3">Database 数据库</a></h4><p>数据库可以进行优化的层面：</p>
-<ul>
-<li>服务器硬件</li>
-<li>数据库配置</li>
-<li>数据库表结构</li>
-<li>SQL 语句和索引</li>
-</ul>
-<p>以 MySQL 为例，在服务器硬件方面，可以选择多核 CPU，增加内存，使用 SSD 和选择适合的 RAID 方案,选择千兆以上的网卡；在数据库配置方面，可以根据监控日志和性能压测数据进行调优；数据表结构方面可以根据需要存储的数据选择最优的数据类型,设计时可以根据数据库表的范式来设计减少冗余数据，也可以反范式设计提高查询性能；如果数据库表过大，可以采取垂直拆分和水平拆分。而 SQL 语句和索引方面，可以通过开启 mysqldumpslow 和 pt-query-digest 来查看慢查询。使用 EXPLAIN 分析 SQL 的执行计划；使用普通索引或复合索引增加查询数据；了解 MySQL 执行的细节写出最优解的 SQL 语句。</p>
-<h4 id="Cache-缓存"><a href="#Cache-缓存" class="headerlink" title="Cache 缓存"></a><a id="4.4">Cache 缓存</a></h4><h4 id="TODO-2"><a href="#TODO-2" class="headerlink" title="TODO"></a>TODO</h4><h4 id="File-文件"><a href="#File-文件" class="headerlink" title="File 文件"></a><a id="4.5">File 文件</a></h4><h4 id="TODO-3"><a href="#TODO-3" class="headerlink" title="TODO"></a>TODO</h4><h2 id="PHP-瓶颈级性能优化"><a href="#PHP-瓶颈级性能优化" class="headerlink" title="PHP 瓶颈级性能优化"></a><a id="5">PHP 瓶颈级性能优化</a></h2><h4 id="Opcode-优化"><a href="#Opcode-优化" class="headerlink" title="Opcode 优化"></a><a id="5.3">Opcode 优化</a></h4><ul>
-<li>启用 Zend Opcache，以 PHP 7 为例，在配置文件 php.ini 加入以下代码即可：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">zend_extension=opcache.so</div><div class="line">opcache.enable=1</div><div class="line">opcache.enable_cli=1&quot;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="Runtime-优化"><a href="#Runtime-优化" class="headerlink" title="Runtime 优化"></a><a id="5.4">Runtime 优化</a></h4><ul>
-<li><a href="http://wuduoyi.com/note/hhvm/" target="_blank" rel="external">HHVM：http://wuduoyi.com/note/hhvm/</a></li>
-<li><a href="http://www.laruence.com/2016/12/18/3137.html" target="_blank" rel="external">PHP-JIT：http://www.laruence.com/2016/12/18/3137.html</a></li>
-</ul>
-<h4 id="PHP-扩展编写"><a href="#PHP-扩展编写" class="headerlink" title="PHP 扩展编写"></a><a id="5.1">PHP 扩展编写</a></h4><ul>
-<li><a href="https://andot.gitbooks.io/bped/content/" target="_blank" rel="external">PHP 扩展开发入门：https://andot.gitbooks.io/bped/content/</a></li>
-<li><a href="http://www.php-internals.com/book/" target="_blank" rel="external">PHP 深入理解 PHP 内核：http://www.php-internals.com/book/</a></li>
-</ul>
-<h2 id="PHP-性能分析工具"><a href="#PHP-性能分析工具" class="headerlink" title="PHP 性能分析工具"></a><a id="6">PHP 性能分析工具</a></h2><h4 id="ApacheBench-的参数讲解与基础使用"><a href="#ApacheBench-的参数讲解与基础使用" class="headerlink" title="ApacheBench 的参数讲解与基础使用"></a><a id="6.1">ApacheBench 的参数讲解与基础使用</a></h4><p><a href="https://github.com/luisedware/Archives/issues/2" target="_blank" rel="external">ApacheBench 参数讲解与基础使用：https://github.com/luisedware/Archives/issues/2</a></p>
-<h4 id="Vld-Opcache-的参数讲解与基础使用"><a href="#Vld-Opcache-的参数讲解与基础使用" class="headerlink" title="Vld Opcache 的参数讲解与基础使用"></a><a id="6.2">Vld Opcache 的参数讲解与基础使用</a></h4><h4 id="TODO-4"><a href="#TODO-4" class="headerlink" title="TODO"></a>TODO</h4><h4 id="XHprof-的安装配置与使用分析"><a href="#XHprof-的安装配置与使用分析" class="headerlink" title="XHprof 的安装配置与使用分析"></a><a id="6.3">XHprof 的安装配置与使用分析</a></h4><h4 id="TODO-5"><a href="#TODO-5" class="headerlink" title="TODO"></a>TODO</h4>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/05/24/LNMP-性能优化之-PHP-性能优化/" data-id="cj9t8tyh60006i24b9to9mtbu" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PHP-的性能优化" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/05/23/PHP-的性能优化/" class="article-date">
-  <time datetime="2017-05-23T13:39:58.000Z" itemprop="datePublished">2017-05-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/23/PHP-的性能优化/">PHP 的性能优化</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="PHP-性能优化初探"><a href="#PHP-性能优化初探" class="headerlink" title="PHP 性能优化初探"></a>PHP 性能优化初探</h2><p>什么情况下，会遇到了 PHP 性能问题？</p>
-<ul>
-<li>PHP 语法使用得不恰当</li>
-<li>使用 PHP 语言做了它不擅长做的事情</li>
-<li>使用 PHP 语言连接的服务不给力</li>
-<li>PHP 自身的短板</li>
-<li>尚未排查出的问题</li>
-</ul>
-<h2 id="PHP-性能问题简析"><a href="#PHP-性能问题简析" class="headerlink" title="PHP 性能问题简析"></a>PHP 性能问题简析</h2><p>PHP 的性能问题，占整体项目性能问题的比例一般是三成，但也不仅仅局限于对 PHP 的性能优化。</p>
-<p>PHP 的性能问题的解决方向，优化难度是从简单到困难</p>
-<ul>
-<li>PHP 语言级的性能优化</li>
-<li>PHP 周边问题的性能优化</li>
-<li>PHP 底层级的性能优化</li>
-</ul>
-<h2 id="压力测试工具简介"><a href="#压力测试工具简介" class="headerlink" title="压力测试工具简介"></a>压力测试工具简介</h2><p>Apache Benchmark(ab)</p>
-<p>简介</p>
-<p>ApacheBench 是 Apache 服务器自带的一个web压力测试工具,缩写为 ab ,旨在高压高并发下体现出各种问题和瓶颈.<br>ab 命令会模拟多个用户同时访问一个url (伪装一个并发访问的环境).<br>此命令对本地cpu要求不高,内存要求也不多,但是会对访问目标服务器造成严重的负载甚至资源耗尽而宿机,很类似与cc攻击.</p>
-<p>如何使用</p>
-<p>./ab -n1000 -c100 <a href="http://www.baidu.com/，其中" target="_blank" rel="external">http://www.baidu.com/，其中</a> -n 是请求书，-c 是并发数，后面的是压测地址。</p>
-<p>压测呈现的数据，比较重要的三个</p>
-<ul>
-<li>Requests per second: 每秒处理的请求</li>
-<li>Time per request: 每处理一个请求所消耗的时间</li>
-<li>Time taken for test: 完成这次压测所消耗的时间</li>
-</ul>
-<h2 id="PHP-语言级的性能优化"><a href="#PHP-语言级的性能优化" class="headerlink" title="PHP 语言级的性能优化"></a>PHP 语言级的性能优化</h2><p>优化点：产生额外开销的错误抑制符 @</p>
-<ul>
-<li>情况描述：PHP 提供的错误抑制符只是为了方便懒人</li>
-<li>@ 的实际逻辑：在代码开始前、结束后，增加 Opcode，忽略报错</li>
-<li>vld - PHP Opcode 查看扩展</li>
-<li><p>举例说明：file_get_contents()</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php -dvld.active=1 -dvld.execute=0 XXX.php 只查看不执行</div></pre></td></tr></table></figure>
-</li>
-<li><p>好的建议：尽量不要使用 @ 错误抑制符</p>
-</li>
-</ul>
-<p>优化点：合理使用内存</p>
-<ul>
-<li>情况描述：PHP 有内存回收机制保底，但也请小心使用内存</li>
-<li>好的建议：利用 unset 及时释放不使用的内存</li>
-</ul>
-<p>优化点：减少计算密集型业务</p>
-<ul>
-<li>情况描述：PHP 不适合密集型运算的场景</li>
-<li>为什么：PHP 语言特性决定了 PHP 不适合做大数据量运算</li>
-<li>PHP 使用场景：适合衔接 Webserver 与后端服务、UI 呈现</li>
-</ul>
-<p>优化点：务必使用带引号字符串做键值</p>
-<ul>
-<li>情况描述：PHP 会将没有引号的键值当做常量，产生查找常量的开销</li>
-<li>好的建议：严格使用引号作为键值</li>
-</ul>
-<h2 id="PHP-周边问题的性能优化"><a href="#PHP-周边问题的性能优化" class="headerlink" title="PHP 周边问题的性能优化"></a>PHP 周边问题的性能优化</h2><ul>
-<li>Linux 环境</li>
-<li>网络的性能</li>
-<li>缓存的性能</li>
-<li>数据库的性能</li>
-<li>服务器硬盘的性能</li>
-</ul>
-<p>php =&gt; 网络 =》 DB 的场景，找出问题的和核心，并且找到大头去优化。</p>
-<p>减少文件类操作：</p>
-<ul>
-<li>PHP 常见的开销场景<ul>
-<li>读写硬盘</li>
-<li>读写数据库</li>
-<li>读写内存</li>
-<li>读写网络数据</li>
-</ul>
-</li>
-<li>PHP 常见的开销场景的开销次序<ul>
-<li>读写内存 小于 读写数据库</li>
-<li>读写数据库 小于 读写硬盘</li>
-<li>读写硬盘 小于 读写网络数据（网络延迟）</li>
-<li>读写数据库、读写硬盘、读写网络数据都是基于文件类操作</li>
-</ul>
-</li>
-<li>优化网络请求<ul>
-<li>问题<ul>
-<li>API 的不确定因素</li>
-<li>网络稳定性</li>
-</ul>
-</li>
-<li>如何优化<ul>
-<li>1.设置超时时间<ul>
-<li>连接超时 200ms</li>
-<li>读超时 800ms</li>
-<li>写超时 500ms</li>
-</ul>
-</li>
-<li>2.将串行请求并行化<ul>
-<li>使用 curl<em>multi</em>*()</li>
-<li>使用 Swoole 扩展</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>压缩 PHP 接口输出</p>
-<ul>
-<li>如何压缩<ul>
-<li>使用 Gzip 即可</li>
-</ul>
-</li>
-<li>压缩输出的利与弊<ul>
-<li>利于我们的数据输出， Client 端能更快获取数据</li>
-<li>额外的 CPU 开销（如果传输数据大于 100 KB，能取得不错的效果）</li>
-</ul>
-</li>
-</ul>
-<p>缓存重复计算内容</p>
-<ul>
-<li>什么情况下做输出内容的缓存<ul>
-<li>多次请求，内容不变情况</li>
-</ul>
-</li>
-</ul>
-<p>重叠时间窗口思想：</p>
-<pre><code>- 串行
-- 重叠时间窗口思想
-</code></pre><p>如果后一个请求不强依赖前一个请求的返回结果，可以使用将网络请求并行化。</p>
-<p>旁路方案</p>
-<p>如果后一个请求不强依赖前一个请求的返回结果，可以使用旁路方案。</p>
-<h2 id="PHP-性能问题的具体分析"><a href="#PHP-性能问题的具体分析" class="headerlink" title="PHP 性能问题的具体分析"></a>PHP 性能问题的具体分析</h2><p>工具：XHPorf(源自 Fackbook 的 PHP 性能分析工具)<br>实践：通过分析 Wordpress 程序，做优化</p>
-<h2 id="PHP-性能瓶颈解决方法"><a href="#PHP-性能瓶颈解决方法" class="headerlink" title="PHP 性能瓶颈解决方法"></a>PHP 性能瓶颈解决方法</h2><p>Opcode Cache: PHP 扩展 Yac<br>扩展实现：通过 PHP 扩展代替原 PHP 代码中高频逻辑<br>Runtime 优化：HHVM,PHP-JIT</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/05/23/PHP-的性能优化/" data-id="cj9t8tyi8001yi24bcwq6sju6" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2017/05/25/高性能的-PHP-日志系统/" data-id="cjamgspiz008ezy4brnxr22ag" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -1429,7 +1248,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categorieën</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -1439,7 +1258,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Labels</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
     </div>
@@ -1449,7 +1268,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Programming-Language/" style="font-size: 11.43px;">Programming Language</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a> <a href="/tags/vue-js/" style="font-size: 10px;">vue.js</a>
     </div>
@@ -1458,7 +1277,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
@@ -1468,9 +1287,17 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/11/16/PHP-秒杀系统/">PHP 秒杀系统</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/14/PHP-面试考点/">PHP 面试考察点</a>
+          </li>
         
           <li>
             <a href="/2017/11/09/Web-API-的设计与开发/">Web API 的设计与开发</a>
@@ -1482,14 +1309,6 @@
         
           <li>
             <a href="/2017/11/01/刻意练习/">刻意练习</a>
-          </li>
-        
-          <li>
-            <a href="/2017/10/24/高性能的-PHP-API-接口开发/">高性能的 PHP API 接口开发</a>
-          </li>
-        
-          <li>
-            <a href="/2017/09/04/Vue-js-2-X-实践/">Vue.js 2.X 实践</a>
           </li>
         
       </ul>
@@ -1505,7 +1324,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Luis Edware<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

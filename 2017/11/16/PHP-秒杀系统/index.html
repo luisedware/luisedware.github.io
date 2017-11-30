@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>PHP 秒杀系统 | 七月十五九月初七</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="秒杀系统简介 系统环境搭建 系统设计 前端后台功能开发 单机优化、分布式方案、防外挂机器  秒杀系统简介秒杀系统特点 人多商品少 时间短流量高 外挂机器  秒杀系统技术分析 瞬时高并发的处理能力 多层次的分布式处理能力 人机交互与对抗  系统环境搭建技术选型分析：  Linux + Nginx + PHP + MySQL + Redis CDN，智能 DNS 分布式缓存，全国多节点 多线路接入">
+<meta name="keywords" content="PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP 秒杀系统">
+<meta property="og:url" content="http://luisedware.github.io/2017/11/16/PHP-秒杀系统/index.html">
+<meta property="og:site_name" content="七月十五九月初七">
+<meta property="og:description" content="秒杀系统简介 系统环境搭建 系统设计 前端后台功能开发 单机优化、分布式方案、防外挂机器  秒杀系统简介秒杀系统特点 人多商品少 时间短流量高 外挂机器  秒杀系统技术分析 瞬时高并发的处理能力 多层次的分布式处理能力 人机交互与对抗  系统环境搭建技术选型分析：  Linux + Nginx + PHP + MySQL + Redis CDN，智能 DNS 分布式缓存，全国多节点 多线路接入">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2017-11-18T14:15:20.649Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP 秒杀系统">
+<meta name="twitter:description" content="秒杀系统简介 系统环境搭建 系统设计 前端后台功能开发 单机优化、分布式方案、防外挂机器  秒杀系统简介秒杀系统特点 人多商品少 时间短流量高 外挂机器  秒杀系统技术分析 瞬时高并发的处理能力 多层次的分布式处理能力 人机交互与对抗  系统环境搭建技术选型分析：  Linux + Nginx + PHP + MySQL + Redis CDN，智能 DNS 分布式缓存，全国多节点 多线路接入">
+  
+    <link rel="alternate" href="/atom.xml" title="七月十五九月初七" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">七月十五九月初七</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一两祝你手边多银财，二两祝你方寸永不乱</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-PHP-秒杀系统" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/16/PHP-秒杀系统/" class="article-date">
+  <time datetime="2017-11-15T22:43:07.000Z" itemprop="datePublished">2017-11-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      PHP 秒杀系统
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>秒杀系统简介</li>
+<li>系统环境搭建</li>
+<li>系统设计</li>
+<li>前端后台功能开发</li>
+<li>单机优化、分布式方案、防外挂机器</li>
+</ul>
+<h2 id="秒杀系统简介"><a href="#秒杀系统简介" class="headerlink" title="秒杀系统简介"></a>秒杀系统简介</h2><h4 id="秒杀系统特点"><a href="#秒杀系统特点" class="headerlink" title="秒杀系统特点"></a>秒杀系统特点</h4><ul>
+<li>人多商品少</li>
+<li>时间短流量高</li>
+<li>外挂机器</li>
+</ul>
+<h4 id="秒杀系统技术分析"><a href="#秒杀系统技术分析" class="headerlink" title="秒杀系统技术分析"></a>秒杀系统技术分析</h4><ul>
+<li>瞬时高并发的处理能力</li>
+<li>多层次的分布式处理能力</li>
+<li>人机交互与对抗</li>
+</ul>
+<h2 id="系统环境搭建"><a href="#系统环境搭建" class="headerlink" title="系统环境搭建"></a>系统环境搭建</h2><p>技术选型分析：</p>
+<ul>
+<li>Linux + Nginx + PHP + MySQL + Redis</li>
+<li>CDN，智能 DNS</li>
+<li>分布式缓存，全国多节点</li>
+<li>多线路接入</li>
+<li>负载均衡 LVS</li>
+<li>大型 Web 集群</li>
+</ul>
+<h2 id="系统设计"><a href="#系统设计" class="headerlink" title="系统设计"></a>系统设计</h2><h4 id="基本功能和流程"><a href="#基本功能和流程" class="headerlink" title="基本功能和流程"></a>基本功能和流程</h4><ul>
+<li>后台：活动管理、商品管理、订单管理、日志管理</li>
+<li>前台：商品展示、秒杀、购物车、我的订单</li>
+</ul>
+<p>秒杀 -&gt; 问答验证 -&gt; 库存验证 -&gt; 生成订单 -&gt; 成功</p>
+<ul>
+<li>问答验证<ul>
+<li>用户登录验证</li>
+<li>用户黑名单验证</li>
+<li>用户参数验证</li>
+</ul>
+</li>
+<li>库存验证<ul>
+<li>单件商品库存验证</li>
+<li>多个商品库存验证</li>
+<li>商品赠品库存验证</li>
+</ul>
+</li>
+<li>订单验证<ul>
+<li>商品明细验证</li>
+<li>订单信息验证</li>
+</ul>
+</li>
+</ul>
+<h4 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h4><ul>
+<li>活动信息表 activities<ul>
+<li>id - 活动 ID</li>
+<li>title - 活动名称</li>
+<li>start_time - 活动开始时间</li>
+<li>end_time - 活动结束时间</li>
+<li>status  - 活动状态 - 0 待上线，1 已上线，2 已下线</li>
+<li>creator_ip - 创建人 IP</li>
+<li>created_at - 创建时间</li>
+<li>updated_at - 更新时间</li>
+</ul>
+</li>
+<li>商品信息表 goods<ul>
+<li>id - 商品 ID</li>
+<li>activity_id - 活动 ID</li>
+<li>title - 商品名称</li>
+<li>description - 商品描述</li>
+<li>icon - 商品小图</li>
+<li>normal_price - 原价</li>
+<li>discount_price - 秒杀价</li>
+<li>total_num - 总数量</li>
+<li>user_num - 单个用户限购数量</li>
+<li>left_num - 剩余可购买数量</li>
+<li>status - 商品状态 - 0 待上架，1 已上架，2 已下架</li>
+<li>creator_ip - 创建人 IP</li>
+<li>created_at - 创建时间</li>
+<li>updated_at - 更新时间</li>
+</ul>
+</li>
+<li>问答信息表 questions<ul>
+<li>id</li>
+<li>activity_id</li>
+<li>title</li>
+<li>question 1</li>
+<li>answer 1</li>
+<li>question 10</li>
+<li>answer 10</li>
+<li>status - 问答状态 - 0 正常，1 删除</li>
+<li>creator_ip - 创建人 IP</li>
+<li>created_at - 创建时间</li>
+<li>updated_at - 更新时间</li>
+</ul>
+</li>
+<li>订单信息表<ul>
+<li>id - 订单 ID</li>
+<li>activity_id - 活动 ID - 添加普通索引</li>
+<li>goods_id - 商品 ID - 添加普通索引</li>
+<li>user<em>id - 用户 ID - 添加普通索引
+</em> user_name - 用户名称</li>
+<li>total_num - 购买商品数量</li>
+<li>goods_num - 购买商品种类数量</li>
+<li>total_price - 订单总金额</li>
+<li>discount_price - 订单优惠后金额</li>
+<li>confirmed_at - 确认订单时间</li>
+<li>paid_at - 订单支付时间</li>
+<li>overed_at - 订单过期时间</li>
+<li>canceled_at - 订单取消时间</li>
+<li>goods_info - 订单商品详情</li>
+<li>status - 订单状态 - 1 待支付，2 已支付，3 已过期，4 管理员已确认，5 已取消，6 已删除，7 已发货，8 已收货，9 已完成</li>
+<li>creator_ip - 创建人 IP</li>
+<li>created_at - 创建时间</li>
+<li>updated_at - 更新时间</li>
+</ul>
+</li>
+</ul>
+<h2 id="秒杀功能开发"><a href="#秒杀功能开发" class="headerlink" title="秒杀功能开发"></a>秒杀功能开发</h2><ul>
+<li>商品展示页面静态化</li>
+<li>商品状态控制</li>
+<li>商品秒杀业务逻辑<ul>
+<li>验证用户是否登陆</li>
+<li>验证提交参数是否正确合法</li>
+<li>验证用户是否已经购买</li>
+<li>验证问答信息是否正确</li>
+<li>验证活动信息，商品信息是否正常</li>
+<li>验证用户购买的商品数量是否在限制的范围内</li>
+<li>验证商品是否还有剩余数量</li>
+<li>扣除商品剩余数量</li>
+<li>创建订单</li>
+<li>返回提示信息</li>
+</ul>
+</li>
+</ul>
+<h2 id="单商品秒杀"><a href="#单商品秒杀" class="headerlink" title="单商品秒杀"></a>单商品秒杀</h2><p>单商品特点</p>
+<ul>
+<li>简单，没有更多选择</li>
+<li>独立，没有关联关系</li>
+<li>容易，验证逻辑更少</li>
+</ul>
+<p>万次秒杀</p>
+<ul>
+<li>请求少，并发，实现了基本功能就可以满足</li>
+<li>不需要太多考虑优化方面</li>
+<li>单机，MySQL 数据库就可以支持</li>
+</ul>
+<p>百万次秒杀</p>
+<ul>
+<li>请求量和并发量较大</li>
+<li>Web 服务器集群</li>
+<li>引入 Redis 缓存</li>
+</ul>
+<h2 id="组合商品秒杀"><a href="#组合商品秒杀" class="headerlink" title="组合商品秒杀"></a>组合商品秒杀</h2><p>组合商品特点</p>
+<ul>
+<li>支持多商品的选择</li>
+<li>多个商品的库存、限购数量</li>
+<li>验证和处理的逻辑更多</li>
+</ul>
+<h2 id="优化单机性能"><a href="#优化单机性能" class="headerlink" title="优化单机性能"></a>优化单机性能</h2><ul>
+<li>减少页面大小，启用 gzip 压缩</li>
+<li>减少资源请求数量，合并和压缩 CSS,JavaScript</li>
+<li>设置浏览器缓存，利用 CDN 加速，Nginx 配置文件缓存</li>
+<li>数据库索引</li>
+<li>减少数据规模,数据清理</li>
+</ul>
+<h2 id="用户行为分析"><a href="#用户行为分析" class="headerlink" title="用户行为分析"></a>用户行为分析</h2><ul>
+<li>用户访问页面的路径</li>
+<li>页面停留时间、点击位置和时间</li>
+<li>用户基本信息、用户 IP、浏览器信息等</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2017/11/16/PHP-秒杀系统/" data-id="cjamgspev0026zy4b3q4t8tyi" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/11/14/PHP-面试考点/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ouder</strong>
+      <div class="article-nav-title">PHP 面试考察点</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categorieën</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Labels</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Programming-Language/" style="font-size: 11.43px;">Programming Language</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a> <a href="/tags/vue-js/" style="font-size: 10px;">vue.js</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archieven</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recente berichten</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/11/16/PHP-秒杀系统/">PHP 秒杀系统</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/14/PHP-面试考点/">PHP 面试考察点</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/09/Web-API-的设计与开发/">Web API 的设计与开发</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/05/日常开发常用命令/">日常开发常用命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/01/刻意练习/">刻意练习</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Luis Edware<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
