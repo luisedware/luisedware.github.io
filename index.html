@@ -55,7 +55,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -264,7 +264,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/16/PHP-秒杀系统/" data-id="cjamgspev0026zy4b3q4t8tyi" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/11/16/PHP-秒杀系统/" data-id="cjanpyjr00044aj4brwrcus5m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -394,7 +394,7 @@
 </ul>
 <p>unset 引用变量，只会取消引用，不会销毁内存空间；unset 普通变量，会销毁内存空间<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"> <span class="meta">&lt;?php</span></div><div class="line">$a = range(<span class="number">0</span>, <span class="number">2</span>);</div><div class="line"></div><div class="line">$b = &amp;$a;</div><div class="line"></div><div class="line"><span class="keyword">unset</span>($b);</div><div class="line"></div><div class="line">var_dump($a);</div><div class="line"></div><div class="line"><span class="keyword">unset</span>($a);</div><div class="line"></div><div class="line">var_dump($a);</div></pre></td></tr></table></figure></p>
 <p>对象变量都是基于引用赋值传递<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</div><div class="line">  <span class="keyword">public</span> $name = <span class="string">"zhangsan"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$p1 = <span class="keyword">new</span> Person;</div><div class="line">xdebug_debug_zval(<span class="string">'p1'</span>);</div><div class="line"></div><div class="line">$p2 = $p1;</div><div class="line">xdebug_debug_zval(<span class="string">'p1'</span>);</div><div class="line"></div><div class="line">$p2-&gt;name = <span class="string">"Luis"</span>;</div><div class="line">xdebug_debug_zval(<span class="string">'p1'</span>);</div><div class="line"></div><div class="line"><span class="keyword">echo</span> $p1-&gt;name.<span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> $p2-&gt;name.<span class="string">"\n"</span>;</div></pre></td></tr></table></figure></p>
-<p>实践真题<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// 写出如下程序的输出结果</span></div><div class="line">$data = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>];</div><div class="line"><span class="keyword">foreach</span> ($data <span class="keyword">as</span> $key =&gt; $value) &#123;</div><div class="line">  $value = &amp;$data[$key];</div><div class="line">&#125;</div><div class="line"><span class="comment">// 每一次循环结束后，变量 $data 的值是什么</span></div><div class="line">[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>]</div><div class="line">[<span class="string">'b'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>]</div><div class="line">[<span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>]</div><div class="line">[<span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'d'</span>]</div><div class="line"><span class="comment">// 程序执行完成后，变量 $data 的值是什么</span></div><div class="line">[<span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'d'</span>]</div></pre></td></tr></table></figure></p>
+<p>实践真题<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// 写出如下程序的输出结果</span></div><div class="line">$data = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>];</div><div class="line"><span class="keyword">foreach</span> ($data <span class="keyword">as</span> $key =&gt; $value) &#123;</div><div class="line">  $value = &amp;$data[$key];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 每一次循环结束后，变量 $data 的值是什么</span></div><div class="line">[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>]</div><div class="line">[<span class="string">'b'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>]</div><div class="line">[<span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>]</div><div class="line">[<span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'d'</span>]</div><div class="line"></div><div class="line"><span class="comment">// 程序执行完成后，变量 $data 的值是什么</span></div><div class="line">[<span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'d'</span>]</div></pre></td></tr></table></figure></p>
 <h4 id="常量与数据类型"><a href="#常量与数据类型" class="headerlink" title="常量与数据类型"></a>常量与数据类型</h4><ul>
 <li>回顾真题：PHP 的字符串可以使用哪三种定义方法以及各自的区别是什么？</li>
 <li>考官考点：PHP 的字符串的定义方式及各自区别</li>
@@ -420,7 +420,7 @@
 </ul>
 </li>
 </ul>
-<p>浮点类型不能运用到 == 或 === 比较运算中<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$a = <span class="number">0.1</span>;</div><div class="line">$b = <span class="number">0.7</span>;</div><div class="line"></div><div class="line"><span class="keyword">if</span>($a + $b == <span class="number">0.8</span>)&#123;</div><div class="line">	<span class="keyword">echo</span> <span class="keyword">true</span>;</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">	<span class="keyword">echo</span> <span class="keyword">false</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">// false</span></div></pre></td></tr></table></figure></p>
+<p>浮点类型不能运用到 == 或 === 比较运算中<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$a = <span class="number">0.1</span>;</div><div class="line">$b = <span class="number">0.7</span>;</div><div class="line"></div><div class="line"><span class="keyword">if</span>($a + $b == <span class="number">0.8</span>)&#123;</div><div class="line">	<span class="keyword">echo</span> <span class="keyword">true</span>;</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">	<span class="keyword">echo</span> <span class="keyword">false</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">// false</span></div><div class="line"></div><div class="line"><span class="comment">// 如果想要比较浮点类型</span></div></pre></td></tr></table></figure></p>
 <p>布尔类型 false 的七种情况</p>
 <ul>
 <li>整型 0</li>
@@ -511,7 +511,7 @@
 </li>
 <li>知识延伸：PHP 所有运算符考点</li>
 </ul>
-<p>实践真题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">// 下列程序中请写出打印输出的结果</div><div class="line">$a = 0;</div><div class="line">$b = 0;</div><div class="line"></div><div class="line">if($a = 3 &gt; 0 || $b = 3 &gt; 0)&#123;</div><div class="line">  $a++;</div><div class="line">  $b++;</div><div class="line">  echo $a.&quot;\n&quot;;</div><div class="line">  echo $b.&quot;\n&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>实践真题<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// 下列程序中请写出打印输出的结果</span></div><div class="line">$a = <span class="number">0</span>;</div><div class="line">$b = <span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="keyword">if</span>($a = <span class="number">3</span> &gt; <span class="number">0</span> || $b = <span class="number">3</span> &gt; <span class="number">0</span>)&#123;</div><div class="line">  $a++;</div><div class="line">  $b++;</div><div class="line">  <span class="keyword">echo</span> $a.<span class="string">"\n"</span>;</div><div class="line">  <span class="keyword">echo</span> $b.<span class="string">"\n"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <ul>
 <li>3 &gt; 0  返回 true;造成判断条件短路</li>
 <li>$a 等于 true</li>
@@ -530,28 +530,276 @@
 </li>
 <li>区别<ul>
 <li>for 只能遍历索引数组</li>
-<li>foreach 可以遍历索引和关联数组，在遍历之前会对数组进行 reset() 操作</li>
+<li>foreach 可以遍历索引和关联数组，在遍历之前会自动对数组进行 reset() 操作</li>
 <li>list()、each() 和 while 循环可以遍历索引和关联数组，但不会对数组指针进行 reset() 操作</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>知识延伸：分支结构<pre><code>- if...else
-- if...elseif...else
-    - 多个 elseif 从句是排斥关系
-    - 使用 elseif 语句有一个基本原则，总把优先范围小的条件放在前面处理
-- switch...case
-    - switch 后面的控制表达式的数据类型只能是整型、浮点类型或者字符串
-    - continue  语句作用到 switch 的作用类似于 break
-    - switch...case 会生成跳转表，直接跳转到对应 case，执行效率会快一点
-</code></pre></li>
+<li>知识延伸：<ul>
+<li>分支结构<ul>
+<li>if…else</li>
+<li>if…elseif…else<ul>
+<li>多个 elseif 从句是排斥关系</li>
+<li>使用 elseif 语句有一个基本原则，总把优先范围小的条件放在前面处理</li>
 </ul>
-<p>实践真题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">// PHP 中如何优化多个 if...elseif 语句的情况</div><div class="line">条件表达式的可能性越大，就优先进行判断</div><div class="line">使用 switch...case</div></pre></td></tr></table></figure></p>
+</li>
+<li>switch…case<ul>
+<li>switch 后面的控制表达式的数据类型只能是整型、浮点类型或者字符串</li>
+<li>continue  语句作用到 switch 的作用类似于 break</li>
+<li>switch…case 会生成跳转表，直接跳转到对应 case，执行效率会快一点</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>实践真题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// PHP 中如何优化多个 if...elseif 语句的情况</div><div class="line">条件表达式的可能性越大，就优先进行判断</div><div class="line">使用 switch...case</div><div class="line"></div><div class="line">// PHP 遍历数组的三种方法及各自区别</div></pre></td></tr></table></figure></p>
+<h4 id="自定义函数及内部函数"><a href="#自定义函数及内部函数" class="headerlink" title="自定义函数及内部函数"></a>自定义函数及内部函数</h4><p>回顾真题<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 写出如下程序的输出结果</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="comment">// $count 是全局变量</span></div><div class="line">$count = <span class="number">5</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_count</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="comment">// $count 这个是局部变量，初始化没有赋值，$count 为 null</span></div><div class="line">    <span class="keyword">static</span> $count;</div><div class="line"></div><div class="line">	<span class="comment">// 先将变量 $count 返回，然后把 $count++ 的结果保存到变量 $count;</span></div><div class="line">    <span class="keyword">return</span> $count++;</div><div class="line">&#125;</div><div class="line"><span class="keyword">echo</span> $count.<span class="string">"\n"</span>;</div><div class="line">++$count;</div><div class="line"><span class="keyword">echo</span> $count.<span class="string">"\n"</span>;</div><div class="line"></div><div class="line"><span class="keyword">echo</span> get_count().<span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> get_count().<span class="string">"\n"</span>;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>考点分析<ul>
+<li>变量的作用域和静态变量<ul>
+<li>静态变量仅在局部函数域中存在，但当程序执行离开此作用域时，其值并不会消失</li>
+<li>静态变量的特点<ul>
+<li>仅初始化一次</li>
+<li>初始化时需要赋值</li>
+<li>每次执行函数该值会保留</li>
+<li>static 修饰的变量是局部的，仅在函数内部有效</li>
+<li>可以记录函数的调用次数，从而可以在某些条件下终止递归</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>知识延伸<ul>
+<li>函数的参数及参数的引用传递</li>
+<li>函数的返回值及引用返回<ul>
+<li>函数值可以通过关键字 return 返回</li>
+<li>函数值可以返回 PHP 任意数据类型</li>
+<li>关键字 return 会中止函数执行，将控制权交回函数调用处</li>
+<li>省略关键字 return，返回值为 null，无法返回多个值</li>
+<li>从函数返回一个引用，必须在函数声明和指派返回值给一个变量时都是使用引用运算符 &amp;</li>
+</ul>
+</li>
+<li>外部文件的导入<ul>
+<li>给出文件路径则按照文件路径查找</li>
+<li>没有文件路径则从 include_path 中查找</li>
+<li>如果 include_path 中没有，则从调用脚本所在的目录和当前工作目录下寻找</li>
+<li>加载过程中未找到文件，include 会发出一条警告，require 会发出一个错误。</li>
+</ul>
+</li>
+<li>系统内置函数<ul>
+<li>时间日期函数<ul>
+<li>date()</li>
+<li>strtotime()</li>
+<li>mktime()</li>
+<li>time()</li>
+<li>microtime()</li>
+<li>date_default_timezone_set()</li>
+</ul>
+</li>
+<li>IP 处理函数<ul>
+<li>ip2long()</li>
+<li>long2ip</li>
+</ul>
+</li>
+<li>打印处理函数<ul>
+<li>print()</li>
+<li>printf()</li>
+<li>print_r()</li>
+<li>echo</li>
+<li>sprintf()</li>
+<li>var_dump()</li>
+<li>var_export()</li>
+</ul>
+</li>
+<li>序列化、反序列化函数<ul>
+<li>serialize()</li>
+<li>unserialize()</li>
+</ul>
+</li>
+<li>字符串处理函数<ul>
+<li>implode()</li>
+<li>explode()</li>
+<li>join()</li>
+<li>strrev()</li>
+<li>trim()</li>
+<li>ltrim()</li>
+<li>rtrim()</li>
+<li>strstr()</li>
+<li>number_format()</li>
+</ul>
+</li>
+<li>数组处理函数<ul>
+<li>array_keys()</li>
+<li>array_values()</li>
+<li>array_diff()</li>
+<li>array_intersect()</li>
+<li>array_merge()</li>
+<li>array_shift()</li>
+<li>array_unshift()</li>
+<li>array_pop()</li>
+<li>array_push()</li>
+<li>sort</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>实践真题<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$var1 = <span class="number">5</span>;</div><div class="line">$var2 = <span class="number">10</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">(&amp;$myVar)</span></span>&#123;</div><div class="line">    <span class="comment">// 把全局变量 $var1 拿进来使用，$var1 = 7</span></div><div class="line">    <span class="keyword">global</span> $var1;</div><div class="line">    $var1 += <span class="number">2</span>;</div><div class="line">    $var2 = <span class="number">4</span>;</div><div class="line">    $myVar +=<span class="number">3</span>;</div><div class="line">    <span class="keyword">return</span> $var2;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$myVar = <span class="number">5</span>;</div><div class="line"><span class="keyword">echo</span> foo($myVar).<span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> $myVar.<span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> $var1.<span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> $var2.<span class="string">"\n"</span>;</div><div class="line">$bar = <span class="string">'foo'</span>;</div><div class="line">$myVar = <span class="number">10</span>;</div><div class="line"><span class="keyword">echo</span> $bar($myVar).<span class="string">"\n"</span>;</div></pre></td></tr></table></figure></p>
+<h4 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h4><ul>
+<li>回顾真题<ul>
+<li>至少写出一种验证 139 开头的 11 位手机号码的正则表达式</li>
+</ul>
+</li>
+<li>考点分析<ul>
+<li>手机号码的正则表达式编写</li>
+</ul>
+</li>
+<li>知识延伸<ul>
+<li>正则表达式的作用、组成以及编写方法<ul>
+<li>作用：分割、查找、匹配、替换字符串</li>
+<li>组成：<ul>
+<li>分隔符：正斜线、hash 符号(#)以及取反符号(~)</li>
+<li>通用原子：\d、\D、\w、\W、\s、\S</li>
+<li>元字符：. * ? ^ $ + {n} {n,} {n,m} [] () [^] | [-]</li>
+<li>模式修正符：i m e s U x A D u<ul>
+<li>后向引用</li>
+<li>贪婪模式</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>正则表达式函数<ul>
+<li>preg_match()</li>
+<li>preg_match_all()</li>
+<li>preg_replace()</li>
+<li>preg_split()</li>
+</ul>
+</li>
+<li>中文匹配<ul>
+<li>UTF-8 汉字编码范围是 0x4e00-0x9fa5</li>
+<li>ANSI(gb2312) 汉字编码范围是 0xb0-0xf7,0xa1-0xfe</li>
+<li>UTF-8 要使用 u 模式修正符使模式字符串被当成 UTF-8，在 ANSI(gb2312)环境下，要使用 chr 将 Ascii 码转换为字符</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// 后向引用</span></div><div class="line">$string = <span class="string">'&lt;b&gt;abc&lt;/b&gt;'</span>;</div><div class="line">$pattern = <span class="string">'/&lt;b&gt;(.*)&lt;\/b&gt;/'</span>;</div><div class="line">preg_replace($pattern,<span class="string">'\\1'</span>, $string);</div><div class="line"></div><div class="line"><span class="comment">// 贪婪匹配</span></div><div class="line">$string = <span class="string">'&lt;b&gt;abc&lt;/b&gt;&lt;b&gt;123&lt;/b&gt;&lt;b&gt;456&lt;/b&gt;'</span>;</div><div class="line">$pattern = <span class="string">'/&lt;b&gt;.*&lt;\/b&gt;/'</span>;</div><div class="line">var_dump($hello);</div><div class="line"></div><div class="line"><span class="comment">// 解决贪婪匹配</span></div><div class="line">$subject = <span class="string">'&lt;b&gt;abc&lt;/b&gt;&lt;b&gt;123&lt;/b&gt;&lt;b&gt;456&lt;/b&gt;'</span>;</div><div class="line">$pattern = <span class="string">'/&lt;b&gt;.*?&lt;\/b&gt;/'</span>;</div><div class="line">preg_match_all($pattern, $subject, $world);</div><div class="line">var_dump($world);</div><div class="line"></div><div class="line"><span class="comment">// 中文匹配 UTF-8</span></div><div class="line">$str = <span class="string">'中文'</span>;</div><div class="line">$pattern = <span class="string">'/[\x&#123;4e00&#125;-\x&#123;9fa5&#125;]+/u'</span>;</div><div class="line">preg_match($pattern, $str, $match);</div><div class="line">var_dump($match);</div></pre></td></tr></table></figure>
+<p>实践真题<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 写出一种验证 139 开头的 11 位手机号码的正则表达式</span></div><div class="line"><span class="comment"> *</span></div><div class="line"><span class="comment"> * 1.准备一个需要匹配的字符串</span></div><div class="line"><span class="comment"> * 2.自左向右的顺序使用正则表达式的原子和元字符进行拼接</span></div><div class="line"><span class="comment"> * 3.最终加入模式修正符</span></div><div class="line"><span class="comment"> * 4.理解完成，不可死记硬背</span></div><div class="line"><span class="comment"> */</span></div><div class="line">$subject = <span class="string">'13988888888'</span>;</div><div class="line">$pattern = <span class="string">'/^139\d&#123;8&#125;$/'</span>;</div><div class="line">preg_match($pattern, $subject, $match);</div><div class="line">var_dump($match);</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 写出一种验证 139、150、187 开头的 11 位手机号码的正则表达式 TODO</span></div><div class="line"><span class="comment"> */</span></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * URL TODO</span></div><div class="line"><span class="comment"> */</span></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * Email TODO</span></div><div class="line"><span class="comment"> */</span></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * IP 地址 TODO</span></div><div class="line"><span class="comment"> */</span></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 请写一个正则表达式，取出页面中所有 img 标签中的 src 值</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="comment">// 匹配 img 标签</span></div><div class="line">$subject = <span class="string">'&lt;img alt="高清无码" id="av" src="av.jpg" /&gt;'</span>;</div><div class="line">$pattern = <span class="string">'/&lt;img.*?src=".*?".*?\/?&gt;/i'</span>;</div><div class="line">preg_match($pattern, $subject, $match);</div><div class="line">var_dump($match);</div><div class="line"></div><div class="line"><span class="comment">// 加上双括号，获取 src 属性</span></div><div class="line">$subject = <span class="string">'&lt;img alt="高清无码" id="av" src="av.jpg" /&gt;'</span>;</div><div class="line">$pattern = <span class="string">'/&lt;img.*?src="(.*?)".*?\/?&gt;/i'</span>;</div><div class="line">preg_match($pattern, $subject, $match);</div><div class="line">var_dump($match);</div></pre></td></tr></table></figure></p>
+<h4 id="文件及目录处理"><a href="#文件及目录处理" class="headerlink" title="文件及目录处理"></a>文件及目录处理</h4><ul>
+<li>回顾真题：不断在文件 hello.txt 头部写入一行 “Hello World” 字符串，要求代码完整。</li>
+<li><p>考官考点：</p>
+<ul>
+<li>文件读取、写入操作<ul>
+<li>fopen() 函数，用来打开一个文件，打开时需要指定打开模式<ul>
+<li>打开模式：r/r+、w/w+、a/a+、x/x+、b、t TODO复习每个模式含义</li>
+</ul>
+</li>
+<li>读取函数<ul>
+<li>fread()</li>
+<li>fgets()</li>
+<li>fgetc()</li>
+</ul>
+</li>
+<li>fclose() 函数，关闭一个文件</li>
+<li>不需要 fopen() 打开的函数<ul>
+<li>file_get_contents()</li>
+<li>file_put_contents()<ul>
+<li>其他读取函数</li>
+</ul>
+</li>
+<li>file()</li>
+<li>readfile()</li>
+</ul>
+</li>
+<li>访问远程文件：开启 allow_url_fopen，HTTP 协议连接只能使用只读，FTP 协议可以使用只读或者只写</li>
+</ul>
+</li>
+<li>目录操作<ul>
+<li>名称相关：basename()、dirname()、pathinfo()</li>
+<li>目录读取：opendir()、readdir()、closedir()、rewinddir()</li>
+<li>目录删除：rmdir()</li>
+<li>目录创建：mkdir()</li>
+</ul>
+</li>
+<li>文件大小：filesize()</li>
+<li>目录大小：disk_free_space()、disk_total_space()</li>
+<li>文件拷贝：copy()</li>
+<li>删除文件：unlink()</li>
+<li>文件类型：filetype()</li>
+<li>重命名文件或者目录：rename()</li>
+<li>文件截取：ftruncate()</li>
+<li>文件属性：<ul>
+<li>file_exists()</li>
+<li>is_readable()</li>
+<li>is_writable()</li>
+<li>is_executable()</li>
+<li>filectime()</li>
+<li>fileatime()</li>
+<li>filemtime()</li>
+</ul>
+</li>
+<li>文件锁:flock()</li>
+<li>文件指针：<ul>
+<li>ftell()</li>
+<li>fseek()</li>
+<li>rewind()</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>知识延伸：</p>
+<ul>
+<li>目录操作函数</li>
+<li>其他文件操作</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// 不断在文件 hello.txt 头部写入一行 "Hello World"</span></div><div class="line">$file = <span class="string">'./hello.txt'</span>;</div><div class="line">$handle = fopen($file, <span class="string">'r'</span>);</div><div class="line">$content = fread($handle, filesize($file));</div><div class="line">$content = <span class="string">'Hello World'</span>.$content;</div><div class="line">fclose($handle);</div><div class="line">$handle = fopen($file, <span class="string">'w'</span>);</div><div class="line">fwrite($handle, $content);</div><div class="line">fclose($handle);</div></pre></td></tr></table></figure>
+<p>实践真题<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// 通过 PHP 函数的方式对目录进行遍历，写出程序 TODO-2.9</span></div></pre></td></tr></table></figure></p>
+<h4 id="会话控制"><a href="#会话控制" class="headerlink" title="会话控制"></a>会话控制</h4><ul>
+<li>回顾真题<ul>
+<li>简述 cookie 和 session 的区别及各自的工作机制，存储位置等，简述 cookie 的优缺点</li>
+</ul>
+</li>
+<li>考点分析<ul>
+<li>PHP 的会话控制技术<ul>
+<li>通过 GET 参数传递(不建议使用)</li>
+<li>Cookie<ul>
+<li>Cookie 的操做</li>
+<li>Cookie 的优缺点</li>
+</ul>
+</li>
+<li>Session<ul>
+<li>Session 的操作</li>
+<li>Session 的配置</li>
+<li>Session 的优缺点</li>
+</ul>
+</li>
+<li>Session 是基于 Cookie 的</li>
+<li>禁用 Cookie 后，Session ID 可以通过 URL 进行传递:<code>&lt;?php echo session_name.&#39;=&#39;.session_id; ?&gt;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>知识延伸<ul>
+<li>为什么要使用会话控制技术-TODO</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjamgspeu0023zy4bua169u6p" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjanpyjpx0023aj4b1o4bv0ie" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1082,7 +1330,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/09/Web-API-的设计与开发/" data-id="cjamgspf5002uzy4bizgqi8fk" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/11/09/Web-API-的设计与开发/" data-id="cjanpyjq5002kaj4b46g6588u" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -1176,7 +1424,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/05/日常开发常用命令/" data-id="cjamgspie007gzy4bsrupkjt3" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/11/05/日常开发常用命令/" data-id="cjanpyjsh007naj4b8kkkyubb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1265,7 +1513,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/01/刻意练习/" data-id="cjamgsphq006jzy4bl8d63zxv" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/11/01/刻意练习/" data-id="cjanpyjs0006jaj4b39rdlp0b" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1477,7 +1725,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/10/24/高性能的-PHP-API-接口开发/" data-id="cjamgspiw0088zy4b4rebfxft" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/10/24/高性能的-PHP-API-接口开发/" data-id="cjanpyjsr008aaj4bhx5ig71m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -1534,7 +1782,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/09/04/Vue-js-2-X-实践/" data-id="cjamgspf0002gzy4bpwlzhbxx" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/09/04/Vue-js-2-X-实践/" data-id="cjanpyjq4002gaj4biid9ni0f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
@@ -2027,7 +2275,7 @@
 <p>PHP 闭包一般当做函数或方法的回调来使用，如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$numbersPlusOne = array_map(<span class="function"><span class="keyword">function</span><span class="params">($number)</span></span>&#123;</div><div class="line">  <span class="keyword">return</span> $number+<span class="number">1</span>;</div><div class="line">&#125;,[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]);</div><div class="line">var_export($numbersPlusOne);</div></pre></td></tr></table></figure></p>
 <p>PHP 闭包不会像 JavaScript 闭包那样自动封装应用的状态。<br>在 PHP 中，必须手动调用闭包对象的 <strong>bindTo()</strong> 方法或者使用 <strong>use</strong> 关键字，把状态附加到 PHP 闭包上。</p>
 <p>以下是使用 use 关键字附加闭包的状态<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">enclosePerson</span><span class="params">($name)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="params">($doCommand)</span> <span class="title">use</span> <span class="params">($name)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> sprintf(<span class="string">'%s , %s'</span>, $name, $doCommand);</div><div class="line">   &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//把字符串“Clay”封装在闭包中</span></div><div class="line">$clay = enclosePerson(<span class="string">'Clay'</span>);</div><div class="line"></div><div class="line"><span class="comment">//传入参数，调用闭包</span></div><div class="line"><span class="keyword">echo</span> $clay(<span class="string">'get me sweat tea!'</span>); <span class="comment">// Clay, get me sweat tea!</span></div></pre></td></tr></table></figure></p>
-<p>以下是使用 bindTo() 方法附加闭包的状态<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span></span></div><div class="line"><span class="class"></span>&#123;</div><div class="line">  <span class="keyword">protected</span> $route = <span class="keyword">array</span>();</div><div class="line">  <span class="keyword">protected</span> $responseStatus = <span class="string">'200 OK'</span>;</div><div class="line">  <span class="keyword">protected</span> $responseContentType = <span class="string">'text/html'</span>;</div><div class="line">  <span class="keyword">protected</span> $responseBody = <span class="string">'Hello world'</span>;</div><div class="line"></div><div class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">addRoute</span><span class="params">($routePath, $routeCallback)</span></span></div><div class="line"><span class="function">  </span>&#123;</div><div class="line">    <span class="keyword">$this</span>-&gt;routes[$routePath] = $routeCallback-&gt;bindTo(<span class="keyword">$this</span>, <span class="keyword">__CLASS__</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">dispatch</span><span class="params">($currentPath)</span></span></div><div class="line"><span class="function">  </span>&#123;</div><div class="line">    <span class="keyword">foreach</span>(<span class="keyword">$this</span>-&gt;routes <span class="keyword">as</span> $routePath =&gt; $callback) &#123;</div><div class="line">      <span class="keyword">if</span> ($routePath === $currentPath) &#123;</div><div class="line">         $callback();</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    header(<span class="string">'HTTP/1.1'</span> . <span class="keyword">$this</span>-&gt;responseStatus);</div><div class="line">    header(<span class="string">'Content-type: '</span> . <span class="keyword">$this</span>-&gt;responseContentType);</div><div class="line">    header(<span class="string">'Content-length: '</span> . mb_strlen(<span class="keyword">$this</span>-&gt;responseBody));</div><div class="line">    <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;responseBody;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$app = <span class="keyword">new</span> App();</div><div class="line">$app-&gt;addRoute(<span class="string">'/users/1'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">$this</span>-&gt;responseContentType = <span class="string">'application/json;charset=utf8'</span>;</div><div class="line">  <span class="keyword">$this</span>-&gt;responseBody = <span class="string">'&#123;"name" : "Luis Edware", "phone" : "14089950522"&#125;'</span>;</div><div class="line">&#125;);</div><div class="line">$app-&gt;dispatch(<span class="string">'/users/1'</span>);</div></pre></td></tr></table></figure></p>
+<p>以下是使用 bindTo() 方法附加闭包的状态<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span></span></div><div class="line"><span class="class"></span>&#123;</div><div class="line">  <span class="keyword">protected</span> $routes = [];</div><div class="line">  <span class="keyword">protected</span> $responseStatus = <span class="string">'200 OK'</span>;</div><div class="line">  <span class="keyword">protected</span> $responseContentType = <span class="string">'text/html'</span>;</div><div class="line">  <span class="keyword">protected</span> $responseBody = <span class="string">'Hello world'</span>;</div><div class="line"></div><div class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">addRoute</span><span class="params">($routePath, $routeCallback)</span></span></div><div class="line"><span class="function">  </span>&#123;</div><div class="line">    <span class="keyword">$this</span>-&gt;routes[$routePath] = $routeCallback-&gt;bindTo(<span class="keyword">$this</span>, <span class="keyword">__CLASS__</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">dispatch</span><span class="params">($currentPath)</span></span></div><div class="line"><span class="function">  </span>&#123;</div><div class="line">    <span class="keyword">foreach</span>(<span class="keyword">$this</span>-&gt;routes <span class="keyword">as</span> $routePath =&gt; $callback) &#123;</div><div class="line">      <span class="keyword">if</span> ($routePath === $currentPath) &#123;</div><div class="line">         $callback();</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    header(<span class="string">'HTTP/1.1'</span> . <span class="keyword">$this</span>-&gt;responseStatus);</div><div class="line">    header(<span class="string">'Content-type: '</span> . <span class="keyword">$this</span>-&gt;responseContentType);</div><div class="line">    header(<span class="string">'Content-length: '</span> . mb_strlen(<span class="keyword">$this</span>-&gt;responseBody));</div><div class="line">    <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;responseBody;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$app = <span class="keyword">new</span> App();</div><div class="line">$app-&gt;addRoute(<span class="string">'/users/1'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">$this</span>-&gt;responseContentType = <span class="string">'application/json;charset=utf8'</span>;</div><div class="line">  <span class="keyword">$this</span>-&gt;responseBody = <span class="string">'&#123;"name" : "Luis Edware", "phone" : "14089950522"&#125;'</span>;</div><div class="line">&#125;);</div><div class="line">$app-&gt;dispatch(<span class="string">'/users/1'</span>);</div></pre></td></tr></table></figure></p>
 <p>我们可以通过 <strong>bindTo()</strong> 方法的第一个参数把 <code>Closure</code> 对象的内部状态绑定到其他对象上。<br>可以通过 <strong>bindTo()</strong> 方法的第二个参数指定绑定闭包的那个对象所属的 PHP 类。</p>
 <h6 id="惰性求值（Lazy-Evaluation）"><a href="#惰性求值（Lazy-Evaluation）" class="headerlink" title="惰性求值（Lazy Evaluation）"></a>惰性求值（Lazy Evaluation）</h6><p>// TODO</p>
 <h4 id="流程控制和异常处理（ControlFlow）"><a href="#流程控制和异常处理（ControlFlow）" class="headerlink" title="流程控制和异常处理（ControlFlow）"></a>流程控制和异常处理（ControlFlow）</h4><h6 id="分支选择（Branch）"><a href="#分支选择（Branch）" class="headerlink" title="分支选择（Branch）"></a>分支选择（Branch）</h6><p>PHP 提供了一些流程控制的替代语法，包括 <strong>if</strong>，<strong>while</strong>，<strong>for</strong>，<strong>foreach</strong> 和 <strong>switch</strong>。<br>替代语法的基本形式是把左花括号 <code>{</code> 换成冒号 <code>:</code>，把右花括号 <code>}</code> 分别换成 <strong>endif;</strong>，<strong>endwhile;</strong>，<strong>endfor;</strong>，<strong>endforeach;</strong> 以及 <strong>endswitch;</strong>。</p>
@@ -2299,7 +2547,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/19/学习-PHP/" data-id="cjamgspik007nzy4b56mttc6i" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/07/19/学习-PHP/" data-id="cjanpyjsb0079aj4b4su3kxrx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li></ul>
@@ -2521,7 +2769,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/19/编程语言学习框架/" data-id="cjamgspiq007xzy4be5ywrdex" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/07/19/编程语言学习框架/" data-id="cjanpyjsl007vaj4bjcmsuwd4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li></ul>
@@ -2671,7 +2919,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/18/学习数据建模/" data-id="cjamgspii007lzy4bnsoeak3n" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/07/18/学习数据建模/" data-id="cjanpyjsf007iaj4bezm19w5j" class="article-share-link">Share</a>
       
       
     </footer>
@@ -2692,7 +2940,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categorieën</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -2702,7 +2950,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Labels</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
     </div>
@@ -2721,7 +2969,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archieven</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
@@ -2731,7 +2979,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
