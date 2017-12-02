@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="七月十五九月初七">
 <meta property="og:description" content="什么是 Web API本文中的 Web API 是指「使用 HTTP 协议通过网络调用的 API」，简而言之，Web API 就是一个 Web 系统，通过访问 URI 可以与服务器完成信息交互，或者获得存放在服务器的数据信息等，这样调用者通过程序进行访问后即可机械地使用这些数据。 设计优美的 Web API 的重要性 设计优美的 Web API 易于使用 提升开发效率 减少开发周期   设计优美的">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-11-15T22:43:34.562Z">
+<meta property="og:updated_time" content="2017-12-02T03:08:11.940Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Web API 的设计与开发">
 <meta name="twitter:description" content="什么是 Web API本文中的 Web API 是指「使用 HTTP 协议通过网络调用的 API」，简而言之，Web API 就是一个 Web 系统，通过访问 URI 可以与服务器完成信息交互，或者获得存放在服务器的数据信息等，这样调用者通过程序进行访问后即可机械地使用这些数据。 设计优美的 Web API 的重要性 设计优美的 Web API 易于使用 提升开发效率 减少开发周期   设计优美的">
@@ -58,9 +58,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -129,8 +129,7 @@
 <li>设计规范明确的内容必须遵守相关规范。</li>
 <li>没有设计规范的内容必须遵守相关事实标准。</li>
 </ul>
-<h2 id="端点的设计与请求的形式"><a href="#端点的设计与请求的形式" class="headerlink" title="端点的设计与请求的形式"></a>端点的设计与请求的形式</h2><p>本文中的端点是指用于访问 API 的 URI。一般而言，因为 API 将各种不同的功能进行了封装，所以会拥有多个不同的端点。</p>
-<p>URI：统一资源标志符，一个用于标识某一互联网资源名称的字符串。</p>
+<h2 id="端点的设计与请求的形式"><a href="#端点的设计与请求的形式" class="headerlink" title="端点的设计与请求的形式"></a>端点的设计与请求的形式</h2><p>本文中的端点是指用于访问 API 的 URI。一般而言，因为 API 将各种不同的功能进行了封装，所以会拥有多个不同的端点。<br>（URI：统一资源标志符，一个用于标识某一互联网资源名称的字符串）</p>
 <h4 id="API-端点基本原则"><a href="#API-端点基本原则" class="headerlink" title="API 端点基本原则"></a>API 端点基本原则</h4><p>优秀的 URI 设计，有一个非常重要的原则：容易记忆，URI 包含的功能一目了然。可以把这一条原则细化成多个小原则，如下所示：</p>
 <ul>
 <li>短小便于输入的 URI<ul>
@@ -510,7 +509,7 @@
 <p>某些 API 在发生错误时会将 HTML 信息写入信息体，但虽说发生了错误，但客户端依然在访问 API，所以仍然期待服务器返回 JSON 或 XML 等数据格式。</p>
 <p>1.4 维护与状态码</p>
 <p>当停止 API 来进行维护工作时，不仅仅要使用 503 状态码来告知用户当前服务已经停止，还要使用 Retry-After 这一 HTTP 首部来告知用户维护结束的时间。</p>
-<h2 id="最大程度地利用-HTTP-协议规范"><a href="#最大程度地利用-HTTP-协议规范" class="headerlink" title="最大程度地利用 HTTP 协议规范"></a>最大程度地利用 HTTP 协议规范</h2><h4 id="正确使用状态码"><a href="#正确使用状态码" class="headerlink" title="正确使用状态码"></a>正确使用状态码</h4><h4 id="使用-HTTP-缓存"><a href="#使用-HTTP-缓存" class="headerlink" title="使用 HTTP 缓存"></a>使用 HTTP 缓存</h4><p>HTTP 缓存机制分为两类，过期模型和验证模型。过期模型是指预先决定响应数据的保存期限，当到达期限后就会再次访问服务器来重新获取所需的数据；<br>而验证模型则会轮询当前保存的缓存数据是否为最新数据，并只在服务器端进行数据更新时，才重新获取新的数据。</p>
+<h2 id="最大程度地利用-HTTP-协议规范"><a href="#最大程度地利用-HTTP-协议规范" class="headerlink" title="最大程度地利用 HTTP 协议规范"></a>最大程度地利用 HTTP 协议规范</h2><h4 id="正确使用状态码-TODO"><a href="#正确使用状态码-TODO" class="headerlink" title="正确使用状态码 TODO"></a>正确使用状态码 TODO</h4><h4 id="使用-HTTP-缓存"><a href="#使用-HTTP-缓存" class="headerlink" title="使用 HTTP 缓存"></a>使用 HTTP 缓存</h4><p>HTTP 缓存机制分为两类，过期模型和验证模型。过期模型是指预先决定响应数据的保存期限，当到达期限后就会再次访问服务器来重新获取所需的数据；<br>而验证模型则会轮询当前保存的缓存数据是否为最新数据，并只在服务器端进行数据更新时，才重新获取新的数据。</p>
 <p>在 HTTP 协议中，缓存处于可用的状态时成为 fresh 状态，而处于不可用的状态时则成为 stale 状态</p>
 <p>过期模型可以通过在服务器的响应消息里包含何时过期的信息来实现。HTTP 1.1 中定义了两种实现方法：一个方法是用 Cache-Control 响应消息首部，<br>另一个方法是用 Expires 响应消息首部，分别如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Expires: Fri, 01 Jan 2016 00:00:00 GMT</div><div class="line">Cache-Control: max-age=3600</div></pre></td></tr></table></figure></p>
 <p>当 Expires 和 Cache-Control 同时使用时，Cache-Control 优先。另外 HTTP 时间格式必须遵循 RFC 1123 的规范，而且只能使用 GMT 作为时区。</p>
@@ -541,8 +540,7 @@
 <p>CORS（Cross-Origin Resource Sharing)跨域资源访问可以解决同源策略带来的问题。实施 CORS 时，客户端需要使用 Origin 请求首部。然后服务端会检查其中的源<br>是否能够允许被访问。并使用 Allow-Origin 响应首部来返回允许访问的源。</p>
 <p>CORS 在特定场景下会先行查询请求是否能被接收。使用 OPTION 方法发送请求。然后服务端会响应这样的请求，并返回三个首部<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Access-Control-Allow-Origin: 允许源清单</div><div class="line">Access-Control-Allow-Methods: 允许请求方法清单</div><div class="line">Access-Control-Allow-Headers: 允许请求头部清单</div><div class="line">Access-Control-Allow-Max-Age: 允许事先请求的信息在缓存中保存的时间</div></pre></td></tr></table></figure></p>
 <h4 id="定义私有的-HTTP-首部"><a href="#定义私有的-HTTP-首部" class="headerlink" title="定义私有的 HTTP 首部"></a>定义私有的 HTTP 首部</h4><p>如果将 HTTP 首部作为存放元信息的场所，当需要发送无法找到合适首部的元数据时，可以自定义私有的 HTTP 首部，如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">X-AppName-PixelRatio: 2.0</div></pre></td></tr></table></figure></p>
-<h4 id="开发牢固的-Web-API"><a href="#开发牢固的-Web-API" class="headerlink" title="开发牢固的 Web API"></a>开发牢固的 Web API</h4><p>Web API  一般存在安全问题如下所示：</p>
-<ul>
+<h4 id="开发牢固的-Web-API"><a href="#开发牢固的-Web-API" class="headerlink" title="开发牢固的 Web API"></a>开发牢固的 Web API</h4><h6 id="Web-API-安全问题："><a href="#Web-API-安全问题：" class="headerlink" title="Web API 安全问题："></a>Web API 安全问题：</h6><ul>
 <li>非法获取服务器端和客户端之间的信息<ul>
 <li>数据分组嗅探(PacketSniffing)</li>
 <li>会话劫持(SessionJacking)</li>
@@ -581,8 +579,8 @@
 <li>应对超出上限值的情况</li>
 <li>向用户告知限速的信息<ul>
 <li>X-RateLimit-Limit: 单位时间的访问上限</li>
-<li>X-RateLimit-Remaining: 剩余的访问次数</li>
 <li>X-RateLimit-Reset: 访问次数重置的时间</li>
+<li>X-RateLimit-Remaining: 剩余的访问次数</li>
 </ul>
 </li>
 </ul>
@@ -590,7 +588,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/09/Web-API-的设计与开发/" data-id="cjanpyjq5002kaj4b46g6588u" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/09/Web-API-的设计与开发/" data-id="cjap59f8k002vcp4bo72x8mhq" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -602,7 +600,7 @@
 <nav id="article-nav">
   
     <a href="/2017/11/14/PHP-面试考点/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
+      <strong class="article-nav-caption">Récent</strong>
       <div class="article-nav-title">
         
           PHP 面试考察点
@@ -612,7 +610,7 @@
   
   
     <a href="/2017/11/05/日常开发常用命令/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title">日常开发常用命令</div>
     </a>
   
@@ -627,7 +625,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -637,7 +635,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
     </div>
@@ -647,7 +645,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Programming-Language/" style="font-size: 11.43px;">Programming Language</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a> <a href="/tags/vue-js/" style="font-size: 10px;">vue.js</a>
     </div>
@@ -666,7 +664,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -703,7 +701,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Luis Edware<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
