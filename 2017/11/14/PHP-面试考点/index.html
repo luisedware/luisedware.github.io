@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="七月十五九月初七">
 <meta property="og:description" content="PHP 招聘要求总结硬性要求 熟悉常用的算法和数据结构 熟悉(精通) PHP 熟悉 PHP 框架：Laravel、Yii 熟悉 HTML 5 + CSS 3 熟悉 CSS 框架：Bootstrap 熟悉(精通) JavaScript 熟悉 JavaScrip 框架：Vue.js、React.js 熟悉 设计模式、熟悉 MVC 模式 熟悉 HTTP、HTTP 2、TCP、UDP 等标准协议 熟悉 A">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-12-03T04:44:38.061Z">
+<meta property="og:updated_time" content="2017-12-03T07:58:06.155Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP 面试考察点">
 <meta name="twitter:description" content="PHP 招聘要求总结硬性要求 熟悉常用的算法和数据结构 熟悉(精通) PHP 熟悉 PHP 框架：Laravel、Yii 熟悉 HTML 5 + CSS 3 熟悉 CSS 框架：Bootstrap 熟悉(精通) JavaScript 熟悉 JavaScrip 框架：Vue.js、React.js 熟悉 设计模式、熟悉 MVC 模式 熟悉 HTTP、HTTP 2、TCP、UDP 等标准协议 熟悉 A">
@@ -953,6 +953,8 @@
 <li>mediumint</li>
 <li>int</li>
 <li>bigint</li>
+<li>属性:unsigned</li>
+<li>长度：</li>
 </ul>
 </li>
 </ul>
@@ -965,11 +967,29 @@
 </ul>
 </li>
 </ul>
+<p>实践真题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">// 说明表存储引擎 InnoDB 和 MyISAM 的区别</div></pre></td></tr></table></figure></p>
+<h4 id="MySQL-高性能索引"><a href="#MySQL-高性能索引" class="headerlink" title="MySQL 高性能索引"></a>MySQL 高性能索引</h4><ul>
+<li>回顾真题：简单描述 MySQL 中，索引、主键、唯一索引、联合索引的区别，对数据库的性能有什么影响？</li>
+<li>考官考点：MySQL 索引知识</li>
+<li>解题方法：<ul>
+<li>在一些 MySQL 索引基础考题中，我们可以轻松的通过索引基础和类型来解决此类问题。</li>
+<li>对于一些索引创建注意事项方面的考点，我们可以通过索引创建原则和注意事项来解决。</li>
+</ul>
+</li>
+</ul>
+<p>实践真题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">// 创建 MySQL 复合索引应该注意哪些事项？</div></pre></td></tr></table></figure></p>
+<h4 id="MySQL-的-SQL-语句编写考点"><a href="#MySQL-的-SQL-语句编写考点" class="headerlink" title="MySQL 的 SQL 语句编写考点"></a>MySQL 的 SQL 语句编写考点</h4><ul>
+<li>回顾真题：有 A(id,sex,par,c1,c2),B(id,age,c1,c2)两张表，其中 A.id 和 B.id 关联，现在要求写出一条 SQL 语句，将 B 中 age&gt;50 的记录的 c1,c2 更新到 A 表中统一记录中的 c1,c2 字段中。</li>
+<li>考官考点：MySQL 的关联 UPDATE 语句</li>
+<li>知识延伸：MySQL 的关联查询语句(重点)</li>
+<li>解题方式：根据考题要搞清楚表的结构和多表之间的关系，根据想要的结果思考使用哪种关联方式，通常把要查询的列先写出来，然后分析这些列都属于哪些表，才考虑使用关联查询。</li>
+</ul>
+<p>关联更新<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># 方法一，UPDATE 之后的表名代表所要使用到的表</div><div class="line">UPDATE A,B SET A.c1 = B.c1,A.c2 = B.c2 WHERE A.id = B.id and B.age &gt; 50;</div><div class="line"></div><div class="line"># 方法二</div><div class="line">UPDATE A INNER JOIN B ON A.id = B.id SET A.c1 = B.c1,A.c2 = B.c2 WHERE B.age &gt; 50;</div></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjaqcifae002bhe4byb2p6trz" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjaqui66p002f8m4bjybkj78r" class="article-share-link">Share</a>
       
       
     </footer>

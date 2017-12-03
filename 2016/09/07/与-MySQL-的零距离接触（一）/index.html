@@ -14,7 +14,7 @@
 <meta property="og:description" content="目录 第 1 章 初涉 MySQL MySQL概述 MySQL的安装与配置 启动与停止MySQL服务 登录与退出 修改MySQL提示符 MySQL 常用命令以及语法规范 操作数据库   第 2 章 数据类型与操作数据表 数据类型之整型 数据类型之浮点型 数据类型之日期时间型 数据类型之字符型 创建数据表 查看数据表： 查看数据表结构： 记录的插入与查找： 空值与非空 自动编号 初涉主键约束 初涉唯">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.stack.imgur.com/hMKKt.jpg">
-<meta property="og:updated_time" content="2017-12-03T05:26:33.178Z">
+<meta property="og:updated_time" content="2017-12-03T14:11:21.007Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="与 MySQL 的零距离接触（一）">
 <meta name="twitter:description" content="目录 第 1 章 初涉 MySQL MySQL概述 MySQL的安装与配置 启动与停止MySQL服务 登录与退出 修改MySQL提示符 MySQL 常用命令以及语法规范 操作数据库   第 2 章 数据类型与操作数据表 数据类型之整型 数据类型之浮点型 数据类型之日期时间型 数据类型之字符型 创建数据表 查看数据表： 查看数据表结构： 记录的插入与查找： 空值与非空 自动编号 初涉主键约束 初涉唯">
@@ -706,20 +706,61 @@
 </ul>
 </li>
 <li>交叉连接<ul>
+<li>CROSS JOIN</li>
+</ul>
+</li>
+<li>全连接<ul>
 <li>FULL JOIN</li>
+</ul>
+</li>
+<li>联合查询<ul>
+<li>UNION</li>
+<li>UNION ALL</li>
 </ul>
 </li>
 </ul>
 </li>
 <li><h4 id="关于连接的几点说明"><a href="#关于连接的几点说明" class="headerlink" title="关于连接的几点说明"></a><a id="5.9">关于连接的几点说明</a></h4><ul>
 <li>外连接<ul>
-<li>A LEFT JOIN B join_condtion<ul>
+<li><code>SELECT * FROM A LEFT JOIN B [WHERE where_condition]</code><ul>
 <li>数据表 B 的结果集依赖数据表 A</li>
 <li>数据表 A 的结果集根据左连接条件依赖所有数据表</li>
 <li>左外连接条件决定如何检索数据表 B</li>
 <li>如果数据表 A 的某条记录符合 WHERE 条件，但是在数据表 B 不存在符合连接条件的记录，将生成一个所有列为空的额外的行</li>
 </ul>
 </li>
+</ul>
+</li>
+<li>交叉连接<ul>
+<li><code>SELECT * FROM A,B,(,C)</code>或者<code>SELECT * FROM A CROSS JOIN B (CROSS JOIN C)</code><ul>
+<li>没有任何关联条件，结果是笛卡尔积，结果集会较大，适用场景较少。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>内连接<ul>
+<li><code>SELECT * FROM A,B WHERE A.id = B.id</code>或者<code>SELECT * FROM A INNER JOIN B ON A.id = B.id</code><ul>
+<li>数据表 A 结果集和 数据表 B 结果集的交集。</li>
+</ul>
+</li>
+<li>内连接类型<ul>
+<li>不等值连接：<code>ON A.id = B.id</code></li>
+<li>等值连接：<code>ON A.id &gt; B.id</code></li>
+<li>自连接：<code>SELECT * FROM A T1 INNER JOIN A T2 ON T1.id = T2.pid</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>联合查询<ul>
+<li><code>SELECT * FROM A UNION SELECT * FROM B UNION ...</code></li>
+<li>把多个结果集结合在一起，UNION 前的结果为基准，需要注意的是联合查询的列数要相等。</li>
+<li>UNINO 会合并相同的记录行。</li>
+<li>UNION ALL 不会合并重复的记录行。</li>
+</ul>
+</li>
+<li>全连接<ul>
+<li>MySQL 不支持全连接</li>
+<li>可以使用 LEFT JOIN 和 UNION 和 RIGHT JOIN 联合使用 <code>SELECT * FROM A LEFT JOIN B ON A.id = B.id UNION SELECT * FROM A RIGHT JOIN B ON A.id = B.id</code></li>
 </ul>
 </li>
 </ul>
@@ -733,7 +774,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/07/与-MySQL-的零距离接触（一）/" data-id="cjaqcifb90040he4by34rxyda" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/07/与-MySQL-的零距离接触（一）/" data-id="cjaqui68a004a8m4bykyiidyk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>

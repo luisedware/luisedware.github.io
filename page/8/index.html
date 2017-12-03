@@ -892,7 +892,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/19/Linux-命令基础/" data-id="cjaqcif8y000nhe4bqtpgey6g" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/19/Linux-命令基础/" data-id="cjaqui65g000n8m4bxpznzfuf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -966,7 +966,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/12/MySQL-5-7-版本新特性/" data-id="cjaqcifby005ehe4bcyfevocl" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/12/MySQL-5-7-版本新特性/" data-id="cjaqui65t001f8m4bj95rfjzr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -1047,6 +1047,15 @@
 <li><a href="#10-2">10-2 管理工具之 phpMyAdmin</a></li>
 <li><a href="#10-3">10-3 管理工具之 Navicat for MySQL</a></li>
 <li><a href="#10-4">10-4 管理工具之 MySQL Workbench</a></li>
+</ul>
+</li>
+<li><a href="#11">第 11 章 MySQL 索引</a><ul>
+<li><a href="#11-1">11-1 索引简介</a></li>
+<li><a href="#11-2">11-2 索引类型</a></li>
+<li><a href="#11-3">11-3 索引作用</a></li>
+<li><a href="#11-4">11-4 索引场景</a></li>
+<li><a href="#11-5">11-5 索引创建原则</a></li>
+<li><a href="#11-6">11-6 索引注意事项</a></li>
 </ul>
 </li>
 </ul>
@@ -1418,20 +1427,100 @@ insert test(username) values(username); return last_insert_id(); end //</code></
 <h2 id="第-10-章-MySQL-图形化管理工具"><a href="#第-10-章-MySQL-图形化管理工具" class="headerlink" title="第 10 章 MySQL 图形化管理工具"></a><a id="10">第 10 章 MySQL 图形化管理工具</a></h2><ul>
 <li><h4 id="10-1-课程介绍"><a href="#10-1-课程介绍" class="headerlink" title="10-1 课程介绍"></a><a id="10-1">10-1 课程介绍</a></h4><ul>
 <li>PHPMyAdmin</li>
-<li>Navicat</li>
+<li>Navicat for MySQL</li>
 <li>MySQL Workbench</li>
+<li>Sequel Pro</li>
 </ul>
 </li>
 <li><h4 id="10-2-管理工具之-phpMyAdmin"><a href="#10-2-管理工具之-phpMyAdmin" class="headerlink" title="10-2 管理工具之 phpMyAdmin"></a><a id="10-2">10-2 管理工具之 phpMyAdmin</a></h4><ul>
-<li>TODO</li>
+<li><a href="https://www.phpmyadmin.net/" target="_blank" rel="external">phpMyAdmin 官网</a></li>
 </ul>
 </li>
 <li><h4 id="10-3-管理工具之-Navicat-for-MySQL"><a href="#10-3-管理工具之-Navicat-for-MySQL" class="headerlink" title="10-3 管理工具之 Navicat for MySQL"></a><a id="10-3">10-3 管理工具之 Navicat for MySQL</a></h4><ul>
-<li>TODO</li>
+<li><a href="https://www.navicat.com/en/products/navicat-for-mysql" target="_blank" rel="external">Navicat for MySQL 官网</a></li>
 </ul>
 </li>
 <li><h4 id="10-4-管理工具之-MySQL-Workbench"><a href="#10-4-管理工具之-MySQL-Workbench" class="headerlink" title="10-4 管理工具之 MySQL Workbench"></a><a id="10-4">10-4 管理工具之 MySQL Workbench</a></h4><ul>
-<li>TODO</li>
+<li><a href="https://www.mysql.com/products/workbench/" target="_blank" rel="external">MySQL Workbench 官网</a></li>
+</ul>
+</li>
+<li><h4 id="10-4-管理工具之-Sequel-Pro"><a href="#10-4-管理工具之-Sequel-Pro" class="headerlink" title="10-4 管理工具之 Sequel Pro"></a><a id="10-4">10-4 管理工具之 Sequel Pro</a></h4><ul>
+<li><a href="http://www.sequelpro.com/" target="_blank" rel="external">Sequel Pro 官网</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="第-11-章-MySQL-索引"><a href="#第-11-章-MySQL-索引" class="headerlink" title="第 11 章 MySQL 索引"></a><a id="11">第 11 章 MySQL 索引</a></h2><ul>
+<li><h4 id="11-1-索引简介"><a href="#11-1-索引简介" class="headerlink" title="11-1 索引简介"></a><a id="11-1">11-1 索引简介</a></h4><ul>
+<li>索引（Index）是帮助 MySQL 高效获取数据的数据结构</li>
+</ul>
+</li>
+<li><h4 id="11-2-索引类型"><a href="#11-2-索引类型" class="headerlink" title="11-2 索引类型"></a><a id="11-2">11-2 索引类型</a></h4><ul>
+<li>普通索引：最基本的索引，没有任何约束限制</li>
+<li>唯一索引：类似普通索引，但具有唯一性约束</li>
+<li>主键索引：特殊唯一索引，不允许列存在空值</li>
+<li>复合索引：将多个列组合在一起创建索引，可以覆盖多个列</li>
+<li>全文索引：只有 MyISAM 类型的表才能使用全文索引，并且只能对英文进行全文检索。</li>
+<li>外键索引：只有 InnoDB 类型的表才能使用外键索引，保证数据的一致性、完整性和实现级联操作。</li>
+<li>区别<ul>
+<li>一张表只能有一个主键索引，可以有多个唯一索引。</li>
+<li>主键索引一定是唯一索引，唯一索引不是主键索引。</li>
+<li>主键可以与外键构成参照完整性约束，防止数据不一致。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h4 id="11-3-索引作用"><a href="#11-3-索引作用" class="headerlink" title="11-3 索引作用"></a><a id="11-3">11-3 索引作用</a></h4><ul>
+<li>大大减少服务器需要扫描的数据量</li>
+<li>帮助服务器避免排序和临时表</li>
+<li>将随机 I/O 变顺序 I/O</li>
+<li>大大提高查询速度，降低写的速度，占用硬件存储空间</li>
+</ul>
+</li>
+<li><h4 id="11-4-索引场景"><a href="#11-4-索引场景" class="headerlink" title="11-4 索引场景"></a><a id="11-4">11-4 索引场景</a></h4><ul>
+<li>对于非常小的数据表，大部分情况下全表扫描效率更高</li>
+<li>对于中大型的数据表，使用索引非常有效</li>
+<li>对于特大型的数据表，建立和使用索引的代价将随之增长，可以使用分区技术来解决</li>
+</ul>
+</li>
+<li><h4 id="11-5-索引创建原则"><a href="#11-5-索引创建原则" class="headerlink" title="11-5 索引创建原则"></a><a id="11-5">11-5 索引创建原则</a></h4><ul>
+<li>最适合索引的列是出现在 WHERE 子句中的列，或是 JION 子句中的列，而不是出现在 SELECT 关键字后的列。</li>
+<li>索引列的基数越大，索引的效果越好。</li>
+<li>对字符串进行索引，应该制定一个前缀长度，可以节省大量的索引空间。??</li>
+<li>根据情况创建复合索引，复合索引可以提高查询效率。</li>
+<li>避免创建过多索引，索引会额外占用磁盘空间，降低写操作效率。</li>
+<li>主键尽可能选择较短的数据类型，可以有效减少索引的磁盘占用，提高索引效率。</li>
+</ul>
+</li>
+<li><h4 id="11-6-索引注意事项"><a href="#11-6-索引注意事项" class="headerlink" title="11-6 索引注意事项"></a><a id="11-6">11-6 索引注意事项</a></h4><ul>
+<li>复合索引遵循前缀原则。<ul>
+<li>创建复合索引 <code>KEY(a, b, c)</code><ul>
+<li>索引生效的条件查询如下：<ul>
+<li><code>WHERE a = 1 and b = 2 and c = 3</code></li>
+<li><code>WHERE a = 1 and b = 2</code></li>
+<li><code>WHERE a = 1</code></li>
+</ul>
+</li>
+<li>索引无效的条件查询如下：<ul>
+<li><code>WHERE b = 2 and c = 3</code></li>
+<li><code>WHERE a = 1 and c = 3</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>LIKE</code> 查询，<code>%</code> 不能在前，可以使用全文索引。<ul>
+<li><code>WHERE name LIKE &quot;%wange%&quot;</code>，name 索引无效。</li>
+<li><code>WHERE name lIKE &quot;wang%&quot;</code>，name 索引生效。</li>
+</ul>
+</li>
+<li>column is null 可以使用索引</li>
+<li>如果 MySQL 估计使用索引比全表扫描更慢，会放弃使用索引。<ul>
+<li>WHERE id &gt; 2 and id &lt; 100</li>
+</ul>
+</li>
+<li>如果 OR 前的条件中的列有索引，OR 后的条件中的列没有索引，索引都不会生效。</li>
+<li>列类型是字符串型，查询时一定要给值加引号，否则索引失效。</li>
 </ul>
 </li>
 </ul>
@@ -1439,7 +1528,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/09/与-MySQL-的零距离接触（二）/" data-id="cjaqcifb5003vhe4b8a5b2dz3" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/09/与-MySQL-的零距离接触（二）/" data-id="cjaqui68f004d8m4bxibl7w49" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -2086,20 +2175,61 @@ insert test(username) values(username); return last_insert_id(); end //</code></
 </ul>
 </li>
 <li>交叉连接<ul>
+<li>CROSS JOIN</li>
+</ul>
+</li>
+<li>全连接<ul>
 <li>FULL JOIN</li>
+</ul>
+</li>
+<li>联合查询<ul>
+<li>UNION</li>
+<li>UNION ALL</li>
 </ul>
 </li>
 </ul>
 </li>
 <li><h4 id="关于连接的几点说明"><a href="#关于连接的几点说明" class="headerlink" title="关于连接的几点说明"></a><a id="5.9">关于连接的几点说明</a></h4><ul>
 <li>外连接<ul>
-<li>A LEFT JOIN B join_condtion<ul>
+<li><code>SELECT * FROM A LEFT JOIN B [WHERE where_condition]</code><ul>
 <li>数据表 B 的结果集依赖数据表 A</li>
 <li>数据表 A 的结果集根据左连接条件依赖所有数据表</li>
 <li>左外连接条件决定如何检索数据表 B</li>
 <li>如果数据表 A 的某条记录符合 WHERE 条件，但是在数据表 B 不存在符合连接条件的记录，将生成一个所有列为空的额外的行</li>
 </ul>
 </li>
+</ul>
+</li>
+<li>交叉连接<ul>
+<li><code>SELECT * FROM A,B,(,C)</code>或者<code>SELECT * FROM A CROSS JOIN B (CROSS JOIN C)</code><ul>
+<li>没有任何关联条件，结果是笛卡尔积，结果集会较大，适用场景较少。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>内连接<ul>
+<li><code>SELECT * FROM A,B WHERE A.id = B.id</code>或者<code>SELECT * FROM A INNER JOIN B ON A.id = B.id</code><ul>
+<li>数据表 A 结果集和 数据表 B 结果集的交集。</li>
+</ul>
+</li>
+<li>内连接类型<ul>
+<li>不等值连接：<code>ON A.id = B.id</code></li>
+<li>等值连接：<code>ON A.id &gt; B.id</code></li>
+<li>自连接：<code>SELECT * FROM A T1 INNER JOIN A T2 ON T1.id = T2.pid</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>联合查询<ul>
+<li><code>SELECT * FROM A UNION SELECT * FROM B UNION ...</code></li>
+<li>把多个结果集结合在一起，UNION 前的结果为基准，需要注意的是联合查询的列数要相等。</li>
+<li>UNINO 会合并相同的记录行。</li>
+<li>UNION ALL 不会合并重复的记录行。</li>
+</ul>
+</li>
+<li>全连接<ul>
+<li>MySQL 不支持全连接</li>
+<li>可以使用 LEFT JOIN 和 UNION 和 RIGHT JOIN 联合使用 <code>SELECT * FROM A LEFT JOIN B ON A.id = B.id UNION SELECT * FROM A RIGHT JOIN B ON A.id = B.id</code></li>
 </ul>
 </li>
 </ul>
@@ -2113,7 +2243,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/07/与-MySQL-的零距离接触（一）/" data-id="cjaqcifb90040he4by34rxyda" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/07/与-MySQL-的零距离接触（一）/" data-id="cjaqui68a004a8m4bykyiidyk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -2229,7 +2359,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/04/复习使用-MySQL（三）/" data-id="cjaqcifcn006whe4bxu048rzm" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/04/复习使用-MySQL（三）/" data-id="cjaqui6a6006y8m4bzmrfm1z4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -2442,7 +2572,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/04/复习使用-MySQL（二）/" data-id="cjaqcifcm006the4beparogqg" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/04/复习使用-MySQL（二）/" data-id="cjaqui6ac00748m4bt85xjldn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -2681,7 +2811,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/02/复习使用-MySQL（一）/" data-id="cjaqcifcl006qhe4bqm8t0zfh" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/02/复习使用-MySQL（一）/" data-id="cjaqui6a5006v8m4bvkb06vzg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -2767,7 +2897,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/01/查看-Eloquent-模型关联时执行的-SQL-语句/" data-id="cjaqcifd9007mhe4be9i7nv4p" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/01/查看-Eloquent-模型关联时执行的-SQL-语句/" data-id="cjaqui6av007r8m4bja99a9bt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -2900,7 +3030,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/08/31/使用阿里云从零开始部署-Laravel/" data-id="cjaqcifcb0065he4btidg5f7c" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/08/31/使用阿里云从零开始部署-Laravel/" data-id="cjaqui69z006g8m4bhhdpimf8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AliCloud/">AliCloud</a></li></ul>
@@ -2961,7 +3091,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/08/25/使用-Laravel-编写自定义命令/" data-id="cjaqcifbm004qhe4brs3j449f" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/08/25/使用-Laravel-编写自定义命令/" data-id="cjaqui69d00528m4bmzdjqbhx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
