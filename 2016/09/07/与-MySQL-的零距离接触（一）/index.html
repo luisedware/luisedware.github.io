@@ -14,7 +14,7 @@
 <meta property="og:description" content="目录 第 1 章 初涉 MySQL MySQL概述 MySQL的安装与配置 启动与停止MySQL服务 登录与退出 修改MySQL提示符 MySQL 常用命令以及语法规范 操作数据库   第 2 章 数据类型与操作数据表 数据类型之整型 数据类型之浮点型 数据类型之日期时间型 数据类型之字符型 创建数据表 查看数据表： 查看数据表结构： 记录的插入与查找： 空值与非空 自动编号 初涉主键约束 初涉唯">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.stack.imgur.com/hMKKt.jpg">
-<meta property="og:updated_time" content="2017-05-31T09:06:00.000Z">
+<meta property="og:updated_time" content="2017-12-03T05:26:33.178Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="与 MySQL 的零距离接触（一）">
 <meta name="twitter:description" content="目录 第 1 章 初涉 MySQL MySQL概述 MySQL的安装与配置 启动与停止MySQL服务 登录与退出 修改MySQL提示符 MySQL 常用命令以及语法规范 操作数据库   第 2 章 数据类型与操作数据表 数据类型之整型 数据类型之浮点型 数据类型之日期时间型 数据类型之字符型 创建数据表 查看数据表： 查看数据表结构： 记录的插入与查找： 空值与非空 自动编号 初涉主键约束 初涉唯">
@@ -263,6 +263,7 @@
 <h2 id="第-2-章-数据类型与操作数据表"><a href="#第-2-章-数据类型与操作数据表" class="headerlink" title="第 2 章 数据类型与操作数据表"></a><a id="2">第 2 章 数据类型与操作数据表</a></h2><ul>
 <li><h4 id="数据类型之整型"><a href="#数据类型之整型" class="headerlink" title="数据类型之整型"></a><a id="2.1">数据类型之整型</a></h4><ul>
 <li>数据类型的概念：数据类型是指列、存储过程参数、表达式和局部变量的数据特征，它决定了数据的存储格式，代表了不同的信息类型。</li>
+<li>整数类型的长度：为整数类型指定长度，例如：INT(11) 对大多数应用是没有意义的，它不会限制值的合法范围，只会影响显示字符的个数,声明 <code>zerofill</code> 后，会自动在数值填充 0 以达到指定长度。</li>
 <li>整型类型：<ul>
 <li><code>TINYINT</code><ul>
 <li>有符号值：-128 ~ 127 （- 2）</li>
@@ -301,6 +302,7 @@
 <li><h4 id="数据类型之浮点型"><a href="#数据类型之浮点型" class="headerlink" title="数据类型之浮点型"></a><a id="2.2">数据类型之浮点型</a></h4><ul>
 <li><code>FLOAT</code> [(M,D)]：M 是数字总位数，D 是小数点后面的位数。如果 M 和 D 被省略，根据硬件允许的限制来保存值。单精度浮点数精确到大约 7 位小数位。</li>
 <li><code>DOUBLE</code> [(M,D)]</li>
+<li><code>DECIMAL</code> [(M,D)]：可存储比 BIGINT 更大的整数，也可以用于存储精确的小数。</li>
 </ul>
 </li>
 <li><h4 id="数据类型之日期时间型"><a href="#数据类型之日期时间型" class="headerlink" title="数据类型之日期时间型"></a><a id="2.3">数据类型之日期时间型</a></h4><ul>
@@ -309,17 +311,41 @@
 <li><code>DATE</code></li>
 <li><code>DATETIME</code></li>
 <li><code>TIMESTAMP</code></li>
+<li>日期时间型注意项<ul>
+<li>尽量使用 TIMESTAMP，比 DATETIME 空间效率高</li>
+<li>用整数保存时间戳的格式通常不方便处理</li>
+<li>如果需要存储微秒，可以使用 <code>BIGINT</code> 存储</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><h4 id="数据类型之字符型"><a href="#数据类型之字符型" class="headerlink" title="数据类型之字符型"></a><a id="2.4">数据类型之字符型</a></h4><ul>
-<li><code>CHAR</code>：M 个字节，0 &lt;= M &lt;= 255</li>
-<li><code>VARCHAR</code>：L + 1 个字节，其中 L &lt;= M 且 0 &lt;= M &lt;= 65535</li>
+<li><code>CHAR</code>：M 个字节，0 &lt;= M &lt;= 255<ul>
+<li>用于储存定长字符串，根据定义的字符串长度分配足够的空间。</li>
+<li>根据需要采用空格进行填充以方便比较。</li>
+<li>适合存储很短的字符串，或者所有值都接近同一个长度。</li>
+<li>如果存储内容超出指定长度，会被截断。</li>
+</ul>
+</li>
+<li><code>VARCHAR</code>：L + 1 个字节，其中 L &lt;= M 且 0 &lt;= M &lt;= 65535<ul>
+<li>用于储存可变长字符串</li>
+<li>使用 1 或 2 个额外字节记录字符串的长度，列长度小于 255 字节，使用 1 个字节表示，否则用 2 个字节表示。</li>
+<li>如果存储内容超出指定长度，会被截断。</li>
+</ul>
+</li>
 <li><code>TINYTEXT</code>：L + 1 个字节，其中 L &lt; 2^8</li>
 <li><code>TEXT</code>：L + 2 个字节，其中 L &lt; 2^16</li>
 <li><code>MEDIUMTEXT</code>：L + 3 个字节，其中 L &lt; 2^24</li>
 <li><code>LONGTEXT</code>：L + 4 个字节，其中 L &lt; 2^32</li>
 <li><code>ENUM</code>(‘value1’,’value2’,…)：1 或 2 个字节，取决于枚举值的个数（最多 65535 个值）</li>
 <li><code>SET</code>(‘value1’,’value2’,…)：1、2、3、4 或者 8 个字节，取决于 set 成员的数目（最多64个）</li>
+<li>字符型注意项<ul>
+<li>对于经常变更的数据，CHAR 比 VARCHAR 更好，CHAR 不容易产生碎片。</li>
+<li>对于非常短的列，CHAR 比 VARCHAR 在存储空间上更有效率。</li>
+<li>只分配真正需要的空间，更长的列会消耗更多的内存。</li>
+<li>尽量避免使用 BLOB/TEXT 类型，查询会使用临时表，导致严重的性能开销。</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><h4 id="创建数据表"><a href="#创建数据表" class="headerlink" title="创建数据表"></a><a id="2.5">创建数据表</a></h4><ul>
@@ -707,7 +733,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/07/与-MySQL-的零距离接触（一）/" data-id="cjaq9xp9r0045ev4bcoo1sxr0" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/07/与-MySQL-的零距离接触（一）/" data-id="cjaqcifb90040he4by34rxyda" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>

@@ -892,7 +892,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/19/Linux-命令基础/" data-id="cjaq9xp7t000oev4btrifr4wo" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/19/Linux-命令基础/" data-id="cjaqcif8y000nhe4bqtpgey6g" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -966,7 +966,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/12/MySQL-5-7-版本新特性/" data-id="cjaq9xp8g001iev4bt9ef7xsu" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/12/MySQL-5-7-版本新特性/" data-id="cjaqcifby005ehe4bcyfevocl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -1180,7 +1180,8 @@ insert test(username) values(username); return last_insert_id(); end //</code></
 <li>存储过程的简介</li>
 </ul>
 </li>
-<li>存储过程是 SQL 语句和控制语句的预编译集合，以一个名称存储并作为一个单元处理<ul>
+<li>存储过程是 SQL 语句和控制语句的预编译集合，以一个名称存储并作为一个单元处理，就是保存一条或多条 MySQL 语句的集合。</li>
+<li>存储过程是业务逻辑和流程控制的集合，可以在执行过程中创建表，更新数据，删除数据等等。<ul>
 <li>存储过程的有点</li>
 </ul>
 </li>
@@ -1260,13 +1261,14 @@ insert test(username) values(username); return last_insert_id(); end //</code></
 <li><h4 id="9-2-相关知识点之并发处理"><a href="#9-2-相关知识点之并发处理" class="headerlink" title="9-2 相关知识点之并发处理"></a><a id="9-2">9-2 相关知识点之并发处理</a></h4><ul>
 <li>并发控制：当多个连接对记录进行修改时保证数据的一致性和完整性</li>
 <li>锁<ul>
+<li>概念：当多个查询同一时刻进行数据查询或修改时，就会产生并发控制的问题。</li>
 <li>共享锁（读锁）：在同一时间段内，多个用户可以读取同一个资源，读取过程中数据不会发生任何变化。</li>
 <li>排它锁（写锁）：在任何时候只能有一个用户写入资源，当进行写锁时会阻塞其他的读锁或者写锁操作。</li>
 </ul>
 </li>
 <li>锁颗粒<ul>
-<li>表锁，是一种开销最小的锁策略</li>
-<li>行锁，是一种开销最大的锁策略</li>
+<li>表锁，是一种开销最小的锁策略，会锁定整张表，MyISAM 使用表锁。</li>
+<li>行锁，是一种开销最大的锁策略，最大程度地支持并发处理，InnoDB 使用行锁。</li>
 </ul>
 </li>
 </ul>
@@ -1437,7 +1439,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/09/与-MySQL-的零距离接触（二）/" data-id="cjaq9xp9t0048ev4b8ljtyf54" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/09/与-MySQL-的零距离接触（二）/" data-id="cjaqcifb5003vhe4b8a5b2dz3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -1641,6 +1643,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
 <h2 id="第-2-章-数据类型与操作数据表"><a href="#第-2-章-数据类型与操作数据表" class="headerlink" title="第 2 章 数据类型与操作数据表"></a><a id="2">第 2 章 数据类型与操作数据表</a></h2><ul>
 <li><h4 id="数据类型之整型"><a href="#数据类型之整型" class="headerlink" title="数据类型之整型"></a><a id="2.1">数据类型之整型</a></h4><ul>
 <li>数据类型的概念：数据类型是指列、存储过程参数、表达式和局部变量的数据特征，它决定了数据的存储格式，代表了不同的信息类型。</li>
+<li>整数类型的长度：为整数类型指定长度，例如：INT(11) 对大多数应用是没有意义的，它不会限制值的合法范围，只会影响显示字符的个数,声明 <code>zerofill</code> 后，会自动在数值填充 0 以达到指定长度。</li>
 <li>整型类型：<ul>
 <li><code>TINYINT</code><ul>
 <li>有符号值：-128 ~ 127 （- 2）</li>
@@ -1679,6 +1682,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
 <li><h4 id="数据类型之浮点型"><a href="#数据类型之浮点型" class="headerlink" title="数据类型之浮点型"></a><a id="2.2">数据类型之浮点型</a></h4><ul>
 <li><code>FLOAT</code> [(M,D)]：M 是数字总位数，D 是小数点后面的位数。如果 M 和 D 被省略，根据硬件允许的限制来保存值。单精度浮点数精确到大约 7 位小数位。</li>
 <li><code>DOUBLE</code> [(M,D)]</li>
+<li><code>DECIMAL</code> [(M,D)]：可存储比 BIGINT 更大的整数，也可以用于存储精确的小数。</li>
 </ul>
 </li>
 <li><h4 id="数据类型之日期时间型"><a href="#数据类型之日期时间型" class="headerlink" title="数据类型之日期时间型"></a><a id="2.3">数据类型之日期时间型</a></h4><ul>
@@ -1687,17 +1691,41 @@ insert test(username) values(username); return last_insert_id(); end //</code></
 <li><code>DATE</code></li>
 <li><code>DATETIME</code></li>
 <li><code>TIMESTAMP</code></li>
+<li>日期时间型注意项<ul>
+<li>尽量使用 TIMESTAMP，比 DATETIME 空间效率高</li>
+<li>用整数保存时间戳的格式通常不方便处理</li>
+<li>如果需要存储微秒，可以使用 <code>BIGINT</code> 存储</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><h4 id="数据类型之字符型"><a href="#数据类型之字符型" class="headerlink" title="数据类型之字符型"></a><a id="2.4">数据类型之字符型</a></h4><ul>
-<li><code>CHAR</code>：M 个字节，0 &lt;= M &lt;= 255</li>
-<li><code>VARCHAR</code>：L + 1 个字节，其中 L &lt;= M 且 0 &lt;= M &lt;= 65535</li>
+<li><code>CHAR</code>：M 个字节，0 &lt;= M &lt;= 255<ul>
+<li>用于储存定长字符串，根据定义的字符串长度分配足够的空间。</li>
+<li>根据需要采用空格进行填充以方便比较。</li>
+<li>适合存储很短的字符串，或者所有值都接近同一个长度。</li>
+<li>如果存储内容超出指定长度，会被截断。</li>
+</ul>
+</li>
+<li><code>VARCHAR</code>：L + 1 个字节，其中 L &lt;= M 且 0 &lt;= M &lt;= 65535<ul>
+<li>用于储存可变长字符串</li>
+<li>使用 1 或 2 个额外字节记录字符串的长度，列长度小于 255 字节，使用 1 个字节表示，否则用 2 个字节表示。</li>
+<li>如果存储内容超出指定长度，会被截断。</li>
+</ul>
+</li>
 <li><code>TINYTEXT</code>：L + 1 个字节，其中 L &lt; 2^8</li>
 <li><code>TEXT</code>：L + 2 个字节，其中 L &lt; 2^16</li>
 <li><code>MEDIUMTEXT</code>：L + 3 个字节，其中 L &lt; 2^24</li>
 <li><code>LONGTEXT</code>：L + 4 个字节，其中 L &lt; 2^32</li>
 <li><code>ENUM</code>(‘value1’,’value2’,…)：1 或 2 个字节，取决于枚举值的个数（最多 65535 个值）</li>
 <li><code>SET</code>(‘value1’,’value2’,…)：1、2、3、4 或者 8 个字节，取决于 set 成员的数目（最多64个）</li>
+<li>字符型注意项<ul>
+<li>对于经常变更的数据，CHAR 比 VARCHAR 更好，CHAR 不容易产生碎片。</li>
+<li>对于非常短的列，CHAR 比 VARCHAR 在存储空间上更有效率。</li>
+<li>只分配真正需要的空间，更长的列会消耗更多的内存。</li>
+<li>尽量避免使用 BLOB/TEXT 类型，查询会使用临时表，导致严重的性能开销。</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><h4 id="创建数据表"><a href="#创建数据表" class="headerlink" title="创建数据表"></a><a id="2.5">创建数据表</a></h4><ul>
@@ -2085,7 +2113,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/07/与-MySQL-的零距离接触（一）/" data-id="cjaq9xp9r0045ev4bcoo1sxr0" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/07/与-MySQL-的零距离接触（一）/" data-id="cjaqcifb90040he4by34rxyda" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -2201,7 +2229,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/04/复习使用-MySQL（三）/" data-id="cjaq9xpau006tev4bmmxm78xq" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/04/复习使用-MySQL（三）/" data-id="cjaqcifcn006whe4bxu048rzm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -2414,7 +2442,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/04/复习使用-MySQL（二）/" data-id="cjaq9xpav006wev4b9fdilb5k" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/04/复习使用-MySQL（二）/" data-id="cjaqcifcm006the4beparogqg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -2653,7 +2681,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/02/复习使用-MySQL（一）/" data-id="cjaq9xpas006qev4b8qei16v6" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/02/复习使用-MySQL（一）/" data-id="cjaqcifcl006qhe4bqm8t0zfh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
@@ -2739,7 +2767,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/01/查看-Eloquent-模型关联时执行的-SQL-语句/" data-id="cjaq9xpbb007uev4b5sl5ngee" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/01/查看-Eloquent-模型关联时执行的-SQL-语句/" data-id="cjaqcifd9007mhe4be9i7nv4p" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -2872,7 +2900,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/08/31/使用阿里云从零开始部署-Laravel/" data-id="cjaq9xpam0068ev4b5ho0idh0" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/08/31/使用阿里云从零开始部署-Laravel/" data-id="cjaqcifcb0065he4btidg5f7c" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AliCloud/">AliCloud</a></li></ul>
@@ -2933,7 +2961,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/08/25/使用-Laravel-编写自定义命令/" data-id="cjaq9xpa1004sev4befnwor9k" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/08/25/使用-Laravel-编写自定义命令/" data-id="cjaqcifbm004qhe4brs3j449f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>

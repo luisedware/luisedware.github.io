@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="七月十五九月初七">
 <meta property="og:description" content="目录 第 6 章 运算符和函数 6-1 回顾和概述 6-2 字符函数 6-3 数值运算符和函数 6-4 比较运算符和函数 6-5 日期时间函数 6-6 信息函数 6-7 聚合函数 6-8 加密函数   第 7 章 自定义函数 7-1 自定义函数简介 7-2 创建不带参数的自定义函数 7-3 创建带有参数的自定义函数 7-4 创建具有复合结构函数体的自定义函数   第 8 章 MySQL 存储过程">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-06-01T02:57:35.000Z">
+<meta property="og:updated_time" content="2017-12-03T05:46:53.517Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="与 MySQL 的零距离接触（二）">
 <meta name="twitter:description" content="目录 第 6 章 运算符和函数 6-1 回顾和概述 6-2 字符函数 6-3 数值运算符和函数 6-4 比较运算符和函数 6-5 日期时间函数 6-6 信息函数 6-7 聚合函数 6-8 加密函数   第 7 章 自定义函数 7-1 自定义函数简介 7-2 创建不带参数的自定义函数 7-3 创建带有参数的自定义函数 7-4 创建具有复合结构函数体的自定义函数   第 8 章 MySQL 存储过程">
@@ -271,7 +271,8 @@ insert test(username) values(username); return last_insert_id(); end //</code></
 <li>存储过程的简介</li>
 </ul>
 </li>
-<li>存储过程是 SQL 语句和控制语句的预编译集合，以一个名称存储并作为一个单元处理<ul>
+<li>存储过程是 SQL 语句和控制语句的预编译集合，以一个名称存储并作为一个单元处理，就是保存一条或多条 MySQL 语句的集合。</li>
+<li>存储过程是业务逻辑和流程控制的集合，可以在执行过程中创建表，更新数据，删除数据等等。<ul>
 <li>存储过程的有点</li>
 </ul>
 </li>
@@ -351,13 +352,14 @@ insert test(username) values(username); return last_insert_id(); end //</code></
 <li><h4 id="9-2-相关知识点之并发处理"><a href="#9-2-相关知识点之并发处理" class="headerlink" title="9-2 相关知识点之并发处理"></a><a id="9-2">9-2 相关知识点之并发处理</a></h4><ul>
 <li>并发控制：当多个连接对记录进行修改时保证数据的一致性和完整性</li>
 <li>锁<ul>
+<li>概念：当多个查询同一时刻进行数据查询或修改时，就会产生并发控制的问题。</li>
 <li>共享锁（读锁）：在同一时间段内，多个用户可以读取同一个资源，读取过程中数据不会发生任何变化。</li>
 <li>排它锁（写锁）：在任何时候只能有一个用户写入资源，当进行写锁时会阻塞其他的读锁或者写锁操作。</li>
 </ul>
 </li>
 <li>锁颗粒<ul>
-<li>表锁，是一种开销最小的锁策略</li>
-<li>行锁，是一种开销最大的锁策略</li>
+<li>表锁，是一种开销最小的锁策略，会锁定整张表，MyISAM 使用表锁。</li>
+<li>行锁，是一种开销最大的锁策略，最大程度地支持并发处理，InnoDB 使用行锁。</li>
 </ul>
 </li>
 </ul>
@@ -528,7 +530,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/09/与-MySQL-的零距离接触（二）/" data-id="cjaq9xp9t0048ev4b8ljtyf54" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/09/与-MySQL-的零距离接触（二）/" data-id="cjaqcifb5003vhe4b8a5b2dz3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
