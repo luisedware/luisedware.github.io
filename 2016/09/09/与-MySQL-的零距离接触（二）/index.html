@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="七月十五九月初七">
 <meta property="og:description" content="目录 第 6 章 运算符和函数 6-1 回顾和概述 6-2 字符函数 6-3 数值运算符和函数 6-4 比较运算符和函数 6-5 日期时间函数 6-6 信息函数 6-7 聚合函数 6-8 加密函数   第 7 章 自定义函数 7-1 自定义函数简介 7-2 创建不带参数的自定义函数 7-3 创建带有参数的自定义函数 7-4 创建具有复合结构函数体的自定义函数   第 8 章 MySQL 存储过程">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-12-03T14:11:19.373Z">
+<meta property="og:updated_time" content="2017-12-04T01:32:19.764Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="与 MySQL 的零距离接触（二）">
 <meta name="twitter:description" content="目录 第 6 章 运算符和函数 6-1 回顾和概述 6-2 字符函数 6-3 数值运算符和函数 6-4 比较运算符和函数 6-5 日期时间函数 6-6 信息函数 6-7 聚合函数 6-8 加密函数   第 7 章 自定义函数 7-1 自定义函数简介 7-2 创建不带参数的自定义函数 7-3 创建带有参数的自定义函数 7-4 创建具有复合结构函数体的自定义函数   第 8 章 MySQL 存储过程">
@@ -576,14 +576,14 @@ insert test(username) values(username); return last_insert_id(); end //</code></
 <li><h4 id="11-5-索引创建原则"><a href="#11-5-索引创建原则" class="headerlink" title="11-5 索引创建原则"></a><a id="11-5">11-5 索引创建原则</a></h4><ul>
 <li>最适合索引的列是出现在 WHERE 子句中的列，或是 JION 子句中的列，而不是出现在 SELECT 关键字后的列。</li>
 <li>索引列的基数越大，索引的效果越好。</li>
-<li>对字符串进行索引，应该制定一个前缀长度，可以节省大量的索引空间。??</li>
+<li>对字符串进行索引，应该制定一个前缀长度，可以节省大量的索引空间。</li>
 <li>根据情况创建复合索引，复合索引可以提高查询效率。</li>
 <li>避免创建过多索引，索引会额外占用磁盘空间，降低写操作效率。</li>
 <li>主键尽可能选择较短的数据类型，可以有效减少索引的磁盘占用，提高索引效率。</li>
 </ul>
 </li>
 <li><h4 id="11-6-索引注意事项"><a href="#11-6-索引注意事项" class="headerlink" title="11-6 索引注意事项"></a><a id="11-6">11-6 索引注意事项</a></h4><ul>
-<li>复合索引遵循前缀原则。<ul>
+<li>复合索引遵循最左前缀原则。<ul>
 <li>创建复合索引 <code>KEY(a, b, c)</code><ul>
 <li>索引生效的条件查询如下：<ul>
 <li><code>WHERE a = 1 and b = 2 and c = 3</code></li>
@@ -619,7 +619,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/09/与-MySQL-的零距离接触（二）/" data-id="cjaqui68f004d8m4bxibl7w49" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/09/与-MySQL-的零距离接触（二）/" data-id="cjarng0j90049sj4bl9zjesfm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>

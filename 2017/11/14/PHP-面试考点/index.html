@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="七月十五九月初七">
 <meta property="og:description" content="PHP 招聘要求总结硬性要求 熟悉常用的算法和数据结构 熟悉(精通) PHP 熟悉 PHP 框架：Laravel、Yii 熟悉 HTML 5 + CSS 3 熟悉 CSS 框架：Bootstrap 熟悉(精通) JavaScript 熟悉 JavaScrip 框架：Vue.js、React.js 熟悉 设计模式、熟悉 MVC 模式 熟悉 HTTP、HTTP 2、TCP、UDP 等标准协议 熟悉 A">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-12-03T07:58:06.155Z">
+<meta property="og:updated_time" content="2017-12-04T03:41:22.296Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP 面试考察点">
 <meta name="twitter:description" content="PHP 招聘要求总结硬性要求 熟悉常用的算法和数据结构 熟悉(精通) PHP 熟悉 PHP 框架：Laravel、Yii 熟悉 HTML 5 + CSS 3 熟悉 CSS 框架：Bootstrap 熟悉(精通) JavaScript 熟悉 JavaScrip 框架：Vue.js、React.js 熟悉 设计模式、熟悉 MVC 模式 熟悉 HTTP、HTTP 2、TCP、UDP 等标准协议 熟悉 A">
@@ -173,7 +173,7 @@
 </ul>
 <h2 id="PHP-基础知识考察点"><a href="#PHP-基础知识考察点" class="headerlink" title="PHP 基础知识考察点"></a>PHP 基础知识考察点</h2><h4 id="引用变量"><a href="#引用变量" class="headerlink" title="引用变量"></a>引用变量</h4><ul>
 <li>回顾真题：什么是引用变量？在 PHP 当中，用什么符号定义引用变量?</li>
-<li>考官考点：PHP 引用变量的概念及定义方式</li>
+<li>考点分析：PHP 引用变量的概念及定义方式</li>
 <li>知识延伸：PHP 引用变量的原理</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 概念</span></div><div class="line">在 PHP 中引用意味着用不同的名字访问同一个变量的内容</div><div class="line"></div><div class="line"><span class="comment"># 定义方式</span></div><div class="line">使用 &amp; 符号</div><div class="line"></div><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$a = <span class="string">"hello"</span>;</div><div class="line">$b = &amp;a;</div><div class="line">$a = <span class="string">"hello world!"</span>;</div><div class="line"><span class="keyword">echo</span> $b; <span class="comment">// "hello world!"</span></div></pre></td></tr></table></figure>
@@ -189,7 +189,7 @@
 <p>实践真题<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// 写出如下程序的输出结果</span></div><div class="line">$data = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>];</div><div class="line"><span class="keyword">foreach</span> ($data <span class="keyword">as</span> $key =&gt; $value) &#123;</div><div class="line">  $value = &amp;$data[$key];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 每一次循环结束后，变量 $data 的值是什么</span></div><div class="line">[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>]</div><div class="line">[<span class="string">'b'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>]</div><div class="line">[<span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>]</div><div class="line">[<span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'d'</span>]</div><div class="line"></div><div class="line"><span class="comment">// 程序执行完成后，变量 $data 的值是什么</span></div><div class="line">[<span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'d'</span>]</div></pre></td></tr></table></figure></p>
 <h4 id="常量与数据类型"><a href="#常量与数据类型" class="headerlink" title="常量与数据类型"></a>常量与数据类型</h4><ul>
 <li>回顾真题：PHP 的字符串可以使用哪三种定义方法以及各自的区别是什么？</li>
-<li>考官考点：PHP 的字符串的定义方式及各自区别</li>
+<li>考点分析：PHP 的字符串的定义方式及各自区别</li>
 <li><p>知识延伸：常量及数据类型</p>
 </li>
 <li><p>定义方式：</p>
@@ -278,7 +278,7 @@
 <p>实践真题<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// 用 PHP 写出显示客户端 IP 与服务器 IP 的代码</span></div><div class="line"><span class="comment">// __FIEL__ 表示什么意思</span></div></pre></td></tr></table></figure></p>
 <h4 id="运算符考察点"><a href="#运算符考察点" class="headerlink" title="运算符考察点"></a>运算符考察点</h4><ul>
 <li>回顾真题：foo() 和 @foo() 之间的区别</li>
-<li>考官考点：PHP 运算符的错误抑制符<ul>
+<li>考点分析：PHP 运算符的错误抑制符<ul>
 <li>延伸考点<ul>
 <li>递增、递减运算符不影响布尔值</li>
 <li>递减 null 值没有效果</li>
@@ -488,7 +488,7 @@
 <p>实践真题<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 写出一种验证 139 开头的 11 位手机号码的正则表达式</span></div><div class="line"><span class="comment"> *</span></div><div class="line"><span class="comment"> * 1.准备一个需要匹配的字符串</span></div><div class="line"><span class="comment"> * 2.自左向右的顺序使用正则表达式的原子和元字符进行拼接</span></div><div class="line"><span class="comment"> * 3.最终加入模式修正符</span></div><div class="line"><span class="comment"> * 4.理解完成，不可死记硬背</span></div><div class="line"><span class="comment"> */</span></div><div class="line">$subject = <span class="string">'13988888888'</span>;</div><div class="line">$pattern = <span class="string">'/^139\d&#123;8&#125;$/'</span>;</div><div class="line">preg_match($pattern, $subject, $match);</div><div class="line">var_dump($match);</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 写出一种验证 139、150、187 开头的 11 位手机号码的正则表达式 TODO</span></div><div class="line"><span class="comment"> */</span></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * URL TODO</span></div><div class="line"><span class="comment"> */</span></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * Email TODO</span></div><div class="line"><span class="comment"> */</span></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * IP 地址 TODO</span></div><div class="line"><span class="comment"> */</span></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 请写一个正则表达式，取出页面中所有 img 标签中的 src 值</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="comment">// 匹配 img 标签</span></div><div class="line">$subject = <span class="string">'&lt;img alt="高清无码" id="av" src="av.jpg" /&gt;'</span>;</div><div class="line">$pattern = <span class="string">'/&lt;img.*?src=".*?".*?\/?&gt;/i'</span>;</div><div class="line">preg_match($pattern, $subject, $match);</div><div class="line">var_dump($match);</div><div class="line"></div><div class="line"><span class="comment">// 加上双括号，获取 src 属性</span></div><div class="line">$subject = <span class="string">'&lt;img alt="高清无码" id="av" src="av.jpg" /&gt;'</span>;</div><div class="line">$pattern = <span class="string">'/&lt;img.*?src="(.*?)".*?\/?&gt;/i'</span>;</div><div class="line">preg_match($pattern, $subject, $match);</div><div class="line">var_dump($match);</div></pre></td></tr></table></figure></p>
 <h4 id="文件及目录处理"><a href="#文件及目录处理" class="headerlink" title="文件及目录处理"></a>文件及目录处理</h4><ul>
 <li>回顾真题：不断在文件 hello.txt 头部写入一行 “Hello World” 字符串，要求代码完整。</li>
-<li><p>考官考点：</p>
+<li><p>考点分析：</p>
 <ul>
 <li>文件读取、写入操作<ul>
 <li>fopen() 函数，用来打开一个文件，打开时需要指定打开模式<ul>
@@ -599,7 +599,7 @@
 <li>private</li>
 </ul>
 </li>
-<li>考官考点：PHP 的类权限控制修饰符</li>
+<li>考点分析：PHP 的类权限控制修饰符</li>
 <li>知识延伸：<ul>
 <li>面向对象的封装、继承和多态</li>
 <li>魔术方法<ul>
@@ -631,7 +631,7 @@
 </ul>
 <h4 id="网络协议"><a href="#网络协议" class="headerlink" title="网络协议"></a>网络协议</h4><ul>
 <li>回顾真题：HTTP/1.1 中，状态码 200 301 304 403 404 500 的含义</li>
-<li>考官考点：HTTP 协议状态码<ul>
+<li>考点分析：HTTP 协议状态码<ul>
 <li>200</li>
 <li>204</li>
 <li>206</li>
@@ -720,7 +720,7 @@
 <p>实践真题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">// 我们常见的 HTTP 协议、TCP 协议分别位于 OSI 网络模型的第几层? TODO</div></pre></td></tr></table></figure></p>
 <h4 id="开发环境相关"><a href="#开发环境相关" class="headerlink" title="开发环境相关"></a>开发环境相关</h4><ul>
 <li>回顾真题：你是否使用过版本控制软件？如果有，你使用的版本控制软件的名字是什么</li>
-<li>考官考点<ul>
+<li>考点分析<ul>
 <li>版本控制软件<ul>
 <li>CVS</li>
 <li>SVN</li>
@@ -760,7 +760,7 @@
 <p>实践真题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">// 请简述 CGI、FastCGI、PHP-CGI、PHP-FPM 之间的区别</div></pre></td></tr></table></figure></p>
 <h2 id="JavaScript、jQuery、AJAX"><a href="#JavaScript、jQuery、AJAX" class="headerlink" title="JavaScript、jQuery、AJAX"></a>JavaScript、jQuery、AJAX</h2><h4 id="JavaScript、jQuery"><a href="#JavaScript、jQuery" class="headerlink" title="JavaScript、jQuery"></a>JavaScript、jQuery</h4><ul>
 <li>回顾真题：下列不属于 JavaScript 语法关键/保留字的是(var、$、function、while)</li>
-<li>考官考点：JavaScript 基本语法</li>
+<li>考点分析：JavaScript 基本语法</li>
 <li>知识延伸：<ul>
 <li>JavaScript 内置对象</li>
 <li>JavaScript HTML DOM 对象</li>
@@ -775,7 +775,7 @@
 <li>作用：通过在后台与服务器进行少量数据交换，AJAX 可以使网页实现异步更新</li>
 </ul>
 </li>
-<li>考官考点：AJAX 基本工作原理<ul>
+<li>考点分析：AJAX 基本工作原理<ul>
 <li>XMLHttpRequest 对象是 AJAX 的基础<ul>
 <li>XMLHttpRequest 对象请求方法：open(method,url,async)、send(string)</li>
 <li>XMLHttpRequest 对象响应<ul>
@@ -804,7 +804,7 @@
 <p>实践真题<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 写出原生 JavaScript AJAX 操作 TODO</span></div><div class="line"></div><div class="line"><span class="comment">// 写出 jQuery 处理 AJAX 的方法 TODO</span></div></pre></td></tr></table></figure></p>
 <h2 id="Linux-基础知识"><a href="#Linux-基础知识" class="headerlink" title="Linux 基础知识"></a>Linux 基础知识</h2><ul>
 <li>回顾真题：写出尽可能多的 Linux 命令</li>
-<li>考官考点：Linux 常用命令<ul>
+<li>考点分析：Linux 常用命令<ul>
 <li>系统安全<ul>
 <li>sudo</li>
 <li>su</li>
@@ -946,7 +946,7 @@
 <p>实践真题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">// 如何实现每天 0 点钟重新启动服务器</div></pre></td></tr></table></figure></p>
 <h2 id="MySQL-数据库考察点"><a href="#MySQL-数据库考察点" class="headerlink" title="MySQL 数据库考察点"></a>MySQL 数据库考察点</h2><h4 id="MySQL-数据库基础考点"><a href="#MySQL-数据库基础考点" class="headerlink" title="MySQL 数据库基础考点"></a>MySQL 数据库基础考点</h4><ul>
 <li>回顾真题：MySQL 数据类型表达的意义：int(10)、char(16)、varchar(16)、datetime、text</li>
-<li>考官考点：MySQL 数据类型<ul>
+<li>考点分析：MySQL 数据类型<ul>
 <li>整数类型：<ul>
 <li>tinyint</li>
 <li>smallint</li>
@@ -970,7 +970,7 @@
 <p>实践真题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">// 说明表存储引擎 InnoDB 和 MyISAM 的区别</div></pre></td></tr></table></figure></p>
 <h4 id="MySQL-高性能索引"><a href="#MySQL-高性能索引" class="headerlink" title="MySQL 高性能索引"></a>MySQL 高性能索引</h4><ul>
 <li>回顾真题：简单描述 MySQL 中，索引、主键、唯一索引、联合索引的区别，对数据库的性能有什么影响？</li>
-<li>考官考点：MySQL 索引知识</li>
+<li>考点分析：MySQL 索引知识</li>
 <li>解题方法：<ul>
 <li>在一些 MySQL 索引基础考题中，我们可以轻松的通过索引基础和类型来解决此类问题。</li>
 <li>对于一些索引创建注意事项方面的考点，我们可以通过索引创建原则和注意事项来解决。</li>
@@ -980,16 +980,124 @@
 <p>实践真题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">// 创建 MySQL 复合索引应该注意哪些事项？</div></pre></td></tr></table></figure></p>
 <h4 id="MySQL-的-SQL-语句编写考点"><a href="#MySQL-的-SQL-语句编写考点" class="headerlink" title="MySQL 的 SQL 语句编写考点"></a>MySQL 的 SQL 语句编写考点</h4><ul>
 <li>回顾真题：有 A(id,sex,par,c1,c2),B(id,age,c1,c2)两张表，其中 A.id 和 B.id 关联，现在要求写出一条 SQL 语句，将 B 中 age&gt;50 的记录的 c1,c2 更新到 A 表中统一记录中的 c1,c2 字段中。</li>
-<li>考官考点：MySQL 的关联 UPDATE 语句</li>
+<li>考点分析：MySQL 的关联 UPDATE 语句</li>
 <li>知识延伸：MySQL 的关联查询语句(重点)</li>
 <li>解题方式：根据考题要搞清楚表的结构和多表之间的关系，根据想要的结果思考使用哪种关联方式，通常把要查询的列先写出来，然后分析这些列都属于哪些表，才考虑使用关联查询。</li>
 </ul>
 <p>关联更新<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># 方法一，UPDATE 之后的表名代表所要使用到的表</div><div class="line">UPDATE A,B SET A.c1 = B.c1,A.c2 = B.c2 WHERE A.id = B.id and B.age &gt; 50;</div><div class="line"></div><div class="line"># 方法二</div><div class="line">UPDATE A INNER JOIN B ON A.id = B.id SET A.c1 = B.c1,A.c2 = B.c2 WHERE B.age &gt; 50;</div></pre></td></tr></table></figure></p>
-
+<h4 id="MySQL-的查询优化考点"><a href="#MySQL-的查询优化考点" class="headerlink" title="MySQL 的查询优化考点"></a>MySQL 的查询优化考点</h4><ul>
+<li>回顾真题：请简述项目中优化 SQL 语句执行效率的方法，从哪些方面，SQL 语句性能如何分析？</li>
+<li>考点分析：查找分析查询速度慢的原因，为什么会慢，慢在什么地方，如何去解决。</li>
+<li>知识延伸：<ul>
+<li>优化查询过程中的数据访问</li>
+<li>优化长难的查询语句</li>
+<li>优化特定类型的查询语句</li>
+</ul>
+</li>
+<li>解题方式：<ul>
+<li>先说明如何定位低效 SQL语句，然后根据 SQL 语句可能低效的原因做排查。</li>
+<li>排查先从索引着手，如果索引没有问题，再考虑其他方面。</li>
+<li>排查是否是 SQL 查询访问的问题</li>
+<li>排查是否是 SQL 语句过长过慢的问题</li>
+<li>排查是否是 SQL 特定类型优化的问题</li>
+</ul>
+</li>
+<li>一网打尽：SQL 语句优化的一些方法</li>
+</ul>
+<h6 id="分析-SQL-查询慢的方法"><a href="#分析-SQL-查询慢的方法" class="headerlink" title="分析 SQL 查询慢的方法"></a>分析 SQL 查询慢的方法</h6><ul>
+<li>记录慢查询日志<ul>
+<li>分析查询日志，不要直接打开慢查询日志进行分析，这样比较浪费时间和精力，可以使用 pt-query-digest 工具进行分析。</li>
+</ul>
+</li>
+<li>使用 show profile<ul>
+<li>set profiling = 1;开启这个配置项，服务器上执行的所有语句会检测消耗的时间，存到临时表中。</li>
+<li>show profiles</li>
+<li>show profile for query 临时表 ID</li>
+</ul>
+</li>
+<li>使用 show status<ul>
+<li>show status 会返回一些计数器，show global status 查看服务器级别的所有计数。</li>
+<li>有时候根据这些技术，可以猜测出那些操作代价较高或者消耗时间较多</li>
+</ul>
+</li>
+<li>使用 show processlist<ul>
+<li>观察是否有大量线程处于不正常的状态或者特征。</li>
+</ul>
+</li>
+<li>使用 explain 别名 desc（重要）<ul>
+<li>帮助查询单条 SQL 语句</li>
+</ul>
+</li>
+</ul>
+<h6 id="优化查询过程中的数据访问"><a href="#优化查询过程中的数据访问" class="headerlink" title="优化查询过程中的数据访问"></a>优化查询过程中的数据访问</h6><ul>
+<li>如果是访问数据太多导致查询性能下降，避免使用如下 SQL 语句：<ul>
+<li>查询不需要的记录，使用 limit 解决。</li>
+<li>重复查询相同的数据，可以缓存数据，下次读取缓存。</li>
+<li>多表关联不需要返回全部列时，指定 A.id,B.age 字段。</li>
+<li>不要总是取出全部列，SELECT * 会让优化器无法完成索引覆盖扫描的优化。</li>
+</ul>
+</li>
+<li>确定应用程序是否在检索大量超过需要的数据，可能是太多行或太多列。</li>
+<li>确认 MySQL 服务器是否在分析大量不必要的数据行。<ul>
+<li>使用 explain 来进行分析，如果发现查询需要扫描大量的数据但只返回少数的行，可以通过使用索引覆盖扫描，把所有用的列都放到索引中，这样存储引擎不需要回表获取对应行就可以返回结果。</li>
+</ul>
+</li>
+<li>改变数据库和表的结构，修改数据表范式，增加数据冗余。</li>
+<li>重写 SQL 语句，让优化器可以以更优的方式执行查询。</li>
+</ul>
+<h6 id="优化长难的查询语句"><a href="#优化长难的查询语句" class="headerlink" title="优化长难的查询语句"></a>优化长难的查询语句</h6><ul>
+<li>一个复杂查询还是多个简单查询<ul>
+<li>MySQL 内部每秒能扫描内存中上百万行数据，但响应数据给客户端就要慢很多。</li>
+<li>使用尽可能少的查询是好的，但是有时将一个大的查询分解为多个小的查询是很有必要的。</li>
+</ul>
+</li>
+<li>切分查询<ul>
+<li>将一个大的查询分为多个小的相同的查询。</li>
+<li>一次性删除 1000 万的数据要比一次删除 1 万，暂停一会的方案更加损耗服务器开销。</li>
+</ul>
+</li>
+<li>分解关联查询<ul>
+<li>可以将一条关联语句分解成多条 SQL 来执行。这样做可以使缓存的效率更高，执行单个查询可以减少锁的竞争。在应用层做关联可以更容易对数据库进行拆分。</li>
+</ul>
+</li>
+</ul>
+<h6 id="优化特定类型的查询语句。"><a href="#优化特定类型的查询语句。" class="headerlink" title="优化特定类型的查询语句。"></a>优化特定类型的查询语句。</h6><ul>
+<li>优化 count() 查询<ul>
+<li>count(*) 中的 * 会忽略所有的列，直接统计所有列数，因此不要使用 count(列名)。</li>
+<li>用 count(列名)</li>
+<li>MyISAM 中，没有任何 WHERE 条件的 count(*) 非常快，当有 WHERE 条件时，MyISAM 的 count 统计不一定是最快的。</li>
+</ul>
+</li>
+<li>优化关联查询<ul>
+<li>确定 ON 或者 USING 子句的列上有索引</li>
+<li>确保 GROUP BY 和 ORDER BY 中只有一个表中的列，这样 MySQL 才有可能使用索引。</li>
+</ul>
+</li>
+<li>优化子查询<ul>
+<li>尽可能使用关联查询来替代。</li>
+</ul>
+</li>
+<li>优化 GROUP BY 和 DISTINCT<ul>
+<li>这两种查询均可使用索引来优化，是最有效的优化方法。</li>
+<li>关联查询中，使用标识列进行分组的效率会更高。</li>
+<li>如果需要 ORDER BY，进行 GROUP BY 时使用 ORDER BY NULL，MySQL 不会再进行文件排序。</li>
+<li>WITH ROLLUP 超级聚合，可以挪到应用程序处理。</li>
+</ul>
+</li>
+<li>优化 LIMIT 分页<ul>
+<li>LIMIT 偏移量大的时候，查询效率较低。可以记录上次查询的最大 ID，下次查询时直接根据该 ID 来查询</li>
+</ul>
+</li>
+<li>优化 UNION 查询<ul>
+<li>UNION ALL 的效率高于 UNION，可以在应用层把重复的数据筛选过滤掉。</li>
+</ul>
+</li>
+</ul>
+<h4 id="MySQL-高可扩展和高可用考点"><a href="#MySQL-高可扩展和高可用考点" class="headerlink" title="MySQL 高可扩展和高可用考点"></a>MySQL 高可扩展和高可用考点</h4>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjaqui66p002f8m4bjybkj78r" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjarng0ic002isj4bsjsjwyiu" class="article-share-link">Share</a>
       
       
     </footer>
