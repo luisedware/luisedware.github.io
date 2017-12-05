@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="七月十五九月初七">
 <meta property="og:description" content="PHP 招聘要求总结硬性要求 熟悉常用的算法和数据结构 熟悉(精通) PHP 熟悉 PHP 框架：Laravel、Yii 熟悉 HTML 5 + CSS 3 熟悉 CSS 框架：Bootstrap 熟悉(精通) JavaScript 熟悉 JavaScrip 框架：Vue.js、React.js 熟悉 设计模式、熟悉 MVC 模式 熟悉 HTTP、HTTP 2、TCP、UDP 等标准协议 熟悉 A">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-12-04T03:41:22.296Z">
+<meta property="og:updated_time" content="2017-12-04T07:16:56.292Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP 面试考察点">
 <meta name="twitter:description" content="PHP 招聘要求总结硬性要求 熟悉常用的算法和数据结构 熟悉(精通) PHP 熟悉 PHP 框架：Laravel、Yii 熟悉 HTML 5 + CSS 3 熟悉 CSS 框架：Bootstrap 熟悉(精通) JavaScript 熟悉 JavaScrip 框架：Vue.js、React.js 熟悉 设计模式、熟悉 MVC 模式 熟悉 HTTP、HTTP 2、TCP、UDP 等标准协议 熟悉 A">
@@ -1093,11 +1093,131 @@
 </ul>
 </li>
 </ul>
-<h4 id="MySQL-高可扩展和高可用考点"><a href="#MySQL-高可扩展和高可用考点" class="headerlink" title="MySQL 高可扩展和高可用考点"></a>MySQL 高可扩展和高可用考点</h4>
+<h4 id="MySQL-高可扩展和高可用考点"><a href="#MySQL-高可扩展和高可用考点" class="headerlink" title="MySQL 高可扩展和高可用考点"></a>MySQL 高可扩展和高可用考点</h4><ul>
+<li>回顾真题：简述 MySQL 分表操作和分区的工作原理，分别说说分区和分表的使用场景和各自优缺点。</li>
+<li>考点分析：<ul>
+<li>分区表的原理</li>
+<li>分库分表的原理</li>
+</ul>
+</li>
+<li>知识延伸：<ul>
+<li>MySQL 的复制原理和负载均衡</li>
+</ul>
+</li>
+<li>解题方法：充分掌握分区和分表的工作原理和适用场景，在面试中，此类题通常比较灵活，会给一些现有公司遇到问题的场景，大家可以根据分区和分表以及 MySQL 复制、负载均衡的适用场景来根据情况进行回答。</li>
+<li>一网打尽：设定网站的用户数量在千万级别，但是活跃用户的数量只有 1%，如何通过优化数据库提高活跃用户的访问速度？<ul>
+<li>分区，把活跃用户的数量分在一个区，不活跃的用户分在另外一个区。</li>
+<li>分表，通过水平切分的方式，把活跃用户的数据分在一个表，不活跃的用户分在另外一个表。</li>
+</ul>
+</li>
+</ul>
+<h6 id="分区表的原理"><a href="#分区表的原理" class="headerlink" title="分区表的原理"></a>分区表的原理</h6><p>对用户而言，分区表是一个独立的逻辑表，但是底层 MySQL 将其分成了多个物理子表，这对用户来说是透明的，每个分区表都会使用一个独立的表文件<br>。</p>
+<p>创建表时使用 partition by 子句定义每个分区存放的数据，执行查询时，优化器会根据分区定义过滤那些没有我们需要数据的分区，这样查询只需要查询所需数据在的分区即可。</p>
+<p>分区的主要目的是将数据按照一个比较粗的粒度分在不同的表中，这样可以将相关的数据存放在一起，而且如果想一次性删除整个分区的数据也很方便。</p>
+<p>适用场景</p>
+<ul>
+<li>表非常大，无法全部存在内存，或者只在表的最后有热点数据，其他都是历史数据。</li>
+<li>分区表的数据更容易维护，可以对独立的分区进行独立的操作。</li>
+<li>分区表的数据可以分布在不同的机器上，从而高效实用资源。</li>
+<li>可以使用分区表来避免某些特殊的瓶颈</li>
+<li>可以备份和恢复独立的分支。</li>
+</ul>
+<p>限制</p>
+<ul>
+<li>一个表最多只能有 1024 个分区</li>
+<li>5.1 版本中，分区表表达式必须是整数，5.5 可以使用列分区</li>
+<li>分区字段中如果有主键和唯一索引列，那么主键列和唯一列都必须包含进来</li>
+<li>分区表中无法使用外键约束</li>
+<li>需要对现有表的结果进行修改</li>
+<li>所有分区都必须使用相同的存储引擎</li>
+<li>分区函数中可以使用的函数和表达式会有一些限制</li>
+<li>某些存储引擎不支持分区</li>
+<li>对于 MyISAM 的分区表，不能使用 load index into cache</li>
+<li>对于 MyISAM 的分区表，使用时会需要打开更多的文件描述符。</li>
+</ul>
+<h6 id="分库分表的原理"><a href="#分库分表的原理" class="headerlink" title="分库分表的原理"></a>分库分表的原理</h6><p>通过一些 HASH 算法或者工作实现将一张数据表垂直或者水平进行物理切分</p>
+<p>适用场景</p>
+<ul>
+<li>单表记录条数达到百万到千万级别时</li>
+<li>解决表锁的问题</li>
+</ul>
+<p>分表方式</p>
+<ul>
+<li>水平分割<ul>
+<li>作用<ul>
+<li>表很大，分割后可以降低在查询时需要读的数据和索引的页面，同时也降低了索引的层数，提高查询速度。</li>
+</ul>
+</li>
+<li>使用场景<ul>
+<li>表中的数据本身就具有独立性，例如表中分别记录各个地区的数据或者不同时期的数据。特别是有些数据常用，有些不常用。</li>
+<li>需要把数据存放在多个介质上。</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>给应用增加复杂度，通常查询时需要多个表名，查询所有数据都需要 UNION 操作。</li>
+<li>在许多数据库应用中，这种复杂性会超过它带来的优点，查询时会增加读一个索引层的磁盘次数。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>垂直分割<ul>
+<li>把主键和一些列放在一个表，然后把主键和另外的列放在另一个表中。</li>
+<li>使用场景<ul>
+<li>如果一个表中某些列常用，而另外一些列不常用。</li>
+<li>可以使数据行变小，一个数据页能存储更多数据，查询时减少 I/O 次数。</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>管理冗余列，查询所有数据需要 JOIN 操作</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>分表缺点</p>
+<ul>
+<li>有些分表的策略基于应用层的逻辑算法，一旦逻辑算法改变，整个分表逻辑都会改变，扩展性较差。</li>
+<li>对于应用层来说，逻辑算法无疑会增加成本。</li>
+</ul>
+<h6 id="MySQL-的复制原理及负载均衡"><a href="#MySQL-的复制原理及负载均衡" class="headerlink" title="MySQL 的复制原理及负载均衡"></a>MySQL 的复制原理及负载均衡</h6><p>MySQL 主从复制工作原理</p>
+<ul>
+<li>在主库上把数据更改记录到二进制日志</li>
+<li>从库将主库的日志复制到自己的中继日志</li>
+<li>从库读取中继日志中的事件操作，将其执行到从库数据中</li>
+</ul>
+<p>MySQL 主从复制解决的问题</p>
+<ul>
+<li>数据分布：随意停止或开始复制，并在不同地理位置分布数据备份</li>
+<li>负载均衡：降低单个服务器的压力</li>
+<li>高可用和故障切换：帮助应用程序避免单点失败</li>
+<li>升级测试：可以使用更高版本的 MySQL 作为从库</li>
+</ul>
+<h4 id="MySQL-安全性"><a href="#MySQL-安全性" class="headerlink" title="MySQL 安全性"></a>MySQL 安全性</h4><ul>
+<li>回顾真题：SQL 语句应该考虑哪些安全性</li>
+<li>考官考点：SQL 语句的安全方案<ul>
+<li>使用预处理语句防 SQL 注入。</li>
+<li>写入数据库的数据要进行特殊字符的转义。</li>
+<li>查询错误信息不要返回给用户，将错误记录到日志。</li>
+</ul>
+</li>
+<li>知识延伸：MySQL 安全设置<ul>
+<li>定期进行数据备份。</li>
+<li>不给查询用户 root 权限，合理分配权限。</li>
+<li>关闭远程访问数据库权限。</li>
+<li>修改 root 口令，不使用默认口令，使用较复杂的口令。</li>
+<li>删除多余的用户。</li>
+<li>改变 root 用户的名称。</li>
+<li>限制一般用户浏览其他库。</li>
+<li>限制用户对数据文件的访问权限。</li>
+</ul>
+</li>
+<li>实践真题：为什么使用 PDO 和 MySQLi 连接数据库会比 MySQL 函数库更加安全</li>
+</ul>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjarng0ic002isj4bsjsjwyiu" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjateov0i00220q4b0zohbxud" class="article-share-link">Share</a>
       
       
     </footer>
