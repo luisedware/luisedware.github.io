@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="七月十五九月初七">
 <meta property="og:description" content="PHP 招聘要求总结硬性要求 熟悉常用的算法和数据结构 熟悉(精通) PHP 熟悉 PHP 框架：Laravel、Yii 熟悉 HTML 5 + CSS 3 熟悉 CSS 框架：Bootstrap 熟悉(精通) JavaScript 熟悉 JavaScrip 框架：Vue.js、React.js 熟悉 设计模式、熟悉 MVC 模式 熟悉 HTTP、HTTP 2、TCP、UDP 等标准协议 熟悉 A">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-12-04T07:16:56.292Z">
+<meta property="og:updated_time" content="2017-12-05T13:28:16.072Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP 面试考察点">
 <meta name="twitter:description" content="PHP 招聘要求总结硬性要求 熟悉常用的算法和数据结构 熟悉(精通) PHP 熟悉 PHP 框架：Laravel、Yii 熟悉 HTML 5 + CSS 3 熟悉 CSS 框架：Bootstrap 熟悉(精通) JavaScript 熟悉 JavaScrip 框架：Vue.js、React.js 熟悉 设计模式、熟悉 MVC 模式 熟悉 HTTP、HTTP 2、TCP、UDP 等标准协议 熟悉 A">
@@ -139,7 +139,7 @@
 </ul>
 </li>
 <li>程序设计考察点</li>
-<li>常见算法、逻辑思维<ul>
+<li>数据结构、常见算法考察点<ul>
 <li>常见数据结构特征</li>
 <li>算法的工作原理</li>
 <li>时间复杂度</li>
@@ -1213,11 +1213,110 @@
 </li>
 <li>实践真题：为什么使用 PDO 和 MySQLi 连接数据库会比 MySQL 函数库更加安全</li>
 </ul>
+<h2 id="程序设计考察点"><a href="#程序设计考察点" class="headerlink" title="程序设计考察点"></a>程序设计考察点</h2><ul>
+<li>回顾真题：编写一个在线留言本，实现用户的在线留言功能，留言信息存储到数据库，要求设计数据表内容以及使用 PHP 编码完成</li>
+<li>考官考点：<ul>
+<li>数据表设计</li>
+<li>数据表创建语句</li>
+<li>PHP PDO</li>
+<li>PHP 编码能力</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// 编写留言板功能 TODO</span></div></pre></td></tr></table></figure>
+<h2 id="PHP-框架基础知识考察点"><a href="#PHP-框架基础知识考察点" class="headerlink" title="PHP 框架基础知识考察点"></a>PHP 框架基础知识考察点</h2><ul>
+<li>回顾真题：谈谈你对 MVC 的认识，介绍几种目前比较流行的 MVC 框架</li>
+<li>考官考点：<ul>
+<li>MVC 工作原理</li>
+<li>常见 MVC 框架<ul>
+<li>Yii 2</li>
+<li>ThinkPHP</li>
+<li>Laravel</li>
+<li>Yaf</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>知识延伸：<ul>
+<li>单一入口的工作原理<ul>
+<li>使用一个处理程序文件来处理所有的 HTTP 请求，根据请求时的参数的不同区分不同模块和操作的请求。</li>
+<li>可以进行统一的安全性检查，集中处理程序。</li>
+</ul>
+</li>
+<li>模板引擎的工作原理<ul>
+<li>模板引擎就是庞大的完善的正则表达式替换库。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据结构、常见算法考察点"><a href="#数据结构、常见算法考察点" class="headerlink" title="数据结构、常见算法考察点"></a>数据结构、常见算法考察点</h2><ul>
+<li>回顾真题：请写出常见的排序算法，并用 PHP 实现冒泡排序，将数组按照从小到大的方式进行排序。</li>
+<li>考官考点：<ul>
+<li>冒泡排序原理和实现</li>
+</ul>
+</li>
+<li>知识延伸：<ul>
+<li>算法的概念</li>
+<li>时间复杂度和空间复杂度的概念</li>
+<li>常见排序算法</li>
+<li>常见查找算法</li>
+</ul>
+</li>
+</ul>
+<h6 id="算法概念"><a href="#算法概念" class="headerlink" title="算法概念"></a>算法概念</h6><ul>
+<li>算法就是任何良定义的计算过程，该过程取某个值或值的集合作为输入并产生某个值或值的集合作为输出。</li>
+<li>一个问题可以有多种算法，每种算法都有不同的效率。</li>
+<li>一个算法具有五个特征：有穷性、确切性、输入项、输出项、可行性。</li>
+</ul>
+<h6 id="时间负责度和空间复杂度的概念"><a href="#时间负责度和空间复杂度的概念" class="headerlink" title="时间负责度和空间复杂度的概念"></a>时间负责度和空间复杂度的概念</h6><p>算法评定：算法评定的目的在于选择合适算法和改进算法。一个算法的评价主要从时间复杂度和空间复杂度来考虑。</p>
+<p>时间复杂度：执行算法所需要的计算工作量。一般来说，计算机算法是问题规模 n 的函数 f(n)，算法的时间复杂度也因此记做 T(n) = O(f(n))。问题的规模 n 越大，算法执行的时间的增长率与 f(n) 的增长率正相关，称作渐进时间复杂度。</p>
+<p>时间复杂度计算方式：O(n^2)、O(1)、O(n)?，第一，得出算法的计算次数公式。例如 <code>1+2+3+...+n</code>，相当于 for($i = 1; $i &lt;= $n; $++){$sum += $i;}，这个算法的计算次数为 n 次，那么这个算法的时间复杂度是 O(n)。第二，用常数 1 来取代所有时间当中的所有加法常数，例如上述算法，不管 $i 等于多少，都只计算 $i + 3 次，那么这个算法的时间复杂度不能为 O(3)，而是 O(1)。第三，在修改后的运行次数函数中，只保留最高阶项，比如最终计算次数是 <code>n^2+n+1</code>，那么时间复杂度为：O(n^2)。第四，如果最高阶存在且不是1，则去除与这个项相乘的常数，比如最终计算次数是 <code>2n^+3n+1</code>，那么时间复杂度为：O(n)</p>
+<p>时间复杂度举例</p>
+<p>常数阶：O(1)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">function test($n)&#123;</div><div class="line">	echo $n;</div><div class="line">	echo $n;</div><div class="line">	echo $n;</div><div class="line">&#125;</div><div class="line">test();</div></pre></td></tr></table></figure></p>
+<p>线性阶：O(n)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">```</div><div class="line"></div><div class="line">平方阶/立方阶：O(n^2)/O(n^3)</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">对数阶：O(log2n)</div><div class="line">```php</div><div class="line">&lt;?php</div><div class="line">$n = 20;</div><div class="line">while($n &gt;= 1)&#123;</div><div class="line">	$n = $n/2;</div><div class="line">&#125;</div><div class="line">/**</div><div class="line"> * n</div><div class="line"> * n/2</div><div class="line"> * n/2/2</div><div class="line"> * n/2/2/...</div><div class="line"> *</div><div class="line"> * n/(2^m) = 1</div><div class="line"> * 2^m = n</div><div class="line"> * m = log2n 或 m = logn</div><div class="line"> */</div></pre></td></tr></table></figure>
+<ul>
+<li>常见时间复杂度：<ul>
+<li>常数阶</li>
+<li>线性阶</li>
+<li>平方阶</li>
+<li>立方阶</li>
+<li>对数阶</li>
+<li>nlog2n 阶</li>
+<li>指数阶</li>
+</ul>
+</li>
+<li>效率从高到底<ul>
+<li>O(1)</li>
+<li>O(log2n)</li>
+<li>O(n)</li>
+<li>O(n^2)</li>
+<li>O(n^3)</li>
+<li>O(2^n)</li>
+<li>O(n!)</li>
+<li>O(n^n)</li>
+</ul>
+</li>
+</ul>
+<p>空间复杂度：算法需要消耗的内存空间，记作 S(n)=O(f(n))。包括程序代码所占用的空间，输入数据所占用的空间和辅助变量所占用的空间这三个方面。计算和表示方法与时间复杂度类似，一般用复杂度的渐进性来表示。</p>
+<p>排序算法</p>
+<ul>
+<li>冒泡排序</li>
+<li>直接插入排序</li>
+<li>希尔排序</li>
+<li>选择排序</li>
+<li>快速排序</li>
+<li>堆排序</li>
+<li>归并排序</li>
+</ul>
+<p><strong>冒牌排序</strong></p>
+<p>原理：两两相邻的数进行比较，如果反序就交换，否则不交换。时间复杂度：最坏 O(n^2)，平均 O(n^2)<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjateov0i00220q4b0zohbxud" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjatpiycp002ea14b9cl97qm6" class="article-share-link">Share</a>
       
       
     </footer>

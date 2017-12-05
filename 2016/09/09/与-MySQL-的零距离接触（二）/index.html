@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="七月十五九月初七">
 <meta property="og:description" content="目录 第 6 章 运算符和函数 6-1 回顾和概述 6-2 字符函数 6-3 数值运算符和函数 6-4 比较运算符和函数 6-5 日期时间函数 6-6 信息函数 6-7 聚合函数 6-8 加密函数   第 7 章 自定义函数 7-1 自定义函数简介 7-2 创建不带参数的自定义函数 7-3 创建带有参数的自定义函数 7-4 创建具有复合结构函数体的自定义函数   第 8 章 MySQL 存储过程">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-12-04T01:32:19.764Z">
+<meta property="og:updated_time" content="2017-12-05T12:13:33.344Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="与 MySQL 的零距离接触（二）">
 <meta name="twitter:description" content="目录 第 6 章 运算符和函数 6-1 回顾和概述 6-2 字符函数 6-3 数值运算符和函数 6-4 比较运算符和函数 6-5 日期时间函数 6-6 信息函数 6-7 聚合函数 6-8 加密函数   第 7 章 自定义函数 7-1 自定义函数简介 7-2 创建不带参数的自定义函数 7-3 创建带有参数的自定义函数 7-4 创建具有复合结构函数体的自定义函数   第 8 章 MySQL 存储过程">
@@ -600,12 +600,12 @@ insert test(username) values(username); return last_insert_id(); end //</code></
 </li>
 </ul>
 </li>
-<li><code>LIKE</code> 查询，<code>%</code> 不能在前，可以使用全文索引。<ul>
+<li><code>LIKE</code> 查询时，<code>%</code> 不能在前，否则 MySQL 会使用全文索引。<ul>
 <li><code>WHERE name LIKE &quot;%wange%&quot;</code>，name 索引无效。</li>
 <li><code>WHERE name lIKE &quot;wang%&quot;</code>，name 索引生效。</li>
 </ul>
 </li>
-<li>column is null 可以使用索引</li>
+<li>column is null 会使用索引</li>
 <li>如果 MySQL 估计使用索引比全表扫描更慢，会放弃使用索引。<ul>
 <li>WHERE id &gt; 2 and id &lt; 100</li>
 </ul>
@@ -619,7 +619,7 @@ insert test(username) values(username); return last_insert_id(); end //</code></
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/09/与-MySQL-的零距离接触（二）/" data-id="cjateov1l00460q4bmn2k2rn1" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/09/09/与-MySQL-的零距离接触（二）/" data-id="cjatpiydg0044a14bh4ivbule" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
