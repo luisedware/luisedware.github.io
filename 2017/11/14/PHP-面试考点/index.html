@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="七月十五九月初七">
 <meta property="og:description" content="PHP 招聘要求总结硬性要求 熟悉常用的算法和数据结构 熟悉(精通) PHP 熟悉 PHP 框架：Laravel、Yii 熟悉 HTML 5 + CSS 3 熟悉 CSS 框架：Bootstrap 熟悉(精通) JavaScript 熟悉 JavaScrip 框架：Vue.js、React.js 熟悉 设计模式、熟悉 MVC 模式 熟悉 HTTP、HTTP 2、TCP、UDP 等标准协议 熟悉 A">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-12-05T13:28:16.072Z">
+<meta property="og:updated_time" content="2017-12-06T01:29:35.075Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP 面试考察点">
 <meta name="twitter:description" content="PHP 招聘要求总结硬性要求 熟悉常用的算法和数据结构 熟悉(精通) PHP 熟悉 PHP 框架：Laravel、Yii 熟悉 HTML 5 + CSS 3 熟悉 CSS 框架：Bootstrap 熟悉(精通) JavaScript 熟悉 JavaScrip 框架：Vue.js、React.js 熟悉 设计模式、熟悉 MVC 模式 熟悉 HTTP、HTTP 2、TCP、UDP 等标准协议 熟悉 A">
@@ -1311,12 +1311,20 @@
 <li>归并排序</li>
 </ul>
 <p><strong>冒牌排序</strong></p>
-<p>原理：两两相邻的数进行比较，如果反序就交换，否则不交换。时间复杂度：最坏 O(n^2)，平均 O(n^2)<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div></pre></td></tr></table></figure></p>
+<p>原理：两两相邻的数进行比较，如果反序就交换，否则不交换。时间复杂度：最坏 O(n^2)，平均 O(n^2)；空间复杂度：O(1)。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div></pre></td></tr></table></figure></p>
+<p><strong>直接插入排序</strong></p>
+<p>原理：每次从无序表中取出第一个元素，把它插入到有序表的合适位置，使有序表仍然有序。时间复杂度：最坏 O(n^2) 平均 O(n^2)；空间复杂度：O(1)。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div></pre></td></tr></table></figure></p>
+<p><strong>希尔排序</strong></p>
+<p>原理：把待排序的数据根据增量分成几个子序列，对子序列进行插入排序，直到增量为 1，直接进行插入排序；增量的排序，一般是数据的长度的一半，再变为原来增量的一半，直到增量为 1。时间复杂度：最坏 O(n^2)，平均 O(nlog2n)；空间复杂度：O(1)。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div></pre></td></tr></table></figure></p>
+<p><strong>选择排序</strong></p>
+<p>原理：每次从待排序的数据元素中选出最小（或最大）的一个元素，存放在序列的起始位置，直到全部待排序的数据元素排完。时间复杂度：最坏 O(n^2)，平均 O(n^2)。空间复杂度：O(1)。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div></pre></td></tr></table></figure></p>
+<p><strong>快速排序</strong></p>
+<p>原理：通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都要比另外一部分的所有数据都要小，然后再按照此方法对这两部分数据分别进行快速排序，整个排序过程可以递归完成。时间复杂度：最差 O(n^2)，平均 O(nlog2n)；空间复杂度是 最差 O(n)，平均 O(log2n)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjatpiycp002ea14b9cl97qm6" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjaudm4xq0020jq4b9dkqypq0" class="article-share-link">Share</a>
       
       
     </footer>
