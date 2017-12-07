@@ -264,7 +264,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/16/PHP-秒杀系统/" data-id="cjaudm4xt0029jq4bbh3k2e3x" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/16/PHP-秒杀系统/" data-id="cjavzy0r7001wmx4bnp8vz3q8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -1458,7 +1458,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="数据结构、常见算法考察点"><a href="#数据结构、常见算法考察点" class="headerlink" title="数据结构、常见算法考察点"></a>数据结构、常见算法考察点</h2><ul>
+<h2 id="数据结构、常见算法考察点"><a href="#数据结构、常见算法考察点" class="headerlink" title="数据结构、常见算法考察点"></a>数据结构、常见算法考察点</h2><h4 id="常见算法"><a href="#常见算法" class="headerlink" title="常见算法"></a>常见算法</h4><ul>
 <li>回顾真题：请写出常见的排序算法，并用 PHP 实现冒泡排序，将数组按照从小到大的方式进行排序。</li>
 <li>考官考点：<ul>
 <li>冒泡排序原理和实现</li>
@@ -1471,9 +1471,16 @@
 <li>常见查找算法</li>
 </ul>
 </li>
+<li>解题方法：此类考点非常重要也比较复杂，需要考生充分理解各种排序算法和查找算法的原理以及实现方式，另外还需要理解时间复杂度和空间复杂度的计算方式和概念，此类考察点毋庸置疑是考察考生的逻辑思维能力，因此需要大家仔细研究各种算法的实现方式。</li>
+<li><p>一网打尽：</p>
+<ul>
+<li>请简述时间复杂度和空间复杂度概念</li>
+<li>对无序数组排序，最优的时间复杂度是什么，用 PHP 或者 JavaScript 写出一个实际的例子，该算法的空间复杂度是什么？</li>
+<li>一个有序数组中，查询特定 item 是否存在的最优算法是什么？时间复杂度是什么？</li>
 </ul>
-<h6 id="算法概念"><a href="#算法概念" class="headerlink" title="算法概念"></a>算法概念</h6><ul>
-<li>算法就是任何良定义的计算过程，该过程取某个值或值的集合作为输入并产生某个值或值的集合作为输出。</li>
+</li>
+<li><p>算法就是任何良定义的计算过程，该过程取某个值或值的集合作为输入并产生某个值或值的集合作为输出。</p>
+</li>
 <li>一个问题可以有多种算法，每种算法都有不同的效率。</li>
 <li>一个算法具有五个特征：有穷性、确切性、输入项、输出项、可行性。</li>
 </ul>
@@ -1527,12 +1534,80 @@
 <p><strong>选择排序</strong></p>
 <p>原理：每次从待排序的数据元素中选出最小（或最大）的一个元素，存放在序列的起始位置，直到全部待排序的数据元素排完。时间复杂度：最坏 O(n^2)，平均 O(n^2)。空间复杂度：O(1)。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div></pre></td></tr></table></figure></p>
 <p><strong>快速排序</strong></p>
-<p>原理：通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都要比另外一部分的所有数据都要小，然后再按照此方法对这两部分数据分别进行快速排序，整个排序过程可以递归完成。时间复杂度：最差 O(n^2)，平均 O(nlog2n)；空间复杂度是 最差 O(n)，平均 O(log2n)</p>
+<p>原理：通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都要比另外一部分的所有数据都要小，然后再按照此方法对这两部分数据分别进行快速排序，整个排序过程可以递归完成。时间复杂度：最差 O(n^2)，平均 O(nlog2n)；空间复杂度是 最差 O(n)，平均 O(log2n)<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div></pre></td></tr></table></figure></p>
+<p><strong>堆排序</strong></p>
+<p>原理：把待排序的元素按照大小在二叉树位置上排列，排序好的元素要满足：父节点的元素要大于等于子节点；这个过程叫做堆化过程，如果根节点存放的是最大的数，则叫做大根堆，如果是最小，就叫小跟堆，可以把根节点拿出来，然后再堆化，循环到最后一个节点。时间复杂度：最差 O(nlog2n)，平均 O(nlog2n)。空间复杂度：O(1)<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div></pre></td></tr></table></figure></p>
+<p><strong>归并排序</strong></p>
+<p>原理：将两个（或两个以上）有序表合并成一个新的有序表，即把待排序序列分为若干个有序的子序列，再把有序的子序列合并为整体有序序列。时间复杂度：最差 O(nlog2n)，平均 O(nlog2n)。 空间复杂度是：O(n)。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div></pre></td></tr></table></figure></p>
+<p>查找算法：</p>
+<ul>
+<li>二份查找</li>
+<li>顺序查找</li>
+</ul>
+<p><strong>二分查找</strong></p>
+<p>原理：从数组的中间元素开始，如果中间元素正好是要查找的元素，搜索结束。如果某一个特定元素大于或者小于中间元素，则在数组大于或者小于中间元素的那一半中查找，而且跟开始一样从中间开始比较，如果某一步骤数组为空，代表找不到。时间复杂度：最差 O(log2n)，平均 O(log2n)。空间复杂度：迭代 O(1),递归 O(log2n)<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div></pre></td></tr></table></figure></p>
+<p><strong>顺序查找</strong></p>
+<p>原理：按一定的顺序检查数据中每一个元素，直到找到所需要寻找的特定值为止。时间复杂度：最差 O(n)，平均 O(n)；空间复杂度：O(1)。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div></pre></td></tr></table></figure></p>
+<p>总结：二分查找算法的时间复杂度最差是 O(log2n)，顺序查找的时间复杂度是 O(n)，所以二份查找算法更快，但是递归情况下，二分查找算法更加消耗内容，时间复杂度为 O(log2n)。</p>
+<h4 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h4><ul>
+<li>回顾真题：请简单描述一下数据结构的特征(stack、heap、list、doubly-linked-list、queue、array(vector)、set、map)。</li>
+<li>考点分析：常见数据接口特征。</li>
+<li>解题方法：先理解每种数据结构的特征，有时会遇到让用 PHP 代码实现其中的数据结构，遇到此类问题，先要理解该种数组结构的特性是什么，然后再实现，通常可以使用 PHP 的数组来模拟。</li>
+<li>一网打尽：用 PHP 实现一个双向队列。<ul>
+<li>array_shift</li>
+<li>array_unshift</li>
+<li>array_pop</li>
+<li>array_push</li>
+</ul>
+</li>
+</ul>
+<p><strong>Array</strong></p>
+<p>数组，最简单而且应用最广泛的数据结构之一。</p>
+<p>特性：使用连续的内存来存储，数组中的所有元素必须是相同的类型或者类型的衍生（同质数据结构），元素可以通过下标直接访问。</p>
+<p><strong>LinkedList</strong></p>
+<p>链表，线性表的一种，最基本，最简单，也是最常用的数据结构。</p>
+<p>特性：元素之间的关系是一对一的关系（除了第一个和最后一个元素，其他元素都是首尾相接）。有顺序存储结构和链式存储结构两种存储方式。</p>
+<p><strong>Stack</strong></p>
+<p>栈，一个带有数据存储特性的数据结构。</p>
+<p>特性：存储数据是先进后出的，栈只有一个出口，只能从栈顶部增加和移除元素。</p>
+<p><strong>Heap</strong></p>
+<p>堆，一般情况下，堆叫做二叉堆，近似完全二叉树的数据结构。</p>
+<p>特性：子节点的键值或者索引总是小于它的父节点、每个节点的左右子树又是一个二叉堆。根节点最大的堆叫最大堆或者大根堆、最小的叫最小堆或者小根堆。</p>
+<p><strong>List</strong></p>
+<p>线性表，由零个或多个数据元素组成的有限序列。</p>
+<p>特性：线性表是一个序列。0 个元素构成的线性表是空表，第一个元素无先驱、最后一个元素无后继、其他元素都只有一个先驱和后继。有长度，长度是元素的个数，长度有限。</p>
+<p><strong>doubly-linked-list</strong></p>
+<p>双向链表</p>
+<p>特性：每个元素都是一个对象，每个对象有一个关键字 Key 和两个指针 next 和 prev。</p>
+<p><strong>queue</strong></p>
+<p>队列</p>
+<p>特性：先进先出(FIFO)、并发中使用，可以安全将对象从一个任务传给另一个任务。</p>
+<p><strong>set</strong></p>
+<p>集合</p>
+<p>特性：保存不重复元素。</p>
+<p><strong>map</strong></p>
+<p>字典</p>
+<p>特性：关联数组也可以被称为字典。</p>
+<p><strong>graph</strong></p>
+<p>图</p>
+<p>特性：通常使用邻接矩阵和邻接表表示。前者易实现但是对于稀疏矩阵会浪费较多空间。后者使用链表的方式存储信息但是对于图搜索时间复杂度较高。</p>
+<h4 id="其他逻辑算法"><a href="#其他逻辑算法" class="headerlink" title="其他逻辑算法"></a>其他逻辑算法</h4><ul>
+<li>回顾真题：1,1,2,3,5,8,13,21,34…求第 30 位的数是多少，请用伪代码描述其实现方法 TODO。</li>
+<li>考点分析：逻辑思维能力</li>
+<li>解题方法：找到要处理的数组或者字符串的规律，也可能是一个数列的规律，如果要求使用伪代码实现，建议先说明规律，然后白话说明解题步骤即可。</li>
+<li>一网打尽：请写一个函数，实现以下功能：字符串 “open_door” 转换成 OpenDoor，“make_by_id” 转换成 “MakeById” TODO。</li>
+</ul>
+<h4 id="模拟内置函数实现"><a href="#模拟内置函数实现" class="headerlink" title="模拟内置函数实现"></a>模拟内置函数实现</h4><ul>
+<li>回顾真题：不使用 PHP 函数，用方法写一个反转字符串的函数。</li>
+<li>考点分析：逻辑思维能力、PHP 内置函数的熟悉程度、字符串和数组的处理能力。</li>
+<li>解题方法：多多学习 PHP 字符串和数组的内置函数，尝试模拟其功能，有助于提成逻辑思维和熟悉函数功能。</li>
+<li>一网打尽：写一个函数，要求不使用 array_merge 完成多个数组的合并。</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjaudm4xq0020jq4b9dkqypq0" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjavzy0rh002bmx4bq9i7egm7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -2061,7 +2136,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/09/Web-API-的设计与开发/" data-id="cjaudm4zo0033jq4b61ol3rm5" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/09/Web-API-的设计与开发/" data-id="cjavzy0rm002jmx4b19rg8rxe" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -2155,7 +2230,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/05/日常开发常用命令/" data-id="cjaudm52y007tjq4bvd6irp3i" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/05/日常开发常用命令/" data-id="cjavzy0wm007nmx4blbcp5gdb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -2244,7 +2319,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/01/刻意练习/" data-id="cjaudm524006djq4biwqcd7hd" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/01/刻意练习/" data-id="cjavzy0vr006tmx4byvs7hw17" class="article-share-link">Share</a>
       
       
     </footer>
@@ -2456,7 +2531,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/10/24/高性能的-PHP-API-接口开发/" data-id="cjaudm536008ajq4b0p0c00lv" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/10/24/高性能的-PHP-API-接口开发/" data-id="cjavzy0xn0088mx4b2z7x63uh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -2513,7 +2588,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/09/04/Vue-js-2-X-实践/" data-id="cjaudm4zc002sjq4bft2syztv" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/09/04/Vue-js-2-X-实践/" data-id="cjavzy0rq002qmx4bcbczbof1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
@@ -2735,7 +2810,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/19/编程语言学习框架/" data-id="cjaudm52z007wjq4bnyvqcnb7" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/07/19/编程语言学习框架/" data-id="cjavzy0xl0085mx4blkh7najd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li></ul>
@@ -3500,7 +3575,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/19/学习-PHP/" data-id="cjaudm52q007cjq4buu8xpl12" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/07/19/学习-PHP/" data-id="cjavzy0xz008imx4bopv9psne" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li></ul>
@@ -3650,7 +3725,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/18/学习数据建模/" data-id="cjaudm52v007mjq4bbhs2x1le" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/07/18/学习数据建模/" data-id="cjavzy0x7007umx4b2d1i89gm" class="article-share-link">Share</a>
       
       
     </footer>
