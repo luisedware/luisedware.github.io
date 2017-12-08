@@ -264,7 +264,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/16/PHP-秒杀系统/" data-id="cjavzy0r7001wmx4bnp8vz3q8" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/16/PHP-秒杀系统/" data-id="cjaxkgryq002nmv4b9lwhb8iw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -1603,11 +1603,93 @@
 <li>解题方法：多多学习 PHP 字符串和数组的内置函数，尝试模拟其功能，有助于提成逻辑思维和熟悉函数功能。</li>
 <li>一网打尽：写一个函数，要求不使用 array_merge 完成多个数组的合并。</li>
 </ul>
+<h2 id="高并发解决方案考察点（重点）"><a href="#高并发解决方案考察点（重点）" class="headerlink" title="高并发解决方案考察点（重点）"></a>高并发解决方案考察点（重点）</h2><ul>
+<li>回顾真题：PHP 如何解决网站大流量与高并发的问题？</li>
+<li>考点分析：高并发架构相关的概念和高并发解决方案案例</li>
+<li>知识延伸：</li>
+<li>一网打尽：</li>
+</ul>
+<p>高并发：通常是指并发访问。简单来说，就是在某个时间点，有多少个访问同时到来。通常如果一个系统的日 PV 在千万以上，有可能是一个高并发的系统。</p>
+<p>高并发的问题，我们具体该关心什么？</p>
+<p><strong>QPS</strong></p>
+<p>每秒钟请求或者查询的数量，在互联网领域，指每秒响应请求数(指 HTTP 请求)。</p>
+<p>峰值每秒请求数（QPS) = (总 PV 数 * 80%)/(86400/4*20%)</p>
+<p>80% 的访问量都集中在 20% 的时间内。</p>
+<p><strong>吞吐量</strong></p>
+<p>单位时间内处理的请求数量（通常由 QPS 与并发数决定）。</p>
+<p><strong>响应时间</strong></p>
+<p>从请求发出到收到响应花费的时间。</p>
+<p><strong>PV</strong></p>
+<p>综合浏览量（Page View），即页面浏览量或者点击量，所有访客在 24 小时内访问该网站不同页面的数量。同一个人浏览网站的同一个页面，只记作一次 PV。</p>
+<p><strong>UV</strong></p>
+<p>独立访客（Unique Visitor），即一定时间范围内相同访客多次访问网站，只计算为 1 个独立访客。</p>
+<p><strong>带宽</strong></p>
+<p>计算带宽大小需关注两个指标，峰值流量和页面的平均大小。日网站带宽 = <code>PV / 86400 * 平均页面大小 KB * 8</code>。峰值一般是平均值的倍数，根据实际情况而定。</p>
+<p><strong>压力测试</strong></p>
+<p>测试能承受的最大并发<br>测试最大承受的 QPS 值</p>
+<p>常用性能测试工具</p>
+<ul>
+<li>ab，Apache Benchmark</li>
+<li>wrk</li>
+<li>http_load</li>
+<li>Web Bench</li>
+<li>Siege</li>
+<li>Apache JMeter</li>
+</ul>
+<p>注意事项</p>
+<pre><code>- QPS 不等于并发连接数
+- QPS 是每秒 HTTP 请求数量，并发连接数是系统同时处理的请求数量。
+- 测试机器与被测试机器分开
+- 不要对线上服务做压力测试
+- 观察测试工具 ab 所在机器，以及被测试的前端机的 CPU，内存，网络等都不超过最高限度的 75%
+</code></pre><p><strong>QPS 达到极限</strong></p>
+<p>QPS 达到 50，可以称之为小型网站，一般的服务器就可以应付。</p>
+<p>QPS 达到 100，假设关系型数据库的每次请求在 0.01 秒完成。假设单页面只有一个 SQL 查询，那么 100 QPS 意味着 1 秒钟完成 100 次请求，但是此时我们并不能保证数据库查询能完成 100 次。方案：数据库缓存层、数据库的负载均衡。</p>
+<p>QPS 达到 800,假设我们使用百兆带宽，意味着网站出口的实际带宽是 8M 左右。假设每个页面只有 10 K，在这个并发条件下，百兆带宽已经吃完。方案：CDN 加速、负载均衡。</p>
+<p>QPS 达到 1000，假设使用 Memcache 缓存数据库查询数据，每个页面对 Memcache 的请求远大于直接对 DB 的请求。Memcache 的悲观并发数在 2W 左右，但有可能在之前内网带宽已经吃光，表现出不稳定。静态 HTML 缓存。</p>
+<p>QPS 达到 2000。这个级别下，文件系统访问锁都变成了灾难。方案：做业务分离，分布式存储。</p>
+<p><strong>高并发解决方案案例</strong></p>
+<ul>
+<li>流量优化：防盗链处理。</li>
+<li>前端优化：<ul>
+<li>减少 HTTP 请求。<ul>
+<li>JS 文件压缩合并。</li>
+<li>CSS 文件压缩合并。</li>
+<li>CSS 背景图片压缩合并。</li>
+</ul>
+</li>
+<li>添加异步请求，实现资源懒加载。</li>
+<li>启用浏览器缓存和响应资源压缩。</li>
+<li>CDN 加速，把前端的资源放到 CDN 服务，也可以减少带宽的消耗。</li>
+<li>建立独立图片服务器。</li>
+</ul>
+</li>
+<li>服务端优化<ul>
+<li>页面静态化处理</li>
+<li>并发处理<ul>
+<li>队列处理</li>
+<li>请求异步处理</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>数据库优化<ul>
+<li>数据库缓存</li>
+<li>分库分表、分区操作</li>
+<li>读写分离</li>
+<li>负载均衡</li>
+</ul>
+</li>
+<li>Web 服务器优化<ul>
+<li>负载均衡</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjavzy0rh002bmx4bq9i7egm7" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjaxkgs38007lmv4boz1z4km3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -2136,7 +2218,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/09/Web-API-的设计与开发/" data-id="cjavzy0rm002jmx4b19rg8rxe" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/09/Web-API-的设计与开发/" data-id="cjaxkgrzp0032mv4bkvslgo80" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -2230,7 +2312,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/05/日常开发常用命令/" data-id="cjavzy0wm007nmx4blbcp5gdb" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/05/日常开发常用命令/" data-id="cjaxkgs3n007vmv4b41tc0sz2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -2319,7 +2401,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/01/刻意练习/" data-id="cjavzy0vr006tmx4byvs7hw17" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/01/刻意练习/" data-id="cjaxkgs2b006omv4b9scbdlus" class="article-share-link">Share</a>
       
       
     </footer>
@@ -2531,7 +2613,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/10/24/高性能的-PHP-API-接口开发/" data-id="cjavzy0xn0088mx4b2z7x63uh" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/10/24/高性能的-PHP-API-接口开发/" data-id="cjaxkgs41008amv4b1gu86n0h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -2588,7 +2670,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/09/04/Vue-js-2-X-实践/" data-id="cjavzy0rq002qmx4bcbczbof1" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/09/04/Vue-js-2-X-实践/" data-id="cjaxkgs00003gmv4bsrpj3tq4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
@@ -2810,7 +2892,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/19/编程语言学习框架/" data-id="cjavzy0xl0085mx4blkh7najd" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/07/19/编程语言学习框架/" data-id="cjaxkgs400088mv4bcj9y7n21" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li></ul>
@@ -3575,7 +3657,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/19/学习-PHP/" data-id="cjavzy0xz008imx4bopv9psne" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/07/19/学习-PHP/" data-id="cjaxkgs3x0084mv4b3e1828ko" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li></ul>
@@ -3725,7 +3807,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/18/学习数据建模/" data-id="cjavzy0x7007umx4b2d1i89gm" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/07/18/学习数据建模/" data-id="cjaxkgs3c007omv4bugey7ts7" class="article-share-link">Share</a>
       
       
     </footer>
