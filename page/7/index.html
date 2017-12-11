@@ -53,9 +53,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -65,6 +65,512 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-LNMP-性能优化之-MySQL-性能优化" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/13/LNMP-性能优化之-MySQL-性能优化/" class="article-date">
+  <time datetime="2016-10-13T12:32:23.000Z" itemprop="datePublished">2016-10-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/13/LNMP-性能优化之-MySQL-性能优化/">LNMP 性能优化之 MySQL 性能优化</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li><a href="#1">数据准备</a></li>
+<li><a href="#6">数据库结构优化</a><ul>
+<li><a href="#6-1">选择合适的数据类型</a></li>
+<li><a href="#6-2">数据库表的范式化优化与反范式化优化</a></li>
+<li><a href="#6-3">数据库表垂直拆分</a></li>
+<li><a href="#6-5">数据库表垂直拆分实践</a></li>
+<li><a href="#6-4">数据库表水平拆分</a></li>
+<li><a href="#6-6">数据库表水平拆分实践</a></li>
+</ul>
+</li>
+<li><a href="#2">MySQL 慢查询日志</a><ul>
+<li><a href="#2-1">慢查询日志配置</a></li>
+<li><a href="#2-2">慢查询日志所存内容</a></li>
+<li><a href="#2-3">慢查询日志分析工具</a></li>
+<li><a href="#2-4">慢查询日志判断问题 SQL 的依据</a></li>
+</ul>
+</li>
+<li><a href="#3">EXPLAIN 分析 SQL</a></li>
+<li><a href="#4">SQL 优化</a><ul>
+<li><a href="#4-1">MAX() 优化</a></li>
+<li><a href="#4-2">COUNT() 优化</a></li>
+<li><a href="#4-5">子查询优化</a></li>
+<li><a href="#4-3">GROUP BY 优化</a></li>
+<li><a href="#4-4">LIMIT 优化</a></li>
+</ul>
+</li>
+<li><a href="#5">索引优化</a><ul>
+<li><a href="#5-1">为合适的列建立索引</a></li>
+<li><a href="#5-2">找到重复和冗余的索引</a></li>
+<li><a href="#5-3">删除不用的索引</a></li>
+</ul>
+</li>
+<li><a href="#8">系统配置优化</a><ul>
+<li><a href="#8-1">数据库系统配置优化</a></li>
+<li><a href="#8-2">MySQL 配置文件</a></li>
+<li><a href="#8-4">存储引擎及版本的选择</a></li>
+<li><a href="#8-3">第三方配置工具使用</a></li>
+</ul>
+</li>
+<li><a href="#7">服务器硬件优化</a></li>
+<li><a href="#9">MySQL 服务器集群</a></li>
+</ul>
+<h2 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a><a id="1">数据准备</a></h2><p>打开链接下载数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://downloads.mysql.com/docs/sakila-db.zip</div></pre></td></tr></table></figure></p>
+<p>打开终端，执行以下命令<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> 登录 MySQL Cli 模式</div><div class="line">mysql -uroot -p</div><div class="line"></div><div class="line"><span class="meta">#</span> 创建数据库</div><div class="line">SOURCE /Users/LuisEdware/Downloads/sakila-db/sakila-schema.sql</div><div class="line"></div><div class="line"><span class="meta">#</span> 填充数据到数据库</div><div class="line">SOURCE /Users/LuisEdware/Downloads/sakila-db/sakila-data.sql</div><div class="line"></div><div class="line"><span class="meta">#</span> 使用 sakila 数据库</div><div class="line">USE sakila;</div></pre></td></tr></table></figure></p>
+<h2 id="数据库结构优化"><a href="#数据库结构优化" class="headerlink" title="数据库结构优化"></a><a id="6">数据库结构优化</a></h2><h4 id="选择合适的数据类型"><a href="#选择合适的数据类型" class="headerlink" title="选择合适的数据类型"></a><a id="6-1">选择合适的数据类型</a></h4><ul>
+<li>使用可以存下你的数据的最小的数据类型</li>
+<li>使用简单的数据类型。Integer 要比 Varchar 类型在 MySQL 中处理更高效</li>
+<li>尽可能使用 not null 定义字段</li>
+<li>尽量少用 text 类型，非用不可时最好考虑分表</li>
+</ul>
+<h4 id="数据库表的范式化优化与反范式化优化"><a href="#数据库表的范式化优化与反范式化优化" class="headerlink" title="数据库表的范式化优化与反范式化优化"></a><a id="6-2">数据库表的范式化优化与反范式化优化</a></h4><p>为了避免冗余数据，可以根据数据库表设计第三范式对数据的储存进行优化设计；也可以为了提高性能，采用数据库表设计反范式化设计去冗余数据，使得数据库的查询更加的快速。</p>
+<h4 id="数据库表垂直拆分"><a href="#数据库表垂直拆分" class="headerlink" title="数据库表垂直拆分"></a><a id="6-3">数据库表垂直拆分</a></h4><p>垂直拆分，就是把原来一个有很多列的表拆分成多个表，这解决了表的宽度问题。通常垂直拆分就可以按以下原则进行：</p>
+<ul>
+<li>把不太常用的字段单独存放到一个表中</li>
+<li>把大字段独立存放到一个表中</li>
+<li>把经常一起使用的字段放到一起</li>
+</ul>
+<h4 id="数据库表垂直拆分实践"><a href="#数据库表垂直拆分实践" class="headerlink" title="数据库表垂直拆分实践"></a><a id="6-5">数据库表垂直拆分实践</a></h4><h4 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h4><h4 id="数据库表水平拆分"><a href="#数据库表水平拆分" class="headerlink" title="数据库表水平拆分"></a><a id="6-4">数据库表水平拆分</a></h4><p>当单表的数据量过大，导致增删查改等操作过慢，这时候需要对表进行水平拆分。水平拆分的表，每一张表的结构都是完全一致的。</p>
+<p>常用的水平拆分方法为：</p>
+<ol>
+<li>对 customer_id 进行 hash 运算，如果要拆分成 5 个表则使用 mod(customer_id,5) 取出 0-4 个值</li>
+<li>针对不同的 hashID 把数据存到不同的表中</li>
+</ol>
+<p>挑战：</p>
+<ul>
+<li>跨分区表进行数据查询</li>
+<li>统计及后台报表操作</li>
+</ul>
+<h4 id="数据库表水平拆分实践"><a href="#数据库表水平拆分实践" class="headerlink" title="数据库表水平拆分实践"></a><a id="6-6">数据库表水平拆分实践</a></h4><h4 id="TODO-1"><a href="#TODO-1" class="headerlink" title="TODO"></a>TODO</h4><h2 id="MySQL-慢查询日志"><a href="#MySQL-慢查询日志" class="headerlink" title="MySQL 慢查询日志"></a><a id="2">MySQL 慢查询日志</a></h2><h4 id="慢查询日志配置"><a href="#慢查询日志配置" class="headerlink" title="慢查询日志配置"></a><a id="2-1">慢查询日志配置</a></h4><p>如何发现有问题的 SQL？答案是使用 MySQL 慢查询日志对有效率问题的 SQL 进行监控，执行命令如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> 查看是否开启慢查询日志</div><div class="line">show variables like "slow_query_log";</div><div class="line"></div><div class="line"><span class="meta">#</span> 查看是否设置了把没有索引的记录到慢查询日志</div><div class="line">show variables like "log_queries_not_using_indexes";</div><div class="line"></div><div class="line"><span class="meta">#</span> 查看是否设置慢查询的 SQL 执行时间</div><div class="line">show variables like "long_query_time";</div><div class="line"></div><div class="line"><span class="meta">#</span> 查看慢查询日志记录位置</div><div class="line">show variables like "slow_query_log_file";</div><div class="line"></div><div class="line"><span class="meta">#</span> 开启慢查询日志</div><div class="line">set global slow_query_log=on</div><div class="line"></div><div class="line"><span class="meta">#</span> 设置没有索引的记录到慢查询日志</div><div class="line">set global log_queries_not_using_indexes=on</div><div class="line"></div><div class="line"><span class="meta">#</span> 设置到慢查询日志的 SQL 执行时间（1 代表 1 秒）</div><div class="line">set global long_query_time=1</div><div class="line"></div><div class="line"><span class="meta">#</span> 查看慢查询日志（在 Linux 终端下执行）</div><div class="line">tail -50 /usr/local/var/mysql/luyiyuandeMacBook-Pro-slow.log;</div></pre></td></tr></table></figure></p>
+<h4 id="慢查询日志所存内容"><a href="#慢查询日志所存内容" class="headerlink" title="慢查询日志所存内容"></a><a id="2-2">慢查询日志所存内容</a></h4><ul>
+<li>SQL 的执行时间：<strong># Time: 2016-10-13T10:01:45.914267Z</strong></li>
+<li>SQL 的执行主机：<strong># User@Host: root[root] @ localhost []  Id:   949</strong></li>
+<li>SQL 的执行信息：<strong># Query_time: 0.000227  Lock_time: 0.000099 Rows_sent: 2  Rows_examined: 2</strong></li>
+<li>SQL 的执行时间：<strong>SET timestamp=1476352905;</strong></li>
+<li>SQL 的执行内容：<strong>select * from store;</strong></li>
+</ul>
+<h4 id="慢查询日志分析工具"><a href="#慢查询日志分析工具" class="headerlink" title="慢查询日志分析工具"></a><a id="2-3">慢查询日志分析工具</a></h4><ul>
+<li>mysqldumpslow<ul>
+<li>安装：MySQL 数据库自带</li>
+<li>使用：<code>mysqldumpslow /usr/local/var/mysql/luyiyuandeMacBook-Pro-slow.log;</code></li>
+<li>详解：<a href="https://github.com/luisedware/Archives/issues/7" target="_blank" rel="external">点击查看详情</a></li>
+</ul>
+</li>
+<li>pt-query-digest<ul>
+<li>安装：<code>brew install brew install percona-toolkit</code></li>
+<li>使用：<code>pt-query-digest /usr/local/var/mysql/luyiyuandeMacBook-Pro-slow.log | more;</code></li>
+<li>详解：TODO</li>
+</ul>
+</li>
+<li>mysqlsla<ul>
+<li>安装：TODO</li>
+<li>使用：TODO</li>
+<li>详解：TODO</li>
+</ul>
+</li>
+</ul>
+<h4 id="慢查询日志判断问题-SQL-的依据"><a href="#慢查询日志判断问题-SQL-的依据" class="headerlink" title="慢查询日志判断问题 SQL 的依据"></a><a id="2-4">慢查询日志判断问题 SQL 的依据</a></h4><ul>
+<li>查询次数多且每次查询占用时间长的 SQL</li>
+<li>未命中索引的 SQL</li>
+<li>IO 大的 SQL</li>
+</ul>
+<h2 id="EXPLAIN-分析-SQL-的执行计划"><a href="#EXPLAIN-分析-SQL-的执行计划" class="headerlink" title="EXPLAIN 分析 SQL 的执行计划"></a><a id="3">EXPLAIN 分析 SQL 的执行计划</a></h2><p>使用 EXPLAIN 分析 SQL<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">EXPLAIN</span> <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> staff;</div></pre></td></tr></table></figure></p>
+<p>使用 EXPLAIN 分析 SQL 后各个参数含义如下：</p>
+<ul>
+<li>id：SQL 语句执行顺序编号</li>
+<li>select_type：SQL 语句执行的类型，主要区别普通查询、联合查询和子查询之类的复杂查询</li>
+<li>table：SQL 语句执行所引用的数据表</li>
+<li>type：显示连接使用的类型</li>
+<li>possible_keys：指出 MySQL 能在该数据表中使用哪些索引有助于查询</li>
+<li>key：SQL 语句执行时所使用的索引</li>
+<li>key_len：SQL 语句执行时所使用的索引的长度。在不损失精确性的情况下，长度越短越好</li>
+<li>ref：显示索引的哪一列被使用了</li>
+<li>rows：MySQL 认为必须检查的用来返回请求数据的行数</li>
+<li>Extra：提供 MySQL 优化器一系列额外信息</li>
+</ul>
+<p>执行 EXPLAIN 分析 SQL 返回结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">mysql&gt; EXPLAIN select * from z_order left join z_league on z_order.league_id = z_league.id limit 10000\G;</div><div class="line">*************************** 1. row ***************************</div><div class="line">           id: 1</div><div class="line">  select_type: SIMPLE</div><div class="line">        table: z_order</div><div class="line">   partitions: NULL</div><div class="line">         type: ALL</div><div class="line">possible_keys: NULL</div><div class="line">          key: NULL</div><div class="line">      key_len: NULL</div><div class="line">          ref: NULL</div><div class="line">         rows: 740339</div><div class="line">     filtered: 100.00</div><div class="line">        Extra: NULL</div><div class="line">*************************** 2. row ***************************</div><div class="line">           id: 1</div><div class="line">  select_type: SIMPLE</div><div class="line">        table: z_league</div><div class="line">   partitions: NULL</div><div class="line">         type: eq_ref</div><div class="line">possible_keys: PRIMARY</div><div class="line">          key: PRIMARY</div><div class="line">      key_len: 4</div><div class="line">          ref: bingoshuiguo.z_order.league_id</div><div class="line">         rows: 1</div><div class="line">     filtered: 100.00</div><div class="line">        Extra: Using where</div><div class="line">2 rows in set, 1 warning (0.00 sec)</div></pre></td></tr></table></figure></p>
+<h2 id="SQL-优化"><a href="#SQL-优化" class="headerlink" title="SQL 优化"></a><a id="4">SQL 优化</a></h2><h4 id="MAX-优化"><a href="#MAX-优化" class="headerlink" title="MAX() 优化"></a><a id="4-1">MAX() 优化</a></h4><p>分析 SQL 语句：使用 MAX() 方法查询最后一笔交易的时间<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">EXPLAIN SELECT MAX(payment_date) FROM payment_date</div></pre></td></tr></table></figure></p>
+<p>执行结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">*************************** 1. row ***************************</div><div class="line">           id: 1</div><div class="line">  select_type: SIMPLE</div><div class="line">        table: payment</div><div class="line">   partitions: NULL</div><div class="line">         type: ALL</div><div class="line">possible_keys: NULL</div><div class="line">          key: NULL</div><div class="line">      key_len: NULL</div><div class="line">          ref: NULL</div><div class="line">         rows: 16086</div><div class="line">     filtered: 100.00</div><div class="line">        Extra: NULL</div><div class="line">1 row in set, 1 warning (0.00 sec)</div></pre></td></tr></table></figure></p>
+<p>如果数据表的数据非常大，查询频率又非常高，那么服务器的 IO 消耗也会非常高，所以这条 SQL 语句需要优化。可以通过建立索引进行优化。执行代码如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> idx_paydate <span class="keyword">ON</span> payment(payment_date);</div></pre></td></tr></table></figure>
+<p>然后再分析 SQL 语句，执行结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">*************************** 1. row ***************************</div><div class="line">           id: 1</div><div class="line">  select_type: SIMPLE</div><div class="line">        table: NULL</div><div class="line">   partitions: NULL</div><div class="line">         type: NULL</div><div class="line">possible_keys: NULL</div><div class="line">          key: NULL</div><div class="line">      key_len: NULL</div><div class="line">          ref: NULL</div><div class="line">         rows: NULL</div><div class="line">     filtered: NULL</div><div class="line">        Extra: Select tables optimized away</div><div class="line">1 row in set, 1 warning (0.01 sec)</div></pre></td></tr></table></figure></p>
+<p>经过优化之后，由于索引是按顺序排列的，MySQL 不需要查询表中的数据，而是通过查询索引最后的一个数据，就可以得知执行结果了。而且这个时候，不管表的数据量多大，查询 MAX() 所需要的时间都是基本固定的，这样就尽可能地减少了 IO 操作。</p>
+<h4 id="COUNT-优化"><a href="#COUNT-优化" class="headerlink" title="COUNT() 优化"></a><a id="4-2">COUNT() 优化</a></h4><p>分析 SQL 语句：使用 COUNT() 函数在一条 SQL 中同时查出 2006 年和 2007 年电影的数量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">SELECT</div><div class="line">  count(release_year = &apos;2006&apos; OR NULL) AS &apos;2006 年电影数量&apos; ,</div><div class="line">  count(release_year = &apos;2007&apos; OR NULL) AS &apos;2007 年电影数量&apos;</div><div class="line">FROM</div><div class="line">  film;</div></pre></td></tr></table></figure></p>
+<p>count(*) 包含空值，count(id) 不包含空值。上述语句就是优化 Count() 函数取值</p>
+<h4 id="子查询优化"><a href="#子查询优化" class="headerlink" title="子查询优化"></a><a id="4-5">子查询优化</a></h4><p>分析 SQL 语句：查询 sandra 出演的所有影片<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">SELECT</div><div class="line">  title ,</div><div class="line">  release_year ,</div><div class="line">  LENGTH</div><div class="line">FROM</div><div class="line">  film</div><div class="line">WHERE</div><div class="line">  film_id IN(</div><div class="line">    SELECT</div><div class="line">      film_id</div><div class="line">    FROM</div><div class="line">      film_actor</div><div class="line">    WHERE</div><div class="line">      actor_id IN(</div><div class="line">        SELECT</div><div class="line">          actor_id</div><div class="line">        FROM</div><div class="line">          actor</div><div class="line">        WHERE</div><div class="line">          first_name = &apos;sandra&apos;</div><div class="line">      )</div><div class="line">  )</div></pre></td></tr></table></figure></p>
+<p>通常情况下，需要把子查询优化为 join 查询，但在优化时要注意关联键是否有一对多的关系，要注意重复数据。</p>
+<h4 id="GROUP-BY-优化"><a href="#GROUP-BY-优化" class="headerlink" title="GROUP BY 优化"></a><a id="4-3">GROUP BY 优化</a></h4><p>group by 可能会出现临时表、文件排序等，影响效率。可以通过关联的子查询，来避免产生临时表和文件排序，可以节省 IO。</p>
+<p>group by 查询优化前：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">EXPLAIN SELECT</div><div class="line">	actor.first_name ,</div><div class="line">	actor.last_name ,</div><div class="line">	Count(*)</div><div class="line">FROM</div><div class="line">	sakila.film_actor</div><div class="line">INNER JOIN sakila.actor USING(actor_id)</div><div class="line">GROUP BY</div><div class="line">	film_actor.actor_id;</div></pre></td></tr></table></figure></p>
+<p>执行结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">*************************** 1. row ***************************</div><div class="line">           id: 1</div><div class="line">  select_type: SIMPLE</div><div class="line">        table: actor</div><div class="line">   partitions: NULL</div><div class="line">         type: ALL</div><div class="line">possible_keys: PRIMARY</div><div class="line">          key: NULL</div><div class="line">      key_len: NULL</div><div class="line">          ref: NULL</div><div class="line">         rows: 200</div><div class="line">     filtered: 100.00</div><div class="line">        Extra: Using temporary; Using filesort</div><div class="line">*************************** 2. row ***************************</div><div class="line">           id: 1</div><div class="line">  select_type: SIMPLE</div><div class="line">        table: film_actor</div><div class="line">   partitions: NULL</div><div class="line">         type: ref</div><div class="line">possible_keys: PRIMARY,idx_fk_film_id</div><div class="line">          key: PRIMARY</div><div class="line">      key_len: 2</div><div class="line">          ref: sakila.actor.actor_id</div><div class="line">         rows: 27</div><div class="line">     filtered: 100.00</div><div class="line">        Extra: Using index</div><div class="line">2 rows in set, 1 warning (0.01 sec)</div></pre></td></tr></table></figure></p>
+<p>group by 查询优化后：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">EXPLAIN SELECT</div><div class="line">	actor.first_name ,</div><div class="line">	actor.last_name ,</div><div class="line">	c.cnt</div><div class="line">FROM</div><div class="line">	sakila.actor</div><div class="line">INNER JOIN(</div><div class="line">	SELECT</div><div class="line">		actor_id ,</div><div class="line">		count(*) AS cnt</div><div class="line">	FROM</div><div class="line">		sakila.film_actor</div><div class="line">	GROUP BY</div><div class="line">		actor_id</div><div class="line">) AS c USING(actor_id);</div></pre></td></tr></table></figure></p>
+<p>执行结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">*************************** 1. row ***************************</div><div class="line">           id: 1</div><div class="line">  select_type: PRIMARY</div><div class="line">        table: actor</div><div class="line">   partitions: NULL</div><div class="line">         type: ALL</div><div class="line">possible_keys: PRIMARY</div><div class="line">          key: NULL</div><div class="line">      key_len: NULL</div><div class="line">          ref: NULL</div><div class="line">         rows: 200</div><div class="line">     filtered: 100.00</div><div class="line">        Extra: NULL</div><div class="line">*************************** 2. row ***************************</div><div class="line">           id: 1</div><div class="line">  select_type: PRIMARY</div><div class="line">        table: &lt;derived2&gt;</div><div class="line">   partitions: NULL</div><div class="line">         type: ref</div><div class="line">possible_keys: &lt;auto_key0&gt;</div><div class="line">          key: &lt;auto_key0&gt;</div><div class="line">      key_len: 2</div><div class="line">          ref: sakila.actor.actor_id</div><div class="line">         rows: 27</div><div class="line">     filtered: 100.00</div><div class="line">        Extra: NULL</div><div class="line">*************************** 3. row ***************************</div><div class="line">           id: 2</div><div class="line">  select_type: DERIVED</div><div class="line">        table: film_actor</div><div class="line">   partitions: NULL</div><div class="line">         type: index</div><div class="line">possible_keys: PRIMARY,idx_fk_film_id</div><div class="line">          key: PRIMARY</div><div class="line">      key_len: 4</div><div class="line">          ref: NULL</div><div class="line">         rows: 5462</div><div class="line">     filtered: 100.00</div><div class="line">        Extra: Using index</div><div class="line">3 rows in set, 1 warning (0.00 sec)</div></pre></td></tr></table></figure></p>
+<h4 id="LIMIT-优化"><a href="#LIMIT-优化" class="headerlink" title="LIMIT 优化"></a><a id="4-4">LIMIT 优化</a></h4><p>LIMIT 常用于分页处理，时常会伴随 ORDER BY 从句使用，因此大多时候会使用 Filesorts ，这样会造成大量的 IO 问题</p>
+<p>优化步骤1：使用有索引的列或主键进行 Order By 操作<br>优化步骤2：记录上次返回的主键，在下次查询时使用主键过滤（保证主键是自增且有索引）</p>
+<h2 id="索引优化"><a href="#索引优化" class="headerlink" title="索引优化"></a><a id="5">索引优化</a></h2><h4 id="为合适的列建立索引"><a href="#为合适的列建立索引" class="headerlink" title="为合适的列建立索引"></a><a id="5-1">为合适的列建立索引</a></h4><ul>
+<li>在 WHERE 从句，GROUP BY 从句，ORDER BY 从句，ON 从句中出现的字段</li>
+<li>索引字段越小越好</li>
+<li>离散度的字段放到联合索引的前面</li>
+</ul>
+<p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SELECT * FROM payment WHERE staff_id = 2 AND customer_id = 584;</div></pre></td></tr></table></figure></p>
+<p>上述 SQL 语句，是 <code>index(staff_id,customer_id)</code> 合理，还是 <code>index(customer_id,staff_id)</code> 合理。执行语句如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">SELECT count(DISTINCT customer_id) , count(DISTINCT staff_id) FROM payment;</div><div class="line"></div><div class="line">count(DISTINCT customer_id):599</div><div class="line">count(DISTINCT staff_id):2</div></pre></td></tr></table></figure></p>
+<p>由于 customer_id 的离散度更大，所以应该使用 <code>index(customer_id,staff_id)</code></p>
+<h4 id="找到重复和冗余的索引"><a href="#找到重复和冗余的索引" class="headerlink" title="找到重复和冗余的索引"></a><a id="5-2">找到重复和冗余的索引</a></h4><p>之所以要找到重复和冗余的索引，是因为过多的索引不但影响写入，而且影响查询，索引越多，分析越慢。那么为何重复索引、冗余索引？概念如下：</p>
+<p>重复索引是指相同的列以相同的顺序建立的同类型的索引，如下表中 primary key 和 ID 列上的索引就是重复索引，例子如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE test(</div><div class="line">	id INT NOT NULL PRIMARY KEY ,</div><div class="line">	NAME VARCHAR(10) NOT NULL ,</div><div class="line">	title VARCHAR(50) NOT NULL ,</div><div class="line">	UNIQUE(id)</div><div class="line">) ENGINE = INNODB;</div></pre></td></tr></table></figure></p>
+<p><code>UNIQUE(ID)</code> 和 <code>PRIMARY KEY</code> 重复了。<br>冗余索引是指多个索引的前缀列相同，或是在联合索引中包含了主键的索引，例子如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE test(</div><div class="line">	id INT NOT NULL PRIMARY KEY ,</div><div class="line">	NAME VARCHAR(10) NOT NULL ,</div><div class="line">	title VARCHAR(50) NOT NULL ,</div><div class="line">	KEY(NAME , id)</div><div class="line">) ENGINE = INNODB;</div></pre></td></tr></table></figure></p>
+<p>查找重复及冗余索引的 SQL 语句如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">USE information_schema;</div><div class="line"></div><div class="line">SELECT</div><div class="line">	a.TABLE_SCHEMA AS &apos;数据名&apos; ,</div><div class="line">	a.table_name AS &apos;表名&apos; ,</div><div class="line">	a.index_name AS &apos;索引1&apos; ,</div><div class="line">	b.INDEX_NAME AS &apos;索引2&apos; ,</div><div class="line">	a.COLUMN_NAME AS &apos;重复列名&apos;</div><div class="line">FROM</div><div class="line">	STATISTICS a</div><div class="line">JOIN STATISTICS b ON a.TABLE_SCHEMA = b.TABLE_SCHEMA</div><div class="line">AND a.TABLE_NAME = b.table_name</div><div class="line">AND a.SEQ_IN_INDEX = b.SEQ_IN_INDEX</div><div class="line">AND a.COLUMN_NAME = b.COLUMN_NAME</div><div class="line">WHERE</div><div class="line">	a.SEQ_IN_INDEX = 1</div><div class="line">AND a.INDEX_NAME &lt;&gt; b.INDEX_NAME</div></pre></td></tr></table></figure></p>
+<p>也可以使用工具 <code>pt-duplicate-key-checker</code> 检查重复索引和冗余索引,使用例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pt-duplicate-key-checker -uroot -p &apos;123456&apos; -h 127.0.0.1 -d sakila</div></pre></td></tr></table></figure></p>
+<p>执行结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># ########################################################################</div><div class="line"># Summary of indexes</div><div class="line"># ########################################################################</div><div class="line"></div><div class="line"># Size Duplicate Indexes   118425374</div><div class="line"># Total Duplicate Indexes  24</div><div class="line"># Total Indexes            1439</div></pre></td></tr></table></figure></p>
+<h4 id="删除不用的索引"><a href="#删除不用的索引" class="headerlink" title="删除不用的索引"></a><a id="5-3">删除不用的索引</a></h4><p>目前 MySQL 中还没有记录索引的使用情况，但是在 PerconMySQL 和 MariaDB 中可以通过 INDEX_STATISTICS 表来查看哪些索引未使用，但在 MySQL 中目前只能通过慢查询日志配合共组 <code>pt-index-usage</code> 来进行索引使用情况的分析。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pt-index-usage -uroot -p &apos;123456&apos; /usr/local/var/mysql/luyiyuandeMacBook-Pro-slow.log;</div></pre></td></tr></table></figure>
+<h2 id="系统配置优化"><a href="#系统配置优化" class="headerlink" title="系统配置优化"></a><a id="8">系统配置优化</a></h2><h4 id="数据库系统配置优化"><a href="#数据库系统配置优化" class="headerlink" title="数据库系统配置优化"></a><a id="8-1">数据库系统配置优化</a></h4><p>数据库是基于操作系统的，目前大多数 MySQL 都是安装在Linux 系统之上，所以对于操作系统的一些参数配置也会影响到 MySQL 的性能，下面列举一些常用到的系统配置。</p>
+<p>网络方面的配置，要修改文件 <code>/etc/sysctl.conf</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># 增加 tcp 支持的队列数</div><div class="line">net.ipv4.tcp_max_syn_backlog = 65535</div><div class="line"></div><div class="line"># 减少断开连接时，资源回收</div><div class="line">net.ipv4.tcp_max_tw_buckets = 8000</div><div class="line">net.ipv4.tcp_tw_reuse = 1</div><div class="line">net.ipv4.tcp_tw_recycle = 1</div><div class="line">net.ipv4.tcp_fin_timeout = 10</div></pre></td></tr></table></figure></p>
+<p>打开文件数的限制，可以使用 ulimit -a 查看目录的各项限制，可以修改文件 <code>/etc/security/limits.conf</code> ，增加以下内容以修改打开文件数量的限制<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">soft nofile 65535</div><div class="line">hard nofile 65535</div></pre></td></tr></table></figure></p>
+<p>除此之外最好在 MySQL 服务器上关闭 iptables，selinux 等防火墙软件。</p>
+<h4 id="MySQL-配置文件"><a href="#MySQL-配置文件" class="headerlink" title="MySQL 配置文件"></a><a id="8-2">MySQL 配置文件</a></h4><p>MySQL 可以通过启动时指定配置参数和使用配置文件两种方法进行配置，在一般情况下，配置文件位于 <code>/etc/my.cnf</code> 或是 <code>/etc/mysql/my.cnf</code>，MySQL 查询配置文件的顺序是可以通过以下方法过的</p>
+<p>常用参数说明</p>
+<ul>
+<li><p>innodb_buffer_pool_size：用于配置 Innodb 的缓冲池</p>
+<ul>
+<li>如果数据库中只有 Innodb 表，则推荐配置量为总内存的 75%</li>
+<li>Innodb_buffer_pool_size &gt;= Total MB<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">SELECT</div><div class="line">  ENGINE ,</div><div class="line">  round(</div><div class="line">    sum(data_length + index_length) / 1024 / 1024 ,</div><div class="line">    1</div><div class="line">  ) AS &apos;Total MB&apos;</div><div class="line">FROM</div><div class="line">  information_schema. TABLES</div><div class="line">WHERE</div><div class="line">  table_schema NOT IN(</div><div class="line">    &quot;information_schema&quot; ,</div><div class="line">    &quot;performance_schema&quot;</div><div class="line">  )</div><div class="line">GROUP BY</div><div class="line">  ENGINE;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>innodb_buffer_pool_instances</strong>：MySQL 5.5 中新增参数，可以控制缓冲池的个数，默认情况下只有一个缓冲池。</p>
+</li>
+<li><strong>innodb_log_buffer_size</strong>：Innodb 日志缓冲的大小，由于日志最长，每秒钟就会刷新，所以一般不用太大。</li>
+<li><strong>innodb_flush_log_at_trx_commit</strong>：对 Innodb 的 IO 效率影响很大。</li>
+<li><strong>innodb_file_per_table</strong>：控制 Innodb 每一个表都使用独立的表空间，默认为 OFF，也就是所有表都会建立在共享表空间中。</li>
+<li><strong>innodb_stats_on_metadata</strong>：决定 MySQL 在什么情况下会刷新 innodb 表的统计信息。</li>
+</ul>
+<h4 id="存储引擎及版本的选择"><a href="#存储引擎及版本的选择" class="headerlink" title="存储引擎及版本的选择"></a><a id="8-4">存储引擎及版本的选择</a></h4><p>请选择 MySQL InnoDB 存储引擎及 MySQL 5.5+ 的版本，原因如下：</p>
+<ul>
+<li>更稳定可靠的数据存储和索引结构；整个存储引擎设计思想更可靠先进，接近于 Oracle、SQL Server 级别的数据库</li>
+<li>更多可靠特性支持，比如事务、外键等支持（支付等关键领域事务非常重要）</li>
+<li>运行更稳定，不论读写数据的量级，都能够保证比较稳定的性能响应</li>
+<li>更好地崩溃恢复机制，特别利用一些 Percona 的一些工具，更有效地运维 InnoDB</li>
+<li>MySQL 5.5+ 对比 MySQL 5.1.x 总体功能和性能提升太多，改进太多</li>
+</ul>
+<h4 id="第三方配置工具使用"><a href="#第三方配置工具使用" class="headerlink" title="第三方配置工具使用"></a><a id="8-3">第三方配置工具使用</a></h4><p><strong><code>percona：https://tools.percona.com/</code></strong></p>
+<h2 id="服务器硬件优化"><a href="#服务器硬件优化" class="headerlink" title="服务器硬件优化"></a><a id="7">服务器硬件优化</a></h2><ul>
+<li>CPU<ul>
+<li>使用多核 CPU，能够充分发挥新版 MySQL 多核下的效果</li>
+<li>MySQL 有一些工作只能使用到单核 CPU，选择高频</li>
+<li>MySQL 对 CPU 核数的支持并不是越多越快，MySQL 5.5 版本不要超过 32 个核</li>
+</ul>
+</li>
+<li>内存<ul>
+<li>选择高频内存</li>
+<li>如果数据量比较大，建议使用不要低于 20 G 内存的服务器</li>
+</ul>
+</li>
+<li>网络<ul>
+<li>保证足够的吞吐量，建议千兆网卡</li>
+<li>增加带宽，加快网络通信速度</li>
+</ul>
+</li>
+<li>硬盘 IO 优化<ul>
+<li>使用 SSD 硬盘，提高 TPS，选择适合的 RAID 方案</li>
+<li>RAID 级别简介<ul>
+<li>RAID 0：也称为条带，就是把多个磁盘链接成一个硬盘使用，这个级别 IO 最好</li>
+<li>RAID 1：也成为镜像，要求至少两个磁盘，每组磁盘存储的数据相同</li>
+<li>RAID 1 + 0：就是 RAID 1 和 RAID 0的结合。同时具备两个级别的优缺点。一般建议数据库使用这个级别。</li>
+<li>RAID 5：把多个（最少 3 个）硬盘合并成 1 个逻辑盘使用，数据读写时会建立奇偶校验信息，并且奇偶校验信息和相对应的数据分别存储在不同的磁盘上。当 RAID 5 的一个磁盘数据发生损坏后，利用剩下的数据和相应的奇偶校验信息去恢复被损坏的数据。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="MySQL-服务器集群"><a href="#MySQL-服务器集群" class="headerlink" title="MySQL 服务器集群"></a><a id="9">MySQL 服务器集群</a></h2><p>TODO</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2016/10/13/LNMP-性能优化之-MySQL-性能优化/" data-id="cjb1uvrsv0005fl4bgolw6z5f" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Linux-Shell-基础之条件判断语句" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/04/Linux-Shell-基础之条件判断语句/" class="article-date">
+  <time datetime="2016-10-04T02:56:05.000Z" itemprop="datePublished">2016-10-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/04/Linux-Shell-基础之条件判断语句/">Linux Shell 基础之条件判断语句</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Shell-条件判断式语句"><a href="#Shell-条件判断式语句" class="headerlink" title="Shell 条件判断式语句"></a>Shell 条件判断式语句</h2><h3 id="按文件类型判断"><a href="#按文件类型判断" class="headerlink" title="按文件类型判断"></a>按文件类型判断</h3><table>
+<thead>
+<tr>
+<th>测试选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-b 文件</td>
+<td>判断该文件是否存在，并且是否为块设备文件</td>
+</tr>
+<tr>
+<td>-c 文件</td>
+<td>判断该文件是否存在，并且是否为字符设备文件</td>
+</tr>
+<tr>
+<td>-d 文件</td>
+<td>判断该文件是否存在，并且是否为目录文件</td>
+</tr>
+<tr>
+<td>-e 文件</td>
+<td>判断该文件是否存在（存在为真）</td>
+</tr>
+<tr>
+<td>-f 文件</td>
+<td>判断该文件是否存在，并且是否为普通文件</td>
+</tr>
+<tr>
+<td>-L 文件</td>
+<td>判断该文件是否存在，并且是否为符号链接文件</td>
+</tr>
+<tr>
+<td>-p 文件</td>
+<td>判断该文件是否存在，并且是否为管道文件</td>
+</tr>
+<tr>
+<td>-s 文件</td>
+<td>判断该文件是否存在，并且是否为非空</td>
+</tr>
+<tr>
+<td>-S 文件</td>
+<td>判断该文件是否存在，并且是否为套接字文件</td>
+</tr>
+</tbody>
+</table>
+<p>两种判断格式</p>
+<ul>
+<li><code>test -e /root/install.log</code></li>
+<li><code>[ -e /root/install.log ]</code></li>
+<li><code>[ -e /root/install.log ] &amp;&amp; echo yes || echo no</code></li>
+</ul>
+<h3 id="按文件权限判断"><a href="#按文件权限判断" class="headerlink" title="按文件权限判断"></a>按文件权限判断</h3><table>
+<thead>
+<tr>
+<th>测试选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-r 文件</td>
+<td>判断该文件是否存在，并且是否该文件拥有读权限</td>
+</tr>
+<tr>
+<td>-w 文件</td>
+<td>判断该文件是否存在，并且是否该文件拥有写权限</td>
+</tr>
+<tr>
+<td>-x 文件</td>
+<td>判断该文件是否存在，并且是否该文件拥有执行权限</td>
+</tr>
+<tr>
+<td>-u 文件</td>
+<td>判断该文件是否存在，并且是否该文件拥有 SUID 权限</td>
+</tr>
+<tr>
+<td>-g 文件</td>
+<td>判断该文件是否存在，并且是否该文件拥有 SGID 权限</td>
+</tr>
+<tr>
+<td>-k 文件</td>
+<td>判断该文件是否存在，并且是否该文件拥有 SBit 权限</td>
+</tr>
+</tbody>
+</table>
+<h3 id="两个文件之间的比较"><a href="#两个文件之间的比较" class="headerlink" title="两个文件之间的比较"></a>两个文件之间的比较</h3><table>
+<thead>
+<tr>
+<th>测试选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>文件1 -nt 文件2</td>
+<td>判断文件 1 的修改时间是否比文件 2 的新</td>
+</tr>
+<tr>
+<td>文件1 -ot 文件2</td>
+<td>判断文件 1 的修改时间是否比文件 2 的旧</td>
+</tr>
+<tr>
+<td>文件1 -ef 文件2</td>
+<td>判断文件 1 是否和文件 2 的 Inode 号一致，可以理解为两个文件是否为同一个文件，这个判断用于硬链接判断是很好的方法</td>
+</tr>
+</tbody>
+</table>
+<p>例子<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> 创建一个硬链接</div><div class="line">ln /root/student.txt/tmp/stu.txt</div><div class="line"></div><div class="line"><span class="meta">#</span> 测试</div><div class="line">[/root/student.txt -ef /tmp/stu.txt] &amp;&amp; echo "yes" || echo "no"</div></pre></td></tr></table></figure></p>
+<h3 id="两个整数之间的比较"><a href="#两个整数之间的比较" class="headerlink" title="两个整数之间的比较"></a>两个整数之间的比较</h3><table>
+<thead>
+<tr>
+<th>测试选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>整数1 -eq 整数2</td>
+<td>判断整数 1 是否和整数 2 相等</td>
+</tr>
+<tr>
+<td>整数1 -ne 整数2</td>
+<td>判断整数 1 是否和整数 2 不相等</td>
+</tr>
+<tr>
+<td>整数1 -gt 整数2</td>
+<td>判断整数 1 是否大于整数 2</td>
+</tr>
+<tr>
+<td>整数1 -lt 整数2</td>
+<td>判断整数 1 是否小于整数 2</td>
+</tr>
+<tr>
+<td>整数1 -ge 整数2</td>
+<td>判断整数 1 是否大于等于整数 2</td>
+</tr>
+<tr>
+<td>整数1 -le 整数2</td>
+<td>判断整数 1 是否小于等于整数 2</td>
+</tr>
+</tbody>
+</table>
+<p>例子</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[ 23 -ge 22 ] &amp;&amp; echo "yes" || echo "no"</div><div class="line">[ 23 -le 22 ] &amp;&amp; echo "yes" || echo "no"</div></pre></td></tr></table></figure>
+<h3 id="字符串的判断"><a href="#字符串的判断" class="headerlink" title="字符串的判断"></a>字符串的判断</h3><table>
+<thead>
+<tr>
+<th>测试选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-z</td>
+<td>判断字符串是否为空</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>判断字符串是否为非空</td>
+</tr>
+<tr>
+<td>字符串1==字符串2</td>
+<td>判断字符串 1 是否和字符串 2 相等</td>
+</tr>
+<tr>
+<td>字符串1!=字符串2</td>
+<td>判断字符串 1 是否和字符串 2 不相等</td>
+</tr>
+</tbody>
+</table>
+<p>例子<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> 给 name 变量赋值</div><div class="line">name=fengj</div><div class="line"></div><div class="line"><span class="meta">#</span> 判断 name 变量是否为空</div><div class="line">[ -z "$name" ] &amp;&amp; echo "yes" || echo "no"</div><div class="line"></div><div class="line"><span class="meta">#</span> 给变量 aa 和变量 bb 赋值</div><div class="line">aa=11</div><div class="line">bb=22</div><div class="line"></div><div class="line"><span class="meta">#</span> 判断两个变量的值是否相等</div><div class="line">[ "$aa" == "$bb" ] &amp;&amp; echo yes || echo no</div></pre></td></tr></table></figure></p>
+<h3 id="多重条件判断"><a href="#多重条件判断" class="headerlink" title="多重条件判断"></a>多重条件判断</h3><table>
+<thead>
+<tr>
+<th>测试选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>判断1 -a 判断2</td>
+<td>逻辑与，判断 1 和判断 2 都成立，最终的结果才为真</td>
+</tr>
+<tr>
+<td>判断1 -o 判断2</td>
+<td>逻辑或，判断 1 和判断 2 有一个成立，最终的结果就为真</td>
+</tr>
+<tr>
+<td>! 判断</td>
+<td>逻辑非，使原始的判断式取反</td>
+</tr>
+</tbody>
+</table>
+<p>例子<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> 给变量 aa 赋值</div><div class="line">aa=11</div><div class="line"></div><div class="line"><span class="meta">#</span> 判断变量 aa 是否有值，同时判断变量 aa 是否大于 23</div><div class="line">[ -n "$aa" -a "$aa" -gt 23 ] &amp;&amp; echo "yes" || echo "no"</div></pre></td></tr></table></figure></p>
+<h2 id="Shell-单分支if语句"><a href="#Shell-单分支if语句" class="headerlink" title="Shell 单分支if语句"></a>Shell 单分支if语句</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>如何 “背” 程序</p>
+<ol>
+<li>抄写目标程序并能正确运行</li>
+<li>为目标程序补全注释</li>
+<li>删掉注释，为代码重新加注释</li>
+<li>删除代码，看注释写代码</li>
+<li>删除注释和代码，从头开始写</li>
+</ol>
+<h3 id="单分支-if-语句"><a href="#单分支-if-语句" class="headerlink" title="单分支 if 语句"></a>单分支 if 语句</h3><p>语法支持<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">if [ 条件判断式 ];then</div><div class="line">	程序</div><div class="line">fi</div><div class="line"></div><div class="line">if [ 条件判断式 ]</div><div class="line">	then</div><div class="line">	程序</div><div class="line">fi</div></pre></td></tr></table></figure></p>
+<p>例子1：判断登录的用户是否为 root<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>!/bin/bash</div><div class="line"></div><div class="line">test=$(env|grep "USER" |cut -d "=" -f2)</div><div class="line"></div><div class="line">if [ "$test" == root ]</div><div class="line">	then</div><div class="line">	echo "Current user is root."</div><div class="line">fi</div></pre></td></tr></table></figure></p>
+<h3 id="单分支-if-语句例子：判断分区使用率"><a href="#单分支-if-语句例子：判断分区使用率" class="headerlink" title="单分支 if 语句例子：判断分区使用率"></a>单分支 if 语句例子：判断分区使用率</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>!/bin/bash</div><div class="line"></div><div class="line"><span class="meta">#</span> 统计根分区使用率，把根分区使用率作为变量值赋予变量 rate</div><div class="line">rate=$(df -h | grep "/dev/disk1" | awk '&#123;print $5&#125;' | cut -d "%" -f 1)</div><div class="line"></div><div class="line">if [ $rate -ge 70 ]</div><div class="line">then</div><div class="line">	echo "Warning! /dev/disk1 is full!!"</div><div class="line">fi</div></pre></td></tr></table></figure>
+<h2 id="Shell-双分支if语句"><a href="#Shell-双分支if语句" class="headerlink" title="Shell 双分支if语句"></a>Shell 双分支if语句</h2><p>语法支持<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">if [ 条件判断式 ]</div><div class="line">	then</div><div class="line">		条件成立时，执行的程序</div><div class="line">	else</div><div class="line">		条件不成立时，执行的另一个程序</div><div class="line">fi</div></pre></td></tr></table></figure></p>
+<h3 id="双分支-if-语句例子：判断输入的是否是一个目录"><a href="#双分支-if-语句例子：判断输入的是否是一个目录" class="headerlink" title="双分支 if 语句例子：判断输入的是否是一个目录"></a>双分支 if 语句例子：判断输入的是否是一个目录</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>!/bin/bash</div><div class="line"></div><div class="line">read -t 30 -p "Please input a dir:" dir</div><div class="line"></div><div class="line">if [ -d "$dir" ]</div><div class="line">then</div><div class="line">    echo "is a Dir"</div><div class="line">else</div><div class="line">    echo "is not a Dir"</div><div class="line">fi</div></pre></td></tr></table></figure>
+<h3 id="双分支-if-语句例子：判断Apache服务是否启动"><a href="#双分支-if-语句例子：判断Apache服务是否启动" class="headerlink" title="双分支 if 语句例子：判断Apache服务是否启动"></a>双分支 if 语句例子：判断Apache服务是否启动</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>!/bin/bash</div><div class="line"></div><div class="line"><span class="meta">#</span> 列出所有进程，选取 httpd 进程，反选 grep</div><div class="line">test=$(ps aux | grep httpd | grep -v grep)</div><div class="line"></div><div class="line">if [ -n "$test" ]</div><div class="line">	then</div><div class="line">		echo "$(date) httpd is ok!" &gt;&gt; /tmp/autostart-acc.log</div><div class="line">	else</div><div class="line">		sudo apachectl restart  &amp;&gt; /dev/null</div><div class="line">		echo "$(date) restart httpd !!" &gt;&gt; /tmp/autostart-err.log</div><div class="line">fi</div></pre></td></tr></table></figure>
+<h2 id="Shell-多分支-if-语句"><a href="#Shell-多分支-if-语句" class="headerlink" title="Shell 多分支 if 语句"></a>Shell 多分支 if 语句</h2><p>语言支持：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">if [ 条件判断式 1 ]</div><div class="line">	then</div><div class="line">		条件成立 1 时，执行的程序</div><div class="line">elif [ 条件判断式 2 ]</div><div class="line">	then</div><div class="line">		条件成立 2 时，执行的程序</div><div class="line">else</div><div class="line">		条件不成立时，执行的另一个程序</div><div class="line">fi</div></pre></td></tr></table></figure></p>
+<h3 id="多分支-if-语句例子：判断用户输入的是什么文件"><a href="#多分支-if-语句例子：判断用户输入的是什么文件" class="headerlink" title="多分支 if 语句例子：判断用户输入的是什么文件"></a>多分支 if 语句例子：判断用户输入的是什么文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>!/bin/bash</div><div class="line"><span class="meta">#</span> 判断用户输出的是什么文件</div><div class="line"></div><div class="line"><span class="meta">#</span> 接受键盘的输入，并赋予变量file</div><div class="line">read -p "Please input a filename:" file</div><div class="line"></div><div class="line"><span class="meta">#</span> 判断变量是否为空</div><div class="line">if [ -z "$file" ]</div><div class="line">then</div><div class="line">	echo "Error,Please input a filename"</div><div class="line">	exit 1</div><div class="line"><span class="meta">#</span> 判断 file 的值是否存在</div><div class="line">elif [ ! -e "$file" ]</div><div class="line">then</div><div class="line">	echo "Your input is not a file!"</div><div class="line">	exit 2</div><div class="line"><span class="meta">#</span> 判断 file 的值是否为普通文件</div><div class="line">elif [ -f "$file" ]</div><div class="line">then</div><div class="line">	echo "$file is a regulare file!"</div><div class="line"><span class="meta">#</span> 判断 file 的值是否为目录文件</div><div class="line">then</div><div class="line">	echo "$file is a directory!"</div><div class="line">else</div><div class="line">	echo "$file is an other file!"</div></pre></td></tr></table></figure>
+<h2 id="Shell-多分支case语句"><a href="#Shell-多分支case语句" class="headerlink" title="Shell 多分支case语句"></a>Shell 多分支case语句</h2><p>语法支持<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">case $变量名 in</div><div class="line">	"值1")</div><div class="line">		如果变量的值等于值 1，则执行程序1</div><div class="line">	;;</div><div class="line">	"值2")</div><div class="line">		如果变量的值等于值 2，则执行程序2</div><div class="line">	;;</div><div class="line">	*)</div><div class="line">		如果变量的值都不是以上的值，则执行此程序</div><div class="line">	;;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之条件判断语句/" data-id="cjb1uvrww002rfl4bg2f41s5n" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-Linux-Shell-基础之运算符" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -168,7 +674,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之运算符/" data-id="cjb1rb78f000aig4bt865wwm2" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之运算符/" data-id="cjb1uvrv5000nfl4bbfrzt23y" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -356,7 +862,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之变量/" data-id="cjb1rb78j000fig4b0kn5nhdy" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/10/04/Linux-Shell-基础之变量/" data-id="cjb1uvrv0000lfl4b7bouy1e5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -401,7 +907,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/10/03/Linux-Shell-实战/" data-id="cjb1rb78r000hig4bgu8wloyo" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/10/03/Linux-Shell-实战/" data-id="cjb1uvrv9000pfl4bkquhwezr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -560,7 +1066,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/30/Linux-权限管理/" data-id="cjb1rb79j000xig4bgzcmndrj" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/30/Linux-权限管理/" data-id="cjb1uvrvh0012fl4bmnpfbfi0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -799,7 +1305,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/27/Linux-软件安装/" data-id="cjb1rb7a50015ig4beqo6xcqr" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/27/Linux-软件安装/" data-id="cjb1uvrvl0017fl4bv89ysub0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1052,7 +1558,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/26/Linux-定时任务/" data-id="cjb1rb79g000uig4b6p6cxgjm" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/26/Linux-定时任务/" data-id="cjb1uvrvj0014fl4b95qq4ae5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1433,7 +1939,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/24/Linux-系统管理/" data-id="cjb1rb7al001iig4bhxdby531" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/24/Linux-系统管理/" data-id="cjb1uvrvp001afl4b9iu82wyo" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -1602,625 +2108,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/23/Linux-服务管理/" data-id="cjb1rb797000lig4be3m9k3zm" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Linux-Shell-基础之正则表达式" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/22/Linux-Shell-基础之正则表达式/" class="article-date">
-  <time datetime="2016-09-22T12:56:54.000Z" itemprop="datePublished">2016-09-22</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/22/Linux-Shell-基础之正则表达式/">Linux-Shell-基础之正则表达式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="第1章-正则表达式"><a href="#第1章-正则表达式" class="headerlink" title="第1章 正则表达式"></a>第1章 正则表达式</h2><h3 id="1-1-什么是正则表达式"><a href="#1-1-什么是正则表达式" class="headerlink" title="1-1 什么是正则表达式"></a>1-1 什么是正则表达式</h3><p>正则表达式是用于描述字符排列和匹配模式的一种语法规则。它主要用于字符串的模式分割、匹配、查找及替换操作。</p>
-<h3 id="1-2-正则表达式与通配符"><a href="#1-2-正则表达式与通配符" class="headerlink" title="1-2 正则表达式与通配符"></a>1-2 正则表达式与通配符</h3><ul>
-<li>正则表达式用来在文件中匹配符合条件的字符串，正则是包含匹配。grep、awk、sed 等命令可以支持正则表达式（字符串）</li>
-<li>通配符用来匹配符合条件的文件名，通配符是完全匹配。ls、find、cp 这些命令不支持正则表达式，所以只能使用 Shell 自己的通配符来进行匹配了。（文件）<ul>
-<li>* 匹配任意内容</li>
-<li>? 匹配任意一个内容</li>
-<li>[] 匹配括号中的一个字符</li>
-</ul>
-</li>
-</ul>
-<h3 id="1-3-基础正则表达式"><a href="#1-3-基础正则表达式" class="headerlink" title="1-3 基础正则表达式"></a>1-3 基础正则表达式</h3><table>
-<thead>
-<tr>
-<th>元字符</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>*</td>
-<td>前一个字符匹配 0 次或任意多次</td>
-</tr>
-<tr>
-<td>.</td>
-<td>匹配除了换行符外任意一个字符</td>
-</tr>
-<tr>
-<td>^</td>
-<td>匹配行首，例如：^hello 会匹配以 hello 开头的行</td>
-</tr>
-<tr>
-<td>$</td>
-<td>匹配行尾，例如：hello&amp; 会匹配以 hello 结尾的行</td>
-</tr>
-<tr>
-<td>[]</td>
-<td>匹配中括号中指定的任意一个字符，只匹配一个字符。</td>
-</tr>
-<tr>
-<td>[^]</td>
-<td>匹配除中括号的字符以外的任意一个字符</td>
-</tr>
-<tr>
-<td>\</td>
-<td>转义符，用于取消讲特殊符号的含义取消</td>
-</tr>
-<tr>
-<td>\{n\}</td>
-<td>表示其前面的字符恰好出现 n 次</td>
-</tr>
-<tr>
-<td>\{n,\}</td>
-<td>表示其前面的字符出现不小于 n 次</td>
-</tr>
-<tr>
-<td>\{n,m\}</td>
-<td>表示其前面的字符至少出现 n 次，最多出现 m 次</td>
-</tr>
-</tbody>
-</table>
-<h2 id="第2章-字符截取命令"><a href="#第2章-字符截取命令" class="headerlink" title="第2章 字符截取命令"></a>第2章 字符截取命令</h2><ul>
-<li>cut 列提取字符串<ul>
-<li><code>cut [选项] 文件名</code><ul>
-<li>-f 列号：提取第几列<ul>
-<li><code>cut -f 2 student.txt</code> 截取第二列</li>
-<li><code>cut -f 2,4 student.txt</code> 截取第二、第四列</li>
-</ul>
-</li>
-<li>-d 分隔符：按照指定分隔符分割列<ul>
-<li><code>grep &quot;/bin/bash&quot; /etc/passwd |grep -v &quot;root&quot; | cut -f 1 -d &quot;:&quot;</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>printf 格式化输出命令<ul>
-<li><code>printf &#39;输出类型输出格式&#39; 输出内容</code><ul>
-<li>输出类型<ul>
-<li>%ns 输出字符串。n 是数字指代输出几个字符</li>
-<li>%ni 输出整数。n 是数字指代输出几个数字</li>
-<li>%m.nf 输出浮点数。m 和 n 是数字，指代输出的整数位数和小数位数。如 %8.2f 代表共输出 8 位数，其中 2 位是小数，6 位是整数。</li>
-</ul>
-</li>
-<li>输出格式<ul>
-<li>\a 输出警告声音</li>
-<li>\b 输出退格键</li>
-<li>\f 清除屏幕</li>
-<li>\n 换行</li>
-<li>\r 回车</li>
-<li>\t 水平输出 Tab 键</li>
-<li>\v 垂直输出 Tab 键</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>在 <code>awk</code> 命令的输出中支持 <code>print</code> 和 <code>printf</code> 命令</li>
-</ul>
-</li>
-<li>awk 字符截取命令<ul>
-<li><code>awk &#39;条件1{动作1}条件2{动作2}...&#39; 文件名</code></li>
-<li>条件<ul>
-<li>一般使用关系表达式作为条件</li>
-<li>x&gt;10 判断变量 x 是否大于 10</li>
-<li>x&gt;=10 大于等于</li>
-<li>x&lt;=10 小于等于</li>
-</ul>
-</li>
-<li>动作<ul>
-<li>格式化输出</li>
-<li>流程控制语句</li>
-</ul>
-</li>
-<li>例子<ul>
-<li><code>awk &#39;{printf $2 &quot;\t&quot; $4 &quot;\n&quot;}&#39; student.txt</code></li>
-<li><code>awk &#39;{print $2 &quot;\t&quot; $4 }&#39; student.txt</code></li>
-<li><code>df -h | awk &#39;{print $1 &quot;\t&quot; $3}&#39;</code><ul>
-<li><code>akw &#39;BEGIN{printf &quot;This is a transcript \n&quot;}{printf $2 &quot;\t&quot; $4 &quot;\n&quot;}&#39; student.txt</code></li>
-<li><code>cat /etc/passwd |grep &quot;/bin/bash&quot; | awk &#39;BEGIN{FS=&quot;:&quot;}{printf $1 &quot;\t&quot; $3 &quot;\n&quot;}&#39;</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>sed 字符替换命令<ul>
-<li>sed 是一个几乎包括在所有 UNIX 平台（包括 Linux）的轻量级编辑器。sed 主要是用来将数据进行选取、替换、删除、新增的命令</li>
-<li><code>sed [选项] &#39;[动作]&#39; 文件名</code><ul>
-<li>选项<ul>
-<li>-n 一般 sed 命令会把所有数据都输出到屏幕，如果加入此选择则只会把经过 sed 命令处理的行输出到屏幕</li>
-<li>-e 允许对输入数据应用多条 sed 命令编辑</li>
-<li>-i 用 sed 的修改结果直接修改读取数据的文件，而不是由屏幕输出</li>
-</ul>
-</li>
-<li>动作<ul>
-<li>a 追加，在当前行后添加一行或多行</li>
-<li>c 行替换，用 c 后面的字符串替换原数据行</li>
-<li>i 插入，在当期行前插入一行或多行</li>
-<li>d 删除，删除指定行</li>
-<li>p 打印，输出指定的行</li>
-<li>s 字符串替换，用一个字符串替换另外一个字符串，格式为 “行范围s/旧字符串g”</li>
-</ul>
-</li>
-<li>例子<ul>
-<li><code>sed &#39;2p&#39; student.txt</code> 查看文件的第二行</li>
-<li><code>sed &#39;2,4d&#39; student.txt</code> 表示删除【第2-4行】，但是不改变文件本身</li>
-<li><code>sed &#39;2a piaoliangdecxiaoguniang&#39; student.txt</code> 在第2行之后添加字符串，但是不改变字符串本身</li>
-<li><code>sed &#39;4c xxwmpg&#39; student.txt</code> 将第二行的整行替换为xxwmpg</li>
-<li><code>sed &#39;6s/70/100/g&#39; student.txt</code> 将第7行的所有70全部替换为100，如果不指定行的话会替换所有的指定字符串</li>
-<li><code>sed -e &#39;s/fengj//g&#39;;s/cang//g&#39; student.txt</code> 同时把fengj和cang替换为空</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="第3章-字符处理命令"><a href="#第3章-字符处理命令" class="headerlink" title="第3章 字符处理命令"></a>第3章 字符处理命令</h2><ul>
-<li>sort 排序命令<ul>
-<li><code>sort [选项] 文件名</code><ul>
-<li>选项<ul>
-<li>-f 忽略大小写</li>
-<li>-n 以数值型进行排序，默认使用字符串型排序</li>
-<li>-r 反向排序</li>
-<li>-t 指定分隔符，默认的分隔符是制表符</li>
-<li>-k n[,m] 按照指定的字段范围排序。从第 n 字段开始，m 字段结束（默认到行尾）</li>
-</ul>
-</li>
-<li>用法<ul>
-<li><code>sort /etc/passwd</code> 用户信息正向排序</li>
-<li><code>sort -r /etc/passwd</code> 用户信息反向排序</li>
-<li><code>sort -t &quot;:&quot; -k 3,3 /etc/passwd</code> 指定分隔符是 “:”，用第三字段开头，第三字段结尾排序，就是只用第三字段排序</li>
-<li><code>sort -n -t &quot;:&quot; -k 3,3 /etc/passwd</code> 作用同上，但把指定字符串排序改为数字排序</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>wc 统计命令<ul>
-<li><code>wc [选项] 文件名</code><ul>
-<li>选项：<ul>
-<li>-l 只统计行数</li>
-<li>-w 只统计单词数</li>
-<li>-m 只统计字符数</li>
-</ul>
-</li>
-<li>用法：<ul>
-<li><code>wc /etc/passwd</code></li>
-<li><code>wc -l /etc/passwd</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/22/Linux-Shell-基础之正则表达式/" data-id="cjb1rb79a000nig4bq0wkbx40" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Linux-网络基础" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/20/Linux-网络基础/" class="article-date">
-  <time datetime="2016-09-20T12:33:54.000Z" itemprop="datePublished">2016-09-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/20/Linux-网络基础/">Linux 网络基础</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="网络基础"><a href="#网络基础" class="headerlink" title="网络基础"></a>网络基础</h2><h3 id="ISO-OSI-七层模型简介"><a href="#ISO-OSI-七层模型简介" class="headerlink" title="ISO / OSI 七层模型简介"></a>ISO / OSI 七层模型简介</h3><ul>
-<li>ISO：国际标准化组织</li>
-<li>OSI：开放系统互联模型<ul>
-<li>OSI 的七层模型<ul>
-<li>应用层 - APDU<ul>
-<li>APDU 是应用协议数据单元</li>
-</ul>
-</li>
-<li>表示层 - PPDU<ul>
-<li>PPDU 是表示层协议数据单元</li>
-</ul>
-</li>
-<li>会话层 - SPDU<ul>
-<li>SPDU 是会话协议数据单元</li>
-</ul>
-</li>
-<li>传输层 - TPDU<ul>
-<li>TPDU 是传输协议数据单元</li>
-</ul>
-</li>
-<li>网络层 - 报文<ul>
-<li>IP 地址负责外网通信</li>
-</ul>
-</li>
-<li>数据链路层 - 帧<ul>
-<li>MAC 地址负责局域网通信</li>
-</ul>
-</li>
-<li>物理层 - 比特</li>
-</ul>
-</li>
-<li>数据发送时候，从上层向下层传递；数据接收时候，从下层向上层传递。</li>
-</ul>
-</li>
-</ul>
-<h3 id="ISO-OSI-七层模型详解"><a href="#ISO-OSI-七层模型详解" class="headerlink" title="ISO / OSI 七层模型详解"></a>ISO / OSI 七层模型详解</h3><ul>
-<li>应用层 - APDU<ul>
-<li>用户接口</li>
-</ul>
-</li>
-<li>表示层 - PPDU<ul>
-<li>数据的表现形式、特定功能的实现如-加密</li>
-</ul>
-</li>
-<li>会话层 - SPDU<ul>
-<li>对应用会话的管理、同步</li>
-</ul>
-</li>
-<li>传输层 - TPDU<ul>
-<li>可靠与不可靠的传输、传输前的错误检测、流控</li>
-</ul>
-</li>
-<li>网络层 - 报文<ul>
-<li>提供逻辑地址、选路</li>
-</ul>
-</li>
-<li>数据链路层 - 帧<ul>
-<li>城帧、用 MAC 地址访问媒介、错误检测与修正</li>
-</ul>
-</li>
-<li>物理层 - 比特<ul>
-<li>设备之间的比特流的传输、物理接口、电器特征等</li>
-</ul>
-</li>
-</ul>
-<h3 id="TCP-IP-四层模型"><a href="#TCP-IP-四层模型" class="headerlink" title="TCP / IP 四层模型"></a>TCP / IP 四层模型</h3><ul>
-<li>TCP / IP 四层模型<ul>
-<li>应用层 （对应 OSI 模型的应用层、表示层、会话层）<ul>
-<li>应用层对应于 OSI 参考模型的应用层、表示层、会话层，为用户提供所需要的各种服务，例如：FTP、Telnet、DNS、SMTP 等</li>
-</ul>
-</li>
-<li>传输层 （对应 OSI 模型的传输层）<ul>
-<li>传输层对应于 OSI 模型的传输层，为应用层实体提供端到端的通信功能，保证了数据包的顺序传送及数据的完整性。该层定义了两个主要的协议：传输控制协议（TCP）和用户数据协议（UDP）</li>
-</ul>
-</li>
-<li>网际互联层（对应 OSI 模型的网络层）<ul>
-<li>网际互联对应于 OSI 模型的网络层，主要解决主机到主机的通信问题。它所包含的协议涉及数据包在整个网络上的逻辑传输。该层有三个主要协议：网际协议（IP）、互联网组管理协议（IGMP）和互联网控制报文协议（ICMP）。</li>
-</ul>
-</li>
-<li>网络接口层（对应 OSI 模型的数据链路层、物理层）<ul>
-<li>网络接口层与 OSI 模型中的物理层和数据链路层相对应。它负责监视数据在主机和网络之间的交换。事实上，TCP /IP 本身并未定义该层的协议，而由参与互连的各网络使用自己的物理层和数据链路层协议，然后与 TCP / IP 的网络接口层进行连接。地址解析协议（ARP）工作在此层，即 OSI 参考模型的数据链路层。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>TCP / IP 三次握手（两军问题）</p>
-<p>数据封装过程</p>
-<table>
-<thead>
-<tr>
-<th>应用数据</th>
-<th>字节流（数据）</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>应用层</td>
-<td>FTP + 数据</td>
-</tr>
-<tr>
-<td>传输层</td>
-<td>TCP 头 + FTP + 数据</td>
-</tr>
-<tr>
-<td>网络层</td>
-<td>IP 头 + TCP 头 + FTP + 数据</td>
-</tr>
-<tr>
-<td>数据链路层</td>
-<td>以太帧头 + (IP 头 + TCP 头 + FTP + 数据) = IP 数据报</td>
-</tr>
-<tr>
-<td>最后</td>
-<td>以太帧头 + 目的地址 + 源地址 + 包类型 + 包数据（IP 数据报） + CRC</td>
-</tr>
-</tbody>
-</table>
-<h3 id="IP地址详解"><a href="#IP地址详解" class="headerlink" title="IP地址详解"></a>IP地址详解</h3><ul>
-<li>IP 包头<ul>
-<li>第一行<ul>
-<li>版本（4）</li>
-<li>头部长度（4）</li>
-<li>优先级和服务类型（8）</li>
-<li>总长度（16）</li>
-</ul>
-</li>
-<li>第二行<ul>
-<li>标识（16）</li>
-<li>标志（3）</li>
-<li>片偏移（13）</li>
-</ul>
-</li>
-<li>第三行<ul>
-<li>生存时间（8）</li>
-<li>协议（8）</li>
-<li>头部校验和（16）</li>
-</ul>
-</li>
-<li>第四行<ul>
-<li>源 IP 地址（32）</li>
-</ul>
-</li>
-<li>第五行<ul>
-<li>目的 IP 地址（32）</li>
-</ul>
-</li>
-<li>第六行<ul>
-<li>选项</li>
-</ul>
-</li>
-<li>第七行<ul>
-<li>数据</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>IP 地址分类</p>
-<table>
-<thead>
-<tr>
-<th>网络类别</th>
-<th>最大网络数</th>
-<th>IP 地址范围</th>
-<th>最大主机数</th>
-<th>私有 IP 地址范围</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>A</td>
-<td>126</td>
-<td>1.0.0.0 – 126.255.255.255</td>
-<td>2^24-2</td>
-<td>10.0.0.0 – 10.255.255.255</td>
-</tr>
-<tr>
-<td>B</td>
-<td>16384</td>
-<td>128.0.0.0 – 191.255.255.255</td>
-<td>2^16-2</td>
-<td>172.16.0.0 – 172.31.255.255</td>
-</tr>
-<tr>
-<td>C</td>
-<td>2098152</td>
-<td>192.0.0.0 – 223.255.255.255</td>
-<td>2^8-2</td>
-<td>192.168.0.0 – 192.168.255.255</td>
-</tr>
-</tbody>
-</table>
-<h3 id="子网掩码"><a href="#子网掩码" class="headerlink" title="子网掩码"></a>子网掩码</h3><h3 id="网关作用"><a href="#网关作用" class="headerlink" title="网关作用"></a>网关作用</h3><ul>
-<li>网关（Gateway）又称为网间连接器、协议转换器</li>
-<li>网关在网络层以上实现网络互连，是最复杂的网络互连设备，仅用于两个高层协议不同的网络互连</li>
-<li>网关既可以用于广域网互连，也可以用于局域网互连</li>
-<li>网关是一种充当转换重任的服务器或路由器</li>
-</ul>
-<h3 id="端口作用"><a href="#端口作用" class="headerlink" title="端口作用"></a>端口作用</h3><ul>
-<li>TCP 协议包头<ul>
-<li>第一行<ul>
-<li>源端口（16）</li>
-<li>目的端口（16）</li>
-</ul>
-</li>
-<li>第二行<ul>
-<li>序列号（32）</li>
-</ul>
-</li>
-<li>第三行<ul>
-<li>确认号（32）</li>
-</ul>
-</li>
-<li>第四行<ul>
-<li>数据偏移（4）</li>
-<li>保留（6）</li>
-<li>标志（6）</li>
-<li>窗口（16）</li>
-</ul>
-</li>
-<li>第五行<ul>
-<li>校验和（16）</li>
-<li>紧急指针（16）</li>
-</ul>
-</li>
-<li>第六行<ul>
-<li>选项</li>
-</ul>
-</li>
-<li>第七行<ul>
-<li>数据</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>UDP 协议包头<ul>
-<li>第一行<ul>
-<li>源端口（16）</li>
-<li>目的端口（16）</li>
-</ul>
-</li>
-<li>第二行<ul>
-<li>长度（16）</li>
-<li>校验和（16）</li>
-</ul>
-</li>
-<li>第三行<ul>
-<li>数据</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>常见端口号</p>
-<ul>
-<li>FTP（文件传输协议）：20 21</li>
-<li>SSH（安全 Shell 协议）：22</li>
-<li>TELNET（远程登录协议）：23</li>
-<li>DNS（域名系统）：53</li>
-<li>HTTP（超文本传输协议）：80</li>
-<li>SMTP（简单邮件传输协议）：25</li>
-<li>POP3（邮局协议 3 代）：110</li>
-</ul>
-<p>查看本机启用的端口</p>
-<ul>
-<li>netstat -an<ul>
-<li>-a 查看所有连接和监听端口</li>
-<li>-n 显示 IP 地址和端口号，而不显示域名和服务名</li>
-</ul>
-</li>
-</ul>
-<h3 id="DNS-作用"><a href="#DNS-作用" class="headerlink" title="DNS 作用"></a>DNS 作用</h3><ul>
-<li>DNS 的作用：将域名解析为 IP 地址<ul>
-<li>客户机向 DNS 服务器发送域名查询请求</li>
-<li>DNS 服务器告知客户机 Web 服务器的 IP 地址</li>
-<li>客户机与 Web 服务器通信</li>
-</ul>
-</li>
-<li>DNS 的查询类型<ul>
-<li>从查询方式上分<ul>
-<li>递归查询<ul>
-<li>要么做出查询成功响应，要么做出查询失败的响应，一般客户机和服务器之间属于递归查询，即当客户机向 DNS 服务器发出请求后，若 DNS 服务器本身不能解析，则会向另外的 DNS 服务器发出查询请求，得到结果后转交给客户机。</li>
-</ul>
-</li>
-<li>迭代查询<ul>
-<li>服务器收到一次迭代查询回复一次结果，这个结果不一定是目标 IP 与域名的映射关系，也可以是其他 DNS 服务器的地址</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>从查询内容上分<ul>
-<li>正向查询由域名查找 IP 地址</li>
-<li>反向查询由 IP 地址查找域名</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="Linux-网络配置"><a href="#Linux-网络配置" class="headerlink" title="Linux 网络配置"></a>Linux 网络配置</h2><h3 id="IP-地址配置"><a href="#IP-地址配置" class="headerlink" title="IP 地址配置"></a>IP 地址配置</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> 查看与配置网络状态命令</div><div class="line">ifconfig</div><div class="line"></div><div class="line"><span class="meta">#</span> 临时设置 eth0 网卡的 IP 地址与子网掩码</div><div class="line">ifconfig eth0 192.168.0.200 netmask 255.255.255.0</div><div class="line"></div><div class="line"><span class="meta">#</span> setup 图形界面（红帽专用）</div><div class="line">setup</div></pre></td></tr></table></figure>
-<h3 id="使用文件配置-IP-地址"><a href="#使用文件配置-IP-地址" class="headerlink" title="使用文件配置 IP 地址"></a>使用文件配置 IP 地址</h3><p>网卡信息文件<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/sysconfig/network-scripts/ifcfg-eth0</div></pre></td></tr></table></figure></p>
-<p>主机名文件<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/sysconfig/network</div></pre></td></tr></table></figure></p>
-<h2 id="Linux-网络命令"><a href="#Linux-网络命令" class="headerlink" title="Linux 网络命令"></a>Linux 网络命令</h2><h3 id="网络环境查看命令"><a href="#网络环境查看命令" class="headerlink" title="网络环境查看命令"></a>网络环境查看命令</h3><ul>
-<li><code>ifconfig</code> 查看与配置网络状态命令<ul>
-<li>只能看到 IP 和子网掩码，看不到网关和 DNS</li>
-</ul>
-</li>
-<li><code>ifdown 网卡设备名称</code> 禁用指定网卡设备</li>
-<li><code>ifup 网卡设置名称</code> 启用指定网卡设备</li>
-<li><code>netstat 选项</code><ul>
-<li>-t 列出 TCP 协议端口</li>
-<li>-u 列出 UDP 协议端口</li>
-<li>-n 不使用域名与服务名，而是用 IP 地址和端口号</li>
-<li>-l 仅列出在监听状态网络服务</li>
-<li>-a 列出所有的网络连接</li>
-</ul>
-</li>
-<li><code>route -n</code> 查看路由列表</li>
-<li><code>route add default gw 192.168.1.1</code> 临时设定网关</li>
-<li><code>nslookup [主机名或 IP]</code> 进行域名与 IP 地址解析</li>
-<li><code>nslookup &gt;server</code> 查看本机 DNS 服务器</li>
-</ul>
-<h3 id="网络测试命令"><a href="#网络测试命令" class="headerlink" title="网络测试命令"></a>网络测试命令</h3><ul>
-<li><code>ping [选项] [IP 或域名]</code> 探测指定 IP 或域名的网络状况<ul>
-<li>-c 次数 指定 ping 包的次数</li>
-</ul>
-</li>
-<li><code>telnet [域名或 IP] [端口]</code> 远程管理与端口探测命令</li>
-<li><code>wget URL</code> 下载命令</li>
-<li><code>tcpdump -i eth0 -nnX port 21</code><ul>
-<li>-i 指定网卡接口</li>
-<li>-X 以十六进制和 ASCII 码显示数据包内容</li>
-<li>-nn 将数据包中的域名与服务转为 IP 和端口</li>
-<li>port 指定监听的端口</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/09/20/Linux-网络基础/" data-id="cjb1rb7a20012ig4bz4ya9zoy" class="article-share-link">Partager</a>
+      <a data-url="http://luisedware.github.io/2016/09/23/Linux-服务管理/" data-id="cjb1uvrvf000zfl4bhgo5nxyc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -2243,7 +2131,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -2253,7 +2141,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
     </div>
@@ -2263,7 +2151,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Programming-Language/" style="font-size: 11.43px;">Programming Language</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a> <a href="/tags/vue-js/" style="font-size: 10px;">vue.js</a>
     </div>
@@ -2274,7 +2162,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
   </div>
 
@@ -2282,9 +2170,17 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/12/11/学习算法设计/">学习算法设计</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/11/学习数据结构/">学习数据结构</a>
+          </li>
         
           <li>
             <a href="/2017/11/16/PHP-秒杀系统/">PHP 秒杀系统</a>
@@ -2296,14 +2192,6 @@
         
           <li>
             <a href="/2017/11/09/Web-API-的设计与开发/">Web API 的设计与开发</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/05/日常开发常用命令/">日常开发常用命令</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/01/刻意练习/">刻意练习</a>
           </li>
         
       </ul>
@@ -2319,7 +2207,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Luis Edware<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
