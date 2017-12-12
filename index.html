@@ -92,7 +92,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/12/11/学习算法设计/" data-id="cjb32r9470082hq4bzfwhw6iu" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/12/11/学习算法设计/" data-id="cjb35beoi007olo4bdc94u631" class="article-share-link">Share</a>
       
       
     </footer>
@@ -128,7 +128,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/12/11/学习数据结构/" data-id="cjb32r9460081hq4ba66itl9g" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/12/11/学习数据结构/" data-id="cjb35beoh007mlo4b9dzyupv9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -336,7 +336,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/16/PHP-秒杀系统/" data-id="cjb32r91j0027hq4bz82417vz" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/16/PHP-秒杀系统/" data-id="cjb35bem10026lo4b6v7zmtzt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -1806,11 +1806,39 @@
 <p>图片地图：图片地图允许你在一个图片上关联多个 URL。目标 URL 的选择取决于用户单击了图片上的哪个位置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;img usemap=&quot;#map1&quot; border=&quot;0&quot; src=&quot;example.png&quot; width=&quot;171&quot; height=&quot;31&quot;&gt;</div><div class="line">&lt;map name=&quot;map1&quot;&gt;</div><div class="line">&lt;area shape=&quot;rect&quot; coords=&quot;0,0,31,31&quot; href=&quot;&quot; alt=&quot;&quot;&gt;</div><div class="line">&lt;area shape=&quot;rect&quot; coords=&quot;36,0,66,31&quot; href=&quot;&quot; alt=&quot;&quot;&gt;</div><div class="line">&lt;area shape=&quot;rect&quot; coords=&quot;71,0,101,31&quot; href=&quot;&quot; alt=&quot;&quot;&gt;</div><div class="line">&lt;area shape=&quot;rect&quot; coords=&quot;106,0,136,31&quot; href=&quot;&quot; alt=&quot;&quot;&gt;</div><div class="line">&lt;area shape=&quot;rect&quot; coords=&quot;141,0,171,31&quot; href=&quot;&quot; alt=&quot;&quot;&gt;</div><div class="line">&lt;/map&gt;</div></pre></td></tr></table></figure></p>
 <p>CSS Sprites，中文翻译为 CSS 精灵，通过使用合并图片，通过指定 css 的 background-image 和 background-position 来显示元素。</p>
 <p>图片地图与 CSS Sprites 的响应时间基本上相同，但比使用各自独立图片的方式要快 50 % 以上。</p>
+<h4 id="浏览器缓存和数据压缩"><a href="#浏览器缓存和数据压缩" class="headerlink" title="浏览器缓存和数据压缩"></a>浏览器缓存和数据压缩</h4><ul>
+<li>HTTP 缓存机制</li>
+<li>Nginx 配置缓存策略</li>
+<li>前端代码和资源的压缩</li>
+</ul>
+<p><strong>HTTP 缓存分类</strong></p>
+<p>缓存不仅仅只能做数据库缓存，还能做浏览器缓存。HTTP 缓存模型中，如果请求成功会有三种情况：</p>
+<p>第一种情况：200 from cache: 本地缓存。直接从本地缓存中获取响应，最快速，最省流量，因为根本没有向服务器发送请求。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"># 相关 Header</div><div class="line">Pragma：HTTP 1.0 时代的遗留产物，该字段被设置为 no-cache 时，会告知浏览器禁用本地缓存，即每次都向服务器发送请求。</div><div class="line"></div><div class="line">Expires：HTTP 1.0 用来启用本地缓存的字段。使用格林威治时间。当浏览器与服务器的时间无法保持一致，如果时间差距过大，就会影响缓存结果。</div><div class="line"></div><div class="line">Cache-Control：HTTP 1.1 针对 Expires 时间不一致的解决方案，运用 Cache-Control 告知浏览器缓存过期的时间间隔而不是时刻，即使具体时间不一致，也不影响缓存的管理。</div><div class="line">Cache-Control 的参数如下：</div><div class="line">no-store：禁止浏览器缓存响应。</div><div class="line">no-cache：不允许直接使用本地缓存，先发起请求和服务器协商，协商缓存。</div><div class="line">max-age=delta-seconds：告知浏览器该响应本地缓存有效的最长期限，以秒为单位。</div><div class="line"></div><div class="line">优先级：Pragma &gt; Cache-Control &gt; Expires</div></pre></td></tr></table></figure></p>
+<p>第二种情况：304 Not Modified：协商缓存。浏览器在本地没有命中的情况下，请求头中发送一定的校验数据到服务端，如果服务端数据没有改变，浏览器从本地缓存响应，返回 304。特点：快速，发送的数据很少，只返回一些基本的响应头信息，数据量很小，不发送实际响应体。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># 相关 Header</div><div class="line">Last-Modified：通知浏览器资源的最后修改时间。使用格林威治时间。</div><div class="line"></div><div class="line">If-Modified-Since：得到资源的最后修改时间后，会将这个信息通过 If-Modified-Since 提交到服务器做检查，如果没有修改，返回 304 状态码。</div><div class="line"></div><div class="line">ETag：HTTP 1.1 推出，文件的指纹标识符，如果文件内容修改，指纹会改变。</div><div class="line"></div><div class="line">If-None-Match：本地缓存失效，会携带此值去请求服务端，服务端判断该资源是否改变，如果没有改变，直接使用本地缓存，返回 304。</div></pre></td></tr></table></figure></p>
+<p>第三种情况：200 OK：以上两种缓存全部失败，服务器返回完整响应。没有用到缓存，相对最慢。</p>
+<p><strong>缓存策略的选择</strong></p>
+<p>适合缓存的内容：</p>
+<ul>
+<li>不变的图像：如 Logo，图标等，适合做本地缓存。</li>
+<li>js、css 等静态文件，适合做本地缓存。</li>
+<li>可下载的内容，媒体文件，如 mp3、flash、swf，适合做本地缓存。</li>
+<li>经常改变的文件如 HTML 文件，适合做协商缓存。</li>
+<li>经常替换的图片如网站首页轮播图，适合做协商缓存。</li>
+<li>经常修改的js、css 文件，适合做协商缓存，js、css 文件的加载可以加入文件的签名来拒绝缓存。。</li>
+</ul>
+<p>不适合缓存的内容：</p>
+<ul>
+<li>用户隐私等敏感数据</li>
+<li>经常改变的 api 数据接口</li>
+</ul>
+<p><strong>Nginx 配置缓存策略</strong></p>
+<p>PHP 实现缓存策略<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$since = $_SERVER[<span class="string">'HTTP_IF_MODIFIED_SINCE'</span>];</div><div class="line"></div><div class="line">$lifetime = <span class="number">3600</span>;</div><div class="line"></div><div class="line"><span class="keyword">if</span>(strtotime($since) + $lifetime &gt; time())&#123;</div><div class="line">	header(<span class="string">'HTTP/1.1 304 Not Modified'</span>);</div><div class="line">	<span class="keyword">exit</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">header(<span class="string">"Last-Modified: "</span>. gmdate(<span class="string">'D, d M Y H:i:s'</span>, time()).<span class="string">' GMT'</span>);</div><div class="line"></div><div class="line"><span class="keyword">echo</span> time();</div></pre></td></tr></table></figure></p>
+<p>Nginx 配置缓存策略<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># add_header 指令：添加状态码为 2XX 和 3XX 响应头信息。</span></div><div class="line"><span class="attribute">add_header</span> name value [always];</div><div class="line"></div><div class="line"><span class="comment"># 可以设置 Pragma/Expires/Cache-Control 可以继承。</span></div><div class="line"></div><div class="line"><span class="comment"># 本地缓存配置，expires 指令，通知浏览器过期时长。</span></div><div class="line"><span class="comment"># expires time;为负值时表示 Cache-Control:no-cache；</span></div><div class="line"><span class="comment"># 当为正或者 0 时，就表示 Cache-Control:max-age=指定时间。</span></div><div class="line"><span class="attribute">location</span> <span class="regexp">~ .*\.(js|css)?$</span></div><div class="line"><span class="regexp"></span>&#123;</div><div class="line">	<span class="attribute">expires</span> <span class="number">12h</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjb32r926003hhq4bas1vl824" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjb35bem4002clo4b8uogkp0r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -2339,7 +2367,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/09/Web-API-的设计与开发/" data-id="cjb32r91s002lhq4bkbtmfee0" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/09/Web-API-的设计与开发/" data-id="cjb35beme002nlo4b46xd682q" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -2433,7 +2461,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/05/日常开发常用命令/" data-id="cjb32r94b0087hq4bwdgbwsft" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/05/日常开发常用命令/" data-id="cjb35beok007ulo4bs35n12dl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -2522,7 +2550,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/01/刻意练习/" data-id="cjb32r93h006mhq4bh4ub49jx" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/01/刻意练习/" data-id="cjb35beo2006jlo4bquyfrrg0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -2734,7 +2762,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/10/24/高性能的-PHP-API-接口开发/" data-id="cjb32r94g008hhq4b55kn2kw6" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/10/24/高性能的-PHP-API-接口开发/" data-id="cjb35beos008flo4by62m57a3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -2791,7 +2819,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/09/04/Vue-js-2-X-实践/" data-id="cjb32r91q002ghq4b6ofb9a33" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/09/04/Vue-js-2-X-实践/" data-id="cjb35bem6002glo4bskd332th" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
@@ -3556,7 +3584,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/19/学习-PHP/" data-id="cjb32r93u007jhq4bynyxphvp" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/07/19/学习-PHP/" data-id="cjb35beob0079lo4b2mfrz6rn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li></ul>
