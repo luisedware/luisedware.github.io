@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="七月十五九月初七">
 <meta property="og:description" content="PHP 招聘要求总结硬性要求 熟悉常用的算法和数据结构 熟悉(精通) PHP 熟悉 PHP 框架：Laravel、Yii 熟悉 HTML 5 + CSS 3 熟悉 CSS 框架：Bootstrap 熟悉(精通) JavaScript 熟悉 JavaScrip 框架：Vue.js、React.js 熟悉 设计模式、熟悉 MVC 模式 熟悉 HTTP、HTTP 2、TCP、UDP 等标准协议 熟悉 A">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-12-12T04:47:18.777Z">
+<meta property="og:updated_time" content="2017-12-12T07:30:30.222Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP 面试考察点">
 <meta name="twitter:description" content="PHP 招聘要求总结硬性要求 熟悉常用的算法和数据结构 熟悉(精通) PHP 熟悉 PHP 框架：Laravel、Yii 熟悉 HTML 5 + CSS 3 熟悉 CSS 框架：Bootstrap 熟悉(精通) JavaScript 熟悉 JavaScrip 框架：Vue.js、React.js 熟悉 设计模式、熟悉 MVC 模式 熟悉 HTTP、HTTP 2、TCP、UDP 等标准协议 熟悉 A">
@@ -1553,12 +1553,91 @@
 </ul>
 <p><strong>Nginx 配置缓存策略</strong></p>
 <p>PHP 实现缓存策略<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$since = $_SERVER[<span class="string">'HTTP_IF_MODIFIED_SINCE'</span>];</div><div class="line"></div><div class="line">$lifetime = <span class="number">3600</span>;</div><div class="line"></div><div class="line"><span class="keyword">if</span>(strtotime($since) + $lifetime &gt; time())&#123;</div><div class="line">	header(<span class="string">'HTTP/1.1 304 Not Modified'</span>);</div><div class="line">	<span class="keyword">exit</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">header(<span class="string">"Last-Modified: "</span>. gmdate(<span class="string">'D, d M Y H:i:s'</span>, time()).<span class="string">' GMT'</span>);</div><div class="line"></div><div class="line"><span class="keyword">echo</span> time();</div></pre></td></tr></table></figure></p>
-<p>Nginx 配置缓存策略<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># add_header 指令：添加状态码为 2XX 和 3XX 响应头信息。</span></div><div class="line"><span class="attribute">add_header</span> name value [always];</div><div class="line"></div><div class="line"><span class="comment"># 可以设置 Pragma/Expires/Cache-Control 可以继承。</span></div><div class="line"></div><div class="line"><span class="comment"># 本地缓存配置，expires 指令，通知浏览器过期时长。</span></div><div class="line"><span class="comment"># expires time;为负值时表示 Cache-Control:no-cache；</span></div><div class="line"><span class="comment"># 当为正或者 0 时，就表示 Cache-Control:max-age=指定时间。</span></div><div class="line"><span class="attribute">location</span> <span class="regexp">~ .*\.(js|css)?$</span></div><div class="line"><span class="regexp"></span>&#123;</div><div class="line">	<span class="attribute">expires</span> <span class="number">12h</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Nginx 配置缓存策略<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># add_header 指令：添加状态码为 2XX 和 3XX 响应头信息。</span></div><div class="line"><span class="attribute">add_header</span> name value [always];</div><div class="line"></div><div class="line"><span class="comment"># 可以设置 Pragma/Expires/Cache-Control 可以继承。</span></div><div class="line"></div><div class="line"><span class="comment"># 本地缓存配置，expires 指令，通知浏览器过期时长。</span></div><div class="line"><span class="comment"># expires time;为负值时表示 Cache-Control:no-cache；</span></div><div class="line"><span class="comment"># 当为正或者 0 时，就表示 Cache-Control:max-age=指定时间。</span></div><div class="line"><span class="attribute">location</span> <span class="regexp">~ .*\.(js|css)?$</span></div><div class="line"><span class="regexp"></span>&#123;</div><div class="line">	<span class="attribute">expires</span> <span class="number">12h</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment"># 协商缓存相关配置 Etag 指令：指定签名。etag on | off ，默认是 on</span></div><div class="line"><span class="attribute">location</span> <span class="regexp">~ .*\.(gif|jpg|jpeg|png|bmp|swf)$</span></div><div class="line"><span class="regexp"></span>&#123;</div><div class="line">	<span class="attribute">etag</span> <span class="literal">on</span>;</div><div class="line">	<span class="attribute">add_header</span> cache-control max-age=<span class="number">3600</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>前端代码和资源的压缩</strong></p>
+<p>优势：让资源文件更小，加快文件在网络中的传输，让网页更快的展现，降低带宽和流量开销。</p>
+<p>压缩方式</p>
+<ul>
+<li>JavaScript 文件压缩，一般是去掉多余的空格和回车、替换长变量名、简化一些代码写法等。</li>
+<li>CSS 文件压缩，一般是去掉多余的空格和回车、注释并且优化一些 CSS 语义规则等。</li>
+<li>可以使用 Gzip 压缩 HTML 代码。</li>
+<li>图片压缩</li>
+</ul>
+<p>Gzip 压缩 Nginx 配置</p>
+<ul>
+<li>gzip on | off; # 是否开启 gzip</li>
+<li>gzip_buffers 32 4K | 16 8K # 缓冲（在内存中缓冲几块？每块多大）</li>
+<li>gzip_comp_level [1-9] #推荐 6，压缩级别越高，压的越小，越浪费 CPU 计算资源。</li>
+<li>gzip_disable #正则匹配 UA，什么样的 URI 不进行 gzip</li>
+<li>gzip_min_length 200 # 开始压缩的最小长度</li>
+<li>gzip_http_version 1.0|1.1 # 开始压缩的 http 协议版本</li>
+<li>gzip_proxied # 设置请求者代理服务器，该如何缓存内容</li>
+<li>gzip_types text/plain application/xml # 对哪些类型的文件进行压缩</li>
+<li>gzip_vary on | off # 是否传输 gzip 压缩标志</li>
+</ul>
+<h4 id="CDN-加速"><a href="#CDN-加速" class="headerlink" title="CDN 加速"></a>CDN 加速</h4><p><strong>什么是 CDN</strong></p>
+<p>CDN 的全称是 Content Delivery Network，即内容分发网络。尽可能避开互联网上有可能影响数据传输速度和稳定性的瓶颈和环节，使内容传输的更快、更稳定。</p>
+<p>在网络各处放置节点服务器所构成的在现有的互联网基础之上的一层智能虚拟网络。相当于真实服务器的一个镜像。</p>
+<p>CDN 系统能够实时地根据网络流量和各节点的连接、负载状况以及到用户的距离和响应时间等综合信息将用户的请求重新导向离用户最近的服务节点上。</p>
+<p><strong>CDN 的使用优势</strong></p>
+<ul>
+<li>本地 Cache 加速，提高了企业站点（尤其含有大量图片和静态页面站点）的访问速度。</li>
+<li>跨运营商的网络加速，保证不同网络的用户都得到良好的访问质量。</li>
+<li>远程访问的用户可以根据 DNS 负载均衡技术智能自动选择 Cache 服务器。</li>
+<li>自动生成服务器的远程镜像 Cache 服务器，远程用户访问时，从 Cache 服务器上读取数据，减少远程访问的带宽、分担网络流量、减轻原站点 WEB 服务器压力。</li>
+<li>广泛分布的 CDN 节点加上节点之前的智能冗余机制，可以有效地预防黑客入侵。</li>
+</ul>
+<p><strong>CDN 的工作原理</strong></p>
+<p>传统访问：用户在浏览器输入域名发起请求 –》 解析域名获取服务器 IP 地址 –》 根据 IP 地址找到对应的服务器 –》 服务器响应并返回数据。</p>
+<p>使用 CDN 访问：用户发起请求 –》 智能 DNS 的解析（根据 IP 判断地理位置、接入网类型、选择路由最短和负载最轻的服务器) –》 取得缓存服务器 IP –》把内容返回给用户（如果缓存中有）–》向源站发起请求–》将结果返回给用户–》将结果存入缓存服务器。</p>
+<p><strong>CDN 的适用场景</strong></p>
+<ul>
+<li>站点或者应用中大量静态资源的加速分发，例如：CSS，JS，图片和 HTML。</li>
+<li>文件下载</li>
+<li>直播网站</li>
+</ul>
+<p><strong>CDN 的功能实现</strong></p>
+<ul>
+<li>可用 LVS 做 4 层负载均衡。</li>
+<li>可以 Nginx、Apache 做 7 层负载均衡和 Cache。</li>
+</ul>
+<h4 id="独立图片服务器的部署"><a href="#独立图片服务器的部署" class="headerlink" title="独立图片服务器的部署"></a>独立图片服务器的部署</h4><p><strong>独立的必要性</strong></p>
+<p>分担 Web 服务器的 I/O 负载，将耗费资源的图片服务分离出来，提高服务器的性能和稳定。</p>
+<p>能够专门对图片服务器进行优化，为图片服务设置有针对性的缓存方案，减少带宽成本，提高访问速度。</p>
+<p>提高网站的可扩展性，通过增加图片服务器，提交图片吞吐能力。</p>
+<p><strong>采用独立域名</strong></p>
+<p>原因：同一域名下浏览器的并发连接数有限制，为了突破浏览器连接数的限制。由于 cookie 的原因，对缓存不利。大部分 Web Cache 都只缓存不带 cookie 的请求，导致每次的图片请求都不能命中 Cache。</p>
+<p><strong>独立后的问题</strong></p>
+<p>如何进行图片上传和图片同步</p>
+<ul>
+<li>NFS 共享操作</li>
+<li>利用 FTP 同步</li>
+</ul>
+<h4 id="动态语言静态化"><a href="#动态语言静态化" class="headerlink" title="动态语言静态化"></a>动态语言静态化</h4><p><strong>什么是动态语言静态化</strong></p>
+<p>将现有 PHP 等动态语言的逻辑代码生成为静态 HTML 文件，用户访问动态脚本重定向到静态 HTML 文件的过程。</p>
+<p>对实时性要求不高的页面适合静态化。</p>
+<p><strong>为什么要静态化</strong></p>
+<p>动态脚本通常会做逻辑计算和数据查询，访问量越大，服务器压力越大。</p>
+<p>访问量大时可能会造成 CPU 负载过高，数据库服务器压力过大。静态化可以减低逻辑处理压力，降低数据库服务器查询压力。</p>
+<p><strong>静态化的实现方式</strong></p>
+<ul>
+<li>使用模板引擎<ul>
+<li>可以使用 Smarty 的缓存机制生成静态 HTML 缓存文件。</li>
+</ul>
+</li>
+<li>使用 ob 系列的函数<ul>
+<li>ob_start(): 打开输出控制缓冲</li>
+<li>ob_get_contents(): 返回输出缓冲区内容</li>
+<li>ob_clean(): 清空输出缓冲区</li>
+<li>ob_end_flush(): 冲刷出输出缓冲区内容并关闭缓冲。</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjb35bem4002clo4b8uogkp0r" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjb3b5cp80025gl4bxwx6w8uf" class="article-share-link">Share</a>
       
       
     </footer>
