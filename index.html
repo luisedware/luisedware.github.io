@@ -92,7 +92,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/12/11/学习算法设计/" data-id="cjb4dw5es007o944bv3xky4k2" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/12/11/学习算法设计/" data-id="cjb4h4abx007tk74b6232w7vd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -128,7 +128,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/12/11/学习数据结构/" data-id="cjb4dw5eq007i944bpuk9u6ss" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/12/11/学习数据结构/" data-id="cjb4h4aby007yk74btpb8p3v9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -336,7 +336,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/16/PHP-秒杀系统/" data-id="cjb4dw5ci0028944bityfi02t" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/16/PHP-秒杀系统/" data-id="cjb4h4a8z0025k74bpjddwg3z" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -1996,11 +1996,68 @@
 <li>callback，事件发生后对应的处理逻辑，一般在 add/set 时制定。</li>
 </ul>
 <p><strong>PHP 并发编程实践</strong></p>
+<h2 id="数据库缓存"><a href="#数据库缓存" class="headerlink" title="数据库缓存"></a>数据库缓存</h2><p><strong>什么是数据库缓存</strong></p>
+<p>MySQL 等一些常见的关系型数据库的数据都存储在磁盘当中，在高并发场景下，业务应用对 MySQL 产生的增删查改的操作造成巨大的 I/O 开销和查询压力，这无疑对数据库和服务器都是一种巨大的压力，为了解决此类问题，缓存数据的概念应运而生。缓存数据是为了让客户端很少甚至不访问数据库服务器进行数据的查询，高并发下，能最大程度地降低对数据库服务器的访问压力。</p>
+<p>作用：</p>
+<ul>
+<li>极大地解决数据库服务器的压力</li>
+<li>提高应用数据的响应速度</li>
+</ul>
+<p>常见缓存形式：</p>
+<ul>
+<li>内存缓存</li>
+<li>文件缓存</li>
+</ul>
+<p><strong>使用缓存需要考虑的内容</strong></p>
+<ul>
+<li>缓存方式的选择</li>
+<li>缓存场景的选择</li>
+<li>缓存数据的实时性</li>
+<li>缓存数据的稳定性</li>
+</ul>
+<p><strong>使用 MySQL 查询缓存</strong></p>
+<p>如何启用 MySQL 查询缓存，使用 query_cache_type 配置项开启关闭。有 0、1、2 三个取值。0 表示不使用查询缓存，1 表示始终使用查询缓存。2 表示按需使用查询缓存。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">SET GLOBAL query_cache_type = 1;</div><div class="line"></div><div class="line"># 当 query_cache_type 为 1 时，亦可关闭查询缓存</div><div class="line">SELECT SQL_NO_CACHE * FROM table WHERE condition;</div><div class="line"></div><div class="line"># 当 query_cache_type 为 2 时，可按需使用查询缓存</div><div class="line">SELECT SQL_CACHE * FROM table WHERE condition;</div></pre></td></tr></table></figure></p>
+<p>如何设置 MySQL 查询缓存大小，使用 query_cache_size 配置项进行配置。默认情况下 query_cache_size 为 0，表示为查询缓存预留的内存为 0，则无法使用查询缓存。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SET GLOBAL query_cache_size = 1342177728;</div></pre></td></tr></table></figure></p>
+<p>MySQL 查询缓存可以看做是 SQL 文本和查询结果的映射。第二次查询的 SQL 和第一次查询的 SQL 完全相同，则会使用缓存。当表的结构或数据发生改变时，查询缓存中的数据不再有效。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"># 查看查询缓存命中次数</div><div class="line">SHOW STATUS LIKE &apos;Qcache_hits&apos;;</div><div class="line"></div><div class="line"># 清理查询缓存内存碎片</div><div class="line">FLUSH QUERY CACHE;</div><div class="line"></div><div class="line"># 从查询缓存中移出所有查询</div><div class="line">RESET QUERY CACHE;</div><div class="line"></div><div class="line"># 关闭所有打开的表，同时清空查询缓存中的内容</div><div class="line">FLUSH TABLES</div></pre></td></tr></table></figure></p>
+<p><strong>使用 Memcache 缓存</strong></p>
+<p>对于大型站点，如果没有中间缓存层，当流量打入数据库层时，即便有之前的几层为我们挡住一部分流量，但是在大并发的情况下，还是会有大量请求涌入数据库层，这样对于数据服务器的压力冲击很大，响应速度也会下降，因此添加中间缓存层很有必要。</p>
+<p>memcache 是一套分布式的高速缓存系统。通过在内存里维护一个统一的巨大的 hash 表，它能够用来存储各种格式的数据，包括图像、视频、文件以及数据库检索的结果等。简单的说就是将数据调用到内存，然后从内存中读取，从而大大提高读取速度。</p>
+<p><strong>使用 Redis 缓存</strong></p>
+<h2 id="Web-服务器的负载均衡"><a href="#Web-服务器的负载均衡" class="headerlink" title="Web 服务器的负载均衡"></a>Web 服务器的负载均衡</h2><p>七层负载均衡：基于 URL 等应用层信息的负载均衡。</p>
+<p>Nginx 的 proxy 是它一个很强大的功能，实现了 7 层负载均衡。</p>
+<p>Nginx 负载均衡的特点</p>
+<ul>
+<li>功能强大，性能卓越，运行稳定</li>
+<li>配置简单灵活</li>
+<li>能够自动剔除工作不正常的后端服务器</li>
+<li>上传文件使用异步模式</li>
+<li>支持多种分配策略，可以分配权重，分配方式灵活</li>
+</ul>
+<p>Nginx 负载均衡的策略</p>
+<ul>
+<li>内置策略<ul>
+<li>IP Hash 策略</li>
+<li>加权轮询策略</li>
+</ul>
+</li>
+<li>扩展策略<ul>
+<li>fair 策略</li>
+<li>通用 hash</li>
+<li>一致性 hash</li>
+</ul>
+</li>
+</ul>
+<p><strong>加权轮询策略</strong></p>
+<p>首先将请求分给高权重的机器，直到该机器的权值降到了比其他机器低，才开始将请求分给下一个高权重的机器。当所有后端机器都 down 掉时，Nginx 会立即将所有机器的标志位清成初始状态，以避免造成所有的机器都处在 timeout 的状态。</p>
+<p><strong>IP Hash 策略</strong></p>
+<p>Nginx 内置的另一个负载均衡的策略，流程和轮询很类似，只是其中的算法和具体的策略有些变化。IP Hash 算法是一种变相的轮询算法。</p>
+<p><strong>fair 策略</strong></p>
+<p>根据后端服务器的响应时间判断负载情况，从中选出负载最轻的机器进行分流。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjb4dw5fj008w944b1biq7xud" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjb4h4ad80090k74bvj1gplpb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -2529,7 +2586,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/09/Web-API-的设计与开发/" data-id="cjb4dw5d60037944bqgznstma" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/09/Web-API-的设计与开发/" data-id="cjb4h4a94002bk74bkej659t6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -2623,7 +2680,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/05/日常开发常用命令/" data-id="cjb4dw5ew0081944bauva9iit" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/05/日常开发常用命令/" data-id="cjb4h4ac00081k74bmbonmflp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -2712,7 +2769,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/01/刻意练习/" data-id="cjb4dw5ef006l944bsscncd71" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/01/刻意练习/" data-id="cjb4h4abi006vk74b7fchmz7c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -2924,7 +2981,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/10/24/高性能的-PHP-API-接口开发/" data-id="cjb4dw5f4008d944btr5u5q54" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/10/24/高性能的-PHP-API-接口开发/" data-id="cjb4h4aca008kk74brpbnmrps" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -2981,7 +3038,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/09/04/Vue-js-2-X-实践/" data-id="cjb4dw5cm002b944bxwfd7tb5" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/09/04/Vue-js-2-X-实践/" data-id="cjb4h4a9e002pk74b6rd1hqkc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
@@ -3746,7 +3803,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/19/学习-PHP/" data-id="cjb4dw5ev007y944b5sf7ghq2" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/07/19/学习-PHP/" data-id="cjb4h4abr007kk74bpim1zts3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li></ul>
