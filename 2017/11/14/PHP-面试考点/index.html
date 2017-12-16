@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="七月十五九月初七">
 <meta property="og:description" content="PHP 招聘要求总结硬性要求 熟悉常用的算法和数据结构 熟悉(精通) PHP 熟悉 PHP 框架：Laravel、Yii 熟悉 HTML 5 + CSS 3 熟悉 CSS 框架：Bootstrap 熟悉(精通) JavaScript 熟悉 JavaScrip 框架：Vue.js、React.js 熟悉 设计模式、熟悉 MVC 模式 熟悉 HTTP、HTTP 2、TCP、UDP 等标准协议 熟悉 A">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-12-16T06:31:13.906Z">
+<meta property="og:updated_time" content="2017-12-16T08:46:53.001Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP 面试考察点">
 <meta name="twitter:description" content="PHP 招聘要求总结硬性要求 熟悉常用的算法和数据结构 熟悉(精通) PHP 熟悉 PHP 框架：Laravel、Yii 熟悉 HTML 5 + CSS 3 熟悉 CSS 框架：Bootstrap 熟悉(精通) JavaScript 熟悉 JavaScrip 框架：Vue.js、React.js 熟悉 设计模式、熟悉 MVC 模式 熟悉 HTTP、HTTP 2、TCP、UDP 等标准协议 熟悉 A">
@@ -171,132 +171,7 @@
 </li>
 <li>面前准备与面试注意事项</li>
 </ul>
-<h2 id="PHP-基础知识考察点"><a href="#PHP-基础知识考察点" class="headerlink" title="PHP 基础知识考察点"></a>PHP 基础知识考察点</h2><p>全局数组</p>
-<ul>
-<li>$GLOBALS：$GLOBALS 数组包含了下述数组所有内容</li>
-<li>$_GET</li>
-<li>$_POST</li>
-<li>$_REQUEST</li>
-<li>$_SESSION</li>
-<li>$_COOKIE</li>
-<li>$_SERVER<ul>
-<li>$_SERVER[‘SERVER_ADDR’]</li>
-<li>$_SERVER[‘SERVER_NAME’]</li>
-<li>$_SERVER[‘REQUEST_TIME’]</li>
-<li>$_SERVER[‘QUERY_STRING’]</li>
-<li>$_SERVER[‘HTTP_REFERER’]</li>
-<li>$_SERVER[‘HTTP_USER_AGENT’]</li>
-<li>$_SERVER[‘REMOTE_ADDR’]</li>
-<li>$_SERVER[‘REQUEST_URI’]</li>
-<li>$_SERVER[‘PATH_INFO’]</li>
-</ul>
-</li>
-<li>$_FILES</li>
-<li>$_ENV</li>
-</ul>
-<p>常量</p>
-<ul>
-<li>定义<ul>
-<li>const</li>
-<li>define</li>
-</ul>
-</li>
-<li>区别<ul>
-<li>const 是语言结构，更快</li>
-<li>define 是函数</li>
-<li>define 不能用于类常量的定义，const 可以</li>
-</ul>
-</li>
-<li>相同<ul>
-<li>常量一经定义，不能被修改，不能被删除</li>
-</ul>
-</li>
-<li>预定义常量<ul>
-<li><code>__LINE__</code>：文件中的当前行号。</li>
-<li><code>__FILE__</code>：文件的完整路径和文件名。</li>
-<li><code>__DIR__</code>：文件所在的目录。</li>
-<li><code>__FUNCTION__</code>：返回函数被定义时的名字（区分大小写）。</li>
-<li><code>__CLASS__</code>：返回该类被定义时的名字（区分大小写）。</li>
-<li><code>__TRAIT__</code>：返回 trait 被定义时的名字（区分大小写）。</li>
-<li><code>__METHOD__</code>：返回该方法被定义时的名字（区分大小写）。</li>
-<li><code>__NAMESPACE__</code>：当前命名空间的名称（区分大小写）。</li>
-</ul>
-</li>
-</ul>
-<p>实践真题<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// 用 PHP 写出显示客户端 IP 与服务器 IP 的代码</span></div><div class="line"><span class="comment">// __FIEL__ 表示什么意思</span></div></pre></td></tr></table></figure></p>
-<h4 id="运算符考察点"><a href="#运算符考察点" class="headerlink" title="运算符考察点"></a>运算符考察点</h4><ul>
-<li>回顾真题：foo() 和 @foo() 之间的区别</li>
-<li>考点分析：PHP 运算符的错误抑制符<ul>
-<li>延伸考点<ul>
-<li>递增、递减运算符不影响布尔值</li>
-<li>递减 null 值没有效果</li>
-<li>递增 NULL 为 1</li>
-<li>逻辑运算符<ul>
-<li>短路作用<ul>
-<li>$a = true || $b == 3</li>
-<li>$b = false &amp;&amp; $a == 1</li>
-</ul>
-</li>
-<li>|| 和 &amp;&amp; 与 or 和 and 的优先级不同<ul>
-<li>$a = false || true; || 优先 =，最后 $a = true;</li>
-<li>$b = false or true; $b 为 false</li>
-<li>$b = true or false; $b 为 true</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>知识延伸：PHP 所有运算符考点</li>
-</ul>
-<p>实践真题<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// 下列程序中请写出打印输出的结果</span></div><div class="line">$a = <span class="number">0</span>;</div><div class="line">$b = <span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="keyword">if</span>($a = <span class="number">3</span> &gt; <span class="number">0</span> || $b = <span class="number">3</span> &gt; <span class="number">0</span>)&#123;</div><div class="line">  $a++;</div><div class="line">  $b++;</div><div class="line">  <span class="keyword">echo</span> $a.<span class="string">"\n"</span>;</div><div class="line">  <span class="keyword">echo</span> $b.<span class="string">"\n"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<ul>
-<li>3 &gt; 0  返回 true;造成判断条件短路</li>
-<li>$a 等于 true</li>
-<li>$a++ 等于 true</li>
-<li>$b++ 等于 1</li>
-<li>echo $a 显示 1，echo $b 显示 1</li>
-</ul>
-<h4 id="流程控制考察点"><a href="#流程控制考察点" class="headerlink" title="流程控制考察点"></a>流程控制考察点</h4><ul>
-<li>回顾真题：请列出 3 种 PHP 数组循环操作的语法，并注明各种循环的区别</li>
-<li>考点分析：PHP 遍历数组的三种方法及各自区别<ul>
-<li>方法<ul>
-<li>使用 for 循环</li>
-<li>使用 foreach 循环</li>
-<li>使用 while、list()、each() 组合循环</li>
-</ul>
-</li>
-<li>区别<ul>
-<li>for 只能遍历索引数组</li>
-<li>foreach 可以遍历索引和关联数组，在遍历之前会自动对数组进行 reset() 操作</li>
-<li>list()、each() 和 while 循环可以遍历索引和关联数组，但不会对数组指针进行 reset() 操作</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>知识延伸：<ul>
-<li>分支结构<ul>
-<li>if…else</li>
-<li>if…elseif…else<ul>
-<li>多个 elseif 从句是排斥关系</li>
-<li>使用 elseif 语句有一个基本原则，总把优先范围小的条件放在前面处理</li>
-</ul>
-</li>
-<li>switch…case<ul>
-<li>switch 后面的控制表达式的数据类型只能是整型、浮点类型或者字符串</li>
-<li>continue  语句作用到 switch 的作用类似于 break</li>
-<li>switch…case 会生成跳转表，直接跳转到对应 case，执行效率会快一点</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>实践真题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// PHP 中如何优化多个 if...elseif 语句的情况</div><div class="line">条件表达式的可能性越大，就优先进行判断</div><div class="line">使用 switch...case</div><div class="line"></div><div class="line">// PHP 遍历数组的三种方法及各自区别</div></pre></td></tr></table></figure></p>
-<h4 id="自定义函数及内部函数"><a href="#自定义函数及内部函数" class="headerlink" title="自定义函数及内部函数"></a>自定义函数及内部函数</h4><p>回顾真题<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 写出如下程序的输出结果</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="comment">// $count 是全局变量</span></div><div class="line">$count = <span class="number">5</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_count</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="comment">// $count 这个是局部变量，初始化没有赋值，$count 为 null</span></div><div class="line">    <span class="keyword">static</span> $count;</div><div class="line"></div><div class="line">	<span class="comment">// 先将变量 $count 返回，然后把 $count++ 的结果保存到变量 $count;</span></div><div class="line">    <span class="keyword">return</span> $count++;</div><div class="line">&#125;</div><div class="line"><span class="keyword">echo</span> $count.<span class="string">"\n"</span>;</div><div class="line">++$count;</div><div class="line"><span class="keyword">echo</span> $count.<span class="string">"\n"</span>;</div><div class="line"></div><div class="line"><span class="keyword">echo</span> get_count().<span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> get_count().<span class="string">"\n"</span>;</div></pre></td></tr></table></figure></p>
+<h2 id="PHP-基础知识考察点"><a href="#PHP-基础知识考察点" class="headerlink" title="PHP 基础知识考察点"></a>PHP 基础知识考察点</h2><h4 id="自定义函数及内部函数"><a href="#自定义函数及内部函数" class="headerlink" title="自定义函数及内部函数"></a>自定义函数及内部函数</h4><p>回顾真题<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 写出如下程序的输出结果</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="comment">// $count 是全局变量</span></div><div class="line">$count = <span class="number">5</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_count</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="comment">// $count 这个是局部变量，初始化没有赋值，$count 为 null</span></div><div class="line">    <span class="keyword">static</span> $count;</div><div class="line"></div><div class="line">	<span class="comment">// 先将变量 $count 返回，然后把 $count++ 的结果保存到变量 $count;</span></div><div class="line">    <span class="keyword">return</span> $count++;</div><div class="line">&#125;</div><div class="line"><span class="keyword">echo</span> $count.<span class="string">"\n"</span>;</div><div class="line">++$count;</div><div class="line"><span class="keyword">echo</span> $count.<span class="string">"\n"</span>;</div><div class="line"></div><div class="line"><span class="keyword">echo</span> get_count().<span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> get_count().<span class="string">"\n"</span>;</div></pre></td></tr></table></figure></p>
 <ul>
 <li>考点分析<ul>
 <li>变量的作用域和静态变量<ul>
@@ -390,7 +265,7 @@
 </ul>
 </li>
 </ul>
-<p>实践真题<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$var1 = <span class="number">5</span>;</div><div class="line">$var2 = <span class="number">10</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">(&amp;$myVar)</span></span>&#123;</div><div class="line">    <span class="comment">// 把全局变量 $var1 拿进来使用，$var1 = 7</span></div><div class="line">    <span class="keyword">global</span> $var1;</div><div class="line">    $var1 += <span class="number">2</span>;</div><div class="line">    $var2 = <span class="number">4</span>;</div><div class="line">    $myVar +=<span class="number">3</span>;</div><div class="line">    <span class="keyword">return</span> $var2;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$myVar = <span class="number">5</span>;</div><div class="line"><span class="keyword">echo</span> foo($myVar).<span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> $myVar.<span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> $var1.<span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> $var2.<span class="string">"\n"</span>;</div><div class="line">$bar = <span class="string">'foo'</span>;</div><div class="line">$myVar = <span class="number">10</span>;</div><div class="line"><span class="keyword">echo</span> $bar($myVar).<span class="string">"\n"</span>;</div></pre></td></tr></table></figure></p>
+<p>实践真题<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">$var1 = <span class="number">5</span>;</div><div class="line">$var2 = <span class="number">10</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">(&amp;$myVar)</span></span>&#123;</div><div class="line">    <span class="comment">// 把全局变量 $var1 拿进来使用，$var1 = 7</span></div><div class="line">    <span class="keyword">global</span> $var1;</div><div class="line">    $var1 += <span class="number">2</span>;</div><div class="line">    $var2 = <span class="number">4</span>;</div><div class="line">    $myVar +=<span class="number">3</span>;</div><div class="line">    <span class="keyword">return</span> $var2;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$myVar = <span class="number">5</span>;</div><div class="line"><span class="keyword">echo</span> foo($myVar).<span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> $myVar.<span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> $var1.<span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> $var2.<span class="string">"\n"</span>;</div><div class="line">$bar = <span class="string">'foo'</span>;</div><div class="line">$myVar = <span class="number">10</span>;</div><div class="line"><span class="keyword">echo</span> $bar($myVar).<span class="string">"\n"</span>;</div></pre></td></tr></table></figure></p>
 <h4 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h4><ul>
 <li>回顾真题<ul>
 <li>至少写出一种验证 139 开头的 11 位手机号码的正则表达式</li>
@@ -1729,7 +1604,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjb8yt9ul008tjn4blfvbvtn3" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjb93n0fp008q8e4bosgjbpi1" class="article-share-link">Share</a>
       
       
     </footer>
