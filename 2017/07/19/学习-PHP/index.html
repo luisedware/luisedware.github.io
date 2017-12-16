@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="七月十五九月初七">
 <meta property="og:description" content="入门概述（Introduction）PHP 是一种被广泛应用的开放源代码的多用途脚本语言，它可嵌入到 HTML中，尤其适合 web 开发。 版本迭代（Version Iteration）当前最新稳定版本是 PHP 7.1.X，相比 PHP 5.X 版本增加了不少新特性。PHP 引擎也大部分被重写，PHP 的运行速度也提到了极大的提升。建议使用 PHP 7.1.X 作为开发和生产的环境。 注释与代码">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-12-01T03:22:48.195Z">
+<meta property="og:updated_time" content="2017-12-16T05:46:24.647Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP 学习框架">
 <meta name="twitter:description" content="入门概述（Introduction）PHP 是一种被广泛应用的开放源代码的多用途脚本语言，它可嵌入到 HTML中，尤其适合 web 开发。 版本迭代（Version Iteration）当前最新稳定版本是 PHP 7.1.X，相比 PHP 5.X 版本增加了不少新特性。PHP 引擎也大部分被重写，PHP 的运行速度也提到了极大的提升。建议使用 PHP 7.1.X 作为开发和生产的环境。 注释与代码">
@@ -145,7 +145,7 @@
 <li>变量提升（Variable Hoisting）</li>
 <li>常量声明（Constants Declaration）<ul>
 <li>语法</li>
-<li>魔术常量</li>
+<li>预定义常量(魔术常量)</li>
 </ul>
 </li>
 </ul>
@@ -186,8 +186,8 @@
 <p>因为 PHP 区别全局作用域、函数作用域和块级作用域，PHP 不存在变量提升这个特性。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$name = <span class="number">10</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span><span class="params">()</span></span>&#123;</div><div class="line">  <span class="keyword">echo</span> $params;</div><div class="line">  $params = <span class="string">"Luis Edware"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">test($name);</div></pre></td></tr></table></figure></p>
 <p>常量声明（Constants Declaration）</p>
 <p>1.语法</p>
-<p>可以用 define() 函数来定义常量，在 PHP 5.3.0 以后，可以使用 const 关键字在类定义之外定义常量。一个常量一旦被定义，就不能再改变或者取消定义。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">define(<span class="string">"LUIS"</span>, <span class="string">"luis"</span>);</div><div class="line"><span class="keyword">const</span> EDWARE = <span class="string">"edware"</span>;</div><div class="line"></div><div class="line"><span class="keyword">echo</span> LUIS.EDWARE;</div><div class="line"></div><div class="line"><span class="keyword">const</span> ARR = [<span class="string">'luis'</span>, <span class="string">'edware'</span>];</div><div class="line">var_dump(ARR);</div></pre></td></tr></table></figure></p>
-<p>2.魔术常量</p>
+<p>可以用 define() 函数来定义常量，在 PHP 5.3.0 以后，可以使用 const 关键字在类定义之外定义常量。一个常量一旦被定义，就不能再改变或者取消定义。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">define(<span class="string">"LUIS"</span>, <span class="string">"Luis"</span>);</div><div class="line"><span class="keyword">const</span> EDWARE = <span class="string">"Edware"</span>;</div><div class="line"><span class="keyword">echo</span> LUIS.<span class="string">' '</span>.EDWARE.<span class="string">"\n"</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> ARR = [<span class="string">'luis'</span>, <span class="string">'edware'</span>];</div><div class="line">var_dump(ARR);</div></pre></td></tr></table></figure></p>
+<p>2.预定义常量(魔术常量)</p>
 <ul>
 <li><code>__LINE__</code>：文件中的当前行号。</li>
 <li><code>__FILE__</code>：文件的完整路径和文件名。</li>
@@ -822,7 +822,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/07/19/学习-PHP/" data-id="cjb8u800g0084vq4bw61dxq8b" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/07/19/学习-PHP/" data-id="cjb8yt9u0007rjn4bjj1gm20t" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li></ul>
@@ -833,19 +833,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/07/19/编程语言学习框架/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/09/04/Vue-js-2-X-实践/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          编程语言学习框架
+          Vue.js 2.X 实践
         
       </div>
     </a>
   
   
-    <a href="/2017/07/18/学习数据建模/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/07/19/编程语言学习框架/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">学习数据建模</div>
+      <div class="article-nav-title">编程语言学习框架</div>
     </a>
   
 </nav>

@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="七月十五九月初七">
 <meta property="og:description" content="PHP 招聘要求总结硬性要求 熟悉常用的算法和数据结构 熟悉(精通) PHP 熟悉 PHP 框架：Laravel、Yii 熟悉 HTML 5 + CSS 3 熟悉 CSS 框架：Bootstrap 熟悉(精通) JavaScript 熟悉 JavaScrip 框架：Vue.js、React.js 熟悉 设计模式、熟悉 MVC 模式 熟悉 HTTP、HTTP 2、TCP、UDP 等标准协议 熟悉 A">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-12-16T04:23:16.223Z">
+<meta property="og:updated_time" content="2017-12-16T06:31:13.906Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP 面试考察点">
 <meta name="twitter:description" content="PHP 招聘要求总结硬性要求 熟悉常用的算法和数据结构 熟悉(精通) PHP 熟悉 PHP 框架：Laravel、Yii 熟悉 HTML 5 + CSS 3 熟悉 CSS 框架：Bootstrap 熟悉(精通) JavaScript 熟悉 JavaScrip 框架：Vue.js、React.js 熟悉 设计模式、熟悉 MVC 模式 熟悉 HTTP、HTTP 2、TCP、UDP 等标准协议 熟悉 A">
@@ -171,59 +171,7 @@
 </li>
 <li>面前准备与面试注意事项</li>
 </ul>
-<h2 id="PHP-基础知识考察点"><a href="#PHP-基础知识考察点" class="headerlink" title="PHP 基础知识考察点"></a>PHP 基础知识考察点</h2><h4 id="引用变量"><a href="#引用变量" class="headerlink" title="引用变量"></a>引用变量</h4><ul>
-<li>回顾真题：什么是引用变量？在 PHP 当中，用什么符号定义引用变量?</li>
-<li>考点分析：PHP 引用变量的概念及定义方式</li>
-<li>知识延伸：PHP 引用变量的原理</li>
-</ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 概念</span></div><div class="line">在 PHP 中引用意味着用不同的名字访问同一个变量的内容</div><div class="line"></div><div class="line"><span class="comment"># 定义方式</span></div><div class="line">使用 &amp; 符号</div><div class="line"></div><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$a = <span class="string">"hello"</span>;</div><div class="line">$b = &amp;a;</div><div class="line">$a = <span class="string">"hello world!"</span>;</div><div class="line"><span class="keyword">echo</span> $b; <span class="comment">// "hello world!"</span></div></pre></td></tr></table></figure>
-<p>普通变量赋值原理<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">echo</span> <span class="string">"初始内存 - "</span>.memory_get_usage().<span class="string">"\n"</span>;</div><div class="line"><span class="comment">// 初始内存 - 357016</span></div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line"><span class="comment"> * 定义一个变量 a，在内存中开辟一块空间，变量 a 就是指向这个内存空间。</span></div><div class="line"><span class="comment"> */</span></div><div class="line">$a = range(<span class="number">0</span>, <span class="number">1000</span>);</div><div class="line"><span class="keyword">echo</span> <span class="string">"变量 a 声明 - "</span>.memory_get_usage().<span class="string">"\n"</span>;</div><div class="line"><span class="comment">// 变量 a 声明 - 393968</span></div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line"><span class="comment"> * 定义一个变量 b，将变量 a 赋值给变量 b，变量 b 并不会在内存中开辟一块新的空间</span></div><div class="line"><span class="comment"> * 因为 PHP 存在 COW(Copy On Write)机制，当对变量 a 或对变量 b 进行写操作，</span></div><div class="line"><span class="comment"> * 才会在内存中开辟一块新的空间。只要进行了写操作，即使数值不变，也会开辟内存空间。</span></div><div class="line"><span class="comment"> */</span></div><div class="line">$b = $a;</div><div class="line"><span class="keyword">echo</span> <span class="string">"变量 a 赋值给变量 b - "</span>.memory_get_usage().<span class="string">"\n"</span>;</div><div class="line"><span class="comment">// 变量 a 赋值给变量 b - 393968</span></div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line"><span class="comment"> * 变量 a 进行写操作，PHP COW 机制为变量 b 开辟开辟一块内存空间。</span></div><div class="line"><span class="comment"> */</span></div><div class="line">$a = range(<span class="number">0</span>, <span class="number">1000</span>);</div><div class="line"><span class="keyword">echo</span> <span class="string">"变量 a 进行修改操作，变量 b 开始使用内存空间 - "</span>.memory_get_usage().<span class="string">"\n"</span>;</div><div class="line"><span class="comment">// 变量 a 进行修改操作，变量 b 开始使用内存空间 - 430888</span></div><div class="line"></div><div class="line"><span class="keyword">unset</span>($a);</div><div class="line"><span class="keyword">echo</span> <span class="string">"撤销变量 a - "</span>.memory_get_usage().<span class="string">"\n"</span>;</div><div class="line"><span class="comment">// 撤销变量 a - 393968</span></div><div class="line"></div><div class="line"><span class="keyword">unset</span>($b);</div><div class="line"><span class="keyword">echo</span> <span class="string">"撤销变量 b - "</span>.memory_get_usage().<span class="string">"\n"</span>;</div><div class="line"><span class="comment">// 撤销变量 b - 357048</span></div></pre></td></tr></table></figure></p>
-<p>引用变量赋值原理<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">echo</span> <span class="string">"初始内存 - "</span>.memory_get_usage().<span class="string">"\n"</span>;</div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line"><span class="comment"> * 定义一个变量 a，在内存中开辟一块空间，变量 a 就是指向这个内存空间。</span></div><div class="line"><span class="comment"> */</span></div><div class="line">$a = range(<span class="number">0</span>, <span class="number">1000</span>);</div><div class="line"><span class="keyword">echo</span> <span class="string">"变量 a 声明 - "</span>.memory_get_usage().<span class="string">"\n"</span>;</div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line"><span class="comment"> * 如果使用引用赋值，就说明变量 a 和变量 b 都指向同一块内存空间，</span></div><div class="line"><span class="comment"> */</span></div><div class="line">$b = &amp;$a;</div><div class="line"><span class="keyword">echo</span> <span class="string">"变量 a 引用赋值给变量 b - "</span>.memory_get_usage().<span class="string">"\n"</span>;</div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line"><span class="comment"> * 变量 a 进行修改操作，PHP COW 机制是不会为变量 b 开辟开辟一块内存空间。</span></div><div class="line"><span class="comment"> */</span></div><div class="line">$a = range(<span class="number">0</span>, <span class="number">1000</span>);</div><div class="line"><span class="keyword">echo</span> <span class="string">"变量 a 进行修改操作，变量 b 开始使用内存空间 - "</span>.memory_get_usage().<span class="string">"\n"</span>;</div><div class="line"></div><div class="line"><span class="keyword">unset</span>($a);</div><div class="line"><span class="keyword">echo</span> <span class="string">"撤销变量 a - "</span>.memory_get_usage().<span class="string">"\n"</span>;</div><div class="line"></div><div class="line"><span class="keyword">unset</span>($b);</div><div class="line"><span class="keyword">echo</span> <span class="string">"撤销变量 b - "</span>.memory_get_usage().<span class="string">"\n"</span>;</div></pre></td></tr></table></figure></p>
-<p>zval 结构体是 PHP 变量的容器，查看 zval 结构体<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// zval 结构体就是 PHP 变量容器</span></div><div class="line">$a = range(<span class="number">0</span>, <span class="number">3</span>);</div><div class="line">xdebug_debug_zval(<span class="string">'a'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 定义变量 b，把变量 a 赋值给 b</span></div><div class="line">$b = $a;</div><div class="line">xdebug_debug_zval(<span class="string">'a'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 对变量 a 进行写操作</span></div><div class="line">$a = range(<span class="number">0</span>, <span class="number">3</span>);</div><div class="line">xdebug_debug_zval(<span class="string">'a'</span>);</div><div class="line"></div><div class="line">$b = &amp;$a;</div><div class="line">xdebug_debug_zval(<span class="string">'a'</span>);</div><div class="line">xdebug_debug_zval(<span class="string">'b'</span>);</div><div class="line"></div><div class="line">$c = &amp;$a;</div><div class="line">xdebug_debug_zval(<span class="string">'b'</span>);</div><div class="line">xdebug_debug_zval(<span class="string">'c'</span>);</div></pre></td></tr></table></figure></p>
-<ul>
-<li>refcount - 代表多少变量指向这个内存空间</li>
-<li>is_ref - 代表变量是否被引用</li>
-</ul>
-<p>unset 引用变量，只会取消引用，不会销毁内存空间；unset 普通变量，会销毁内存空间<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"> <span class="meta">&lt;?php</span></div><div class="line">$a = range(<span class="number">0</span>, <span class="number">2</span>);</div><div class="line"></div><div class="line">$b = &amp;$a;</div><div class="line"></div><div class="line"><span class="keyword">unset</span>($b);</div><div class="line"></div><div class="line">var_dump($a);</div><div class="line"></div><div class="line"><span class="keyword">unset</span>($a);</div><div class="line"></div><div class="line">var_dump($a);</div></pre></td></tr></table></figure></p>
-<p>对象变量都是基于引用赋值传递<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</div><div class="line">  <span class="keyword">public</span> $name = <span class="string">"zhangsan"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$p1 = <span class="keyword">new</span> Person;</div><div class="line">xdebug_debug_zval(<span class="string">'p1'</span>);</div><div class="line"></div><div class="line">$p2 = $p1;</div><div class="line">xdebug_debug_zval(<span class="string">'p1'</span>);</div><div class="line"></div><div class="line">$p2-&gt;name = <span class="string">"Luis"</span>;</div><div class="line">xdebug_debug_zval(<span class="string">'p1'</span>);</div><div class="line"></div><div class="line"><span class="keyword">echo</span> $p1-&gt;name.<span class="string">"\n"</span>;</div><div class="line"><span class="keyword">echo</span> $p2-&gt;name.<span class="string">"\n"</span>;</div></pre></td></tr></table></figure></p>
-<p>实践真题<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// 写出如下程序的输出结果</span></div><div class="line">$data = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>];</div><div class="line"><span class="keyword">foreach</span> ($data <span class="keyword">as</span> $key =&gt; $value) &#123;</div><div class="line">  $value = &amp;$data[$key];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 每一次循环结束后，变量 $data 的值是什么</span></div><div class="line">[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>]</div><div class="line">[<span class="string">'b'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>]</div><div class="line">[<span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>]</div><div class="line">[<span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'d'</span>]</div><div class="line"></div><div class="line"><span class="comment">// 程序执行完成后，变量 $data 的值是什么</span></div><div class="line">[<span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'d'</span>]</div></pre></td></tr></table></figure></p>
-<h4 id="常量与数据类型"><a href="#常量与数据类型" class="headerlink" title="常量与数据类型"></a>常量与数据类型</h4><ul>
-<li>回顾真题：PHP 的字符串可以使用哪三种定义方法以及各自的区别是什么？</li>
-<li>考点分析：PHP 的字符串的定义方式及各自区别</li>
-<li><p>知识延伸：常量及数据类型</p>
-</li>
-<li><p>定义方式：</p>
-<ul>
-<li>单引号</li>
-<li>双引号</li>
-<li>heredoc、newdoc</li>
-</ul>
-</li>
-<li>区别：<ul>
-<li>单引号不能解析变量</li>
-<li>单引号不能解析转义字符，只能解析单引号和反斜线本身</li>
-<li>双引号可以解析变量，变量可以使用特殊字符和 <code>{}</code> 包含</li>
-<li>双引号可以解析所有转移字符</li>
-<li>单双引号都可以使用 <code>.</code> 连接字符串或变量</li>
-<li>单引号效率高于双引号</li>
-<li>newdoc 类似于单引号</li>
-<li>heredoc 类似于双引号</li>
-<li>heredoc、newdoc 比较擅长处理大文本</li>
-</ul>
-</li>
-</ul>
-<p>浮点类型不能运用到 == 或 === 比较运算中<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$a = <span class="number">0.1</span>;</div><div class="line">$b = <span class="number">0.7</span>;</div><div class="line"></div><div class="line"><span class="keyword">if</span>($a + $b == <span class="number">0.8</span>)&#123;</div><div class="line">	<span class="keyword">echo</span> <span class="keyword">true</span>;</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">	<span class="keyword">echo</span> <span class="keyword">false</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">// false</span></div><div class="line"></div><div class="line"><span class="comment">// 如果想要比较浮点类型</span></div></pre></td></tr></table></figure></p>
-<p>布尔类型 false 的七种情况</p>
-<ul>
-<li>整型 0</li>
-<li>浮点 0.0</li>
-<li>布尔 false</li>
-<li>空字符串</li>
-<li>字符串 0</li>
-<li>空数组</li>
-<li>null</li>
-</ul>
-<p>全局数组</p>
+<h2 id="PHP-基础知识考察点"><a href="#PHP-基础知识考察点" class="headerlink" title="PHP 基础知识考察点"></a>PHP 基础知识考察点</h2><p>全局数组</p>
 <ul>
 <li>$GLOBALS：$GLOBALS 数组包含了下述数组所有内容</li>
 <li>$_GET</li>
@@ -244,7 +192,7 @@
 </ul>
 </li>
 <li>$_FILES</li>
-<li>$_ENV（已废弃）</li>
+<li>$_ENV</li>
 </ul>
 <p>常量</p>
 <ul>
@@ -256,7 +204,7 @@
 <li>区别<ul>
 <li>const 是语言结构，更快</li>
 <li>define 是函数</li>
-<li>const 不能用于类常量的定义，const 可以</li>
+<li>define 不能用于类常量的定义，const 可以</li>
 </ul>
 </li>
 <li>相同<ul>
@@ -1781,7 +1729,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjb8u800x008ovq4b15rfm3hr" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjb8yt9ul008tjn4blfvbvtn3" class="article-share-link">Share</a>
       
       
     </footer>
