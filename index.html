@@ -94,7 +94,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/12/21/学习-ES6/" data-id="cjbuabkxy006yth4bqhpmiqr7" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/12/21/学习-ES6/" data-id="cjbvpd8q40089y94bwy2bfdi1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -132,7 +132,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/12/11/学习算法设计/" data-id="cjbuabkya007rth4bke0kn73p" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/12/11/学习算法设计/" data-id="cjbvpd8pl007dy94bueho2x7c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -168,7 +168,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/12/11/学习数据结构/" data-id="cjbuabky8007oth4brz0u5btu" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/12/11/学习数据结构/" data-id="cjbvpd8pg0078y94bmov1gpey" class="article-share-link">Share</a>
       
       
     </footer>
@@ -376,7 +376,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/16/PHP-秒杀系统/" data-id="cjbuabkv70026th4by2tzov02" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/16/PHP-秒杀系统/" data-id="cjbvpd8my0024y94b9hpz45kj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -702,92 +702,6 @@
 <li>解题方法：牢记以上基础知识点</li>
 </ul>
 <p>实践真题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">// 如何实现每天 0 点钟重新启动服务器</div></pre></td></tr></table></figure></p>
-<h2 id="MySQL-数据库考察点"><a href="#MySQL-数据库考察点" class="headerlink" title="MySQL 数据库考察点"></a>MySQL 数据库考察点</h2><h4 id="MySQL-高可扩展和高可用考点"><a href="#MySQL-高可扩展和高可用考点" class="headerlink" title="MySQL 高可扩展和高可用考点"></a>MySQL 高可扩展和高可用考点</h4><ul>
-<li>回顾真题：简述 MySQL 分表操作和分区的工作原理，分别说说分区和分表的使用场景和各自优缺点。</li>
-<li>考点分析：<ul>
-<li>分区表的原理</li>
-<li>分库分表的原理</li>
-</ul>
-</li>
-<li>知识延伸：<ul>
-<li>MySQL 的复制原理和负载均衡</li>
-</ul>
-</li>
-<li>解题方法：充分掌握分区和分表的工作原理和适用场景，在面试中，此类题通常比较灵活，会给一些现有公司遇到问题的场景，大家可以根据分区和分表以及 MySQL 复制、负载均衡的适用场景来根据情况进行回答。</li>
-<li>一网打尽：设定网站的用户数量在千万级别，但是活跃用户的数量只有 1%，如何通过优化数据库提高活跃用户的访问速度？<ul>
-<li>分区，把活跃用户的数量分在一个区，不活跃的用户分在另外一个区。</li>
-<li>分表，通过水平切分的方式，把活跃用户的数据分在一个表，不活跃的用户分在另外一个表。</li>
-</ul>
-</li>
-</ul>
-<h6 id="分区表的原理"><a href="#分区表的原理" class="headerlink" title="分区表的原理"></a>分区表的原理</h6><p>对用户而言，分区表是一个独立的逻辑表，但是底层 MySQL 将其分成了多个物理子表，这对用户来说是透明的，每个分区表都会使用一个独立的表文件<br>。</p>
-<p>创建表时使用 partition by 子句定义每个分区存放的数据，执行查询时，优化器会根据分区定义过滤那些没有我们需要数据的分区，这样查询只需要查询所需数据在的分区即可。</p>
-<p>分区的主要目的是将数据按照一个比较粗的粒度分在不同的表中，这样可以将相关的数据存放在一起，而且如果想一次性删除整个分区的数据也很方便。</p>
-<p>适用场景</p>
-<ul>
-<li>表非常大，无法全部存在内存，或者只在表的最后有热点数据，其他都是历史数据。</li>
-<li>分区表的数据更容易维护，可以对独立的分区进行独立的操作。</li>
-<li>分区表的数据可以分布在不同的机器上，从而高效实用资源。</li>
-<li>可以使用分区表来避免某些特殊的瓶颈</li>
-<li>可以备份和恢复独立的分支。</li>
-</ul>
-<p>限制</p>
-<ul>
-<li>一个表最多只能有 1024 个分区</li>
-<li>5.1 版本中，分区表表达式必须是整数，5.5 可以使用列分区</li>
-<li>分区字段中如果有主键和唯一索引列，那么主键列和唯一列都必须包含进来</li>
-<li>分区表中无法使用外键约束</li>
-<li>需要对现有表的结果进行修改</li>
-<li>所有分区都必须使用相同的存储引擎</li>
-<li>分区函数中可以使用的函数和表达式会有一些限制</li>
-<li>某些存储引擎不支持分区</li>
-<li>对于 MyISAM 的分区表，不能使用 load index into cache</li>
-<li>对于 MyISAM 的分区表，使用时会需要打开更多的文件描述符。</li>
-</ul>
-<h6 id="分库分表的原理"><a href="#分库分表的原理" class="headerlink" title="分库分表的原理"></a>分库分表的原理</h6><p>通过一些 HASH 算法或者工作实现将一张数据表垂直或者水平进行物理切分</p>
-<p>适用场景</p>
-<ul>
-<li>单表记录条数达到百万到千万级别时</li>
-<li>解决表锁的问题</li>
-</ul>
-<p>分表方式</p>
-<ul>
-<li>水平分割<ul>
-<li>作用<ul>
-<li>表很大，分割后可以降低在查询时需要读的数据和索引的页面，同时也降低了索引的层数，提高查询速度。</li>
-</ul>
-</li>
-<li>使用场景<ul>
-<li>表中的数据本身就具有独立性，例如表中分别记录各个地区的数据或者不同时期的数据。特别是有些数据常用，有些不常用。</li>
-<li>需要把数据存放在多个介质上。</li>
-</ul>
-</li>
-<li>缺点<ul>
-<li>给应用增加复杂度，通常查询时需要多个表名，查询所有数据都需要 UNION 操作。</li>
-<li>在许多数据库应用中，这种复杂性会超过它带来的优点，查询时会增加读一个索引层的磁盘次数。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>垂直分割<ul>
-<li>把主键和一些列放在一个表，然后把主键和另外的列放在另一个表中。</li>
-<li>使用场景<ul>
-<li>如果一个表中某些列常用，而另外一些列不常用。</li>
-<li>可以使数据行变小，一个数据页能存储更多数据，查询时减少 I/O 次数。</li>
-</ul>
-</li>
-<li>缺点<ul>
-<li>管理冗余列，查询所有数据需要 JOIN 操作</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>分表缺点</p>
-<ul>
-<li>有些分表的策略基于应用层的逻辑算法，一旦逻辑算法改变，整个分表逻辑都会改变，扩展性较差。</li>
-<li>对于应用层来说，逻辑算法无疑会增加成本。</li>
-</ul>
 <h2 id="程序设计考察点"><a href="#程序设计考察点" class="headerlink" title="程序设计考察点"></a>程序设计考察点</h2><ul>
 <li>回顾真题：编写一个在线留言本，实现用户的在线留言功能，留言信息存储到数据库，要求设计数据表内容以及使用 PHP 编码完成</li>
 <li>考官考点：<ul>
@@ -1356,7 +1270,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjbuabkve002cth4b0zs751ob" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjbvpd8mq001yy94bvd2i99uq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1885,7 +1799,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/09/Web-API-的设计与开发/" data-id="cjbuabkvi002nth4bvcnkkk3v" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/09/Web-API-的设计与开发/" data-id="cjbvpd8ng0038y94bky7nurhn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -1979,7 +1893,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/05/日常开发常用命令/" data-id="cjbuabkyd007xth4bqkwsf2v5" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/05/日常开发常用命令/" data-id="cjbvpd8pp007ky94bn8fcfe1k" class="article-share-link">Share</a>
       
       
     </footer>
@@ -2068,7 +1982,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/01/刻意练习/" data-id="cjbuabkxq006jth4bcxgqxozl" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/01/刻意练习/" data-id="cjbvpd8p3006ly94boqrjq5ca" class="article-share-link">Share</a>
       
       
     </footer>
@@ -2280,7 +2194,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/10/24/高性能的-PHP-API-接口开发/" data-id="cjbuabkyp008hth4b1d2vk3ih" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/10/24/高性能的-PHP-API-接口开发/" data-id="cjbvpd8pv0081y94bzbqm19k7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -2337,7 +2251,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/09/04/Vue-js-2-X-实践/" data-id="cjbuabkvh002jth4bewlny50c" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/09/04/Vue-js-2-X-实践/" data-id="cjbvpd8n3002dy94bhi7x6lo4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
@@ -2435,7 +2349,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2017 Luis Edware<br>
+      &copy; 2018 Luis Edware<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
