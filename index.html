@@ -55,7 +55,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -121,12 +121,19 @@
 <h6 id="Symbol-的作用"><a href="#Symbol-的作用" class="headerlink" title="Symbol 的作用"></a>Symbol 的作用</h6><p>Symbol() 函数会返回 Symbol 值，每个值都是唯一的。一个 symbol 值能作为对象属性的标识符。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="keyword">let</span> a1 = <span class="built_in">Symbol</span>();</div><div class="line">	<span class="keyword">let</span> a2 = <span class="built_in">Symbol</span>();</div><div class="line">	<span class="built_in">console</span>.log(a1 === a2);</div><div class="line"></div><div class="line">	<span class="keyword">let</span> a3 = <span class="built_in">Symbol</span>(<span class="string">'foo'</span>);</div><div class="line">	<span class="keyword">let</span> a4 = <span class="built_in">Symbol</span>(<span class="string">'foo'</span>);</div><div class="line">	<span class="built_in">console</span>.log(a3 === a4);</div><div class="line">&#125;</div><div class="line">&#123;</div><div class="line">	<span class="keyword">let</span> a1 = <span class="built_in">Symbol</span>.for(<span class="string">'abc'</span>);</div><div class="line">	<span class="keyword">let</span> obj = &#123;</div><div class="line">		[a1]: <span class="string">'123'</span>,</div><div class="line">		<span class="string">'abc'</span>: <span class="number">345</span>,</div><div class="line">		<span class="string">'c'</span>: <span class="number">456</span></div><div class="line">	&#125;</div><div class="line">	<span class="built_in">console</span>.log(obj);</div><div class="line"></div><div class="line">	<span class="comment">// 无法遍历 Symbol 类型</span></div><div class="line">	<span class="keyword">for</span> (<span class="keyword">let</span> [key, value] <span class="keyword">of</span> <span class="built_in">Object</span>.entries(obj)) &#123;</div><div class="line">		<span class="built_in">console</span>.log(key, value);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">// 只能遍历 Symbol 类型</span></div><div class="line">	<span class="built_in">Object</span>.getOwnPropertySymbols(obj).forEach(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(obj[item]);</div><div class="line">	&#125;)</div><div class="line"></div><div class="line">	<span class="comment">// 全部遍历</span></div><div class="line">	<span class="built_in">Reflect</span>.ownKeys(obj).forEach(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">'ownkeys'</span>, item, obj[item]);</div><div class="line">	&#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h4 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h4><h6 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h6><p>Set 对象是值的集合，你可以按照插入的顺序迭代它的元素。 Set中的元素只会出现一次，即 Set 中的元素是唯一的。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="keyword">let</span> list = <span class="keyword">new</span> <span class="built_in">Set</span>();</div><div class="line">	list.add(<span class="number">1</span>);</div><div class="line">	list.add(<span class="number">3</span>);</div><div class="line">	list.add(<span class="number">5</span>);</div><div class="line">	list.add(<span class="number">7</span>);</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'size'</span>, list.size);		<span class="comment">// size 4</span></div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'length'</span>, list.length);	<span class="comment">// length undefined</span></div><div class="line">&#125;</div><div class="line">&#123;</div><div class="line">	<span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">2</span>];</div><div class="line">	<span class="keyword">let</span> list = <span class="keyword">new</span> <span class="built_in">Set</span>(arr);</div><div class="line">	<span class="comment">// 重复的数组元素会被过滤掉</span></div><div class="line">	<span class="built_in">console</span>.log(list);					<span class="comment">// Set &#123; 1, 2, 3, 4, 5 &#125;</span></div><div class="line">&#125;</div><div class="line">&#123;</div><div class="line">	<span class="keyword">let</span> arr = [<span class="string">'add'</span>, <span class="string">'delete'</span>, <span class="string">'clear'</span>, <span class="string">'has'</span>];</div><div class="line">	<span class="keyword">let</span> list = <span class="keyword">new</span> <span class="built_in">Set</span>(arr);</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'has'</span>, list.has(<span class="string">'has'</span>));</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'delete'</span>, list.delete(<span class="string">'add'</span>), list);</div><div class="line">	list.clear()</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'clear'</span>, list);</div><div class="line">&#125;</div><div class="line">&#123;</div><div class="line">	<span class="comment">// Set 遍历</span></div><div class="line">	<span class="keyword">let</span> arr = [<span class="string">'add'</span>, <span class="string">'delete'</span>, <span class="string">'clear'</span>, <span class="string">'has'</span>];</div><div class="line">	<span class="keyword">let</span> list = <span class="keyword">new</span> <span class="built_in">Set</span>(arr);</div><div class="line"></div><div class="line">	<span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">of</span> list.keys()) &#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">'key'</span>, key);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">for</span> (<span class="keyword">let</span> value <span class="keyword">of</span> list.values()) &#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">'value'</span>, value);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">for</span> (<span class="keyword">let</span> item <span class="keyword">of</span> list) &#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">'item'</span>, item);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">for</span> (<span class="keyword">let</span> [key, value] <span class="keyword">of</span> list.entries()) &#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">'entries'</span>, key, value);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	list.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(item);</div><div class="line">	&#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h6 id="WeakSet"><a href="#WeakSet" class="headerlink" title="WeakSet"></a>WeakSet</h6><p>WeakSet 和 Set 的区别：WeakSet 只能存储对象类型的数据。WeakSet 存储对象数据时是基于弱引用，不会检测对象数据是否被垃圾回收。WeakSet 类型没有 clear 方法。</p>
-<h6 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h6>
+<h6 id="WeakSet"><a href="#WeakSet" class="headerlink" title="WeakSet"></a>WeakSet</h6><p>WeakSet 和 Set 的区别：WeakSet 只能存储对象类型的数据。WeakSet 存储对象数据时是基于弱引用，不会检测对象数据是否被垃圾回收。WeakSet 类型没有 clear() 方法，WeakSet 不能遍历。</p>
+<h6 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h6><p>new Map([iterable]),Iterable 可以是一个数组或者其他 iterable 对象，其元素或为键值对，或为两个元素的数组。 每个键值对都会添加到新的 Map。null 会被当做 undefined。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>();</div><div class="line">	<span class="keyword">let</span> arr = [<span class="string">'123'</span>];</div><div class="line">	map.set(arr, <span class="number">456</span>);</div><div class="line">	<span class="built_in">console</span>.log(map, map.get(arr));</div><div class="line">&#125;</div><div class="line">&#123;</div><div class="line">	<span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>([[<span class="string">'a'</span>,<span class="number">123</span>],[<span class="string">'b'</span>,<span class="number">456</span>]]);</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'map args'</span>, map);</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'size'</span>, map.size)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h6 id="WeakMap"><a href="#WeakMap" class="headerlink" title="WeakMap"></a>WeakMap</h6><ul>
+<li>只能存储对象类型数据</li>
+<li>没有 clear() 方法</li>
+<li>不能遍历</li>
+</ul>
+<h6 id="Map-与-Array-的对比"><a href="#Map-与-Array-的对比" class="headerlink" title="Map 与 Array 的对比"></a>Map 与 Array 的对比</h6><h6 id="Set-与-Array-的对比"><a href="#Set-与-Array-的对比" class="headerlink" title="Set 与 Array 的对比"></a>Set 与 Array 的对比</h6>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/12/21/学习-ES6/" data-id="cjbygdk4t00738u4b2wn22vma" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/12/21/学习-ES6/" data-id="cjbygq5n5007aiu4bsefzlb3j" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -164,7 +171,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/12/11/学习算法设计/" data-id="cjbygdk5m007v8u4bsvs62hoc" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/12/11/学习算法设计/" data-id="cjbygq5ni007oiu4bg3yaf6me" class="article-share-link">Share</a>
       
       
     </footer>
@@ -200,7 +207,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/12/11/学习数据结构/" data-id="cjbygdk5g007r8u4b9bkkzjk9" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/12/11/学习数据结构/" data-id="cjbygq5ne007iiu4b1t379zmo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -408,7 +415,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/16/PHP-秒杀系统/" data-id="cjbygdjzk00288u4b8a745ufy" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/11/16/PHP-秒杀系统/" data-id="cjbygq5jw0026iu4b1trn583h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -1085,7 +1092,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjbygdjzo002b8u4b6lhneo4y" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjbygq5k6002ciu4bcdag08ae" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1614,7 +1621,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/09/Web-API-的设计与开发/" data-id="cjbygdk0u003b8u4bhl6pdnd3" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/11/09/Web-API-的设计与开发/" data-id="cjbygq5kk002ziu4by4in7vvm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -1708,7 +1715,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/05/日常开发常用命令/" data-id="cjbygdk5r00848u4bpeoyogf6" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/11/05/日常开发常用命令/" data-id="cjbygq5np0084iu4b7plzovlj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1797,7 +1804,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/01/刻意练习/" data-id="cjbygdk4r00708u4bzh5kjeaa" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/11/01/刻意练习/" data-id="cjbygq5ms006kiu4b0oy3ixpk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -2009,7 +2016,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/10/24/高性能的-PHP-API-接口开发/" data-id="cjbygdk6e008l8u4bj96z7lw1" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/10/24/高性能的-PHP-API-接口开发/" data-id="cjbygq5nv008giu4b1dstrakn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -2066,7 +2073,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/09/04/Vue-js-2-X-实践/" data-id="cjbygdjzy002l8u4bdm9t3h0r" class="article-share-link">Delen</a>
+      <a data-url="http://luisedware.github.io/2017/09/04/Vue-js-2-X-实践/" data-id="cjbygq5kd002jiu4bul2dsuww" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
@@ -2089,7 +2096,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categorieën</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -2099,7 +2106,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Labels</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
     </div>
@@ -2118,7 +2125,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archieven</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
@@ -2128,7 +2135,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
