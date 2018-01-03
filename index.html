@@ -53,9 +53,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -129,11 +129,16 @@
 <li>没有 clear() 方法</li>
 <li>不能遍历</li>
 </ul>
-<h6 id="Map-与-Array-的对比"><a href="#Map-与-Array-的对比" class="headerlink" title="Map 与 Array 的对比"></a>Map 与 Array 的对比</h6><h6 id="Set-与-Array-的对比"><a href="#Set-与-Array-的对比" class="headerlink" title="Set 与 Array 的对比"></a>Set 与 Array 的对比</h6>
+<h6 id="Map-与-Array-的对比"><a href="#Map-与-Array-的对比" class="headerlink" title="Map 与 Array 的对比"></a>Map 与 Array 的对比</h6><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="comment">// 增删查改对比</span></div><div class="line">	<span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>();</div><div class="line">	<span class="keyword">let</span> arr = [];</div><div class="line"></div><div class="line">	<span class="comment">// 增</span></div><div class="line">	map.set(<span class="string">'t'</span>, <span class="number">1</span>);</div><div class="line">	arr.push(&#123;<span class="attr">t</span>: <span class="number">1</span>&#125;);</div><div class="line">	<span class="built_in">console</span>.info(<span class="string">'map-array'</span>, map, arr);</div><div class="line"></div><div class="line">	<span class="comment">// 查</span></div><div class="line">	<span class="keyword">let</span> map_exist = map.has(<span class="string">'t'</span>);</div><div class="line">	<span class="keyword">let</span> arr_exist = arr.find(<span class="function"><span class="params">item</span> =&gt;</span> item.t);</div><div class="line">	<span class="built_in">console</span>.info(<span class="string">'map-array'</span>, map_exist, arr_exist);</div><div class="line"></div><div class="line">	<span class="comment">// 改</span></div><div class="line">	map.set(<span class="string">'t'</span>, <span class="number">2</span>);</div><div class="line">	arr.forEach(<span class="function"><span class="params">item</span> =&gt;</span> item.t ? item.t = <span class="number">2</span> : <span class="string">''</span>);</div><div class="line">	<span class="built_in">console</span>.info(<span class="string">'map-array'</span>, map, arr);</div><div class="line"></div><div class="line">	<span class="comment">// 删</span></div><div class="line">	map.delete(<span class="string">'t'</span>);</div><div class="line">	<span class="keyword">let</span> index = arr.findIndex(<span class="function"><span class="params">item</span> =&gt;</span> item.t);</div><div class="line">	arr.splice(index, <span class="number">1</span>);</div><div class="line">	<span class="built_in">console</span>.info(<span class="string">'map-array'</span>, map, arr);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h6 id="Set-与-Array-的对比"><a href="#Set-与-Array-的对比" class="headerlink" title="Set 与 Array 的对比"></a>Set 与 Array 的对比</h6><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="comment">// 增删查改对比</span></div><div class="line">	<span class="keyword">let</span> set = <span class="keyword">new</span> <span class="built_in">Set</span>();</div><div class="line">	<span class="keyword">let</span> arr = [];</div><div class="line"></div><div class="line">	<span class="comment">// 增</span></div><div class="line">	obj = &#123;<span class="attr">t</span>:<span class="number">1</span>&#125;;</div><div class="line">	set.add(obj);</div><div class="line">	arr.push(obj);</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'set-array'</span>, set, arr);</div><div class="line"></div><div class="line">	<span class="comment">// 查</span></div><div class="line">	<span class="keyword">let</span> setExist = set.has(obj);</div><div class="line">	<span class="keyword">let</span> arrExist = arr.find(<span class="function"><span class="params">item</span> =&gt;</span> item.t);</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'set-array'</span>, setExist, arrExist);</div><div class="line"></div><div class="line">	<span class="comment">// 改</span></div><div class="line">	set.forEach(<span class="function"><span class="params">item</span> =&gt;</span> item.t ? item.t = <span class="number">2</span> : <span class="string">''</span>);</div><div class="line">	arr.forEach(<span class="function"><span class="params">item</span> =&gt;</span> item.t ? item.t = <span class="number">2</span> : <span class="string">''</span>);</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'set-array'</span>, set, arr);</div><div class="line"></div><div class="line">	<span class="comment">// 删</span></div><div class="line">	set.forEach(<span class="function"><span class="params">item</span> =&gt;</span> item.t ? set.delete(obj) : <span class="string">''</span>);</div><div class="line">	<span class="keyword">let</span> index = arr.findIndex(<span class="function"><span class="params">item</span> =&gt;</span> item.t);</div><div class="line">	arr.splice(index, <span class="number">1</span>);</div><div class="line">	<span class="built_in">console</span>.info(<span class="string">'set-array'</span>, set, arr);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h6 id="Map、Set-与-Object-对比"><a href="#Map、Set-与-Object-对比" class="headerlink" title="Map、Set 与 Object 对比"></a>Map、Set 与 Object 对比</h6><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="comment">// map、set、object 对比</span></div><div class="line">	<span class="keyword">let</span> item = &#123;<span class="attr">t</span>:<span class="number">1</span>&#125;;</div><div class="line">	<span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>();</div><div class="line">	<span class="keyword">let</span> set = <span class="keyword">new</span> <span class="built_in">Set</span>();</div><div class="line">	<span class="keyword">let</span> obj = &#123;&#125;;</div><div class="line"></div><div class="line">	<span class="comment">// 增</span></div><div class="line">	map.set(<span class="string">'t'</span>, <span class="number">1</span>);</div><div class="line">	set.add(item);</div><div class="line">	obj[<span class="string">'t'</span>] = <span class="number">1</span>;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'map-set-obj'</span>, map, set, obj);</div><div class="line"></div><div class="line">	<span class="comment">// 查</span></div><div class="line">	<span class="built_in">console</span>.info(&#123;</div><div class="line">		mapExist: map.has(<span class="string">'t'</span>),</div><div class="line">		setExist: set.has(item),</div><div class="line">		objExist: <span class="string">'t'</span> <span class="keyword">in</span> obj</div><div class="line">	&#125;);</div><div class="line"></div><div class="line">	<span class="comment">// 改</span></div><div class="line">	map.set(<span class="string">'t'</span>, <span class="number">2</span>);</div><div class="line">	item.t = <span class="number">2</span>;</div><div class="line">	obj[<span class="string">'t'</span>] = <span class="number">2</span>;</div><div class="line">	<span class="built_in">console</span>.info(<span class="string">'map-set-obj-modify'</span>, map, set, obj);</div><div class="line"></div><div class="line">	<span class="comment">// 删除</span></div><div class="line">	map.delete(<span class="string">'t'</span>);</div><div class="line">	set.delete(item);</div><div class="line">	<span class="keyword">delete</span> obj[<span class="string">'t'</span>];</div><div class="line">	<span class="built_in">console</span>.info(<span class="string">'map-set-obj-delete'</span>, map, set, obj);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>以后使用数据结构时，优先考虑 Set 和 Map 数据结构，然后才是 Array 和 Object 数据结构</p>
+<h4 id="Proxy-和-Reflect"><a href="#Proxy-和-Reflect" class="headerlink" title="Proxy 和 Reflect"></a>Proxy 和 Reflect</h4><h6 id="Proxy-概念、适用场景"><a href="#Proxy-概念、适用场景" class="headerlink" title="Proxy 概念、适用场景"></a>Proxy 概念、适用场景</h6><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="comment">// 原始对象</span></div><div class="line">	<span class="keyword">let</span> obj = &#123;</div><div class="line">		time: <span class="string">'2017-03-11'</span>,</div><div class="line">		name: <span class="string">'net'</span>,</div><div class="line">		_r: <span class="number">123</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">// 通过 Proxy 创建一个代理对象 monitor</span></div><div class="line">	<span class="keyword">let</span> monitor = <span class="keyword">new</span> <span class="built_in">Proxy</span>(obj, &#123;</div><div class="line">		<span class="comment">// 拦截对象属性读取</span></div><div class="line">		get(target, key)&#123;</div><div class="line">			<span class="keyword">if</span> (key === <span class="string">'time'</span>) &#123;</div><div class="line">				<span class="keyword">return</span> target[key].replace(<span class="string">'2017'</span>, <span class="string">'2888'</span>);</div><div class="line">			&#125;</div><div class="line">		&#125;,</div><div class="line">		<span class="comment">// 拦截对象设置属性</span></div><div class="line">		set(target, key, value)&#123;</div><div class="line">			<span class="keyword">if</span> (key === <span class="string">'name'</span>) &#123;</div><div class="line">				<span class="keyword">return</span> target[key] = value;</div><div class="line">			&#125;<span class="keyword">else</span>&#123;</div><div class="line">				<span class="keyword">return</span> target[key];</div><div class="line">			&#125;</div><div class="line">		&#125;,</div><div class="line">		<span class="comment">// 拦截 key in Object 操作</span></div><div class="line">		has(target, key)&#123;</div><div class="line">			<span class="keyword">if</span> (key === <span class="string">'name'</span>) &#123;</div><div class="line">				<span class="keyword">return</span> target[key]</div><div class="line">			&#125;<span class="keyword">else</span>&#123;</div><div class="line">				<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;,</div><div class="line">		<span class="comment">// 拦截删除操作</span></div><div class="line">		deleteProperty(target, key)&#123;</div><div class="line">			<span class="keyword">if</span> (key.indexOf(<span class="string">'_'</span>) &gt; <span class="number">-1</span>) &#123;</div><div class="line">				<span class="keyword">delete</span> target[key];</div><div class="line">				<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">			&#125;<span class="keyword">else</span>&#123;</div><div class="line">				<span class="keyword">return</span> target[key];</div><div class="line">			&#125;</div><div class="line">		&#125;,</div><div class="line">		<span class="comment">// 拦截 keys</span></div><div class="line">		ownKeys(target)&#123;</div><div class="line">			<span class="keyword">return</span> <span class="built_in">Object</span>.keys(target).filter(<span class="function"><span class="params">item</span> =&gt;</span> item != <span class="string">'time'</span>);</div><div class="line">		&#125;</div><div class="line">	&#125;);</div><div class="line"></div><div class="line">	<span class="comment">// 用户通过访问 monitor 来操作 obj</span></div><div class="line">	<span class="built_in">console</span>.log(monitor.time);</div><div class="line">	<span class="built_in">console</span>.log(monitor.name = <span class="string">"Hello World"</span>);</div><div class="line">	<span class="built_in">console</span>.log(monitor._r = <span class="string">"_r"</span>, obj);</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'time'</span> <span class="keyword">in</span> monitor, <span class="string">'name'</span> <span class="keyword">in</span> monitor);</div><div class="line">	<span class="built_in">console</span>.log(<span class="keyword">delete</span> monitor[<span class="string">'_r'</span>]);</div><div class="line">	<span class="built_in">console</span>.log(<span class="keyword">delete</span> monitor[<span class="string">'name'</span>], monitor);</div><div class="line">	<span class="built_in">console</span>.log(<span class="built_in">Object</span>.keys(monitor));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h6 id="Reflect-概念、适用场景"><a href="#Reflect-概念、适用场景" class="headerlink" title="Reflect 概念、适用场景"></a>Reflect 概念、适用场景</h6>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/12/21/学习-ES6/" data-id="cjbyr9u7p006sb14b7x3jrlqz" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/12/21/学习-ES6/" data-id="cjbyu2rf700704y4bdo81mlwz" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -171,7 +176,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/12/11/学习算法设计/" data-id="cjbyr9u80007jb14bpcpkpcv1" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/12/11/学习算法设计/" data-id="cjbyu2rfj007t4y4bz9xl0wxl" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -207,7 +212,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/12/11/学习数据结构/" data-id="cjbyr9u81007lb14bgpr5l6nj" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/12/11/学习数据结构/" data-id="cjbyu2rfk007x4y4bfwy396s9" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -415,7 +420,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/16/PHP-秒杀系统/" data-id="cjbyr9u5u002bb14bg6f770jl" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/16/PHP-秒杀系统/" data-id="cjbyu2rci002b4y4bn7ap2dti" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -1092,7 +1097,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjbyr9u61002tb14bv98xic38" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjbyu2rcf00284y4bj3i46wmo" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -1621,7 +1626,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/09/Web-API-的设计与开发/" data-id="cjbyr9u63002yb14b8h20lyur" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/09/Web-API-的设计与开发/" data-id="cjbyu2rcx002w4y4bz06gfzjb" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -1715,7 +1720,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/05/日常开发常用命令/" data-id="cjbyr9u85007vb14bjjpu43xj" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/05/日常开发常用命令/" data-id="cjbyu2rfp00894y4bimttq50b" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -1804,7 +1809,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/01/刻意练习/" data-id="cjbyr9u7n006mb14behk5jnoe" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/01/刻意练习/" data-id="cjbyu2rf6006x4y4b2h47885z" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -2016,7 +2021,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/10/24/高性能的-PHP-API-接口开发/" data-id="cjbyr9u8b008bb14bz1z3xlno" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/10/24/高性能的-PHP-API-接口开发/" data-id="cjbyu2rg2008o4y4bkpcap7o9" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -2073,7 +2078,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/09/04/Vue-js-2-X-实践/" data-id="cjbyr9u5x002ib14brec365ar" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/09/04/Vue-js-2-X-实践/" data-id="cjbyu2rct002l4y4btb0njx6n" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
@@ -2096,7 +2101,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -2106,7 +2111,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
     </div>
@@ -2116,7 +2121,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Programming-Language/" style="font-size: 11.43px;">Programming Language</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a> <a href="/tags/vue-js/" style="font-size: 10px;">vue.js</a>
     </div>
@@ -2135,7 +2140,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -2172,7 +2177,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2018 Luis Edware<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
