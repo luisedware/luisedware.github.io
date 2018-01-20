@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="七月十五九月初七">
 <meta property="og:description" content="Laravel 开发必装扩展包12 Yarn12345678// 安装依赖时不读取或生成 yarn.lock 锁文件yarn install --no-bin-links// 使用 cross-env 解决跨平台 NODE_ENV 问题yarn add cross-env// 设置 yarn 源yarn config set registry https://registry.npm.taobao">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-01-10T08:09:11.572Z">
+<meta property="og:updated_time" content="2018-01-20T08:38:20.155Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="日常开发常用命令">
 <meta name="twitter:description" content="Laravel 开发必装扩展包12 Yarn12345678// 安装依赖时不读取或生成 yarn.lock 锁文件yarn install --no-bin-links// 使用 cross-env 解决跨平台 NODE_ENV 问题yarn add cross-env// 设置 yarn 源yarn config set registry https://registry.npm.taobao">
@@ -57,9 +57,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
@@ -104,10 +104,6 @@
 </ul>
 <h2 id="Eloquent"><a href="#Eloquent" class="headerlink" title="Eloquent"></a>Eloquent</h2><h4 id="通过-save-更新"><a href="#通过-save-更新" class="headerlink" title="通过 save() 更新"></a>通过 save() 更新</h4><h4 id="通过-update-更新"><a href="#通过-update-更新" class="headerlink" title="通过 update() 更新"></a>通过 update() 更新</h4><h4 id="通过-redirect-gt-intended-实现页面重定向到上一次请求尝试访问的页面上"><a href="#通过-redirect-gt-intended-实现页面重定向到上一次请求尝试访问的页面上" class="headerlink" title="通过 redirect()-&gt;intended() 实现页面重定向到上一次请求尝试访问的页面上"></a>通过 redirect()-&gt;intended() 实现页面重定向到上一次请求尝试访问的页面上</h4><h4 id="通过-makeVisible-临时显示模型里指定的隐藏属性-hidden"><a href="#通过-makeVisible-临时显示模型里指定的隐藏属性-hidden" class="headerlink" title="通过 makeVisible() 临时显示模型里指定的隐藏属性 $hidden"></a>通过 makeVisible() 临时显示模型里指定的隐藏属性 $hidden</h4><h4 id="数据关联"><a href="#数据关联" class="headerlink" title="数据关联"></a>数据关联</h4><h4 id="数据批量填充"><a href="#数据批量填充" class="headerlink" title="数据批量填充"></a>数据批量填充</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$user_ids = [<span class="string">'1'</span>,<span class="string">'2'</span>,<span class="string">'3'</span>];</div><div class="line">$faker = app(Faker\Generator::class);</div><div class="line"></div><div class="line">$statuses = factory(Status::class)-&gt;times(<span class="number">100</span>)-&gt;make()-&gt;each(<span class="function"><span class="keyword">function</span> <span class="params">($status)</span> <span class="title">use</span> <span class="params">($faker, $user_ids)</span> </span>&#123;</div><div class="line">    $status-&gt;user_id = $faker-&gt;randomElement($user_ids);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">Status::insert($statuses-&gt;toArray());</div></pre></td></tr></table></figure>
 <h4 id="Carbon-设置中文"><a href="#Carbon-设置中文" class="headerlink" title="Carbon 设置中文"></a>Carbon 设置中文</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">boot</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">	\Carbon\Carbon::setLocale(<span class="string">'zh'</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line">...</div><div class="line"></div><div class="line"><span class="comment">// 显示友好的时间差</span></div><div class="line">$model-&gt;updated_at-&gt;diffForHumans();</div></pre></td></tr></table></figure>
-<h4 id="配置初始化-config-app-php"><a href="#配置初始化-config-app-php" class="headerlink" title="配置初始化 config/app.php"></a>配置初始化 config/app.php</h4><ul>
-<li>‘timezone’ =&gt; ‘Asia/Shanghai’,</li>
-<li>‘locale’ =&gt; ‘zh-CN’,</li>
-</ul>
 <h4 id="Auth-routes-等同代码"><a href="#Auth-routes-等同代码" class="headerlink" title="Auth::routes(); 等同代码"></a>Auth::routes(); 等同代码</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// Authentication Routes...</span></div><div class="line">Route::get(<span class="string">'login'</span>, <span class="string">'Auth\LoginController@showLoginForm'</span>)-&gt;name(<span class="string">'login'</span>);</div><div class="line">Route::post(<span class="string">'login'</span>, <span class="string">'Auth\LoginController@login'</span>);</div><div class="line">Route::post(<span class="string">'logout'</span>, <span class="string">'Auth\LoginController@logout'</span>)-&gt;name(<span class="string">'logout'</span>);</div><div class="line"></div><div class="line"><span class="comment">// Registration Routes...</span></div><div class="line">Route::get(<span class="string">'register'</span>, <span class="string">'Auth\RegisterController@showRegistrationForm'</span>)-&gt;name(<span class="string">'register'</span>);</div><div class="line">Route::post(<span class="string">'register'</span>, <span class="string">'Auth\RegisterController@register'</span>);</div><div class="line"></div><div class="line"><span class="comment">// Password Reset Routes...</span></div><div class="line">Route::get(<span class="string">'password/reset'</span>, <span class="string">'Auth\ForgotPasswordController@showLinkRequestForm'</span>)-&gt;name(<span class="string">'password.request'</span>);</div><div class="line">Route::post(<span class="string">'password/email'</span>, <span class="string">'Auth\ForgotPasswordController@sendResetLinkEmail'</span>)-&gt;name(<span class="string">'password.email'</span>);</div><div class="line">Route::get(<span class="string">'password/reset/&#123;token&#125;'</span>, <span class="string">'Auth\ResetPasswordController@showResetForm'</span>)-&gt;name(<span class="string">'password.reset'</span>);</div><div class="line">Route::post(<span class="string">'password/reset'</span>, <span class="string">'Auth\ResetPasswordController@reset'</span>);</div></pre></td></tr></table></figure>
 <h4 id="使用第三方扩展包-mews-captcha-在-Laravel-中实现验证码的功能"><a href="#使用第三方扩展包-mews-captcha-在-Laravel-中实现验证码的功能" class="headerlink" title="使用第三方扩展包 mews/captcha 在 Laravel 中实现验证码的功能"></a>使用第三方扩展包 mews/captcha 在 Laravel 中实现验证码的功能</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">composer require &quot;mews/captcha:~2.0&quot;</div><div class="line"></div><div class="line">&lt;img class=&quot;thumbnail captcha&quot;</div><div class="line">	src=&quot;&#123;&#123; captcha_src(&apos;flat&apos;) &#125;&#125;&quot;</div><div class="line">	onclick=&quot;this.src=&apos;/captcha/flat?&apos;+Math.random()&quot;</div><div class="line">	title=&quot;点击图片重新获取验证码&quot;</div><div class="line">&gt;</div></pre></td></tr></table></figure>
 <h4 id="form-元素完整声明"><a href="#form-元素完整声明" class="headerlink" title="form 元素完整声明"></a>form 元素完整声明</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;form action=&quot;&#123;&#123; route(&apos;users.update&apos;, $user-&gt;id) &#125;&#125;&quot;</div><div class="line">	method=&quot;POST&quot;</div><div class="line">	accept-charset=&quot;UTF-8&quot;</div><div class="line">	enctype=&quot;multipart/form-data&quot;</div><div class="line">&gt;</div><div class="line">&lt;/form&gt;</div></pre></td></tr></table></figure>
@@ -154,7 +150,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/05/日常开发常用命令/" data-id="cjc8seych007uwv4bz6g4fttr" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/05/日常开发常用命令/" data-id="cjcn3qo2u00811x4bchno5xv7" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -164,7 +160,7 @@
 <nav id="article-nav">
   
     <a href="/2017/11/09/Web-API-的设计与开发/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
+      <strong class="article-nav-caption">Récent</strong>
       <div class="article-nav-title">
         
           Web API 的设计与开发
@@ -174,7 +170,7 @@
   
   
     <a href="/2017/11/01/刻意练习/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title">刻意练习</div>
     </a>
   
@@ -189,7 +185,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
     </div>
@@ -199,7 +195,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
     </div>
@@ -209,7 +205,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Programming-Language/" style="font-size: 11.43px;">Programming Language</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a> <a href="/tags/vue-js/" style="font-size: 10px;">vue.js</a>
     </div>
@@ -228,7 +224,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -265,7 +261,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2018 Luis Edware<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
