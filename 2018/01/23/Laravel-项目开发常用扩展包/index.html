@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Laravel 项目开发常用扩展包 | 七月十五九月初七</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Laravel IDE Helperbarryvdh/laravel-ide-helper 扩展包可以通过执行命令生成 IDE Helper 文件，从而使用户的 IDE (PHPStorm, Sublme) 能够实现自动完成、代码跟踪和代码智能提示等功能，提高开发者的工作效率。 安装与使用1). 使用 Composer 安装1composer require barryvdh/laravel-id">
+<meta name="keywords" content="Laravel">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Laravel 项目开发常用扩展包">
+<meta property="og:url" content="http://luisedware.github.io/2018/01/23/Laravel-项目开发常用扩展包/index.html">
+<meta property="og:site_name" content="七月十五九月初七">
+<meta property="og:description" content="Laravel IDE Helperbarryvdh/laravel-ide-helper 扩展包可以通过执行命令生成 IDE Helper 文件，从而使用户的 IDE (PHPStorm, Sublme) 能够实现自动完成、代码跟踪和代码智能提示等功能，提高开发者的工作效率。 安装与使用1). 使用 Composer 安装1composer require barryvdh/laravel-id">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-01-24T01:20:57.274Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Laravel 项目开发常用扩展包">
+<meta name="twitter:description" content="Laravel IDE Helperbarryvdh/laravel-ide-helper 扩展包可以通过执行命令生成 IDE Helper 文件，从而使用户的 IDE (PHPStorm, Sublme) 能够实现自动完成、代码跟踪和代码智能提示等功能，提高开发者的工作效率。 安装与使用1). 使用 Composer 安装1composer require barryvdh/laravel-id">
+  
+    <link rel="alternate" href="/atom.xml" title="七月十五九月初七" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">七月十五九月初七</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一两祝你手边多银财，二两祝你方寸永不乱</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://luisedware.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Laravel-项目开发常用扩展包" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/23/Laravel-项目开发常用扩展包/" class="article-date">
+  <time datetime="2018-01-23T12:27:46.000Z" itemprop="datePublished">2018-01-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Laravel 项目开发常用扩展包
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Laravel-IDE-Helper"><a href="#Laravel-IDE-Helper" class="headerlink" title="Laravel IDE Helper"></a>Laravel IDE Helper</h2><p><code>barryvdh/laravel-ide-helper</code> 扩展包可以通过执行命令生成 IDE Helper 文件，从而使用户的 IDE (PHPStorm, Sublme) 能够实现自动完成、代码跟踪和代码智能提示等功能，提高开发者的工作效率。</p>
+<h4 id="安装与使用"><a href="#安装与使用" class="headerlink" title="安装与使用"></a>安装与使用</h4><p>1). 使用 Composer 安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">composer require barryvdh/laravel-ide-helper --dev</div></pre></td></tr></table></figure></p>
+<p>2). 在文件 <code>app/Providers/AppServiceProvider.php</code> 中注册该扩展包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"></div><div class="line">public function register()</div><div class="line">&#123;</div><div class="line">	// 生成环境不需要注册该服务</div><div class="line">    if ($this-&gt;app-&gt;environment() !== &apos;production&apos;) &#123;</div><div class="line">        $this-&gt;app-&gt;register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">...</div></pre></td></tr></table></figure></p>
+<p>3). 执行以下命令生成 IDE Helper 文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan ide-helper:generate</div></pre></td></tr></table></figure></p>
+<p>4). 也可以在文件 <code>composer.json</code> 进行配置，在安装或更新扩展包时自动生成 IDE Helper 文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"></div><div class="line">&quot;scripts&quot;: &#123;</div><div class="line">    &quot;post-root-package-install&quot;: [</div><div class="line">        &quot;@php -r \&quot;file_exists(&apos;.env&apos;) || copy(&apos;.env.example&apos;, &apos;.env&apos;);\&quot;&quot;</div><div class="line">    ],</div><div class="line">    &quot;post-create-project-cmd&quot;: [</div><div class="line">        &quot;@php artisan key:generate&quot;</div><div class="line">    ],</div><div class="line">    &quot;post-autoload-dump&quot;: [</div><div class="line">        &quot;Illuminate\\Foundation\\ComposerScripts::postAutoloadDump&quot;,</div><div class="line">        &quot;php artisan ide-helper:generate&quot;,</div><div class="line">        &quot;php artisan ide-helper:meta&quot;,</div><div class="line">        &quot;@php artisan package:discover&quot;</div><div class="line">    ]</div><div class="line">&#125;,</div><div class="line"></div><div class="line">...</div></pre></td></tr></table></figure></p>
+<p>5). 也可以生成模型字段智能提示的代码注释，安装以下扩展包并执行命令生成代码注释<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">composer require doctrine/dbal --dev</div><div class="line"></div><div class="line">// 生成 app\User.php 模型代码注释</div><div class="line">php artisan ide-helper:models User</div><div class="line"></div><div class="line">// 生成 app\Models\Foto.php 模型代码注释</div><div class="line">php artisan ide-helper:models &quot;App\Models\Foto&quot;</div><div class="line"></div><div class="line">// 生成目录 Models 下所有模型的代码注释</div><div class="line">php artisan ide-helper:models --dir=&quot;Models&quot;</div></pre></td></tr></table></figure></p>
+<h2 id="Laravel-Debugbar"><a href="#Laravel-Debugbar" class="headerlink" title="Laravel Debugbar"></a>Laravel Debugbar</h2><p><code>barryvdh/laravel-debugbar</code> 扩展包可以将 Laravel 项目的各项开发信息呈现给开发者，可以让开发者快速定位问题，提高 Debug 效率。</p>
+<h4 id="安装与使用-1"><a href="#安装与使用-1" class="headerlink" title="安装与使用"></a>安装与使用</h4><p>1). 使用 Composer 安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">composer require barryvdh/laravel-debugbar --dev</div></pre></td></tr></table></figure></p>
+<p>2). 确保文件 <code>.env</code> 的 <code>APP_DEBUG</code> 值为 <code>true</code>。</p>
+<p>3). 在文件 <code>app/Providers/AppServiceProvider.php</code> 中注册该扩展包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"></div><div class="line">public function register()</div><div class="line">&#123;</div><div class="line">    if (env(&apos;APP_DEBUG&apos;)) &#123;</div><div class="line">        $this-&gt;app-&gt;register(\Barryvdh\Debugbar\ServiceProvider::class,);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">...</div></pre></td></tr></table></figure></p>
+<p>4). 执行以下命令完成配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan vendor:publish --provider=&quot;Barryvdh\Debugbar\ServiceProvider&quot;</div></pre></td></tr></table></figure></p>
+<p>5). 常用方法，需要在配置文件 <code>config/app</code> 的数组 <code>aliases</code> 添加 <code>&#39;Debugbar&#39; =&gt; Barryvdh\Debugbar\Facade::class,</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">// 抛出信息</div><div class="line">Debugbar::info($object);</div><div class="line">Debugbar::error(&apos;Error!&apos;);</div><div class="line">Debugbar::warning(&apos;Watch out…&apos;);</div><div class="line">Debugbar::addMessage(&apos;Another message&apos;, &apos;mylabel&apos;);</div><div class="line"></div><div class="line">// 计算耗时</div><div class="line">Debugbar::startMeasure(&apos;render&apos;,&apos;Time for rendering&apos;);</div><div class="line">Debugbar::stopMeasure(&apos;render&apos;);</div><div class="line">Debugbar::addMeasure(&apos;now&apos;, LARAVEL_START, microtime(true));</div><div class="line">Debugbar::measure(&apos;My long operation&apos;, function() &#123;</div><div class="line">    // Do something…</div><div class="line">&#125;);</div><div class="line"></div><div class="line">// 抛出异常</div><div class="line">try &#123;</div><div class="line">    throw new Exception(&apos;foobar&apos;);</div><div class="line">&#125; catch (Exception $e) &#123;</div><div class="line">    Debugbar::addThrowable($e);</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 启用关闭</div><div class="line">Debugbar::enable();</div><div class="line">Debugbar::disable();</div></pre></td></tr></table></figure></p>
+<h2 id="Laravel-Lang"><a href="#Laravel-Lang" class="headerlink" title="Laravel-Lang"></a>Laravel-Lang</h2><p><code>overtrue/laravel-lang</code> 是基于 <code>caouecs/Laravel-lang</code>、包含 52 种语言的扩展包。</p>
+<h2 id="安装与使用-2"><a href="#安装与使用-2" class="headerlink" title="安装与使用"></a>安装与使用</h2><p>1). 使用 Composer 安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">composer require &quot;overtrue/laravel-lang:~3.0&quot;</div></pre></td></tr></table></figure></p>
+<p>2). 安装完毕之后，将文件 <code>config/app.php</code> 的代码进行替换：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 原来代码</div><div class="line">Illuminate\Translation\TranslationServiceProvider::class,</div><div class="line"></div><div class="line">// 替换代码</div><div class="line">Overtrue\LaravelLang\TranslationServiceProvider::class,</div></pre></td></tr></table></figure></p>
+<p>3). 然后修改文件 <code>config/app.php</code> 的配置项并执行命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"></div><div class="line">&apos;locale&apos; =&gt; &apos;zh-CN&apos;,</div><div class="line"></div><div class="line">...</div><div class="line"></div><div class="line">// 需要执行的命令</div><div class="line">php artisan lang:publish zh-CN</div></pre></td></tr></table></figure></p>
+<p>4). 需要额外添加语言项，请在 <code>resources/lang/zh-CN</code> 下建立文件即可，例如新增文件 <code>resources/lang/zh-CN/example.php</code>，代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"></div><div class="line">return [</div><div class="line">	&apos;hello&apos; =&gt; &apos;你好&apos;,</div><div class="line">	&apos;world&apos; =&gt; &apos;:hello 世界&apos;,</div><div class="line">];</div></pre></td></tr></table></figure></p>
+<p>然后在可以使用函数 <code>trans()</code> 返回自定义语言项:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">echo trans(&apos;example.hello&apos;);</div><div class="line">echo trans(&apos;example.world&apos;, [&apos;hello&apos; =&gt; trans(&apos;example.hello&apos;)]);</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2018/01/23/Laravel-项目开发常用扩展包/" data-id="cjcsdvur80004pl4b6x2ti6hd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/12/21/学习-ES6/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">学习 ES6</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Programming-Language/" style="font-size: 11.43px;">Programming Language</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a> <a href="/tags/vue-js/" style="font-size: 10px;">vue.js</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/01/23/Laravel-项目开发常用扩展包/">Laravel 项目开发常用扩展包</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/21/学习-ES6/">学习 ES6</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/11/学习算法设计/">学习算法设计</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/11/学习数据结构/">学习数据结构</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/16/PHP-秒杀系统/">PHP 秒杀系统</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Luis Edware<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
