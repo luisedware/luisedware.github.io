@@ -127,7 +127,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2018/01/23/Laravel-项目开发常用扩展包/" data-id="cjct7vu8i000a664bm67hp7ko" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2018/01/23/Laravel-项目开发常用扩展包/" data-id="cjcugni0n00053h4b55zanrys" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -220,7 +220,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/12/21/学习-ES6/" data-id="cjct7vubx0076664bwy40csmc" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/12/21/学习-ES6/" data-id="cjcugni5l007c3h4bq593vnx6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -258,7 +258,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/12/11/学习算法设计/" data-id="cjct7vuc4007o664burgzxnrf" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/12/11/学习算法设计/" data-id="cjcugni5y007w3h4b6jz4h79u" class="article-share-link">Share</a>
       
       
     </footer>
@@ -294,7 +294,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/12/11/学习数据结构/" data-id="cjct7vuc5007q664bjbpp2wv6" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/12/11/学习数据结构/" data-id="cjcugni5w007s3h4bqqhq4bmy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -502,7 +502,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/16/PHP-秒杀系统/" data-id="cjct7vu9p002b664bz4midadz" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/16/PHP-秒杀系统/" data-id="cjcugni29002a3h4bqj50vxe7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -793,51 +793,6 @@
 <li>解题方法：多多学习 PHP 字符串和数组的内置函数，尝试模拟其功能，有助于提成逻辑思维和熟悉函数功能。</li>
 <li>一网打尽：写一个函数，要求不使用 array_merge 完成多个数组的合并。</li>
 </ul>
-<h2 id="高并发解决方案考察点（重点）"><a href="#高并发解决方案考察点（重点）" class="headerlink" title="高并发解决方案考察点（重点）"></a>高并发解决方案考察点（重点）</h2><ul>
-<li>回顾真题：PHP 如何解决网站大流量与高并发的问题？</li>
-<li>考点分析：高并发架构相关的概念和高并发解决方案案例</li>
-<li>知识延伸：</li>
-<li>一网打尽：</li>
-</ul>
-<p>高并发：通常是指并发访问。简单来说，就是在某个时间点，有多少个访问同时到来。通常如果一个系统的日 PV 在千万以上，有可能是一个高并发的系统。</p>
-<p>高并发的问题，我们具体该关心什么？</p>
-<p><strong>QPS</strong></p>
-<p>每秒钟请求或者查询的数量，在互联网领域，指每秒响应请求数(指 HTTP 请求)。</p>
-<p>峰值每秒请求数（QPS) = (总 PV 数 * 80%)/(86400/4*20%)</p>
-<p>80% 的访问量都集中在 20% 的时间内。</p>
-<p><strong>吞吐量</strong></p>
-<p>单位时间内处理的请求数量（通常由 QPS 与并发数决定）。</p>
-<p><strong>响应时间</strong></p>
-<p>从请求发出到收到响应花费的时间。</p>
-<p><strong>PV</strong></p>
-<p>综合浏览量（Page View），即页面浏览量或者点击量，所有访客在 24 小时内访问该网站不同页面的数量。同一个人浏览网站的同一个页面，只记作一次 PV。</p>
-<p><strong>UV</strong></p>
-<p>独立访客（Unique Visitor），即一定时间范围内相同访客多次访问网站，只计算为 1 个独立访客。</p>
-<p><strong>带宽</strong></p>
-<p>计算带宽大小需关注两个指标，峰值流量和页面的平均大小。日网站带宽 = <code>PV / 86400 * 平均页面大小 KB * 8</code>。峰值一般是平均值的倍数，根据实际情况而定。</p>
-<p><strong>压力测试</strong></p>
-<p>测试能承受的最大并发<br>测试最大承受的 QPS 值</p>
-<p>常用性能测试工具</p>
-<ul>
-<li>ab，Apache Benchmark</li>
-<li>wrk</li>
-<li>http_load</li>
-<li>Web Bench</li>
-<li>Siege</li>
-<li>Apache JMeter</li>
-</ul>
-<p>注意事项</p>
-<pre><code>- QPS 不等于并发连接数
-- QPS 是每秒 HTTP 请求数量，并发连接数是系统同时处理的请求数量。
-- 测试机器与被测试机器分开
-- 不要对线上服务做压力测试
-- 观察测试工具 ab 所在机器，以及被测试的前端机的 CPU，内存，网络等都不超过最高限度的 75%
-</code></pre><p><strong>QPS 达到极限</strong></p>
-<p>QPS 达到 50，可以称之为小型网站，一般的服务器就可以应付。</p>
-<p>QPS 达到 100，假设关系型数据库的每次请求在 0.01 秒完成。假设单页面只有一个 SQL 查询，那么 100 QPS 意味着 1 秒钟完成 100 次请求，但是此时我们并不能保证数据库查询能完成 100 次。方案：数据库缓存层、数据库的负载均衡。</p>
-<p>QPS 达到 800,假设我们使用百兆带宽，意味着网站出口的实际带宽是 8M 左右。假设每个页面只有 10 K，在这个并发条件下，百兆带宽已经吃完。方案：CDN 加速、负载均衡。</p>
-<p>QPS 达到 1000，假设使用 Memcache 缓存数据库查询数据，每个页面对 Memcache 的请求远大于直接对 DB 的请求。Memcache 的悲观并发数在 2W 左右，但有可能在之前内网带宽已经吃光，表现出不稳定。静态 HTML 缓存。</p>
-<p>QPS 达到 2000。这个级别下，文件系统访问锁都变成了灾难。方案：做业务分离，分布式存储。</p>
 <p><strong>高并发解决方案案例</strong></p>
 <ul>
 <li>流量优化：防盗链处理。</li>
@@ -875,164 +830,6 @@
 </ul>
 </li>
 </ul>
-<h4 id="防盗链处理"><a href="#防盗链处理" class="headerlink" title="防盗链处理"></a>防盗链处理</h4><p><strong>盗链</strong></p>
-<p>是指在自己的页面上展示一些并不在自己服务器上的内容。获得他人服务器上的资源地址，绕过别人的资源展示页面，直接在自己的页面上向最终用户提供此内容。</p>
-<p>常见的是小站盗用大战的图片、音乐、视频、软件等资源。</p>
-<p>通过盗链的方法可以减轻自己服务器的负担，因为真实的空间和流量均是来自别人的服务器。</p>
-<p><strong>防盗链</strong></p>
-<p>防止别人通过一些技术手段绕过本站的资源展示页面，盗用本站的资源，让绕开本站资源展示页面的资源链接失效。可以大大减轻服务器的压力。</p>
-<blockquote>
-<p>工作原理</p>
-</blockquote>
-<p>通过 Referer 或者签名，网站可以检测目标网页访问的来源网页，如果是资源文件，则可以跟踪到显示它的网页地址。一旦检测到来源不是本站即进行阻止或者返回指定的页面。</p>
-<blockquote>
-<p>实现方法</p>
-</blockquote>
-<p>Nginx 模块 ngx_http_referer_module 用于阻拦来源非法的域名请求。</p>
-<p>Nginx 指令 valid_referers，全局变量 $invalid_referer</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 针对文件进行防盗链 valid_referers none | blocked | server_names | string ...;</span></div><div class="line"><span class="attribute">location</span> ~.*\.(gif|jpg|png|flv|swf|rar\zip)$</div><div class="line">&#123;</div><div class="line">	<span class="attribute">valid_referers</span> <span class="literal">none</span> <span class="literal">blocked</span> example.com <span class="regexp">*.example.com</span></div><div class="line">	if(<span class="variable">$invalid_referer</span>)</div><div class="line">	&#123;</div><div class="line">		<span class="attribute">rewrite</span><span class="regexp"> ^/</span> http://www.example.com/403.jpg;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 针对目录进行防盗链</div><div class="line"><span class="attribute">location</span> /images/</div><div class="line">&#123;</div><div class="line">	<span class="attribute">valid_referers</span> <span class="literal">none</span> <span class="literal">blocked</span> example.com <span class="regexp">*.example.com</span></div><div class="line">	if(<span class="variable">$invalid_referer</span>)</div><div class="line">	&#123;</div><div class="line">		<span class="attribute">rewrite</span><span class="regexp"> ^/</span> http://www.example.com/403.jpg;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>伪造 Referer 的盗链，可以使用加密签名来解决。可以使用第三方模块 HttpAccessKeyModule 实现 Nginx 防盗链。</p>
-<ul>
-<li>accesskey on | off 模块开关</li>
-<li>accesskey_hasmethod md5 | sha-1 签名加密方式</li>
-<li>accesskey_arg GET 参数名称</li>
-<li>accesskey_signature 加密规则</li>
-</ul>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">location</span> ~.*\.(gif|jpg|png|flv|swf|rar|zip)$</div><div class="line">&#123;</div><div class="line">	<span class="attribute">accesskey</span> <span class="literal">on</span>;</div><div class="line">	<span class="attribute">accesskey_hashmethod</span> md5;</div><div class="line">	<span class="comment"># URL 参数</span></div><div class="line">	<span class="attribute">accesskey_arg</span> <span class="string">"key"</span>;</div><div class="line">	<span class="comment"># $remote_addr 客户端 IP</span></div><div class="line">	<span class="attribute">accesskey_signatrure</span> <span class="string">"password<span class="variable">$remote_addr</span>"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="减少-HTTP-请求"><a href="#减少-HTTP-请求" class="headerlink" title="减少 HTTP 请求"></a>减少 HTTP 请求</h4><p><strong>为什么要减少 HTTP 请求</strong></p>
-<p>只有 10% ~ 20% 的最终用户响应时间花在接受请求的 HTML 文档上，剩下的 80%~90% 时间花在 HTML 文档所引用的所有组件（图片，JavaScript，CSS，flash 等等）进行的 HTTP 请求上。</p>
-<p><strong>如何改善</strong></p>
-<p>改善响应时间的最简单途径就是减少组件的数量，并由此减少 HTTP 请求的数量。</p>
-<p>HTTP 连接产生的开销：</p>
-<ul>
-<li>DNS 解析<ul>
-<li>查找 DNS 缓存也需要时间，多个缓存就要查找多次。有时候缓存有可能被清除掉。</li>
-</ul>
-</li>
-<li>TCP 连接<ul>
-<li>HTTP 1.1 协议规定请求只能串行发送，也就是说一百个请求必须依次逐个发送，前面的一个请求完成才能开始下个请求。</li>
-</ul>
-</li>
-<li>发送请求</li>
-<li>等待</li>
-<li>下载资源</li>
-<li>解析时间</li>
-</ul>
-<blockquote>
-<p>改善方式</p>
-</blockquote>
-<p>图片地图：图片地图允许你在一个图片上关联多个 URL。目标 URL 的选择取决于用户单击了图片上的哪个位置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;img usemap=&quot;#map1&quot; border=&quot;0&quot; src=&quot;example.png&quot; width=&quot;171&quot; height=&quot;31&quot;&gt;</div><div class="line">&lt;map name=&quot;map1&quot;&gt;</div><div class="line">&lt;area shape=&quot;rect&quot; coords=&quot;0,0,31,31&quot; href=&quot;&quot; alt=&quot;&quot;&gt;</div><div class="line">&lt;area shape=&quot;rect&quot; coords=&quot;36,0,66,31&quot; href=&quot;&quot; alt=&quot;&quot;&gt;</div><div class="line">&lt;area shape=&quot;rect&quot; coords=&quot;71,0,101,31&quot; href=&quot;&quot; alt=&quot;&quot;&gt;</div><div class="line">&lt;area shape=&quot;rect&quot; coords=&quot;106,0,136,31&quot; href=&quot;&quot; alt=&quot;&quot;&gt;</div><div class="line">&lt;area shape=&quot;rect&quot; coords=&quot;141,0,171,31&quot; href=&quot;&quot; alt=&quot;&quot;&gt;</div><div class="line">&lt;/map&gt;</div></pre></td></tr></table></figure></p>
-<p>CSS Sprites，中文翻译为 CSS 精灵，通过使用合并图片，通过指定 css 的 background-image 和 background-position 来显示元素。</p>
-<p>图片地图与 CSS Sprites 的响应时间基本上相同，但比使用各自独立图片的方式要快 50 % 以上。</p>
-<h4 id="浏览器缓存和数据压缩"><a href="#浏览器缓存和数据压缩" class="headerlink" title="浏览器缓存和数据压缩"></a>浏览器缓存和数据压缩</h4><ul>
-<li>HTTP 缓存机制</li>
-<li>Nginx 配置缓存策略</li>
-<li>前端代码和资源的压缩</li>
-</ul>
-<p><strong>HTTP 缓存分类</strong></p>
-<p>缓存不仅仅只能做数据库缓存，还能做浏览器缓存。HTTP 缓存模型中，如果请求成功会有三种情况：</p>
-<p>第一种情况：200 from cache: 本地缓存。直接从本地缓存中获取响应，最快速，最省流量，因为根本没有向服务器发送请求。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"># 相关 Header</div><div class="line">Pragma：HTTP 1.0 时代的遗留产物，该字段被设置为 no-cache 时，会告知浏览器禁用本地缓存，即每次都向服务器发送请求。</div><div class="line"></div><div class="line">Expires：HTTP 1.0 用来启用本地缓存的字段。使用格林威治时间。当浏览器与服务器的时间无法保持一致，如果时间差距过大，就会影响缓存结果。</div><div class="line"></div><div class="line">Cache-Control：HTTP 1.1 针对 Expires 时间不一致的解决方案，运用 Cache-Control 告知浏览器缓存过期的时间间隔而不是时刻，即使具体时间不一致，也不影响缓存的管理。</div><div class="line">Cache-Control 的参数如下：</div><div class="line">no-store：禁止浏览器缓存响应。</div><div class="line">no-cache：不允许直接使用本地缓存，先发起请求和服务器协商，协商缓存。</div><div class="line">max-age=delta-seconds：告知浏览器该响应本地缓存有效的最长期限，以秒为单位。</div><div class="line"></div><div class="line">优先级：Pragma &gt; Cache-Control &gt; Expires</div></pre></td></tr></table></figure></p>
-<p>第二种情况：304 Not Modified：协商缓存。浏览器在本地没有命中的情况下，请求头中发送一定的校验数据到服务端，如果服务端数据没有改变，浏览器从本地缓存响应，返回 304。特点：快速，发送的数据很少，只返回一些基本的响应头信息，数据量很小，不发送实际响应体。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># 相关 Header</div><div class="line">Last-Modified：通知浏览器资源的最后修改时间。使用格林威治时间。</div><div class="line"></div><div class="line">If-Modified-Since：得到资源的最后修改时间后，会将这个信息通过 If-Modified-Since 提交到服务器做检查，如果没有修改，返回 304 状态码。</div><div class="line"></div><div class="line">ETag：HTTP 1.1 推出，文件的指纹标识符，如果文件内容修改，指纹会改变。</div><div class="line"></div><div class="line">If-None-Match：本地缓存失效，会携带此值去请求服务端，服务端判断该资源是否改变，如果没有改变，直接使用本地缓存，返回 304。</div></pre></td></tr></table></figure></p>
-<p>第三种情况：200 OK：以上两种缓存全部失败，服务器返回完整响应。没有用到缓存，相对最慢。</p>
-<p><strong>缓存策略的选择</strong></p>
-<p>适合缓存的内容：</p>
-<ul>
-<li>不变的图像：如 Logo，图标等，适合做本地缓存。</li>
-<li>js、css 等静态文件，适合做本地缓存。</li>
-<li>可下载的内容，媒体文件，如 mp3、flash、swf，适合做本地缓存。</li>
-<li>经常改变的文件如 HTML 文件，适合做协商缓存。</li>
-<li>经常替换的图片如网站首页轮播图，适合做协商缓存。</li>
-<li>经常修改的js、css 文件，适合做协商缓存，js、css 文件的加载可以加入文件的签名来拒绝缓存。。</li>
-</ul>
-<p>不适合缓存的内容：</p>
-<ul>
-<li>用户隐私等敏感数据</li>
-<li>经常改变的 api 数据接口</li>
-</ul>
-<p><strong>Nginx 配置缓存策略</strong></p>
-<p>PHP 实现缓存策略<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$since = $_SERVER[<span class="string">'HTTP_IF_MODIFIED_SINCE'</span>];</div><div class="line"></div><div class="line">$lifetime = <span class="number">3600</span>;</div><div class="line"></div><div class="line"><span class="keyword">if</span>(strtotime($since) + $lifetime &gt; time())&#123;</div><div class="line">	header(<span class="string">'HTTP/1.1 304 Not Modified'</span>);</div><div class="line">	<span class="keyword">exit</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">header(<span class="string">"Last-Modified: "</span>. gmdate(<span class="string">'D, d M Y H:i:s'</span>, time()).<span class="string">' GMT'</span>);</div><div class="line"></div><div class="line"><span class="keyword">echo</span> time();</div></pre></td></tr></table></figure></p>
-<p>Nginx 配置缓存策略<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># add_header 指令：添加状态码为 2XX 和 3XX 响应头信息。</span></div><div class="line"><span class="attribute">add_header</span> name value [always];</div><div class="line"></div><div class="line"><span class="comment"># 可以设置 Pragma/Expires/Cache-Control 可以继承。</span></div><div class="line"></div><div class="line"><span class="comment"># 本地缓存配置，expires 指令，通知浏览器过期时长。</span></div><div class="line"><span class="comment"># expires time;为负值时表示 Cache-Control:no-cache；</span></div><div class="line"><span class="comment"># 当为正或者 0 时，就表示 Cache-Control:max-age=指定时间。</span></div><div class="line"><span class="attribute">location</span> <span class="regexp">~ .*\.(js|css)?$</span></div><div class="line"><span class="regexp"></span>&#123;</div><div class="line">	<span class="attribute">expires</span> <span class="number">12h</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment"># 协商缓存相关配置 Etag 指令：指定签名。etag on | off ，默认是 on</span></div><div class="line"><span class="attribute">location</span> <span class="regexp">~ .*\.(gif|jpg|jpeg|png|bmp|swf)$</span></div><div class="line"><span class="regexp"></span>&#123;</div><div class="line">	<span class="attribute">etag</span> <span class="literal">on</span>;</div><div class="line">	<span class="attribute">add_header</span> cache-control max-age=<span class="number">3600</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><strong>前端代码和资源的压缩</strong></p>
-<p>优势：让资源文件更小，加快文件在网络中的传输，让网页更快的展现，降低带宽和流量开销。</p>
-<p>压缩方式</p>
-<ul>
-<li>JavaScript 文件压缩，一般是去掉多余的空格和回车、替换长变量名、简化一些代码写法等。</li>
-<li>CSS 文件压缩，一般是去掉多余的空格和回车、注释并且优化一些 CSS 语义规则等。</li>
-<li>可以使用 Gzip 压缩 HTML 代码。</li>
-<li>图片压缩</li>
-</ul>
-<p>Gzip 压缩 Nginx 配置</p>
-<ul>
-<li>gzip on | off; # 是否开启 gzip</li>
-<li>gzip_buffers 32 4K | 16 8K # 缓冲（在内存中缓冲几块？每块多大）</li>
-<li>gzip_comp_level [1-9] #推荐 6，压缩级别越高，压的越小，越浪费 CPU 计算资源。</li>
-<li>gzip_disable #正则匹配 UA，什么样的 URI 不进行 gzip</li>
-<li>gzip_min_length 200 # 开始压缩的最小长度</li>
-<li>gzip_http_version 1.0|1.1 # 开始压缩的 http 协议版本</li>
-<li>gzip_proxied # 设置请求者代理服务器，该如何缓存内容</li>
-<li>gzip_types text/plain application/xml # 对哪些类型的文件进行压缩</li>
-<li>gzip_vary on | off # 是否传输 gzip 压缩标志</li>
-</ul>
-<h4 id="CDN-加速"><a href="#CDN-加速" class="headerlink" title="CDN 加速"></a>CDN 加速</h4><p><strong>什么是 CDN</strong></p>
-<p>CDN 的全称是 Content Delivery Network，即内容分发网络。尽可能避开互联网上有可能影响数据传输速度和稳定性的瓶颈和环节，使内容传输的更快、更稳定。</p>
-<p>在网络各处放置节点服务器所构成的在现有的互联网基础之上的一层智能虚拟网络。相当于真实服务器的一个镜像。</p>
-<p>CDN 系统能够实时地根据网络流量和各节点的连接、负载状况以及到用户的距离和响应时间等综合信息将用户的请求重新导向离用户最近的服务节点上。</p>
-<p><strong>CDN 的使用优势</strong></p>
-<ul>
-<li>本地 Cache 加速，提高了企业站点（尤其含有大量图片和静态页面站点）的访问速度。</li>
-<li>跨运营商的网络加速，保证不同网络的用户都得到良好的访问质量。</li>
-<li>远程访问的用户可以根据 DNS 负载均衡技术智能自动选择 Cache 服务器。</li>
-<li>自动生成服务器的远程镜像 Cache 服务器，远程用户访问时，从 Cache 服务器上读取数据，减少远程访问的带宽、分担网络流量、减轻原站点 WEB 服务器压力。</li>
-<li>广泛分布的 CDN 节点加上节点之前的智能冗余机制，可以有效地预防黑客入侵。</li>
-</ul>
-<p><strong>CDN 的工作原理</strong></p>
-<p>传统访问：用户在浏览器输入域名发起请求 –》 解析域名获取服务器 IP 地址 –》 根据 IP 地址找到对应的服务器 –》 服务器响应并返回数据。</p>
-<p>使用 CDN 访问：用户发起请求 –》 智能 DNS 的解析（根据 IP 判断地理位置、接入网类型、选择路由最短和负载最轻的服务器) –》 取得缓存服务器 IP –》把内容返回给用户（如果缓存中有）–》向源站发起请求–》将结果返回给用户–》将结果存入缓存服务器。</p>
-<p><strong>CDN 的适用场景</strong></p>
-<ul>
-<li>站点或者应用中大量静态资源的加速分发，例如：CSS，JS，图片和 HTML。</li>
-<li>文件下载</li>
-<li>直播网站</li>
-</ul>
-<p><strong>CDN 的功能实现</strong></p>
-<ul>
-<li>可用 LVS 做 4 层负载均衡。</li>
-<li>可以 Nginx、Apache 做 7 层负载均衡和 Cache。</li>
-</ul>
-<h4 id="独立图片服务器的部署"><a href="#独立图片服务器的部署" class="headerlink" title="独立图片服务器的部署"></a>独立图片服务器的部署</h4><p><strong>独立的必要性</strong></p>
-<p>分担 Web 服务器的 I/O 负载，将耗费资源的图片服务分离出来，提高服务器的性能和稳定。</p>
-<p>能够专门对图片服务器进行优化，为图片服务设置有针对性的缓存方案，减少带宽成本，提高访问速度。</p>
-<p>提高网站的可扩展性，通过增加图片服务器，提交图片吞吐能力。</p>
-<p><strong>采用独立域名</strong></p>
-<p>原因：同一域名下浏览器的并发连接数有限制，为了突破浏览器连接数的限制。由于 cookie 的原因，对缓存不利。大部分 Web Cache 都只缓存不带 cookie 的请求，导致每次的图片请求都不能命中 Cache。</p>
-<p><strong>独立后的问题</strong></p>
-<p>如何进行图片上传和图片同步</p>
-<ul>
-<li>NFS 共享操作</li>
-<li>利用 FTP 同步</li>
-</ul>
-<h4 id="动态语言静态化"><a href="#动态语言静态化" class="headerlink" title="动态语言静态化"></a>动态语言静态化</h4><p><strong>什么是动态语言静态化</strong></p>
-<p>将现有 PHP 等动态语言的逻辑代码生成为静态 HTML 文件，用户访问动态脚本重定向到静态 HTML 文件的过程。</p>
-<p>对实时性要求不高的页面适合静态化。</p>
-<p><strong>为什么要静态化</strong></p>
-<p>动态脚本通常会做逻辑计算和数据查询，访问量越大，服务器压力越大。</p>
-<p>访问量大时可能会造成 CPU 负载过高，数据库服务器压力过大。静态化可以减低逻辑处理压力，降低数据库服务器查询压力。</p>
-<p><strong>静态化的实现方式</strong></p>
-<ul>
-<li>使用模板引擎<ul>
-<li>可以使用 Smarty 的缓存机制生成静态 HTML 缓存文件。</li>
-</ul>
-</li>
-<li>使用 ob 系列的函数<ul>
-<li>ob_start(): 打开输出控制缓冲</li>
-<li>ob_get_contents(): 返回输出缓冲区内容</li>
-<li>ob_clean(): 清空输出缓冲区</li>
-<li>ob_end_flush(): 冲刷出输出缓冲区内容并关闭缓冲。</li>
-<li>可以判断文件的 inode 修改时间，判断是否过期，使用 filectime 函数</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"></div><div class="line">$cache_name = md5(__FIEL__).&apos;.html&apos;;</div><div class="line">$cache_lifetime = 3600;</div><div class="line">if(file_exists($cache_name) &amp;&amp; filectime($cache_name) + $cache_lifetime &gt; time())&#123;</div><div class="line">	include $cache_name;</div><div class="line">	exit;</div><div class="line">&#125;</div><div class="line"></div><div class="line">ob_start();</div><div class="line"></div><div class="line">$name = &quot;Hello World!&quot;;</div><div class="line"></div><div class="line">?&gt;</div><div class="line"></div><div class="line">&lt;b&gt;This is My Script &lt;?php echo $name;?&gt;&lt;/b&gt;</div><div class="line"></div><div class="line">&lt;?php</div><div class="line"></div><div class="line">$content = ob_get_contents();</div><div class="line"></div><div class="line">ob_end_flush();</div><div class="line"></div><div class="line">$handle = fopen($cache_name, &apos;w&apos;);</div><div class="line"></div><div class="line">fwrite($handle, $content);</div><div class="line"></div><div class="line">fclose($handle);</div></pre></td></tr></table></figure>
 <h4 id="动态语言的并发处理"><a href="#动态语言的并发处理" class="headerlink" title="动态语言的并发处理"></a>动态语言的并发处理</h4><p><strong>什么是进程、线程、协程</strong></p>
 <h6 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h6><p>进程是计算机中已运行程序的实体。用户下达运行程序的命令后，就会产生进程。进程需要资源才能完成工作，如 CPU 工作时间、存储器、文件和 IO 设备。每个 CPU 核心任何时间内仅能运行一个进程。</p>
 <p>进程的三态模型：多道程序进程在 CPU 上交替运行，运行状态不断地发生变化。状态分别是运行、就绪、阻塞。</p>
@@ -1079,8 +876,8 @@
 <li>两者均可并发执行。</li>
 </ul>
 <h6 id="线程和协程的区别"><a href="#线程和协程的区别" class="headerlink" title="线程和协程的区别"></a>线程和协程的区别</h6><ul>
-<li>一个线程可以多个协程，一个进程也可以单独拥有多个协程</li>
-<li>线程进程都是同步机制，而协程则是一部</li>
+<li>一个线程可以有多个协程，一个进程也可以单独拥有多个协程。</li>
+<li>线程进程都是同步机制，而协程则是异步机制。</li>
 <li>协程能保留上一次调用时的状态，每次过程重入时，就相当于进入上一次调用的状态。</li>
 </ul>
 <p><strong>什么是多进程、多线程</strong></p>
@@ -1179,7 +976,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjct7vu9s002m664bqnir5btr" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjcugni2e002g3h4blg577btg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1708,7 +1505,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/09/Web-API-的设计与开发/" data-id="cjct7vu9y002s664b48zxoiwy" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/09/Web-API-的设计与开发/" data-id="cjcugni2o002x3h4b43c4tr8h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -1798,7 +1595,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/05/日常开发常用命令/" data-id="cjct7vuca0082664bwlizdy5v" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/05/日常开发常用命令/" data-id="cjcugni66008a3h4b0g55wflm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1887,7 +1684,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/01/刻意练习/" data-id="cjct7vubn006m664b5p81dca5" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/01/刻意练习/" data-id="cjcugni59006p3h4b3jgr5t2g" class="article-share-link">Share</a>
       
       
     </footer>
@@ -2100,7 +1897,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/10/24/高性能的-PHP-API-接口开发/" data-id="cjct7vucf008g664btwyflqq0" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/10/24/高性能的-PHP-API-接口开发/" data-id="cjcugni6v008q3h4b2pa1m4x9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
