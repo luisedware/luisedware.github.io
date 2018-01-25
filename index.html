@@ -127,7 +127,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2018/01/23/Laravel-项目开发常用扩展包/" data-id="cjcugni0n00053h4b55zanrys" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2018/01/23/Laravel-项目开发常用扩展包/" data-id="cjcujcgat0004qi4b717znnw7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -220,7 +220,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/12/21/学习-ES6/" data-id="cjcugni5l007c3h4bq593vnx6" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/12/21/学习-ES6/" data-id="cjcujcgga0073qi4bqvxmnmcg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -258,7 +258,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/12/11/学习算法设计/" data-id="cjcugni5y007w3h4b6jz4h79u" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/12/11/学习算法设计/" data-id="cjcujcggs0088qi4bvz04l0bd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -294,7 +294,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/12/11/学习数据结构/" data-id="cjcugni5w007s3h4bqqhq4bmy" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/12/11/学习数据结构/" data-id="cjcujcggq0081qi4bpn73l66j" class="article-share-link">Share</a>
       
       
     </footer>
@@ -502,7 +502,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/16/PHP-秒杀系统/" data-id="cjcugni29002a3h4bqj50vxe7" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/16/PHP-秒杀系统/" data-id="cjcujcgd6002dqi4bg0uk6tr8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -830,87 +830,6 @@
 </ul>
 </li>
 </ul>
-<h4 id="动态语言的并发处理"><a href="#动态语言的并发处理" class="headerlink" title="动态语言的并发处理"></a>动态语言的并发处理</h4><p><strong>什么是进程、线程、协程</strong></p>
-<h6 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h6><p>进程是计算机中已运行程序的实体。用户下达运行程序的命令后，就会产生进程。进程需要资源才能完成工作，如 CPU 工作时间、存储器、文件和 IO 设备。每个 CPU 核心任何时间内仅能运行一个进程。</p>
-<p>进程的三态模型：多道程序进程在 CPU 上交替运行，运行状态不断地发生变化。状态分别是运行、就绪、阻塞。</p>
-<p>运行：当一个进程在 CPU 上运行时，则称改进程处于运行状态。在没有其他进程可以执行时，通过会自动执行系统的空闲进程。</p>
-<p>就绪：当一个进程获得了除处理机以外的一切所需资源，一旦得到处理机即可运行，则称此进程处于就绪状态。就绪进程可以按多个优先级来划分队列。例如：当一个进程由于时间片用完而进入就绪状态时，排入低优先级队列；当进程由 I/O 操作完成而进入就绪状态时，排入高优先级队列。</p>
-<p>阻塞：也成为等待或睡眠状态，一个进程正在等待某一件事件发生（例如请求 I/O 或等待 I/O 完成等）而暂时停止运行，这时即使把处理机分配给进程也无法运行，故称该进程处于阻塞状态。</p>
-<p>进程的五态模型：</p>
-<ul>
-<li>新建态<ul>
-<li>对应于进程刚刚被创建时没有被提交的状态，并等待系统完成创建进程的所有必要信息。</li>
-</ul>
-</li>
-<li>活跃就绪、静止就绪<ul>
-<li>活跃就绪是指进程在主存并且可被调度的状态。</li>
-<li>静止就绪是指进程被对换到辅存时的就绪状态，是不能被直接调度的状态，只有当主存中没有活跃就绪进程，或者是其他挂起就绪态进程具有更高的优先级时，系统将把挂起就绪态进程调回主存并转换活跃就绪。</li>
-</ul>
-</li>
-<li>运行</li>
-<li>活跃阻塞、静止阻塞<ul>
-<li>活跃阻塞是指进程已经在主存，一旦等待的事件产生便进入活跃就绪状态。</li>
-<li>静止阻塞是指进程对换到辅存时的阻塞状态，一旦等待的事件产生便进入静止就绪状态。</li>
-</ul>
-</li>
-<li>终止态<ul>
-<li>进程已结束运行，回收除进程控制块之外的其他资源，并让其他进程从进程控制块中手机有关信息。</li>
-</ul>
-</li>
-</ul>
-<h6 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h6><p>线程是进程的一个实体,是 CPU 调度和分派的基本单位,它是比进程更小的能独立运行的基本单位.线程自己基本上不拥有系统资源,只拥有一点在运行中必不可少的资源,但是它可与同属一个进程的其他的线程共享进程所拥有的全部资源。</p>
-<p>一个线程可以创建和撤销另一个线程，同一进程中的多个线程之间可以并发执行。每个程序都至少有一个线程，若程序只有一个线程，那就是程序本身。</p>
-<p>线程的三态模型</p>
-<ul>
-<li>运行</li>
-<li>等待</li>
-<li>阻塞</li>
-</ul>
-<h6 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h6><p>协程是一种用户态的轻量级线程，协程的调度完全由用户控制。协程拥有自己的寄存器上下文和栈。协程调度时，将寄存器上下文和栈保存到其他地方，在切回来的时候，回复先前保存的寄存器上下文和栈，直接操作栈则基本没有内核切换的开销，可以不加锁的访问全局变量，所以上下文的切换非常快。</p>
-<h6 id="进程和线程的区别"><a href="#进程和线程的区别" class="headerlink" title="进程和线程的区别"></a>进程和线程的区别</h6><ul>
-<li>创建进程的空间开销和时间开销要大于线程</li>
-<li>一个线程只能属于一个进程，而一个进程可以有多个线程，但至少有一个线程，也就是主线程。</li>
-<li>资源分配给进程后，同一进程的所有线程共享该进程的所有资源</li>
-<li>线程的划分尺度小于进程，使得多线程程序的并发性高</li>
-<li>进程之间有着不同的地址空间，一个子进程挂了，不会影响其他子进程。线程之间共享内存，如果一个线程奔溃了，进而就会影响到其他线程和隶属进程了。</li>
-<li>两者均可并发执行。</li>
-</ul>
-<h6 id="线程和协程的区别"><a href="#线程和协程的区别" class="headerlink" title="线程和协程的区别"></a>线程和协程的区别</h6><ul>
-<li>一个线程可以有多个协程，一个进程也可以单独拥有多个协程。</li>
-<li>线程进程都是同步机制，而协程则是异步机制。</li>
-<li>协程能保留上一次调用时的状态，每次过程重入时，就相当于进入上一次调用的状态。</li>
-</ul>
-<p><strong>什么是多进程、多线程</strong></p>
-<h6 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h6><p>同一个时间里，同一个计算机系统中如果允许两个或两个以上的进程处于运行状态，就是多进程。<br>多开一个进程，就多分配一份资源，进程间互相通信不便。</p>
-<p>线程就是把一个进程分为很多片，每一片都可以是一个独立的流程，与多进程的区别是只会使用一个进程的资源，线程间可以直接通信。在单个程序中同时运行多个线程完成不同的工作，成为多线程。</p>
-<p>多个概念之间的区别：</p>
-<ul>
-<li>单进程单线程：一个人在一张桌子上吃饭</li>
-<li>单进程多线程：多个人在同一张桌子上一起吃饭</li>
-<li>多进程单线程：多个人在不同的一张桌子上独自吃饭</li>
-<li>多进程多线程：多张桌子上有多个人一起吃饭</li>
-</ul>
-<p><strong>同步阻塞模型</strong></p>
-<p>最早的服务器端程序都是通过多进程、多线程来解决并发 IO 的问题，一个请求创建一个进程，然后子进程进入循环同步阻塞地与客户端连接进行交互，收发处理数据。</p>
-<p>模拟同步阻塞模型</p>
-<p>创建一个 socket，进入 while 循环，阻塞在进程 accept 操作上，等待客户端连接进入。主进程在多进程模型下通过 fork 创建子进程。多线程模型下可以创建子线程。子进程或子线程创建成功后进入 while 循环，阻塞在 recv 调用上，等待客户端向服务器发送数据。收到数据后，服务器程序进行处理然后使用 send 向客户端发送响应。当客户端连击关闭时，子进程或子线程退出并销毁所有资源。主进程或线程会回收掉此子进程或子线程。</p>
-<p>缺点：</p>
-<ul>
-<li>这种模型严重依赖进程的数量解决并发问题。</li>
-<li>启动大量进程会带来额外的进程调度消耗。</li>
-</ul>
-<p>模拟运行机制<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$sockserv = stream_socket_server(<span class="string">'tcp://0.0.0.0:8000'</span>, $errno, $errstr);</div><div class="line"></div><div class="line"><span class="keyword">for</span> ($i = <span class="number">0</span>; $i &lt; <span class="number">5</span>; $i++) &#123;</div><div class="line">    <span class="keyword">if</span>(pcntl_fork() == <span class="number">0</span>)&#123;</div><div class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</div><div class="line">            $conn = stream_socket_accept($sockserv);</div><div class="line">            <span class="keyword">if</span>($conn == <span class="keyword">false</span>)&#123;</div><div class="line">                <span class="keyword">continue</span>;</div><div class="line">            &#125;</div><div class="line">            $request = fread($conn, <span class="number">9000</span>);</div><div class="line">            $response = <span class="string">'hello'</span>;</div><div class="line">            fwrite($conn, $response);</div><div class="line">            fclose($conn);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">exit</span>(<span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure></p>
-<p><strong>异步非阻塞模型</strong></p>
-<p>现在各种高并发异步 IO 的服务器程序都是基于 epoll 实现的。</p>
-<p>IO 复用异步非阻塞程序使用经典的 Reactor 模型。它本身不处理任何数据收发。只是可以监视一个 socket 句柄的事件变化。</p>
-<p>Reactor 有 4 个核心的操作</p>
-<ul>
-<li>add 添加 socket 监听到 reactor</li>
-<li>set 修改事件监听，可以设置监听的类型，如可读、可写。</li>
-<li>del 从 reactor 中移除，不再监听事件</li>
-<li>callback，事件发生后对应的处理逻辑，一般在 add/set 时制定。</li>
-</ul>
-<p><strong>PHP 并发编程实践</strong></p>
 <h2 id="数据库缓存"><a href="#数据库缓存" class="headerlink" title="数据库缓存"></a>数据库缓存</h2><p><strong>什么是数据库缓存</strong></p>
 <p>MySQL 等一些常见的关系型数据库的数据都存储在磁盘当中，在高并发场景下，业务应用对 MySQL 产生的增删查改的操作造成巨大的 I/O 开销和查询压力，这无疑对数据库和服务器都是一种巨大的压力，为了解决此类问题，缓存数据的概念应运而生。缓存数据是为了让客户端很少甚至不访问数据库服务器进行数据的查询，高并发下，能最大程度地降低对数据库服务器的访问压力。</p>
 <p>作用：</p>
@@ -938,45 +857,11 @@
 <p>对于大型站点，如果没有中间缓存层，当流量打入数据库层时，即便有之前的几层为我们挡住一部分流量，但是在大并发的情况下，还是会有大量请求涌入数据库层，这样对于数据服务器的压力冲击很大，响应速度也会下降，因此添加中间缓存层很有必要。</p>
 <p>memcache 是一套分布式的高速缓存系统。通过在内存里维护一个统一的巨大的 hash 表，它能够用来存储各种格式的数据，包括图像、视频、文件以及数据库检索的结果等。简单的说就是将数据调用到内存，然后从内存中读取，从而大大提高读取速度。</p>
 <p><strong>使用 Redis 缓存</strong></p>
-<h2 id="Web-服务器的负载均衡"><a href="#Web-服务器的负载均衡" class="headerlink" title="Web 服务器的负载均衡"></a>Web 服务器的负载均衡</h2><p>七层负载均衡：基于 URL 等应用层信息的负载均衡。</p>
-<p>Nginx 的 proxy 是它一个很强大的功能，实现了 7 层负载均衡。</p>
-<p>Nginx 负载均衡的特点</p>
-<ul>
-<li>功能强大，性能卓越，运行稳定</li>
-<li>配置简单灵活</li>
-<li>能够自动剔除工作不正常的后端服务器</li>
-<li>上传文件使用异步模式</li>
-<li>支持多种分配策略，可以分配权重，分配方式灵活</li>
-</ul>
-<p>Nginx 负载均衡的策略</p>
-<ul>
-<li>内置策略<ul>
-<li>IP Hash 策略</li>
-<li>加权轮询策略</li>
-</ul>
-</li>
-<li>扩展策略<ul>
-<li>fair 策略</li>
-<li>通用 hash</li>
-<li>一致性 hash</li>
-</ul>
-</li>
-</ul>
-<p><strong>加权轮询策略</strong></p>
-<p>首先将请求分给高权重的机器，直到该机器的权值降到了比其他机器低，才开始将请求分给下一个高权重的机器。当所有后端机器都 down 掉时，Nginx 会立即将所有机器的标志位清成初始状态，以避免造成所有的机器都处在 timeout 的状态。</p>
-<p><strong>IP Hash 策略</strong></p>
-<p>Nginx 内置的另一个负载均衡的策略，流程和轮询很类似，只是其中的算法和具体的策略有些变化。IP Hash 算法是一种变相的轮询算法。</p>
-<p><strong>fair 策略</strong></p>
-<p>根据后端服务器的响应时间判断负载情况，从中选出负载最轻的机器进行分流。</p>
-<p><strong>通用 Hash、一致性 Hash 策略</strong></p>
-<p>通用 Hash 比较简单，可以以 Nginx 内置的变量为 key 进行 hash，一致性 hash 采用了 Nginx 内置的一致性 Hash 环，支持 memcache。</p>
-<h6 id="四层负载均衡的实现"><a href="#四层负载均衡的实现" class="headerlink" title="四层负载均衡的实现"></a>四层负载均衡的实现</h6><p>通过报文中的目标地址和端口，再加上负载均衡设备设置的服务器选择方式，决定最终选择的内部服务器。</p>
-<p>LVS 实现服务器集群负载均衡有三种方式：NAT，DR 和 TUN。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjcugni2e002g3h4blg577btg" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjcujcgd2002aqi4bfwdlil1q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1505,7 +1390,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/09/Web-API-的设计与开发/" data-id="cjcugni2o002x3h4b43c4tr8h" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/09/Web-API-的设计与开发/" data-id="cjcujcgdh002uqi4bkytajj6w" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -1595,7 +1480,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/05/日常开发常用命令/" data-id="cjcugni66008a3h4b0g55wflm" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/05/日常开发常用命令/" data-id="cjcujcggr0085qi4bal4j6pcf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1684,7 +1569,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/01/刻意练习/" data-id="cjcugni59006p3h4b3jgr5t2g" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/01/刻意练习/" data-id="cjcujcgg5006rqi4bfvxfrytm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1897,7 +1782,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/10/24/高性能的-PHP-API-接口开发/" data-id="cjcugni6v008q3h4b2pa1m4x9" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/10/24/高性能的-PHP-API-接口开发/" data-id="cjcujcgh2008sqi4boj2d8vl9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
