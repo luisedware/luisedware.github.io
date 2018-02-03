@@ -66,6 +66,439 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Nginx-从入门到实战" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/02/01/Nginx-从入门到实战/" class="article-date">
+  <time datetime="2018-02-01T01:17:12.000Z" itemprop="datePublished">2018-02-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/nginx/">nginx</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/01/Nginx-从入门到实战/">Nginx 从入门到实战</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、系统环境"><a href="#一、系统环境" class="headerlink" title="一、系统环境"></a>一、系统环境</h2><ul>
+<li>系统版本：Centos 7.0 以上版本，64 位。</li>
+<li>环境调试<ul>
+<li>四个确认<ul>
+<li>确认系统网络：<code>ping www.baidu.com</code></li>
+<li>确认 yum 可用：<code>yum list | grep gcc</code></li>
+<li>确认关闭 iptables 规则：<code>iptables -F &amp;&amp; iptables -t nat -F</code></li>
+<li>确认停用 selinux：<code>setenforce 0</code></li>
+</ul>
+</li>
+<li>两项安装<ul>
+<li><code>yum -y install gcc gcc-c++ autoconf pcre pcre-devel make automake</code></li>
+<li><code>yum -y install wget httpd-tools vim</code></li>
+<li><code>yum -y install net-tools</code></li>
+</ul>
+</li>
+<li>一次初始化<ul>
+<li><code>cd /opt</code></li>
+<li><code>mkdir app download logs work backup</code></li>
+</ul>
+</li>
+<li>SSH 登录<ul>
+<li>编辑 SSH 配置文件：<code>vi /etc/ssh/sshd_config</code><ul>
+<li>Port 22</li>
+<li>ListenAddress 0.0.0.0</li>
+<li>ListenAddress ::</li>
+<li>PermitRootLogin yes</li>
+<li>PasswordAuthentication yes</li>
+</ul>
+</li>
+<li>启用 SSH 服务：<code>service sshd restart</code></li>
+<li>设置 SSH 开机启动：<code>systemctl enable sshd.service</code></li>
+<li>虚拟机设置端口转发规则：<a href="https://www.jianshu.com/p/120ee4a6be9e" target="_blank" rel="external">https://www.jianshu.com/p/120ee4a6be9e</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="二、Nginx-的中间件架构"><a href="#二、Nginx-的中间件架构" class="headerlink" title="二、Nginx 的中间件架构"></a>二、Nginx 的中间件架构</h2><h3 id="Nginx-简述"><a href="#Nginx-简述" class="headerlink" title="Nginx 简述"></a>Nginx 简述</h3><p>Nginx 是一个开源、高性能、可靠的 HTTP 中间件、代理服务器。</p>
+<h3 id="Nginx-优势"><a href="#Nginx-优势" class="headerlink" title="Nginx 优势"></a>Nginx 优势</h3><ul>
+<li>IO 多路复用 epoll。</li>
+<li>功能模块少、代码模块化。</li>
+<li>CPU 亲和（affinity）</li>
+<li>sendfile</li>
+</ul>
+<h4 id="什么是-IO-多路复用"><a href="#什么是-IO-多路复用" class="headerlink" title="什么是 IO 多路复用"></a>什么是 IO 多路复用</h4><p>多个描述符的 IO 操作都能在同一个线程内并发交替地顺序完成，这就叫 IO 多路复用。</p>
+<h4 id="什么是-epoll"><a href="#什么是-epoll" class="headerlink" title="什么是 epoll"></a>什么是 epoll</h4><p>IO 多路复用的实现方式。</p>
+<h4 id="什么是-CPU-亲和（affinity）"><a href="#什么是-CPU-亲和（affinity）" class="headerlink" title="什么是 CPU 亲和（affinity）"></a>什么是 CPU 亲和（affinity）</h4><p>是一种把 CPU 核心和 Nginx 工作进程绑定凡事，把每个 worker 进程固定在一个 CPU 上执行，减少切换 CPU 的 Cache Miss，获得更好的性能。</p>
+<h4 id="什么是-sendfile"><a href="#什么是-sendfile" class="headerlink" title="什么是 sendfile"></a>什么是 sendfile</h4><h3 id="Nginx-安装"><a href="#Nginx-安装" class="headerlink" title="Nginx 安装"></a>Nginx 安装</h3><p>1). 新增 yum 源<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/yum.repos.d/nginx.repo</div></pre></td></tr></table></figure></p>
+<p>2). 编辑 yum 源<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[nginx]</div><div class="line">name=nginx repo</div><div class="line">baseurl=http://nginx.org/packages/centos/7/$basearch/</div><div class="line">gpgcheck=0</div><div class="line">enabled=1</div></pre></td></tr></table></figure></p>
+<p>3). 测试 yum 源是否可用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum list | grep nginx</div></pre></td></tr></table></figure></p>
+<p>4). 安装 nginx<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install nginx</div></pre></td></tr></table></figure></p>
+<h3 id="Nginx-基础使用"><a href="#Nginx-基础使用" class="headerlink" title="Nginx 基础使用"></a>Nginx 基础使用</h3><p>1). 安装目录讲解<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 显示程序安装目录</div><div class="line">rpm -ql nginx</div></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th>路径</th>
+<th>类型</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/etc/logrotate.d/nginx</td>
+<td>配置文件</td>
+<td>Nginx 日志轮转，用于 logrotate 服务的日志切割</td>
+</tr>
+<tr>
+<td>/etc/nginx</td>
+<td>目录</td>
+<td>Nginx 目录</td>
+</tr>
+<tr>
+<td>/etc/nginx/nginx.conf</td>
+<td>配置文件</td>
+<td>Nginx 主配置文件</td>
+</tr>
+<tr>
+<td>/etc/nginx/conf.d</td>
+<td>配置文件</td>
+<td>Nginx 主配置文件</td>
+</tr>
+<tr>
+<td>/etc/nginx/conf.d/default.conf</td>
+<td>配置文件</td>
+<td>Nginx 主配置文件</td>
+</tr>
+<tr>
+<td>/etc/nginx/fastcgi-params</td>
+<td>配置文件</td>
+<td>cgi 配置文件</td>
+</tr>
+<tr>
+<td>/etc/nginx/uwsgi-params</td>
+<td>配置文件</td>
+<td>cgi 配置文件</td>
+</tr>
+<tr>
+<td>/etc/nginx/scgi-params</td>
+<td>配置文件</td>
+<td>cgi 配置文件</td>
+</tr>
+<tr>
+<td>/etc/nginx/mime.types</td>
+<td>配置文件</td>
+<td>设置 HTTP 协议的 Content-Type 与扩展名对应关系</td>
+</tr>
+<tr>
+<td>/etc/lib/systemd/system/nginx-debug.service</td>
+<td>配置文件</td>
+<td>用于配置出系统守护进程管理器管理方式</td>
+</tr>
+<tr>
+<td>/etc/lib/systemd/system/nginx.service</td>
+<td>配置文件</td>
+<td>用于配置出系统守护进程管理器管理方式</td>
+</tr>
+<tr>
+<td>/etc/sysconfig/nginx</td>
+<td>配置文件</td>
+<td>用于配置出系统守护进程管理器管理方式</td>
+</tr>
+<tr>
+<td>/etc/sysconfig/nginx-debug</td>
+<td>配置文件</td>
+<td>用于配置出系统守护进程管理器管理方式</td>
+</tr>
+<tr>
+<td>/etc/lib64/nginx/modules</td>
+<td>目录</td>
+<td>Nginx 模块目录</td>
+</tr>
+<tr>
+<td>/etc/nginx/modules</td>
+<td>目录</td>
+<td>Nginx 模块目录</td>
+</tr>
+<tr>
+<td>/usr/sbin/nginx</td>
+<td>命令</td>
+<td>Nginx 服务的启动管理的终端命令</td>
+</tr>
+<tr>
+<td>/usr/sbin/nginx-debug</td>
+<td>命令</td>
+<td>Nginx 服务的启动管理的终端命令</td>
+</tr>
+<tr>
+<td>/usr/share/doc/nginx-1.12.0</td>
+<td>目录</td>
+<td>Nginx 的手册和帮助文件</td>
+</tr>
+<tr>
+<td>/var/cache/nginx</td>
+<td>目录</td>
+<td>Nginx 的缓存目录</td>
+</tr>
+<tr>
+<td>/var/log/nginx</td>
+<td>目录</td>
+<td>Nginx 的日志目录</td>
+</tr>
+</tbody>
+</table>
+<p>2). Nginx 编译参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 显示编译参数</div><div class="line">nginx -V</div></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th>编译选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>–prefix=/etc/nginx</td>
+<td>设定 Nginx 安装目录</td>
+</tr>
+<tr>
+<td>–sbin-path=/usr/sbin/nginx</td>
+<td>设定 Nginx 可执行文件安装路径</td>
+</tr>
+<tr>
+<td>–modules-path=/usr/lib64/nginx/modules</td>
+<td>设定 Nginx 模块目录</td>
+</tr>
+<tr>
+<td>–conf-path=/etc/nginx/nginx.conf</td>
+<td>设定 Nginx 配置文件路径</td>
+</tr>
+<tr>
+<td>–error-log-path=/var/log/nginx/error.log</td>
+<td>设定 Nginx 错误日志文件路径</td>
+</tr>
+<tr>
+<td>–http-log-path=/var/log/nginx/access.log</td>
+<td>设定 Nginx HTTP 请求日志文件路径</td>
+</tr>
+<tr>
+<td>–pid-path=/var/run/nginx.pid</td>
+<td>设定 nginx.pid 的路径</td>
+</tr>
+<tr>
+<td>–lock-path=/var/run/nginx.lock</td>
+<td>设定 nginx.lock 文件的路径</td>
+</tr>
+<tr>
+<td>–http-client-body-temp-path=/var/cache/nginx</td>
+<td>指定 HTTP 客户端请求缓存文件存放目录的路径</td>
+</tr>
+<tr>
+<td>–http-proxy-temp-path=/var/cache/nginx/proxy_temp</td>
+<td>指定 HTTP 反向代理缓存文件存放目录的路径</td>
+</tr>
+<tr>
+<td>–http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp</td>
+<td>指定 HTTP FastCGI缓存文件存放目录的路径</td>
+</tr>
+<tr>
+<td>–user=nginx</td>
+<td>设定 Nginx 进程启动的用户</td>
+</tr>
+<tr>
+<td>–group-nginx</td>
+<td>设定 Nginx 进程启动的用户组</td>
+</tr>
+</tbody>
+</table>
+<p>3). Nginx 日志类型</p>
+<ul>
+<li>error_log：存储 Nginx 错误日志</li>
+<li>access_log：存储 HTTP 请求相关日志</li>
+</ul>
+<p>内置的日志级别有：</p>
+<ul>
+<li>第一级别日志<ul>
+<li>stderr</li>
+<li>emerg</li>
+<li>alert</li>
+<li>crit</li>
+<li>error</li>
+<li>warn</li>
+<li>notice</li>
+<li>info</li>
+<li>debug</li>
+</ul>
+</li>
+<li>第二级别日志<ul>
+<li>debug_core</li>
+<li>debug_alloc</li>
+<li>debug_mutex</li>
+<li>debug_event</li>
+<li>debug_http</li>
+<li>debug_mail</li>
+<li>debug_mysql</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 定义错误日志</span></div><div class="line"><span class="attribute">error_log</span> path/logs/error.log <span class="literal">info</span></div><div class="line"></div><div class="line"><span class="comment"># 自定义日志格式</span></div><div class="line">log_format  customLog <span class="string">"<span class="variable">$remote_addr</span>^A<span class="variable">$remote_user</span>^A<span class="variable">$time_local</span>^A<span class="variable">$request_method</span>^A<span class="variable">$uri</span>^A<span class="variable">$args</span>^A<span class="variable">$server_protocol</span>"</span></div><div class="line">        <span class="string">"^A<span class="variable">$status</span>^A<span class="variable">$body_bytes_sent</span>^A<span class="variable">$http_referer</span>"</span></div><div class="line">        <span class="string">"^A<span class="variable">$http_user_agent</span>"</span>;</div><div class="line"><span class="attribute">access_log</span> path/logs/access.log customLog</div></pre></td></tr></table></figure>
+<p>4). Nginx 变量</p>
+<ul>
+<li>HTTP 请求变量</li>
+<li>内置变量</li>
+<li>自定义变量</li>
+</ul>
+<p>5). Nginx 模块</p>
+<ul>
+<li>Nginx 官方模块</li>
+<li>Nginx 第三方模块</li>
+</ul>
+<p>5-1). http_stub_status_module 模块</p>
+<p>这个模块的作用是展示 Nginx 当前处理连接的状态。</p>
+<p>模块的配置语法：</p>
+<ul>
+<li>Syntax: <code>stub_status;</code></li>
+<li>Default:</li>
+<li>Context: server, location</li>
+</ul>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">location</span> /nginx-http-stub-status-module &#123;</div><div class="line">    stub_status;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>Active connections：Nginx 当前活跃的连接数</li>
+<li>server accepts handled requests<ul>
+<li>第一个参数：Nginx 处理握手总次数</li>
+<li>第二个参数：Nginx 处理连接总次数</li>
+<li>第三个参数：Nginx 处理请求总次数</li>
+</ul>
+</li>
+<li>Reading<ul>
+<li>第一个参数：表示正在读取的连接数量</li>
+<li>第二个参数：表示正在写入的连接数量</li>
+<li>第三个参数：表示正在等待的连接数量</li>
+</ul>
+</li>
+</ul>
+<p>5-2). http_random_index_module 模块</p>
+<p>这个模块的作用是从指定目录中随机选择一个文件作为主页。</p>
+<p>模块的配置语法：</p>
+<ul>
+<li>Syntax: <code>random_index on | off;</code></li>
+<li>Default: <code>random_index off;</code></li>
+<li>Context: server, location</li>
+</ul>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">location</span> /nginx-http-random-index-module &#123;</div><div class="line">    <span class="attribute">alias</span> /opt/app/HttpRandomIndexModule/;</div><div class="line">    <span class="attribute">random_index</span> <span class="literal">on</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>5-3). http_sub_module 模块</p>
+<p>这个模块的作用是用于 HTTP 内容替换。</p>
+<p>模块的配置语法：</p>
+<ul>
+<li>Syntax: <code>sub_filter (string) (replacement);</code></li>
+<li>Default:</li>
+<li>Context: http, server, location</li>
+<li><p>设置字符串替换；string 是被替换的字符串，replacement 是新的字符串。</p>
+</li>
+<li><p>Syntax: <code>sub_filter_last_modified on | off;</code></p>
+</li>
+<li>Default: <code>sub_filter_last_modified off;</code></li>
+<li>Context: http, server, location</li>
+<li><p>判断是否存在更新，存在更新则返回新的资源，否则返回缓存。</p>
+</li>
+<li><p>Syntax: <code>sub_filter_once on | off;</code></p>
+</li>
+<li>Default: <code>sub_filter_once on;</code></li>
+<li>Context: http, server, location</li>
+<li>设置字符串替换是多次替换或只是替换一次。</li>
+</ul>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">location</span> /nginx-http-sub-module &#123;</div><div class="line">    <span class="attribute">alias</span> /opt/app/HttpSubModule/;</div><div class="line">    <span class="attribute">index</span> index.html;</div><div class="line">    <span class="attribute">sub_filter</span> <span class="string">'&lt;h1&gt;Hello World&lt;/h1&gt;'</span> <span class="string">'&lt;h5&gt;Luis Edware&lt;/h5&gt;'</span>;</div><div class="line">    <span class="attribute">sub_filter_once</span> <span class="literal">off</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>5-4). limit_conn_module 模块</p>
+<p>这个模块的作用是根据定义的键来限制每个键值的 TCP 连接数。</p>
+<ul>
+<li>Syntax: <code>limit_conn_zone key zone=name:size;</code></li>
+<li>Default: none</li>
+<li>Context: http</li>
+</ul>
+<p>该指令描述会话状态存储区域。键的状态中保存了当前连接数，键的值可以是特定变量的任何非空值。key 定义键，zone=name 定义区域名称，size 定义各个键共享内存空间大小。如果内存空间被耗尽，服务器将会对后续所有的请求返回 503 错误。</p>
+<ul>
+<li>Syntax: <code>limit_conn zone number;</code></li>
+<li>Default: none</li>
+<li>Context: http, server, location</li>
+</ul>
+<p>该指令给每个键值指定最大同时连接数，当超过这个数字时返回 503 错误。</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">limit_conn_zone</span> <span class="variable">$binary_remote_addr</span> zone=conn_zone:<span class="number">1m</span>;</div><div class="line"></div><div class="line">server&#123;</div><div class="line">...</div><div class="line"></div><div class="line"><span class="attribute">location</span> /nginx-limit-conn-module &#123;</div><div class="line">    <span class="attribute">alias</span> /opt/app/LimitConnModule/;</div><div class="line">    <span class="attribute">index</span> index.html;</div><div class="line">    <span class="attribute">limit_conn</span> conn_zone <span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>5-5). limit_req_module 模块</p>
+<p>这个模块的作用是根据定义的键值来限制请求处理的频率。限制的方法如同漏斗，每秒固定处理请求数，推迟过多请求。</p>
+<ul>
+<li>Syntax: <code>limit_req_zone $variable zone=name:size rate=rate;</code></li>
+<li>Default: none</li>
+<li>Context: http</li>
+</ul>
+<p>设置一块共享内存限制域用来保存键值的状态参数。速度可以设置为每秒处理请求数和每分钟处理请求数，其值必须是整数，所以如果你需要指定每秒处理少于1个的请求，2秒处理一个请求，可以使用 “30r/m”</p>
+<ul>
+<li>Syntax: <code>limit_req zone=name [burst=number] [nodelay];</code></li>
+<li>Default: none</li>
+<li>Context: http, server, location</li>
+</ul>
+<p>设置对应的共享内存限制域和允许被处理的最大请求数阈值。 如果请求的频率超过了限制域配置的值，请求处理会被延迟，所以所有的请求都是以定义的频率被处理的。 超过频率限制的请求会被延迟，直到被延迟的请求数超过了定义的阈值，这时，这个请求会被终止，并返回503 (Service Temporarily Unavailable) 错误。这个阈值的默认值为0</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">limit_req_zone $binary_remote_addr zone=req_zone:1m rate=1r/s;</div><div class="line"></div><div class="line">location /nginx-limit-req-module &#123;</div><div class="line">    alias /opt/app/LimitReqModule/;</div><div class="line">    index index.html;</div><div class="line">    # nodelay 参数表示不希望超过的请求被延迟，burst 参数表示请求阈值。</div><div class="line">    limit_req zone=req_zone burst=5 nodelay;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>5-6). http_access_module 模块</p>
+<p>这个模块的作用是提供对于特定 host 的客户端的访问控制。对于使用了代理服务器的客户端的请求识别率不高。</p>
+<ul>
+<li>Syntax: <code>allow address | CIDR | unix: | all;</code></li>
+<li>Default: none</li>
+<li>Context: http, server, location, limit_except</li>
+</ul>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">location</span> /nginx-http-access-module &#123;</div><div class="line">    <span class="attribute">alias</span> /opt/app/HttpAccessModule/;</div><div class="line">    <span class="attribute">index</span> index.html;</div><div class="line">    <span class="attribute">allow</span> <span class="number">192.168.1.103</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>Syntax: <code>deny address | CIDR | unix: | all;</code></li>
+<li>Default: none</li>
+<li>Context: http, server, location, limit_except</li>
+</ul>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">location</span> /nginx-http-access-module &#123;</div><div class="line">    <span class="attribute">alias</span> /opt/app/HttpAccessModule/;</div><div class="line">    <span class="attribute">index</span> index.html;</div><div class="line">    <span class="attribute">deny</span> all;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>5-7). http_auth_basic_module 模块</p>
+<p>这个模块的作用是让用户输入正确的账号和密码才允许访问 Web 资源。使用 <code>htpasswd</code> 生成账号密码文件。</p>
+<ul>
+<li>Syntax: <code>auth_basic string | off;</code></li>
+<li>Default: <code>auth_basic off;</code></li>
+<li>Context: http, server, location, limit_except</li>
+</ul>
+<ul>
+<li>Syntax: <code>auth_basic_user_file file;</code></li>
+<li>Default: none</li>
+<li>Context: http, server, location, limit_except</li>
+</ul>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">location</span> /nginx-http-auth-basic-module &#123;</div><div class="line">    <span class="attribute">alias</span> /opt/app/HttpAuthBasicModule/;</div><div class="line">    <span class="attribute">auth_basic</span> <span class="string">"Hello World! Please input your account and password!"</span>;</div><div class="line">    <span class="attribute">auth_basic_user_file</span> /opt/app/HttpAuthBasicModule/AccountPassword;</div><div class="line">    <span class="attribute">index</span> index.html;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>http_auth_basic_module 局限性</p>
+<ul>
+<li>用户信息依赖文件方式</li>
+<li>操作管理机械，效率低下</li>
+</ul>
+<p>解决方案</p>
+<ul>
+<li>Nginx 结合 Lua 实现高效验证</li>
+<li>Nginx 结合 LDAP，利用 nginx-auth-ldap 模块</li>
+</ul>
+<h3 id="Nginx-进阶学习"><a href="#Nginx-进阶学习" class="headerlink" title="Nginx 进阶学习"></a>Nginx 进阶学习</h3><h4 id="一、静态资源-Web-服务"><a href="#一、静态资源-Web-服务" class="headerlink" title="一、静态资源 Web 服务"></a>一、静态资源 Web 服务</h4><h4 id="二、代理服务"><a href="#二、代理服务" class="headerlink" title="二、代理服务"></a>二、代理服务</h4><h4 id="三、负载均衡调度器-SLB"><a href="#三、负载均衡调度器-SLB" class="headerlink" title="三、负载均衡调度器 SLB"></a>三、负载均衡调度器 SLB</h4><h4 id="四、动态缓存"><a href="#四、动态缓存" class="headerlink" title="四、动态缓存"></a>四、动态缓存</h4>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2018/02/01/Nginx-从入门到实战/" data-id="cjd7e2rv7001l2s4b4fkty6zx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Laravel-项目开发常用扩展包" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/01/23/Laravel-项目开发常用扩展包/" class="article-date">
@@ -127,7 +560,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2018/01/23/Laravel-项目开发常用扩展包/" data-id="cjcujcgat0004qi4b717znnw7" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2018/01/23/Laravel-项目开发常用扩展包/" data-id="cjd7e2ru4000b2s4b49moi6sj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -220,7 +653,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/12/21/学习-ES6/" data-id="cjcujcgga0073qi4bqvxmnmcg" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/12/21/学习-ES6/" data-id="cjd7e2s1p007e2s4blfsvwyfh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -258,7 +691,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/12/11/学习算法设计/" data-id="cjcujcggs0088qi4bvz04l0bd" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/12/11/学习算法设计/" data-id="cjd7e2s2e007w2s4b7i2b181y" class="article-share-link">Share</a>
       
       
     </footer>
@@ -294,7 +727,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/12/11/学习数据结构/" data-id="cjcujcggq0081qi4bpn73l66j" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/12/11/学习数据结构/" data-id="cjd7e2s2i007y2s4bp240fytu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -502,7 +935,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/16/PHP-秒杀系统/" data-id="cjcujcgd6002dqi4bg0uk6tr8" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/16/PHP-秒杀系统/" data-id="cjd7e2rw4002g2s4bqaqkznlc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -739,129 +1172,11 @@
 <p><strong>顺序查找</strong></p>
 <p>原理：按一定的顺序检查数据中每一个元素，直到找到所需要寻找的特定值为止。时间复杂度：最差 O(n)，平均 O(n)；空间复杂度：O(1)。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div></pre></td></tr></table></figure></p>
 <p>总结：二分查找算法的时间复杂度最差是 O(log2n)，顺序查找的时间复杂度是 O(n)，所以二份查找算法更快，但是递归情况下，二分查找算法更加消耗内容，时间复杂度为 O(log2n)。</p>
-<h4 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h4><ul>
-<li>回顾真题：请简单描述一下数据结构的特征(stack、heap、list、doubly-linked-list、queue、array(vector)、set、map)。</li>
-<li>考点分析：常见数据接口特征。</li>
-<li>解题方法：先理解每种数据结构的特征，有时会遇到让用 PHP 代码实现其中的数据结构，遇到此类问题，先要理解该种数组结构的特性是什么，然后再实现，通常可以使用 PHP 的数组来模拟。</li>
-<li>一网打尽：用 PHP 实现一个双向队列。<ul>
-<li>array_shift</li>
-<li>array_unshift</li>
-<li>array_pop</li>
-<li>array_push</li>
-</ul>
-</li>
-</ul>
-<p><strong>Array</strong></p>
-<p>数组，最简单而且应用最广泛的数据结构之一。</p>
-<p>特性：使用连续的内存来存储，数组中的所有元素必须是相同的类型或者类型的衍生（同质数据结构），元素可以通过下标直接访问。</p>
-<p><strong>LinkedList</strong></p>
-<p>链表，线性表的一种，最基本，最简单，也是最常用的数据结构。</p>
-<p>特性：元素之间的关系是一对一的关系（除了第一个和最后一个元素，其他元素都是首尾相接）。有顺序存储结构和链式存储结构两种存储方式。</p>
-<p><strong>Stack</strong></p>
-<p>栈，一个带有数据存储特性的数据结构。</p>
-<p>特性：存储数据是先进后出的，栈只有一个出口，只能从栈顶部增加和移除元素。</p>
-<p><strong>Heap</strong></p>
-<p>堆，一般情况下，堆叫做二叉堆，近似完全二叉树的数据结构。</p>
-<p>特性：子节点的键值或者索引总是小于它的父节点、每个节点的左右子树又是一个二叉堆。根节点最大的堆叫最大堆或者大根堆、最小的叫最小堆或者小根堆。</p>
-<p><strong>List</strong></p>
-<p>线性表，由零个或多个数据元素组成的有限序列。</p>
-<p>特性：线性表是一个序列。0 个元素构成的线性表是空表，第一个元素无先驱、最后一个元素无后继、其他元素都只有一个先驱和后继。有长度，长度是元素的个数，长度有限。</p>
-<p><strong>doubly-linked-list</strong></p>
-<p>双向链表</p>
-<p>特性：每个元素都是一个对象，每个对象有一个关键字 Key 和两个指针 next 和 prev。</p>
-<p><strong>queue</strong></p>
-<p>队列</p>
-<p>特性：先进先出(FIFO)、并发中使用，可以安全将对象从一个任务传给另一个任务。</p>
-<p><strong>set</strong></p>
-<p>集合</p>
-<p>特性：保存不重复元素。</p>
-<p><strong>map</strong></p>
-<p>字典</p>
-<p>特性：关联数组也可以被称为字典。</p>
-<p><strong>graph</strong></p>
-<p>图</p>
-<p>特性：通常使用邻接矩阵和邻接表表示。前者易实现但是对于稀疏矩阵会浪费较多空间。后者使用链表的方式存储信息但是对于图搜索时间复杂度较高。</p>
-<h4 id="其他逻辑算法"><a href="#其他逻辑算法" class="headerlink" title="其他逻辑算法"></a>其他逻辑算法</h4><ul>
-<li>回顾真题：1,1,2,3,5,8,13,21,34…求第 30 位的数是多少，请用伪代码描述其实现方法 TODO。</li>
-<li>考点分析：逻辑思维能力</li>
-<li>解题方法：找到要处理的数组或者字符串的规律，也可能是一个数列的规律，如果要求使用伪代码实现，建议先说明规律，然后白话说明解题步骤即可。</li>
-<li>一网打尽：请写一个函数，实现以下功能：字符串 “open_door” 转换成 OpenDoor，“make_by_id” 转换成 “MakeById” TODO。</li>
-</ul>
-<h4 id="模拟内置函数实现"><a href="#模拟内置函数实现" class="headerlink" title="模拟内置函数实现"></a>模拟内置函数实现</h4><ul>
-<li>回顾真题：不使用 PHP 函数，用方法写一个反转字符串的函数。</li>
-<li>考点分析：逻辑思维能力、PHP 内置函数的熟悉程度、字符串和数组的处理能力。</li>
-<li>解题方法：多多学习 PHP 字符串和数组的内置函数，尝试模拟其功能，有助于提成逻辑思维和熟悉函数功能。</li>
-<li>一网打尽：写一个函数，要求不使用 array_merge 完成多个数组的合并。</li>
-</ul>
-<p><strong>高并发解决方案案例</strong></p>
-<ul>
-<li>流量优化：防盗链处理。</li>
-<li>前端优化：<ul>
-<li>减少 HTTP 请求。<ul>
-<li>JS 文件压缩合并。</li>
-<li>CSS 文件压缩合并。</li>
-<li>CSS 背景图片压缩合并。</li>
-</ul>
-</li>
-<li>添加异步请求，实现资源懒加载。</li>
-<li>启用浏览器缓存和响应资源压缩。</li>
-<li>CDN 加速，把前端的资源放到 CDN 服务，也可以减少带宽的消耗。</li>
-<li>建立独立图片服务器。</li>
-</ul>
-</li>
-<li>服务端优化<ul>
-<li>页面静态化处理</li>
-<li>并发处理<ul>
-<li>队列处理</li>
-<li>请求异步处理</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>数据库优化<ul>
-<li>数据库缓存</li>
-<li>分库分表、分区操作</li>
-<li>读写分离</li>
-<li>负载均衡</li>
-</ul>
-</li>
-<li>Web 服务器优化<ul>
-<li>负载均衡</li>
-</ul>
-</li>
-</ul>
-<h2 id="数据库缓存"><a href="#数据库缓存" class="headerlink" title="数据库缓存"></a>数据库缓存</h2><p><strong>什么是数据库缓存</strong></p>
-<p>MySQL 等一些常见的关系型数据库的数据都存储在磁盘当中，在高并发场景下，业务应用对 MySQL 产生的增删查改的操作造成巨大的 I/O 开销和查询压力，这无疑对数据库和服务器都是一种巨大的压力，为了解决此类问题，缓存数据的概念应运而生。缓存数据是为了让客户端很少甚至不访问数据库服务器进行数据的查询，高并发下，能最大程度地降低对数据库服务器的访问压力。</p>
-<p>作用：</p>
-<ul>
-<li>极大地解决数据库服务器的压力</li>
-<li>提高应用数据的响应速度</li>
-</ul>
-<p>常见缓存形式：</p>
-<ul>
-<li>内存缓存</li>
-<li>文件缓存</li>
-</ul>
-<p><strong>使用缓存需要考虑的内容</strong></p>
-<ul>
-<li>缓存方式的选择</li>
-<li>缓存场景的选择</li>
-<li>缓存数据的实时性</li>
-<li>缓存数据的稳定性</li>
-</ul>
-<p><strong>使用 MySQL 查询缓存</strong></p>
-<p>如何启用 MySQL 查询缓存，使用 query_cache_type 配置项开启关闭。有 0、1、2 三个取值。0 表示不使用查询缓存，1 表示始终使用查询缓存。2 表示按需使用查询缓存。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">SET GLOBAL query_cache_type = 1;</div><div class="line"></div><div class="line"># 当 query_cache_type 为 1 时，亦可关闭查询缓存</div><div class="line">SELECT SQL_NO_CACHE * FROM table WHERE condition;</div><div class="line"></div><div class="line"># 当 query_cache_type 为 2 时，可按需使用查询缓存</div><div class="line">SELECT SQL_CACHE * FROM table WHERE condition;</div></pre></td></tr></table></figure></p>
-<p>如何设置 MySQL 查询缓存大小，使用 query_cache_size 配置项进行配置。默认情况下 query_cache_size 为 0，表示为查询缓存预留的内存为 0，则无法使用查询缓存。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SET GLOBAL query_cache_size = 1342177728;</div></pre></td></tr></table></figure></p>
-<p>MySQL 查询缓存可以看做是 SQL 文本和查询结果的映射。第二次查询的 SQL 和第一次查询的 SQL 完全相同，则会使用缓存。当表的结构或数据发生改变时，查询缓存中的数据不再有效。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"># 查看查询缓存命中次数</div><div class="line">SHOW STATUS LIKE &apos;Qcache_hits&apos;;</div><div class="line"></div><div class="line"># 清理查询缓存内存碎片</div><div class="line">FLUSH QUERY CACHE;</div><div class="line"></div><div class="line"># 从查询缓存中移出所有查询</div><div class="line">RESET QUERY CACHE;</div><div class="line"></div><div class="line"># 关闭所有打开的表，同时清空查询缓存中的内容</div><div class="line">FLUSH TABLES</div></pre></td></tr></table></figure></p>
-<p><strong>使用 Memcache 缓存</strong></p>
-<p>对于大型站点，如果没有中间缓存层，当流量打入数据库层时，即便有之前的几层为我们挡住一部分流量，但是在大并发的情况下，还是会有大量请求涌入数据库层，这样对于数据服务器的压力冲击很大，响应速度也会下降，因此添加中间缓存层很有必要。</p>
-<p>memcache 是一套分布式的高速缓存系统。通过在内存里维护一个统一的巨大的 hash 表，它能够用来存储各种格式的数据，包括图像、视频、文件以及数据库检索的结果等。简单的说就是将数据调用到内存，然后从内存中读取，从而大大提高读取速度。</p>
-<p><strong>使用 Redis 缓存</strong></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjcujcgd2002aqi4bfwdlil1q" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjd7e2rw2002d2s4bke2f5zqc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1390,7 +1705,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/09/Web-API-的设计与开发/" data-id="cjcujcgdh002uqi4bkytajj6w" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/09/Web-API-的设计与开发/" data-id="cjd7e2rwj002t2s4br6k5d6tg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -1480,7 +1795,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/05/日常开发常用命令/" data-id="cjcujcggr0085qi4bal4j6pcf" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/05/日常开发常用命令/" data-id="cjd7e2s3100872s4bafhelnxi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1569,224 +1884,9 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/01/刻意练习/" data-id="cjcujcgg5006rqi4bfvxfrytm" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/01/刻意练习/" data-id="cjd7e2s1f006u2s4ba0k0b2m8" class="article-share-link">Share</a>
       
       
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-高性能的-PHP-API-接口开发" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/10/24/高性能的-PHP-API-接口开发/" class="article-date">
-  <time datetime="2017-10-24T02:52:27.000Z" itemprop="datePublished">2017-10-24</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/24/高性能的-PHP-API-接口开发/">高性能的 PHP API 接口开发</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="学习与目标"><a href="#学习与目标" class="headerlink" title="学习与目标"></a>学习与目标</h2><ul>
-<li><p>API 的工程化建设及 API 性能</p>
-<ul>
-<li>如何对 API 项目中的公共技术抽离，建立有层级的 PHP API 项目</li>
-<li>如何做好异常处理及监控，保障 API 高效稳定地提供服务</li>
-<li>如何进行 API 性能测试</li>
-<li>如何定位性能瓶颈</li>
-<li>如何解决接口 QPS TPS 问题</li>
-</ul>
-</li>
-<li><p>PHP 常规实现的基本 API</p>
-<ul>
-<li>用户登录注册接口</li>
-<li>文章类别接口</li>
-<li>一些接口实现方法</li>
-<li>邮件接口</li>
-</ul>
-</li>
-<li><p>第三方能力的整合系列接口</p>
-<ul>
-<li>短信发送</li>
-<li>Push 消息</li>
-<li>IP 地址转换</li>
-<li>支付</li>
-<li>其他</li>
-</ul>
-</li>
-<li><p>Yaf 框架的优点</p>
-<ul>
-<li>功能足够精简</li>
-<li>性能足够优秀</li>
-<li>适合做 API 层开发</li>
-<li>适合用 PHP 硬编码实现</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>学习收获<ul>
-<li>掌握 Restful API 接口的实现方法</li>
-<li>学习更多 PHP 基本语法、基本库的使用</li>
-<li>能够了解 API的分层实现方法</li>
-<li>与前端解耦，并行开发</li>
-<li>学会工程化抽离整理代码能力</li>
-<li>提升 API 性能问题的定位分析与解决能力</li>
-</ul>
-</li>
-</ul>
-<h2 id="API-基础知识讲解"><a href="#API-基础知识讲解" class="headerlink" title="API 基础知识讲解"></a>API 基础知识讲解</h2><ul>
-<li>API 是无状态性的</li>
-<li>API 的有状态性的实现方法<ul>
-<li>Session Cookie 实现</li>
-<li>Json Web Token 实现</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>REST 与 SOAP、RPC 的区别<ul>
-<li>RPC 所谓的远程过程调用（面向方法）？</li>
-<li>SOAP 所谓的面向服务的架构（面向消息）？</li>
-<li>REST 所谓的面向资源?</li>
-</ul>
-</li>
-</ul>
-<h2 id="周边知识与工具"><a href="#周边知识与工具" class="headerlink" title="周边知识与工具"></a>周边知识与工具</h2><ul>
-<li>API 常用传输格式：JSON</li>
-<li>JSON 的可视化工具</li>
-<li>API 调试工具：Postman</li>
-</ul>
-<h2 id="Yaf-框架"><a href="#Yaf-框架" class="headerlink" title="Yaf 框架"></a>Yaf 框架</h2><ul>
-<li>Yaf 的安装<ul>
-<li>wget “安装地址”</li>
-<li>tar zxvf 安装包.tgz</li>
-<li>phpize</li>
-<li>./configure –with-php-config=php-config</li>
-<li>make</li>
-<li>make test</li>
-<li>make install</li>
-</ul>
-</li>
-</ul>
-<p>Yaf Codes Generator<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php yaf_cg Sample</div></pre></td></tr></table></figure></p>
-<h2 id="一些思考"><a href="#一些思考" class="headerlink" title="一些思考"></a>一些思考</h2><ul>
-<li>如何防止机器恶意注册与机器模拟用户登录<ul>
-<li>提交特殊参数</li>
-<li>实现网站验证码</li>
-</ul>
-</li>
-<li>如何实现密码找回功能</li>
-<li>如何实现数据分页效果</li>
-<li>如何收集发送出去的邮件的送达效果</li>
-<li>短信发送成功对账实现</li>
-<li>批量短信通知的场景如何高效发送</li>
-<li>在不能完全识别 IP 地址的时候如何做降级方案</li>
-</ul>
-<h2 id="文章类接口的实现"><a href="#文章类接口的实现" class="headerlink" title="文章类接口的实现"></a>文章类接口的实现</h2><ul>
-<li>文章信息的 CRUD</li>
-<li>让一个 API 接口做更多的事情</li>
-<li>文章类接口通用功能：分页功能的实现</li>
-</ul>
-<h2 id="Push-服务"><a href="#Push-服务" class="headerlink" title="Push 服务"></a>Push 服务</h2><ul>
-<li>小米 Push</li>
-<li>华为 Push</li>
-<li>个推</li>
-<li>极光推送</li>
-</ul>
-<h2 id="IP-地址转换接口"><a href="#IP-地址转换接口" class="headerlink" title="IP 地址转换接口"></a>IP 地址转换接口</h2><ul>
-<li>黑白名单</li>
-<li>访问来源统计</li>
-<li>小流量线上验证</li>
-</ul>
-<h2 id="API-接口的提炼"><a href="#API-接口的提炼" class="headerlink" title="API 接口的提炼"></a>API 接口的提炼</h2><ul>
-<li>API 自测脚本<ul>
-<li>作用<ul>
-<li>项目部署上线前，验证调成过的项目代码</li>
-<li>有利于新的团队成员快速去了解代码功能</li>
-</ul>
-</li>
-<li>安装<ul>
-<li>composer require curl/curl</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>API 公共 Lib 的抽离<ul>
-<li>SDK 抽离</li>
-<li>Composer 管理</li>
-</ul>
-</li>
-<li>建立数据操作层 DAO</li>
-<li>接口异常时的处理规范<ul>
-<li>统一的 API 接口返回 - 错误信息字典</li>
-<li>统一的 API 异常处理 - 容错与降级</li>
-</ul>
-</li>
-<li>API 功能的整合</li>
-<li>API 文档<ul>
-<li>PHPDocumentor</li>
-</ul>
-</li>
-</ul>
-<h2 id="API-接口的性能"><a href="#API-接口的性能" class="headerlink" title="API 接口的性能"></a>API 接口的性能</h2><ul>
-<li>接口性能信息收集<ul>
-<li>关注接口的整体时间开销<ul>
-<li>grep ‘log_format’ ./ -r</li>
-</ul>
-</li>
-<li>Xhprof 收集 API 接口开销</li>
-</ul>
-</li>
-<li>API 时间开销定位与分析</li>
-<li>API 上下游性能优化<ul>
-<li>MySQL 性能分析</li>
-<li>后端服务调优<ul>
-<li>短信</li>
-<li>邮件</li>
-<li>微信推送</li>
-</ul>
-</li>
-<li>API 返回调优</li>
-</ul>
-</li>
-<li>API 服务稳定性 SLA<ul>
-<li>服务监控<ul>
-<li>supervisor</li>
-<li>supervisor 配置和使用</li>
-<li>find / -name ‘supervisord.conf’</li>
-</ul>
-</li>
-<li>API 负载均衡</li>
-<li>服务报警</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/10/24/高性能的-PHP-API-接口开发/" data-id="cjcujcgh2008sqi4boj2d8vl9" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
-
     </footer>
   </div>
   
@@ -1807,7 +1907,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nginx/">nginx</a></li></ul>
     </div>
   </div>
 
@@ -1817,7 +1917,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
     </div>
   </div>
 
@@ -1827,7 +1927,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Programming-Language/" style="font-size: 11.43px;">Programming Language</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a> <a href="/tags/vue-js/" style="font-size: 10px;">vue.js</a>
+      <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Programming-Language/" style="font-size: 11.43px;">Programming Language</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/vue-js/" style="font-size: 10px;">vue.js</a>
     </div>
   </div>
 
@@ -1836,7 +1936,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
   </div>
 
@@ -1847,6 +1947,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/02/01/Nginx-从入门到实战/">Nginx 从入门到实战</a>
+          </li>
         
           <li>
             <a href="/2018/01/23/Laravel-项目开发常用扩展包/">Laravel 项目开发常用扩展包</a>
@@ -1862,10 +1966,6 @@
         
           <li>
             <a href="/2017/12/11/学习数据结构/">学习数据结构</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/16/PHP-秒杀系统/">PHP 秒杀系统</a>
           </li>
         
       </ul>

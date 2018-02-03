@@ -66,6 +66,66 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-使用Laravel构建内容管理框架（六）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/04/使用Laravel构建内容管理框架（六）/" class="article-date">
+  <time datetime="2016-04-04T13:33:28.000Z" itemprop="datePublished">2016-04-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/04/使用Laravel构建内容管理框架（六）/">使用 Laravel 构建内容管理框架（六）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>完成Entrust的配置</p>
+<h1 id="安装zizaco-entrust-Package"><a href="#安装zizaco-entrust-Package" class="headerlink" title="安装zizaco/entrust Package"></a>安装zizaco/entrust Package</h1><hr>
+<p>zizaco/entrust是Laravel下基于角色的权限管理方案。</p>
+<p>1.修改文件<code>composer.json</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&quot;require&quot;: &#123;</div><div class="line">    &quot;php&quot;: &quot;&gt;=5.5.9&quot;,</div><div class="line">    &quot;laravel/framework&quot;: &quot;5.1.*&quot;,</div><div class="line">    &quot;gregwar/captcha&quot;: &quot;1.*&quot;,</div><div class="line">    &quot;zizaco/entrust&quot;: &quot;dev-laravel-5&quot;</div><div class="line">&#125;,</div></pre></td></tr></table></figure></p>
+<p>2.在终端运行命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">composer install</div><div class="line"></div><div class="line">// or</div><div class="line"></div><div class="line">composer update</div></pre></td></tr></table></figure></p>
+<p>3.在文件<code>config/app.php</code>的<code>providers</code>数组和<code>aliase</code>数组分别添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// providers</div><div class="line">Zizaco\Entrust\EntrustServiceProvider::class</div><div class="line"></div><div class="line">// aliase</div><div class="line">&apos;Entrust&apos; =&gt; Zizaco\Entrust\EntrustFacade::class,</div></pre></td></tr></table></figure></p>
+<p>4.在文件<code>app/Http/Kernel.php</code>的<code>$routeMiddleware</code>添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&apos;role&apos; =&gt; Zizaco\Entrust\Middleware\EntrustRole::class,</div><div class="line">&apos;permission&apos; =&gt; Zizaco\Entrust\Middleware\EntrustPermission::class,</div><div class="line">&apos;ability&apos; =&gt; Zizaco\Entrust\Middleware\EntrustAbility::class,</div></pre></td></tr></table></figure></p>
+<p>5.Entrust会根据文件<code>config/auth.php</code>的<code>model</code>来选择用户模型，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&apos;model&apos; =&gt; App\Models\User::class</div></pre></td></tr></table></figure></p>
+<p>执行以下命令生成配置文件<code>config/entrust.php</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan vendor:publish</div></pre></td></tr></table></figure></p>
+<p>修改配置文件<code>entrust.php</code>如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&apos;role&apos;=&gt;&apos;App\Models\Role&apos;</div><div class="line">&apos;permission&apos;=&gt;&apos;App\Models\Permission&apos;</div></pre></td></tr></table></figure></p>
+<p>6.生成数据库迁移文件并执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">php artisan entrust:migration</div><div class="line">php artisan migrate</div></pre></td></tr></table></figure></p>
+<p>7.生成自动加载<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">composer dump-autoload</div></pre></td></tr></table></figure></p>
+<h1 id="管理模型"><a href="#管理模型" class="headerlink" title="管理模型"></a>管理模型</h1><hr>
+<p>为了使用Entrust，我们需要新建两个模型，在终端运行以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 角色模型</div><div class="line">php artisan make:model Models/Role</div><div class="line"></div><div class="line">// 权限模型</div><div class="line">php artisan make:model Models/Permission</div></pre></td></tr></table></figure></p>
+<h2 id="Role-php"><a href="#Role-php" class="headerlink" title="Role.php"></a>Role.php</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">namespace App\Models;</div><div class="line"></div><div class="line">use Zizaco\Entrust\EntrustRole;</div><div class="line"></div><div class="line">class Role extends EntrustRole</div><div class="line">&#123;</div><div class="line">    protected $guarded = [];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Permission-php"><a href="#Permission-php" class="headerlink" title="Permission.php"></a>Permission.php</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">namespace App\Models;</div><div class="line"></div><div class="line">use Zizaco\Entrust\EntrustPermission;</div><div class="line"></div><div class="line">class Permission extends EntrustPermission</div><div class="line">&#123;</div><div class="line">    protected $guarded = [];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>为了配合Entrust的使用，需要修改User.php的代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"></div><div class="line">namespace App\Models;</div><div class="line"></div><div class="line">use Illuminate\Auth\Authenticatable;</div><div class="line">use Illuminate\Database\Eloquent\Model;</div><div class="line">use Illuminate\Auth\Passwords\CanResetPassword;</div><div class="line">use Illuminate\Foundation\Auth\Access\Authorizable;</div><div class="line">use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;</div><div class="line">use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;</div><div class="line">use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;</div><div class="line">use Zizaco\Entrust\Traits\EntrustUserTrait;</div><div class="line"></div><div class="line">class User extends Model implements AuthenticatableContract,</div><div class="line">    AuthorizableContract,</div><div class="line">    CanResetPasswordContract</div><div class="line">&#123;</div><div class="line">    use Authenticatable, Authorizable, CanResetPassword, EntrustUserTrait&#123;</div><div class="line">        Authorizable::can insteadof  EntrustUserTrait;</div><div class="line">        EntrustUserTrait::can as hasPermission;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * The database table used by the model.</div><div class="line">     *</div><div class="line">     * @var string</div><div class="line">     */</div><div class="line">    protected $table = &apos;users&apos;;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * The attributes that are mass assignable.</div><div class="line">     *</div><div class="line">     * @var array</div><div class="line">     */</div><div class="line">    protected $fillable = [&apos;name&apos;, &apos;email&apos;, &apos;password&apos;];</div><div class="line"></div><div class="line">    /**</div><div class="line">     * The attributes excluded from the model&apos;s JSON form.</div><div class="line">     *</div><div class="line">     * @var array</div><div class="line">     */</div><div class="line">    protected $hidden = [&apos;password&apos;, &apos;remember_token&apos;];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>完成上述所有操作之后，Entrust的配置就完成了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（六）/" data-id="cjd7e2s0100662s4b0rp5ixac" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-使用Laravel构建内容管理框架（五）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/04/04/使用Laravel构建内容管理框架（五）/" class="article-date">
@@ -128,7 +188,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（五）/" data-id="cjcujcgfj005pqi4baanwd4v4" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（五）/" data-id="cjd7e2rzy00632s4bfcvx5m4a" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -190,7 +250,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（八）/" data-id="cjcujcgfu0066qi4bqlcg1hbj" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（八）/" data-id="cjd7e2s0500692s4b2vczyt5h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -253,7 +313,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（四）/" data-id="cjcujcgfx006cqi4bs8mgxs4v" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（四）/" data-id="cjd7e2s07006c2s4b9tqfifet" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -321,7 +381,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（三）/" data-id="cjcujcgfi005mqi4bt43rtsuz" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（三）/" data-id="cjd7e2rzq005p2s4b5hw4c6ds" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -387,7 +447,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（二）/" data-id="cjcujcgfr0060qi4bcnmz889f" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/04/04/使用Laravel构建内容管理框架（二）/" data-id="cjd7e2rzu00602s4bgenxwklu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -796,7 +856,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/03/13/使用-Sublime-Text-3-开发-PHP-的总结/" data-id="cjcujcgfc0058qi4b8k2z2nfk" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/03/13/使用-Sublime-Text-3-开发-PHP-的总结/" data-id="cjd7e2rzd005c2s4bp9aveltr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li></ul>
@@ -853,7 +913,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2016/03/09/使用Laravel构建内容管理框架（一）/" data-id="cjcujcgfd005bqi4bvnvqtufe" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2016/03/09/使用Laravel构建内容管理框架（一）/" data-id="cjd7e2rzk005j2s4b31isipjl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li></ul>
@@ -878,7 +938,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nginx/">nginx</a></li></ul>
     </div>
   </div>
 
@@ -888,7 +948,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
     </div>
   </div>
 
@@ -898,7 +958,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Programming-Language/" style="font-size: 11.43px;">Programming Language</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a> <a href="/tags/vue-js/" style="font-size: 10px;">vue.js</a>
+      <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Programming-Language/" style="font-size: 11.43px;">Programming Language</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/vue-js/" style="font-size: 10px;">vue.js</a>
     </div>
   </div>
 
@@ -907,7 +967,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
   </div>
 
@@ -918,6 +978,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/02/01/Nginx-从入门到实战/">Nginx 从入门到实战</a>
+          </li>
         
           <li>
             <a href="/2018/01/23/Laravel-项目开发常用扩展包/">Laravel 项目开发常用扩展包</a>
@@ -933,10 +997,6 @@
         
           <li>
             <a href="/2017/12/11/学习数据结构/">学习数据结构</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/16/PHP-秒杀系统/">PHP 秒杀系统</a>
           </li>
         
       </ul>

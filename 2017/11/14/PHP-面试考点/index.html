@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="七月十五九月初七">
 <meta property="og:description" content="PHP 招聘要求总结硬性要求 熟悉常用的算法和数据结构 熟悉(精通) PHP 熟悉 PHP 框架：Laravel、Yii 熟悉 HTML 5 + CSS 3 熟悉 CSS 框架：Bootstrap 熟悉(精通) JavaScript 熟悉 JavaScrip 框架：Vue.js、React.js 熟悉 设计模式、熟悉 MVC 模式 熟悉 HTTP、HTTP 2、TCP、UDP 等标准协议 熟悉 A">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-01-25T13:28:21.926Z">
+<meta property="og:updated_time" content="2018-01-28T01:58:20.764Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP 面试考察点">
 <meta name="twitter:description" content="PHP 招聘要求总结硬性要求 熟悉常用的算法和数据结构 熟悉(精通) PHP 熟悉 PHP 框架：Laravel、Yii 熟悉 HTML 5 + CSS 3 熟悉 CSS 框架：Bootstrap 熟悉(精通) JavaScript 熟悉 JavaScrip 框架：Vue.js、React.js 熟悉 设计模式、熟悉 MVC 模式 熟悉 HTTP、HTTP 2、TCP、UDP 等标准协议 熟悉 A">
@@ -293,129 +293,11 @@
 <p><strong>顺序查找</strong></p>
 <p>原理：按一定的顺序检查数据中每一个元素，直到找到所需要寻找的特定值为止。时间复杂度：最差 O(n)，平均 O(n)；空间复杂度：O(1)。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div></pre></td></tr></table></figure></p>
 <p>总结：二分查找算法的时间复杂度最差是 O(log2n)，顺序查找的时间复杂度是 O(n)，所以二份查找算法更快，但是递归情况下，二分查找算法更加消耗内容，时间复杂度为 O(log2n)。</p>
-<h4 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h4><ul>
-<li>回顾真题：请简单描述一下数据结构的特征(stack、heap、list、doubly-linked-list、queue、array(vector)、set、map)。</li>
-<li>考点分析：常见数据接口特征。</li>
-<li>解题方法：先理解每种数据结构的特征，有时会遇到让用 PHP 代码实现其中的数据结构，遇到此类问题，先要理解该种数组结构的特性是什么，然后再实现，通常可以使用 PHP 的数组来模拟。</li>
-<li>一网打尽：用 PHP 实现一个双向队列。<ul>
-<li>array_shift</li>
-<li>array_unshift</li>
-<li>array_pop</li>
-<li>array_push</li>
-</ul>
-</li>
-</ul>
-<p><strong>Array</strong></p>
-<p>数组，最简单而且应用最广泛的数据结构之一。</p>
-<p>特性：使用连续的内存来存储，数组中的所有元素必须是相同的类型或者类型的衍生（同质数据结构），元素可以通过下标直接访问。</p>
-<p><strong>LinkedList</strong></p>
-<p>链表，线性表的一种，最基本，最简单，也是最常用的数据结构。</p>
-<p>特性：元素之间的关系是一对一的关系（除了第一个和最后一个元素，其他元素都是首尾相接）。有顺序存储结构和链式存储结构两种存储方式。</p>
-<p><strong>Stack</strong></p>
-<p>栈，一个带有数据存储特性的数据结构。</p>
-<p>特性：存储数据是先进后出的，栈只有一个出口，只能从栈顶部增加和移除元素。</p>
-<p><strong>Heap</strong></p>
-<p>堆，一般情况下，堆叫做二叉堆，近似完全二叉树的数据结构。</p>
-<p>特性：子节点的键值或者索引总是小于它的父节点、每个节点的左右子树又是一个二叉堆。根节点最大的堆叫最大堆或者大根堆、最小的叫最小堆或者小根堆。</p>
-<p><strong>List</strong></p>
-<p>线性表，由零个或多个数据元素组成的有限序列。</p>
-<p>特性：线性表是一个序列。0 个元素构成的线性表是空表，第一个元素无先驱、最后一个元素无后继、其他元素都只有一个先驱和后继。有长度，长度是元素的个数，长度有限。</p>
-<p><strong>doubly-linked-list</strong></p>
-<p>双向链表</p>
-<p>特性：每个元素都是一个对象，每个对象有一个关键字 Key 和两个指针 next 和 prev。</p>
-<p><strong>queue</strong></p>
-<p>队列</p>
-<p>特性：先进先出(FIFO)、并发中使用，可以安全将对象从一个任务传给另一个任务。</p>
-<p><strong>set</strong></p>
-<p>集合</p>
-<p>特性：保存不重复元素。</p>
-<p><strong>map</strong></p>
-<p>字典</p>
-<p>特性：关联数组也可以被称为字典。</p>
-<p><strong>graph</strong></p>
-<p>图</p>
-<p>特性：通常使用邻接矩阵和邻接表表示。前者易实现但是对于稀疏矩阵会浪费较多空间。后者使用链表的方式存储信息但是对于图搜索时间复杂度较高。</p>
-<h4 id="其他逻辑算法"><a href="#其他逻辑算法" class="headerlink" title="其他逻辑算法"></a>其他逻辑算法</h4><ul>
-<li>回顾真题：1,1,2,3,5,8,13,21,34…求第 30 位的数是多少，请用伪代码描述其实现方法 TODO。</li>
-<li>考点分析：逻辑思维能力</li>
-<li>解题方法：找到要处理的数组或者字符串的规律，也可能是一个数列的规律，如果要求使用伪代码实现，建议先说明规律，然后白话说明解题步骤即可。</li>
-<li>一网打尽：请写一个函数，实现以下功能：字符串 “open_door” 转换成 OpenDoor，“make_by_id” 转换成 “MakeById” TODO。</li>
-</ul>
-<h4 id="模拟内置函数实现"><a href="#模拟内置函数实现" class="headerlink" title="模拟内置函数实现"></a>模拟内置函数实现</h4><ul>
-<li>回顾真题：不使用 PHP 函数，用方法写一个反转字符串的函数。</li>
-<li>考点分析：逻辑思维能力、PHP 内置函数的熟悉程度、字符串和数组的处理能力。</li>
-<li>解题方法：多多学习 PHP 字符串和数组的内置函数，尝试模拟其功能，有助于提成逻辑思维和熟悉函数功能。</li>
-<li>一网打尽：写一个函数，要求不使用 array_merge 完成多个数组的合并。</li>
-</ul>
-<p><strong>高并发解决方案案例</strong></p>
-<ul>
-<li>流量优化：防盗链处理。</li>
-<li>前端优化：<ul>
-<li>减少 HTTP 请求。<ul>
-<li>JS 文件压缩合并。</li>
-<li>CSS 文件压缩合并。</li>
-<li>CSS 背景图片压缩合并。</li>
-</ul>
-</li>
-<li>添加异步请求，实现资源懒加载。</li>
-<li>启用浏览器缓存和响应资源压缩。</li>
-<li>CDN 加速，把前端的资源放到 CDN 服务，也可以减少带宽的消耗。</li>
-<li>建立独立图片服务器。</li>
-</ul>
-</li>
-<li>服务端优化<ul>
-<li>页面静态化处理</li>
-<li>并发处理<ul>
-<li>队列处理</li>
-<li>请求异步处理</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>数据库优化<ul>
-<li>数据库缓存</li>
-<li>分库分表、分区操作</li>
-<li>读写分离</li>
-<li>负载均衡</li>
-</ul>
-</li>
-<li>Web 服务器优化<ul>
-<li>负载均衡</li>
-</ul>
-</li>
-</ul>
-<h2 id="数据库缓存"><a href="#数据库缓存" class="headerlink" title="数据库缓存"></a>数据库缓存</h2><p><strong>什么是数据库缓存</strong></p>
-<p>MySQL 等一些常见的关系型数据库的数据都存储在磁盘当中，在高并发场景下，业务应用对 MySQL 产生的增删查改的操作造成巨大的 I/O 开销和查询压力，这无疑对数据库和服务器都是一种巨大的压力，为了解决此类问题，缓存数据的概念应运而生。缓存数据是为了让客户端很少甚至不访问数据库服务器进行数据的查询，高并发下，能最大程度地降低对数据库服务器的访问压力。</p>
-<p>作用：</p>
-<ul>
-<li>极大地解决数据库服务器的压力</li>
-<li>提高应用数据的响应速度</li>
-</ul>
-<p>常见缓存形式：</p>
-<ul>
-<li>内存缓存</li>
-<li>文件缓存</li>
-</ul>
-<p><strong>使用缓存需要考虑的内容</strong></p>
-<ul>
-<li>缓存方式的选择</li>
-<li>缓存场景的选择</li>
-<li>缓存数据的实时性</li>
-<li>缓存数据的稳定性</li>
-</ul>
-<p><strong>使用 MySQL 查询缓存</strong></p>
-<p>如何启用 MySQL 查询缓存，使用 query_cache_type 配置项开启关闭。有 0、1、2 三个取值。0 表示不使用查询缓存，1 表示始终使用查询缓存。2 表示按需使用查询缓存。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">SET GLOBAL query_cache_type = 1;</div><div class="line"></div><div class="line"># 当 query_cache_type 为 1 时，亦可关闭查询缓存</div><div class="line">SELECT SQL_NO_CACHE * FROM table WHERE condition;</div><div class="line"></div><div class="line"># 当 query_cache_type 为 2 时，可按需使用查询缓存</div><div class="line">SELECT SQL_CACHE * FROM table WHERE condition;</div></pre></td></tr></table></figure></p>
-<p>如何设置 MySQL 查询缓存大小，使用 query_cache_size 配置项进行配置。默认情况下 query_cache_size 为 0，表示为查询缓存预留的内存为 0，则无法使用查询缓存。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SET GLOBAL query_cache_size = 1342177728;</div></pre></td></tr></table></figure></p>
-<p>MySQL 查询缓存可以看做是 SQL 文本和查询结果的映射。第二次查询的 SQL 和第一次查询的 SQL 完全相同，则会使用缓存。当表的结构或数据发生改变时，查询缓存中的数据不再有效。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"># 查看查询缓存命中次数</div><div class="line">SHOW STATUS LIKE &apos;Qcache_hits&apos;;</div><div class="line"></div><div class="line"># 清理查询缓存内存碎片</div><div class="line">FLUSH QUERY CACHE;</div><div class="line"></div><div class="line"># 从查询缓存中移出所有查询</div><div class="line">RESET QUERY CACHE;</div><div class="line"></div><div class="line"># 关闭所有打开的表，同时清空查询缓存中的内容</div><div class="line">FLUSH TABLES</div></pre></td></tr></table></figure></p>
-<p><strong>使用 Memcache 缓存</strong></p>
-<p>对于大型站点，如果没有中间缓存层，当流量打入数据库层时，即便有之前的几层为我们挡住一部分流量，但是在大并发的情况下，还是会有大量请求涌入数据库层，这样对于数据服务器的压力冲击很大，响应速度也会下降，因此添加中间缓存层很有必要。</p>
-<p>memcache 是一套分布式的高速缓存系统。通过在内存里维护一个统一的巨大的 hash 表，它能够用来存储各种格式的数据，包括图像、视频、文件以及数据库检索的结果等。简单的说就是将数据调用到内存，然后从内存中读取，从而大大提高读取速度。</p>
-<p><strong>使用 Redis 缓存</strong></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjcujcgd2002aqi4bfwdlil1q" class="article-share-link">Share</a>
+      <a data-url="http://luisedware.github.io/2017/11/14/PHP-面试考点/" data-id="cjd7e2rw2002d2s4bke2f5zqc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -452,7 +334,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Patterns/">Design Patterns</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pattern/">Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tooling/">Tooling</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/">UML</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nginx/">nginx</a></li></ul>
     </div>
   </div>
 
@@ -462,7 +344,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliCloud/">AliCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHPStorm/">PHPStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pattern/">Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-Language/">Programming Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text-3/">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UML/">UML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue-js/">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii/">Yii</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yii2/">Yii2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-js/">vue.js</a></li></ul>
     </div>
   </div>
 
@@ -472,7 +354,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Programming-Language/" style="font-size: 11.43px;">Programming Language</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a> <a href="/tags/vue-js/" style="font-size: 10px;">vue.js</a>
+      <a href="/tags/AliCloud/" style="font-size: 11.43px;">AliCloud</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Javascript/" style="font-size: 11.43px;">Javascript</a> <a href="/tags/Laravel/" style="font-size: 18.57px;">Laravel</a> <a href="/tags/Learning/" style="font-size: 10px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHPStorm/" style="font-size: 11.43px;">PHPStorm</a> <a href="/tags/Pattern/" style="font-size: 12.86px;">Pattern</a> <a href="/tags/Programming-Language/" style="font-size: 11.43px;">Programming Language</a> <a href="/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Swoole/" style="font-size: 10px;">Swoole</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/UML/" style="font-size: 11.43px;">UML</a> <a href="/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/tags/Yii/" style="font-size: 14.29px;">Yii</a> <a href="/tags/Yii2/" style="font-size: 10px;">Yii2</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/vue-js/" style="font-size: 10px;">vue.js</a>
     </div>
   </div>
 
@@ -481,7 +363,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
   </div>
 
@@ -492,6 +374,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/02/01/Nginx-从入门到实战/">Nginx 从入门到实战</a>
+          </li>
         
           <li>
             <a href="/2018/01/23/Laravel-项目开发常用扩展包/">Laravel 项目开发常用扩展包</a>
@@ -507,10 +393,6 @@
         
           <li>
             <a href="/2017/12/11/学习数据结构/">学习数据结构</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/16/PHP-秒杀系统/">PHP 秒杀系统</a>
           </li>
         
       </ul>
